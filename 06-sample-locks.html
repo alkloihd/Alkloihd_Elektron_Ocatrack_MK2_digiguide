@@ -1,1156 +1,1190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Octatrack: Sample Locks</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            background: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-        }
+      body {
+        background: #0a0a0a;
+        color: #e0e0e0;
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+      }
 
-        a {
-            color: #00ffff;
-            text-decoration: none;
-        }
+      a {
+        color: #00ffff;
+        text-decoration: none;
+      }
 
-        a:hover {
-            text-decoration: underline;
-        }
+      a:hover {
+        text-decoration: underline;
+      }
 
-        /* TOP BAR */
-        .top-bar {
-            background: #111111;
-            border-bottom: 3px solid #00ffff;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      /* TOP BAR */
+      .top-bar {
+        background: #111111;
+        border-bottom: 3px solid #00ffff;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
 
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+      .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
 
-        .dashboard-link {
-            padding: 8px 12px;
-            border: 2px solid #00ffff;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+      .dashboard-link {
+        padding: 8px 12px;
+        border: 2px solid #00ffff;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
 
-        .dashboard-link:hover {
-            transform: translateY(-2px);
-            background: #00ffff;
-            color: #0a0a0a;
-        }
+      .dashboard-link:hover {
+        transform: translateY(-2px);
+        background: #00ffff;
+        color: #0a0a0a;
+      }
 
-        .top-bar-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 22px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-        }
+      .top-bar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+      }
 
-        .top-bar-meta {
-            display: flex;
-            gap: 20px;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+      .top-bar-meta {
+        display: flex;
+        gap: 20px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
 
-        .meta-item {
-            border: 2px solid #666666;
-            padding: 6px 10px;
-            color: #666666;
-        }
+      .meta-item {
+        border: 2px solid #666666;
+        padding: 6px 10px;
+        color: #666666;
+      }
 
-        /* LAYOUT */
+      /* LAYOUT */
+      .main-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        background: #111111;
+        border-right: 3px solid #666666;
+        padding: 24px;
+        position: sticky;
+        top: 60px;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .sidebar-item {
+        padding: 10px 12px;
+        border: 2px solid #333333;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666666;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+      }
+
+      .sidebar-item:hover {
+        border-color: #00ffff;
+        color: #00ffff;
+      }
+
+      .sidebar-item.active {
+        border-color: #00ffff;
+        color: #00ffff;
+        background: rgba(0, 255, 255, 0.05);
+      }
+
+      .sidebar-item::before {
+        content: '□';
+        margin-right: 8px;
+      }
+
+      .sidebar-item.active::before {
+        content: '☒';
+      }
+
+      /* CONTENT */
+      .content {
+        padding: 40px;
+        max-width: 900px;
+      }
+
+      .section {
+        margin-bottom: 60px;
+        scroll-margin-top: 80px;
+      }
+
+      .section-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 28px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #00ff41;
+        padding-bottom: 12px;
+      }
+
+      .section-content {
+        margin-bottom: 24px;
+        color: #e0e0e0;
+      }
+
+      .section-content p {
+        margin-bottom: 12px;
+      }
+
+      /* CARDS */
+      .card {
+        background: #111111;
+        border: 3px solid #333333;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .card-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ffff;
+        margin-bottom: 12px;
+      }
+
+      .card-content {
+        color: #e0e0e0;
+      }
+
+      /* BUTTONS */
+      .button {
+        padding: 12px 20px;
+        border: 3px solid #00ffff;
+        background: transparent;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        background: #00ffff;
+        color: #0a0a0a;
+      }
+
+      .button.secondary {
+        border-color: #ff00ff;
+        color: #ff00ff;
+      }
+
+      .button.secondary:hover {
+        background: #ff00ff;
+        color: #0a0a0a;
+      }
+
+      /* SEQUENCER */
+      .drum-kit-sequencer {
+        background: #111111;
+        border: 3px solid #ff00ff;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .drum-kit-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ff00ff;
+        margin-bottom: 16px;
+      }
+
+      .drum-sequencer-grid {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .drum-step {
+        aspect-ratio: 1;
+        border: 2px solid #333333;
+        background: #0a0a0a;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 10px;
+        font-weight: 700;
+        color: #e0e0e0;
+        transition: all 0.2s;
+      }
+
+      .drum-step:hover {
+        border-color: #00ffff;
+      }
+
+      .drum-step.kick {
+        border-color: #ff6666;
+        background: rgba(255, 102, 102, 0.1);
+        color: #ff6666;
+      }
+
+      .drum-step.snare {
+        border-color: #ffff66;
+        background: rgba(255, 255, 102, 0.1);
+        color: #ffff66;
+      }
+
+      .drum-step.hat {
+        border-color: #66ff66;
+        background: rgba(102, 255, 102, 0.1);
+        color: #66ff66;
+      }
+
+      .drum-step.clap {
+        border-color: #6666ff;
+        background: rgba(102, 102, 255, 0.1);
+        color: #6666ff;
+      }
+
+      .drum-kit-legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        border: 2px solid #333333;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .legend-box {
+        width: 16px;
+        height: 16px;
+        border: 2px solid currentColor;
+        flex-shrink: 0;
+      }
+
+      /* COMPARISON TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        border: 3px solid #333333;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border: 2px solid #333333;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+      }
+
+      th {
+        background: #111111;
+        color: #00ffff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      td {
+        color: #e0e0e0;
+      }
+
+      tr:nth-child(even) {
+        background: rgba(0, 255, 255, 0.02);
+      }
+
+      /* ANIMATION DEMO */
+      .animation-demo {
+        background: #111111;
+        border: 3px solid #00ff41;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .demo-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ff41;
+        margin-bottom: 16px;
+      }
+
+      .demo-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .demo-step {
+        padding: 12px;
+        border-left: 4px solid #00ff41;
+        background: #0a0a0a;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: #e0e0e0;
+      }
+
+      .demo-step .step-num {
+        color: #00ff41;
+        font-weight: 700;
+        margin-right: 8px;
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        margin-top: 40px;
+        padding-top: 40px;
+        border-top: 3px solid #ff00ff;
+      }
+
+      .quiz-item {
+        background: #111111;
+        border: 3px solid #333333;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .quiz-question {
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ff00ff;
+        margin-bottom: 16px;
+      }
+
+      .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .quiz-option {
+        padding: 12px;
+        border: 2px solid #333333;
+        background: #0a0a0a;
+        color: #e0e0e0;
+        cursor: pointer;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        transition: all 0.2s;
+      }
+
+      .quiz-option:hover {
+        border-color: #00ffff;
+      }
+
+      .quiz-option.selected {
+        border-color: #00ffff;
+        background: rgba(0, 255, 255, 0.1);
+      }
+
+      .quiz-option.correct {
+        border-color: #00ff41;
+        background: rgba(0, 255, 65, 0.1);
+        color: #00ff41;
+      }
+
+      .quiz-option.incorrect {
+        border-color: #ff3333;
+        background: rgba(255, 51, 51, 0.1);
+        color: #ff3333;
+      }
+
+      .quiz-feedback {
+        margin-top: 12px;
+        padding: 12px;
+        border-left: 3px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        font-size: 13px;
+        color: #00ff41;
+      }
+
+      .quiz-feedback.incorrect {
+        border-color: #ff3333;
+        background: rgba(255, 51, 51, 0.05);
+        color: #ff3333;
+      }
+
+      /* CONFIDENCE SCALE */
+      .confidence-section {
+        background: #111111;
+        border: 3px solid #00ff41;
+        padding: 24px;
+        margin: 40px 0;
+      }
+
+      .confidence-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ff41;
+        margin-bottom: 20px;
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .confidence-button {
+        width: 50px;
+        height: 50px;
+        border: 3px solid #00ff41;
+        background: #0a0a0a;
+        color: #00ff41;
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-button:hover {
+        transform: translateY(-2px);
+      }
+
+      .confidence-button.selected {
+        background: #00ff41;
+        color: #0a0a0a;
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 40px;
+        border-top: 3px solid #666666;
+        margin-top: 60px;
+        background: #0a0a0a;
+      }
+
+      .nav-button {
+        padding: 12px 20px;
+        border: 3px solid #00ffff;
+        background: transparent;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .nav-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        background: #00ffff;
+        color: #0a0a0a;
+      }
+
+      .nav-button:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .nav-progress {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: #666666;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
         .main-layout {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            min-height: calc(100vh - 60px);
+          grid-template-columns: 1fr;
         }
 
-        /* SIDEBAR */
         .sidebar {
-            background: #111111;
-            border-right: 3px solid #666666;
-            padding: 24px;
-            position: sticky;
-            top: 60px;
-            max-height: calc(100vh - 60px);
-            overflow-y: auto;
+          position: relative;
+          top: auto;
+          max-height: auto;
+          border-right: none;
+          border-bottom: 3px solid #666666;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          padding: 12px;
         }
 
         .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+          flex-direction: row;
+          gap: 6px;
         }
 
         .sidebar-item {
-            padding: 10px 12px;
-            border: 2px solid #333333;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #666666;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
+          padding: 8px;
+          font-size: 11px;
         }
 
-        .sidebar-item:hover {
-            border-color: #00ffff;
-            color: #00ffff;
+        .top-bar {
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-start;
         }
 
-        .sidebar-item.active {
-            border-color: #00ffff;
-            color: #00ffff;
-            background: rgba(0, 255, 255, 0.05);
-        }
-
-        .sidebar-item::before {
-            content: '□';
-            margin-right: 8px;
-        }
-
-        .sidebar-item.active::before {
-            content: '☒';
-        }
-
-        /* CONTENT */
-        .content {
-            padding: 40px;
-            max-width: 900px;
-        }
-
-        .section {
-            margin-bottom: 60px;
-            scroll-margin-top: 80px;
-        }
-
-        .section-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 28px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #00ff41;
-            padding-bottom: 12px;
-        }
-
-        .section-content {
-            margin-bottom: 24px;
-            color: #e0e0e0;
-        }
-
-        .section-content p {
-            margin-bottom: 12px;
-        }
-
-        /* CARDS */
-        .card {
-            background: #111111;
-            border: 3px solid #333333;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .card-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ffff;
-            margin-bottom: 12px;
-        }
-
-        .card-content {
-            color: #e0e0e0;
-        }
-
-        /* BUTTONS */
-        .button {
-            padding: 12px 20px;
-            border: 3px solid #00ffff;
-            background: transparent;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            background: #00ffff;
-            color: #0a0a0a;
-        }
-
-        .button.secondary {
-            border-color: #ff00ff;
-            color: #ff00ff;
-        }
-
-        .button.secondary:hover {
-            background: #ff00ff;
-            color: #0a0a0a;
-        }
-
-        /* SEQUENCER */
-        .drum-kit-sequencer {
-            background: #111111;
-            border: 3px solid #ff00ff;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .drum-kit-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ff00ff;
-            margin-bottom: 16px;
+        .top-bar-meta {
+          gap: 10px;
         }
 
         .drum-sequencer-grid {
-            display: grid;
-            grid-template-columns: repeat(16, 1fr);
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .drum-step {
-            aspect-ratio: 1;
-            border: 2px solid #333333;
-            background: #0a0a0a;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Mono', monospace;
-            font-size: 10px;
-            font-weight: 700;
-            color: #e0e0e0;
-            transition: all 0.2s;
-        }
-
-        .drum-step:hover {
-            border-color: #00ffff;
-        }
-
-        .drum-step.kick {
-            border-color: #ff6666;
-            background: rgba(255, 102, 102, 0.1);
-            color: #ff6666;
-        }
-
-        .drum-step.snare {
-            border-color: #ffff66;
-            background: rgba(255, 255, 102, 0.1);
-            color: #ffff66;
-        }
-
-        .drum-step.hat {
-            border-color: #66ff66;
-            background: rgba(102, 255, 102, 0.1);
-            color: #66ff66;
-        }
-
-        .drum-step.clap {
-            border-color: #6666ff;
-            background: rgba(102, 102, 255, 0.1);
-            color: #6666ff;
+          grid-template-columns: repeat(8, 1fr);
         }
 
         .drum-kit-legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
+          grid-template-columns: repeat(2, 1fr);
         }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px;
-            border: 2px solid #333333;
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .legend-box {
-            width: 16px;
-            height: 16px;
-            border: 2px solid currentColor;
-            flex-shrink: 0;
-        }
-
-        /* COMPARISON TABLE */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            border: 3px solid #333333;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 2px solid #333333;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-        }
-
-        th {
-            background: #111111;
-            color: #00ffff;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        td {
-            color: #e0e0e0;
-        }
-
-        tr:nth-child(even) {
-            background: rgba(0, 255, 255, 0.02);
-        }
-
-        /* ANIMATION DEMO */
-        .animation-demo {
-            background: #111111;
-            border: 3px solid #00ff41;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .demo-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ff41;
-            margin-bottom: 16px;
-        }
-
-        .demo-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .demo-step {
-            padding: 12px;
-            border-left: 4px solid #00ff41;
-            background: #0a0a0a;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: #e0e0e0;
-        }
-
-        .demo-step .step-num {
-            color: #00ff41;
-            font-weight: 700;
-            margin-right: 8px;
-        }
-
-        /* QUIZ */
-        .quiz-section {
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 3px solid #ff00ff;
-        }
-
-        .quiz-item {
-            background: #111111;
-            border: 3px solid #333333;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .quiz-question {
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ff00ff;
-            margin-bottom: 16px;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .quiz-option {
-            padding: 12px;
-            border: 2px solid #333333;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-
-        .quiz-option:hover {
-            border-color: #00ffff;
-        }
-
-        .quiz-option.selected {
-            border-color: #00ffff;
-            background: rgba(0, 255, 255, 0.1);
-        }
-
-        .quiz-option.correct {
-            border-color: #00ff41;
-            background: rgba(0, 255, 65, 0.1);
-            color: #00ff41;
-        }
-
-        .quiz-option.incorrect {
-            border-color: #ff3333;
-            background: rgba(255, 51, 51, 0.1);
-            color: #ff3333;
-        }
-
-        .quiz-feedback {
-            margin-top: 12px;
-            padding: 12px;
-            border-left: 3px solid #00ff41;
-            background: rgba(0, 255, 65, 0.05);
-            font-size: 13px;
-            color: #00ff41;
-        }
-
-        .quiz-feedback.incorrect {
-            border-color: #ff3333;
-            background: rgba(255, 51, 51, 0.05);
-            color: #ff3333;
-        }
-
-        /* CONFIDENCE SCALE */
-        .confidence-section {
-            background: #111111;
-            border: 3px solid #00ff41;
-            padding: 24px;
-            margin: 40px 0;
-        }
-
-        .confidence-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ff41;
-            margin-bottom: 20px;
-        }
-
-        .confidence-scale {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .confidence-button {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #00ff41;
-            background: #0a0a0a;
-            color: #00ff41;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .confidence-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .confidence-button.selected {
-            background: #00ff41;
-            color: #0a0a0a;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 40px;
-            border-top: 3px solid #666666;
-            margin-top: 60px;
-            background: #0a0a0a;
-        }
-
-        .nav-button {
-            padding: 12px 20px;
-            border: 3px solid #00ffff;
-            background: transparent;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .nav-button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            background: #00ffff;
-            color: #0a0a0a;
-        }
-
-        .nav-button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .nav-progress {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: relative;
-                top: auto;
-                max-height: auto;
-                border-right: none;
-                border-bottom: 3px solid #666666;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                padding: 12px;
-            }
-
-            .sidebar-nav {
-                flex-direction: row;
-                gap: 6px;
-            }
-
-            .sidebar-item {
-                padding: 8px;
-                font-size: 11px;
-            }
-
-            .top-bar {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-
-            .top-bar-meta {
-                gap: 10px;
-            }
-
-            .drum-sequencer-grid {
-                grid-template-columns: repeat(8, 1fr);
-            }
-
-            .drum-kit-legend {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- TOP BAR -->
     <div class="top-bar">
-        <div class="top-bar-left">
-            <button class="dashboard-link" onclick="window.location.href='index.html'">← DASHBOARD</button>
-            <div class="top-bar-title">SAMPLE LOCKS</div>
-        </div>
-        <div class="top-bar-meta">
-            <div class="meta-item">⏱ 25 MIN</div>
-            <div class="meta-item">⚡ BEGINNER/INT</div>
-        </div>
+      <div class="top-bar-left">
+        <button class="dashboard-link" onclick="window.location.href = 'index.html'">← DASHBOARD</button>
+        <div class="top-bar-title">SAMPLE LOCKS</div>
+      </div>
+      <div class="top-bar-meta">
+        <div class="meta-item">⏱ 25 MIN</div>
+        <div class="meta-item">⚡ BEGINNER/INT</div>
+      </div>
     </div>
 
     <!-- MAIN LAYOUT -->
     <div class="main-layout">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <nav class="sidebar-nav" id="sidebarNav"></nav>
-        </aside>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+      </aside>
 
-        <!-- CONTENT -->
-        <main class="content">
-            <!-- SECTION 1: What Are Sample Locks? -->
-            <section class="section" id="sec-1">
-                <h2 class="section-title">1. WHAT ARE SAMPLE LOCKS?</h2>
-                <div class="section-content">
-                    <p>Sample locks let you play a DIFFERENT sample on each step, all on the same track. Imagine having 16 different instruments assigned to one track - that's sample locks.</p>
-                    <p>This is the Octatrack's secret weapon for:</p>
-                    <ul style="margin-left: 20px; margin-bottom: 20px;">
-                        <li>Building complete drum kits on one track</li>
-                        <li>Creating variety and layers without using multiple tracks</li>
-                        <li>DJ-style sample juggling</li>
-                        <li>Polyrhythmic textures from different samples</li>
-                    </ul>
-                    <div class="card">
-                        <div class="card-title">KEY CONCEPT</div>
-                        <div class="card-content">
-                            One track, 16 steps, 16 different samples. Each step can play a completely different sound. The red LED tells you which steps have sample locks active.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 2: How to Set Sample Locks -->
-            <section class="section" id="sec-2">
-                <h2 class="section-title">2. HOW TO SET SAMPLE LOCKS</h2>
-                <div class="section-content">
-                    <p>Here's the exact procedure to lock a sample to a specific step:</p>
-
-                    <div class="animation-demo">
-                        <div class="demo-title">STEP-BY-STEP PROCEDURE</div>
-                        <div class="demo-steps">
-                            <div class="demo-step">
-                                <span class="step-num">1.</span>
-                                Press [REC] to enter GRID RECORDING mode. The sequencer is now ready to record locks.
-                            </div>
-                            <div class="demo-step">
-                                <span class="step-num">2.</span>
-                                HOLD DOWN one of the [TRIG] keys (1-16) corresponding to the step you want to lock.
-                            </div>
-                            <div class="demo-step">
-                                <span class="step-num">3.</span>
-                                While holding the [TRIG], press [UP] or [DOWN] arrow to open the sample browser.
-                            </div>
-                            <div class="demo-step">
-                                <span class="step-num">4.</span>
-                                Navigate to the sample you want and press [YES] to select it.
-                            </div>
-                            <div class="demo-step">
-                                <span class="step-num">5.</span>
-                                Release the [TRIG] key. The lock is now set.
-                            </div>
-                            <div class="demo-step">
-                                <span class="step-num">6.</span>
-                                Look at the [TRIG] LED - it will now FLASH RED = sample lock is active on that step.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">RED LED = SAMPLE LOCK ACTIVE</div>
-                        <div class="card-content">
-                            When a trig has a red flashing LED, it means a sample lock is programmed on that step. This is your visual feedback that something is locked to this trigger.
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;">Practice with 2-3 steps first. Once you get the feel for it, you can quickly lock samples across an entire pattern.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 3: Building a Drum Kit -->
-            <section class="section" id="sec-3">
-                <h2 class="section-title">3. BUILDING A DRUM KIT ON ONE TRACK</h2>
-                <div class="section-content">
-                    <p>Here's an interactive example of what a drum kit looks like using sample locks. Click steps to see which drum sounds are assigned:</p>
-
-                    <div class="drum-kit-sequencer">
-                        <div class="drum-kit-title">DRUM KIT LAYOUT (16 STEPS)</div>
-                        <div class="drum-sequencer-grid" id="drumSequencer"></div>
-                        <div class="drum-kit-legend" id="drumLegend"></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">HOW THIS WORKS</div>
-                        <div class="card-content">
-                            <strong>Step 1, 5, 9, 13:</strong> KICK (deep bass hit)<br>
-                            <strong>Step 5, 13 (also):</strong> SNARE layered with kick (two different sample locks per track if needed, or on adjacent track)<br>
-                            <strong>Step 3, 7, 11, 15:</strong> HI-HAT (crisp, high frequency)<br>
-                            <strong>Step 4, 12:</strong> CLAP (snappy transient)<br>
-                            This pattern creates a classic drum groove all from one track!
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;"><strong>Why this is powerful:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>Uses only 1 track slot (leaves 7 others free for melodies, effects, resampling)</li>
-                        <li>Each drum element can be different samples (kick_punchy.wav, snare_tight.wav, etc.)</li>
-                        <li>Each step is independent - you can mute, p-lock, or effect any individual drum hit</li>
-                        <li>Real-time adjustments: swap samples without re-locking</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- SECTION 4: Combining with P-Locks -->
-            <section class="section" id="sec-4">
-                <h2 class="section-title">4. SAMPLE LOCKS + P-LOCKS = POWER</h2>
-                <div class="section-content">
-                    <p>Each sample-locked step can ALSO have parameter locks. This means infinite variation:</p>
-
-                    <table>
-                        <tr>
-                            <th>LOCK TYPE</th>
-                            <th>EFFECT</th>
-                            <th>EXAMPLE</th>
-                        </tr>
-                        <tr>
-                            <td>Sample Lock</td>
-                            <td>Different sample per step</td>
-                            <td>Step 1 = kick, Step 3 = snare</td>
-                        </tr>
-                        <tr>
-                            <td>Sample Lock + Volume P-Lock</td>
-                            <td>Different volume per sample</td>
-                            <td>Step 1 kick at 100, Step 5 kick at 80 (velocity simulation)</td>
-                        </tr>
-                        <tr>
-                            <td>Sample Lock + Pitch P-Lock</td>
-                            <td>Different pitch per sample</td>
-                            <td>Drum loop slices pitched up/down step by step</td>
-                        </tr>
-                        <tr>
-                            <td>Sample Lock + Filter P-Lock</td>
-                            <td>Different filter per sample</td>
-                            <td>Same snare sample: closed filter on step 4, open on step 12</td>
-                        </tr>
-                        <tr>
-                            <td>Sample Lock + Effect Send</td>
-                            <td>Different effect amount per step</td>
-                            <td>Kick on step 1 dry, snare on step 5 heavily reverbed</td>
-                        </tr>
-                    </table>
-
-                    <div class="card" style="margin-top: 20px;">
-                        <div class="card-title">REAL EXAMPLE</div>
-                        <div class="card-content">
-                            Track 3, Step 1: kick.wav with no filter<br>
-                            Track 3, Step 5: snare.wav with 50% reverb send<br>
-                            Track 3, Step 9: kick.wav pitched up +3 semitones<br>
-                            Track 3, Step 13: hat.wav at 70% volume<br>
-                            Result: one track, unlimited texture and color
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;">This combination is what separates basic sequencing from expressive Octatrack performance.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 5: Sample Locks vs Slicing -->
-            <section class="section" id="sec-5">
-                <h2 class="section-title">5. SAMPLE LOCKS vs SLICING: WHICH TO USE?</h2>
-                <div class="section-content">
-                    <p>Both are powerful techniques. Here's when to use each:</p>
-
-                    <table>
-                        <tr>
-                            <th>FEATURE</th>
-                            <th>SAMPLE LOCKS</th>
-                            <th>SLICING</th>
-                        </tr>
-                        <tr>
-                            <td>Source</td>
-                            <td>Multiple different samples</td>
-                            <td>One sample divided</td>
-                        </tr>
-                        <tr>
-                            <td>Slots used</td>
-                            <td>1 slot per unique sample</td>
-                            <td>1 slot total</td>
-                        </tr>
-                        <tr>
-                            <td>Best for</td>
-                            <td>Drum kits, variety, different sounds</td>
-                            <td>Chopping loops, beat rearrangement</td>
-                        </tr>
-                        <tr>
-                            <td>RAM cost</td>
-                            <td>Each sample (Flex) = memory</td>
-                            <td>One sample only = minimal</td>
-                        </tr>
-                        <tr>
-                            <td>Flexibility</td>
-                            <td>Totally different sounds per step</td>
-                            <td>Variations of the same source</td>
-                        </tr>
-                        <tr>
-                            <td>Setup speed</td>
-                            <td>Slower (assign each step)</td>
-                            <td>Faster (grid slice once)</td>
-                        </tr>
-                        <tr>
-                            <td>Real-time swaps</td>
-                            <td>Yes! Instant sample changes</td>
-                            <td>Fixed to sample slices</td>
-                        </tr>
-                    </table>
-
-                    <div class="card" style="margin-top: 20px;">
-                        <div class="card-title">DECISION TREE</div>
-                        <div class="card-content">
-                            Are you chopping a single drum loop into pieces? → SLICING<br>
-                            Building a kit from separate kicks, snares, hats? → SAMPLE LOCKS<br>
-                            Want to swap samples during a live jam? → SAMPLE LOCKS<br>
-                            Want to remix a single loop in new ways? → SLICING
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 6: Performance Tips -->
-            <section class="section" id="sec-6">
-                <h2 class="section-title">6. PERFORMANCE TIPS & TRICKS</h2>
-                <div class="section-content">
-                    <p>Master these techniques for faster, cleaner sample locking:</p>
-
-                    <div class="card">
-                        <div class="card-title">PRE-BROWSING</div>
-                        <div class="card-content">
-                            Before starting a jam, pre-browse the samples you'll use. This keeps them in the "recent" section of the browser, so you don't have to dig through folders during a live performance.
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">MACHINE COMPATIBILITY</div>
-                        <div class="card-content">
-                            Sample locks work with ANY machine type: Flex, Static, Neighbor, Thru, Pickup. You're not limited to one type!
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">CROSS-FOLDER SAMPLES</div>
-                        <div class="card-content">
-                            You can sample-lock samples from DIFFERENT folders. No need to organize everything into one place - flexibility is part of the design.
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">COMBINE WITH TRIG CONDITIONS</div>
-                        <div class="card-content">
-                            Use FILL trig conditions with sample locks for instant fill variations. Example: Normal pattern uses kick, but when holding [YES], a different kick sample plays (FILL condition).
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">VISUAL FEEDBACK</div>
-                        <div class="card-content">
-                            Red flashing trig LED = your lock is active. When you play the pattern, watch for those flashes to confirm which steps are locked. Very useful during jams.
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;"><strong>Pro move:</strong> Lock a series of break-heavy samples to the first half of a pattern, then sparse ambient samples to the second half. Your jam automatically evolves.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 7: Live Loop Switching -->
-            <section class="section" id="sec-7">
-                <h2 class="section-title">7. LIVE LOOP SWITCHING: DJ STYLE</h2>
-                <div class="section-content">
-                    <p>Use sample locks to switch between different loop sections in real time - like a DJ cutting between breaks:</p>
-
-                    <div class="card">
-                        <div class="card-title">SETUP</div>
-                        <div class="card-content">
-                            1. Take a long sample (e.g., 8-bar loop)<br>
-                            2. Slice it into sections (first 2 bars, next 2 bars, etc.)<br>
-                            3. Sample-lock each section to different steps<br>
-                            4. Add ONE-SHOT trigs to each step to prevent re-triggering<br>
-                            5. Now each [TRIG] press jumps to a different section
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;">This is powerful for:</p>
-                    <ul style="margin-left: 20px;">
-                        <li>Breaking long tracks into loops to jam with</li>
-                        <li>Remixing live - play sections in random order</li>
-                        <li>Building tension by repeating a climactic section</li>
-                        <li>DJ-style transitions between tracks</li>
-                    </ul>
-
-                    <div class="card" style="margin-top: 20px;">
-                        <div class="card-title">EXAMPLE JAM SCENARIO</div>
-                        <div class="card-content">
-                            Step 1: Dark intro section (first 2 bars)<br>
-                            Step 2: Builds to pre-chorus (next 2 bars)<br>
-                            Step 3: Peak moment (next 2 bars)<br>
-                            Step 4: Drop / breakdown<br>
-                            Now during your jam, press Step 3 repeatedly to hammer the peak, then drop to Step 4 for impact. Live control!
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- QUIZ SECTION -->
-            <section class="quiz-section">
-                <h2 class="section-title">TEST YOURSELF</h2>
-                <div id="quizContainer"></div>
-            </section>
-
-            <!-- CONFIDENCE SECTION -->
-            <section class="confidence-section">
-                <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
-                <div class="confidence-scale" id="confidenceScale"></div>
-                <div style="margin-top: 16px; font-size: 12px; color: #666666;">Rate your confidence (1 = not ready, 5 = totally got it)</div>
-            </section>
-
-            <!-- BOTTOM NAV -->
-            <div class="bottom-nav">
-                <button class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
-                <div class="nav-progress">
-                    <span id="progressText">TUTORIAL 06 / 06</span>
-                </div>
-                <button class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
+      <!-- CONTENT -->
+      <main class="content">
+        <!-- SECTION 1: What Are Sample Locks? -->
+        <section class="section" id="sec-1">
+          <h2 class="section-title">1. WHAT ARE SAMPLE LOCKS?</h2>
+          <div class="section-content">
+            <p>Sample locks let you play a DIFFERENT sample on each step, all on the same track. Imagine having 16 different instruments assigned to one track - that's sample locks.</p>
+            <p>This is the Octatrack's secret weapon for:</p>
+            <ul style="margin-left: 20px; margin-bottom: 20px">
+              <li>Building complete drum kits on one track</li>
+              <li>Creating variety and layers without using multiple tracks</li>
+              <li>DJ-style sample juggling</li>
+              <li>Polyrhythmic textures from different samples</li>
+            </ul>
+            <div class="card">
+              <div class="card-title">KEY CONCEPT</div>
+              <div class="card-content">One track, 16 steps, 16 different samples. Each step can play a completely different sound. The red LED tells you which steps have sample locks active.</div>
             </div>
-        </main>
+          </div>
+        </section>
+
+        <!-- SECTION 2: How to Set Sample Locks -->
+        <section class="section" id="sec-2">
+          <h2 class="section-title">2. HOW TO SET SAMPLE LOCKS</h2>
+          <div class="section-content">
+            <p>Here's the exact procedure to lock a sample to a specific step:</p>
+
+            <div class="animation-demo">
+              <div class="demo-title">STEP-BY-STEP PROCEDURE</div>
+              <div class="demo-steps">
+                <div class="demo-step">
+                  <span class="step-num">1.</span>
+                  Press [REC] to enter GRID RECORDING mode. The sequencer is now ready to record locks.
+                </div>
+                <div class="demo-step">
+                  <span class="step-num">2.</span>
+                  HOLD DOWN one of the [TRIG] keys (1-16) corresponding to the step you want to lock.
+                </div>
+                <div class="demo-step">
+                  <span class="step-num">3.</span>
+                  While holding the [TRIG], press [UP] or [DOWN] arrow to open the sample browser.
+                </div>
+                <div class="demo-step">
+                  <span class="step-num">4.</span>
+                  Navigate to the sample you want and press [YES] to select it.
+                </div>
+                <div class="demo-step">
+                  <span class="step-num">5.</span>
+                  Release the [TRIG] key. The lock is now set.
+                </div>
+                <div class="demo-step">
+                  <span class="step-num">6.</span>
+                  Look at the [TRIG] LED - it will now FLASH RED = sample lock is active on that step.
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">RED LED = SAMPLE LOCK ACTIVE</div>
+              <div class="card-content">
+                When a trig has a red flashing LED, it means a sample lock is programmed on that step. This is your visual feedback that something is locked to this trigger.
+              </div>
+            </div>
+
+            <p style="margin-top: 20px">Practice with 2-3 steps first. Once you get the feel for it, you can quickly lock samples across an entire pattern.</p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: Building a Drum Kit -->
+        <section class="section" id="sec-3">
+          <h2 class="section-title">3. BUILDING A DRUM KIT ON ONE TRACK</h2>
+          <div class="section-content">
+            <p>Here's an interactive example of what a drum kit looks like using sample locks. Click steps to see which drum sounds are assigned:</p>
+
+            <div class="drum-kit-sequencer">
+              <div class="drum-kit-title">DRUM KIT LAYOUT (16 STEPS)</div>
+              <div class="drum-sequencer-grid" id="drumSequencer"></div>
+              <div class="drum-kit-legend" id="drumLegend"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">HOW THIS WORKS</div>
+              <div class="card-content">
+                <strong>Step 1, 5, 9, 13:</strong>
+                KICK (deep bass hit)
+                <br />
+                <strong>Step 5, 13 (also):</strong>
+                SNARE layered with kick (two different sample locks per track if needed, or on adjacent track)
+                <br />
+                <strong>Step 3, 7, 11, 15:</strong>
+                HI-HAT (crisp, high frequency)
+                <br />
+                <strong>Step 4, 12:</strong>
+                CLAP (snappy transient)
+                <br />
+                This pattern creates a classic drum groove all from one track!
+              </div>
+            </div>
+
+            <p style="margin-top: 20px"><strong>Why this is powerful:</strong></p>
+            <ul style="margin-left: 20px">
+              <li>Uses only 1 track slot (leaves 7 others free for melodies, effects, resampling)</li>
+              <li>Each drum element can be different samples (kick_punchy.wav, snare_tight.wav, etc.)</li>
+              <li>Each step is independent - you can mute, p-lock, or effect any individual drum hit</li>
+              <li>Real-time adjustments: swap samples without re-locking</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 4: Combining with P-Locks -->
+        <section class="section" id="sec-4">
+          <h2 class="section-title">4. SAMPLE LOCKS + P-LOCKS = POWER</h2>
+          <div class="section-content">
+            <p>Each sample-locked step can ALSO have parameter locks. This means infinite variation:</p>
+
+            <table>
+              <tr>
+                <th>LOCK TYPE</th>
+                <th>EFFECT</th>
+                <th>EXAMPLE</th>
+              </tr>
+              <tr>
+                <td>Sample Lock</td>
+                <td>Different sample per step</td>
+                <td>Step 1 = kick, Step 3 = snare</td>
+              </tr>
+              <tr>
+                <td>Sample Lock + Volume P-Lock</td>
+                <td>Different volume per sample</td>
+                <td>Step 1 kick at 100, Step 5 kick at 80 (velocity simulation)</td>
+              </tr>
+              <tr>
+                <td>Sample Lock + Pitch P-Lock</td>
+                <td>Different pitch per sample</td>
+                <td>Drum loop slices pitched up/down step by step</td>
+              </tr>
+              <tr>
+                <td>Sample Lock + Filter P-Lock</td>
+                <td>Different filter per sample</td>
+                <td>Same snare sample: closed filter on step 4, open on step 12</td>
+              </tr>
+              <tr>
+                <td>Sample Lock + Effect Send</td>
+                <td>Different effect amount per step</td>
+                <td>Kick on step 1 dry, snare on step 5 heavily reverbed</td>
+              </tr>
+            </table>
+
+            <div class="card" style="margin-top: 20px">
+              <div class="card-title">REAL EXAMPLE</div>
+              <div class="card-content">
+                Track 3, Step 1: kick.wav with no filter
+                <br />
+                Track 3, Step 5: snare.wav with 50% reverb send
+                <br />
+                Track 3, Step 9: kick.wav pitched up +3 semitones
+                <br />
+                Track 3, Step 13: hat.wav at 70% volume
+                <br />
+                Result: one track, unlimited texture and color
+              </div>
+            </div>
+
+            <p style="margin-top: 20px">This combination is what separates basic sequencing from expressive Octatrack performance.</p>
+          </div>
+        </section>
+
+        <!-- SECTION 5: Sample Locks vs Slicing -->
+        <section class="section" id="sec-5">
+          <h2 class="section-title">5. SAMPLE LOCKS vs SLICING: WHICH TO USE?</h2>
+          <div class="section-content">
+            <p>Both are powerful techniques. Here's when to use each:</p>
+
+            <table>
+              <tr>
+                <th>FEATURE</th>
+                <th>SAMPLE LOCKS</th>
+                <th>SLICING</th>
+              </tr>
+              <tr>
+                <td>Source</td>
+                <td>Multiple different samples</td>
+                <td>One sample divided</td>
+              </tr>
+              <tr>
+                <td>Slots used</td>
+                <td>1 slot per unique sample</td>
+                <td>1 slot total</td>
+              </tr>
+              <tr>
+                <td>Best for</td>
+                <td>Drum kits, variety, different sounds</td>
+                <td>Chopping loops, beat rearrangement</td>
+              </tr>
+              <tr>
+                <td>RAM cost</td>
+                <td>Each sample (Flex) = memory</td>
+                <td>One sample only = minimal</td>
+              </tr>
+              <tr>
+                <td>Flexibility</td>
+                <td>Totally different sounds per step</td>
+                <td>Variations of the same source</td>
+              </tr>
+              <tr>
+                <td>Setup speed</td>
+                <td>Slower (assign each step)</td>
+                <td>Faster (grid slice once)</td>
+              </tr>
+              <tr>
+                <td>Real-time swaps</td>
+                <td>Yes! Instant sample changes</td>
+                <td>Fixed to sample slices</td>
+              </tr>
+            </table>
+
+            <div class="card" style="margin-top: 20px">
+              <div class="card-title">DECISION TREE</div>
+              <div class="card-content">
+                Are you chopping a single drum loop into pieces? → SLICING
+                <br />
+                Building a kit from separate kicks, snares, hats? → SAMPLE LOCKS
+                <br />
+                Want to swap samples during a live jam? → SAMPLE LOCKS
+                <br />
+                Want to remix a single loop in new ways? → SLICING
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: Performance Tips -->
+        <section class="section" id="sec-6">
+          <h2 class="section-title">6. PERFORMANCE TIPS & TRICKS</h2>
+          <div class="section-content">
+            <p>Master these techniques for faster, cleaner sample locking:</p>
+
+            <div class="card">
+              <div class="card-title">PRE-BROWSING</div>
+              <div class="card-content">
+                Before starting a jam, pre-browse the samples you'll use. This keeps them in the "recent" section of the browser, so you don't have to dig through folders during a live performance.
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">MACHINE COMPATIBILITY</div>
+              <div class="card-content">Sample locks work with ANY machine type: Flex, Static, Neighbor, Thru, Pickup. You're not limited to one type!</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">CROSS-FOLDER SAMPLES</div>
+              <div class="card-content">You can sample-lock samples from DIFFERENT folders. No need to organize everything into one place - flexibility is part of the design.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">COMBINE WITH TRIG CONDITIONS</div>
+              <div class="card-content">
+                Use FILL trig conditions with sample locks for instant fill variations. Example: Normal pattern uses kick, but when holding [YES], a different kick sample plays (FILL condition).
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">VISUAL FEEDBACK</div>
+              <div class="card-content">
+                Red flashing trig LED = your lock is active. When you play the pattern, watch for those flashes to confirm which steps are locked. Very useful during jams.
+              </div>
+            </div>
+
+            <p style="margin-top: 20px">
+              <strong>Pro move:</strong>
+              Lock a series of break-heavy samples to the first half of a pattern, then sparse ambient samples to the second half. Your jam automatically evolves.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 7: Live Loop Switching -->
+        <section class="section" id="sec-7">
+          <h2 class="section-title">7. LIVE LOOP SWITCHING: DJ STYLE</h2>
+          <div class="section-content">
+            <p>Use sample locks to switch between different loop sections in real time - like a DJ cutting between breaks:</p>
+
+            <div class="card">
+              <div class="card-title">SETUP</div>
+              <div class="card-content">
+                1. Take a long sample (e.g., 8-bar loop)
+                <br />
+                2. Slice it into sections (first 2 bars, next 2 bars, etc.)
+                <br />
+                3. Sample-lock each section to different steps
+                <br />
+                4. Add ONE-SHOT trigs to each step to prevent re-triggering
+                <br />
+                5. Now each [TRIG] press jumps to a different section
+              </div>
+            </div>
+
+            <p style="margin-top: 20px">This is powerful for:</p>
+            <ul style="margin-left: 20px">
+              <li>Breaking long tracks into loops to jam with</li>
+              <li>Remixing live - play sections in random order</li>
+              <li>Building tension by repeating a climactic section</li>
+              <li>DJ-style transitions between tracks</li>
+            </ul>
+
+            <div class="card" style="margin-top: 20px">
+              <div class="card-title">EXAMPLE JAM SCENARIO</div>
+              <div class="card-content">
+                Step 1: Dark intro section (first 2 bars)
+                <br />
+                Step 2: Builds to pre-chorus (next 2 bars)
+                <br />
+                Step 3: Peak moment (next 2 bars)
+                <br />
+                Step 4: Drop / breakdown
+                <br />
+                Now during your jam, press Step 3 repeatedly to hammer the peak, then drop to Step 4 for impact. Live control!
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section class="quiz-section">
+          <h2 class="section-title">TEST YOURSELF</h2>
+          <div id="quizContainer"></div>
+        </section>
+
+        <!-- CONFIDENCE SECTION -->
+        <section class="confidence-section">
+          <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
+          <div class="confidence-scale" id="confidenceScale"></div>
+          <div style="margin-top: 16px; font-size: 12px; color: #666666">Rate your confidence (1 = not ready, 5 = totally got it)</div>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <button class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
+          <div class="nav-progress">
+            <span id="progressText">TUTORIAL 06 / 06</span>
+          </div>
+          <button class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
+        </div>
+      </main>
     </div>
 
     <script>
-        const TUTORIAL_ID = '06-sample-locks';
-        const SECTIONS = [
-            { id: 'sec-1', label: 'What Are Sample Locks?' },
-            { id: 'sec-2', label: 'How to Set Locks' },
-            { id: 'sec-3', label: 'Build a Drum Kit' },
-            { id: 'sec-4', label: 'Locks + P-Locks' },
-            { id: 'sec-5', label: 'vs Slicing' },
-            { id: 'sec-6', label: 'Performance Tips' },
-            { id: 'sec-7', label: 'Live Loop Switching' }
-        ];
+      const TUTORIAL_ID = '06-sample-locks';
+      const SECTIONS = [
+        { id: 'sec-1', label: 'What Are Sample Locks?' },
+        { id: 'sec-2', label: 'How to Set Locks' },
+        { id: 'sec-3', label: 'Build a Drum Kit' },
+        { id: 'sec-4', label: 'Locks + P-Locks' },
+        { id: 'sec-5', label: 'vs Slicing' },
+        { id: 'sec-6', label: 'Performance Tips' },
+        { id: 'sec-7', label: 'Live Loop Switching' },
+      ];
 
-        const DRUM_KIT = {
-            1: { type: 'kick', color: 'kick', name: 'KICK' },
-            3: { type: 'hat', color: 'hat', name: 'HI-HAT' },
-            4: { type: 'clap', color: 'clap', name: 'CLAP' },
-            5: { type: 'kick', color: 'kick', name: 'KICK' },
-            7: { type: 'hat', color: 'hat', name: 'HI-HAT' },
-            9: { type: 'kick', color: 'kick', name: 'KICK' },
-            11: { type: 'hat', color: 'hat', name: 'HI-HAT' },
-            12: { type: 'clap', color: 'clap', name: 'CLAP' },
-            13: { type: 'kick', color: 'kick', name: 'KICK' },
-            15: { type: 'hat', color: 'hat', name: 'HI-HAT' }
+      const DRUM_KIT = {
+        1: { type: 'kick', color: 'kick', name: 'KICK' },
+        3: { type: 'hat', color: 'hat', name: 'HI-HAT' },
+        4: { type: 'clap', color: 'clap', name: 'CLAP' },
+        5: { type: 'kick', color: 'kick', name: 'KICK' },
+        7: { type: 'hat', color: 'hat', name: 'HI-HAT' },
+        9: { type: 'kick', color: 'kick', name: 'KICK' },
+        11: { type: 'hat', color: 'hat', name: 'HI-HAT' },
+        12: { type: 'clap', color: 'clap', name: 'CLAP' },
+        13: { type: 'kick', color: 'kick', name: 'KICK' },
+        15: { type: 'hat', color: 'hat', name: 'HI-HAT' },
+      };
+
+      const QUIZ_QUESTIONS = [
+        {
+          q: 'How do you open the sample browser while on a trig to set a sample lock?',
+          opts: ['Press [AUD]', 'Hold [TRIG] + press [UP]/[DOWN]', 'Hold [FUNC] + [TRIG]', 'Press [REC] twice'],
+          correct: 1,
+        },
+        {
+          q: 'What does a RED FLASHING trig LED indicate?',
+          opts: ['The trig is muted', 'A sample lock is active on that step', 'Recording is enabled', 'A parameter is locked'],
+          correct: 1,
+        },
+        {
+          q: 'Can you combine sample locks with parameter locks on the same step?',
+          opts: ['No, they conflict', 'Yes, completely', 'Only on Flex machines', 'Only volume'],
+          correct: 1,
+        },
+        {
+          q: 'Which machine types support sample locks?',
+          opts: ['Flex only', 'Flex and Static only', 'All (Flex, Static, Neighbor, Thru, Pickup)', 'Only Static'],
+          correct: 2,
+        },
+      ];
+
+      // Initialize sidebar
+      function initSidebar() {
+        const nav = document.getElementById('sidebarNav');
+        nav.innerHTML = SECTIONS.map((s) => `<div class="sidebar-item" onclick="scrollToSection('${s.id}')">${s.label}</div>`).join('');
+        trackActiveSection();
+      }
+
+      // Scroll to section
+      function scrollToSection(id) {
+        const elem = document.getElementById(id);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // Track active section with IntersectionObserver
+      function trackActiveSection() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                document.querySelectorAll('.sidebar-item').forEach((item) => {
+                  item.classList.remove('active');
+                });
+                const idx = SECTIONS.findIndex((s) => s.id === entry.target.id);
+                if (idx >= 0) {
+                  document.querySelectorAll('.sidebar-item')[idx].classList.add('active');
+                }
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+
+        SECTIONS.forEach((s) => {
+          const elem = document.getElementById(s.id);
+          if (elem) observer.observe(elem);
+        });
+      }
+
+      // Drum kit sequencer
+      function initDrumSequencer() {
+        const container = document.getElementById('drumSequencer');
+        const legend = document.getElementById('drumLegend');
+
+        // Create grid
+        container.innerHTML = Array.from({ length: 16 }, (_, i) => {
+          const step = i + 1;
+          const drum = DRUM_KIT[step];
+          const className = drum ? drum.color : '';
+          const text = drum ? drum.name : '—';
+          return `<div class="drum-step ${className}">${text}</div>`;
+        }).join('');
+
+        // Create legend
+        const colors = {
+          kick: { name: 'KICK', color: '#ff6666' },
+          snare: { name: 'SNARE', color: '#ffff66' },
+          hat: { name: 'HI-HAT', color: '#66ff66' },
+          clap: { name: 'CLAP', color: '#6666ff' },
         };
 
-        const QUIZ_QUESTIONS = [
-            {
-                q: 'How do you open the sample browser while on a trig to set a sample lock?',
-                opts: ['Press [AUD]', 'Hold [TRIG] + press [UP]/[DOWN]', 'Hold [FUNC] + [TRIG]', 'Press [REC] twice'],
-                correct: 1
-            },
-            {
-                q: 'What does a RED FLASHING trig LED indicate?',
-                opts: ['The trig is muted', 'A sample lock is active on that step', 'Recording is enabled', 'A parameter is locked'],
-                correct: 1
-            },
-            {
-                q: 'Can you combine sample locks with parameter locks on the same step?',
-                opts: ['No, they conflict', 'Yes, completely', 'Only on Flex machines', 'Only volume'],
-                correct: 1
-            },
-            {
-                q: 'Which machine types support sample locks?',
-                opts: ['Flex only', 'Flex and Static only', 'All (Flex, Static, Neighbor, Thru, Pickup)', 'Only Static'],
-                correct: 2
-            }
-        ];
-
-        // Initialize sidebar
-        function initSidebar() {
-            const nav = document.getElementById('sidebarNav');
-            nav.innerHTML = SECTIONS.map(s =>
-                `<div class="sidebar-item" onclick="scrollToSection('${s.id}')">${s.label}</div>`
-            ).join('');
-            trackActiveSection();
-        }
-
-        // Scroll to section
-        function scrollToSection(id) {
-            const elem = document.getElementById(id);
-            if (elem) {
-                elem.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Track active section with IntersectionObserver
-        function trackActiveSection() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        document.querySelectorAll('.sidebar-item').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        const idx = SECTIONS.findIndex(s => s.id === entry.target.id);
-                        if (idx >= 0) {
-                            document.querySelectorAll('.sidebar-item')[idx].classList.add('active');
-                        }
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            SECTIONS.forEach(s => {
-                const elem = document.getElementById(s.id);
-                if (elem) observer.observe(elem);
-            });
-        }
-
-        // Drum kit sequencer
-        function initDrumSequencer() {
-            const container = document.getElementById('drumSequencer');
-            const legend = document.getElementById('drumLegend');
-
-            // Create grid
-            container.innerHTML = Array.from({length: 16}, (_, i) => {
-                const step = i + 1;
-                const drum = DRUM_KIT[step];
-                const className = drum ? drum.color : '';
-                const text = drum ? drum.name : '—';
-                return `<div class="drum-step ${className}">${text}</div>`;
-            }).join('');
-
-            // Create legend
-            const colors = {
-                kick: { name: 'KICK', color: '#ff6666' },
-                snare: { name: 'SNARE', color: '#ffff66' },
-                hat: { name: 'HI-HAT', color: '#66ff66' },
-                clap: { name: 'CLAP', color: '#6666ff' }
-            };
-
-            legend.innerHTML = Object.entries(colors).map(([key, val]) =>
-                `<div class="legend-item" style="color: ${val.color};">
+        legend.innerHTML = Object.entries(colors)
+          .map(
+            ([key, val]) =>
+              `<div class="legend-item" style="color: ${val.color};">
                     <div class="legend-box"></div>
                     <span>${val.name}</span>
                 </div>`
-            ).join('');
-        }
+          )
+          .join('');
+      }
 
-        // Quiz
-        function initQuiz() {
-            const container = document.getElementById('quizContainer');
-            container.innerHTML = QUIZ_QUESTIONS.map((q, qIdx) => `
+      // Quiz
+      function initQuiz() {
+        const container = document.getElementById('quizContainer');
+        container.innerHTML = QUIZ_QUESTIONS.map(
+          (q, qIdx) => `
                 <div class="quiz-item">
                     <div class="quiz-question">Q${qIdx + 1}: ${q.q}</div>
                     <div class="quiz-options">
-                        ${q.opts.map((opt, oIdx) => `
+                        ${q.opts
+                          .map(
+                            (opt, oIdx) => `
                             <div class="quiz-option" onclick="selectQuizOption(${qIdx}, ${oIdx})">
                                 ◯ ${opt}
                             </div>
-                        `).join('')}
+                        `
+                          )
+                          .join('')}
                     </div>
                     <div id="feedback-${qIdx}"></div>
                 </div>
-            `).join('');
-        }
+            `
+        ).join('');
+      }
 
-        function selectQuizOption(qIdx, oIdx) {
-            const correct = QUIZ_QUESTIONS[qIdx].correct === oIdx;
-            const options = document.querySelectorAll(`.quiz-item`)[qIdx].querySelectorAll('.quiz-option');
-            options.forEach((opt, idx) => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-                if (idx === oIdx) {
-                    opt.classList.add('selected', correct ? 'correct' : 'incorrect');
-                }
-            });
-
-            const feedback = document.getElementById(`feedback-${qIdx}`);
-            feedback.className = 'quiz-feedback ' + (correct ? '' : 'incorrect');
-            feedback.innerHTML = correct
-                ? '<strong>✓ CORRECT!</strong> Well done.'
-                : `<strong>✗ NOT QUITE.</strong> The correct answer is: <strong>${QUIZ_QUESTIONS[qIdx].opts[QUIZ_QUESTIONS[qIdx].correct]}</strong>`;
-        }
-
-        // Confidence scale
-        function initConfidence() {
-            const container = document.getElementById('confidenceScale');
-            container.innerHTML = Array.from({length: 5}, (_, i) =>
-                `<button class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`
-            ).join('');
-        }
-
-        function setConfidence(level) {
-            document.querySelectorAll('.confidence-button').forEach((btn, idx) => {
-                btn.classList.toggle('selected', idx + 1 <= level);
-            });
-            saveProgress();
-        }
-
-        // Progress tracking
-        function saveProgress() {
-            let data = JSON.parse(localStorage.getItem('octatrack-tutorials') || '{}');
-            if (!data.tutorials) data.tutorials = {};
-            data.tutorials[TUTORIAL_ID] = {
-                completed: true,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('octatrack-tutorials', JSON.stringify(data));
-        }
-
-        // Navigation
-        function goToPrev() {
-            window.location.href = '05-slice-and-dice.html';
-        }
-
-        function goToNext() {
-            saveProgress();
-            window.location.href = 'index.html';
-        }
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            initSidebar();
-            initDrumSequencer();
-            initQuiz();
-            initConfidence();
+      function selectQuizOption(qIdx, oIdx) {
+        const correct = QUIZ_QUESTIONS[qIdx].correct === oIdx;
+        const options = document.querySelectorAll(`.quiz-item`)[qIdx].querySelectorAll('.quiz-option');
+        options.forEach((opt, idx) => {
+          opt.classList.remove('selected', 'correct', 'incorrect');
+          if (idx === oIdx) {
+            opt.classList.add('selected', correct ? 'correct' : 'incorrect');
+          }
         });
+
+        const feedback = document.getElementById(`feedback-${qIdx}`);
+        feedback.className = 'quiz-feedback ' + (correct ? '' : 'incorrect');
+        feedback.innerHTML = correct
+          ? '<strong>✓ CORRECT!</strong> Well done.'
+          : `<strong>✗ NOT QUITE.</strong> The correct answer is: <strong>${QUIZ_QUESTIONS[qIdx].opts[QUIZ_QUESTIONS[qIdx].correct]}</strong>`;
+      }
+
+      // Confidence scale
+      function initConfidence() {
+        const container = document.getElementById('confidenceScale');
+        container.innerHTML = Array.from({ length: 5 }, (_, i) => `<button class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`).join('');
+      }
+
+      function setConfidence(level) {
+        document.querySelectorAll('.confidence-button').forEach((btn, idx) => {
+          btn.classList.toggle('selected', idx + 1 <= level);
+        });
+        saveProgress();
+      }
+
+      // Progress tracking
+      function saveProgress() {
+        let data = JSON.parse(localStorage.getItem('octatrack-tutorials') || '{}');
+        if (!data.tutorials) data.tutorials = {};
+        data.tutorials[TUTORIAL_ID] = {
+          completed: true,
+          timestamp: new Date().toISOString(),
+        };
+        localStorage.setItem('octatrack-tutorials', JSON.stringify(data));
+      }
+
+      // Navigation
+      function goToPrev() {
+        window.location.href = '05-slice-and-dice.html';
+      }
+
+      function goToNext() {
+        saveProgress();
+        window.location.href = 'index.html';
+      }
+
+      // Init
+      document.addEventListener('DOMContentLoaded', () => {
+        initSidebar();
+        initDrumSequencer();
+        initQuiz();
+        initConfidence();
+      });
     </script>
-</body>
+    <script src="assets/svg-overlay.js" defer></script>
+  </body>
 </html>

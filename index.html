@@ -1,1302 +1,1383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OCTATRACK MK2 // LEARNING SYSTEM</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap');
+
+      body {
+        background: #0a0a0a;
+        color: #e0e0e0;
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* HEADER */
+      .header {
+        background: #0a0a0a;
+        border-bottom: 3px solid #00ffff;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+      }
+
+      .header-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        animation: glitch 0.3s ease-in-out;
+      }
+
+      @keyframes glitch {
+        0% {
+          text-shadow:
+            2px 0 #ff00ff,
+            -2px 0 #00ff41;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap');
-
-        body {
-            background: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            overflow-x: hidden;
+        50% {
+          text-shadow:
+            -2px 0 #ff00ff,
+            2px 0 #00ff41;
         }
-
-        /* HEADER */
-        .header {
-            background: #0a0a0a;
-            border-bottom: 3px solid #00ffff;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 8px 32px rgba(0, 255, 255, 0.1);
+        100% {
+          text-shadow:
+            2px 0 #ff00ff,
+            -2px 0 #00ff41;
         }
+      }
 
+      .header-subtitle {
+        font-size: 1.1rem;
+        color: #999999;
+        letter-spacing: 0.05em;
+        font-style: italic;
+        min-height: 1.5em;
+      }
+
+      .subtitle-cursor {
+        display: inline-block;
+        width: 2px;
+        background: #00ffff;
+        margin-left: 0.2em;
+        animation: blink 0.6s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        49% {
+          opacity: 1;
+        }
+        50%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      /* STATS OVERVIEW */
+      .stats-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding: 0 2rem;
+      }
+
+      .stat-card {
+        background: #111111;
+        border: 2px solid #00ffff;
+        padding: 1.5rem;
+        position: relative;
+        transition: all 0.2s ease;
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+      }
+
+      .stat-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .stat-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .stat-card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .stat-card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .stat-card:hover {
+        border-color: #ff00ff;
+        box-shadow: 0 0 24px rgba(255, 0, 255, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .stat-card-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ff41;
+        margin-bottom: 1rem;
+      }
+
+      .stat-card-value {
+        font-family: 'Space Mono', monospace;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-card-subtext {
+        font-size: 0.9rem;
+        color: #666666;
+      }
+
+      .progress-ring-container {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+      }
+
+      .progress-ring {
+        transform: rotate(-90deg);
+        transform-origin: center;
+      }
+
+      .progress-ring-circle {
+        stroke: #333333;
+        fill: transparent;
+        stroke-width: 3;
+      }
+
+      .progress-ring-circle-progress {
+        stroke: #00ffff;
+        fill: transparent;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 282.6;
+        stroke-dashoffset: 282.6;
+        transition: stroke-dashoffset 0.8s ease;
+      }
+
+      .confidence-dots {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .confidence-dot {
+        width: 8px;
+        height: 8px;
+        border: 2px solid #666666;
+        background: transparent;
+        transition: all 0.2s ease;
+      }
+
+      .confidence-dot.filled {
+        background: #ff00ff;
+        border-color: #ff00ff;
+      }
+
+      /* RECOMMENDED NEXT */
+      .recommended-section {
+        padding: 0 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .recommended-banner {
+        background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
+        border: 2px solid #ffaa00;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .recommended-banner:hover {
+        border-color: #ff00ff;
+        box-shadow: 0 0 24px rgba(255, 0, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      .recommended-banner::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffaa00, transparent);
+      }
+
+      .recommended-banner::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffaa00, transparent);
+      }
+
+      .recommended-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffaa00;
+        margin-bottom: 0.5rem;
+      }
+
+      .recommended-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      .recommended-meta {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        color: #999999;
+      }
+
+      .recommended-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .difficulty-badge {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border: 1px solid;
+      }
+
+      .difficulty-beginner {
+        border-color: #00ff41;
+        color: #00ff41;
+      }
+
+      .difficulty-intermediate {
+        border-color: #ffaa00;
+        color: #ffaa00;
+      }
+
+      .difficulty-advanced {
+        border-color: #ff3333;
+        color: #ff3333;
+      }
+
+      /* LEARNING PATH VISUALIZATION */
+      .learning-path {
+        padding: 0 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .learning-path-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        margin-bottom: 2rem;
+      }
+
+      .path-visualization {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        background: #111111;
+        border: 2px solid #333333;
+      }
+
+      .path-node {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: #0a0a0a;
+      }
+
+      .path-node.not-started {
+        border-color: #444444;
+        color: #666666;
+      }
+
+      .path-node.in-progress {
+        border-color: #ffaa00;
+        background: rgba(255, 170, 0, 0.1);
+        color: #ffaa00;
+      }
+
+      .path-node.completed {
+        border-color: #00ff41;
+        background: rgba(0, 255, 65, 0.1);
+        color: #00ff41;
+      }
+
+      .path-node:hover:not(.not-started) {
+        box-shadow: 0 0 20px currentColor;
+        transform: translateY(-4px);
+      }
+
+      .path-node-number {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+
+      .path-node-title {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-align: center;
+        margin-top: 0.3rem;
+      }
+
+      .path-tier-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ffff;
+        margin: 2rem 0 1rem 0;
+        padding: 1rem 0;
+        border-top: 2px solid #333333;
+        border-bottom: 2px solid #333333;
+      }
+
+      /* TUTORIAL GRID */
+      .tutorials-section {
+        padding: 0 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .tutorials-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        margin-bottom: 2rem;
+      }
+
+      .tutorials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+      }
+
+      .tutorial-card {
+        background: #111111;
+        border: 2px solid;
+        padding: 1.5rem;
+        position: relative;
+        transition: all 0.2s ease;
+        animation: fadeInUp 0.6s ease forwards;
+        opacity: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .tutorial-card.not-started {
+        border-color: #444444;
+      }
+
+      .tutorial-card.in-progress {
+        border-color: #ffaa00;
+      }
+
+      .tutorial-card.completed {
+        border-color: #00ff41;
+      }
+
+      .tutorial-card.coming-soon {
+        border-color: #333333;
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .tutorial-card:not(.coming-soon):hover {
+        border-color: #00ffff;
+        box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
+        transform: translateY(-4px);
+      }
+
+      .tutorial-number {
+        font-family: 'Space Mono', monospace;
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.5rem;
+        color: #00ffff;
+      }
+
+      .tutorial-card.completed .tutorial-number {
+        color: #00ff41;
+      }
+
+      .tutorial-card.in-progress .tutorial-number {
+        color: #ffaa00;
+      }
+
+      .tutorial-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #ffffff;
+        margin-bottom: 0.3rem;
+      }
+
+      .tutorial-subtitle {
+        font-size: 0.9rem;
+        color: #999999;
+        margin-bottom: 1rem;
+      }
+
+      .tutorial-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+      }
+
+      .tutorial-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .tutorial-meta-icon {
+        font-size: 0.8rem;
+        color: #666666;
+      }
+
+      .tutorial-progress-container {
+        margin: 1rem 0;
+      }
+
+      .progress-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #666666;
+        margin-bottom: 0.4rem;
+      }
+
+      .progress-bar {
+        height: 12px;
+        background: #1a1a1a;
+        border: 1px solid #333333;
+        overflow: hidden;
+      }
+
+      .progress-bar-fill {
+        height: 100%;
+        background: #00ffff;
+        width: 0%;
+        transition: width 0.6s ease;
+      }
+
+      .tutorial-card.in-progress .progress-bar-fill {
+        background: #ffaa00;
+      }
+
+      .tutorial-card.completed .progress-bar-fill {
+        background: #00ff41;
+      }
+
+      .tutorial-confidence {
+        margin: 1rem 0;
+      }
+
+      .confidence-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #666666;
+        margin-bottom: 0.4rem;
+      }
+
+      .confidence-rating {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .confidence-star {
+        width: 12px;
+        height: 12px;
+        border: 1px solid #444444;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .confidence-star.active {
+        background: #ff00ff;
+        border-color: #ff00ff;
+      }
+
+      .quiz-score {
+        font-size: 0.85rem;
+        color: #666666;
+        margin: 1rem 0;
+      }
+
+      .tutorial-prerequisites {
+        font-size: 0.8rem;
+        color: #666666;
+        margin: 1rem 0;
+        display: none;
+      }
+
+      .tutorial-prerequisites.active {
+        display: block;
+      }
+
+      .prerequisite-item {
+        display: inline-block;
+        background: #1a1a1a;
+        border: 1px solid #333333;
+        padding: 0.2rem 0.6rem;
+        margin-right: 0.4rem;
+        margin-bottom: 0.4rem;
+        font-size: 0.75rem;
+      }
+
+      .tutorial-status {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #666666;
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid #222222;
+      }
+
+      .tutorial-status.active {
+        color: #00ffff;
+      }
+
+      .tutorial-status.in-progress {
+        color: #ffaa00;
+      }
+
+      .tutorial-status.completed {
+        color: #00ff41;
+      }
+
+      .tutorial-button {
+        margin-top: 1rem;
+        padding: 0.8rem 1.2rem;
+        background: transparent;
+        border: 2px solid;
+        color: #ffffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        width: 100%;
+      }
+
+      .tutorial-card.not-started .tutorial-button {
+        border-color: #00ffff;
+        color: #00ffff;
+      }
+
+      .tutorial-card.not-started .tutorial-button:hover {
+        background: rgba(0, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .tutorial-card.in-progress .tutorial-button {
+        border-color: #ffaa00;
+        color: #ffaa00;
+      }
+
+      .tutorial-card.in-progress .tutorial-button:hover {
+        background: rgba(255, 170, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .tutorial-card.completed .tutorial-button {
+        border-color: #00ff41;
+        color: #00ff41;
+      }
+
+      .tutorial-card.completed .tutorial-button:hover {
+        background: rgba(0, 255, 65, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .tutorial-card.coming-soon .tutorial-button {
+        border-color: #666666;
+        color: #666666;
+        cursor: not-allowed;
+      }
+
+      /* FOOTER */
+      .footer {
+        background: #111111;
+        border-top: 2px solid #333333;
+        padding: 2rem;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .footer-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: #666666;
+      }
+
+      .footer-info-highlight {
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.85rem;
+      }
+
+      .footer-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .footer-button {
+        padding: 0.6rem 1rem;
+        background: transparent;
+        border: 2px solid #666666;
+        color: #666666;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .footer-button:hover {
+        border-color: #00ffff;
+        color: #00ffff;
+        transform: translateY(-2px);
+      }
+
+      /* MODAL */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        animation: fadeIn 0.2s ease;
+      }
+
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .modal-content {
+        background: #111111;
+        border: 2px solid #00ffff;
+        padding: 2rem;
+        max-width: 500px;
+        width: 90%;
+        animation: slideUp 0.3s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        margin-bottom: 1rem;
+      }
+
+      .modal-body {
+        color: #e0e0e0;
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+      }
+
+      .modal-button {
+        padding: 0.7rem 1.5rem;
+        border: 2px solid;
+        background: transparent;
+        color: #ffffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .modal-button.primary {
+        border-color: #00ffff;
+        color: #00ffff;
+      }
+
+      .modal-button.primary:hover {
+        background: rgba(0, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .modal-button.secondary {
+        border-color: #666666;
+        color: #666666;
+      }
+
+      .modal-button.secondary:hover {
+        border-color: #ffffff;
+        color: #ffffff;
+        transform: translateY(-2px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
         .header-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-            animation: glitch 0.3s ease-in-out;
+          font-size: 1.8rem;
         }
 
-        @keyframes glitch {
-            0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ff41; }
-            50% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ff41; }
-            100% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ff41; }
-        }
-
-        .header-subtitle {
-            font-size: 1.1rem;
-            color: #999999;
-            letter-spacing: 0.05em;
-            font-style: italic;
-            min-height: 1.5em;
-        }
-
-        .subtitle-cursor {
-            display: inline-block;
-            width: 2px;
-            background: #00ffff;
-            margin-left: 0.2em;
-            animation: blink 0.6s infinite;
-        }
-
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-
-        /* STATS OVERVIEW */
         .stats-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            padding: 0 2rem;
-        }
-
-        .stat-card {
-            background: #111111;
-            border: 2px solid #00ffff;
-            padding: 1.5rem;
-            position: relative;
-            transition: all 0.2s ease;
-            animation: fadeInUp 0.6s ease forwards;
-            opacity: 0;
-        }
-
-        .stat-card:nth-child(1) { animation-delay: 0.1s; }
-        .stat-card:nth-child(2) { animation-delay: 0.2s; }
-        .stat-card:nth-child(3) { animation-delay: 0.3s; }
-        .stat-card:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stat-card:hover {
-            border-color: #ff00ff;
-            box-shadow: 0 0 24px rgba(255, 0, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .stat-card-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ff41;
-            margin-bottom: 1rem;
-        }
-
-        .stat-card-value {
-            font-family: 'Space Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card-subtext {
-            font-size: 0.9rem;
-            color: #666666;
-        }
-
-        .progress-ring-container {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-        }
-
-        .progress-ring {
-            transform: rotate(-90deg);
-            transform-origin: center;
-        }
-
-        .progress-ring-circle {
-            stroke: #333333;
-            fill: transparent;
-            stroke-width: 3;
-        }
-
-        .progress-ring-circle-progress {
-            stroke: #00ffff;
-            fill: transparent;
-            stroke-width: 3;
-            stroke-linecap: round;
-            stroke-dasharray: 282.6;
-            stroke-dashoffset: 282.6;
-            transition: stroke-dashoffset 0.8s ease;
-        }
-
-        .confidence-dots {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .confidence-dot {
-            width: 8px;
-            height: 8px;
-            border: 2px solid #666666;
-            background: transparent;
-            transition: all 0.2s ease;
-        }
-
-        .confidence-dot.filled {
-            background: #ff00ff;
-            border-color: #ff00ff;
-        }
-
-        /* RECOMMENDED NEXT */
-        .recommended-section {
-            padding: 0 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .recommended-banner {
-            background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
-            border: 2px solid #ffaa00;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .recommended-banner:hover {
-            border-color: #ff00ff;
-            box-shadow: 0 0 24px rgba(255, 0, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .recommended-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffaa00, transparent);
-        }
-
-        .recommended-banner::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffaa00, transparent);
-        }
-
-        .recommended-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffaa00;
-            margin-bottom: 0.5rem;
-        }
-
-        .recommended-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-        }
-
-        .recommended-meta {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: #999999;
-        }
-
-        .recommended-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border: 1px solid;
-        }
-
-        .difficulty-beginner {
-            border-color: #00ff41;
-            color: #00ff41;
-        }
-
-        .difficulty-intermediate {
-            border-color: #ffaa00;
-            color: #ffaa00;
-        }
-
-        .difficulty-advanced {
-            border-color: #ff3333;
-            color: #ff3333;
-        }
-
-        /* LEARNING PATH VISUALIZATION */
-        .learning-path {
-            padding: 0 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .learning-path-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ffffff;
-            margin-bottom: 2rem;
-        }
-
-        .path-visualization {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            background: #111111;
-            border: 2px solid #333333;
-        }
-
-        .path-node {
-            aspect-ratio: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: #0a0a0a;
-        }
-
-        .path-node.not-started {
-            border-color: #444444;
-            color: #666666;
-        }
-
-        .path-node.in-progress {
-            border-color: #ffaa00;
-            background: rgba(255, 170, 0, 0.1);
-            color: #ffaa00;
-        }
-
-        .path-node.completed {
-            border-color: #00ff41;
-            background: rgba(0, 255, 65, 0.1);
-            color: #00ff41;
-        }
-
-        .path-node:hover:not(.not-started) {
-            box-shadow: 0 0 20px currentColor;
-            transform: translateY(-4px);
-        }
-
-        .path-node-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .path-node-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            text-align: center;
-            margin-top: 0.3rem;
-        }
-
-        .path-tier-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ffff;
-            margin: 2rem 0 1rem 0;
-            padding: 1rem 0;
-            border-top: 2px solid #333333;
-            border-bottom: 2px solid #333333;
-        }
-
-        /* TUTORIAL GRID */
-        .tutorials-section {
-            padding: 0 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .tutorials-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ffffff;
-            margin-bottom: 2rem;
+          grid-template-columns: repeat(2, 1fr);
+          padding: 0 1rem;
         }
 
         .tutorials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .tutorial-card {
-            background: #111111;
-            border: 2px solid;
-            padding: 1.5rem;
-            position: relative;
-            transition: all 0.2s ease;
-            animation: fadeInUp 0.6s ease forwards;
-            opacity: 0;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .tutorial-card.not-started {
-            border-color: #444444;
-        }
-
-        .tutorial-card.in-progress {
-            border-color: #ffaa00;
-        }
-
-        .tutorial-card.completed {
-            border-color: #00ff41;
-        }
-
-        .tutorial-card.coming-soon {
-            border-color: #333333;
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .tutorial-card:not(.coming-soon):hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
-            transform: translateY(-4px);
-        }
-
-        .tutorial-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            color: #00ffff;
-        }
-
-        .tutorial-card.completed .tutorial-number {
-            color: #00ff41;
-        }
-
-        .tutorial-card.in-progress .tutorial-number {
-            color: #ffaa00;
-        }
-
-        .tutorial-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #ffffff;
-            margin-bottom: 0.3rem;
-        }
-
-        .tutorial-subtitle {
-            font-size: 0.9rem;
-            color: #999999;
-            margin-bottom: 1rem;
-        }
-
-        .tutorial-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            flex-wrap: wrap;
-        }
-
-        .tutorial-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .tutorial-meta-icon {
-            font-size: 0.8rem;
-            color: #666666;
-        }
-
-        .tutorial-progress-container {
-            margin: 1rem 0;
-        }
-
-        .progress-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #666666;
-            margin-bottom: 0.4rem;
-        }
-
-        .progress-bar {
-            height: 12px;
-            background: #1a1a1a;
-            border: 1px solid #333333;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: #00ffff;
-            width: 0%;
-            transition: width 0.6s ease;
-        }
-
-        .tutorial-card.in-progress .progress-bar-fill {
-            background: #ffaa00;
-        }
-
-        .tutorial-card.completed .progress-bar-fill {
-            background: #00ff41;
-        }
-
-        .tutorial-confidence {
-            margin: 1rem 0;
-        }
-
-        .confidence-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #666666;
-            margin-bottom: 0.4rem;
-        }
-
-        .confidence-rating {
-            display: flex;
-            gap: 0.4rem;
-        }
-
-        .confidence-star {
-            width: 12px;
-            height: 12px;
-            border: 1px solid #444444;
-            background: transparent;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .confidence-star.active {
-            background: #ff00ff;
-            border-color: #ff00ff;
-        }
-
-        .quiz-score {
-            font-size: 0.85rem;
-            color: #666666;
-            margin: 1rem 0;
-        }
-
-        .tutorial-prerequisites {
-            font-size: 0.8rem;
-            color: #666666;
-            margin: 1rem 0;
-            display: none;
-        }
-
-        .tutorial-prerequisites.active {
-            display: block;
-        }
-
-        .prerequisite-item {
-            display: inline-block;
-            background: #1a1a1a;
-            border: 1px solid #333333;
-            padding: 0.2rem 0.6rem;
-            margin-right: 0.4rem;
-            margin-bottom: 0.4rem;
-            font-size: 0.75rem;
-        }
-
-        .tutorial-status {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #666666;
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid #222222;
-        }
-
-        .tutorial-status.active {
-            color: #00ffff;
-        }
-
-        .tutorial-status.in-progress {
-            color: #ffaa00;
-        }
-
-        .tutorial-status.completed {
-            color: #00ff41;
-        }
-
-        .tutorial-button {
-            margin-top: 1rem;
-            padding: 0.8rem 1.2rem;
-            background: transparent;
-            border: 2px solid;
-            color: #ffffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-        .tutorial-card.not-started .tutorial-button {
-            border-color: #00ffff;
-            color: #00ffff;
-        }
-
-        .tutorial-card.not-started .tutorial-button:hover {
-            background: rgba(0, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .tutorial-card.in-progress .tutorial-button {
-            border-color: #ffaa00;
-            color: #ffaa00;
-        }
-
-        .tutorial-card.in-progress .tutorial-button:hover {
-            background: rgba(255, 170, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .tutorial-card.completed .tutorial-button {
-            border-color: #00ff41;
-            color: #00ff41;
-        }
-
-        .tutorial-card.completed .tutorial-button:hover {
-            background: rgba(0, 255, 65, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .tutorial-card.coming-soon .tutorial-button {
-            border-color: #666666;
-            color: #666666;
-            cursor: not-allowed;
-        }
-
-        /* FOOTER */
-        .footer {
-            background: #111111;
-            border-top: 2px solid #333333;
-            padding: 2rem;
-            margin-top: 4rem;
+          grid-template-columns: 1fr;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .footer-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            color: #666666;
-        }
-
-        .footer-info-highlight {
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
+          grid-template-columns: 1fr;
         }
 
         .footer-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+          justify-content: flex-start;
         }
-
-        .footer-button {
-            padding: 0.6rem 1rem;
-            background: transparent;
-            border: 2px solid #666666;
-            color: #666666;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <h1 class="header-title">OCTATRACK MK2 // LEARNING SYSTEM</h1>
+      <p class="header-subtitle">
+        Master the machine. One tutorial at a time.
+        <span class="subtitle-cursor"></span>
+      </p>
+      <nav style="margin-top: 12px; display: flex; gap: 20px">
+        <a
+          href="videos.html"
+          style="
+            color: #ff00ff;
+            text-decoration: none;
             font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .footer-button:hover {
-            border-color: #00ffff;
-            color: #00ffff;
-            transform: translateY(-2px);
-        }
-
-        /* MODAL */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background: #111111;
-            border: 2px solid #00ffff;
-            padding: 2rem;
-            max-width: 500px;
-            width: 90%;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #ffffff;
-            margin-bottom: 1rem;
-        }
-
-        .modal-body {
-            color: #e0e0e0;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-        }
-
-        .modal-button {
-            padding: 0.7rem 1.5rem;
-            border: 2px solid;
-            background: transparent;
-            color: #ffffff;
+            border: 2px solid #ff00ff;
+            padding: 6px 16px;
+            transition: all 0.2s;
+          "
+          onmouseover="this.style.background = 'rgba(255,0,255,0.1)'"
+          onmouseout="this.style.background = 'transparent'"
+        >
+          Video Library
+        </a>
+        <a
+          href="credits.html"
+          style="
+            color: #666;
+            text-decoration: none;
             font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .modal-button.primary {
-            border-color: #00ffff;
-            color: #00ffff;
-        }
-
-        .modal-button.primary:hover {
-            background: rgba(0, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .modal-button.secondary {
-            border-color: #666666;
-            color: #666666;
-        }
-
-        .modal-button.secondary:hover {
-            border-color: #ffffff;
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 1.8rem;
-            }
-
-            .stats-overview {
-                grid-template-columns: repeat(2, 1fr);
-                padding: 0 1rem;
-            }
-
-            .tutorials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-actions {
-                justify-content: flex-start;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- HEADER -->
-    <header class="header">
-        <h1 class="header-title">OCTATRACK MK2 // LEARNING SYSTEM</h1>
-        <p class="header-subtitle">Master the machine. One tutorial at a time.<span class="subtitle-cursor"></span></p>
+            letter-spacing: 0.1em;
+            border: 2px solid #333;
+            padding: 6px 16px;
+            transition: all 0.2s;
+          "
+          onmouseover="
+            this.style.borderColor = '#666';
+            this.style.color = '#999';
+          "
+          onmouseout="
+            this.style.borderColor = '#333';
+            this.style.color = '#666';
+          "
+        >
+          Credits
+        </a>
+      </nav>
     </header>
 
     <!-- STATS OVERVIEW -->
     <section class="stats-overview">
-        <div class="stat-card">
-            <div class="stat-card-label">Tutorials Completed</div>
-            <div class="progress-ring-container">
-                <svg class="progress-ring" width="100" height="100">
-                    <circle class="progress-ring-circle" cx="50" cy="50" r="45"/>
-                    <circle class="progress-ring-circle-progress" id="completionRing" cx="50" cy="50" r="45"/>
-                </svg>
-            </div>
-            <div class="stat-card-value" id="completionPercentage">0%</div>
-            <div class="stat-card-subtext"><span id="completionCount">0</span>/8 tutorials</div>
+      <div class="stat-card">
+        <div class="stat-card-label">Tutorials Completed</div>
+        <div class="progress-ring-container">
+          <svg class="progress-ring" width="100" height="100">
+            <circle class="progress-ring-circle" cx="50" cy="50" r="45" />
+            <circle class="progress-ring-circle-progress" id="completionRing" cx="50" cy="50" r="45" />
+          </svg>
         </div>
+        <div class="stat-card-value" id="completionPercentage">0%</div>
+        <div class="stat-card-subtext">
+          <span id="completionCount">0</span>
+          /8 tutorials
+        </div>
+      </div>
 
-        <div class="stat-card">
-            <div class="stat-card-label">Time Invested</div>
-            <div class="stat-card-value" id="totalTime">0h 0m</div>
-            <div class="stat-card-subtext">Across all tutorials</div>
-        </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Time Invested</div>
+        <div class="stat-card-value" id="totalTime">0h 0m</div>
+        <div class="stat-card-subtext">Across all tutorials</div>
+      </div>
 
-        <div class="stat-card">
-            <div class="stat-card-label">Average Confidence</div>
-            <div class="stat-card-value" id="averageConfidence">—</div>
-            <div class="confidence-dots" id="confidenceDots">
-                <div class="confidence-dot"></div>
-                <div class="confidence-dot"></div>
-                <div class="confidence-dot"></div>
-                <div class="confidence-dot"></div>
-                <div class="confidence-dot"></div>
-            </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Average Confidence</div>
+        <div class="stat-card-value" id="averageConfidence">—</div>
+        <div class="confidence-dots" id="confidenceDots">
+          <div class="confidence-dot"></div>
+          <div class="confidence-dot"></div>
+          <div class="confidence-dot"></div>
+          <div class="confidence-dot"></div>
+          <div class="confidence-dot"></div>
         </div>
+      </div>
 
-        <div class="stat-card">
-            <div class="stat-card-label">Learning Streak</div>
-            <div class="stat-card-value" id="streakDays">0</div>
-            <div class="stat-card-subtext">Consecutive days</div>
-        </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Learning Streak</div>
+        <div class="stat-card-value" id="streakDays">0</div>
+        <div class="stat-card-subtext">Consecutive days</div>
+      </div>
     </section>
 
     <!-- RECOMMENDED NEXT -->
     <section class="recommended-section">
-        <div class="recommended-banner" id="recommendedBanner" style="display: none;">
-            <div class="recommended-label">RECOMMENDED NEXT →</div>
-            <div class="recommended-title" id="recommendedTitle">Tutorial</div>
-            <div class="recommended-meta">
-                <div class="recommended-meta-item">
-                    <span class="recommended-meta-icon">⏱</span>
-                    <span id="recommendedTime">20 min</span>
-                </div>
-                <div class="recommended-meta-item">
-                    <span id="recommendedDifficulty" class="difficulty-badge difficulty-beginner">Beginner</span>
-                </div>
-            </div>
+      <div class="recommended-banner" id="recommendedBanner" style="display: none">
+        <div class="recommended-label">RECOMMENDED NEXT →</div>
+        <div class="recommended-title" id="recommendedTitle">Tutorial</div>
+        <div class="recommended-meta">
+          <div class="recommended-meta-item">
+            <span class="recommended-meta-icon">⏱</span>
+            <span id="recommendedTime">20 min</span>
+          </div>
+          <div class="recommended-meta-item">
+            <span id="recommendedDifficulty" class="difficulty-badge difficulty-beginner">Beginner</span>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- LEARNING PATH VISUALIZATION -->
     <section class="learning-path">
-        <h2 class="learning-path-title">Learning Path</h2>
-        <div class="path-visualization">
-            <div class="path-tier-label">TIER 1 — FOUNDATIONS</div>
-            <div class="path-node not-started" data-tutorial="01-set-sail">
-                <div class="path-node-number">1</div>
-                <div class="path-node-title">Set Sail</div>
-            </div>
-            <div class="path-node not-started" data-tutorial="02-load-and-lock">
-                <div class="path-node-number">2</div>
-                <div class="path-node-title">Load & Lock</div>
-            </div>
-            <div class="path-node not-started" data-tutorial="03-beat-basics">
-                <div class="path-node-number">3</div>
-                <div class="path-node-title">Beat Basics</div>
-            </div>
-            <div class="path-node not-started" data-tutorial="04-audio-pool">
-                <div class="path-node-number">4</div>
-                <div class="path-node-title">Audio Pool</div>
-            </div>
-
-            <div class="path-tier-label">TIER 2 — CORE MANIPULATION</div>
-            <div class="path-node not-started" data-tutorial="05-slice-and-dice">
-                <div class="path-node-number">5</div>
-                <div class="path-node-title">Slice & Dice</div>
-            </div>
-            <div class="path-node not-started" data-tutorial="06-sample-locks">
-                <div class="path-node-number">6</div>
-                <div class="path-node-title">Sample Locks</div>
-            </div>
-            <div class="path-node not-started" data-tutorial="07-loop-stretching">
-                <div class="path-node-number">7</div>
-                <div class="path-node-title">Loop Stretching</div>
-            </div>
-            <div class="path-node not-started" data-tutorial="08-parts-banks-scenes">
-                <div class="path-node-number">8</div>
-                <div class="path-node-title">Parts & Scenes</div>
-            </div>
-
-            <div class="path-tier-label">TIER 3 — ADVANCED</div>
-            <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3;">
-                <div class="path-node-number">9</div>
-                <div class="path-node-title">Trig Conditions</div>
-            </div>
-            <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3;">
-                <div class="path-node-number">10</div>
-                <div class="path-node-title">Resampling</div>
-            </div>
-            <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3;">
-                <div class="path-node-number">11</div>
-                <div class="path-node-title">FX & Neighbors</div>
-            </div>
-
-            <div class="path-tier-label">TIER 4 — MASTERY</div>
-            <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3;">
-                <div class="path-node-number">12</div>
-                <div class="path-node-title">LFOs & Modulation</div>
-            </div>
-            <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3;">
-                <div class="path-node-number">13</div>
-                <div class="path-node-title">Live Performance</div>
-            </div>
+      <h2 class="learning-path-title">Learning Path</h2>
+      <div class="path-visualization">
+        <div class="path-tier-label">TIER 1 — FOUNDATIONS</div>
+        <div class="path-node not-started" data-tutorial="01-set-sail">
+          <div class="path-node-number">1</div>
+          <div class="path-node-title">Set Sail</div>
         </div>
+        <div class="path-node not-started" data-tutorial="02-load-and-lock">
+          <div class="path-node-number">2</div>
+          <div class="path-node-title">Load & Lock</div>
+        </div>
+        <div class="path-node not-started" data-tutorial="03-beat-basics">
+          <div class="path-node-number">3</div>
+          <div class="path-node-title">Beat Basics</div>
+        </div>
+        <div class="path-node not-started" data-tutorial="04-audio-pool">
+          <div class="path-node-number">4</div>
+          <div class="path-node-title">Audio Pool</div>
+        </div>
+
+        <div class="path-tier-label">TIER 2 — CORE MANIPULATION</div>
+        <div class="path-node not-started" data-tutorial="05-slice-and-dice">
+          <div class="path-node-number">5</div>
+          <div class="path-node-title">Slice & Dice</div>
+        </div>
+        <div class="path-node not-started" data-tutorial="06-sample-locks">
+          <div class="path-node-number">6</div>
+          <div class="path-node-title">Sample Locks</div>
+        </div>
+        <div class="path-node not-started" data-tutorial="07-loop-stretching">
+          <div class="path-node-number">7</div>
+          <div class="path-node-title">Loop Stretching</div>
+        </div>
+        <div class="path-node not-started" data-tutorial="08-parts-banks-scenes">
+          <div class="path-node-number">8</div>
+          <div class="path-node-title">Parts & Scenes</div>
+        </div>
+
+        <div class="path-tier-label">TIER 3 — ADVANCED</div>
+        <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
+          <div class="path-node-number">9</div>
+          <div class="path-node-title">Trig Conditions</div>
+        </div>
+        <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
+          <div class="path-node-number">10</div>
+          <div class="path-node-title">Resampling</div>
+        </div>
+        <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
+          <div class="path-node-number">11</div>
+          <div class="path-node-title">FX & Neighbors</div>
+        </div>
+
+        <div class="path-tier-label">TIER 4 — MASTERY</div>
+        <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
+          <div class="path-node-number">12</div>
+          <div class="path-node-title">LFOs & Modulation</div>
+        </div>
+        <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
+          <div class="path-node-number">13</div>
+          <div class="path-node-title">Live Performance</div>
+        </div>
+      </div>
     </section>
 
     <!-- TUTORIAL GRID -->
     <section class="tutorials-section">
-        <h2 class="tutorials-title">Tier 1 — Foundations</h2>
-        <div class="tutorials-grid" id="tutorialsGridTier1"></div>
+      <h2 class="tutorials-title">Tier 1 — Foundations</h2>
+      <div class="tutorials-grid" id="tutorialsGridTier1"></div>
     </section>
 
     <section class="tutorials-section">
-        <h2 class="tutorials-title">Tier 2 — Core Manipulation</h2>
-        <div class="tutorials-grid" id="tutorialsGridTier2"></div>
+      <h2 class="tutorials-title">Tier 2 — Core Manipulation</h2>
+      <div class="tutorials-grid" id="tutorialsGridTier2"></div>
     </section>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-info">
-                <div>Served locally at <span class="footer-info-highlight">localhost:8080</span></div>
-                <div>Progress saves automatically to localStorage</div>
-            </div>
-            <div class="footer-actions">
-                <button class="footer-button" onclick="app.exportProgress()">Export Progress</button>
-                <button class="footer-button" onclick="app.showResetModal()">Reset Progress</button>
-            </div>
+      <div class="footer-content">
+        <div class="footer-info">
+          <div>
+            Served locally at
+            <span class="footer-info-highlight">localhost:8080</span>
+          </div>
+          <div>Progress saves automatically to localStorage</div>
         </div>
+        <div class="footer-actions">
+          <button class="footer-button" onclick="app.exportProgress()">Export Progress</button>
+          <button class="footer-button" onclick="app.showResetModal()">Reset Progress</button>
+        </div>
+      </div>
     </footer>
 
     <!-- RESET CONFIRMATION MODAL -->
     <div class="modal" id="resetModal">
-        <div class="modal-content">
-            <h3 class="modal-title">Reset Progress?</h3>
-            <div class="modal-body">
-                This will clear all your tutorial progress, completion status, and confidence ratings. This action cannot be undone.
-            </div>
-            <div class="modal-actions">
-                <button class="modal-button secondary" onclick="app.closeResetModal()">Cancel</button>
-                <button class="modal-button primary" onclick="app.confirmReset()">Reset All</button>
-            </div>
+      <div class="modal-content">
+        <h3 class="modal-title">Reset Progress?</h3>
+        <div class="modal-body">This will clear all your tutorial progress, completion status, and confidence ratings. This action cannot be undone.</div>
+        <div class="modal-actions">
+          <button class="modal-button secondary" onclick="app.closeResetModal()">Cancel</button>
+          <button class="modal-button primary" onclick="app.confirmReset()">Reset All</button>
         </div>
+      </div>
     </div>
 
     <script>
-        const TUTORIALS = {
-            '01-set-sail': {
-                tier: 1,
-                number: 1,
-                title: 'Set Sail',
-                subtitle: 'First Steps',
-                time: 15,
-                difficulty: 'Beginner',
-                prerequisites: [],
-                file: '01-set-sail.html'
-            },
-            '02-load-and-lock': {
-                tier: 1,
-                number: 2,
-                title: 'Load & Lock',
-                subtitle: 'Static vs Flex',
-                time: 20,
-                difficulty: 'Beginner',
-                prerequisites: ['01-set-sail'],
-                file: '02-load-and-lock.html'
-            },
-            '03-beat-basics': {
-                tier: 1,
-                number: 3,
-                title: 'Beat Basics',
-                subtitle: 'First Pattern',
-                time: 25,
-                difficulty: 'Beginner',
-                prerequisites: ['01-set-sail', '02-load-and-lock'],
-                file: '03-beat-basics.html'
-            },
-            '04-audio-pool': {
-                tier: 1,
-                number: 4,
-                title: 'Audio Pool',
-                subtitle: 'Samples & Organization',
-                time: 20,
-                difficulty: 'Beginner',
-                prerequisites: ['01-set-sail'],
-                file: '04-audio-pool.html'
-            },
-            '05-slice-and-dice': {
-                tier: 2,
-                number: 5,
-                title: 'Slice & Dice',
-                subtitle: 'Chopping Loops',
-                time: 30,
-                difficulty: 'Beginner',
-                prerequisites: ['01-set-sail', '02-load-and-lock', '04-audio-pool'],
-                file: '05-slice-and-dice.html'
-            },
-            '06-sample-locks': {
-                tier: 2,
-                number: 6,
-                title: 'Sample Locks',
-                subtitle: 'Multiple Clips',
-                time: 25,
-                difficulty: 'Beginner',
-                prerequisites: ['01-set-sail', '02-load-and-lock', '03-beat-basics'],
-                file: '06-sample-locks.html'
-            },
-            '07-loop-stretching': {
-                tier: 2,
-                number: 7,
-                title: 'Loop Stretching',
-                subtitle: 'Timestretch',
-                time: 25,
-                difficulty: 'Beginner',
-                prerequisites: ['01-set-sail', '02-load-and-lock', '04-audio-pool'],
-                file: '07-loop-stretching.html'
-            },
-            '08-parts-banks-scenes': {
-                tier: 2,
-                number: 8,
-                title: 'Parts & Scenes',
-                subtitle: 'Multi-Section',
-                time: 30,
-                difficulty: 'Intermediate',
-                prerequisites: ['01-set-sail', '02-load-and-lock', '03-beat-basics', '05-slice-and-dice'],
-                file: '08-parts-banks-scenes.html'
+      const TUTORIALS = {
+        '01-set-sail': {
+          tier: 1,
+          number: 1,
+          title: 'Set Sail',
+          subtitle: 'First Steps',
+          time: 15,
+          difficulty: 'Beginner',
+          prerequisites: [],
+          file: '01-set-sail.html',
+        },
+        '02-load-and-lock': {
+          tier: 1,
+          number: 2,
+          title: 'Load & Lock',
+          subtitle: 'Static vs Flex',
+          time: 20,
+          difficulty: 'Beginner',
+          prerequisites: ['01-set-sail'],
+          file: '02-load-and-lock.html',
+        },
+        '03-beat-basics': {
+          tier: 1,
+          number: 3,
+          title: 'Beat Basics',
+          subtitle: 'First Pattern',
+          time: 25,
+          difficulty: 'Beginner',
+          prerequisites: ['01-set-sail', '02-load-and-lock'],
+          file: '03-beat-basics.html',
+        },
+        '04-audio-pool': {
+          tier: 1,
+          number: 4,
+          title: 'Audio Pool',
+          subtitle: 'Samples & Organization',
+          time: 20,
+          difficulty: 'Beginner',
+          prerequisites: ['01-set-sail'],
+          file: '04-audio-pool.html',
+        },
+        '05-slice-and-dice': {
+          tier: 2,
+          number: 5,
+          title: 'Slice & Dice',
+          subtitle: 'Chopping Loops',
+          time: 30,
+          difficulty: 'Beginner',
+          prerequisites: ['01-set-sail', '02-load-and-lock', '04-audio-pool'],
+          file: '05-slice-and-dice.html',
+        },
+        '06-sample-locks': {
+          tier: 2,
+          number: 6,
+          title: 'Sample Locks',
+          subtitle: 'Multiple Clips',
+          time: 25,
+          difficulty: 'Beginner',
+          prerequisites: ['01-set-sail', '02-load-and-lock', '03-beat-basics'],
+          file: '06-sample-locks.html',
+        },
+        '07-loop-stretching': {
+          tier: 2,
+          number: 7,
+          title: 'Loop Stretching',
+          subtitle: 'Timestretch',
+          time: 25,
+          difficulty: 'Beginner',
+          prerequisites: ['01-set-sail', '02-load-and-lock', '04-audio-pool'],
+          file: '07-loop-stretching.html',
+        },
+        '08-parts-banks-scenes': {
+          tier: 2,
+          number: 8,
+          title: 'Parts & Scenes',
+          subtitle: 'Multi-Section',
+          time: 30,
+          difficulty: 'Intermediate',
+          prerequisites: ['01-set-sail', '02-load-and-lock', '03-beat-basics', '05-slice-and-dice'],
+          file: '08-parts-banks-scenes.html',
+        },
+      };
+
+      const DEFAULT_STATE = {
+        version: '1.0',
+        tutorials: {
+          '01-set-sail': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '02-load-and-lock': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '03-beat-basics': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '04-audio-pool': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '05-slice-and-dice': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '06-sample-locks': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '07-loop-stretching': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '08-parts-banks-scenes': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+        },
+        streakDays: 0,
+        lastActiveDate: null,
+        totalTimeMinutes: 0,
+      };
+
+      const app = {
+        state: null,
+
+        init() {
+          this.loadState();
+          this.updateStreak();
+          this.renderStats();
+          this.renderTutorials();
+          this.renderPathVisualization();
+          this.renderRecommendedNext();
+          window.addEventListener('beforeunload', () => this.saveState());
+        },
+
+        loadState() {
+          const stored = localStorage.getItem('octatrack-tutorials');
+          this.state = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_STATE));
+          Object.keys(DEFAULT_STATE.tutorials).forEach((key) => {
+            if (!this.state.tutorials[key]) {
+              this.state.tutorials[key] = JSON.parse(JSON.stringify(DEFAULT_STATE.tutorials[key]));
             }
-        };
+          });
+        },
 
-        const DEFAULT_STATE = {
-            version: '1.0',
-            tutorials: {
-                '01-set-sail': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '02-load-and-lock': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '03-beat-basics': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '04-audio-pool': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '05-slice-and-dice': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '06-sample-locks': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '07-loop-stretching': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
-                '08-parts-banks-scenes': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null }
-            },
-            streakDays: 0,
-            lastActiveDate: null,
-            totalTimeMinutes: 0
-        };
+        saveState() {
+          localStorage.setItem('octatrack-tutorials', JSON.stringify(this.state));
+        },
 
-        const app = {
-            state: null,
+        updateStreak() {
+          const today = new Date().toISOString().split('T')[0];
+          const lastActive = this.state.lastActiveDate;
 
-            init() {
-                this.loadState();
-                this.updateStreak();
-                this.renderStats();
-                this.renderTutorials();
-                this.renderPathVisualization();
-                this.renderRecommendedNext();
-                window.addEventListener('beforeunload', () => this.saveState());
-            },
+          if (lastActive === today) {
+            // Already counted today
+          } else if (lastActive) {
+            const lastDate = new Date(lastActive);
+            const currentDate = new Date(today);
+            const diffTime = currentDate - lastDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-            loadState() {
-                const stored = localStorage.getItem('octatrack-tutorials');
-                this.state = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_STATE));
-                Object.keys(DEFAULT_STATE.tutorials).forEach(key => {
-                    if (!this.state.tutorials[key]) {
-                        this.state.tutorials[key] = JSON.parse(JSON.stringify(DEFAULT_STATE.tutorials[key]));
-                    }
-                });
-            },
+            if (diffDays === 1) {
+              this.state.streakDays++;
+            } else {
+              this.state.streakDays = 1;
+            }
+          } else {
+            this.state.streakDays = 1;
+          }
 
-            saveState() {
-                localStorage.setItem('octatrack-tutorials', JSON.stringify(this.state));
-            },
+          this.state.lastActiveDate = today;
+          this.saveState();
+        },
 
-            updateStreak() {
-                const today = new Date().toISOString().split('T')[0];
-                const lastActive = this.state.lastActiveDate;
+        getOverallCompletion() {
+          const completed = Object.values(this.state.tutorials).filter((t) => t.status === 'completed').length;
+          return (completed / 8) * 100;
+        },
 
-                if (lastActive === today) {
-                    // Already counted today
-                } else if (lastActive) {
-                    const lastDate = new Date(lastActive);
-                    const currentDate = new Date(today);
-                    const diffTime = currentDate - lastDate;
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        getAverageConfidence() {
+          const rated = Object.values(this.state.tutorials).filter((t) => t.confidence > 0);
+          if (rated.length === 0) return 0;
+          const avg = rated.reduce((sum, t) => sum + t.confidence, 0) / rated.length;
+          return Math.round(avg * 10) / 10;
+        },
 
-                    if (diffDays === 1) {
-                        this.state.streakDays++;
-                    } else {
-                        this.state.streakDays = 1;
-                    }
-                } else {
-                    this.state.streakDays = 1;
-                }
+        formatTime(minutes) {
+          const hours = Math.floor(minutes / 60);
+          const mins = minutes % 60;
+          return `${hours}h ${mins}m`;
+        },
 
-                this.state.lastActiveDate = today;
-                this.saveState();
-            },
+        renderStats() {
+          const completion = this.getOverallCompletion();
+          const completed = Object.values(this.state.tutorials).filter((t) => t.status === 'completed').length;
+          const avgConfidence = this.getAverageConfidence();
+          const totalTime = this.state.totalTimeMinutes;
 
-            getOverallCompletion() {
-                const completed = Object.values(this.state.tutorials).filter(t => t.status === 'completed').length;
-                return (completed / 8) * 100;
-            },
+          const circumference = 2 * Math.PI * 45;
+          const offset = circumference - (completion / 100) * circumference;
+          document.getElementById('completionRing').style.strokeDashoffset = offset;
 
-            getAverageConfidence() {
-                const rated = Object.values(this.state.tutorials).filter(t => t.confidence > 0);
-                if (rated.length === 0) return 0;
-                const avg = rated.reduce((sum, t) => sum + t.confidence, 0) / rated.length;
-                return Math.round(avg * 10) / 10;
-            },
+          document.getElementById('completionPercentage').textContent = Math.round(completion) + '%';
+          document.getElementById('completionCount').textContent = completed;
+          document.getElementById('totalTime').textContent = this.formatTime(totalTime);
+          document.getElementById('streakDays').textContent = this.state.streakDays;
 
-            formatTime(minutes) {
-                const hours = Math.floor(minutes / 60);
-                const mins = minutes % 60;
-                return `${hours}h ${mins}m`;
-            },
+          const confEl = document.getElementById('averageConfidence');
+          confEl.textContent = avgConfidence > 0 ? avgConfidence : '—';
 
-            renderStats() {
-                const completion = this.getOverallCompletion();
-                const completed = Object.values(this.state.tutorials).filter(t => t.status === 'completed').length;
-                const avgConfidence = this.getAverageConfidence();
-                const totalTime = this.state.totalTimeMinutes;
+          const dots = document.querySelectorAll('#confidenceDots .confidence-dot');
+          dots.forEach((dot, idx) => {
+            if (idx < Math.round(avgConfidence)) {
+              dot.classList.add('filled');
+            } else {
+              dot.classList.remove('filled');
+            }
+          });
+        },
 
-                const circumference = 2 * Math.PI * 45;
-                const offset = circumference - (completion / 100) * circumference;
-                document.getElementById('completionRing').style.strokeDashoffset = offset;
+        getRecommendedNext() {
+          for (const [id, tutorial] of Object.entries(TUTORIALS)) {
+            if (this.state.tutorials[id].status === 'completed') continue;
 
-                document.getElementById('completionPercentage').textContent = Math.round(completion) + '%';
-                document.getElementById('completionCount').textContent = completed;
-                document.getElementById('totalTime').textContent = this.formatTime(totalTime);
-                document.getElementById('streakDays').textContent = this.state.streakDays;
+            const prereqsMet = tutorial.prerequisites.every((prereq) => this.state.tutorials[prereq].status === 'completed');
 
-                const confEl = document.getElementById('averageConfidence');
-                confEl.textContent = avgConfidence > 0 ? avgConfidence : '—';
+            if (prereqsMet) {
+              return { id, ...tutorial };
+            }
+          }
+          return null;
+        },
 
-                const dots = document.querySelectorAll('#confidenceDots .confidence-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx < Math.round(avgConfidence)) {
-                        dot.classList.add('filled');
-                    } else {
-                        dot.classList.remove('filled');
-                    }
-                });
-            },
+        renderRecommendedNext() {
+          const recommended = this.getRecommendedNext();
+          const banner = document.getElementById('recommendedBanner');
 
-            getRecommendedNext() {
-                for (const [id, tutorial] of Object.entries(TUTORIALS)) {
-                    if (this.state.tutorials[id].status === 'completed') continue;
+          if (recommended) {
+            document.getElementById('recommendedTitle').textContent = recommended.title;
+            document.getElementById('recommendedTime').textContent = recommended.time + ' min';
+            const diffEl = document.getElementById('recommendedDifficulty');
+            diffEl.textContent = recommended.difficulty;
+            diffEl.className = 'difficulty-badge difficulty-' + recommended.difficulty.toLowerCase();
+            banner.style.display = 'block';
+            banner.onclick = () => this.openTutorial(recommended.id);
+          } else {
+            banner.style.display = 'none';
+          }
+        },
 
-                    const prereqsMet = tutorial.prerequisites.every(
-                        prereq => this.state.tutorials[prereq].status === 'completed'
-                    );
+        renderTutorials() {
+          const tier1 = Object.entries(TUTORIALS).filter(([_, t]) => t.tier === 1);
+          const tier2 = Object.entries(TUTORIALS).filter(([_, t]) => t.tier === 2);
 
-                    if (prereqsMet) {
-                        return { id, ...tutorial };
-                    }
-                }
-                return null;
-            },
+          document.getElementById('tutorialsGridTier1').innerHTML = tier1.map(([id, tutorial]) => this.createTutorialCard(id, tutorial)).join('');
 
-            renderRecommendedNext() {
-                const recommended = this.getRecommendedNext();
-                const banner = document.getElementById('recommendedBanner');
+          document.getElementById('tutorialsGridTier2').innerHTML = tier2.map(([id, tutorial]) => this.createTutorialCard(id, tutorial)).join('');
 
-                if (recommended) {
-                    document.getElementById('recommendedTitle').textContent = recommended.title;
-                    document.getElementById('recommendedTime').textContent = recommended.time + ' min';
-                    const diffEl = document.getElementById('recommendedDifficulty');
-                    diffEl.textContent = recommended.difficulty;
-                    diffEl.className = 'difficulty-badge difficulty-' + recommended.difficulty.toLowerCase();
-                    banner.style.display = 'block';
-                    banner.onclick = () => this.openTutorial(recommended.id);
-                } else {
-                    banner.style.display = 'none';
-                }
-            },
+          document.querySelectorAll('.tutorial-card').forEach((card) => {
+            card.addEventListener('click', (e) => {
+              if (e.target.classList.contains('tutorial-button')) return;
+              const id = card.dataset.tutorial;
+              if (id && !card.classList.contains('coming-soon')) {
+                this.openTutorial(id);
+              }
+            });
+          });
 
-            renderTutorials() {
-                const tier1 = Object.entries(TUTORIALS).filter(([_, t]) => t.tier === 1);
-                const tier2 = Object.entries(TUTORIALS).filter(([_, t]) => t.tier === 2);
+          document.querySelectorAll('.tutorial-button').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const id = btn.closest('.tutorial-card').dataset.tutorial;
+              this.openTutorial(id);
+            });
+          });
 
-                document.getElementById('tutorialsGridTier1').innerHTML = tier1.map(
-                    ([id, tutorial]) => this.createTutorialCard(id, tutorial)
-                ).join('');
+          document.querySelectorAll('.confidence-star').forEach((star) => {
+            star.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const card = star.closest('.tutorial-card');
+              const id = card.dataset.tutorial;
+              const rating = parseInt(star.dataset.rating);
+              this.state.tutorials[id].confidence = rating;
+              this.saveState();
+              this.renderStats();
+              this.renderTutorials();
+            });
+          });
+        },
 
-                document.getElementById('tutorialsGridTier2').innerHTML = tier2.map(
-                    ([id, tutorial]) => this.createTutorialCard(id, tutorial)
-                ).join('');
+        createTutorialCard(id, tutorial) {
+          const status = this.state.tutorials[id].status;
+          const completion = this.state.tutorials[id].completion;
+          const confidence = this.state.tutorials[id].confidence;
+          const quizScore = this.state.tutorials[id].quizScore;
 
-                document.querySelectorAll('.tutorial-card').forEach(card => {
-                    card.addEventListener('click', (e) => {
-                        if (e.target.classList.contains('tutorial-button')) return;
-                        const id = card.dataset.tutorial;
-                        if (id && !card.classList.contains('coming-soon')) {
-                            this.openTutorial(id);
-                        }
-                    });
-                });
+          const difficultyClass = 'difficulty-' + tutorial.difficulty.toLowerCase();
+          const statusClass = status === 'completed' ? 'completed' : status === 'in-progress' ? 'in-progress' : 'not-started';
+          const statusText = status === 'not-started' ? 'NOT STARTED' : status === 'in-progress' ? 'IN PROGRESS' : 'COMPLETED';
+          const buttonText = status === 'not-started' ? 'START' : status === 'in-progress' ? 'CONTINUE' : 'REVIEW';
 
-                document.querySelectorAll('.tutorial-button').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const id = btn.closest('.tutorial-card').dataset.tutorial;
-                        this.openTutorial(id);
-                    });
-                });
-
-                document.querySelectorAll('.confidence-star').forEach(star => {
-                    star.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const card = star.closest('.tutorial-card');
-                        const id = card.dataset.tutorial;
-                        const rating = parseInt(star.dataset.rating);
-                        this.state.tutorials[id].confidence = rating;
-                        this.saveState();
-                        this.renderStats();
-                        this.renderTutorials();
-                    });
-                });
-            },
-
-            createTutorialCard(id, tutorial) {
-                const status = this.state.tutorials[id].status;
-                const completion = this.state.tutorials[id].completion;
-                const confidence = this.state.tutorials[id].confidence;
-                const quizScore = this.state.tutorials[id].quizScore;
-
-                const difficultyClass = 'difficulty-' + tutorial.difficulty.toLowerCase();
-                const statusClass = status === 'completed' ? 'completed' : status === 'in-progress' ? 'in-progress' : 'not-started';
-                const statusText = status === 'not-started' ? 'NOT STARTED' : status === 'in-progress' ? 'IN PROGRESS' : 'COMPLETED';
-                const buttonText = status === 'not-started' ? 'START' : status === 'in-progress' ? 'CONTINUE' : 'REVIEW';
-
-                let prerequisites = '';
-                if (tutorial.prerequisites.length > 0) {
-                    prerequisites = `<div class="tutorial-prerequisites active">
+          let prerequisites = '';
+          if (tutorial.prerequisites.length > 0) {
+            prerequisites = `<div class="tutorial-prerequisites active">
                         <strong>Prerequisites:</strong>
-                        ${tutorial.prerequisites.map(p => `<div class="prerequisite-item">${p}</div>`).join('')}
+                        ${tutorial.prerequisites.map((p) => `<div class="prerequisite-item">${p}</div>`).join('')}
                     </div>`;
-                }
+          }
 
-                let quizInfo = '';
-                if (quizScore > 0) {
-                    quizInfo = `<div class="quiz-score">Quiz: ${quizScore}/${this.state.tutorials[id].quizTotal}</div>`;
-                }
+          let quizInfo = '';
+          if (quizScore > 0) {
+            quizInfo = `<div class="quiz-score">Quiz: ${quizScore}/${this.state.tutorials[id].quizTotal}</div>`;
+          }
 
-                return `
+          return `
                     <div class="tutorial-card ${statusClass}" data-tutorial="${id}">
                         <div class="tutorial-number">${tutorial.number}</div>
                         <div class="tutorial-title">${tutorial.title}</div>
@@ -1319,14 +1400,18 @@
                             </div>
                         </div>
 
-                        ${status !== 'not-started' ? `
+                        ${
+                          status !== 'not-started'
+                            ? `
                         <div class="tutorial-confidence">
                             <div class="confidence-label">Confidence</div>
                             <div class="confidence-rating">
-                                ${[1, 2, 3, 4, 5].map(i => `<div class="confidence-star ${confidence >= i ? 'active' : ''}" data-rating="${i}"></div>`).join('')}
+                                ${[1, 2, 3, 4, 5].map((i) => `<div class="confidence-star ${confidence >= i ? 'active' : ''}" data-rating="${i}"></div>`).join('')}
                             </div>
                         </div>
-                        ` : ''}
+                        `
+                            : ''
+                        }
 
                         ${quizInfo}
                         ${prerequisites}
@@ -1338,62 +1423,62 @@
                         <button class="tutorial-button">${buttonText}</button>
                     </div>
                 `;
-            },
+        },
 
-            renderPathVisualization() {
-                document.querySelectorAll('.path-node[data-tutorial]').forEach(node => {
-                    const id = node.dataset.tutorial;
-                    const status = this.state.tutorials[id].status;
-                    node.className = `path-node ${status}`;
-                    node.addEventListener('click', () => this.openTutorial(id));
-                });
-            },
+        renderPathVisualization() {
+          document.querySelectorAll('.path-node[data-tutorial]').forEach((node) => {
+            const id = node.dataset.tutorial;
+            const status = this.state.tutorials[id].status;
+            node.className = `path-node ${status}`;
+            node.addEventListener('click', () => this.openTutorial(id));
+          });
+        },
 
-            openTutorial(id) {
-                if (!TUTORIALS[id]) return;
-                this.state.tutorials[id].status = 'in-progress';
-                this.state.tutorials[id].lastAccessed = new Date().toISOString();
-                this.saveState();
-                window.location.href = TUTORIALS[id].file;
-            },
+        openTutorial(id) {
+          if (!TUTORIALS[id]) return;
+          this.state.tutorials[id].status = 'in-progress';
+          this.state.tutorials[id].lastAccessed = new Date().toISOString();
+          this.saveState();
+          window.location.href = TUTORIALS[id].file;
+        },
 
-            exportProgress() {
-                const dataStr = JSON.stringify(this.state, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(dataBlob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `octatrack-progress-${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                URL.revokeObjectURL(url);
-            },
+        exportProgress() {
+          const dataStr = JSON.stringify(this.state, null, 2);
+          const dataBlob = new Blob([dataStr], { type: 'application/json' });
+          const url = URL.createObjectURL(dataBlob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `octatrack-progress-${new Date().toISOString().split('T')[0]}.json`;
+          link.click();
+          URL.revokeObjectURL(url);
+        },
 
-            showResetModal() {
-                document.getElementById('resetModal').classList.add('active');
-            },
+        showResetModal() {
+          document.getElementById('resetModal').classList.add('active');
+        },
 
-            closeResetModal() {
-                document.getElementById('resetModal').classList.remove('active');
-            },
+        closeResetModal() {
+          document.getElementById('resetModal').classList.remove('active');
+        },
 
-            confirmReset() {
-                this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
-                this.saveState();
-                this.closeResetModal();
-                this.renderStats();
-                this.renderTutorials();
-                this.renderPathVisualization();
-                this.renderRecommendedNext();
-            }
-        };
+        confirmReset() {
+          this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+          this.saveState();
+          this.closeResetModal();
+          this.renderStats();
+          this.renderTutorials();
+          this.renderPathVisualization();
+          this.renderRecommendedNext();
+        },
+      };
 
-        document.addEventListener('DOMContentLoaded', () => app.init());
+      document.addEventListener('DOMContentLoaded', () => app.init());
 
-        document.getElementById('resetModal').addEventListener('click', (e) => {
-            if (e.target.id === 'resetModal') {
-                app.closeResetModal();
-            }
-        });
+      document.getElementById('resetModal').addEventListener('click', (e) => {
+        if (e.target.id === 'resetModal') {
+          app.closeResetModal();
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

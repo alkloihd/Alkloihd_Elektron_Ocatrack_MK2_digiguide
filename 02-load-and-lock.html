@@ -1,1380 +1,1459 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial 02: LOAD & LOCK - Octatrack MK2 Learning</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-        }
+      body {
+        background-color: #0a0a0a;
+        color: #e0e0e0;
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+      }
 
-        /* TOP BAR */
-        .top-bar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background-color: #0a0a0a;
-            border-bottom: 3px solid #00ffff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      /* TOP BAR */
+      .top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: #0a0a0a;
+        border-bottom: 3px solid #00ffff;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .top-bar-left {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
+      .top-bar-left {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
 
-        .top-bar-link {
-            color: #00ffff;
-            text-decoration: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            border: 2px solid #00ffff;
-            padding: 0.5rem 1rem;
-            transition: all 0.2s ease;
-            font-weight: 700;
-        }
+      .top-bar-link {
+        color: #00ffff;
+        text-decoration: none;
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        border: 2px solid #00ffff;
+        padding: 0.5rem 1rem;
+        transition: all 0.2s ease;
+        font-weight: 700;
+      }
 
-        .top-bar-link:hover {
-            background-color: #00ffff;
-            color: #0a0a0a;
-        }
+      .top-bar-link:hover {
+        background-color: #00ffff;
+        color: #0a0a0a;
+      }
 
-        .top-bar-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 18px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #ffffff;
-            font-weight: 700;
-        }
+      .top-bar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ffffff;
+        font-weight: 700;
+      }
 
-        .top-bar-meta {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
+      .top-bar-meta {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
 
-        .difficulty-badge {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            background-color: #ff00ff;
-            color: #0a0a0a;
-            padding: 0.5rem 1rem;
-            border: 2px solid #ff00ff;
-            font-weight: 700;
-        }
+      .difficulty-badge {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background-color: #ff00ff;
+        color: #0a0a0a;
+        padding: 0.5rem 1rem;
+        border: 2px solid #ff00ff;
+        font-weight: 700;
+      }
 
-        .time-badge {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border: 2px solid #ffaa00;
-            color: #ffaa00;
-            padding: 0.5rem 1rem;
-            font-weight: 700;
-        }
+      .time-badge {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        border: 2px solid #ffaa00;
+        color: #ffaa00;
+        padding: 0.5rem 1rem;
+        font-weight: 700;
+      }
 
-        /* MAIN LAYOUT */
+      /* MAIN LAYOUT */
+      .container {
+        display: flex;
+        min-height: calc(100vh - 80px);
+      }
+
+      .sidebar {
+        width: 280px;
+        background-color: #111111;
+        border-right: 3px solid #ff00ff;
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        position: sticky;
+        top: 80px;
+        max-height: calc(100vh - 80px);
+      }
+
+      .sidebar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ff00ff;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid #ff00ff;
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.75rem;
+      }
+
+      .sidebar-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        background-color: transparent;
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-nav-item:hover {
+        background-color: #1a1a1a;
+        border-color: #ff00ff;
+      }
+
+      .sidebar-nav-item.active {
+        border-color: #00ffff;
+        background-color: #0a2a2a;
+        color: #00ffff;
+      }
+
+      .sidebar-checkbox {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #666666;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #00ff41;
+        font-size: 12px;
+      }
+
+      .sidebar-checkbox.checked {
+        background-color: #00ff41;
+        border-color: #00ff41;
+        color: #0a0a0a;
+      }
+
+      /* MAIN CONTENT */
+      .main {
+        flex: 1;
+        padding: 3rem;
+        background-color: #0a0a0a;
+        overflow-y: auto;
+      }
+
+      .section {
+        margin-bottom: 4rem;
+        padding: 2rem;
+        background-color: #111111;
+        border: 3px solid #333333;
+        transition: all 0.3s ease;
+      }
+
+      .section:hover {
+        border-color: #00ffff;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+      }
+
+      .section h2 {
+        font-family: 'Space Mono', monospace;
+        font-size: 22px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        border-bottom: 3px solid #00ffff;
+        padding-bottom: 0.75rem;
+        font-weight: 700;
+      }
+
+      .section h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ff00ff;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .section p {
+        margin-bottom: 1rem;
+        color: #e0e0e0;
+      }
+
+      .section ul,
+      .section ol {
+        margin-left: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .section li {
+        margin-bottom: 0.75rem;
+        color: #e0e0e0;
+      }
+
+      /* SVG DIAGRAM */
+      .svg-diagram {
+        margin: 2rem 0;
+        display: flex;
+        justify-content: center;
+        background-color: #0a0a0a;
+        padding: 2rem;
+        border: 2px solid #333333;
+        overflow-x: auto;
+      }
+
+      /* CALCULATOR */
+      .calculator {
+        background-color: #1a1a1a;
+        border: 3px solid #00ff41;
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+
+      .calculator-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #00ff41;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      }
+
+      .calc-input-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.5rem;
+      }
+
+      .calc-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #00ff41;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .calc-input {
+        padding: 0.75rem;
+        border: 2px solid #00ff41;
+        background-color: #0a0a0a;
+        color: #00ff41;
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+      }
+
+      .calc-select {
+        padding: 0.75rem;
+        border: 2px solid #00ff41;
+        background-color: #0a0a0a;
+        color: #00ff41;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+      }
+
+      .calc-result {
+        background-color: #0a2a0a;
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        font-family: 'Space Mono', monospace;
+        color: #00ff41;
+        font-size: 13px;
+      }
+
+      /* FLOWCHART */
+      .flowchart {
+        background-color: #0a0a0a;
+        padding: 2rem;
+        border: 2px solid #ff00ff;
+        margin: 2rem 0;
+        overflow-x: auto;
+      }
+
+      /* STEP-BY-STEP */
+      .steps-container {
+        margin: 2rem 0;
+      }
+
+      .step {
+        background-color: #1a1a1a;
+        border: 2px solid #333333;
+        border-left: 4px solid #00ff41;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        transition: all 0.2s ease;
+      }
+
+      .step:hover {
+        border-color: #00ff41;
+        border-left-color: #00ffff;
+      }
+
+      .step-number {
+        font-family: 'Space Mono', monospace;
+        font-size: 24px;
+        font-weight: 700;
+        color: #00ff41;
+        margin-bottom: 0.5rem;
+      }
+
+      .step-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+      }
+
+      .step-content {
+        color: #e0e0e0;
+        font-size: 14px;
+      }
+
+      .button-press {
+        display: inline-block;
+        background-color: #0a0a0a;
+        border: 2px solid #00ffff;
+        padding: 0.5rem 0.75rem;
+        margin: 0 0.25rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        color: #00ffff;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        background-color: #1a1a1a;
+        border: 3px solid #ff00ff;
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      .quiz-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ff00ff;
+        margin-bottom: 2rem;
+        font-weight: 700;
+      }
+
+      .quiz-question {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background-color: #0a0a0a;
+        border: 2px solid #333333;
+      }
+
+      .quiz-question-text {
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .quiz-option {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        border: 2px solid #333333;
+        background-color: #111111;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 14px;
+      }
+
+      .quiz-option:hover {
+        border-color: #00ffff;
+        background-color: #0a2a2a;
+      }
+
+      .quiz-option input[type='radio'] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: #00ffff;
+      }
+
+      .quiz-option.correct {
+        border-color: #00ff41;
+        background-color: #0a2a0a;
+      }
+
+      .quiz-option.incorrect {
+        border-color: #ff3333;
+        background-color: #2a0a0a;
+      }
+
+      .quiz-feedback {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        border-left: 3px solid #00ffff;
+        font-size: 13px;
+        color: #e0e0e0;
+        font-family: 'Space Mono', monospace;
+      }
+
+      .quiz-feedback.show {
+        display: block;
+      }
+
+      .quiz-feedback.correct {
+        border-left-color: #00ff41;
+        color: #00ff41;
+      }
+
+      .quiz-feedback.incorrect {
+        border-left-color: #ff3333;
+        color: #ff3333;
+      }
+
+      .quiz-submit {
+        background-color: #00ffff;
+        color: #0a0a0a;
+        border: 3px solid #00ffff;
+        padding: 1rem 2rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-top: 1rem;
+      }
+
+      .quiz-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
+      }
+
+      .quiz-result {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: #0a2a0a;
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        display: none;
+      }
+
+      .quiz-result.show {
+        display: block;
+      }
+
+      /* CONFIDENCE RATING */
+      .confidence-section {
+        background-color: #1a1a1a;
+        border: 3px solid #ffaa00;
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      .confidence-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 15px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #ffaa00;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .confidence-btn {
+        width: 56px;
+        height: 56px;
+        border: 3px solid #666666;
+        background-color: #0a0a0a;
+        color: #e0e0e0;
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .confidence-btn:hover {
+        border-color: #ffaa00;
+        box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+      }
+
+      .confidence-btn.selected {
+        background-color: #ffaa00;
+        border-color: #ffaa00;
+        color: #0a0a0a;
+      }
+
+      /* PROGRESS BAR */
+      .progress-container {
+        background-color: #111111;
+        border: 3px solid #00ffff;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .progress-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #00ffff;
+        margin-bottom: 0.75rem;
+        font-weight: 700;
+      }
+
+      .progress-bar {
+        height: 14px;
+        background-color: #0a0a0a;
+        border: 2px solid #00ffff;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: #00ffff;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 3px solid #333333;
+      }
+
+      .nav-button {
+        flex: 1;
+        padding: 1.5rem;
+        border: 3px solid #00ffff;
+        background-color: transparent;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        font-weight: 700;
+      }
+
+      .nav-button:hover {
+        background-color: #00ffff;
+        color: #0a0a0a;
+        transform: translateY(-2px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
         .container {
-            display: flex;
-            min-height: calc(100vh - 80px);
+          flex-direction: column;
         }
 
         .sidebar {
-            width: 280px;
-            background-color: #111111;
-            border-right: 3px solid #ff00ff;
-            padding: 2rem 1.5rem;
-            overflow-y: auto;
-            position: sticky;
-            top: 80px;
-            max-height: calc(100vh - 80px);
+          width: 100%;
+          max-height: 280px;
+          border-right: none;
+          border-bottom: 3px solid #ff00ff;
+          position: static;
         }
 
-        .sidebar-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #ff00ff;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            border-bottom: 2px solid #ff00ff;
-            padding-bottom: 0.5rem;
-        }
-
-        .sidebar-nav {
-            list-style: none;
-        }
-
-        .sidebar-nav li {
-            margin-bottom: 0.75rem;
-        }
-
-        .sidebar-nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            cursor: pointer;
-            border: 2px solid transparent;
-            background-color: transparent;
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 13px;
-            transition: all 0.2s ease;
-            font-family: 'Space Mono', monospace;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .sidebar-nav-item:hover {
-            background-color: #1a1a1a;
-            border-color: #ff00ff;
-        }
-
-        .sidebar-nav-item.active {
-            border-color: #00ffff;
-            background-color: #0a2a2a;
-            color: #00ffff;
-        }
-
-        .sidebar-checkbox {
-            width: 18px;
-            height: 18px;
-            border: 2px solid #666666;
-            background-color: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #00ff41;
-            font-size: 12px;
-        }
-
-        .sidebar-checkbox.checked {
-            background-color: #00ff41;
-            border-color: #00ff41;
-            color: #0a0a0a;
-        }
-
-        /* MAIN CONTENT */
         .main {
-            flex: 1;
-            padding: 3rem;
-            background-color: #0a0a0a;
-            overflow-y: auto;
+          padding: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .top-bar {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .top-bar-left {
+          flex-direction: column;
+          gap: 0.5rem;
+          width: 100%;
+        }
+
+        .main {
+          padding: 1rem;
         }
 
         .section {
-            margin-bottom: 4rem;
-            padding: 2rem;
-            background-color: #111111;
-            border: 3px solid #333333;
-            transition: all 0.3s ease;
-        }
-
-        .section:hover {
-            border-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-        }
-
-        .section h2 {
-            font-family: 'Space Mono', monospace;
-            font-size: 22px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid #00ffff;
-            padding-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        .section h3 {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #ff00ff;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .section p {
-            margin-bottom: 1rem;
-            color: #e0e0e0;
-        }
-
-        .section ul, .section ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .section li {
-            margin-bottom: 0.75rem;
-            color: #e0e0e0;
-        }
-
-        /* SVG DIAGRAM */
-        .svg-diagram {
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-            background-color: #0a0a0a;
-            padding: 2rem;
-            border: 2px solid #333333;
-            overflow-x: auto;
-        }
-
-        /* CALCULATOR */
-        .calculator {
-            background-color: #1a1a1a;
-            border: 3px solid #00ff41;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-
-        .calculator-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #00ff41;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .calc-input-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.5rem;
-        }
-
-        .calc-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #00ff41;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .calc-input {
-            padding: 0.75rem;
-            border: 2px solid #00ff41;
-            background-color: #0a0a0a;
-            color: #00ff41;
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-        }
-
-        .calc-select {
-            padding: 0.75rem;
-            border: 2px solid #00ff41;
-            background-color: #0a0a0a;
-            color: #00ff41;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-        }
-
-        .calc-result {
-            background-color: #0a2a0a;
-            border: 2px solid #00ff41;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            font-family: 'Space Mono', monospace;
-            color: #00ff41;
-            font-size: 13px;
-        }
-
-        /* FLOWCHART */
-        .flowchart {
-            background-color: #0a0a0a;
-            padding: 2rem;
-            border: 2px solid #ff00ff;
-            margin: 2rem 0;
-            overflow-x: auto;
-        }
-
-        /* STEP-BY-STEP */
-        .steps-container {
-            margin: 2rem 0;
-        }
-
-        .step {
-            background-color: #1a1a1a;
-            border: 2px solid #333333;
-            border-left: 4px solid #00ff41;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
-        }
-
-        .step:hover {
-            border-color: #00ff41;
-            border-left-color: #00ffff;
-        }
-
-        .step-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            color: #00ff41;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        .step-content {
-            color: #e0e0e0;
-            font-size: 14px;
-        }
-
-        .button-press {
-            display: inline-block;
-            background-color: #0a0a0a;
-            border: 2px solid #00ffff;
-            padding: 0.5rem 0.75rem;
-            margin: 0 0.25rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            color: #00ffff;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        /* QUIZ */
-        .quiz-section {
-            background-color: #1a1a1a;
-            border: 3px solid #ff00ff;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .quiz-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 18px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #ff00ff;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .quiz-question {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background-color: #0a0a0a;
-            border: 2px solid #333333;
-        }
-
-        .quiz-question-text {
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .quiz-option {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            margin-bottom: 0.75rem;
-            border: 2px solid #333333;
-            background-color: #111111;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 14px;
-        }
-
-        .quiz-option:hover {
-            border-color: #00ffff;
-            background-color: #0a2a2a;
-        }
-
-        .quiz-option input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: #00ffff;
-        }
-
-        .quiz-option.correct {
-            border-color: #00ff41;
-            background-color: #0a2a0a;
-        }
-
-        .quiz-option.incorrect {
-            border-color: #ff3333;
-            background-color: #2a0a0a;
-        }
-
-        .quiz-feedback {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            border-left: 3px solid #00ffff;
-            font-size: 13px;
-            color: #e0e0e0;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .quiz-feedback.show {
-            display: block;
-        }
-
-        .quiz-feedback.correct {
-            border-left-color: #00ff41;
-            color: #00ff41;
-        }
-
-        .quiz-feedback.incorrect {
-            border-left-color: #ff3333;
-            color: #ff3333;
-        }
-
-        .quiz-submit {
-            background-color: #00ffff;
-            color: #0a0a0a;
-            border: 3px solid #00ffff;
-            padding: 1rem 2rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-top: 1rem;
-        }
-
-        .quiz-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
-        }
-
-        .quiz-result {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background-color: #0a2a0a;
-            border: 2px solid #00ff41;
-            color: #00ff41;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            display: none;
-        }
-
-        .quiz-result.show {
-            display: block;
-        }
-
-        /* CONFIDENCE RATING */
-        .confidence-section {
-            background-color: #1a1a1a;
-            border: 3px solid #ffaa00;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .confidence-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 15px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #ffaa00;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+          padding: 1rem;
         }
 
         .confidence-scale {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
+          flex-wrap: wrap;
         }
 
-        .confidence-btn {
-            width: 56px;
-            height: 56px;
-            border: 3px solid #666666;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Space Mono', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .calc-input-group {
+          display: flex;
+          margin-bottom: 1rem;
         }
 
-        .confidence-btn:hover {
-            border-color: #ffaa00;
-            box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        .calc-label {
+          flex-basis: 100%;
         }
 
-        .confidence-btn.selected {
-            background-color: #ffaa00;
-            border-color: #ffaa00;
-            color: #0a0a0a;
+        .calc-input,
+        .calc-select {
+          flex: 1;
         }
-
-        /* PROGRESS BAR */
-        .progress-container {
-            background-color: #111111;
-            border: 3px solid #00ffff;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .progress-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #00ffff;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        .progress-bar {
-            height: 14px;
-            background-color: #0a0a0a;
-            border: 2px solid #00ffff;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: #00ffff;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-between;
-            gap: 2rem;
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 3px solid #333333;
-        }
-
-        .nav-button {
-            flex: 1;
-            padding: 1.5rem;
-            border: 3px solid #00ffff;
-            background-color: transparent;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            font-weight: 700;
-        }
-
-        .nav-button:hover {
-            background-color: #00ffff;
-            color: #0a0a0a;
-            transform: translateY(-2px);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                max-height: 280px;
-                border-right: none;
-                border-bottom: 3px solid #ff00ff;
-                position: static;
-            }
-
-            .main {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .top-bar {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .top-bar-left {
-                flex-direction: column;
-                gap: 0.5rem;
-                width: 100%;
-            }
-
-            .main {
-                padding: 1rem;
-            }
-
-            .section {
-                padding: 1rem;
-            }
-
-            .confidence-scale {
-                flex-wrap: wrap;
-            }
-
-            .calc-input-group {
-                display: flex;
-                margin-bottom: 1rem;
-            }
-
-            .calc-label {
-                flex-basis: 100%;
-            }
-
-            .calc-input, .calc-select {
-                flex: 1;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- TOP BAR -->
     <div class="top-bar">
-        <div class="top-bar-left">
-            <a href="index.html" class="top-bar-link">← DASHBOARD</a>
-            <div class="top-bar-title">TUTORIAL 02: LOAD & LOCK</div>
-        </div>
-        <div class="top-bar-meta">
-            <div class="difficulty-badge">BEGINNER</div>
-            <div class="time-badge">⏱ 20 MIN</div>
-        </div>
+      <div class="top-bar-left">
+        <a href="index.html" class="top-bar-link">← DASHBOARD</a>
+        <div class="top-bar-title">TUTORIAL 02: LOAD & LOCK</div>
+      </div>
+      <div class="top-bar-meta">
+        <div class="difficulty-badge">BEGINNER</div>
+        <div class="time-badge">⏱ 20 MIN</div>
+      </div>
     </div>
 
     <!-- MAIN LAYOUT -->
     <div class="container">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="sidebar-title">SECTIONS</div>
-            <nav class="sidebar-nav">
-                <li><a href="#ram-budget" class="sidebar-nav-item active" data-section="ram-budget"><span class="sidebar-checkbox"></span>RAM BUDGET</a></li>
-                <li><a href="#static" class="sidebar-nav-item" data-section="static"><span class="sidebar-checkbox"></span>STATIC</a></li>
-                <li><a href="#flex" class="sidebar-nav-item" data-section="flex"><span class="sidebar-checkbox"></span>FLEX</a></li>
-                <li><a href="#decision-tree" class="sidebar-nav-item" data-section="decision-tree"><span class="sidebar-checkbox"></span>DECISION TREE</a></li>
-                <li><a href="#load-sample" class="sidebar-nav-item" data-section="load-sample"><span class="sidebar-checkbox"></span>LOAD SAMPLE</a></li>
-                <li><a href="#monitoring" class="sidebar-nav-item" data-section="monitoring"><span class="sidebar-checkbox"></span>MONITORING</a></li>
-                <li><a href="#sample-chains" class="sidebar-nav-item" data-section="sample-chains"><span class="sidebar-checkbox"></span>CHAINS</a></li>
-                <li><a href="#quiz" class="sidebar-nav-item" data-section="quiz"><span class="sidebar-checkbox"></span>QUIZ</a></li>
-                <li><a href="#confidence" class="sidebar-nav-item" data-section="confidence"><span class="sidebar-checkbox"></span>RATE</a></li>
-            </nav>
-            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #333333;">
-                <div class="progress-label" style="margin-bottom: 0.5rem;">COMPLETION</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="sidebarProgress"></div>
-                </div>
-                <div style="font-size: 11px; color: #666666; margin-top: 0.5rem;">
-                    <span id="completionPercent">0</span>%
-                </div>
-            </div>
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-title">SECTIONS</div>
+        <nav class="sidebar-nav">
+          <li>
+            <a href="#ram-budget" class="sidebar-nav-item active" data-section="ram-budget">
+              <span class="sidebar-checkbox"></span>
+              RAM BUDGET
+            </a>
+          </li>
+          <li>
+            <a href="#static" class="sidebar-nav-item" data-section="static">
+              <span class="sidebar-checkbox"></span>
+              STATIC
+            </a>
+          </li>
+          <li>
+            <a href="#flex" class="sidebar-nav-item" data-section="flex">
+              <span class="sidebar-checkbox"></span>
+              FLEX
+            </a>
+          </li>
+          <li>
+            <a href="#decision-tree" class="sidebar-nav-item" data-section="decision-tree">
+              <span class="sidebar-checkbox"></span>
+              DECISION TREE
+            </a>
+          </li>
+          <li>
+            <a href="#load-sample" class="sidebar-nav-item" data-section="load-sample">
+              <span class="sidebar-checkbox"></span>
+              LOAD SAMPLE
+            </a>
+          </li>
+          <li>
+            <a href="#monitoring" class="sidebar-nav-item" data-section="monitoring">
+              <span class="sidebar-checkbox"></span>
+              MONITORING
+            </a>
+          </li>
+          <li>
+            <a href="#sample-chains" class="sidebar-nav-item" data-section="sample-chains">
+              <span class="sidebar-checkbox"></span>
+              CHAINS
+            </a>
+          </li>
+          <li>
+            <a href="#quiz" class="sidebar-nav-item" data-section="quiz">
+              <span class="sidebar-checkbox"></span>
+              QUIZ
+            </a>
+          </li>
+          <li>
+            <a href="#confidence" class="sidebar-nav-item" data-section="confidence">
+              <span class="sidebar-checkbox"></span>
+              RATE
+            </a>
+          </li>
+        </nav>
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #333333">
+          <div class="progress-label" style="margin-bottom: 0.5rem">COMPLETION</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="sidebarProgress"></div>
+          </div>
+          <div style="font-size: 11px; color: #666666; margin-top: 0.5rem">
+            <span id="completionPercent">0</span>
+            %
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main">
+        <div class="progress-container">
+          <div class="progress-label">OVERALL PROGRESS</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="mainProgress" style="width: 0%"></div>
+          </div>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main">
-            <div class="progress-container">
-                <div class="progress-label">OVERALL PROGRESS</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="mainProgress" style="width: 0%;"></div>
-                </div>
-            </div>
+        <!-- SECTION: RAM BUDGET -->
+        <div class="section" id="ram-budget" data-section="ram-budget">
+          <h2>THE RAM BUDGET (85.5 MB Total)</h2>
+          <p>
+            The Octatrack's memory is finite. Every Flex sample you load consumes RAM. Static machines consume ZERO RAM because they stream directly from the CF card. Understanding this trade-off is
+            the key to smart sample loading.
+          </p>
+          <h3>Total Available</h3>
+          <ul>
+            <li><strong>85.5 MB total RAM</strong></li>
+            <li>
+              <strong>64 MB default allocated to Flex</strong>
+              (adjustable in System settings)
+            </li>
+            <li>
+              <strong>Recorder buffers</strong>
+              share Flex RAM
+            </li>
+          </ul>
 
-            <!-- SECTION: RAM BUDGET -->
-            <div class="section" id="ram-budget" data-section="ram-budget">
-                <h2>THE RAM BUDGET (85.5 MB Total)</h2>
-                <p>
-                    The Octatrack's memory is finite. Every Flex sample you load consumes RAM. Static machines consume ZERO RAM because they stream directly from the CF card. Understanding this trade-off is the key to smart sample loading.
-                </p>
-                <h3>Total Available</h3>
-                <ul>
-                    <li><strong>85.5 MB total RAM</strong></li>
-                    <li><strong>64 MB default allocated to Flex</strong> (adjustable in System settings)</li>
-                    <li><strong>Recorder buffers</strong> share Flex RAM</li>
-                </ul>
+          <div class="svg-diagram">
+            <svg width="600" height="280" viewBox="0 0 600 280" style="max-width: 100%; height: auto">
+              <rect width="600" height="280" fill="#0a0a0a" stroke="#00ffff" stroke-width="2" />
 
-                <div class="svg-diagram">
-                    <svg width="600" height="280" viewBox="0 0 600 280" style="max-width: 100%; height: auto;">
-                        <rect width="600" height="280" fill="#0a0a0a" stroke="#00ffff" stroke-width="2"/>
+              <!-- RAM ALLOCATION VISUALIZATION -->
+              <text x="20" y="25" font-family="'Space Mono'" font-size="12" fill="#00ffff" font-weight="700">RAM ALLOCATION: 85.5 MB TOTAL</text>
 
-                        <!-- RAM ALLOCATION VISUALIZATION -->
-                        <text x="20" y="25" font-family="'Space Mono'" font-size="12" fill="#00ffff" font-weight="700">RAM ALLOCATION: 85.5 MB TOTAL</text>
+              <!-- Total bar -->
+              <rect x="20" y="45" width="560" height="40" fill="#0a0a0a" stroke="#00ffff" stroke-width="2" />
+              <text x="30" y="72" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">TOTAL: 85.5 MB</text>
 
-                        <!-- Total bar -->
-                        <rect x="20" y="45" width="560" height="40" fill="#0a0a0a" stroke="#00ffff" stroke-width="2"/>
-                        <text x="30" y="72" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">TOTAL: 85.5 MB</text>
+              <!-- Flex section (64 MB) -->
+              <rect x="20" y="110" width="419" height="30" fill="#0a2a0a" stroke="#00ff41" stroke-width="2" />
+              <text x="30" y="131" font-family="'Space Mono'" font-size="10" fill="#00ff41" font-weight="700">FLEX POOL: 64 MB (75%)</text>
 
-                        <!-- Flex section (64 MB) -->
-                        <rect x="20" y="110" width="419" height="30" fill="#0a2a0a" stroke="#00ff41" stroke-width="2"/>
-                        <text x="30" y="131" font-family="'Space Mono'" font-size="10" fill="#00ff41" font-weight="700">FLEX POOL: 64 MB (75%)</text>
+              <!-- Static section (streams from card) -->
+              <rect x="439" y="110" width="141" height="30" fill="#0a0a2a" stroke="#00ffff" stroke-width="2" />
+              <text x="449" y="131" font-family="'Space Mono'" font-size="9" fill="#00ffff" font-weight="700">STATIC: 0 MB (streams)</text>
 
-                        <!-- Static section (streams from card) -->
-                        <rect x="439" y="110" width="141" height="30" fill="#0a0a2a" stroke="#00ffff" stroke-width="2"/>
-                        <text x="449" y="131" font-family="'Space Mono'" font-size="9" fill="#00ffff" font-weight="700">STATIC: 0 MB (streams)</text>
+              <!-- Example: 5 samples -->
+              <text x="20" y="180" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">EXAMPLE: 5 SAMPLES IN FLEX</text>
 
-                        <!-- Example: 5 samples -->
-                        <text x="20" y="180" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">EXAMPLE: 5 SAMPLES IN FLEX</text>
+              <g id="examples">
+                <!-- 24-bit stereo, 2min = 16MB -->
+                <rect x="20" y="195" width="80" height="20" fill="#1a1a1a" stroke="#ff00ff" stroke-width="1" />
+                <text x="25" y="209" font-family="'Space Mono'" font-size="9" fill="#ff00ff" font-weight="700">Kick: 16MB</text>
 
-                        <g id="examples">
-                            <!-- 24-bit stereo, 2min = 16MB -->
-                            <rect x="20" y="195" width="80" height="20" fill="#1a1a1a" stroke="#ff00ff" stroke-width="1"/>
-                            <text x="25" y="209" font-family="'Space Mono'" font-size="9" fill="#ff00ff" font-weight="700">Kick: 16MB</text>
+                <!-- 24-bit stereo, 1min = 8MB -->
+                <rect x="100" y="195" width="40" height="20" fill="#1a1a1a" stroke="#ff00ff" stroke-width="1" />
+                <text x="105" y="209" font-family="'Space Mono'" font-size="8" fill="#ff00ff" font-weight="700">Bass: 8MB</text>
 
-                            <!-- 24-bit stereo, 1min = 8MB -->
-                            <rect x="100" y="195" width="40" height="20" fill="#1a1a1a" stroke="#ff00ff" stroke-width="1"/>
-                            <text x="105" y="209" font-family="'Space Mono'" font-size="8" fill="#ff00ff" font-weight="700">Bass: 8MB</text>
+                <!-- 16-bit mono, 30sec = 2.5MB -->
+                <rect x="140" y="195" width="12" height="20" fill="#1a1a1a" stroke="#00ff41" stroke-width="1" />
+                <text x="143" y="209" font-family="'Space Mono'" font-size="8" fill="#00ff41" font-weight="700">Hit</text>
 
-                            <!-- 16-bit mono, 30sec = 2.5MB -->
-                            <rect x="140" y="195" width="12" height="20" fill="#1a1a1a" stroke="#00ff41" stroke-width="1"/>
-                            <text x="143" y="209" font-family="'Space Mono'" font-size="8" fill="#00ff41" font-weight="700">Hit</text>
+                <!-- 24-bit stereo, 4min = 32MB -->
+                <rect x="152" y="195" width="160" height="20" fill="#1a1a1a" stroke="#ff00ff" stroke-width="1" />
+                <text x="157" y="209" font-family="'Space Mono'" font-size="9" fill="#ff00ff" font-weight="700">Pad (Long): 32MB</text>
 
-                            <!-- 24-bit stereo, 4min = 32MB -->
-                            <rect x="152" y="195" width="160" height="20" fill="#1a1a1a" stroke="#ff00ff" stroke-width="1"/>
-                            <text x="157" y="209" font-family="'Space Mono'" font-size="9" fill="#ff00ff" font-weight="700">Pad (Long): 32MB</text>
+                <text x="20" y="235" font-family="'Space Mono'" font-size="9" fill="#e0e0e0">Total used: 58.5 MB / 64 MB available</text>
+                <text x="20" y="250" font-family="'Space Mono'" font-size="9" fill="#00ff41">Remaining: 5.5 MB (room for 1 more short hit)</text>
+              </g>
 
-                            <text x="20" y="235" font-family="'Space Mono'" font-size="9" fill="#e0e0e0">Total used: 58.5 MB / 64 MB available</text>
-                            <text x="20" y="250" font-family="'Space Mono'" font-size="9" fill="#00ff41">Remaining: 5.5 MB (room for 1 more short hit)</text>
-                        </g>
+              <!-- RAM costs table -->
+              <text x="20" y="270" font-family="'Space Mono'" font-size="10" fill="#ffaa00" font-weight="700">RAM COSTS (per minute of audio):</text>
+            </svg>
+          </div>
 
-                        <!-- RAM costs table -->
-                        <text x="20" y="270" font-family="'Space Mono'" font-size="10" fill="#ffaa00" font-weight="700">RAM COSTS (per minute of audio):</text>
-                    </svg>
-                </div>
-
-                <h3>RAM Costs Per Minute</h3>
-                <div style="font-family: 'Space Mono', monospace; font-size: 12px; background-color: #1a1a1a; border: 2px solid #00ff41; padding: 1.5rem; margin: 1.5rem 0;">
-                    <div style="color: #00ff41; margin-bottom: 0.75rem; font-weight: 700;">24-bit stereo:  ~8 MB/min</div>
-                    <div style="color: #00ff41; margin-bottom: 0.75rem; font-weight: 700;">24-bit mono:    ~4 MB/min</div>
-                    <div style="color: #00ff41; margin-bottom: 0.75rem; font-weight: 700;">16-bit stereo:  ~5.3 MB/min</div>
-                    <div style="color: #00ff41; font-weight: 700;">16-bit mono:    ~2.6 MB/min</div>
-                </div>
-            </div>
-
-            <!-- SECTION: STATIC MACHINES -->
-            <div class="section" id="static" data-section="static">
-                <h2>STATIC MACHINES: THE LAZY OPTION</h2>
-                <h3>What They Do</h3>
-                <ul>
-                    <li>Stream directly from CF card (no loading into RAM)</li>
-                    <li>ZERO RAM cost, no matter how long the file</li>
-                    <li>Can load files up to 2 GB in size</li>
-                    <li>Perfect for backing tracks, stems, long ambient pads</li>
-                </ul>
-
-                <h3>Strengths</h3>
-                <ul>
-                    <li>No RAM budget concerns—load massive files freely</li>
-                    <li>Great for long loops, full songs, backing tracks</li>
-                    <li>Timestretch works on Static machines too</li>
-                    <li>128 Static slots per project (plenty of room)</li>
-                </ul>
-
-                <h3>Gotchas</h3>
-                <ul>
-                    <li>Heavy STRT (start position) modulation can cause streaming glitches</li>
-                    <li>Not ideal for slicing or rapid position jumps</li>
-                    <li>Can't edit slice points like you can with Flex</li>
-                </ul>
-
-                <h3>Pro Tip</h3>
-                <p style="background-color: #0a2a0a; border-left: 3px solid #00ff41; padding: 1rem; margin: 1rem 0; color: #00ff41; font-family: 'Space Mono', monospace; font-size: 13px;">
-                    Use Static machines for long loops (30+ seconds) and Flex for everything else. It's the fastest way to make smart decisions.
-                </p>
-            </div>
-
-            <!-- SECTION: FLEX MACHINES -->
-            <div class="section" id="flex" data-section="flex">
-                <h2>FLEX MACHINES: THE POWER PLAYERS</h2>
-                <h3>What They Do</h3>
-                <ul>
-                    <li>Load entire audio sample into RAM for instant access</li>
-                    <li>Perfect for slicing, chopping, retriggering</li>
-                    <li>Costs RAM proportional to sample length</li>
-                    <li>128 Flex slots per project</li>
-                </ul>
-
-                <h3>Strengths</h3>
-                <ul>
-                    <li>Instant access to any position—jump around freely</li>
-                    <li>Can create slices and chop patterns</li>
-                    <li>Rapid retriggering (great for drums, hi-hats)</li>
-                    <li>Timestretch works beautifully</li>
-                </ul>
-
-                <h3>Gotchas</h3>
-                <ul>
-                    <li>Limited by 64 MB Flex RAM (Recorder buffers share this space)</li>
-                    <li>Every sample consumes RAM—budget carefully</li>
-                    <li>If you run out of RAM, you can't load more Flex samples</li>
-                </ul>
-
-                <!-- INTERACTIVE RAM CALCULATOR -->
-                <div class="calculator">
-                    <div class="calculator-title">FLEX RAM CALCULATOR</div>
-                    <p style="margin-bottom: 1.5rem; color: #e0e0e0; font-size: 14px;">Calculate how much RAM your sample will consume</p>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                        <div>
-                            <div class="calc-input-group">
-                                <label class="calc-label">Sample Length (seconds)</label>
-                                <input type="number" id="sampleLength" class="calc-input" placeholder="120" value="120" min="1">
-                            </div>
-
-                            <div class="calc-input-group">
-                                <label class="calc-label">Bit Depth</label>
-                                <select id="bitDepth" class="calc-select">
-                                    <option value="24">24-bit</option>
-                                    <option value="16">16-bit</option>
-                                </select>
-                            </div>
-
-                            <div class="calc-input-group">
-                                <label class="calc-label">Channels</label>
-                                <select id="channels" class="calc-select">
-                                    <option value="stereo">Stereo</option>
-                                    <option value="mono">Mono</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div id="calcResults" class="calc-result" style="display: flex; flex-direction: column; justify-content: center;">
-                            <div style="font-size: 24px; margin-bottom: 0.75rem; font-weight: 700;">--</div>
-                            <div style="font-size: 12px; margin-bottom: 1rem; color: #666666;">Calculating...</div>
-                            <div style="border-top: 1px solid #333333; padding-top: 1rem; margin-top: 1rem; font-size: 11px;">
-                                <div style="margin-bottom: 0.5rem;">Remaining: <span id="remaining">64</span> MB</div>
-                                <div>Slots left: <span id="slotsLeft">~10</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    function updateRAMCalc() {
-                        const length = parseFloat(document.getElementById('sampleLength').value) || 0;
-                        const bitDepth = document.getElementById('bitDepth').value;
-                        const channels = document.getElementById('channels').value;
-
-                        let costPerMin;
-                        if (bitDepth === '24' && channels === 'stereo') costPerMin = 8;
-                        else if (bitDepth === '24' && channels === 'mono') costPerMin = 4;
-                        else if (bitDepth === '16' && channels === 'stereo') costPerMin = 5.3;
-                        else costPerMin = 2.6; // 16-bit mono
-
-                        const minutes = length / 60;
-                        const used = (minutes * costPerMin).toFixed(1);
-                        const remaining = (64 - used).toFixed(1);
-                        const slotsLeft = Math.floor(remaining / costPerMin) || 0;
-
-                        document.querySelector('.calc-result > div:first-child').textContent = used + ' MB';
-                        document.querySelector('.calc-result > div:nth-child(2)').textContent = 'RAM used';
-                        document.getElementById('remaining').textContent = remaining;
-                        document.getElementById('slotsLeft').textContent = slotsLeft;
-                    }
-
-                    document.getElementById('sampleLength').addEventListener('input', updateRAMCalc);
-                    document.getElementById('bitDepth').addEventListener('change', updateRAMCalc);
-                    document.getElementById('channels').addEventListener('change', updateRAMCalc);
-                    updateRAMCalc();
-                </script>
-            </div>
-
-            <!-- SECTION: DECISION TREE -->
-            <div class="section" id="decision-tree" data-section="decision-tree">
-                <h2>DECISION TREE: STATIC OR FLEX?</h2>
-                <p>Use this flowchart to decide which machine type to use:</p>
-
-                <div class="svg-diagram">
-                    <svg width="700" height="500" viewBox="0 0 700 500" style="max-width: 100%; height: auto;">
-                        <defs>
-                            <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="#00ffff" />
-                            </marker>
-                        </defs>
-
-                        <!-- START -->
-                        <rect x="250" y="10" width="200" height="40" fill="#00ffff" stroke="#00ffff" stroke-width="2"/>
-                        <text x="260" y="35" font-family="'Space Mono'" font-size="12" fill="#0a0a0a" font-weight="700">START: NEW SAMPLE</text>
-
-                        <!-- Q1: Longer than 30 sec? -->
-                        <line x1="350" y1="50" x2="350" y2="80" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <rect x="250" y="80" width="200" height="50" fill="#0a0a0a" stroke="#ff00ff" stroke-width="2"/>
-                        <text x="265" y="105" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">IS IT LONGER</text>
-                        <text x="265" y="120" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">THAN 30 SEC?</text>
-
-                        <!-- YES: Static -->
-                        <line x1="250" y1="105" x2="150" y2="160" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="180" y="145" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">YES</text>
-                        <rect x="70" y="160" width="160" height="50" fill="#0a2a0a" stroke="#00ff41" stroke-width="2"/>
-                        <text x="85" y="185" font-family="'Space Mono'" font-size="12" fill="#00ff41" font-weight="700">USE STATIC</text>
-                        <text x="85" y="200" font-family="'Space Mono'" font-size="10" fill="#00ff41" font-weight="700">(Zero RAM, stream)</text>
-
-                        <!-- NO: Continue -->
-                        <line x1="450" y1="105" x2="550" y2="160" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="480" y="145" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">NO</text>
-
-                        <!-- Q2: Need to slice/chop? -->
-                        <rect x="450" y="160" width="200" height="50" fill="#0a0a0a" stroke="#ff00ff" stroke-width="2"/>
-                        <text x="465" y="185" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">NEED TO SLICE</text>
-                        <text x="465" y="200" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">OR CHOP?</text>
-
-                        <!-- YES: Flex -->
-                        <line x1="550" y1="210" x2="550" y2="270" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="560" y="245" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">YES</text>
-                        <rect x="450" y="270" width="200" height="50" fill="#0a2a2a" stroke="#00ffff" stroke-width="2"/>
-                        <text x="465" y="295" font-family="'Space Mono'" font-size="12" fill="#00ffff" font-weight="700">USE FLEX</text>
-                        <text x="465" y="310" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">(Instant access, slice)</text>
-
-                        <!-- NO: Q3 -->
-                        <line x1="450" y1="185" x2="350" y2="250" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="390" y="210" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">NO</text>
-                        <rect x="250" y="250" width="200" height="50" fill="#0a0a0a" stroke="#ff00ff" stroke-width="2"/>
-                        <text x="265" y="275" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">RAPID RETRIG</text>
-                        <text x="265" y="290" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">OR ONE-SHOT?</text>
-
-                        <!-- YES: Flex -->
-                        <line x1="350" y1="300" x2="350" y2="360" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="360" y="330" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">YES</text>
-                        <rect x="250" y="360" width="200" height="50" fill="#0a2a2a" stroke="#00ffff" stroke-width="2"/>
-                        <text x="265" y="385" font-family="'Space Mono'" font-size="12" fill="#00ffff" font-weight="700">USE FLEX</text>
-                        <text x="265" y="400" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">(Instant, responsive)</text>
-
-                        <!-- NO: Static chain -->
-                        <line x1="250" y1="275" x2="120" y2="330" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)"/>
-                        <text x="160" y="300" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">NO</text>
-                        <rect x="20" y="330" width="200" height="50" fill="#0a2a0a" stroke="#00ff41" stroke-width="2"/>
-                        <text x="35" y="355" font-family="'Space Mono'" font-size="12" fill="#00ff41" font-weight="700">STATIC CHAIN</text>
-                        <text x="35" y="370" font-family="'Space Mono'" font-size="10" fill="#00ff41" font-weight="700">(Many sounds, RAM)</text>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- SECTION: LOADING YOUR FIRST SAMPLE -->
-            <div class="section" id="load-sample" data-section="load-sample">
-                <h2>LOADING YOUR FIRST SAMPLE</h2>
-                <p>Step-by-step: how to load a sample onto a track. Here's the button sequence:</p>
-
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-title">SELECT YOUR TRACK</div>
-                        <div class="step-content">
-                            Press <span class="button-press">[TRACK]</span> then <span class="button-press">[TRIG 1-8]</span> to select which track to load the sample onto. The track LED will light up.
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-title">OPEN PLAYBACK SETUP</div>
-                        <div class="step-content">
-                            Press <span class="button-press">[FUNC]</span> then use the MAIN ENCODER to navigate to "PLAYBACK SETUP". Press <span class="button-press">[YES]</span> to open.
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-title">CHOOSE MACHINE TYPE</div>
-                        <div class="step-content">
-                            Navigate to "MACHINE" and select either STATIC or FLEX using the encoder. Use your decision tree knowledge here!
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-title">OPEN SAMPLE BROWSER</div>
-                        <div class="step-content">
-                            Press <span class="button-press">[FUNC]</span> then <span class="button-press">[CUE/SRC]</span> to open the sample browser. You should see your AUDIO folder.
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-title">NAVIGATE AND SELECT</div>
-                        <div class="step-content">
-                            Use the MAIN ENCODER to navigate through folders. Select your sample and press <span class="button-press">[YES]</span> to load it.
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">6</div>
-                        <div class="step-title">TRIGGER IT</div>
-                        <div class="step-content">
-                            Press any of the TRIG keys (1-16) to trigger the sample on that track. You should hear it play!
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION: MONITORING RAM -->
-            <div class="section" id="monitoring" data-section="monitoring">
-                <h2>MONITORING RAM USAGE</h2>
-                <p>
-                    Always check your RAM usage before loading new Flex samples. Here's where to look:
-                </p>
-                <ol>
-                    <li>Press <span class="button-press">[FUNC]</span> to open the menu</li>
-                    <li>Navigate to <strong>PROJECT</strong></li>
-                    <li>Select <strong>CONTROL</strong></li>
-                    <li>Open <strong>MEMORY</strong> page</li>
-                </ol>
-                <p style="margin-top: 1.5rem;">
-                    This screen shows you how much Flex RAM is used and available. Keep an eye on this before loading new samples. If you're over 90% capacity, consider:
-                </p>
-                <ul>
-                    <li>Using Static machines for new samples</li>
-                    <li>Deleting unused Flex samples from RAM</li>
-                    <li>Using sample chains to consolidate multiple sounds</li>
-                </ul>
-            </div>
-
-            <!-- SECTION: SAMPLE CHAINS -->
-            <div class="section" id="sample-chains" data-section="sample-chains">
-                <h2>SAMPLE CHAINS: MAXIMIZE YOUR SLOTS</h2>
-                <h3>What's a Chain?</h3>
-                <p>
-                    A sample chain is multiple audio samples concatenated into one WAV file, paired with a .ot metadata file that stores slice points. Instead of using 64 slots for 64 sounds, you can use 1 slot for 64 sounds.
-                </p>
-                <h3>Why Use Chains?</h3>
-                <ul>
-                    <li>Save slots: 64 sounds in 1 slot instead of 64 slots</li>
-                    <li>Better for drum kits: one chain = whole kit</li>
-                    <li>Works on Static machines (zero RAM cost)</li>
-                    <li>You can p-lock through different hits in the chain per step</li>
-                </ul>
-
-                <h3>Best Practices</h3>
-                <ul>
-                    <li>Use power-of-2 slices: 16, 32, or 64 sounds per chain</li>
-                    <li>Equal length samples work best (all kicks roughly same duration)</li>
-                    <li>Tools: OctaChainer (free, macOS) or ffmpeg+Python</li>
-                </ul>
-
-                <h3>How to Use on the OT</h3>
-                <ol>
-                    <li>Load the chain WAV file like any other sample</li>
-                    <li>In Audio Editor, slices are pre-defined by the .ot metadata</li>
-                    <li>In Playback Setup, enable SLICE = ON</li>
-                    <li>P-lock slice numbers per step to play different hits</li>
-                </ol>
-            </div>
-
-            <!-- SECTION: QUIZ -->
-            <div class="section" id="quiz" data-section="quiz">
-                <div class="quiz-section">
-                    <div class="quiz-title">TEST YOURSELF</div>
-
-                    <!-- Q1 -->
-                    <div class="quiz-question">
-                        <div class="quiz-question-text">Q1: Which machine uses ZERO RAM?</div>
-                        <label class="quiz-option">
-                            <input type="radio" name="q1" value="a">
-                            Flex machines
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q1" value="b">
-                            Static machines
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q1" value="c">
-                            Both use equal RAM
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q1" value="d">
-                            Neither uses RAM
-                        </label>
-                        <div class="quiz-feedback">
-                            Correct! Static machines stream from the card—zero RAM cost.
-                        </div>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div class="quiz-question">
-                        <div class="quiz-question-text">Q2: A 24-bit stereo 2-minute sample costs how much RAM in Flex?</div>
-                        <label class="quiz-option">
-                            <input type="radio" name="q2" value="a">
-                            4 MB
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q2" value="b">
-                            8 MB
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q2" value="c">
-                            16 MB
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q2" value="d">
-                            32 MB
-                        </label>
-                        <div class="quiz-feedback">
-                            Correct! 24-bit stereo costs 8 MB/min. 2 min = 16 MB.
-                        </div>
-                    </div>
-
-                    <!-- Q3 -->
-                    <div class="quiz-question">
-                        <div class="quiz-question-text">Q3: Can Static machines do timestretch?</div>
-                        <label class="quiz-option">
-                            <input type="radio" name="q3" value="a">
-                            Yes, timestretch works on both
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q3" value="b">
-                            No, only Flex can timestretch
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q3" value="c">
-                            Only if you manually resample
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q3" value="d">
-                            The OT doesn't support timestretch
-                        </label>
-                        <div class="quiz-feedback">
-                            Correct! TSTR works on Static AND Flex machines.
-                        </div>
-                    </div>
-
-                    <!-- Q4 -->
-                    <div class="quiz-question">
-                        <div class="quiz-question-text">Q4: Max Flex slots per project?</div>
-                        <label class="quiz-option">
-                            <input type="radio" name="q4" value="a">
-                            16
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q4" value="b">
-                            64
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q4" value="c">
-                            128
-                        </label>
-                        <label class="quiz-option">
-                            <input type="radio" name="q4" value="d">
-                            Unlimited
-                        </label>
-                        <div class="quiz-feedback">
-                            Correct! 128 Flex slots and 128 Static slots per project.
-                        </div>
-                    </div>
-
-                    <button class="quiz-submit" id="submitQuiz">SUBMIT QUIZ</button>
-                    <div class="quiz-result" id="quizResult"></div>
-                </div>
-            </div>
-
-            <!-- SECTION: CONFIDENCE RATING -->
-            <div class="section" id="confidence" data-section="confidence">
-                <div class="confidence-section">
-                    <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
-                    <p style="margin-bottom: 1.5rem; color: #e0e0e0;">
-                        Rate your understanding of Static vs Flex machines.
-                    </p>
-                    <div class="confidence-scale">
-                        <button class="confidence-btn" data-confidence="1">1</button>
-                        <button class="confidence-btn" data-confidence="2">2</button>
-                        <button class="confidence-btn" data-confidence="3">3</button>
-                        <button class="confidence-btn" data-confidence="4">4</button>
-                        <button class="confidence-btn" data-confidence="5">5</button>
-                    </div>
-                    <div style="text-align: center; margin-top: 1rem; font-family: 'Space Mono', monospace; color: #666666; font-size: 11px;">
-                        1 = Not ready | 5 = Totally got it
-                    </div>
-                </div>
-            </div>
-
-            <!-- BOTTOM NAV -->
-            <div class="bottom-nav">
-                <a href="01-set-sail.html" class="nav-button">← PREVIOUS: SET SAIL</a>
-                <a href="03-beat-basics.html" class="nav-button">NEXT: BEAT BASICS →</a>
-            </div>
+          <h3>RAM Costs Per Minute</h3>
+          <div style="font-family: 'Space Mono', monospace; font-size: 12px; background-color: #1a1a1a; border: 2px solid #00ff41; padding: 1.5rem; margin: 1.5rem 0">
+            <div style="color: #00ff41; margin-bottom: 0.75rem; font-weight: 700">24-bit stereo: ~8 MB/min</div>
+            <div style="color: #00ff41; margin-bottom: 0.75rem; font-weight: 700">24-bit mono: ~4 MB/min</div>
+            <div style="color: #00ff41; margin-bottom: 0.75rem; font-weight: 700">16-bit stereo: ~5.3 MB/min</div>
+            <div style="color: #00ff41; font-weight: 700">16-bit mono: ~2.6 MB/min</div>
+          </div>
         </div>
+
+        <!-- SECTION: STATIC MACHINES -->
+        <div class="section" id="static" data-section="static">
+          <h2>STATIC MACHINES: THE LAZY OPTION</h2>
+          <h3>What They Do</h3>
+          <ul>
+            <li>Stream directly from CF card (no loading into RAM)</li>
+            <li>ZERO RAM cost, no matter how long the file</li>
+            <li>Can load files up to 2 GB in size</li>
+            <li>Perfect for backing tracks, stems, long ambient pads</li>
+          </ul>
+
+          <h3>Strengths</h3>
+          <ul>
+            <li>No RAM budget concerns—load massive files freely</li>
+            <li>Great for long loops, full songs, backing tracks</li>
+            <li>Timestretch works on Static machines too</li>
+            <li>128 Static slots per project (plenty of room)</li>
+          </ul>
+
+          <h3>Gotchas</h3>
+          <ul>
+            <li>Heavy STRT (start position) modulation can cause streaming glitches</li>
+            <li>Not ideal for slicing or rapid position jumps</li>
+            <li>Can't edit slice points like you can with Flex</li>
+          </ul>
+
+          <h3>Pro Tip</h3>
+          <p style="background-color: #0a2a0a; border-left: 3px solid #00ff41; padding: 1rem; margin: 1rem 0; color: #00ff41; font-family: 'Space Mono', monospace; font-size: 13px">
+            Use Static machines for long loops (30+ seconds) and Flex for everything else. It's the fastest way to make smart decisions.
+          </p>
+        </div>
+
+        <!-- SECTION: FLEX MACHINES -->
+        <div class="section" id="flex" data-section="flex">
+          <h2>FLEX MACHINES: THE POWER PLAYERS</h2>
+          <h3>What They Do</h3>
+          <ul>
+            <li>Load entire audio sample into RAM for instant access</li>
+            <li>Perfect for slicing, chopping, retriggering</li>
+            <li>Costs RAM proportional to sample length</li>
+            <li>128 Flex slots per project</li>
+          </ul>
+
+          <h3>Strengths</h3>
+          <ul>
+            <li>Instant access to any position—jump around freely</li>
+            <li>Can create slices and chop patterns</li>
+            <li>Rapid retriggering (great for drums, hi-hats)</li>
+            <li>Timestretch works beautifully</li>
+          </ul>
+
+          <h3>Gotchas</h3>
+          <ul>
+            <li>Limited by 64 MB Flex RAM (Recorder buffers share this space)</li>
+            <li>Every sample consumes RAM—budget carefully</li>
+            <li>If you run out of RAM, you can't load more Flex samples</li>
+          </ul>
+
+          <!-- INTERACTIVE RAM CALCULATOR -->
+          <div class="calculator">
+            <div class="calculator-title">FLEX RAM CALCULATOR</div>
+            <p style="margin-bottom: 1.5rem; color: #e0e0e0; font-size: 14px">Calculate how much RAM your sample will consume</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem">
+              <div>
+                <div class="calc-input-group">
+                  <label class="calc-label">Sample Length (seconds)</label>
+                  <input type="number" id="sampleLength" class="calc-input" placeholder="120" value="120" min="1" />
+                </div>
+
+                <div class="calc-input-group">
+                  <label class="calc-label">Bit Depth</label>
+                  <select id="bitDepth" class="calc-select">
+                    <option value="24">24-bit</option>
+                    <option value="16">16-bit</option>
+                  </select>
+                </div>
+
+                <div class="calc-input-group">
+                  <label class="calc-label">Channels</label>
+                  <select id="channels" class="calc-select">
+                    <option value="stereo">Stereo</option>
+                    <option value="mono">Mono</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="calcResults" class="calc-result" style="display: flex; flex-direction: column; justify-content: center">
+                <div style="font-size: 24px; margin-bottom: 0.75rem; font-weight: 700">--</div>
+                <div style="font-size: 12px; margin-bottom: 1rem; color: #666666">Calculating...</div>
+                <div style="border-top: 1px solid #333333; padding-top: 1rem; margin-top: 1rem; font-size: 11px">
+                  <div style="margin-bottom: 0.5rem">
+                    Remaining:
+                    <span id="remaining">64</span>
+                    MB
+                  </div>
+                  <div>
+                    Slots left:
+                    <span id="slotsLeft">~10</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+            function updateRAMCalc() {
+              const length = parseFloat(document.getElementById('sampleLength').value) || 0;
+              const bitDepth = document.getElementById('bitDepth').value;
+              const channels = document.getElementById('channels').value;
+
+              let costPerMin;
+              if (bitDepth === '24' && channels === 'stereo') costPerMin = 8;
+              else if (bitDepth === '24' && channels === 'mono') costPerMin = 4;
+              else if (bitDepth === '16' && channels === 'stereo') costPerMin = 5.3;
+              else costPerMin = 2.6; // 16-bit mono
+
+              const minutes = length / 60;
+              const used = (minutes * costPerMin).toFixed(1);
+              const remaining = (64 - used).toFixed(1);
+              const slotsLeft = Math.floor(remaining / costPerMin) || 0;
+
+              document.querySelector('.calc-result > div:first-child').textContent = used + ' MB';
+              document.querySelector('.calc-result > div:nth-child(2)').textContent = 'RAM used';
+              document.getElementById('remaining').textContent = remaining;
+              document.getElementById('slotsLeft').textContent = slotsLeft;
+            }
+
+            document.getElementById('sampleLength').addEventListener('input', updateRAMCalc);
+            document.getElementById('bitDepth').addEventListener('change', updateRAMCalc);
+            document.getElementById('channels').addEventListener('change', updateRAMCalc);
+            updateRAMCalc();
+          </script>
+        </div>
+
+        <!-- SECTION: DECISION TREE -->
+        <div class="section" id="decision-tree" data-section="decision-tree">
+          <h2>DECISION TREE: STATIC OR FLEX?</h2>
+          <p>Use this flowchart to decide which machine type to use:</p>
+
+          <div class="svg-diagram">
+            <svg width="700" height="500" viewBox="0 0 700 500" style="max-width: 100%; height: auto">
+              <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                  <polygon points="0 0, 10 3, 0 6" fill="#00ffff" />
+                </marker>
+              </defs>
+
+              <!-- START -->
+              <rect x="250" y="10" width="200" height="40" fill="#00ffff" stroke="#00ffff" stroke-width="2" />
+              <text x="260" y="35" font-family="'Space Mono'" font-size="12" fill="#0a0a0a" font-weight="700">START: NEW SAMPLE</text>
+
+              <!-- Q1: Longer than 30 sec? -->
+              <line x1="350" y1="50" x2="350" y2="80" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <rect x="250" y="80" width="200" height="50" fill="#0a0a0a" stroke="#ff00ff" stroke-width="2" />
+              <text x="265" y="105" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">IS IT LONGER</text>
+              <text x="265" y="120" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">THAN 30 SEC?</text>
+
+              <!-- YES: Static -->
+              <line x1="250" y1="105" x2="150" y2="160" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <text x="180" y="145" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">YES</text>
+              <rect x="70" y="160" width="160" height="50" fill="#0a2a0a" stroke="#00ff41" stroke-width="2" />
+              <text x="85" y="185" font-family="'Space Mono'" font-size="12" fill="#00ff41" font-weight="700">USE STATIC</text>
+              <text x="85" y="200" font-family="'Space Mono'" font-size="10" fill="#00ff41" font-weight="700">(Zero RAM, stream)</text>
+
+              <!-- NO: Continue -->
+              <line x1="450" y1="105" x2="550" y2="160" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <text x="480" y="145" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">NO</text>
+
+              <!-- Q2: Need to slice/chop? -->
+              <rect x="450" y="160" width="200" height="50" fill="#0a0a0a" stroke="#ff00ff" stroke-width="2" />
+              <text x="465" y="185" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">NEED TO SLICE</text>
+              <text x="465" y="200" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">OR CHOP?</text>
+
+              <!-- YES: Flex -->
+              <line x1="550" y1="210" x2="550" y2="270" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <text x="560" y="245" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">YES</text>
+              <rect x="450" y="270" width="200" height="50" fill="#0a2a2a" stroke="#00ffff" stroke-width="2" />
+              <text x="465" y="295" font-family="'Space Mono'" font-size="12" fill="#00ffff" font-weight="700">USE FLEX</text>
+              <text x="465" y="310" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">(Instant access, slice)</text>
+
+              <!-- NO: Q3 -->
+              <line x1="450" y1="185" x2="350" y2="250" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <text x="390" y="210" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">NO</text>
+              <rect x="250" y="250" width="200" height="50" fill="#0a0a0a" stroke="#ff00ff" stroke-width="2" />
+              <text x="265" y="275" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">RAPID RETRIG</text>
+              <text x="265" y="290" font-family="'Space Mono'" font-size="11" fill="#ff00ff" font-weight="700">OR ONE-SHOT?</text>
+
+              <!-- YES: Flex -->
+              <line x1="350" y1="300" x2="350" y2="360" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <text x="360" y="330" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">YES</text>
+              <rect x="250" y="360" width="200" height="50" fill="#0a2a2a" stroke="#00ffff" stroke-width="2" />
+              <text x="265" y="385" font-family="'Space Mono'" font-size="12" fill="#00ffff" font-weight="700">USE FLEX</text>
+              <text x="265" y="400" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">(Instant, responsive)</text>
+
+              <!-- NO: Static chain -->
+              <line x1="250" y1="275" x2="120" y2="330" stroke="#00ffff" stroke-width="2" marker-end="url(#arrow)" />
+              <text x="160" y="300" font-family="'Space Mono'" font-size="10" fill="#00ffff" font-weight="700">NO</text>
+              <rect x="20" y="330" width="200" height="50" fill="#0a2a0a" stroke="#00ff41" stroke-width="2" />
+              <text x="35" y="355" font-family="'Space Mono'" font-size="12" fill="#00ff41" font-weight="700">STATIC CHAIN</text>
+              <text x="35" y="370" font-family="'Space Mono'" font-size="10" fill="#00ff41" font-weight="700">(Many sounds, RAM)</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- SECTION: LOADING YOUR FIRST SAMPLE -->
+        <div class="section" id="load-sample" data-section="load-sample">
+          <h2>LOADING YOUR FIRST SAMPLE</h2>
+          <p>Step-by-step: how to load a sample onto a track. Here's the button sequence:</p>
+
+          <div class="steps-container">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-title">SELECT YOUR TRACK</div>
+              <div class="step-content">
+                Press
+                <span class="button-press">[TRACK]</span>
+                then
+                <span class="button-press">[TRIG 1-8]</span>
+                to select which track to load the sample onto. The track LED will light up.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-title">OPEN PLAYBACK SETUP</div>
+              <div class="step-content">
+                Press
+                <span class="button-press">[FUNC]</span>
+                then use the MAIN ENCODER to navigate to "PLAYBACK SETUP". Press
+                <span class="button-press">[YES]</span>
+                to open.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-title">CHOOSE MACHINE TYPE</div>
+              <div class="step-content">Navigate to "MACHINE" and select either STATIC or FLEX using the encoder. Use your decision tree knowledge here!</div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-title">OPEN SAMPLE BROWSER</div>
+              <div class="step-content">
+                Press
+                <span class="button-press">[FUNC]</span>
+                then
+                <span class="button-press">[CUE/SRC]</span>
+                to open the sample browser. You should see your AUDIO folder.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-title">NAVIGATE AND SELECT</div>
+              <div class="step-content">
+                Use the MAIN ENCODER to navigate through folders. Select your sample and press
+                <span class="button-press">[YES]</span>
+                to load it.
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-title">TRIGGER IT</div>
+              <div class="step-content">Press any of the TRIG keys (1-16) to trigger the sample on that track. You should hear it play!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION: MONITORING RAM -->
+        <div class="section" id="monitoring" data-section="monitoring">
+          <h2>MONITORING RAM USAGE</h2>
+          <p>Always check your RAM usage before loading new Flex samples. Here's where to look:</p>
+          <ol>
+            <li>
+              Press
+              <span class="button-press">[FUNC]</span>
+              to open the menu
+            </li>
+            <li>
+              Navigate to
+              <strong>PROJECT</strong>
+            </li>
+            <li>
+              Select
+              <strong>CONTROL</strong>
+            </li>
+            <li>
+              Open
+              <strong>MEMORY</strong>
+              page
+            </li>
+          </ol>
+          <p style="margin-top: 1.5rem">This screen shows you how much Flex RAM is used and available. Keep an eye on this before loading new samples. If you're over 90% capacity, consider:</p>
+          <ul>
+            <li>Using Static machines for new samples</li>
+            <li>Deleting unused Flex samples from RAM</li>
+            <li>Using sample chains to consolidate multiple sounds</li>
+          </ul>
+        </div>
+
+        <!-- SECTION: SAMPLE CHAINS -->
+        <div class="section" id="sample-chains" data-section="sample-chains">
+          <h2>SAMPLE CHAINS: MAXIMIZE YOUR SLOTS</h2>
+          <h3>What's a Chain?</h3>
+          <p>
+            A sample chain is multiple audio samples concatenated into one WAV file, paired with a .ot metadata file that stores slice points. Instead of using 64 slots for 64 sounds, you can use 1
+            slot for 64 sounds.
+          </p>
+          <h3>Why Use Chains?</h3>
+          <ul>
+            <li>Save slots: 64 sounds in 1 slot instead of 64 slots</li>
+            <li>Better for drum kits: one chain = whole kit</li>
+            <li>Works on Static machines (zero RAM cost)</li>
+            <li>You can p-lock through different hits in the chain per step</li>
+          </ul>
+
+          <h3>Best Practices</h3>
+          <ul>
+            <li>Use power-of-2 slices: 16, 32, or 64 sounds per chain</li>
+            <li>Equal length samples work best (all kicks roughly same duration)</li>
+            <li>Tools: OctaChainer (free, macOS) or ffmpeg+Python</li>
+          </ul>
+
+          <h3>How to Use on the OT</h3>
+          <ol>
+            <li>Load the chain WAV file like any other sample</li>
+            <li>In Audio Editor, slices are pre-defined by the .ot metadata</li>
+            <li>In Playback Setup, enable SLICE = ON</li>
+            <li>P-lock slice numbers per step to play different hits</li>
+          </ol>
+        </div>
+
+        <!-- SECTION: QUIZ -->
+        <div class="section" id="quiz" data-section="quiz">
+          <div class="quiz-section">
+            <div class="quiz-title">TEST YOURSELF</div>
+
+            <!-- Q1 -->
+            <div class="quiz-question">
+              <div class="quiz-question-text">Q1: Which machine uses ZERO RAM?</div>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="a" />
+                Flex machines
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="b" />
+                Static machines
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="c" />
+                Both use equal RAM
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q1" value="d" />
+                Neither uses RAM
+              </label>
+              <div class="quiz-feedback">Correct! Static machines stream from the card—zero RAM cost.</div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+              <div class="quiz-question-text">Q2: A 24-bit stereo 2-minute sample costs how much RAM in Flex?</div>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="a" />
+                4 MB
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="b" />
+                8 MB
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="c" />
+                16 MB
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q2" value="d" />
+                32 MB
+              </label>
+              <div class="quiz-feedback">Correct! 24-bit stereo costs 8 MB/min. 2 min = 16 MB.</div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+              <div class="quiz-question-text">Q3: Can Static machines do timestretch?</div>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="a" />
+                Yes, timestretch works on both
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="b" />
+                No, only Flex can timestretch
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="c" />
+                Only if you manually resample
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q3" value="d" />
+                The OT doesn't support timestretch
+              </label>
+              <div class="quiz-feedback">Correct! TSTR works on Static AND Flex machines.</div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+              <div class="quiz-question-text">Q4: Max Flex slots per project?</div>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="a" />
+                16
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="b" />
+                64
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="c" />
+                128
+              </label>
+              <label class="quiz-option">
+                <input type="radio" name="q4" value="d" />
+                Unlimited
+              </label>
+              <div class="quiz-feedback">Correct! 128 Flex slots and 128 Static slots per project.</div>
+            </div>
+
+            <button class="quiz-submit" id="submitQuiz">SUBMIT QUIZ</button>
+            <div class="quiz-result" id="quizResult"></div>
+          </div>
+        </div>
+
+        <!-- SECTION: CONFIDENCE RATING -->
+        <div class="section" id="confidence" data-section="confidence">
+          <div class="confidence-section">
+            <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
+            <p style="margin-bottom: 1.5rem; color: #e0e0e0">Rate your understanding of Static vs Flex machines.</p>
+            <div class="confidence-scale">
+              <button class="confidence-btn" data-confidence="1">1</button>
+              <button class="confidence-btn" data-confidence="2">2</button>
+              <button class="confidence-btn" data-confidence="3">3</button>
+              <button class="confidence-btn" data-confidence="4">4</button>
+              <button class="confidence-btn" data-confidence="5">5</button>
+            </div>
+            <div style="text-align: center; margin-top: 1rem; font-family: 'Space Mono', monospace; color: #666666; font-size: 11px">1 = Not ready | 5 = Totally got it</div>
+          </div>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <a href="01-set-sail.html" class="nav-button">← PREVIOUS: SET SAIL</a>
+          <a href="03-beat-basics.html" class="nav-button">NEXT: BEAT BASICS →</a>
+        </div>
+      </div>
     </div>
 
     <script>
-        const STORAGE_KEY = 'octatrack-tutorials';
-        const TUTORIAL_ID = '02-load-and-lock';
+      const STORAGE_KEY = 'octatrack-tutorials';
+      const TUTORIAL_ID = '02-load-and-lock';
 
-        function loadState() {
-            const data = localStorage.getItem(STORAGE_KEY);
-            if (!data) return {};
-            const parsed = JSON.parse(data);
-            return parsed[TUTORIAL_ID] || {};
-        }
+      function loadState() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (!data) return {};
+        const parsed = JSON.parse(data);
+        return parsed[TUTORIAL_ID] || {};
+      }
 
-        function saveState(state) {
-            const data = localStorage.getItem(STORAGE_KEY);
-            const parsed = data ? JSON.parse(data) : {};
-            parsed[TUTORIAL_ID] = {
-                ...parsed[TUTORIAL_ID],
-                ...state,
-                lastAccessed: new Date().toISOString()
-            };
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
-        }
+      function saveState(state) {
+        const data = localStorage.getItem(STORAGE_KEY);
+        const parsed = data ? JSON.parse(data) : {};
+        parsed[TUTORIAL_ID] = {
+          ...parsed[TUTORIAL_ID],
+          ...state,
+          lastAccessed: new Date().toISOString(),
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+      }
 
-        function updateProgress() {
-            const state = loadState();
-            const sections = document.querySelectorAll('[data-section]');
-            const completedSections = new Set(state.sectionsCompleted || []);
-            const totalSections = sections.length;
-            const completed = completedSections.size;
-            const percent = Math.round((completed / totalSections) * 100);
+      function updateProgress() {
+        const state = loadState();
+        const sections = document.querySelectorAll('[data-section]');
+        const completedSections = new Set(state.sectionsCompleted || []);
+        const totalSections = sections.length;
+        const completed = completedSections.size;
+        const percent = Math.round((completed / totalSections) * 100);
 
-            document.getElementById('mainProgress').style.width = percent + '%';
-            document.getElementById('sidebarProgress').style.width = percent + '%';
-            document.getElementById('completionPercent').textContent = percent;
+        document.getElementById('mainProgress').style.width = percent + '%';
+        document.getElementById('sidebarProgress').style.width = percent + '%';
+        document.getElementById('completionPercent').textContent = percent;
 
-            document.querySelectorAll('.sidebar-nav-item').forEach(item => {
-                const section = item.dataset.section;
-                const checkbox = item.querySelector('.sidebar-checkbox');
-                if (completedSections.has(section)) {
-                    checkbox.classList.add('checked');
-                    checkbox.textContent = '✓';
-                } else {
-                    checkbox.classList.remove('checked');
-                    checkbox.textContent = '';
-                }
-            });
-        }
+        document.querySelectorAll('.sidebar-nav-item').forEach((item) => {
+          const section = item.dataset.section;
+          const checkbox = item.querySelector('.sidebar-checkbox');
+          if (completedSections.has(section)) {
+            checkbox.classList.add('checked');
+            checkbox.textContent = '✓';
+          } else {
+            checkbox.classList.remove('checked');
+            checkbox.textContent = '';
+          }
+        });
+      }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const section = entry.target.dataset.section;
-                    const state = loadState();
-                    const completed = new Set(state.sectionsCompleted || []);
-                    completed.add(section);
-                    saveState({ sectionsCompleted: Array.from(completed), status: 'in-progress' });
-                    updateProgress();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const section = entry.target.dataset.section;
+              const state = loadState();
+              const completed = new Set(state.sectionsCompleted || []);
+              completed.add(section);
+              saveState({ sectionsCompleted: Array.from(completed), status: 'in-progress' });
+              updateProgress();
 
-                    document.querySelectorAll('.sidebar-nav-item').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    const activeItem = document.querySelector(`.sidebar-nav-item[data-section="${section}"]`);
-                    if (activeItem) activeItem.classList.add('active');
-                }
-            });
-        }, { threshold: 0.3 });
+              document.querySelectorAll('.sidebar-nav-item').forEach((item) => {
+                item.classList.remove('active');
+              });
+              const activeItem = document.querySelector(`.sidebar-nav-item[data-section="${section}"]`);
+              if (activeItem) activeItem.classList.add('active');
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
 
-        document.querySelectorAll('[data-section]').forEach(section => {
-            observer.observe(section);
+      document.querySelectorAll('[data-section]').forEach((section) => {
+        observer.observe(section);
+      });
+
+      // QUIZ
+      document.getElementById('submitQuiz').addEventListener('click', function () {
+        const answers = { q1: 'b', q2: 'c', q3: 'a', q4: 'c' };
+        let score = 0;
+
+        document.querySelectorAll('.quiz-question').forEach((q, idx) => {
+          const name = `q${idx + 1}`;
+          const selected = document.querySelector(`input[name="${name}"]:checked`);
+
+          if (!selected) return;
+
+          const isCorrect = selected.value === answers[name];
+          const option = selected.closest('.quiz-option');
+          const feedback = q.querySelector('.quiz-feedback');
+
+          if (isCorrect) {
+            score++;
+            option.classList.add('correct');
+            feedback.classList.add('show', 'correct');
+          } else {
+            option.classList.add('incorrect');
+            feedback.classList.add('show', 'incorrect');
+            feedback.textContent = '✗ Incorrect. Review and try again.';
+          }
         });
 
-        // QUIZ
-        document.getElementById('submitQuiz').addEventListener('click', function() {
-            const answers = { q1: 'b', q2: 'c', q3: 'a', q4: 'c' };
-            let score = 0;
-
-            document.querySelectorAll('.quiz-question').forEach((q, idx) => {
-                const name = `q${idx + 1}`;
-                const selected = document.querySelector(`input[name="${name}"]:checked`);
-
-                if (!selected) return;
-
-                const isCorrect = selected.value === answers[name];
-                const option = selected.closest('.quiz-option');
-                const feedback = q.querySelector('.quiz-feedback');
-
-                if (isCorrect) {
-                    score++;
-                    option.classList.add('correct');
-                    feedback.classList.add('show', 'correct');
-                } else {
-                    option.classList.add('incorrect');
-                    feedback.classList.add('show', 'incorrect');
-                    feedback.textContent = '✗ Incorrect. Review and try again.';
-                }
-            });
-
-            const result = document.getElementById('quizResult');
-            result.classList.add('show');
-            result.textContent = `Score: ${score}/4. ${score === 4 ? 'Perfect!' : 'Review and retry.'}`;
-
-            const state = loadState();
-            const completed = new Set(state.sectionsCompleted || []);
-            if (score >= 3) completed.add('quiz');
-            saveState({ quizScore: score, sectionsCompleted: Array.from(completed) });
-            updateProgress();
-        });
-
-        // CONFIDENCE
-        document.querySelectorAll('.confidence-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.confidence-btn').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-
-                const state = loadState();
-                const completed = new Set(state.sectionsCompleted || []);
-                completed.add('confidence');
-                saveState({ confidence: parseInt(this.dataset.confidence), sectionsCompleted: Array.from(completed) });
-                updateProgress();
-            });
-        });
+        const result = document.getElementById('quizResult');
+        result.classList.add('show');
+        result.textContent = `Score: ${score}/4. ${score === 4 ? 'Perfect!' : 'Review and retry.'}`;
 
         const state = loadState();
-        if (state.confidence) {
-            document.querySelector(`.confidence-btn[data-confidence="${state.confidence}"]`)?.classList.add('selected');
-        }
-
+        const completed = new Set(state.sectionsCompleted || []);
+        if (score >= 3) completed.add('quiz');
+        saveState({ quizScore: score, sectionsCompleted: Array.from(completed) });
         updateProgress();
+      });
 
-        let startTime = Date.now();
-        window.addEventListener('beforeunload', function() {
-            const elapsed = Math.floor((Date.now() - startTime) / 1000);
-            const current = loadState();
-            saveState({ timeSpent: (current.timeSpent || 0) + elapsed });
+      // CONFIDENCE
+      document.querySelectorAll('.confidence-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.confidence-btn').forEach((b) => b.classList.remove('selected'));
+          this.classList.add('selected');
+
+          const state = loadState();
+          const completed = new Set(state.sectionsCompleted || []);
+          completed.add('confidence');
+          saveState({ confidence: parseInt(this.dataset.confidence), sectionsCompleted: Array.from(completed) });
+          updateProgress();
         });
+      });
+
+      const state = loadState();
+      if (state.confidence) {
+        document.querySelector(`.confidence-btn[data-confidence="${state.confidence}"]`)?.classList.add('selected');
+      }
+
+      updateProgress();
+
+      let startTime = Date.now();
+      window.addEventListener('beforeunload', function () {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const current = loadState();
+        saveState({ timeSpent: (current.timeSpent || 0) + elapsed });
+      });
     </script>
-</body>
+    <script src="assets/svg-overlay.js" defer></script>
+  </body>
 </html>

@@ -1,1613 +1,1712 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial 08 - Parts, Banks & Scenes: Multi-Section Arrangements</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
+      body {
+        background-color: #0a0a0a;
+        color: #e0e0e0;
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
 
-        /* TOP BAR */
-        .top-bar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: #0a0a0a;
-            border-bottom: 3px solid #ff00ff;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
+      /* TOP BAR */
+      .top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: #0a0a0a;
+        border-bottom: 3px solid #ff00ff;
+        padding: 1rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
 
-        .top-bar a {
-            color: #ff00ff;
-            text-decoration: none;
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border: 2px solid #ff00ff;
-            padding: 0.5rem 1rem;
-            transition: all 0.2s;
-        }
+      .top-bar a {
+        color: #ff00ff;
+        text-decoration: none;
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border: 2px solid #ff00ff;
+        padding: 0.5rem 1rem;
+        transition: all 0.2s;
+      }
 
-        .top-bar a:hover {
-            background-color: #ff00ff;
-            color: #0a0a0a;
-            transform: translateY(-2px);
-        }
+      .top-bar a:hover {
+        background-color: #ff00ff;
+        color: #0a0a0a;
+        transform: translateY(-2px);
+      }
 
-        .top-bar-title {
-            flex: 1;
-            font-family: 'Space Mono', monospace;
-            font-size: 18px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-        }
+      .top-bar-title {
+        flex: 1;
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+      }
 
-        .top-bar-meta {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 13px;
-            font-family: 'Space Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+      .top-bar-meta {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 13px;
+        font-family: 'Space Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
 
-        .meta-item {
-            border: 2px solid #666666;
-            padding: 0.5rem 0.8rem;
-            color: #e0e0e0;
-        }
+      .meta-item {
+        border: 2px solid #666666;
+        padding: 0.5rem 0.8rem;
+        color: #e0e0e0;
+      }
 
-        .meta-item.difficulty-intermediate {
-            border-color: #ffaa00;
-            color: #ffaa00;
-        }
+      .meta-item.difficulty-intermediate {
+        border-color: #ffaa00;
+        color: #ffaa00;
+      }
 
-        /* CONTAINER */
+      /* CONTAINER */
+      .container {
+        display: flex;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        background-color: #111111;
+        border-right: 3px solid #00ffff;
+        padding: 2rem 1.5rem;
+        position: sticky;
+        top: 60px;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
+      }
+
+      .sidebar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #00ffff;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid #00ffff;
+        padding-bottom: 0.75rem;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.75rem;
+      }
+
+      .sidebar-nav a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #e0e0e0;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 0.5rem 0.75rem;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+
+      .sidebar-nav a:hover {
+        color: #ff00ff;
+        border-left: 2px solid #ff00ff;
+        padding-left: 0.5rem;
+      }
+
+      .sidebar-nav a.active {
+        color: #ff00ff;
+        border-left: 3px solid #ff00ff;
+        padding-left: 0.5rem;
+        font-weight: 600;
+      }
+
+      .checkmark {
+        display: none;
+        color: #00ff41;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .sidebar-nav a.completed .checkmark {
+        display: inline;
+      }
+
+      /* MAIN CONTENT */
+      .main-content {
+        flex: 1;
+        padding: 3rem;
+        max-width: 900px;
+      }
+
+      .section {
+        margin-bottom: 4rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid #333333;
+        opacity: 0;
+        animation: fadeIn 0.4s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section:last-of-type {
+        border-bottom: none;
+      }
+
+      .section h2 {
+        font-family: 'Space Mono', monospace;
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #ff00ff;
+        padding-left: 1rem;
+      }
+
+      .section h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ff00ff;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .section p {
+        margin-bottom: 1rem;
+        color: #e0e0e0;
+      }
+
+      .highlight-box {
+        background-color: #111111;
+        border: 3px solid #00ffff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 0;
+      }
+
+      .highlight-box.warning {
+        border-color: #ffaa00;
+        border-left: 6px solid #ffaa00;
+      }
+
+      .highlight-box.success {
+        border-color: #00ff41;
+        border-left: 6px solid #00ff41;
+      }
+
+      .highlight-box h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        margin-bottom: 0.75rem;
+      }
+
+      .code-block {
+        background-color: #0a0a0a;
+        border: 2px solid #ff00ff;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        color: #ff00ff;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        border: 2px solid #333333;
+      }
+
+      th {
+        background-color: #111111;
+        border: 2px solid #333333;
+        padding: 1rem;
+        font-family: 'Space Mono', monospace;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        color: #ff00ff;
+        text-align: left;
+      }
+
+      td {
+        border: 2px solid #333333;
+        padding: 1rem;
+        color: #e0e0e0;
+      }
+
+      tr:nth-child(even) td {
+        background-color: #0d0d0d;
+      }
+
+      /* SVG DIAGRAM */
+      .diagram {
+        background-color: #111111;
+        border: 3px solid #00ff41;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+      }
+
+      /* INTERACTIVE PART DEMO */
+      .part-demo {
+        background-color: #111111;
+        border: 3px solid #ff00ff;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 0;
+      }
+
+      .pattern-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .pattern-box {
+        background-color: #0a0a0a;
+        border: 2px solid #333333;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .pattern-box:hover {
+        border-color: #ff00ff;
+        background-color: #0d0d0d;
+      }
+
+      .pattern-box.part-1 {
+        border-left: 4px solid #00ffff;
+      }
+      .pattern-box.part-2 {
+        border-left: 4px solid #ff00ff;
+      }
+      .pattern-box.part-3 {
+        border-left: 4px solid #00ff41;
+      }
+      .pattern-box.part-4 {
+        border-left: 4px solid #ffaa00;
+      }
+
+      .pattern-label {
+        color: #888;
+        font-size: 11px;
+        margin-top: 0.5rem;
+      }
+
+      .pattern-info {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: #0a0a0a;
+        border-left: 3px solid #ff00ff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        display: none;
+      }
+
+      .pattern-info.show {
+        display: block;
+      }
+
+      /* CROSSFADER WIDGET */
+      .crossfader-widget {
+        background-color: #111111;
+        border: 3px solid #00ffff;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 0;
+      }
+
+      .crossfader-container {
+        margin-top: 1.5rem;
+      }
+
+      .crossfader-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .crossfader-labels .label-a {
+        color: #00ffff;
+      }
+
+      .crossfader-labels .label-b {
+        color: #ff00ff;
+      }
+
+      .crossfader-slider {
+        width: 100%;
+        height: 30px;
+        -webkit-appearance: none;
+        appearance: none;
+        background: linear-gradient(to right, #00ffff 0%, #00ffff 25%, #555 50%, #ff00ff 75%, #ff00ff 100%);
+        outline: none;
+        border: 2px solid #333;
+        cursor: pointer;
+      }
+
+      .crossfader-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 40px;
+        background-color: #00ff41;
+        cursor: pointer;
+        border: 2px solid #00ff41;
+      }
+
+      .crossfader-slider::-moz-range-thumb {
+        width: 20px;
+        height: 40px;
+        background-color: #00ff41;
+        cursor: pointer;
+        border: 2px solid #00ff41;
+      }
+
+      .crossfader-values {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+      }
+
+      .crossfader-value {
+        background-color: #0a0a0a;
+        border: 2px solid #333;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .crossfader-value.side-a {
+        border-top: 3px solid #00ffff;
+      }
+
+      .crossfader-value.side-b {
+        border-top: 3px solid #ff00ff;
+      }
+
+      .crossfader-value-label {
+        color: #888;
+        font-size: 11px;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+      }
+
+      .crossfader-value-display {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      /* STEP-BY-STEP */
+      .step-guide {
+        background-color: #111111;
+        border: 3px solid #00ffff;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background-color: #ff00ff;
+        color: #0a0a0a;
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        font-size: 18px;
+        border: 2px solid #ff00ff;
+        flex-shrink: 0;
+      }
+
+      .step-content h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+      }
+
+      .step-content p {
+        color: #e0e0e0;
+        font-size: 15px;
+      }
+
+      .button-demo {
+        display: inline-block;
+        background-color: #0a0a0a;
+        border: 2px solid #ff00ff;
+        color: #ff00ff;
+        padding: 0.5rem 1rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-top: 0.5rem;
+        cursor: default;
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        background-color: #111111;
+        border: 3px solid #ff00ff;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 0;
+      }
+
+      .quiz-question {
+        margin-bottom: 2rem;
+      }
+
+      .quiz-question:last-child {
+        margin-bottom: 0;
+      }
+
+      .quiz-question h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+        margin-bottom: 1rem;
+      }
+
+      .quiz-option {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        padding: 0.75rem;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+
+      .quiz-option:hover {
+        border: 2px solid #ff00ff;
+        background-color: #0d0d0d;
+      }
+
+      .quiz-option input[type='radio'] {
+        cursor: pointer;
+      }
+
+      .quiz-option label {
+        cursor: pointer;
+        flex: 1;
+      }
+
+      .quiz-feedback {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        display: none;
+      }
+
+      .quiz-feedback.show {
+        display: block;
+      }
+
+      .quiz-feedback.correct {
+        background-color: #00ff41;
+        color: #0a0a0a;
+      }
+
+      .quiz-feedback.incorrect {
+        background-color: #ff3333;
+        color: #ffffff;
+      }
+
+      /* CONFIDENCE */
+      .confidence-section {
+        background-color: #111111;
+        border: 3px solid #ffaa00;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 0;
+      }
+
+      .confidence-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ffaa00;
+        margin-bottom: 1.5rem;
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      .confidence-btn {
+        width: 50px;
+        height: 50px;
+        border: 2px solid #ffaa00;
+        background-color: #0a0a0a;
+        color: #ffaa00;
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-btn:hover {
+        background-color: #ffaa00;
+        color: #0a0a0a;
+        transform: translateY(-2px);
+      }
+
+      .confidence-btn.selected {
+        background-color: #ffaa00;
+        color: #0a0a0a;
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        gap: 1rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 3px solid #333333;
+      }
+
+      .nav-btn {
+        flex: 1;
+        padding: 1rem;
+        border: 3px solid #ff00ff;
+        background-color: #0a0a0a;
+        color: #ff00ff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+      }
+
+      .nav-btn:hover {
+        background-color: #ff00ff;
+        color: #0a0a0a;
+        transform: translateY(-2px);
+      }
+
+      .nav-btn.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .nav-btn.disabled:hover {
+        transform: none;
+        background-color: #0a0a0a;
+        color: #ff00ff;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1024px) {
         .container {
-            display: flex;
-            min-height: calc(100vh - 60px);
+          flex-direction: column;
         }
 
-        /* SIDEBAR */
         .sidebar {
-            width: 280px;
-            background-color: #111111;
-            border-right: 3px solid #00ffff;
-            padding: 2rem 1.5rem;
-            position: sticky;
-            top: 60px;
-            height: calc(100vh - 60px);
-            overflow-y: auto;
+          width: 100%;
+          height: auto;
+          position: static;
+          border-right: none;
+          border-bottom: 3px solid #00ffff;
+          display: flex;
+          gap: 2rem;
+          padding: 1.5rem;
         }
 
         .sidebar-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #00ffff;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid #00ffff;
-            padding-bottom: 0.75rem;
+          flex: 0 0 150px;
+          margin-bottom: 0;
         }
 
         .sidebar-nav {
-            list-style: none;
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          flex: 1;
         }
 
         .sidebar-nav li {
-            margin-bottom: 0.75rem;
+          margin-bottom: 0;
         }
 
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 14px;
-            padding: 0.5rem 0.75rem;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .sidebar-nav a:hover {
-            color: #ff00ff;
-            border-left: 2px solid #ff00ff;
-            padding-left: 0.5rem;
-        }
-
-        .sidebar-nav a.active {
-            color: #ff00ff;
-            border-left: 3px solid #ff00ff;
-            padding-left: 0.5rem;
-            font-weight: 600;
-        }
-
-        .checkmark {
-            display: none;
-            color: #00ff41;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .sidebar-nav a.completed .checkmark {
-            display: inline;
-        }
-
-        /* MAIN CONTENT */
         .main-content {
-            flex: 1;
-            padding: 3rem;
-            max-width: 900px;
+          padding: 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .top-bar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
         }
 
-        .section {
-            margin-bottom: 4rem;
-            padding-bottom: 2rem;
-            border-bottom: 2px solid #333333;
-            opacity: 0;
-            animation: fadeIn 0.4s ease-out forwards;
+        .top-bar-meta {
+          width: 100%;
+          gap: 0.75rem;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .section:last-of-type {
-            border-bottom: none;
-        }
-
-        .section h2 {
-            font-family: 'Space Mono', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #ff00ff;
-            padding-left: 1rem;
-        }
-
-        .section h3 {
-            font-family: 'Space Mono', monospace;
-            font-size: 16px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ff00ff;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section p {
-            margin-bottom: 1rem;
-            color: #e0e0e0;
-        }
-
-        .highlight-box {
-            background-color: #111111;
-            border: 3px solid #00ffff;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0;
-        }
-
-        .highlight-box.warning {
-            border-color: #ffaa00;
-            border-left: 6px solid #ffaa00;
-        }
-
-        .highlight-box.success {
-            border-color: #00ff41;
-            border-left: 6px solid #00ff41;
-        }
-
-        .highlight-box h4 {
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ffffff;
-            margin-bottom: 0.75rem;
-        }
-
-        .code-block {
-            background-color: #0a0a0a;
-            border: 2px solid #ff00ff;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            color: #ff00ff;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        /* TABLE */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            border: 2px solid #333333;
-        }
-
-        th {
-            background-color: #111111;
-            border: 2px solid #333333;
-            padding: 1rem;
-            font-family: 'Space Mono', monospace;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            color: #ff00ff;
-            text-align: left;
-        }
-
-        td {
-            border: 2px solid #333333;
-            padding: 1rem;
-            color: #e0e0e0;
-        }
-
-        tr:nth-child(even) td {
-            background-color: #0d0d0d;
-        }
-
-        /* SVG DIAGRAM */
-        .diagram {
-            background-color: #111111;
-            border: 3px solid #00ff41;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 300px;
-        }
-
-        /* INTERACTIVE PART DEMO */
-        .part-demo {
-            background-color: #111111;
-            border: 3px solid #ff00ff;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 0;
-        }
-
-        .pattern-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .pattern-box {
-            background-color: #0a0a0a;
-            border: 2px solid #333333;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .pattern-box:hover {
-            border-color: #ff00ff;
-            background-color: #0d0d0d;
-        }
-
-        .pattern-box.part-1 { border-left: 4px solid #00ffff; }
-        .pattern-box.part-2 { border-left: 4px solid #ff00ff; }
-        .pattern-box.part-3 { border-left: 4px solid #00ff41; }
-        .pattern-box.part-4 { border-left: 4px solid #ffaa00; }
-
-        .pattern-label {
-            color: #888;
-            font-size: 11px;
-            margin-top: 0.5rem;
-        }
-
-        .pattern-info {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: #0a0a0a;
-            border-left: 3px solid #ff00ff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            display: none;
-        }
-
-        .pattern-info.show {
-            display: block;
-        }
-
-        /* CROSSFADER WIDGET */
-        .crossfader-widget {
-            background-color: #111111;
-            border: 3px solid #00ffff;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 0;
-        }
-
-        .crossfader-container {
-            margin-top: 1.5rem;
-        }
-
-        .crossfader-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .crossfader-labels .label-a {
-            color: #00ffff;
-        }
-
-        .crossfader-labels .label-b {
-            color: #ff00ff;
-        }
-
-        .crossfader-slider {
-            width: 100%;
-            height: 30px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: linear-gradient(to right, #00ffff 0%, #00ffff 25%, #555 50%, #ff00ff 75%, #ff00ff 100%);
-            outline: none;
-            border: 2px solid #333;
-            cursor: pointer;
-        }
-
-        .crossfader-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 40px;
-            background-color: #00ff41;
-            cursor: pointer;
-            border: 2px solid #00ff41;
-        }
-
-        .crossfader-slider::-moz-range-thumb {
-            width: 20px;
-            height: 40px;
-            background-color: #00ff41;
-            cursor: pointer;
-            border: 2px solid #00ff41;
-        }
-
-        .crossfader-values {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-        }
-
-        .crossfader-value {
-            background-color: #0a0a0a;
-            border: 2px solid #333;
-            padding: 1rem;
-            text-align: center;
-        }
-
-        .crossfader-value.side-a {
-            border-top: 3px solid #00ffff;
-        }
-
-        .crossfader-value.side-b {
-            border-top: 3px solid #ff00ff;
-        }
-
-        .crossfader-value-label {
-            color: #888;
-            font-size: 11px;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .crossfader-value-display {
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        /* STEP-BY-STEP */
-        .step-guide {
-            background-color: #111111;
-            border: 3px solid #00ffff;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 0;
+        .sidebar-nav {
+          flex-direction: column;
         }
 
         .step {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+          flex-direction: column;
+          gap: 1rem;
         }
 
-        .step:last-child {
-            margin-bottom: 0;
-        }
-
-        .step-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background-color: #ff00ff;
-            color: #0a0a0a;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 18px;
-            border: 2px solid #ff00ff;
-            flex-shrink: 0;
-        }
-
-        .step-content h4 {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-content p {
-            color: #e0e0e0;
-            font-size: 15px;
-        }
-
-        .button-demo {
-            display: inline-block;
-            background-color: #0a0a0a;
-            border: 2px solid #ff00ff;
-            color: #ff00ff;
-            padding: 0.5rem 1rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 0.5rem;
-            cursor: default;
-        }
-
-        /* QUIZ */
-        .quiz-section {
-            background-color: #111111;
-            border: 3px solid #ff00ff;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 0;
-        }
-
-        .quiz-question {
-            margin-bottom: 2rem;
-        }
-
-        .quiz-question:last-child {
-            margin-bottom: 0;
-        }
-
-        .quiz-question h4 {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ffffff;
-            margin-bottom: 1rem;
-        }
-
-        .quiz-option {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            cursor: pointer;
-            padding: 0.75rem;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .quiz-option:hover {
-            border: 2px solid #ff00ff;
-            background-color: #0d0d0d;
-        }
-
-        .quiz-option input[type="radio"] {
-            cursor: pointer;
-        }
-
-        .quiz-option label {
-            cursor: pointer;
-            flex: 1;
-        }
-
-        .quiz-feedback {
-            margin-top: 0.5rem;
-            padding: 0.75rem;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            display: none;
-        }
-
-        .quiz-feedback.show {
-            display: block;
-        }
-
-        .quiz-feedback.correct {
-            background-color: #00ff41;
-            color: #0a0a0a;
-        }
-
-        .quiz-feedback.incorrect {
-            background-color: #ff3333;
-            color: #ffffff;
-        }
-
-        /* CONFIDENCE */
-        .confidence-section {
-            background-color: #111111;
-            border: 3px solid #ffaa00;
-            padding: 2rem;
-            margin: 2rem 0;
-            border-radius: 0;
-        }
-
-        .confidence-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ffaa00;
-            margin-bottom: 1.5rem;
+        .pattern-row {
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .confidence-scale {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
+          flex-wrap: wrap;
         }
-
-        .confidence-btn {
-            width: 50px;
-            height: 50px;
-            border: 2px solid #ffaa00;
-            background-color: #0a0a0a;
-            color: #ffaa00;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .confidence-btn:hover {
-            background-color: #ffaa00;
-            color: #0a0a0a;
-            transform: translateY(-2px);
-        }
-
-        .confidence-btn.selected {
-            background-color: #ffaa00;
-            color: #0a0a0a;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-            display: flex;
-            gap: 1rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 3px solid #333333;
-        }
-
-        .nav-btn {
-            flex: 1;
-            padding: 1rem;
-            border: 3px solid #ff00ff;
-            background-color: #0a0a0a;
-            color: #ff00ff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            text-align: center;
-            display: block;
-        }
-
-        .nav-btn:hover {
-            background-color: #ff00ff;
-            color: #0a0a0a;
-            transform: translateY(-2px);
-        }
-
-        .nav-btn.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .nav-btn.disabled:hover {
-            transform: none;
-            background-color: #0a0a0a;
-            color: #ff00ff;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-                border-right: none;
-                border-bottom: 3px solid #00ffff;
-                display: flex;
-                gap: 2rem;
-                padding: 1.5rem;
-            }
-
-            .sidebar-title {
-                flex: 0 0 150px;
-                margin-bottom: 0;
-            }
-
-            .sidebar-nav {
-                display: flex;
-                gap: 1rem;
-                flex-wrap: wrap;
-                flex: 1;
-            }
-
-            .sidebar-nav li {
-                margin-bottom: 0;
-            }
-
-            .main-content {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
-            }
-
-            .top-bar-meta {
-                width: 100%;
-                gap: 0.75rem;
-            }
-
-            .sidebar-nav {
-                flex-direction: column;
-            }
-
-            .step {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .pattern-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .confidence-scale {
-                flex-wrap: wrap;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- TOP BAR -->
     <div class="top-bar">
-        <a href="index.html">← DASHBOARD</a>
-        <div class="top-bar-title">08 - PARTS, BANKS & SCENES</div>
-        <div class="top-bar-meta">
-            <div class="meta-item difficulty-intermediate">INTERMEDIATE</div>
-            <div class="meta-item">30 MIN</div>
-        </div>
+      <a href="index.html">← DASHBOARD</a>
+      <div class="top-bar-title">08 - PARTS, BANKS & SCENES</div>
+      <div class="top-bar-meta">
+        <div class="meta-item difficulty-intermediate">INTERMEDIATE</div>
+        <div class="meta-item">30 MIN</div>
+      </div>
     </div>
 
     <!-- CONTAINER -->
     <div class="container">
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="sidebar-title">SECTIONS</div>
-            <ul class="sidebar-nav">
-                <li><a href="#section-1" class="nav-link active">
-                    <span class="checkmark">✓</span>
-                    <span>The Big Picture</span>
-                </a></li>
-                <li><a href="#section-2" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Understanding Parts</span>
-                </a></li>
-                <li><a href="#section-3" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Switching Parts</span>
-                </a></li>
-                <li><a href="#section-4" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Banks & Patterns</span>
-                </a></li>
-                <li><a href="#section-5" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Scenes & Crossfader</span>
-                </a></li>
-                <li><a href="#section-6" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Tension/Release</span>
-                </a></li>
-                <li><a href="#section-7" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Scene Locks</span>
-                </a></li>
-                <li><a href="#section-8" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Multi-Section Setup</span>
-                </a></li>
-                <li><a href="#section-9" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Quiz</span>
-                </a></li>
-                <li><a href="#section-10" class="nav-link">
-                    <span class="checkmark">✓</span>
-                    <span>Confidence</span>
-                </a></li>
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-title">SECTIONS</div>
+        <ul class="sidebar-nav">
+          <li>
+            <a href="#section-1" class="nav-link active">
+              <span class="checkmark">✓</span>
+              <span>The Big Picture</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-2" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Understanding Parts</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-3" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Switching Parts</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-4" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Banks & Patterns</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-5" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Scenes & Crossfader</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-6" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Tension/Release</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-7" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Scene Locks</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-8" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Multi-Section Setup</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-9" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Quiz</span>
+            </a>
+          </li>
+          <li>
+            <a href="#section-10" class="nav-link">
+              <span class="checkmark">✓</span>
+              <span>Confidence</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <!-- SECTION 1: THE BIG PICTURE -->
+        <div class="section" id="section-1">
+          <h2>01 - THE BIG PICTURE</h2>
+          <p>The Octatrack's architecture is built on a hierarchy. Understanding this hierarchy is the key to arranging multi-section songs, live jams, and organized sets.</p>
+
+          <h3>Hierarchy Diagram</h3>
+          <div class="diagram">
+            <svg width="100%" height="350" viewBox="0 0 500 350" style="max-width: 100%">
+              <!-- Title -->
+              <text x="250" y="25" font-family="'Space Mono', monospace" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff" text-transform="uppercase">PROJECT</text>
+
+              <!-- Bank Row -->
+              <g id="banks">
+                <rect x="20" y="60" width="100" height="40" fill="#111111" stroke="#ff00ff" stroke-width="2" />
+                <text x="70" y="85" font-family="'Space Mono', monospace" font-size="12" text-anchor="middle" fill="#ff00ff">BANK A</text>
+
+                <rect x="135" y="60" width="100" height="40" fill="#111111" stroke="#ff00ff" stroke-width="2" />
+                <text x="185" y="85" font-family="'Space Mono', monospace" font-size="12" text-anchor="middle" fill="#ff00ff">BANK B</text>
+
+                <text x="280" y="85" font-family="'Space Mono', monospace" font-size="12" fill="#888">... BANK P</text>
+
+                <!-- Arrows down from banks -->
+                <line x1="70" y1="100" x2="70" y2="125" stroke="#00ffff" stroke-width="2" />
+                <line x1="185" y1="100" x2="185" y2="125" stroke="#00ffff" stroke-width="2" />
+              </g>
+
+              <!-- Parts Row -->
+              <g id="parts">
+                <rect x="20" y="125" width="100" height="40" fill="#111111" stroke="#00ffff" stroke-width="2" />
+                <text x="70" y="150" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="#00ffff">PART 1-4</text>
+
+                <rect x="135" y="125" width="100" height="40" fill="#111111" stroke="#00ffff" stroke-width="2" />
+                <text x="185" y="150" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="#00ffff">PART 1-4</text>
+
+                <!-- Arrows down -->
+                <line x1="70" y1="165" x2="70" y2="190" stroke="#00ffff" stroke-width="2" />
+                <line x1="185" y1="165" x2="185" y2="190" stroke="#00ffff" stroke-width="2" />
+              </g>
+
+              <!-- Part Contents -->
+              <g id="part-contents">
+                <text x="20" y="210" font-family="'Space Mono', monospace" font-size="11" fill="#e0e0e0">Each Part Contains:</text>
+
+                <rect x="20" y="220" width="120" height="30" fill="#111111" stroke="#00ff41" stroke-width="2" />
+                <text x="80" y="240" font-family="'Space Mono', monospace" font-size="10" text-anchor="middle" fill="#00ff41">8 TRACK MACHINE</text>
+
+                <rect x="155" y="220" width="120" height="30" fill="#111111" stroke="#00ff41" stroke-width="2" />
+                <text x="215" y="235" font-family="'Space Mono', monospace" font-size="9" text-anchor="middle" fill="#00ff41">8 TRACK EFFECTS</text>
+                <text x="215" y="247" font-family="'Space Mono', monospace" font-size="9" text-anchor="middle" fill="#00ff41">(FX1 + FX2)</text>
+
+                <rect x="290" y="220" width="120" height="30" fill="#111111" stroke="#00ff41" stroke-width="2" />
+                <text x="350" y="240" font-family="'Space Mono', monospace" font-size="10" text-anchor="middle" fill="#00ff41">16 SCENES</text>
+
+                <!-- Arrows down -->
+                <line x1="80" y1="250" x2="80" y2="275" stroke="#00ff41" stroke-width="2" />
+              </g>
+
+              <!-- All Parameters -->
+              <g id="parameters">
+                <rect x="20" y="275" width="390" height="35" fill="#111111" stroke="#ffaa00" stroke-width="2" />
+                <text x="215" y="295" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="#ffaa00" font-weight="bold">ALL PARAMETER VALUES FOR ALL 8 TRACKS</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="highlight-box success">
+            <h4>KEY CONCEPT</h4>
+            <p>
+              A
+              <strong>Part is a complete snapshot</strong>
+              of your entire 8-track setup. It stores which samples are on which tracks, which effects you've assigned, all parameter values, and your 16 scenes. When you switch Parts,
+              <strong>EVERYTHING changes instantly.</strong>
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 2: UNDERSTANDING PARTS -->
+        <div class="section" id="section-2">
+          <h2>02 - UNDERSTANDING PARTS</h2>
+          <p>This is the most important concept in this tutorial. Most Octatrack confusion comes from misunderstanding Parts.</p>
+
+          <h3>What is a Part?</h3>
+          <div class="highlight-box">
+            <h4>THE DEFINITION</h4>
+            <p>
+              A Part is a
+              <strong>complete configuration</strong>
+              for your 8 tracks. It includes:
+            </p>
+            <ul style="margin-left: 2rem; margin-top: 0.75rem; color: #e0e0e0">
+              <li>✓ Machine type on each track (Static, Flex, Thru, etc.)</li>
+              <li>✓ Sample assignment on each track</li>
+              <li>✓ Effect assignments (FX1 + FX2 per track)</li>
+              <li>✓ All parameter values (filter cutoff, delay send, etc.)</li>
+              <li>✓ 16 Scenes (crossfader morphs)</li>
             </ul>
+          </div>
+
+          <h3>How Many Parts Are There?</h3>
+          <p><strong>4 Parts per Bank. 16 Banks total. = 64 Parts in a project.</strong></p>
+
+          <h3>The Critical Gotcha: Parts are Shared</h3>
+          <div class="highlight-box warning">
+            <h4>⚠️ MULTIPLE PATTERNS CAN SHARE ONE PART</h4>
+            <p>In Bank A, you have Patterns A01-A16. Not each pattern has its own Part. Instead, you have only 4 Parts (Part 1, 2, 3, 4) that are shared across all 16 patterns.</p>
+            <p>
+              <strong>Example:</strong>
+              Pattern A01, A03, and A07 might all use Part 1. If you change a sample on A01, the change propagates to A03 and A07 automatically because they share the same Part.
+            </p>
+          </div>
+
+          <h3>Interactive Part-Sharing Demo</h3>
+          <div class="part-demo">
+            <p style="margin-bottom: 1.5rem; font-size: 14px">
+              Click on any pattern to see which Part it uses. Then click "Change Sample" to simulate a sample change and see how it affects shared patterns.
+            </p>
+
+            <h4 style="margin-bottom: 1rem; font-family: 'Space Mono', monospace; font-size: 12px; color: #ff00ff; text-transform: uppercase">BANK A PATTERNS</h4>
+            <div class="pattern-row">
+              <div class="pattern-box part-1" data-pattern="A01" data-part="1">
+                <div>A01</div>
+                <div class="pattern-label">Part 1</div>
+              </div>
+              <div class="pattern-box part-2" data-pattern="A02" data-part="2">
+                <div>A02</div>
+                <div class="pattern-label">Part 2</div>
+              </div>
+              <div class="pattern-box part-3" data-pattern="A03" data-part="3">
+                <div>A03</div>
+                <div class="pattern-label">Part 3</div>
+              </div>
+              <div class="pattern-box part-4" data-pattern="A04" data-part="4">
+                <div>A04</div>
+                <div class="pattern-label">Part 4</div>
+              </div>
+            </div>
+
+            <div class="pattern-row">
+              <div class="pattern-box part-1" data-pattern="A05" data-part="1">
+                <div>A05</div>
+                <div class="pattern-label">Part 1</div>
+              </div>
+              <div class="pattern-box part-2" data-pattern="A06" data-part="2">
+                <div>A06</div>
+                <div class="pattern-label">Part 2</div>
+              </div>
+              <div class="pattern-box part-3" data-pattern="A07" data-part="3">
+                <div>A07</div>
+                <div class="pattern-label">Part 3</div>
+              </div>
+              <div class="pattern-box part-4" data-pattern="A08" data-part="4">
+                <div>A08</div>
+                <div class="pattern-label">Part 4</div>
+              </div>
+            </div>
+
+            <div class="pattern-info" id="pattern-info">
+              <p id="pattern-info-text"></p>
+            </div>
+
+            <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+              <button
+                id="select-btn"
+                style="
+                  padding: 0.75rem;
+                  background-color: #111111;
+                  border: 2px solid #ff00ff;
+                  color: #ff00ff;
+                  font-family: 'Space Mono', monospace;
+                  text-transform: uppercase;
+                  cursor: pointer;
+                  display: none;
+                "
+              >
+                Select Pattern
+              </button>
+              <button
+                id="change-btn"
+                style="
+                  padding: 0.75rem;
+                  background-color: #111111;
+                  border: 2px solid #00ff41;
+                  color: #00ff41;
+                  font-family: 'Space Mono', monospace;
+                  text-transform: uppercase;
+                  cursor: pointer;
+                  display: none;
+                "
+              >
+                Change Sample on This Pattern
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <!-- SECTION 1: THE BIG PICTURE -->
-            <div class="section" id="section-1">
-                <h2>01 - THE BIG PICTURE</h2>
-                <p>The Octatrack's architecture is built on a hierarchy. Understanding this hierarchy is the key to arranging multi-section songs, live jams, and organized sets.</p>
+        <!-- SECTION 3: SWITCHING PARTS -->
+        <div class="section" id="section-3">
+          <h2>03 - SWITCHING PARTS</h2>
+          <p>Parts switch instantly and change your entire 8-track configuration. This is how you create different sections (verse, chorus, bridge) with completely different sounds.</p>
 
-                <h3>Hierarchy Diagram</h3>
-                <div class="diagram">
-                    <svg width="100%" height="350" viewBox="0 0 500 350" style="max-width: 100%;">
-                        <!-- Title -->
-                        <text x="250" y="25" font-family="'Space Mono', monospace" font-size="16" font-weight="bold" text-anchor="middle" fill="#ffffff" text-transform="uppercase">PROJECT</text>
+          <div class="highlight-box">
+            <h4>HOW TO SWITCH PARTS</h4>
+            <p>Hold [FUNC] and press one of the 4 Part keys:</p>
+            <div class="code-block">[FUNC] + [PART 1/2/3/4]</div>
+          </div>
 
-                        <!-- Bank Row -->
-                        <g id="banks">
-                            <rect x="20" y="60" width="100" height="40" fill="#111111" stroke="#ff00ff" stroke-width="2"/>
-                            <text x="70" y="85" font-family="'Space Mono', monospace" font-size="12" text-anchor="middle" fill="#ff00ff">BANK A</text>
+          <h3>What Happens When You Switch Parts?</h3>
+          <table>
+            <tr>
+              <th>What Changes</th>
+              <th>Effect</th>
+            </tr>
+            <tr>
+              <td>Machine assignments on all 8 tracks</td>
+              <td>Tracks instantly load new machine types</td>
+            </tr>
+            <tr>
+              <td>Samples on all tracks</td>
+              <td>New samples play (or silence if no sample assigned)</td>
+            </tr>
+            <tr>
+              <td>Effect assignments</td>
+              <td>New effects load on each track</td>
+            </tr>
+            <tr>
+              <td>All parameter values</td>
+              <td>Filter cutoff, delays, reverbs, everything changes</td>
+            </tr>
+            <tr>
+              <td>Scenes 1-16</td>
+              <td>New scene configuration for crossfader morphs</td>
+            </tr>
+          </table>
 
-                            <rect x="135" y="60" width="100" height="40" fill="#111111" stroke="#ff00ff" stroke-width="2"/>
-                            <text x="185" y="85" font-family="'Space Mono', monospace" font-size="12" text-anchor="middle" fill="#ff00ff">BANK B</text>
-
-                            <text x="280" y="85" font-family="'Space Mono', monospace" font-size="12" fill="#888">... BANK P</text>
-
-                            <!-- Arrows down from banks -->
-                            <line x1="70" y1="100" x2="70" y2="125" stroke="#00ffff" stroke-width="2"/>
-                            <line x1="185" y1="100" x2="185" y2="125" stroke="#00ffff" stroke-width="2"/>
-                        </g>
-
-                        <!-- Parts Row -->
-                        <g id="parts">
-                            <rect x="20" y="125" width="100" height="40" fill="#111111" stroke="#00ffff" stroke-width="2"/>
-                            <text x="70" y="150" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="#00ffff">PART 1-4</text>
-
-                            <rect x="135" y="125" width="100" height="40" fill="#111111" stroke="#00ffff" stroke-width="2"/>
-                            <text x="185" y="150" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="#00ffff">PART 1-4</text>
-
-                            <!-- Arrows down -->
-                            <line x1="70" y1="165" x2="70" y2="190" stroke="#00ffff" stroke-width="2"/>
-                            <line x1="185" y1="165" x2="185" y2="190" stroke="#00ffff" stroke-width="2"/>
-                        </g>
-
-                        <!-- Part Contents -->
-                        <g id="part-contents">
-                            <text x="20" y="210" font-family="'Space Mono', monospace" font-size="11" fill="#e0e0e0">Each Part Contains:</text>
-
-                            <rect x="20" y="220" width="120" height="30" fill="#111111" stroke="#00ff41" stroke-width="2"/>
-                            <text x="80" y="240" font-family="'Space Mono', monospace" font-size="10" text-anchor="middle" fill="#00ff41">8 TRACK MACHINE</text>
-
-                            <rect x="155" y="220" width="120" height="30" fill="#111111" stroke="#00ff41" stroke-width="2"/>
-                            <text x="215" y="235" font-family="'Space Mono', monospace" font-size="9" text-anchor="middle" fill="#00ff41">8 TRACK EFFECTS</text>
-                            <text x="215" y="247" font-family="'Space Mono', monospace" font-size="9" text-anchor="middle" fill="#00ff41">(FX1 + FX2)</text>
-
-                            <rect x="290" y="220" width="120" height="30" fill="#111111" stroke="#00ff41" stroke-width="2"/>
-                            <text x="350" y="240" font-family="'Space Mono', monospace" font-size="10" text-anchor="middle" fill="#00ff41">16 SCENES</text>
-
-                            <!-- Arrows down -->
-                            <line x1="80" y1="250" x2="80" y2="275" stroke="#00ff41" stroke-width="2"/>
-                        </g>
-
-                        <!-- All Parameters -->
-                        <g id="parameters">
-                            <rect x="20" y="275" width="390" height="35" fill="#111111" stroke="#ffaa00" stroke-width="2"/>
-                            <text x="215" y="295" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="#ffaa00" font-weight="bold">ALL PARAMETER VALUES FOR ALL 8 TRACKS</text>
-                        </g>
-                    </svg>
-                </div>
-
-                <div class="highlight-box success">
-                    <h4>KEY CONCEPT</h4>
-                    <p>A <strong>Part is a complete snapshot</strong> of your entire 8-track setup. It stores which samples are on which tracks, which effects you've assigned, all parameter values, and your 16 scenes. When you switch Parts, <strong>EVERYTHING changes instantly.</strong></p>
-                </div>
-            </div>
-
-            <!-- SECTION 2: UNDERSTANDING PARTS -->
-            <div class="section" id="section-2">
-                <h2>02 - UNDERSTANDING PARTS</h2>
-                <p>This is the most important concept in this tutorial. Most Octatrack confusion comes from misunderstanding Parts.</p>
-
-                <h3>What is a Part?</h3>
-                <div class="highlight-box">
-                    <h4>THE DEFINITION</h4>
-                    <p>A Part is a <strong>complete configuration</strong> for your 8 tracks. It includes:</p>
-                    <ul style="margin-left: 2rem; margin-top: 0.75rem; color: #e0e0e0;">
-                        <li>✓ Machine type on each track (Static, Flex, Thru, etc.)</li>
-                        <li>✓ Sample assignment on each track</li>
-                        <li>✓ Effect assignments (FX1 + FX2 per track)</li>
-                        <li>✓ All parameter values (filter cutoff, delay send, etc.)</li>
-                        <li>✓ 16 Scenes (crossfader morphs)</li>
-                    </ul>
-                </div>
-
-                <h3>How Many Parts Are There?</h3>
-                <p><strong>4 Parts per Bank. 16 Banks total. = 64 Parts in a project.</strong></p>
-
-                <h3>The Critical Gotcha: Parts are Shared</h3>
-                <div class="highlight-box warning">
-                    <h4>⚠️ MULTIPLE PATTERNS CAN SHARE ONE PART</h4>
-                    <p>In Bank A, you have Patterns A01-A16. Not each pattern has its own Part. Instead, you have only 4 Parts (Part 1, 2, 3, 4) that are shared across all 16 patterns.</p>
-                    <p><strong>Example:</strong> Pattern A01, A03, and A07 might all use Part 1. If you change a sample on A01, the change propagates to A03 and A07 automatically because they share the same Part.</p>
-                </div>
-
-                <h3>Interactive Part-Sharing Demo</h3>
-                <div class="part-demo">
-                    <p style="margin-bottom: 1.5rem; font-size: 14px;">
-                        Click on any pattern to see which Part it uses. Then click "Change Sample" to simulate a sample change and see how it affects shared patterns.
-                    </p>
-
-                    <h4 style="margin-bottom: 1rem; font-family: 'Space Mono', monospace; font-size: 12px; color: #ff00ff; text-transform: uppercase;">BANK A PATTERNS</h4>
-                    <div class="pattern-row">
-                        <div class="pattern-box part-1" data-pattern="A01" data-part="1">
-                            <div>A01</div>
-                            <div class="pattern-label">Part 1</div>
-                        </div>
-                        <div class="pattern-box part-2" data-pattern="A02" data-part="2">
-                            <div>A02</div>
-                            <div class="pattern-label">Part 2</div>
-                        </div>
-                        <div class="pattern-box part-3" data-pattern="A03" data-part="3">
-                            <div>A03</div>
-                            <div class="pattern-label">Part 3</div>
-                        </div>
-                        <div class="pattern-box part-4" data-pattern="A04" data-part="4">
-                            <div>A04</div>
-                            <div class="pattern-label">Part 4</div>
-                        </div>
-                    </div>
-
-                    <div class="pattern-row">
-                        <div class="pattern-box part-1" data-pattern="A05" data-part="1">
-                            <div>A05</div>
-                            <div class="pattern-label">Part 1</div>
-                        </div>
-                        <div class="pattern-box part-2" data-pattern="A06" data-part="2">
-                            <div>A06</div>
-                            <div class="pattern-label">Part 2</div>
-                        </div>
-                        <div class="pattern-box part-3" data-pattern="A07" data-part="3">
-                            <div>A07</div>
-                            <div class="pattern-label">Part 3</div>
-                        </div>
-                        <div class="pattern-box part-4" data-pattern="A08" data-part="4">
-                            <div>A08</div>
-                            <div class="pattern-label">Part 4</div>
-                        </div>
-                    </div>
-
-                    <div class="pattern-info" id="pattern-info">
-                        <p id="pattern-info-text"></p>
-                    </div>
-
-                    <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                        <button id="select-btn" style="padding: 0.75rem; background-color: #111111; border: 2px solid #ff00ff; color: #ff00ff; font-family: 'Space Mono', monospace; text-transform: uppercase; cursor: pointer; display: none;">Select Pattern</button>
-                        <button id="change-btn" style="padding: 0.75rem; background-color: #111111; border: 2px solid #00ff41; color: #00ff41; font-family: 'Space Mono', monospace; text-transform: uppercase; cursor: pointer; display: none;">Change Sample on This Pattern</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 3: SWITCHING PARTS -->
-            <div class="section" id="section-3">
-                <h2>03 - SWITCHING PARTS</h2>
-                <p>Parts switch instantly and change your entire 8-track configuration. This is how you create different sections (verse, chorus, bridge) with completely different sounds.</p>
-
-                <div class="highlight-box">
-                    <h4>HOW TO SWITCH PARTS</h4>
-                    <p>Hold [FUNC] and press one of the 4 Part keys:</p>
-                    <div class="code-block">[FUNC] + [PART 1/2/3/4]</div>
-                </div>
-
-                <h3>What Happens When You Switch Parts?</h3>
-                <table>
-                    <tr>
-                        <th>What Changes</th>
-                        <th>Effect</th>
-                    </tr>
-                    <tr>
-                        <td>Machine assignments on all 8 tracks</td>
-                        <td>Tracks instantly load new machine types</td>
-                    </tr>
-                    <tr>
-                        <td>Samples on all tracks</td>
-                        <td>New samples play (or silence if no sample assigned)</td>
-                    </tr>
-                    <tr>
-                        <td>Effect assignments</td>
-                        <td>New effects load on each track</td>
-                    </tr>
-                    <tr>
-                        <td>All parameter values</td>
-                        <td>Filter cutoff, delays, reverbs, everything changes</td>
-                    </tr>
-                    <tr>
-                        <td>Scenes 1-16</td>
-                        <td>New scene configuration for crossfader morphs</td>
-                    </tr>
-                </table>
-
-                <div class="highlight-box success">
-                    <h4>WHEN TO USE PARTS</h4>
-                    <p>Switch Parts when you want a <strong>completely different sound palette</strong>:</p>
-                    <ul style="margin-left: 2rem; color: #e0e0e0; margin-top: 0.75rem;">
-                        <li>✓ Verse (drums + bass) → Chorus (drums + bass + synth melody)</li>
-                        <li>✓ Intro (just drums) → Main groove (drums + 3 other tracks)</li>
-                        <li>✓ Different effect setups (Part 1 = light FX, Part 2 = heavy FX)</li>
-                        <li>✓ Tempo ramps (switch to Part with different sample BPMs)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- SECTION 4: BANKS & PATTERNS -->
-            <div class="section" id="section-4">
-                <h2>04 - BANKS & PATTERN NAVIGATION</h2>
-                <p>The Octatrack has 256 patterns: 16 Banks × 16 Patterns = 256.</p>
-
-                <h3>Pattern Naming</h3>
-                <table>
-                    <tr>
-                        <th>Bank</th>
-                        <th>Patterns</th>
-                        <th>Notation</th>
-                    </tr>
-                    <tr>
-                        <td>A</td>
-                        <td>1-16</td>
-                        <td>A01, A02, ... A16</td>
-                    </tr>
-                    <tr>
-                        <td>B</td>
-                        <td>1-16</td>
-                        <td>B01, B02, ... B16</td>
-                    </tr>
-                    <tr>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>P</td>
-                        <td>1-16</td>
-                        <td>P01, P02, ... P16</td>
-                    </tr>
-                </table>
-
-                <h3>Switching Patterns</h3>
-                <div class="highlight-box">
-                    <h4>SAME BANK (FAST)</h4>
-                    <p>Press [TRIG 1-16] to jump to any pattern in the current bank. Quantized to pattern end.</p>
-                </div>
-
-                <div class="highlight-box">
-                    <h4>DIFFERENT BANK (SLOWER)</h4>
-                    <p>Press [BANK] + bank letter + pattern number:</p>
-                    <div class="code-block">[BANK] + [B] + [03]  → Jump to B03</div>
-                    <p style="margin-top: 0.75rem;">Also quantized to pattern end.</p>
-                </div>
-
-                <h3>Organization Tip</h3>
-                <p>Use Banks to organize complete songs or jam setups:</p>
-                <ul style="margin-left: 2rem; color: #e0e0e0;">
-                    <li><strong>Bank A:</strong> Song 1 (A01=intro, A02=verse, A03=chorus, etc.)</li>
-                    <li><strong>Bank B:</strong> Song 2</li>
-                    <li><strong>Bank C:</strong> Jam templates</li>
-                </ul>
-            </div>
-
-            <!-- SECTION 5: SCENES & CROSSFADER -->
-            <div class="section" id="section-5">
-                <h2>05 - SCENES & THE CROSSFADER</h2>
-                <p>Scenes are where you create dynamic, morphing arrangements without changing patterns. The crossfader blends between two scenes, letting you build tension and release.</p>
-
-                <h3>What is a Scene?</h3>
-                <p>A Scene is a <strong>snapshot of parameter values</strong> for one side of the crossfader. You have 16 scenes per Part, and you can assign any two of them to the crossfader's A and B buttons.</p>
-
-                <h3>Setting Up Scenes: Step-by-Step</h3>
-                <div class="step-guide">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>ASSIGN SCENE A</h4>
-                            <p>Press [SCENE A], then press any [TRIG 1-16] to assign that scene as your A-side. (e.g., [SCENE A] + [TRIG 1] makes Scene 1 your A side.)</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>ASSIGN SCENE B</h4>
-                            <p>Press [SCENE B], then press any [TRIG 1-16] to assign your B-side. (e.g., [SCENE B] + [TRIG 2] makes Scene 2 your B side.)</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>LOCK PARAMETERS TO SCENE A</h4>
-                            <p>Hold [SCENE A] and turn any knob (Filter Cutoff, Delay Send, etc.). This "locks" that parameter to Scene A with whatever value you set.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>LOCK PARAMETERS TO SCENE B</h4>
-                            <p>Hold [SCENE B] and turn the same knob to a different value. This locks it to Scene B.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>USE THE CROSSFADER</h4>
-                            <p>Move the crossfader left and right. You're now blending between the two scenes! Left = Scene A values, Right = Scene B values, Middle = interpolated.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>Interactive Crossfader Demo</h3>
-                <div class="crossfader-widget">
-                    <p style="margin-bottom: 1.5rem;">
-                        Drag the crossfader slider to see how parameters interpolate between Scene A and Scene B.
-                    </p>
-
-                    <div class="crossfader-container">
-                        <div class="crossfader-labels">
-                            <span class="label-a">← SCENE A (CLEAN)</span>
-                            <span class="label-b">SCENE B (TENSION) →</span>
-                        </div>
-                        <input type="range" id="crossfader" class="crossfader-slider" min="0" max="100" value="50">
-                    </div>
-
-                    <div class="crossfader-values">
-                        <div class="crossfader-value side-a">
-                            <div class="crossfader-value-label">Filter Cutoff</div>
-                            <div class="crossfader-value-display" id="filter-value">127</div>
-                        </div>
-                        <div class="crossfader-value side-b">
-                            <div class="crossfader-value-label">Delay Send</div>
-                            <div class="crossfader-value-display" id="delay-value">0</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlight-box success">
-                    <h4>WHAT JUST HAPPENED</h4>
-                    <p>At the left (Scene A), the Filter Cutoff is open (127) and Delay Send is low (0) — clean sound. At the right (Scene B), the Filter is closed (30) and Delay is high (80) — tension. Moving the crossfader smoothly blends these two states.</p>
-                </div>
-            </div>
-
-            <!-- SECTION 6: TENSION/RELEASE RECIPE -->
-            <div class="section" id="section-6">
-                <h2>06 - BUILDING A TENSION/RELEASE RECIPE</h2>
-                <p>This is a powerful composition tool. Use scenes to dynamically build and release energy without changing patterns or samples.</p>
-
-                <h3>The Recipe</h3>
-                <div class="highlight-box">
-                    <h4>SCENE A: CLEAN (Release)</h4>
-                    <ul style="margin-left: 2rem; color: #e0e0e0; margin-top: 0.75rem;">
-                        <li>Filter Cutoff: 127 (fully open)</li>
-                        <li>Reverb Send: 10-20 (subtle)</li>
-                        <li>Delay Send: 0 (off)</li>
-                        <li>All tracks audible (XVOL = 127)</li>
-                    </ul>
-                </div>
-
-                <div class="highlight-box warning">
-                    <h4>SCENE B: TENSION (Build)</h4>
-                    <ul style="margin-left: 2rem; color: #e0e0e0; margin-top: 0.75rem;">
-                        <li>Filter Cutoff: 20-40 (closed, darker)</li>
-                        <li>Reverb Send: 60-80 (lush, ambient)</li>
-                        <li>Delay Send: 60-80 (rhythmic, spacious)</li>
-                        <li>Optional: Mute some tracks (XVOL = 0) for contrast</li>
-                    </ul>
-                </div>
-
-                <h3>How to Use This in Your Jam</h3>
-                <ol style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem;">
-                    <li>Set up Scene A and Scene B as above</li>
-                    <li>Assign them to crossfader: [SCENE A] + [TRIG 1], [SCENE B] + [TRIG 2]</li>
-                    <li>Start at Scene A (left on crossfader) for your intro — clean and simple</li>
-                    <li>Slowly drag the crossfader right over 4-8 bars — tension builds</li>
-                    <li>At Scene B (right), the track sounds filtered, reverb-heavy, and spacious</li>
-                    <li>Drag back to Scene A to release the tension — clean open sound returns</li>
-                </ol>
-
-                <div class="highlight-box success">
-                    <h4>✓ THE POWER OF THIS APPROACH</h4>
-                    <p>You're not changing patterns, samples, or tempo. You're using the same loop, just morphing the timbre and character. Your audience hears a massive energy shift, but technically you're playing the same beat the whole time.</p>
-                </div>
-            </div>
-
-            <!-- SECTION 7: SCENE LOCKS OVERRIDE P-LOCKS -->
-            <div class="section" id="section-7">
-                <h2>07 - SCENE LOCKS OVERRIDE P-LOCKS</h2>
-                <p>This is important if you're using both per-step parameter locks (p-locks) AND scene locks.</p>
-
-                <div class="highlight-box warning">
-                    <h4>THE RULE</h4>
-                    <p>If a step has a p-lock on a parameter AND that parameter is locked to a scene, <strong>the SCENE value wins.</strong> The crossfader always has priority.</p>
-                </div>
-
-                <h3>Example</h3>
-                <p><strong>Scenario:</strong> You have a drum loop. On step 4, you p-locked the Filter Cutoff to 50. But your scene B has Filter Cutoff locked to 20.</p>
-                <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem;">
-                    <li>When crossfader is at Scene A: p-lock applies (50)</li>
-                    <li>When crossfader is at Scene B: Scene B value applies (20), p-lock is ignored</li>
-                    <li>When crossfader is in between: interpolated value between the two</li>
-                </ul>
-
-                <div class="highlight-box success">
-                    <h4>HOW TO THINK ABOUT IT</h4>
-                    <p>P-locks add detail and rhythmic movement. Scenes are the big, sweeping energy changes. Scenes are the "master controller" — they override the details.</p>
-                </div>
-            </div>
-
-            <!-- SECTION 8: MULTI-SECTION SETUP -->
-            <div class="section" id="section-8">
-                <h2>08 - PRACTICAL: MULTI-SECTION JAM SETUP</h2>
-                <p>Let's design a complete multi-section arrangement using Parts, Scenes, and what you've learned.</p>
-
-                <div class="highlight-box">
-                    <h4>THE GOAL</h4>
-                    <p>Create a song with Verse, Chorus, and Bridge sections, each with distinct sounds and dynamics.</p>
-                </div>
-
-                <h3>Part Setup</h3>
-                <table>
-                    <tr>
-                        <th>Section</th>
-                        <th>Part</th>
-                        <th>Track 1</th>
-                        <th>Track 2</th>
-                        <th>Track 3</th>
-                        <th>Notes</th>
-                    </tr>
-                    <tr>
-                        <td>Verse</td>
-                        <td>Part 1</td>
-                        <td>Drums</td>
-                        <td>Bass</td>
-                        <td>-</td>
-                        <td>Clean, minimal</td>
-                    </tr>
-                    <tr>
-                        <td>Chorus</td>
-                        <td>Part 2</td>
-                        <td>Drums</td>
-                        <td>Bass</td>
-                        <td>Synth Melody</td>
-                        <td>Add synth, same drums/bass</td>
-                    </tr>
-                    <tr>
-                        <td>Bridge</td>
-                        <td>Part 3</td>
-                        <td>Drums</td>
-                        <td>Bassline (chop)</td>
-                        <td>Riser FX</td>
-                        <td>Chop the bass, add texture</td>
-                    </tr>
-                </table>
-
-                <h3>Scene Setup (Per Part)</h3>
-                <p>For EACH Part, set up the Tension/Release recipe:</p>
-                <div class="code-block">SCENE A: Clean (Filter open, FX low)
-SCENE B: Tension (Filter closed, FX high)
-
-This gives you dynamic control WITHIN each part.
-You get control at TWO levels:
-  1. Part switches → different samples/machines
-  2. Scene morphs → different timbre/space</div>
-
-                <h3>Live Performance Flow</h3>
-                <div class="step-guide">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>START AT PART 1, SCENE A</h4>
-                            <p>Press [FUNC] + [PART 1]. Crossfader at left. Clean verse drums + bass.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>BUILD TENSION IN VERSE</h4>
-                            <p>Over 8 bars, drag crossfader right. Same samples, but filtering closes and reverb builds.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>SWITCH TO CHORUS</h4>
-                            <p>Press [FUNC] + [PART 2] (quantized to pattern end). Synth melody appears. Crossfader resets to left (clean again).</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>BUILD TENSION IN CHORUS</h4>
-                            <p>Drag crossfader right again. Same scenario — but now with the extra synth layer on top.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>SWITCH TO BRIDGE</h4>
-                            <p>Press [FUNC] + [PART 3]. Bass chop appears, riser FX loads. Crossfader at left again.</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">6</div>
-                        <div class="step-content">
-                            <h4>BACK TO VERSE</h4>
-                            <p>Switch back to Part 1, drag crossfader left to release. Synth gone, back to minimal drums + bass.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="highlight-box success">
-                    <h4>✓ WHAT YOU'VE CREATED</h4>
-                    <p>A multi-section arrangement with dynamic control at every level. You can perform this live, making real-time crossfader movements, switching parts at key moments. It's arranging AND performance in one.</p>
-                </div>
-            </div>
-
-            <!-- SECTION 9: QUIZ -->
-            <div class="section" id="section-9">
-                <h2>09 - QUIZ</h2>
-                <div class="quiz-section">
-                    <!-- Q1 -->
-                    <div class="quiz-question">
-                        <h4>Q1: How many Parts are there per Bank?</h4>
-                        <div class="quiz-option">
-                            <input type="radio" name="q1" value="wrong1" id="q1a">
-                            <label for="q1a">16 Parts per Bank</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q1" value="correct" id="q1b">
-                            <label for="q1b">4 Parts per Bank</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q1" value="wrong2" id="q1c">
-                            <label for="q1c">1 Part per Pattern (16 Parts)</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q1" value="wrong3" id="q1d">
-                            <label for="q1d">8 Parts per Bank (one per track)</label>
-                        </div>
-                        <div class="quiz-feedback" id="q1-feedback"></div>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div class="quiz-question">
-                        <h4>Q2: Patterns A01 and A03 both use Part 1. You change a sample on A01. What happens to A03?</h4>
-                        <div class="quiz-option">
-                            <input type="radio" name="q2" value="wrong1" id="q2a">
-                            <label for="q2a">Nothing — A03 keeps its original sample</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q2" value="correct" id="q2b">
-                            <label for="q2b">A03 changes too — they share the same Part</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q2" value="wrong2" id="q2c">
-                            <label for="q2c">A03 is deleted automatically</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q2" value="wrong3" id="q2d">
-                            <label for="q2d">You must manually copy the change to A03</label>
-                        </div>
-                        <div class="quiz-feedback" id="q2-feedback"></div>
-                    </div>
-
-                    <!-- Q3 -->
-                    <div class="quiz-question">
-                        <h4>Q3: What does XVOL do?</h4>
-                        <div class="quiz-option">
-                            <input type="radio" name="q3" value="wrong1" id="q3a">
-                            <label for="q3a">It crossfades between two samples</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q3" value="correct" id="q3b">
-                            <label for="q3b">It provides equal-energy crossfading (prevents volume dip at center)</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q3" value="wrong2" id="q3c">
-                            <label for="q3c">It mutes the track when crossfader is in the middle</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q3" value="wrong3" id="q3d">
-                            <label for="q3d">It controls crossfader speed</label>
-                        </div>
-                        <div class="quiz-feedback" id="q3-feedback"></div>
-                    </div>
-
-                    <!-- Q4 -->
-                    <div class="quiz-question">
-                        <h4>Q4: Scene locks vs p-locks — which has priority?</h4>
-                        <div class="quiz-option">
-                            <input type="radio" name="q4" value="wrong1" id="q4a">
-                            <label for="q4a">P-locks always win</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q4" value="correct" id="q4b">
-                            <label for="q4b">Scene locks win — the crossfader always has priority</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q4" value="wrong2" id="q4c">
-                            <label for="q4c">They cancel each other out</label>
-                        </div>
-                        <div class="quiz-option">
-                            <input type="radio" name="q4" value="wrong3" id="q4d">
-                            <label for="q4d">It depends on which was locked first</label>
-                        </div>
-                        <div class="quiz-feedback" id="q4-feedback"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION 10: CONFIDENCE -->
-            <div class="section" id="section-10">
-                <h2>10 - CONFIDENCE RATING</h2>
-                <p>How confident do you feel about Parts, Banks, Scenes, and the crossfader after this tutorial?</p>
-                <div class="confidence-section">
-                    <div class="confidence-title">Rate Your Confidence (1-5)</div>
-                    <div class="confidence-scale">
-                        <button class="confidence-btn" data-level="1">1</button>
-                        <button class="confidence-btn" data-level="2">2</button>
-                        <button class="confidence-btn" data-level="3">3</button>
-                        <button class="confidence-btn" data-level="4">4</button>
-                        <button class="confidence-btn" data-level="5">5</button>
-                    </div>
-                    <p id="confidence-message" style="margin-top: 1.5rem; text-align: center; color: #ffaa00; display: none;">
-                        Thanks! Your confidence level has been saved.
-                    </p>
-                </div>
-            </div>
-
-            <!-- BOTTOM NAV -->
-            <div class="bottom-nav">
-                <a href="07-loop-stretching.html" class="nav-btn">← PREV: STRETCHING</a>
-                <a href="index.html" class="nav-btn">DASHBOARD →</a>
-            </div>
+          <div class="highlight-box success">
+            <h4>WHEN TO USE PARTS</h4>
+            <p>
+              Switch Parts when you want a
+              <strong>completely different sound palette</strong>
+              :
+            </p>
+            <ul style="margin-left: 2rem; color: #e0e0e0; margin-top: 0.75rem">
+              <li>✓ Verse (drums + bass) → Chorus (drums + bass + synth melody)</li>
+              <li>✓ Intro (just drums) → Main groove (drums + 3 other tracks)</li>
+              <li>✓ Different effect setups (Part 1 = light FX, Part 2 = heavy FX)</li>
+              <li>✓ Tempo ramps (switch to Part with different sample BPMs)</li>
+            </ul>
+          </div>
         </div>
+
+        <!-- SECTION 4: BANKS & PATTERNS -->
+        <div class="section" id="section-4">
+          <h2>04 - BANKS & PATTERN NAVIGATION</h2>
+          <p>The Octatrack has 256 patterns: 16 Banks × 16 Patterns = 256.</p>
+
+          <h3>Pattern Naming</h3>
+          <table>
+            <tr>
+              <th>Bank</th>
+              <th>Patterns</th>
+              <th>Notation</th>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>1-16</td>
+              <td>A01, A02, ... A16</td>
+            </tr>
+            <tr>
+              <td>B</td>
+              <td>1-16</td>
+              <td>B01, B02, ... B16</td>
+            </tr>
+            <tr>
+              <td>...</td>
+              <td>...</td>
+              <td>...</td>
+            </tr>
+            <tr>
+              <td>P</td>
+              <td>1-16</td>
+              <td>P01, P02, ... P16</td>
+            </tr>
+          </table>
+
+          <h3>Switching Patterns</h3>
+          <div class="highlight-box">
+            <h4>SAME BANK (FAST)</h4>
+            <p>Press [TRIG 1-16] to jump to any pattern in the current bank. Quantized to pattern end.</p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>DIFFERENT BANK (SLOWER)</h4>
+            <p>Press [BANK] + bank letter + pattern number:</p>
+            <div class="code-block">[BANK] + [B] + [03] → Jump to B03</div>
+            <p style="margin-top: 0.75rem">Also quantized to pattern end.</p>
+          </div>
+
+          <h3>Organization Tip</h3>
+          <p>Use Banks to organize complete songs or jam setups:</p>
+          <ul style="margin-left: 2rem; color: #e0e0e0">
+            <li>
+              <strong>Bank A:</strong>
+              Song 1 (A01=intro, A02=verse, A03=chorus, etc.)
+            </li>
+            <li>
+              <strong>Bank B:</strong>
+              Song 2
+            </li>
+            <li>
+              <strong>Bank C:</strong>
+              Jam templates
+            </li>
+          </ul>
+        </div>
+
+        <!-- SECTION 5: SCENES & CROSSFADER -->
+        <div class="section" id="section-5">
+          <h2>05 - SCENES & THE CROSSFADER</h2>
+          <p>Scenes are where you create dynamic, morphing arrangements without changing patterns. The crossfader blends between two scenes, letting you build tension and release.</p>
+
+          <h3>What is a Scene?</h3>
+          <p>
+            A Scene is a
+            <strong>snapshot of parameter values</strong>
+            for one side of the crossfader. You have 16 scenes per Part, and you can assign any two of them to the crossfader's A and B buttons.
+          </p>
+
+          <h3>Setting Up Scenes: Step-by-Step</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>ASSIGN SCENE A</h4>
+                <p>Press [SCENE A], then press any [TRIG 1-16] to assign that scene as your A-side. (e.g., [SCENE A] + [TRIG 1] makes Scene 1 your A side.)</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>ASSIGN SCENE B</h4>
+                <p>Press [SCENE B], then press any [TRIG 1-16] to assign your B-side. (e.g., [SCENE B] + [TRIG 2] makes Scene 2 your B side.)</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>LOCK PARAMETERS TO SCENE A</h4>
+                <p>Hold [SCENE A] and turn any knob (Filter Cutoff, Delay Send, etc.). This "locks" that parameter to Scene A with whatever value you set.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>LOCK PARAMETERS TO SCENE B</h4>
+                <p>Hold [SCENE B] and turn the same knob to a different value. This locks it to Scene B.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h4>USE THE CROSSFADER</h4>
+                <p>Move the crossfader left and right. You're now blending between the two scenes! Left = Scene A values, Right = Scene B values, Middle = interpolated.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Interactive Crossfader Demo</h3>
+          <div class="crossfader-widget">
+            <p style="margin-bottom: 1.5rem">Drag the crossfader slider to see how parameters interpolate between Scene A and Scene B.</p>
+
+            <div class="crossfader-container">
+              <div class="crossfader-labels">
+                <span class="label-a">← SCENE A (CLEAN)</span>
+                <span class="label-b">SCENE B (TENSION) →</span>
+              </div>
+              <input type="range" id="crossfader" class="crossfader-slider" min="0" max="100" value="50" />
+            </div>
+
+            <div class="crossfader-values">
+              <div class="crossfader-value side-a">
+                <div class="crossfader-value-label">Filter Cutoff</div>
+                <div class="crossfader-value-display" id="filter-value">127</div>
+              </div>
+              <div class="crossfader-value side-b">
+                <div class="crossfader-value-label">Delay Send</div>
+                <div class="crossfader-value-display" id="delay-value">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box success">
+            <h4>WHAT JUST HAPPENED</h4>
+            <p>
+              At the left (Scene A), the Filter Cutoff is open (127) and Delay Send is low (0) — clean sound. At the right (Scene B), the Filter is closed (30) and Delay is high (80) — tension. Moving
+              the crossfader smoothly blends these two states.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 6: TENSION/RELEASE RECIPE -->
+        <div class="section" id="section-6">
+          <h2>06 - BUILDING A TENSION/RELEASE RECIPE</h2>
+          <p>This is a powerful composition tool. Use scenes to dynamically build and release energy without changing patterns or samples.</p>
+
+          <h3>The Recipe</h3>
+          <div class="highlight-box">
+            <h4>SCENE A: CLEAN (Release)</h4>
+            <ul style="margin-left: 2rem; color: #e0e0e0; margin-top: 0.75rem">
+              <li>Filter Cutoff: 127 (fully open)</li>
+              <li>Reverb Send: 10-20 (subtle)</li>
+              <li>Delay Send: 0 (off)</li>
+              <li>All tracks audible (XVOL = 127)</li>
+            </ul>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>SCENE B: TENSION (Build)</h4>
+            <ul style="margin-left: 2rem; color: #e0e0e0; margin-top: 0.75rem">
+              <li>Filter Cutoff: 20-40 (closed, darker)</li>
+              <li>Reverb Send: 60-80 (lush, ambient)</li>
+              <li>Delay Send: 60-80 (rhythmic, spacious)</li>
+              <li>Optional: Mute some tracks (XVOL = 0) for contrast</li>
+            </ul>
+          </div>
+
+          <h3>How to Use This in Your Jam</h3>
+          <ol style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem">
+            <li>Set up Scene A and Scene B as above</li>
+            <li>Assign them to crossfader: [SCENE A] + [TRIG 1], [SCENE B] + [TRIG 2]</li>
+            <li>Start at Scene A (left on crossfader) for your intro — clean and simple</li>
+            <li>Slowly drag the crossfader right over 4-8 bars — tension builds</li>
+            <li>At Scene B (right), the track sounds filtered, reverb-heavy, and spacious</li>
+            <li>Drag back to Scene A to release the tension — clean open sound returns</li>
+          </ol>
+
+          <div class="highlight-box success">
+            <h4>✓ THE POWER OF THIS APPROACH</h4>
+            <p>
+              You're not changing patterns, samples, or tempo. You're using the same loop, just morphing the timbre and character. Your audience hears a massive energy shift, but technically you're
+              playing the same beat the whole time.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 7: SCENE LOCKS OVERRIDE P-LOCKS -->
+        <div class="section" id="section-7">
+          <h2>07 - SCENE LOCKS OVERRIDE P-LOCKS</h2>
+          <p>This is important if you're using both per-step parameter locks (p-locks) AND scene locks.</p>
+
+          <div class="highlight-box warning">
+            <h4>THE RULE</h4>
+            <p>
+              If a step has a p-lock on a parameter AND that parameter is locked to a scene,
+              <strong>the SCENE value wins.</strong>
+              The crossfader always has priority.
+            </p>
+          </div>
+
+          <h3>Example</h3>
+          <p>
+            <strong>Scenario:</strong>
+            You have a drum loop. On step 4, you p-locked the Filter Cutoff to 50. But your scene B has Filter Cutoff locked to 20.
+          </p>
+          <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem">
+            <li>When crossfader is at Scene A: p-lock applies (50)</li>
+            <li>When crossfader is at Scene B: Scene B value applies (20), p-lock is ignored</li>
+            <li>When crossfader is in between: interpolated value between the two</li>
+          </ul>
+
+          <div class="highlight-box success">
+            <h4>HOW TO THINK ABOUT IT</h4>
+            <p>P-locks add detail and rhythmic movement. Scenes are the big, sweeping energy changes. Scenes are the "master controller" — they override the details.</p>
+          </div>
+        </div>
+
+        <!-- SECTION 8: MULTI-SECTION SETUP -->
+        <div class="section" id="section-8">
+          <h2>08 - PRACTICAL: MULTI-SECTION JAM SETUP</h2>
+          <p>Let's design a complete multi-section arrangement using Parts, Scenes, and what you've learned.</p>
+
+          <div class="highlight-box">
+            <h4>THE GOAL</h4>
+            <p>Create a song with Verse, Chorus, and Bridge sections, each with distinct sounds and dynamics.</p>
+          </div>
+
+          <h3>Part Setup</h3>
+          <table>
+            <tr>
+              <th>Section</th>
+              <th>Part</th>
+              <th>Track 1</th>
+              <th>Track 2</th>
+              <th>Track 3</th>
+              <th>Notes</th>
+            </tr>
+            <tr>
+              <td>Verse</td>
+              <td>Part 1</td>
+              <td>Drums</td>
+              <td>Bass</td>
+              <td>-</td>
+              <td>Clean, minimal</td>
+            </tr>
+            <tr>
+              <td>Chorus</td>
+              <td>Part 2</td>
+              <td>Drums</td>
+              <td>Bass</td>
+              <td>Synth Melody</td>
+              <td>Add synth, same drums/bass</td>
+            </tr>
+            <tr>
+              <td>Bridge</td>
+              <td>Part 3</td>
+              <td>Drums</td>
+              <td>Bassline (chop)</td>
+              <td>Riser FX</td>
+              <td>Chop the bass, add texture</td>
+            </tr>
+          </table>
+
+          <h3>Scene Setup (Per Part)</h3>
+          <p>For EACH Part, set up the Tension/Release recipe:</p>
+          <div class="code-block">
+            SCENE A: Clean (Filter open, FX low) SCENE B: Tension (Filter closed, FX high) This gives you dynamic control WITHIN each part. You get control at TWO levels: 1. Part switches → different
+            samples/machines 2. Scene morphs → different timbre/space
+          </div>
+
+          <h3>Live Performance Flow</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>START AT PART 1, SCENE A</h4>
+                <p>Press [FUNC] + [PART 1]. Crossfader at left. Clean verse drums + bass.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>BUILD TENSION IN VERSE</h4>
+                <p>Over 8 bars, drag crossfader right. Same samples, but filtering closes and reverb builds.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>SWITCH TO CHORUS</h4>
+                <p>Press [FUNC] + [PART 2] (quantized to pattern end). Synth melody appears. Crossfader resets to left (clean again).</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>BUILD TENSION IN CHORUS</h4>
+                <p>Drag crossfader right again. Same scenario — but now with the extra synth layer on top.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <h4>SWITCH TO BRIDGE</h4>
+                <p>Press [FUNC] + [PART 3]. Bass chop appears, riser FX loads. Crossfader at left again.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <h4>BACK TO VERSE</h4>
+                <p>Switch back to Part 1, drag crossfader left to release. Synth gone, back to minimal drums + bass.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box success">
+            <h4>✓ WHAT YOU'VE CREATED</h4>
+            <p>
+              A multi-section arrangement with dynamic control at every level. You can perform this live, making real-time crossfader movements, switching parts at key moments. It's arranging AND
+              performance in one.
+            </p>
+          </div>
+        </div>
+
+        <!-- SECTION 9: QUIZ -->
+        <div class="section" id="section-9">
+          <h2>09 - QUIZ</h2>
+          <div class="quiz-section">
+            <!-- Q1 -->
+            <div class="quiz-question">
+              <h4>Q1: How many Parts are there per Bank?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="wrong1" id="q1a" />
+                <label for="q1a">16 Parts per Bank</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="correct" id="q1b" />
+                <label for="q1b">4 Parts per Bank</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="wrong2" id="q1c" />
+                <label for="q1c">1 Part per Pattern (16 Parts)</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="wrong3" id="q1d" />
+                <label for="q1d">8 Parts per Bank (one per track)</label>
+              </div>
+              <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+              <h4>Q2: Patterns A01 and A03 both use Part 1. You change a sample on A01. What happens to A03?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="wrong1" id="q2a" />
+                <label for="q2a">Nothing — A03 keeps its original sample</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="correct" id="q2b" />
+                <label for="q2b">A03 changes too — they share the same Part</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="wrong2" id="q2c" />
+                <label for="q2c">A03 is deleted automatically</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="wrong3" id="q2d" />
+                <label for="q2d">You must manually copy the change to A03</label>
+              </div>
+              <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+              <h4>Q3: What does XVOL do?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="wrong1" id="q3a" />
+                <label for="q3a">It crossfades between two samples</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="correct" id="q3b" />
+                <label for="q3b">It provides equal-energy crossfading (prevents volume dip at center)</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="wrong2" id="q3c" />
+                <label for="q3c">It mutes the track when crossfader is in the middle</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="wrong3" id="q3d" />
+                <label for="q3d">It controls crossfader speed</label>
+              </div>
+              <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+              <h4>Q4: Scene locks vs p-locks — which has priority?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="wrong1" id="q4a" />
+                <label for="q4a">P-locks always win</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="correct" id="q4b" />
+                <label for="q4b">Scene locks win — the crossfader always has priority</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="wrong2" id="q4c" />
+                <label for="q4c">They cancel each other out</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="wrong3" id="q4d" />
+                <label for="q4d">It depends on which was locked first</label>
+              </div>
+              <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 10: CONFIDENCE -->
+        <div class="section" id="section-10">
+          <h2>10 - CONFIDENCE RATING</h2>
+          <p>How confident do you feel about Parts, Banks, Scenes, and the crossfader after this tutorial?</p>
+          <div class="confidence-section">
+            <div class="confidence-title">Rate Your Confidence (1-5)</div>
+            <div class="confidence-scale">
+              <button class="confidence-btn" data-level="1">1</button>
+              <button class="confidence-btn" data-level="2">2</button>
+              <button class="confidence-btn" data-level="3">3</button>
+              <button class="confidence-btn" data-level="4">4</button>
+              <button class="confidence-btn" data-level="5">5</button>
+            </div>
+            <p id="confidence-message" style="margin-top: 1.5rem; text-align: center; color: #ffaa00; display: none">Thanks! Your confidence level has been saved.</p>
+          </div>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <a href="07-loop-stretching.html" class="nav-btn">← PREV: STRETCHING</a>
+          <a href="index.html" class="nav-btn">DASHBOARD →</a>
+        </div>
+      </div>
     </div>
 
     <script>
-        // SIDEBAR TRACKING
-        const navLinks = document.querySelectorAll('.sidebar-nav a.nav-link');
-        const sections = document.querySelectorAll('.section');
+      // SIDEBAR TRACKING
+      const navLinks = document.querySelectorAll('.sidebar-nav a.nav-link');
+      const sections = document.querySelectorAll('.section');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    navLinks.forEach(link => {
-                        if (link.href.includes(id)) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
-                    });
-                }
-            });
-        }, { threshold: 0.3 });
-
-        sections.forEach(section => observer.observe(section));
-
-        // LOCALSTORAGE
-        const storageKey = 'octatrack-tutorials';
-
-        function saveProgress() {
-            const progress = {
-                '08-parts-banks-scenes': {
-                    completedSections: Array.from(navLinks).filter(link => link.classList.contains('active')).length,
-                    quizAnswers: getQuizAnswers(),
-                    confidence: document.querySelector('.confidence-btn.selected')?.dataset.level || null,
-                    lastAccessed: new Date().toISOString()
-                }
-            };
-
-            let allProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
-            allProgress['08-parts-banks-scenes'] = progress['08-parts-banks-scenes'];
-            localStorage.setItem(storageKey, JSON.stringify(allProgress));
-        }
-
-        function getQuizAnswers() {
-            const answers = {};
-            for (let i = 1; i <= 4; i++) {
-                const selected = document.querySelector(`input[name="q${i}"]:checked`);
-                if (selected) {
-                    answers[`q${i}`] = selected.value;
-                }
-            }
-            return answers;
-        }
-
-        // SAVE PERIODICALLY
-        window.addEventListener('beforeunload', saveProgress);
-        setInterval(saveProgress, 30000);
-
-        // PART DEMO
-        let selectedPattern = null;
-        const patternBoxes = document.querySelectorAll('.pattern-box');
-        const patternInfo = document.getElementById('pattern-info');
-        const patternInfoText = document.getElementById('pattern-info-text');
-        const selectBtn = document.getElementById('select-btn');
-        const changeBtn = document.getElementById('change-btn');
-
-        patternBoxes.forEach(box => {
-            box.addEventListener('click', function() {
-                selectedPattern = this;
-                const pattern = this.getAttribute('data-pattern');
-                const part = this.getAttribute('data-part');
-
-                patternInfoText.innerHTML = `<strong>${pattern}</strong> uses <strong>Part ${part}</strong>. `;
-
-                // Find other patterns with same part
-                const sharedPatterns = Array.from(patternBoxes).filter(b =>
-                    b.getAttribute('data-part') === part &&
-                    b.getAttribute('data-pattern') !== pattern
-                ).map(b => b.getAttribute('data-pattern'));
-
-                if (sharedPatterns.length > 0) {
-                    patternInfoText.innerHTML += `<br><strong>Also sharing Part ${part}:</strong> ${sharedPatterns.join(', ')}`;
-                }
-
-                patternInfo.classList.add('show');
-                selectBtn.style.display = 'inline-block';
-                changeBtn.style.display = 'inline-block';
-            });
-        });
-
-        changeBtn.addEventListener('click', function() {
-            if (!selectedPattern) return;
-
-            const part = selectedPattern.getAttribute('data-part');
-            const allWithSamePart = Array.from(patternBoxes).filter(b =>
-                b.getAttribute('data-part') === part
-            );
-
-            patternInfoText.innerHTML = `<strong>Sample changed on all patterns using Part ${part}!</strong><br>`;
-            patternInfoText.innerHTML += `Affected: ${allWithSamePart.map(b => b.getAttribute('data-pattern')).join(', ')}`;
-        });
-
-        // CROSSFADER
-        const crossfader = document.getElementById('crossfader');
-        const filterValue = document.getElementById('filter-value');
-        const delayValue = document.getElementById('delay-value');
-
-        crossfader.addEventListener('input', function() {
-            const position = parseInt(this.value) / 100;
-
-            // Scene A: Filter 127, Delay 0
-            // Scene B: Filter 30, Delay 80
-            const interpolatedFilter = Math.round(127 - (position * (127 - 30)));
-            const interpolatedDelay = Math.round(position * 80);
-
-            filterValue.textContent = interpolatedFilter;
-            delayValue.textContent = interpolatedDelay;
-        });
-
-        // QUIZ LOGIC
-        document.querySelectorAll('input[type="radio"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const questionNum = this.name;
-                const feedback = document.getElementById(`${questionNum}-feedback`);
-                const isCorrect = this.value === 'correct';
-
-                if (isCorrect) {
-                    feedback.textContent = '✓ CORRECT!';
-                    feedback.classList.add('show', 'correct');
-                    feedback.classList.remove('incorrect');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              navLinks.forEach((link) => {
+                if (link.href.includes(id)) {
+                  link.classList.add('active');
                 } else {
-                    feedback.textContent = '✗ Try again!';
-                    feedback.classList.add('show', 'incorrect');
-                    feedback.classList.remove('correct');
+                  link.classList.remove('active');
                 }
+              });
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
 
-                saveProgress();
-            });
-        });
+      sections.forEach((section) => observer.observe(section));
 
-        // CONFIDENCE RATING
-        document.querySelectorAll('.confidence-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.confidence-btn').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-                document.getElementById('confidence-message').style.display = 'block';
-                saveProgress();
-            });
-        });
+      // LOCALSTORAGE
+      const storageKey = 'octatrack-tutorials';
 
-        // SCROLL TO SECTION
-        document.querySelectorAll('.sidebar-nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const id = this.getAttribute('href').substring(1);
-                const section = document.getElementById(id);
-                if (section) {
-                    section.scrollIntoView({ behavior: 'smooth' });
-                    setTimeout(() => {
-                        this.classList.add('active');
-                    }, 100);
-                }
-            });
+      function saveProgress() {
+        const progress = {
+          '08-parts-banks-scenes': {
+            completedSections: Array.from(navLinks).filter((link) => link.classList.contains('active')).length,
+            quizAnswers: getQuizAnswers(),
+            confidence: document.querySelector('.confidence-btn.selected')?.dataset.level || null,
+            lastAccessed: new Date().toISOString(),
+          },
+        };
+
+        let allProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
+        allProgress['08-parts-banks-scenes'] = progress['08-parts-banks-scenes'];
+        localStorage.setItem(storageKey, JSON.stringify(allProgress));
+      }
+
+      function getQuizAnswers() {
+        const answers = {};
+        for (let i = 1; i <= 4; i++) {
+          const selected = document.querySelector(`input[name="q${i}"]:checked`);
+          if (selected) {
+            answers[`q${i}`] = selected.value;
+          }
+        }
+        return answers;
+      }
+
+      // SAVE PERIODICALLY
+      window.addEventListener('beforeunload', saveProgress);
+      setInterval(saveProgress, 30000);
+
+      // PART DEMO
+      let selectedPattern = null;
+      const patternBoxes = document.querySelectorAll('.pattern-box');
+      const patternInfo = document.getElementById('pattern-info');
+      const patternInfoText = document.getElementById('pattern-info-text');
+      const selectBtn = document.getElementById('select-btn');
+      const changeBtn = document.getElementById('change-btn');
+
+      patternBoxes.forEach((box) => {
+        box.addEventListener('click', function () {
+          selectedPattern = this;
+          const pattern = this.getAttribute('data-pattern');
+          const part = this.getAttribute('data-part');
+
+          patternInfoText.innerHTML = `<strong>${pattern}</strong> uses <strong>Part ${part}</strong>. `;
+
+          // Find other patterns with same part
+          const sharedPatterns = Array.from(patternBoxes)
+            .filter((b) => b.getAttribute('data-part') === part && b.getAttribute('data-pattern') !== pattern)
+            .map((b) => b.getAttribute('data-pattern'));
+
+          if (sharedPatterns.length > 0) {
+            patternInfoText.innerHTML += `<br><strong>Also sharing Part ${part}:</strong> ${sharedPatterns.join(', ')}`;
+          }
+
+          patternInfo.classList.add('show');
+          selectBtn.style.display = 'inline-block';
+          changeBtn.style.display = 'inline-block';
         });
+      });
+
+      changeBtn.addEventListener('click', function () {
+        if (!selectedPattern) return;
+
+        const part = selectedPattern.getAttribute('data-part');
+        const allWithSamePart = Array.from(patternBoxes).filter((b) => b.getAttribute('data-part') === part);
+
+        patternInfoText.innerHTML = `<strong>Sample changed on all patterns using Part ${part}!</strong><br>`;
+        patternInfoText.innerHTML += `Affected: ${allWithSamePart.map((b) => b.getAttribute('data-pattern')).join(', ')}`;
+      });
+
+      // CROSSFADER
+      const crossfader = document.getElementById('crossfader');
+      const filterValue = document.getElementById('filter-value');
+      const delayValue = document.getElementById('delay-value');
+
+      crossfader.addEventListener('input', function () {
+        const position = parseInt(this.value) / 100;
+
+        // Scene A: Filter 127, Delay 0
+        // Scene B: Filter 30, Delay 80
+        const interpolatedFilter = Math.round(127 - position * (127 - 30));
+        const interpolatedDelay = Math.round(position * 80);
+
+        filterValue.textContent = interpolatedFilter;
+        delayValue.textContent = interpolatedDelay;
+      });
+
+      // QUIZ LOGIC
+      document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+        radio.addEventListener('change', function () {
+          const questionNum = this.name;
+          const feedback = document.getElementById(`${questionNum}-feedback`);
+          const isCorrect = this.value === 'correct';
+
+          if (isCorrect) {
+            feedback.textContent = '✓ CORRECT!';
+            feedback.classList.add('show', 'correct');
+            feedback.classList.remove('incorrect');
+          } else {
+            feedback.textContent = '✗ Try again!';
+            feedback.classList.add('show', 'incorrect');
+            feedback.classList.remove('correct');
+          }
+
+          saveProgress();
+        });
+      });
+
+      // CONFIDENCE RATING
+      document.querySelectorAll('.confidence-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.confidence-btn').forEach((b) => b.classList.remove('selected'));
+          this.classList.add('selected');
+          document.getElementById('confidence-message').style.display = 'block';
+          saveProgress();
+        });
+      });
+
+      // SCROLL TO SECTION
+      document.querySelectorAll('.sidebar-nav a').forEach((link) => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const id = this.getAttribute('href').substring(1);
+          const section = document.getElementById(id);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+              this.classList.add('active');
+            }, 100);
+          }
+        });
+      });
     </script>
-</body>
+    <script src="assets/svg-overlay.js" defer></script>
+  </body>
 </html>
