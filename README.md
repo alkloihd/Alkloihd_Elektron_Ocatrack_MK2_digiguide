@@ -24,6 +24,46 @@ Open: `http://localhost:8080`
 
 Start with [`index.html`](./index.html).
 
+## Run From Terminal (No IDE Required)
+
+This project is plain HTML/CSS/JS, so it works cross-platform with a simple local server.
+
+### macOS / Linux
+
+```bash
+git clone https://github.com/alkloihd/Alkloihd_Elektron_Ocatrack_MK2_digiguide.git
+cd Alkloihd_Elektron_Ocatrack_MK2_digiguide
+python3 -m http.server 8080
+```
+
+Open: `http://localhost:8080`
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/alkloihd/Alkloihd_Elektron_Ocatrack_MK2_digiguide.git
+cd Alkloihd_Elektron_Ocatrack_MK2_digiguide
+py -m http.server 8080
+```
+
+Open: `http://localhost:8080`
+
+### Windows (Command Prompt)
+
+```bat
+git clone https://github.com/alkloihd/Alkloihd_Elektron_Ocatrack_MK2_digiguide.git
+cd Alkloihd_Elektron_Ocatrack_MK2_digiguide
+py -m http.server 8080
+```
+
+Open: `http://localhost:8080`
+
+If `py` is unavailable, use:
+
+```bat
+python -m http.server 8080
+```
+
 ## Repository Structure
 
 - `index.html` - tutorial dashboard
