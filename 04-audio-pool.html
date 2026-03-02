@@ -611,7 +611,7 @@
           <p>
             Every sample the Octatrack uses must live inside the Set's
             <code>AUDIO/</code>
-            folder. The OT doesn't reference samples by absolute path—it uses relative paths like
+            folder. When you press [FUNC] + [AED] to open the Audio Editor, or browse samples with [UP] and [DOWN] in the file browser, the OT doesn't reference samples by absolute path—it uses relative paths like
             <code>../AUDIO/folder/file.wav</code>
             .
           </p>
@@ -640,13 +640,13 @@
           </ul>
           <p>
             <strong>Best practice:</strong>
-            Organize once, move files rarely. If you need to reorganize, do it BEFORE loading samples into projects, or update project references manually.
+            Organize once, move files rarely. If you need to reorganize, do it BEFORE loading samples into projects (before pressing [YES] to assign them to a track), or update project references manually.
           </p>
         </section>
 
         <section class="section" id="format-reqs">
           <h2>Audio Format Requirements</h2>
-          <p>The Octatrack is picky about audio format. Use ONLY:</p>
+          <p>The Octatrack is picky about audio format. If you load a wrong-format file and press [PLAY], it will sound wrong (wrong pitch, wrong speed, or silence). Use ONLY:</p>
           <ul>
             <li>
               <strong>Format:</strong>
@@ -727,7 +727,7 @@
           <h2>File Naming Rules</h2>
           <p>
             <strong>Include BPM for loops:</strong>
-            If your filename has a number between 85–170, the OT assumes it's BPM and auto-detects. Examples:
+            If your filename has a number between 85-170, the OT assumes it's BPM and auto-detects when you open the sample in the Audio Editor with [AED]. Examples:
           </p>
           <ul>
             <li>
@@ -780,7 +780,7 @@
           <ul>
             <li>
               <strong>Max 1024 files per folder</strong>
-              on the OT browser—split if needed
+              in the OT file browser (navigate with [UP], [DOWN], [LEFT], [RIGHT])—split if needed
             </li>
             <li>
               <strong>Organize by type:</strong>
@@ -818,7 +818,7 @@
             └── [etc]
           </p>
 
-          <p style="margin-top: 20px">Pro tip: Use a consistent naming scheme and you won't need deep folders. Everything stays fast and visible.</p>
+          <p style="margin-top: 20px">Pro tip: Use a consistent naming scheme and you won't need deep folders. When you press [YES] to enter a folder in the browser, everything stays fast and visible.</p>
         </section>
 
         <section class="section" id="your-library">
@@ -886,13 +886,16 @@
           <p style="margin-top: 20px; color: #ffaa00; font-weight: 600">Finding Samples:</p>
           <ul>
             <li>
+              To browse samples on the OT, hold [FUNC] + press [AED] to open the Audio Editor file browser. Use [UP]/[DOWN] to scroll, [YES] to enter folders, [LEFT] to go back.
+            </li>
+            <li>
               Main loops: Start in
               <code>!!Samples:Loops/</code>
               → navigate by type (Dark, Drum, Melodic, etc.)
             </li>
             <li>One-shots & processing: Check subfolders in each pack</li>
-            <li>You have 26 broken file references from earlier projects</li>
-            <li>Consider consolidating or archiving old packs if disk space is tight</li>
+            <li>You have 26 broken file references from earlier projects — check PROJECT > CONTROL > MEMORY for details</li>
+            <li>To free up RAM, use [FUNC] + [TRACK] to open the sample slot list, then purge unused Flex samples</li>
           </ul>
         </section>
 
@@ -900,11 +903,11 @@
           <h2>Common Problems & Fixes</h2>
 
           <p><strong>Wrong sample rate (48kHz):</strong></p>
-          <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333">Problem: Sample plays at wrong pitch/speed. Solution: Convert with ffmpeg.</p>
+          <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333">Problem: Press [PLAY] and the sample sounds pitched wrong or too slow/fast. Solution: Convert to 44.1 kHz with ffmpeg before loading.</p>
 
           <p><strong>macOS resource forks (._* files):</strong></p>
           <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #666666">
-            Harmless but messy. Delete with:
+            Harmless but clutter up the file browser when you scroll with [UP]/[DOWN]. Delete with:
             <code>find PATH -name "._*" -delete</code>
           </p>
 
@@ -912,20 +915,20 @@
           <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #666666">Harmless Finder metadata. Safe to delete. OT ignores them.</p>
 
           <p><strong>Too many files in one folder:</strong></p>
-          <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333">Problem: OT browser limit = 1024 files. Solution: Split into subfolders.</p>
+          <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333">Problem: OT browser limit = 1024 files (you'll see it when browsing with [UP]/[DOWN]). Solution: Split into subfolders.</p>
 
           <p><strong>Path too long:</strong></p>
           <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333">Problem: Very deep nesting (200+ chars). Solution: Flatten or consolidate.</p>
 
           <p><strong>Projects can't find samples:</strong></p>
           <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333">
-            Problem: You moved a sample file. Solution: Move back, or re-load sample in project. Use AUDIO POOL > MISSING to find broken refs.
+            Problem: You moved a sample file. Solution: Move back, or re-load the sample by pressing [FUNC] + [AED] to browse again and re-assign it. Check PROJECT > CONTROL > MEMORY for missing references.
           </p>
         </section>
 
         <section class="section" id="ableton-pipeline">
           <h2>Ableton → Octatrack Workflow</h2>
-          <p>Bringing loops from Ableton Live to the OT? Follow this pipeline:</p>
+          <p>Bringing loops from Ableton Live to the OT? Follow this pipeline (you'll use [FUNC], [AED], [PLAYBACK], and [LEVEL] on the OT side):</p>
 
           <ol>
             <li>
@@ -951,19 +954,19 @@
             </li>
             <li>
               <strong>Copy to Set's AUDIO folder:</strong>
-              Use Finder or command line.
+              Use Finder or command line. Remember: on the OT, hold [FUNC] and select SYNC TO CARD before entering USB Disk Mode, and press [YES] to confirm.
             </li>
             <li>
               <strong>On OT:</strong>
-              Load sample → Audio Editor → Attributes → set ORIGINAL TEMPO to the BPM.
+              Load sample with [FUNC] + [AED], then in the Audio Editor press [AED] again to access Attributes. Set ORIGINAL TEMPO to the BPM.
             </li>
             <li>
               <strong>Timestretch:</strong>
-              Set TIMESTRETCH to NORMAL (tonal) or BEAT (drums).
+              In Audio Editor Attributes (press [AED] while in the editor), set TIMESTRETCH to NORMAL (tonal) or BEAT (drums).
             </li>
             <li>
               <strong>Playback Setup:</strong>
-              Set TSTR to AUTO to enable stretching.
+              Press [PLAYBACK] (or [FUNC] + [AED]) to open playback parameters. Set TSTR to AUTO to enable stretching. Adjust with the [LEVEL] encoder.
             </li>
           </ol>
 

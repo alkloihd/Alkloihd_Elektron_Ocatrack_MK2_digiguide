@@ -794,11 +794,11 @@
             <li><strong>85.5 MB total RAM</strong></li>
             <li>
               <strong>64 MB default allocated to Flex</strong>
-              (adjustable in System settings)
+              (adjustable via [FUNC] &gt; PROJECT &gt; CONTROL &gt; MEMORY)
             </li>
             <li>
               <strong>Recorder buffers</strong>
-              share Flex RAM
+              share Flex RAM — each recorder track ([T1] through [T8]) with a recorder trig consumes from this pool
             </li>
           </ul>
 
@@ -870,24 +870,26 @@
             <li>Perfect for backing tracks, stems, long ambient pads</li>
           </ul>
 
+          <p>To assign a Static machine: select a track with [TRACK] + [TRIG 1]–[TRIG 8], then open [PLAYBACK] setup (hold [FUNC] + press [PLAYBACK]) and set the machine type to STATIC.</p>
+
           <h3>Strengths</h3>
           <ul>
-            <li>No RAM budget concerns—load massive files freely</li>
+            <li>No RAM budget concerns — load massive files freely</li>
             <li>Great for long loops, full songs, backing tracks</li>
-            <li>Timestretch works on Static machines too</li>
+            <li>Timestretch works on Static machines too (set via [PLAYBACK] page)</li>
             <li>128 Static slots per project (plenty of room)</li>
           </ul>
 
           <h3>Gotchas</h3>
           <ul>
-            <li>Heavy STRT (start position) modulation can cause streaming glitches</li>
+            <li>Heavy STRT (start position) modulation via [SRC] page or [LFO] can cause streaming glitches</li>
             <li>Not ideal for slicing or rapid position jumps</li>
-            <li>Can't edit slice points like you can with Flex</li>
+            <li>Can't edit slice points in [AED] like you can with Flex</li>
           </ul>
 
           <h3>Pro Tip</h3>
           <p style="background-color: #0a2a0a; border-left: 3px solid #00ff41; padding: 1rem; margin: 1rem 0; color: #00ff41; font-family: 'Space Mono', monospace; font-size: 13px">
-            Use Static machines for long loops (30+ seconds) and Flex for everything else. It's the fastest way to make smart decisions.
+            Use Static machines for long loops (30+ seconds) and Flex for everything else. Check your RAM in [FUNC] &gt; PROJECT &gt; CONTROL &gt; MEMORY to see how much space remains.
           </p>
         </div>
 
@@ -902,18 +904,20 @@
             <li>128 Flex slots per project</li>
           </ul>
 
+          <p>To assign a Flex machine: select a track with [TRACK] + [TRIG 1]–[TRIG 8], open [PLAYBACK] setup (hold [FUNC] + press [PLAYBACK]) and set the machine type to FLEX.</p>
+
           <h3>Strengths</h3>
           <ul>
-            <li>Instant access to any position—jump around freely</li>
-            <li>Can create slices and chop patterns</li>
-            <li>Rapid retriggering (great for drums, hi-hats)</li>
-            <li>Timestretch works beautifully</li>
+            <li>Instant access to any position — jump around freely via [SRC] page</li>
+            <li>Can create slices in [AED] (Audio Editor) and chop patterns</li>
+            <li>Rapid retriggering (great for drums, hi-hats) — hold a [TRIG 1]–[TRIG 8] key to preview</li>
+            <li>Timestretch works beautifully — configure in [PLAYBACK] setup</li>
           </ul>
 
           <h3>Gotchas</h3>
           <ul>
             <li>Limited by 64 MB Flex RAM (Recorder buffers share this space)</li>
-            <li>Every sample consumes RAM—budget carefully</li>
+            <li>Every sample consumes RAM — budget carefully and check via [FUNC] &gt; PROJECT &gt; CONTROL &gt; MEMORY</li>
             <li>If you run out of RAM, you can't load more Flex samples</li>
           </ul>
 
@@ -1088,7 +1092,7 @@
               <div class="step-content">
                 Press
                 <span class="button-press">[FUNC]</span>
-                then use the MAIN ENCODER to navigate to "PLAYBACK SETUP". Press
+                then use the [LEVEL] encoder to navigate to "PLAYBACK SETUP". Press
                 <span class="button-press">[YES]</span>
                 to open.
               </div>
@@ -1097,7 +1101,7 @@
             <div class="step">
               <div class="step-number">3</div>
               <div class="step-title">CHOOSE MACHINE TYPE</div>
-              <div class="step-content">Navigate to "MACHINE" and select either STATIC or FLEX using the encoder. Use your decision tree knowledge here!</div>
+              <div class="step-content">Navigate to "MACHINE" and select either STATIC or FLEX using the [LEVEL] encoder. Press [YES] to confirm. Use your decision tree knowledge here!</div>
             </div>
 
             <div class="step">
@@ -1106,8 +1110,8 @@
               <div class="step-content">
                 Press
                 <span class="button-press">[FUNC]</span>
-                then
-                <span class="button-press">[CUE/SRC]</span>
+                +
+                <span class="button-press">[SRC]</span>
                 to open the sample browser. You should see your AUDIO folder.
               </div>
             </div>
@@ -1116,7 +1120,7 @@
               <div class="step-number">5</div>
               <div class="step-title">NAVIGATE AND SELECT</div>
               <div class="step-content">
-                Use the MAIN ENCODER to navigate through folders. Select your sample and press
+                Use the [LEVEL] encoder to navigate through folders. Press [RIGHT] to enter a folder, [LEFT] to go back. Select your sample and press
                 <span class="button-press">[YES]</span>
                 to load it.
               </div>
@@ -1125,7 +1129,7 @@
             <div class="step">
               <div class="step-number">6</div>
               <div class="step-title">TRIGGER IT</div>
-              <div class="step-content">Press any of the TRIG keys (1-16) to trigger the sample on that track. You should hear it play!</div>
+              <div class="step-content">Press [PLAY] to start the sequencer, then press any of the [TRIG 1]–[TRIG 8] keys to trigger the sample on that track. Adjust volume with the [LEVEL] encoder. You should hear it play!</div>
             </div>
           </div>
         </div>
@@ -1143,22 +1147,23 @@
             <li>
               Navigate to
               <strong>PROJECT</strong>
+              using the [LEVEL] encoder
             </li>
             <li>
-              Select
+              Press [YES] to enter, then select
               <strong>CONTROL</strong>
             </li>
             <li>
-              Open
+              Press [YES] again, then open the
               <strong>MEMORY</strong>
               page
             </li>
           </ol>
           <p style="margin-top: 1.5rem">This screen shows you how much Flex RAM is used and available. Keep an eye on this before loading new samples. If you're over 90% capacity, consider:</p>
           <ul>
-            <li>Using Static machines for new samples</li>
-            <li>Deleting unused Flex samples from RAM</li>
-            <li>Using sample chains to consolidate multiple sounds</li>
+            <li>Switching to Static machines — assign via [PLAYBACK] setup</li>
+            <li>Purging unused Flex samples from the sample list (press [FUNC] + [NO] on unused slots)</li>
+            <li>Using sample chains to consolidate multiple sounds into one slot</li>
           </ul>
         </div>
 
@@ -1175,7 +1180,7 @@
             <li>Save slots: 64 sounds in 1 slot instead of 64 slots</li>
             <li>Better for drum kits: one chain = whole kit</li>
             <li>Works on Static machines (zero RAM cost)</li>
-            <li>You can p-lock through different hits in the chain per step</li>
+            <li>You can p-lock through different hits by holding a [TRIG 1]–[TRIG 8] key and turning an encoder</li>
           </ul>
 
           <h3>Best Practices</h3>
@@ -1187,10 +1192,10 @@
 
           <h3>How to Use on the OT</h3>
           <ol>
-            <li>Load the chain WAV file like any other sample</li>
-            <li>In Audio Editor, slices are pre-defined by the .ot metadata</li>
-            <li>In Playback Setup, enable SLICE = ON</li>
-            <li>P-lock slice numbers per step to play different hits</li>
+            <li>Load the chain WAV file via [FUNC] + [SRC] to open the sample browser, then press [YES] to load</li>
+            <li>Open the Audio Editor with [AED] — slices are pre-defined by the .ot metadata</li>
+            <li>Open [PLAYBACK] setup and enable SLICE = ON</li>
+            <li>In [REC] (Grid Recording) mode, hold a trig key and turn the [LEVEL] encoder to p-lock slice numbers per step</li>
           </ol>
         </div>
 

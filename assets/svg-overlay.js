@@ -409,6 +409,16 @@
       'SCENE A': 'scene_a',
       'SCENE B': 'scene_b',
       TRACK: 't1',
+      TRIG: 'trig_1',
+      'TRIG KEY': 'trig_1',
+      'PART 1': 'part',
+      'PART 2': 'part',
+      'PART 3': 'part',
+      'PART 4': 'part',
+      'PART 1/2/3/4': 'part',
+      'UP/DOWN': 'arrow_up',
+      'LEFT/RIGHT': 'arrow_left',
+      FN: 'func',
       'TRIG 1': 'trig_1',
       'TRIG 2': 'trig_2',
       'TRIG 3': 'trig_3',
@@ -521,7 +531,7 @@
         COLORS.border +
         ';background:#121212;overflow:hidden}',
       '.ot-svg-wrap svg{width:100%;height:auto;display:block}',
-      '@media(min-width:1201px){body .main{margin-right:calc(clamp(450px,40vw,700px) + 28px)!important;max-width:none!important}}',
+      '@media(min-width:1201px){body .main,body .content,body .main-content{margin-right:calc(clamp(450px,40vw,700px) + 28px)!important;max-width:none!important}}',
       '.ot-tooltip{position:absolute;background:' +
         COLORS.surface +
         ';border:2px solid ' +

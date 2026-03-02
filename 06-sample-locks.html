@@ -642,7 +642,7 @@
         <section class="section" id="sec-1">
           <h2 class="section-title">1. WHAT ARE SAMPLE LOCKS?</h2>
           <div class="section-content">
-            <p>Sample locks let you play a DIFFERENT sample on each step, all on the same track. Imagine having 16 different instruments assigned to one track - that's sample locks.</p>
+            <p>Sample locks let you play a DIFFERENT sample on each step, all on the same track. In [REC] mode, hold any [TRIG] key and browse to assign a unique sample to that step - that's sample locks.</p>
             <p>This is the Octatrack's secret weapon for:</p>
             <ul style="margin-left: 20px; margin-bottom: 20px">
               <li>Building complete drum kits on one track</li>
@@ -652,7 +652,7 @@
             </ul>
             <div class="card">
               <div class="card-title">KEY CONCEPT</div>
-              <div class="card-content">One track, 16 steps, 16 different samples. Each step can play a completely different sound. The red LED tells you which steps have sample locks active.</div>
+              <div class="card-content">One track, 16 [TRIG] keys, 16 different samples. Each step can play a completely different sound. A red flashing [TRIG] LED tells you which steps have sample locks active.</div>
             </div>
           </div>
         </section>
@@ -676,7 +676,7 @@
                 </div>
                 <div class="demo-step">
                   <span class="step-num">3.</span>
-                  While holding the [TRIG], press [UP] or [DOWN] arrow to open the sample browser.
+                  While holding the [TRIG], press [UP] or [DOWN] to open the sample browser.
                 </div>
                 <div class="demo-step">
                   <span class="step-num">4.</span>
@@ -696,11 +696,11 @@
             <div class="card">
               <div class="card-title">RED LED = SAMPLE LOCK ACTIVE</div>
               <div class="card-content">
-                When a trig has a red flashing LED, it means a sample lock is programmed on that step. This is your visual feedback that something is locked to this trigger.
+                When a [TRIG] key has a red flashing LED, it means a sample lock is programmed on that step. This is your visual feedback that something is locked to this trigger. Press [NO] to remove a sample lock from a held [TRIG].
               </div>
             </div>
 
-            <p style="margin-top: 20px">Practice with 2-3 steps first. Once you get the feel for it, you can quickly lock samples across an entire pattern.</p>
+            <p style="margin-top: 20px">Practice with 2-3 steps first. Once you get the feel for it, you can quickly lock samples across an entire pattern. Press [PLAY] to hear your locks in action, and [STOP] to pause.</p>
           </div>
         </section>
 
@@ -708,7 +708,7 @@
         <section class="section" id="sec-3">
           <h2 class="section-title">3. BUILDING A DRUM KIT ON ONE TRACK</h2>
           <div class="section-content">
-            <p>Here's an interactive example of what a drum kit looks like using sample locks. Click steps to see which drum sounds are assigned:</p>
+            <p>Here's an interactive example of what a drum kit looks like using sample locks. On the Octatrack, you would select a track with [TRACK], enter [REC] mode, and assign samples by holding each [TRIG] key + pressing [UP]/[DOWN]:</p>
 
             <div class="drum-kit-sequencer">
               <div class="drum-kit-title">DRUM KIT LAYOUT (16 STEPS)</div>
@@ -739,7 +739,7 @@
             <ul style="margin-left: 20px">
               <li>Uses only 1 track slot (leaves 7 others free for melodies, effects, resampling)</li>
               <li>Each drum element can be different samples (kick_punchy.wav, snare_tight.wav, etc.)</li>
-              <li>Each step is independent - you can mute, p-lock, or effect any individual drum hit</li>
+              <li>Each step is independent - hold [FUNC] + [TRIG] to mute, or hold a [TRIG] and tweak parameters to p-lock individual hits</li>
               <li>Real-time adjustments: swap samples without re-locking</li>
             </ul>
           </div>
@@ -749,7 +749,7 @@
         <section class="section" id="sec-4">
           <h2 class="section-title">4. SAMPLE LOCKS + P-LOCKS = POWER</h2>
           <div class="section-content">
-            <p>Each sample-locked step can ALSO have parameter locks. This means infinite variation:</p>
+            <p>Each sample-locked step can ALSO have parameter locks. In [REC] mode, hold a [TRIG] key and adjust any parameter with the encoders to p-lock that value to that step. This means infinite variation:</p>
 
             <table>
               <tr>
@@ -765,22 +765,22 @@
               <tr>
                 <td>Sample Lock + Volume P-Lock</td>
                 <td>Different volume per sample</td>
-                <td>Step 1 kick at 100, Step 5 kick at 80 (velocity simulation)</td>
+                <td>Hold [TRIG], adjust [LEVEL] — Step 1 kick at 100, Step 5 kick at 80</td>
               </tr>
               <tr>
                 <td>Sample Lock + Pitch P-Lock</td>
                 <td>Different pitch per sample</td>
-                <td>Drum loop slices pitched up/down step by step</td>
+                <td>Hold [TRIG], press [PLAYBACK] page, tune pitch per step</td>
               </tr>
               <tr>
                 <td>Sample Lock + Filter P-Lock</td>
                 <td>Different filter per sample</td>
-                <td>Same snare sample: closed filter on step 4, open on step 12</td>
+                <td>Hold [TRIG], press [FX1], tweak filter — closed on step 4, open on step 12</td>
               </tr>
               <tr>
                 <td>Sample Lock + Effect Send</td>
                 <td>Different effect amount per step</td>
-                <td>Kick on step 1 dry, snare on step 5 heavily reverbed</td>
+                <td>Hold [TRIG], press [FX2], dial reverb — dry kick on step 1, wet snare on step 5</td>
               </tr>
             </table>
 
@@ -799,7 +799,7 @@
               </div>
             </div>
 
-            <p style="margin-top: 20px">This combination is what separates basic sequencing from expressive Octatrack performance.</p>
+            <p style="margin-top: 20px">Use [PAGE] to navigate between [PLAYBACK], [AMP], [LFO], [FX1], and [FX2] pages while holding a [TRIG] to p-lock any parameter. This combination is what separates basic sequencing from expressive Octatrack performance.</p>
           </div>
         </section>
 
@@ -842,8 +842,8 @@
               </tr>
               <tr>
                 <td>Setup speed</td>
-                <td>Slower (assign each step)</td>
-                <td>Faster (grid slice once)</td>
+                <td>Slower (hold [TRIG] + [UP]/[DOWN] per step)</td>
+                <td>Faster (open [AED], create slice grid once)</td>
               </tr>
               <tr>
                 <td>Real-time swaps</td>
@@ -855,9 +855,9 @@
             <div class="card" style="margin-top: 20px">
               <div class="card-title">DECISION TREE</div>
               <div class="card-content">
-                Are you chopping a single drum loop into pieces? → SLICING
+                Are you chopping a single drum loop into pieces? → SLICING (use [AED] to set slices)
                 <br />
-                Building a kit from separate kicks, snares, hats? → SAMPLE LOCKS
+                Building a kit from separate kicks, snares, hats? → SAMPLE LOCKS (hold [TRIG] + [UP]/[DOWN])
                 <br />
                 Want to swap samples during a live jam? → SAMPLE LOCKS
                 <br />
@@ -876,7 +876,7 @@
             <div class="card">
               <div class="card-title">PRE-BROWSING</div>
               <div class="card-content">
-                Before starting a jam, pre-browse the samples you'll use. This keeps them in the "recent" section of the browser, so you don't have to dig through folders during a live performance.
+                Before starting a jam, hold a [TRIG] + press [UP]/[DOWN] to pre-browse samples. This keeps them in the "recent" section of the browser, so you don't have to dig through folders during a live performance.
               </div>
             </div>
 
@@ -900,7 +900,7 @@
             <div class="card">
               <div class="card-title">VISUAL FEEDBACK</div>
               <div class="card-content">
-                Red flashing trig LED = your lock is active. When you play the pattern, watch for those flashes to confirm which steps are locked. Very useful during jams.
+                Red flashing [TRIG] LED = your lock is active. When you press [PLAY], watch for those flashes to confirm which steps are locked. Press [FUNC] + [REC] to view all active locks. Very useful during jams.
               </div>
             </div>
 
@@ -920,15 +920,15 @@
             <div class="card">
               <div class="card-title">SETUP</div>
               <div class="card-content">
-                1. Take a long sample (e.g., 8-bar loop)
+                1. Load a long sample (e.g., 8-bar loop) and open [AED] to slice it
                 <br />
                 2. Slice it into sections (first 2 bars, next 2 bars, etc.)
                 <br />
-                3. Sample-lock each section to different steps
+                3. Enter [REC] mode and sample-lock each section to different [TRIG] steps
                 <br />
-                4. Add ONE-SHOT trigs to each step to prevent re-triggering
+                4. Add ONE-SHOT trigs ([FUNC] + [TRIG]) to each step to prevent re-triggering
                 <br />
-                5. Now each [TRIG] press jumps to a different section
+                5. Press [PLAY] — now each [TRIG] press jumps to a different section
               </div>
             </div>
 
@@ -951,7 +951,7 @@
                 <br />
                 Step 4: Drop / breakdown
                 <br />
-                Now during your jam, press Step 3 repeatedly to hammer the peak, then drop to Step 4 for impact. Live control!
+                Now during your jam, press [TRIG] 3 repeatedly to hammer the peak, then drop to [TRIG] 4 for impact. Use [SCENE A] and [SCENE B] on the [CROSSFADER] for even more control!
               </div>
             </div>
           </div>

@@ -758,7 +758,7 @@
           <h2>WELCOME TO THE OCTATRACK</h2>
           <p>
             You're holding one of the most powerful and creative devices in electronic music production. The Elektron Octatrack MK2 is an 8-track hardware sampler and sequencer with real-time
-            sampling, dual effects per track, a crossfader, and integration with external gear.
+            sampling, dual effects per track, a [CROSSFADER], and integration with external gear.
           </p>
           <p>
             This tutorial series will take you from first boot to confidently chopping, resampling, and performing live. We'll cover the fundamental concepts that make the OT tick, and show you why
@@ -773,15 +773,15 @@
           </ul>
           <h3>Learning Curve Heads-Up</h3>
           <p>
-            The OT has a steep learning curve, but it's intentional—every button and menu serves a purpose. We'll learn systematically, starting with the essentials. By the end of this series, you'll
-            understand not just HOW to do things, but WHY the OT is designed this way.
+            The OT has a steep learning curve, but it's intentional — every button and menu serves a purpose. We'll learn systematically, starting with the essentials. By the end of this series, you'll
+            understand not just HOW to do things, but WHY the OT is designed this way. You'll know when to reach for [FUNC], when to press [YES], and how [PLAY] and [STOP] keep your workflow flowing.
           </p>
         </div>
 
         <!-- SECTION: HARDWARE OVERVIEW -->
         <div class="section" id="hardware" data-section="hardware">
           <h2>HARDWARE OVERVIEW</h2>
-          <p>The OT MK2 is organized into zones: trig keys, track buttons, the main encoder, crossfader, and real-time controls. Here's the layout:</p>
+          <p>The OT MK2 is organized into zones: trig keys, track buttons, the main [LEVEL] encoder, [CROSSFADER], and real-time controls. Here's the layout:</p>
           <div class="svg-diagram" style="border: 3px solid #00ffff; padding: 1rem; background: #0a0a0a">
             <img src="assets/octatrack svg.svg" alt="Octatrack MK2 Top Panel" style="width: 100%; height: auto; display: block" />
           </div>
@@ -800,23 +800,23 @@
             >
               KEY ZONES
             </div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">TRIG 1-16: trigger samples / select patterns</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">[TRIG 1]-[TRIG 8]: trigger samples / select patterns</div>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">A/B IN: main stereo input pair</div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">TRACK T1-T8: select active track</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">[T1]-[T8]: select active track</div>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">C/D IN: auxiliary input pair</div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">FUNC: hold for secondary functions</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">[FUNC]: hold for secondary functions</div>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">MAIN OUT: stereo output to speakers</div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">CROSSFADER: morph between scenes A/B</div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">CUE OUT: headphone preview output</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">[CROSSFADER]: morph between [SCENE A]/[SCENE B]</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">[CUE] OUT: headphone preview output</div>
             <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">ENCODERS A-F: parameter control</div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">LEVEL ENCODER: master volume / navigate</div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #e0e0e0">[LEVEL] ENCODER: master volume / navigate</div>
           </div>
         </div>
 
         <!-- SECTION: PROJECT HIERARCHY -->
         <div class="section" id="hierarchy" data-section="hierarchy">
           <h2>PROJECT HIERARCHY (CRITICAL)</h2>
-          <p>The OT has a very specific folder structure. Understanding this is essential—moving or renaming folders breaks everything.</p>
+          <p>The OT has a very specific folder structure. Understanding this is essential — moving or renaming folders breaks everything. Use [FUNC] + [YES] to access the project menu, and press [BANK] to switch between the 16 banks (A-P).</p>
           <div style="margin: 2rem 0">
             <div class="tree-toggle" data-tree="cf-card">CF CARD (16 GB)</div>
             <div class="tree-content" id="tree-cf-card">The CF card is the Octatrack's external storage. FAT32 formatted with a 1024 file per-folder limit.</div>
@@ -841,29 +841,29 @@
 
           <div class="tree-node" style="margin-left: 6rem">
             <div class="tree-toggle" data-tree="banks">├─ 16 Banks (A-P)</div>
-            <div class="tree-content" id="tree-banks">Each bank contains 16 patterns and 4 parts. Each part stores machine assignments, FX, and 16 scenes.</div>
+            <div class="tree-content" id="tree-banks">Press [BANK] to select a bank. Each bank contains 16 patterns (selected with [TRIG 1]-[TRIG 8]) and 4 parts (switch with [PART]). Each part stores machine assignments, [FX1]/[FX2] settings, and 16 scenes.</div>
           </div>
 
           <div class="tree-node" style="margin-left: 9rem">
             <div class="tree-toggle" data-tree="parts">├─ 4 Parts per Bank</div>
-            <div class="tree-content" id="tree-parts">CRITICAL: Parts are PER BANK, not per pattern. If two patterns share a Part, editing one affects both. Use different Parts to isolate.</div>
+            <div class="tree-content" id="tree-parts">CRITICAL: Parts are PER BANK, not per pattern. Press [PART] to see which Part is active. If two patterns share a Part, editing one affects both. Use different Parts to isolate. Each Part holds [SRC], [AMP], [LFO], [FX1], and [FX2] settings for all 8 tracks.</div>
           </div>
 
           <div class="tree-explanation" style="margin-top: 2rem">
             <strong>TL;DR:</strong>
-            CF Card → SET → AUDIO (samples) + Project Folders. Each project → Banks → Parts → Scenes. Never rename SET or move samples. If you do, everything breaks.
+            CF Card → SET → AUDIO (samples) + Project Folders. Each project → Banks (press [BANK]) → Parts (press [PART]) → Scenes (press [SCENE A] or [SCENE B]). Never rename SET or move samples. If you do, everything breaks.
           </div>
         </div>
 
         <!-- SECTION: SAVE SYSTEM -->
         <div class="section" id="save-system" data-section="save-system">
           <h2>SAVE SYSTEM: .WORK VS .STRD</h2>
-          <p>The OT has a dual-state save system. Understanding it is crucial to protecting your work.</p>
+          <p>The OT has a dual-state save system. Understanding it is crucial to protecting your work. To save manually, press [FUNC] + [YES] and select SAVE. To reload from your last save, press [FUNC] + [NO].</p>
           <h3>.WORK (Live Working State)</h3>
           <ul>
             <li>Auto-saved constantly as you work</li>
             <li>Plain text file (you can read/edit it with Python!)</li>
-            <li>Lost if you RELOAD or power off without SYNCING</li>
+            <li>Lost if you RELOAD (press [FUNC] + [NO]) or power off without SYNCING</li>
           </ul>
           <h3>.STRD (Stored Saved State)</h3>
           <ul>
@@ -918,7 +918,7 @@
         <!-- SECTION: GOLDEN RULES -->
         <div class="section" id="golden-rules" data-section="golden-rules">
           <h2>THE GOLDEN RULES</h2>
-          <p>These rules protect your work. Break them and you'll learn the hard way. Check them off:</p>
+          <p>These rules protect your work. Break them and you'll learn the hard way. Remember: [FUNC] + [YES] is your friend for saving, and always use the OT's own menus (navigate with [LEFT], [RIGHT], [UP], [DOWN] and confirm with [YES]). Check them off:</p>
           <ul class="checklist" id="golden-rules-list">
             <li class="checklist-item" data-rule="1">
               <div class="checklist-checkbox"></div>
@@ -938,7 +938,7 @@
               <div class="checklist-checkbox"></div>
               <div class="checklist-text">
                 <strong>NEVER unplug card while playing</strong>
-                — OT is streaming from it
+                — press [STOP] first, the OT is streaming from it
               </div>
             </li>
             <li class="checklist-item" data-rule="4">
@@ -966,7 +966,7 @@
               <div class="checklist-checkbox"></div>
               <div class="checklist-text">
                 <strong>.work files are not "saved"</strong>
-                — only .strd persists across reboots
+                — press [FUNC] + [YES] to create .strd, which persists across reboots
               </div>
             </li>
             <li class="checklist-item" data-rule="8">
@@ -982,7 +982,7 @@
         <!-- SECTION: CARD LAYOUT -->
         <div class="section" id="card-layout" data-section="card-layout">
           <h2>YOUR CARD LAYOUT</h2>
-          <p>Here's your actual CF card structure:</p>
+          <p>Here's your actual CF card structure. You can browse it on the OT by pressing [FUNC] + [AED] to open the Audio Editor, or use [FUNC] + [CUE] to browse the sample pool.</p>
           <div style="font-family: 'Space Mono', monospace; font-size: 12px; background-color: #0a0a0a; border: 2px solid #00ffff; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto">
             <div style="color: #ff00ff; margin-bottom: 0.5rem; font-weight: 700">/OCTATRACK/RESTART 2024/</div>
             <div style="color: #e0e0e0; line-height: 1.8">
@@ -1051,7 +1051,7 @@
                 <input type="radio" name="q1" value="d" />
                 Anywhere on the CF card
               </label>
-              <div class="quiz-feedback">Correct! The OT uses relative paths (../AUDIO/).</div>
+              <div class="quiz-feedback">Correct! The OT uses relative paths (../AUDIO/). Browse it with [FUNC] + [CUE].</div>
             </div>
 
             <!-- Q2 -->
@@ -1073,7 +1073,7 @@
                 <input type="radio" name="q2" value="d" />
                 They're the same thing
               </label>
-              <div class="quiz-feedback">Correct! .work is volatile, .strd is persistent.</div>
+              <div class="quiz-feedback">Correct! .work is volatile, .strd is persistent. Press [FUNC] + [YES] to save .strd.</div>
             </div>
 
             <!-- Q3 -->
@@ -1095,7 +1095,7 @@
                 <input type="radio" name="q3" value="d" />
                 The OT refuses to load it
               </label>
-              <div class="quiz-feedback">Correct! The OT ONLY works at 44.1kHz. Always convert first.</div>
+              <div class="quiz-feedback">Correct! The OT ONLY works at 44.1kHz. Always convert before loading. Press [FUNC] + [AED] to check sample properties in the Audio Editor.</div>
             </div>
 
             <!-- Q4 -->
@@ -1117,7 +1117,7 @@
                 <input type="radio" name="q4" value="d" />
                 You get an error message
               </label>
-              <div class="quiz-feedback">Correct! Parts are per Bank. Use different Parts to isolate.</div>
+              <div class="quiz-feedback">Correct! Parts are per Bank. Press [PART] to switch Parts and isolate patterns.</div>
             </div>
 
             <button class="quiz-submit" id="submitQuiz">SUBMIT QUIZ</button>

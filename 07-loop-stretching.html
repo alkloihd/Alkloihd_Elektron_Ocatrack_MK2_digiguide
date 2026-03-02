@@ -721,7 +721,7 @@
         <div class="section" id="section-1">
           <h2>01 - THE PROBLEM</h2>
           <p>
-            You have a drum loop recorded at 120 BPM. Your current project is at 135 BPM. When you load that loop onto a track, it plays too fast AND at the wrong pitch. Without time-stretching, the
+            You have a drum loop recorded at 120 BPM. Your current project is at 135 BPM. When you load that loop onto a track, press [PLAY] and it plays too fast AND at the wrong pitch. Without time-stretching, the
             loop is essentially useless in your project.
           </p>
           <div class="highlight-box success">
@@ -734,7 +734,7 @@
           <p>This is one of the most powerful features of the Octatrack because it lets you:</p>
           <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem">
             <li>✓ Mix loops at different tempos into one project</li>
-            <li>✓ Change your project tempo mid-jam without loops sounding wrong</li>
+            <li>✓ Change your project tempo mid-jam using [FUNC] + [TEMPO] without loops sounding wrong</li>
             <li>✓ Keep long static samples (no RAM cost) while keeping them tempo-locked</li>
             <li>✓ Work with material from Ableton, loops packs, anywhere</li>
           </ul>
@@ -748,7 +748,7 @@
             <h4>THE THREE-STEP SETUP</h4>
             <p>
               <strong>Step 1: ORIGINAL TEMPO</strong>
-              — Tell the OT the loop's TRUE BPM in the Audio Editor
+              — Tell the OT the loop's TRUE BPM in the [AUD] Audio Editor
             </p>
             <p>
               <strong>Step 2: TIMESTRETCH MODE</strong>
@@ -756,7 +756,7 @@
             </p>
             <p>
               <strong>Step 3: TSTR = AUTO</strong>
-              — Enable timestretch in Playback Setup
+              — Enable timestretch in [PLAYBACK] Setup
             </p>
           </div>
 
@@ -766,7 +766,7 @@
               <div class="step-number">1</div>
               <div class="step-content">
                 <h4>OPEN AUDIO EDITOR</h4>
-                <p>While viewing your sample on any track, press:</p>
+                <p>While viewing your sample on any [TRACK], press:</p>
                 <div class="button-demo">[FUNC] + [AUD]</div>
               </div>
             </div>
@@ -774,21 +774,21 @@
               <div class="step-number">2</div>
               <div class="step-content">
                 <h4>NAVIGATE TO ATTRIBUTES</h4>
-                <p>Press the [RIGHT] arrow key to browse pages of the Audio Editor. You're looking for "Attributes" (usually page 2 or 3).</p>
+                <p>Press the [RIGHT] arrow key to browse pages of the [AUD] Audio Editor. You're looking for "Attributes" (usually page 2 or 3).</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">3</div>
               <div class="step-content">
                 <h4>SET ORIGINAL TEMPO</h4>
-                <p>Use the [KNOB] to adjust. If your loop is 120 BPM, set this to 120. This tells the OT: "This sample was recorded at 120 BPM."</p>
+                <p>Use the [LEVEL] encoder to adjust. If your loop is 120 BPM, set this to 120. This tells the OT: "This sample was recorded at 120 BPM."</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">4</div>
               <div class="step-content">
                 <h4>SET TIMESTRETCH MODE</h4>
-                <p>Move to the TIMESTRETCH field. Choose:</p>
+                <p>Use the [RIGHT] arrow to move to the TIMESTRETCH field. Choose:</p>
                 <ul style="margin-left: 1.5rem; margin-top: 0.5rem">
                   <li>NORMAL — for tonal material (pads, vocals, melodic)</li>
                   <li>BEAT — for drums, percussion, rhythmic loops</li>
@@ -798,15 +798,15 @@
             <div class="step">
               <div class="step-number">5</div>
               <div class="step-content">
-                <h4>EXIT AUDIO EDITOR</h4>
+                <h4>EXIT [AUD] AUDIO EDITOR</h4>
                 <p>Press [NO] to return to the main sequencer view.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">6</div>
               <div class="step-content">
-                <h4>OPEN PLAYBACK SETUP</h4>
-                <p>Select the track, then press:</p>
+                <h4>OPEN [PLAYBACK] SETUP</h4>
+                <p>Select the [TRACK], then press:</p>
                 <div class="button-demo">[FUNC] + [PLAYBACK]</div>
               </div>
             </div>
@@ -814,14 +814,14 @@
               <div class="step-number">7</div>
               <div class="step-content">
                 <h4>SET TSTR = AUTO</h4>
-                <p>Find the TSTR field and set it to AUTO. This enables the timestretch effect globally for this sample.</p>
+                <p>Find the TSTR field and use the [LEVEL] encoder to set it to AUTO. This enables the timestretch effect globally for this sample.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">8</div>
               <div class="step-content">
                 <h4>TEST IT!</h4>
-                <p>Change your project tempo using [FUNC] + [TEMPO]. The loop should now follow your tempo changes without sounding wrong.</p>
+                <p>Press [PLAY] to start the sequencer. Change your project tempo using [FUNC] + [TEMPO]. The loop should now follow your tempo changes without sounding wrong.</p>
               </div>
             </div>
           </div>
@@ -891,7 +891,7 @@
             <p>
               If your filename is "Sample_140_Dark.wav" but the loop is actually 120 BPM, the OT will set ORIGINAL TEMPO to 140 and timestretch will sound wrong. Always
               <strong>manually verify ORIGINAL TEMPO</strong>
-              in the Audio Editor, especially with ambiguous filenames.
+              in the [AUD] Audio Editor (press [FUNC] + [AUD] to open), especially with ambiguous filenames.
             </p>
           </div>
 
@@ -903,7 +903,7 @@
         <!-- SECTION 4: NORMAL vs BEAT -->
         <div class="section" id="section-4">
           <h2>04 - NORMAL VS BEAT ALGORITHM</h2>
-          <p>The Octatrack's timestretch engine has two modes. They sound and behave very differently.</p>
+          <p>The Octatrack's timestretch engine has two modes, selectable in the [AUD] Audio Editor attributes page. They sound and behave very differently.</p>
           <table>
             <tr>
               <th>Property</th>
@@ -971,14 +971,14 @@
 
           <p>
             <strong>Experiment!</strong>
-            Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. The OT's CPU can handle it either way — it's about which sound you prefer.
+            Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. Open the [AUD] Audio Editor with [FUNC] + [AUD], navigate with [RIGHT] to attributes, and switch modes. The OT's CPU can handle it either way — it's about which sound you prefer.
           </p>
         </div>
 
         <!-- SECTION 5: STATIC AND FLEX -->
         <div class="section" id="section-5">
           <h2>05 - STATIC AND FLEX BOTH SUPPORT TSTR</h2>
-          <p>This is a common misconception: "Timestretch only works on Static machines, not Flex."</p>
+          <p>This is a common misconception: "Timestretch only works on Static machines, not Flex." Check the [SRC] page to see which machine type is assigned to your [TRACK].</p>
           <div class="highlight-box success">
             <h4>THE TRUTH</h4>
             <p>
@@ -1021,11 +1021,11 @@
           <div class="highlight-box">
             <h4>STATIC MACHINE SETUP</h4>
             <ol style="margin-left: 2rem; color: #e0e0e0">
-              <li>Assign Static to a track</li>
-              <li>Load your loop via Sample Lock browser</li>
-              <li>Set ORIGINAL TEMPO + TIMESTRETCH in Audio Editor</li>
-              <li>Set TSTR = AUTO in Playback Setup</li>
-              <li>ZERO RAM used. Loop streams from CF card. Tempo-matched.</li>
+              <li>Assign Static to a [TRACK] (press [TRACK] to select, then assign via [SRC] setup)</li>
+              <li>Load your loop via the sample browser (hold a [TRIG 1] key + [UP])</li>
+              <li>Set ORIGINAL TEMPO + TIMESTRETCH in [AUD] Audio Editor ([FUNC] + [AUD])</li>
+              <li>Set TSTR = AUTO in [PLAYBACK] Setup ([FUNC] + [PLAYBACK])</li>
+              <li>ZERO RAM used. Loop streams from CF card. Press [PLAY] — tempo-matched.</li>
             </ol>
           </div>
 
@@ -1047,7 +1047,7 @@
               <div class="step-number">1</div>
               <div class="step-content">
                 <h4>LOAD A SAMPLE ONTO A TRACK</h4>
-                <p>Select any track. Open the Sample Lock browser ([TRIG] + [UP/DOWN]). Pick any sample from your AUDIO/ folder.</p>
+                <p>Select any [TRACK] using the [T1] through [T8] track keys. Open the sample browser (hold [TRIG 1] + [UP]). Pick any sample from your AUDIO/ folder and press [YES] to load it.</p>
               </div>
             </div>
             <div class="step">
@@ -1062,35 +1062,35 @@
               <div class="step-number">3</div>
               <div class="step-content">
                 <h4>FIND ATTRIBUTES PAGE</h4>
-                <p>Press [RIGHT] arrow key to navigate pages. Stop when you see "ORIGINAL TEMPO" and "TIMESTRETCH" fields.</p>
+                <p>Press the [RIGHT] arrow key to navigate pages. Use [LEFT] and [RIGHT] to browse. Stop when you see "ORIGINAL TEMPO" and "TIMESTRETCH" fields.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">4</div>
               <div class="step-content">
                 <h4>SET ORIGINAL TEMPO</h4>
-                <p>Use the data entry knob to set ORIGINAL TEMPO to the sample's true BPM. If unsure, check the filename or try 120 BPM as a baseline.</p>
+                <p>Use the [LEVEL] encoder to set ORIGINAL TEMPO to the sample's true BPM. If unsure, check the filename or try 120 BPM as a baseline.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">5</div>
               <div class="step-content">
                 <h4>SET TIMESTRETCH MODE</h4>
-                <p>Move to TIMESTRETCH. If it's drums, choose BEAT. If it's tonal, choose NORMAL. If mixed, try BEAT first.</p>
+                <p>Use the [LEVEL] encoder to move to TIMESTRETCH. If it's drums, choose BEAT. If it's tonal, choose NORMAL. If mixed, try BEAT first.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">6</div>
               <div class="step-content">
-                <h4>EXIT AUDIO EDITOR</h4>
-                <p>Press [NO].</p>
+                <h4>EXIT [AUD] AUDIO EDITOR</h4>
+                <p>Press [NO] to exit back to the main view.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">7</div>
               <div class="step-content">
-                <h4>OPEN PLAYBACK SETUP</h4>
-                <p>Select your track (if not already selected). Press:</p>
+                <h4>OPEN [PLAYBACK] SETUP</h4>
+                <p>Select your [TRACK] (if not already selected). Press:</p>
                 <div class="button-demo">[FUNC] + [PLAYBACK]</div>
               </div>
             </div>
@@ -1098,14 +1098,14 @@
               <div class="step-number">8</div>
               <div class="step-content">
                 <h4>ENABLE TSTR = AUTO</h4>
-                <p>Find the TSTR field and set it to AUTO. This globally enables timestretch for this sample.</p>
+                <p>Find the TSTR field and use the [LEVEL] encoder to set it to AUTO. This globally enables timestretch for this sample.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">9</div>
               <div class="step-content">
                 <h4>TEST TEMPO CHANGES</h4>
-                <p>Press [YES] to arm the track. Trig the sample to hear it play. Now use [FUNC] + [TEMPO] to change your project BPM. The sample should follow your tempo without sounding wrong!</p>
+                <p>Press [YES] to confirm. Place a trig on step [TRIG 1] and press [PLAY] to hear the sample. Now use [FUNC] + [TEMPO] to change your project BPM. Press [STOP] then [PLAY] again. The sample should follow your tempo without sounding wrong!</p>
               </div>
             </div>
           </div>
@@ -1125,17 +1125,17 @@
           <div class="highlight-box warning">
             <h4>HALF-TIME LOOP EXAMPLE</h4>
             <p>
-              You load a loop and it sounds like it's playing at 2x speed. The filename says 140 BPM, but it sounds wrong.
-              <strong>Try setting ORIGINAL TEMPO to 70 (half of 140).</strong>
+              You load a loop and press [PLAY] but it sounds like it's playing at 2x speed. The filename says 140 BPM, but it sounds wrong.
+              <strong>Open the [AUD] Audio Editor ([FUNC] + [AUD]) and try setting ORIGINAL TEMPO to 70 (half of 140).</strong>
               Often samples are recorded at double-time internally.
             </p>
           </div>
           <div class="highlight-box warning">
             <h4>DOUBLE-TIME LOOP EXAMPLE</h4>
             <p>
-              Conversely, a loop sounds too slow. Try
+              Conversely, a loop sounds too slow. Open [FUNC] + [AUD] and try
               <strong>doubling the BPM value</strong>
-              in ORIGINAL TEMPO.
+              in ORIGINAL TEMPO using the [LEVEL] encoder.
             </p>
           </div>
 
@@ -1151,11 +1151,11 @@
               Stuttering, pumping feel
             </li>
           </ul>
-          <p>This is normal. If it sounds bad, consider using samples closer to your project tempo.</p>
+          <p>This is normal. Press [STOP], adjust the [TEMPO] with [FUNC] + [TEMPO], and if it sounds bad, consider using samples closer to your project tempo.</p>
 
           <h3>Resampled Material Does NOT Auto-Follow Tempo</h3>
           <p>
-            If you resample a pattern (recording via Recorder track) and then try to timestretch the resampled audio, it won't follow tempo changes.
+            If you resample a pattern (press [REC] to arm the recorder on a [TRACK] with a Flex machine) and then try to timestretch the resampled audio, it won't follow tempo changes.
             <strong>Recordings are "locked-in"</strong>
             to the tempo they were recorded at.
           </p>

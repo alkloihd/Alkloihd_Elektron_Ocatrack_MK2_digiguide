@@ -846,7 +846,7 @@
         <!-- SECTION 1: THE BIG PICTURE -->
         <div class="section" id="section-1">
           <h2>01 - THE BIG PICTURE</h2>
-          <p>The Octatrack's architecture is built on a hierarchy. Understanding this hierarchy is the key to arranging multi-section songs, live jams, and organized sets.</p>
+          <p>The Octatrack's architecture is built on a hierarchy. Understanding this hierarchy is the key to arranging multi-section songs, live jams, and organized sets. You navigate this hierarchy using buttons like [BANK], [PART], and [PTN] on the hardware.</p>
 
           <h3>Hierarchy Diagram</h3>
           <div class="diagram">
@@ -914,7 +914,7 @@
               A
               <strong>Part is a complete snapshot</strong>
               of your entire 8-track setup. It stores which samples are on which tracks, which effects you've assigned, all parameter values, and your 16 scenes. When you switch Parts,
-              <strong>EVERYTHING changes instantly.</strong>
+              <strong>EVERYTHING changes instantly</strong> — machines, samples, [FX1], [FX2], and all parameter values.
             </p>
           </div>
         </div>
@@ -922,7 +922,7 @@
         <!-- SECTION 2: UNDERSTANDING PARTS -->
         <div class="section" id="section-2">
           <h2>02 - UNDERSTANDING PARTS</h2>
-          <p>This is the most important concept in this tutorial. Most Octatrack confusion comes from misunderstanding Parts.</p>
+          <p>This is the most important concept in this tutorial. Most Octatrack confusion comes from misunderstanding Parts. You access Parts by pressing [FUNC] + [TRIG 1] through [TRIG 4].</p>
 
           <h3>What is a Part?</h3>
           <div class="highlight-box">
@@ -933,11 +933,11 @@
               for your 8 tracks. It includes:
             </p>
             <ul style="margin-left: 2rem; margin-top: 0.75rem; color: #e0e0e0">
-              <li>✓ Machine type on each track (Static, Flex, Thru, etc.)</li>
+              <li>✓ Machine type on each track (Static, Flex, Thru, etc.) — selected via [TRACK] buttons [T1] through [T8]</li>
               <li>✓ Sample assignment on each track</li>
-              <li>✓ Effect assignments (FX1 + FX2 per track)</li>
-              <li>✓ All parameter values (filter cutoff, delay send, etc.)</li>
-              <li>✓ 16 Scenes (crossfader morphs)</li>
+              <li>✓ Effect assignments ([FX1] + [FX2] per track)</li>
+              <li>✓ All parameter values ([AMP], [SRC], [LFO], [MIX] page settings)</li>
+              <li>✓ 16 Scenes ([CROSSFADER] morphs)</li>
             </ul>
           </div>
 
@@ -1056,7 +1056,7 @@
               <th>Effect</th>
             </tr>
             <tr>
-              <td>Machine assignments on all 8 tracks</td>
+              <td>Machine assignments on all 8 tracks ([T1]–[T8])</td>
               <td>Tracks instantly load new machine types</td>
             </tr>
             <tr>
@@ -1064,16 +1064,16 @@
               <td>New samples play (or silence if no sample assigned)</td>
             </tr>
             <tr>
-              <td>Effect assignments</td>
+              <td>Effect assignments ([FX1] + [FX2])</td>
               <td>New effects load on each track</td>
             </tr>
             <tr>
               <td>All parameter values</td>
-              <td>Filter cutoff, delays, reverbs, everything changes</td>
+              <td>[AMP], [SRC], [LFO], [MIX] page values all change</td>
             </tr>
             <tr>
               <td>Scenes 1-16</td>
-              <td>New scene configuration for crossfader morphs</td>
+              <td>New scene configuration for [CROSSFADER] morphs</td>
             </tr>
           </table>
 
@@ -1096,7 +1096,7 @@
         <!-- SECTION 4: BANKS & PATTERNS -->
         <div class="section" id="section-4">
           <h2>04 - BANKS & PATTERN NAVIGATION</h2>
-          <p>The Octatrack has 256 patterns: 16 Banks × 16 Patterns = 256.</p>
+          <p>The Octatrack has 256 patterns: 16 Banks × 16 Patterns = 256. You navigate them with [BANK] and the [TRIG 1] through [TRIG 16] keys.</p>
 
           <h3>Pattern Naming</h3>
           <table>
@@ -1161,13 +1161,13 @@
         <!-- SECTION 5: SCENES & CROSSFADER -->
         <div class="section" id="section-5">
           <h2>05 - SCENES & THE CROSSFADER</h2>
-          <p>Scenes are where you create dynamic, morphing arrangements without changing patterns. The crossfader blends between two scenes, letting you build tension and release.</p>
+          <p>Scenes are where you create dynamic, morphing arrangements without changing patterns. The [CROSSFADER] blends between two scenes, letting you build tension and release.</p>
 
           <h3>What is a Scene?</h3>
           <p>
             A Scene is a
             <strong>snapshot of parameter values</strong>
-            for one side of the crossfader. You have 16 scenes per Part, and you can assign any two of them to the crossfader's A and B buttons.
+            for one side of the [CROSSFADER]. You have 16 scenes per Part, and you can assign any two of them to the [SCENE A] and [SCENE B] buttons.
           </p>
 
           <h3>Setting Up Scenes: Step-by-Step</h3>
@@ -1204,14 +1204,14 @@
               <div class="step-number">5</div>
               <div class="step-content">
                 <h4>USE THE CROSSFADER</h4>
-                <p>Move the crossfader left and right. You're now blending between the two scenes! Left = Scene A values, Right = Scene B values, Middle = interpolated.</p>
+                <p>Move the [CROSSFADER] left and right. You're now blending between the two scenes! Left = [SCENE A] values, Right = [SCENE B] values, Middle = interpolated.</p>
               </div>
             </div>
           </div>
 
           <h3>Interactive Crossfader Demo</h3>
           <div class="crossfader-widget">
-            <p style="margin-bottom: 1.5rem">Drag the crossfader slider to see how parameters interpolate between Scene A and Scene B.</p>
+            <p style="margin-bottom: 1.5rem">Drag the [CROSSFADER] slider to see how parameters interpolate between [SCENE A] and [SCENE B].</p>
 
             <div class="crossfader-container">
               <div class="crossfader-labels">
@@ -1236,8 +1236,8 @@
           <div class="highlight-box success">
             <h4>WHAT JUST HAPPENED</h4>
             <p>
-              At the left (Scene A), the Filter Cutoff is open (127) and Delay Send is low (0) — clean sound. At the right (Scene B), the Filter is closed (30) and Delay is high (80) — tension. Moving
-              the crossfader smoothly blends these two states.
+              At the left ([SCENE A]), the Filter Cutoff is open (127) and Delay Send is low (0) — clean sound. At the right ([SCENE B]), the Filter is closed (30) and Delay is high (80) — tension. Moving
+              the [CROSSFADER] smoothly blends these two states.
             </p>
           </div>
         </div>
@@ -1245,7 +1245,7 @@
         <!-- SECTION 6: TENSION/RELEASE RECIPE -->
         <div class="section" id="section-6">
           <h2>06 - BUILDING A TENSION/RELEASE RECIPE</h2>
-          <p>This is a powerful composition tool. Use scenes to dynamically build and release energy without changing patterns or samples.</p>
+          <p>This is a powerful composition tool. Use scenes and the [CROSSFADER] to dynamically build and release energy without changing patterns or samples.</p>
 
           <h3>The Recipe</h3>
           <div class="highlight-box">
@@ -1270,12 +1270,12 @@
 
           <h3>How to Use This in Your Jam</h3>
           <ol style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem">
-            <li>Set up Scene A and Scene B as above</li>
-            <li>Assign them to crossfader: [SCENE A] + [TRIG 1], [SCENE B] + [TRIG 2]</li>
-            <li>Start at Scene A (left on crossfader) for your intro — clean and simple</li>
-            <li>Slowly drag the crossfader right over 4-8 bars — tension builds</li>
-            <li>At Scene B (right), the track sounds filtered, reverb-heavy, and spacious</li>
-            <li>Drag back to Scene A to release the tension — clean open sound returns</li>
+            <li>Set up [SCENE A] and [SCENE B] as above</li>
+            <li>Assign them to [CROSSFADER]: [SCENE A] + [TRIG 1], [SCENE B] + [TRIG 2]</li>
+            <li>Start at [SCENE A] (left on [CROSSFADER]) for your intro — clean and simple</li>
+            <li>Slowly drag the [CROSSFADER] right over 4-8 bars — tension builds</li>
+            <li>At [SCENE B] (right), the track sounds filtered, reverb-heavy, and spacious</li>
+            <li>Drag back to [SCENE A] to release the tension — clean open sound returns</li>
           </ol>
 
           <div class="highlight-box success">
@@ -1290,31 +1290,31 @@
         <!-- SECTION 7: SCENE LOCKS OVERRIDE P-LOCKS -->
         <div class="section" id="section-7">
           <h2>07 - SCENE LOCKS OVERRIDE P-LOCKS</h2>
-          <p>This is important if you're using both per-step parameter locks (p-locks) AND scene locks.</p>
+          <p>This is important if you're using both per-step parameter locks (p-locks) AND scene locks. P-locks are set by holding a [TRIG 1] through [TRIG 16] key and turning a knob. Scene locks are set by holding [SCENE A] or [SCENE B] and turning a knob.</p>
 
           <div class="highlight-box warning">
             <h4>THE RULE</h4>
             <p>
               If a step has a p-lock on a parameter AND that parameter is locked to a scene,
               <strong>the SCENE value wins.</strong>
-              The crossfader always has priority.
+              The [CROSSFADER] always has priority.
             </p>
           </div>
 
           <h3>Example</h3>
           <p>
             <strong>Scenario:</strong>
-            You have a drum loop. On step 4, you p-locked the Filter Cutoff to 50. But your scene B has Filter Cutoff locked to 20.
+            You have a drum loop. On step 4 ([TRIG 4]), you p-locked the Filter Cutoff to 50. But your [SCENE B] has Filter Cutoff locked to 20.
           </p>
           <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem">
-            <li>When crossfader is at Scene A: p-lock applies (50)</li>
-            <li>When crossfader is at Scene B: Scene B value applies (20), p-lock is ignored</li>
-            <li>When crossfader is in between: interpolated value between the two</li>
+            <li>When [CROSSFADER] is at [SCENE A]: p-lock applies (50)</li>
+            <li>When [CROSSFADER] is at [SCENE B]: Scene B value applies (20), p-lock is ignored</li>
+            <li>When [CROSSFADER] is in between: interpolated value between the two</li>
           </ul>
 
           <div class="highlight-box success">
             <h4>HOW TO THINK ABOUT IT</h4>
-            <p>P-locks add detail and rhythmic movement. Scenes are the big, sweeping energy changes. Scenes are the "master controller" — they override the details.</p>
+            <p>P-locks add detail and rhythmic movement. Scenes are the big, sweeping energy changes. The [CROSSFADER] is the "master controller" — scenes override the details.</p>
           </div>
         </div>
 
@@ -1333,9 +1333,9 @@
             <tr>
               <th>Section</th>
               <th>Part</th>
-              <th>Track 1</th>
-              <th>Track 2</th>
-              <th>Track 3</th>
+              <th>[T1]</th>
+              <th>[T2]</th>
+              <th>[T3]</th>
               <th>Notes</th>
             </tr>
             <tr>
@@ -1365,10 +1365,10 @@
           </table>
 
           <h3>Scene Setup (Per Part)</h3>
-          <p>For EACH Part, set up the Tension/Release recipe:</p>
+          <p>For EACH Part, set up the Tension/Release recipe using [SCENE A] and [SCENE B]:</p>
           <div class="code-block">
-            SCENE A: Clean (Filter open, FX low) SCENE B: Tension (Filter closed, FX high) This gives you dynamic control WITHIN each part. You get control at TWO levels: 1. Part switches → different
-            samples/machines 2. Scene morphs → different timbre/space
+            [SCENE A]: Clean (Filter open, FX low) [SCENE B]: Tension (Filter closed, FX high) This gives you dynamic control WITHIN each part. You get control at TWO levels: 1. Part switches ([FUNC] + [PART]) → different
+            samples/machines 2. [CROSSFADER] scene morphs → different timbre/space
           </div>
 
           <h3>Live Performance Flow</h3>
@@ -1377,42 +1377,42 @@
               <div class="step-number">1</div>
               <div class="step-content">
                 <h4>START AT PART 1, SCENE A</h4>
-                <p>Press [FUNC] + [PART 1]. Crossfader at left. Clean verse drums + bass.</p>
+                <p>Press [FUNC] + [PART 1]. [CROSSFADER] at left. Clean verse drums + bass.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">2</div>
               <div class="step-content">
                 <h4>BUILD TENSION IN VERSE</h4>
-                <p>Over 8 bars, drag crossfader right. Same samples, but filtering closes and reverb builds.</p>
+                <p>Over 8 bars, drag [CROSSFADER] right. Same samples, but filtering closes and reverb builds.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">3</div>
               <div class="step-content">
                 <h4>SWITCH TO CHORUS</h4>
-                <p>Press [FUNC] + [PART 2] (quantized to pattern end). Synth melody appears. Crossfader resets to left (clean again).</p>
+                <p>Press [FUNC] + [PART 2] (quantized to pattern end). Synth melody appears. [CROSSFADER] resets to left (clean again).</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">4</div>
               <div class="step-content">
                 <h4>BUILD TENSION IN CHORUS</h4>
-                <p>Drag crossfader right again. Same scenario — but now with the extra synth layer on top.</p>
+                <p>Drag [CROSSFADER] right again. Same scenario — but now with the extra synth layer on top.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">5</div>
               <div class="step-content">
                 <h4>SWITCH TO BRIDGE</h4>
-                <p>Press [FUNC] + [PART 3]. Bass chop appears, riser FX loads. Crossfader at left again.</p>
+                <p>Press [FUNC] + [PART 3]. Bass chop appears, riser FX loads. [CROSSFADER] at left again.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">6</div>
               <div class="step-content">
                 <h4>BACK TO VERSE</h4>
-                <p>Switch back to Part 1, drag crossfader left to release. Synth gone, back to minimal drums + bass.</p>
+                <p>Press [FUNC] + [PART 1] again, drag [CROSSFADER] left to release. Synth gone, back to minimal drums + bass.</p>
               </div>
             </div>
           </div>
@@ -1420,7 +1420,7 @@
           <div class="highlight-box success">
             <h4>✓ WHAT YOU'VE CREATED</h4>
             <p>
-              A multi-section arrangement with dynamic control at every level. You can perform this live, making real-time crossfader movements, switching parts at key moments. It's arranging AND
+              A multi-section arrangement with dynamic control at every level. You can perform this live, making real-time [CROSSFADER] movements, switching Parts with [FUNC] at key moments. It's arranging AND
               performance in one.
             </p>
           </div>
@@ -1483,15 +1483,15 @@
               </div>
               <div class="quiz-option">
                 <input type="radio" name="q3" value="correct" id="q3b" />
-                <label for="q3b">It provides equal-energy crossfading (prevents volume dip at center)</label>
+                <label for="q3b">It provides equal-energy [CROSSFADER] crossfading (prevents volume dip at center)</label>
               </div>
               <div class="quiz-option">
                 <input type="radio" name="q3" value="wrong2" id="q3c" />
-                <label for="q3c">It mutes the track when crossfader is in the middle</label>
+                <label for="q3c">It mutes the track when [CROSSFADER] is in the middle</label>
               </div>
               <div class="quiz-option">
                 <input type="radio" name="q3" value="wrong3" id="q3d" />
-                <label for="q3d">It controls crossfader speed</label>
+                <label for="q3d">It controls [CROSSFADER] speed</label>
               </div>
               <div class="quiz-feedback" id="q3-feedback"></div>
             </div>
@@ -1505,7 +1505,7 @@
               </div>
               <div class="quiz-option">
                 <input type="radio" name="q4" value="correct" id="q4b" />
-                <label for="q4b">Scene locks win — the crossfader always has priority</label>
+                <label for="q4b">Scene locks win — the [CROSSFADER] always has priority</label>
               </div>
               <div class="quiz-option">
                 <input type="radio" name="q4" value="wrong2" id="q4c" />
@@ -1523,7 +1523,7 @@
         <!-- SECTION 10: CONFIDENCE -->
         <div class="section" id="section-10">
           <h2>10 - CONFIDENCE RATING</h2>
-          <p>How confident do you feel about Parts, Banks, Scenes, and the crossfader after this tutorial?</p>
+          <p>How confident do you feel about Parts, Banks, Scenes, and the [CROSSFADER] after this tutorial?</p>
           <div class="confidence-section">
             <div class="confidence-title">Rate Your Confidence (1-5)</div>
             <div class="confidence-scale">

@@ -1236,6 +1236,17 @@
         loadState() {
           const stored = localStorage.getItem('octatrack-tutorials');
           this.state = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_STATE));
+          // Guard: if stored data is flat (from individual tutorials) or missing tutorials key
+          if (!this.state.tutorials) {
+            // Migrate flat format: top-level keys like "05-slice-and-dice" -> nested under tutorials
+            const flat = Object.assign({}, this.state);
+            this.state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+            Object.keys(flat).forEach((key) => {
+              if (this.state.tutorials[key] && typeof flat[key] === 'object') {
+                Object.assign(this.state.tutorials[key], flat[key]);
+              }
+            });
+          }
           Object.keys(DEFAULT_STATE.tutorials).forEach((key) => {
             if (!this.state.tutorials[key]) {
               this.state.tutorials[key] = JSON.parse(JSON.stringify(DEFAULT_STATE.tutorials[key]));
