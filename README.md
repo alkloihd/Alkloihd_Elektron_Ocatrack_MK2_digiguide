@@ -60,8 +60,8 @@ This repository contains **8 tutorials** across two tiers, covering everything f
 ### Running Locally
 
 ```bash
-# If you're at the source repo root:
-cd "exercises/HTML TUTORIALS"
+# From this repo root:
+cd site
 
 # Start the Python HTTP server
 python3 -m http.server 8080
@@ -80,7 +80,7 @@ You can run this from a plain terminal on any major OS.
 #### macOS / Linux
 
 ```bash
-cd "exercises/HTML TUTORIALS"
+cd site
 python3 -m http.server 8080
 ```
 
@@ -89,7 +89,7 @@ Open: `http://localhost:8080`
 #### Windows (PowerShell)
 
 ```powershell
-cd "exercises/HTML TUTORIALS"
+cd site
 py -m http.server 8080
 ```
 
@@ -98,7 +98,7 @@ Open: `http://localhost:8080`
 #### Windows (Command Prompt)
 
 ```bat
-cd exercises\HTML TUTORIALS
+cd site
 py -m http.server 8080
 ```
 
@@ -136,7 +136,7 @@ python -m http.server 8080
 
 - **Automatic Saves** — progress persists in your browser's localStorage
 - **Section Completion** — tracks which sections you've read (IntersectionObserver)
-- **Dashboard View** — index.html shows overall completion, confidence trends, streaks
+- **Dashboard View** — `site/index.html` shows overall completion, confidence trends, streaks
 - **Export Your Data** — download progress as JSON for backup or sharing
 - **Reset Anytime** — clear progress and start fresh from the footer
 
@@ -153,21 +153,21 @@ python -m http.server 8080
 ## Project Structure
 
 ```
-HTML TUTORIALS/
-├── README.md                           # This file
-├── index.html                          # Dashboard (tutorial overview & progress)
-├── 01-set-sail.html                    # Tutorial 1: Your First Steps
-├── 02-load-and-lock.html               # Tutorial 2: Static vs Flex Machines
-├── 03-beat-basics.html                 # Tutorial 3: Your First Pattern
-├── 04-audio-pool.html                  # Tutorial 4: Samples & Organization
-├── 05-slice-and-dice.html              # Tutorial 5: Chopping Loops
-├── 06-sample-locks.html                # Tutorial 6: Multiple Clips Per Track
-├── 07-loop-stretching.html             # Tutorial 7: Timestretch & BPM
-├── 08-parts-banks-scenes.html          # Tutorial 8: Multi-Section Arrangements
-├── data/
-│   └── progress.json                   # (Optional) server-side progress store
-└── assets/
-    └── (Future) hardware photos, screenshots, SVG reference files
+.
+├── README.md
+├── LICENSE
+├── .github/workflows/ci.yml            # Public CI checks
+├── docs/                               # Project documentation
+│   ├── audit-report.md
+│   ├── CONTENT-SYSTEM-README.md
+│   └── SOURCES-MANIFEST.md
+└── site/                               # Deployable static website
+    ├── index.html                      # Dashboard
+    ├── 01-set-sail.html ... 08-*.html # Tutorials
+    ├── credits.html
+    ├── videos.html
+    ├── assets/
+    └── data/
 ```
 
 Each tutorial HTML file is fully self-contained. No external CSS files, no build step.
@@ -178,7 +178,7 @@ Each tutorial HTML file is fully self-contained. No external CSS files, no build
 
 ### For Students
 
-1. **Start with the Dashboard** — open `index.html` to see all tutorials and your progress
+1. **Start with the Dashboard** — open `site/index.html` to see all tutorials and your progress
 2. **Pick a Tutorial** — click any tutorial to begin
 3. **Read, Watch, Interact** — follow the step-by-step sections
 4. **Rate Your Confidence** — honest self-assessment helps you identify weak spots
@@ -191,7 +191,7 @@ Each tutorial HTML file is fully self-contained. No external CSS files, no build
 2. **Follow the Design System** — use the same CSS variables, structure, and interactive patterns
 3. **Use localStorage** — save state with key `octatrack-tutorials-{tutorial-id}`
 4. **Add Navigation** — include prev/next tutorial links at the bottom
-5. **Update the Dashboard** — add your tutorial to the config in `index.html`
+5. **Update the Dashboard** — add your tutorial to the config in `site/index.html`
 6. **Test Locally** — run `python3 -m http.server 8080` and verify in your browser
 
 ### Tutorial Template Structure
@@ -241,7 +241,7 @@ Each tutorial HTML file is fully self-contained. No external CSS files, no build
 
 ### Resetting Progress
 
-1. Open the **Dashboard** (`index.html`)
+1. Open the **Dashboard** (`site/index.html`)
 2. Scroll to the footer
 3. Click **"Reset All Progress"**
 4. Confirm
@@ -340,7 +340,7 @@ From the dashboard footer, click **"Export My Data"** to download a JSON file of
 ### Can't find a tutorial
 
 - **Check:** Did you click the correct link from the dashboard?
-- **Fix:** Go back to `index.html` and verify the tutorial exists
+- **Fix:** Go back to `site/index.html` and verify the tutorial exists
 
 ---
 
@@ -473,4 +473,4 @@ This project stands on the work of the broader Octatrack community:
 - Educators including **Cuckoo**, **EZBOT**, **Dataline**, and other community teachers
 - The **Elektronauts** community and related forums for techniques, troubleshooting, and shared workflows
 
-For full attribution and links, see [credits.html](./credits.html).
+For full attribution and links, see [site/credits.html](./site/credits.html).

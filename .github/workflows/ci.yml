@@ -30,9 +30,9 @@ jobs:
           import json
           from pathlib import Path
 
-          files = sorted(Path('.').rglob('*.json'))
+          files = sorted(Path('site').rglob('*.json'))
           if not files:
-              raise SystemExit('No JSON files found')
+              raise SystemExit('No JSON files found under site/')
 
           for p in files:
               with p.open('r', encoding='utf-8') as f:
@@ -46,9 +46,9 @@ jobs:
           from pathlib import Path
           import xml.etree.ElementTree as ET
 
-          files = sorted(Path('.').rglob('*.svg'))
+          files = sorted(Path('site').rglob('*.svg'))
           if not files:
-              raise SystemExit('No SVG files found')
+              raise SystemExit('No SVG files found under site/')
 
           for p in files:
               ET.parse(p)
@@ -61,9 +61,9 @@ jobs:
           import re
           from pathlib import Path
 
-          html_files = sorted(Path('.').glob('*.html'))
+          html_files = sorted(Path('site').glob('*.html'))
           if not html_files:
-              raise SystemExit('No HTML files found at repo root')
+              raise SystemExit('No HTML files found under site/')
 
           href_src_re = re.compile(r'''(?:href|src)=["']([^"']+)["']''', re.IGNORECASE)
           errors = []
@@ -92,7 +92,7 @@ jobs:
       - name: JavaScript syntax check
         run: |
           shopt -s nullglob
-          files=(assets/*.js)
+          files=(site/assets/*.js)
           if [ ${#files[@]} -eq 0 ]; then
             echo "No JS files to check"
             exit 0
