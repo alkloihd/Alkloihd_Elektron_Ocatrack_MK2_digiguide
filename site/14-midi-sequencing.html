@@ -1,0 +1,2552 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14 - MIDI Sequencer &amp; External Sync</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* TOP BAR */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-cyan);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 40px;
+        z-index: 1000;
+      }
+
+      .top-bar a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .top-bar a:hover {
+        color: var(--accent-lime);
+        transform: translateY(-2px);
+      }
+
+      .top-bar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-heading);
+        flex: 1;
+      }
+
+      .top-bar-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .difficulty {
+        color: var(--accent-orange);
+        border: 2px solid var(--accent-orange);
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: 'Space Mono', monospace;
+      }
+
+      .time {
+        color: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
+        padding: 4px 10px;
+      }
+
+      /* LAYOUT */
+      .container {
+        display: flex;
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        height: calc(100vh - 60px);
+        z-index: 100;
+      }
+
+      .sidebar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent-magenta);
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-magenta);
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.75rem;
+      }
+
+      .sidebar-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        background-color: transparent;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-nav-item:hover {
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-magenta);
+      }
+
+      .sidebar-nav-item.active {
+        border-color: var(--accent-cyan);
+        background-color: var(--highlight-bg);
+        color: var(--accent-cyan);
+      }
+
+      .sidebar-checkbox {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--text-muted);
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--accent-lime);
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-checkbox.checked {
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      /* MAIN CONTENT */
+      .main {
+        margin-left: 280px;
+        padding: 40px;
+        max-width: 900px;
+        width: 100%;
+      }
+
+      .section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .quiz-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .quiz-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .confidence-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .confidence-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      h2 {
+        font-family: 'Space Mono', monospace;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-heading);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-cyan);
+      }
+
+      h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent-magenta);
+        margin: 24px 0 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      p {
+        margin-bottom: 16px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 16px 24px;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+
+      strong {
+        color: var(--text-heading);
+      }
+
+      /* BUTTON REFERENCES */
+      .button-key {
+        display: inline-block;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--accent-cyan);
+        color: var(--accent-cyan);
+        padding: 2px 10px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin: 2px;
+      }
+
+      .button-sequence {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 12px 0;
+        flex-wrap: wrap;
+      }
+
+      /* STEP GUIDES */
+      .step-guide {
+        margin: 20px 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+        padding: 16px;
+        background: var(--bg-primary);
+        border-left: 3px solid var(--accent-cyan);
+      }
+
+      .step-number {
+        font-family: 'Space Mono', monospace;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .step-content {
+        flex: 1;
+      }
+
+      .step-content p {
+        margin-bottom: 8px;
+      }
+
+      /* INFO BOXES */
+      .info-box {
+        padding: 16px 20px;
+        margin: 16px 0;
+        border-left: 3px solid var(--accent-cyan);
+        background: var(--highlight-bg);
+      }
+
+      .info-box.warning {
+        border-left-color: var(--accent-orange);
+        background: var(--warning-bg);
+      }
+
+      .info-box.protip {
+        border-left-color: var(--accent-lime);
+        background: var(--protip-bg);
+      }
+
+      .info-box p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* PARAM TABLE */
+      .param-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      }
+
+      .param-table th {
+        background: var(--bg-tertiary);
+        color: var(--accent-cyan);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 10px 14px;
+        text-align: left;
+        border: 1px solid var(--border-primary);
+      }
+
+      .param-table td {
+        padding: 10px 14px;
+        border: 1px solid var(--border-subtle);
+        vertical-align: top;
+      }
+
+      .param-table tr:nth-child(even) {
+        background: var(--bg-primary);
+      }
+
+      .param-table code {
+        background: var(--code-bg);
+        color: var(--accent-magenta);
+        padding: 1px 6px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* RECIPE CARDS */
+      .recipe-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .recipe-card h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent-orange);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      /* VIDEO EMBED */
+      .video-embed {
+        margin: 20px 0;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 16px;
+      }
+
+      .video-embed-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent-magenta);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+      }
+
+      .video-embed iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border: none;
+      }
+
+      /* SVG DIAGRAM */
+      .diagram-container {
+        margin: 24px 0;
+        padding: 20px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        overflow-x: auto;
+      }
+
+      .diagram-container svg {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* INTERACTIVE MIDI WIDGET */
+      .midi-widget {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .midi-widget-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+      }
+
+      .midi-seq-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 6px;
+      }
+
+      .midi-seq-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        color: var(--text-muted);
+        width: 60px;
+        text-align: right;
+        margin-right: 8px;
+      }
+
+      .midi-seq-step {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border-primary);
+        background: var(--bg-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        color: var(--text-muted);
+        transition: all 0.15s;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      .midi-seq-step:hover {
+        border-color: var(--accent-cyan);
+      }
+
+      .midi-seq-step.note-on {
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+        border-color: var(--accent-cyan);
+        font-weight: 700;
+      }
+
+      .midi-seq-step.cc-on {
+        background: var(--accent-magenta);
+        color: var(--bg-primary);
+        border-color: var(--accent-magenta);
+        font-weight: 700;
+      }
+
+      .midi-seq-step.arp-on {
+        background: var(--accent-orange);
+        color: var(--bg-primary);
+        border-color: var(--accent-orange);
+        font-weight: 700;
+      }
+
+      .midi-seq-step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 18px;
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        color: var(--text-muted);
+        text-align: center;
+      }
+
+      .midi-controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+
+      .midi-controls button {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        color: var(--text-primary);
+        padding: 6px 14px;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+      }
+
+      .midi-controls button:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      .midi-legend {
+        display: flex;
+        gap: 16px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .midi-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-family: 'Space Mono', monospace;
+        color: var(--text-muted);
+      }
+
+      .midi-legend-swatch {
+        width: 12px;
+        height: 12px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        border-color: var(--accent-magenta) !important;
+      }
+
+      .quiz-section h2 {
+        border-bottom-color: var(--accent-magenta);
+      }
+
+      .quiz-question {
+        margin-bottom: 30px;
+      }
+
+      .quiz-q {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text-heading);
+        margin-bottom: 12px;
+      }
+
+      .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .quiz-option {
+        padding: 10px 16px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+      }
+
+      .quiz-option:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      .quiz-option.selected {
+        border-color: var(--accent-cyan);
+        background: var(--accent-cyan-glow);
+        color: var(--accent-cyan);
+      }
+
+      .quiz-option.correct {
+        border-color: var(--accent-lime);
+        background: var(--accent-lime-glow);
+        color: var(--accent-lime);
+      }
+
+      .quiz-option.incorrect {
+        border-color: var(--accent-error);
+        background: rgba(255, 68, 68, 0.1);
+        color: var(--accent-error);
+      }
+
+      .quiz-feedback {
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: none;
+      }
+
+      .quiz-feedback.show {
+        display: block;
+      }
+
+      /* CONFIDENCE */
+      .confidence-section {
+        border-color: var(--accent-magenta) !important;
+      }
+
+      .confidence-section h2 {
+        border-bottom-color: var(--accent-magenta);
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .confidence-btn {
+        width: 48px;
+        height: 48px;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        color: var(--text-muted);
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-btn:hover {
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
+      }
+
+      .confidence-btn.selected {
+        background: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 60px 0 40px;
+        margin-left: 280px;
+        padding: 0 40px;
+      }
+
+      .bottom-nav a {
+        flex: 1;
+        padding: 20px;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        color: var(--accent-cyan);
+        text-decoration: none;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .bottom-nav a:hover {
+        border-color: var(--accent-cyan);
+        color: var(--text-heading);
+        transform: translateY(-2px);
+      }
+
+      /* SUBMIT BUTTON */
+      .submit-btn {
+        background: var(--accent-magenta);
+        border: none;
+        color: var(--text-heading);
+        padding: 10px 30px;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        transition: all 0.2s;
+      }
+
+      .submit-btn:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+
+        .container {
+          flex-direction: column;
+        }
+
+        .main {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        .bottom-nav {
+          margin-left: 0;
+          padding: 0 20px;
+        }
+
+        .midi-seq-step {
+          width: 28px;
+          height: 28px;
+          font-size: 8px;
+        }
+
+        .midi-seq-label {
+          width: 44px;
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <a href="index.html">&larr; DASHBOARD</a>
+      <div class="top-bar-title">14 &mdash; MIDI Sequencer &amp; External Sync</div>
+      <div class="top-bar-meta">
+        <span class="difficulty">Advanced</span>
+        <span class="time">30 MIN</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="sidebar">
+        <div class="sidebar-title">SECTIONS</div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="#midi-tracks-overview" class="sidebar-nav-item active" data-section="midi-tracks-overview">
+                <span class="sidebar-checkbox"></span>
+                MIDI TRACKS OVERVIEW
+              </a>
+            </li>
+            <li>
+              <a href="#note-modes" class="sidebar-nav-item" data-section="note-modes">
+                <span class="sidebar-checkbox"></span>
+                NOTE MODES
+              </a>
+            </li>
+            <li>
+              <a href="#midi-arpeggiator" class="sidebar-nav-item" data-section="midi-arpeggiator">
+                <span class="sidebar-checkbox"></span>
+                MIDI ARPEGGIATOR
+              </a>
+            </li>
+            <li>
+              <a href="#midi-lfo-cc" class="sidebar-nav-item" data-section="midi-lfo-cc">
+                <span class="sidebar-checkbox"></span>
+                MIDI LFO &amp; CC CONTROL
+              </a>
+            </li>
+            <li>
+              <a href="#sync-setup" class="sidebar-nav-item" data-section="sync-setup">
+                <span class="sidebar-checkbox"></span>
+                SYNC SETUP
+              </a>
+            </li>
+            <li>
+              <a href="#ableton-integration" class="sidebar-nav-item" data-section="ableton-integration">
+                <span class="sidebar-checkbox"></span>
+                ABLETON INTEGRATION
+              </a>
+            </li>
+            <li>
+              <a href="#practical-exercise" class="sidebar-nav-item" data-section="practical-exercise">
+                <span class="sidebar-checkbox"></span>
+                PRACTICAL EXERCISE
+              </a>
+            </li>
+            <li>
+              <a href="#quiz" class="sidebar-nav-item" data-section="quiz">
+                <span class="sidebar-checkbox"></span>
+                QUIZ
+              </a>
+            </li>
+            <li>
+              <a href="#confidence" class="sidebar-nav-item" data-section="confidence">
+                <span class="sidebar-checkbox"></span>
+                CONFIDENCE
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-primary)">
+          <div class="sidebar-title" style="font-size: 11px; margin-bottom: 0.75rem">PREREQUISITES</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem">
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="03-beat-basics.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">03 &mdash; Beat Basics</a>
+            </li>
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="08-parts-banks-scenes.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">
+                08 &mdash; Parts, Banks &amp; Scenes
+              </a>
+            </li>
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="09-trig-conditions.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">09 &mdash; Trig Conditions</a>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top: 0; padding-top: 1rem; border-top: 2px solid var(--border-primary)">
+          <div
+            class="progress-label"
+            style="margin-bottom: 0.5rem; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-magenta); font-weight: 700"
+          >
+            COMPLETION
+          </div>
+          <div class="progress-bar-container" style="height: 6px; background: var(--bg-primary); border: 1px solid var(--border-primary); overflow: hidden">
+            <div
+              class="progress-fill"
+              id="sidebarProgress"
+              style="height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta)); width: 0%; transition: width 0.5s"
+            ></div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 0.5rem">
+            <span id="completionPercent">0</span>
+            %
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <!-- SECTION 1: MIDI TRACKS OVERVIEW -->
+        <section class="section" id="midi-tracks-overview" data-section="midi-tracks-overview">
+          <h2>MIDI Tracks Overview</h2>
+
+          <p>
+            The Octatrack MK2 is not just an audio sampler &mdash; it contains a full
+            <strong>8-track MIDI sequencer</strong>
+            that runs alongside the 8 audio tracks. These MIDI tracks do not generate any sound internally. Instead, they send note data, CC messages, program changes, and pitch bend information out
+            through the MIDI OUT port to control external synthesizers, drum machines, and other MIDI-equipped gear.
+          </p>
+
+          <p>Press the [MIDI] button to enter MIDI mode. The [MIDI] LED lights up and the screen switches to show the 8 MIDI tracks instead of the 8 audio tracks. Each MIDI track has its own:</p>
+          <ul>
+            <li>
+              <strong>16-step sequencer</strong>
+              with the same trig system as audio tracks
+            </li>
+            <li>
+              <strong>Parameter locks</strong>
+              on every step (note, velocity, CC values)
+            </li>
+            <li>
+              <strong>3 dedicated MIDI LFOs</strong>
+              for automating external parameters
+            </li>
+            <li>
+              <strong>Built-in arpeggiator</strong>
+              with multiple modes and up to 16-step custom patterns
+            </li>
+            <li>
+              <strong>10 assignable CC slots</strong>
+              across two CTRL pages
+            </li>
+            <li>
+              <strong>Micro timing and trig conditions</strong>
+              (FILL, probability, A:B &mdash; same as audio)
+            </li>
+          </ul>
+
+          <h3>Accessing MIDI Mode</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p>
+                  <strong>Press [MIDI]</strong>
+                  to switch to MIDI mode. The LED lights up.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[MIDI]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p>
+                  <strong>Select a MIDI track</strong>
+                  by pressing [T1] through [T8]. The screen shows the MIDI channel assigned to each track. An "X" means no MIDI channel is assigned.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[T1]</span>
+                  <span style="color: var(--text-muted)">through</span>
+                  <span class="button-key">[T8]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p>
+                  <strong>Press [MIDI] again</strong>
+                  to return to audio mode.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 15 &mdash; The MIDI Sequencer (page 90). Press [FUNC] + [MIDI] to jump directly to the MIDI SYNC settings.
+            </p>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Channel conflict warning:</strong>
+              If an audio track and a MIDI track share the same MIDI channel, the MIDI track will block the audio track from sending out data, and the audio track will block the MIDI track from
+              receiving data. Avoid assigning the same MIDI channels to both audio and MIDI tracks.
+            </p>
+          </div>
+
+          <!-- SVG: MIDI Architecture Diagram -->
+          <div class="diagram-container">
+            <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Space Mono', monospace">
+              <text x="380" y="28" fill="#00ffff" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2">OCTATRACK MIDI ARCHITECTURE</text>
+
+              <!-- OT Box -->
+              <rect x="180" y="50" width="400" height="240" fill="none" stroke="#00ffff" stroke-width="2" />
+              <text x="380" y="72" fill="#00ffff" font-size="11" font-weight="700" text-anchor="middle">OCTATRACK MK2</text>
+
+              <!-- Audio Tracks -->
+              <rect x="200" y="88" width="160" height="80" fill="#0a1a1a" stroke="#333333" stroke-width="1" />
+              <text x="280" y="108" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">8 AUDIO TRACKS</text>
+              <text x="280" y="125" fill="#666666" font-size="9" text-anchor="middle">Flex / Static / Thru</text>
+              <text x="280" y="140" fill="#666666" font-size="9" text-anchor="middle">Neighbor / Pickup</text>
+              <text x="280" y="158" fill="#00ff41" font-size="9" text-anchor="middle">SOUND OUTPUT</text>
+
+              <!-- MIDI Tracks -->
+              <rect x="400" y="88" width="160" height="80" fill="#1a0a1a" stroke="#ff00ff" stroke-width="1" />
+              <text x="480" y="108" fill="#ff00ff" font-size="10" font-weight="700" text-anchor="middle">8 MIDI TRACKS</text>
+              <text x="480" y="125" fill="#666666" font-size="9" text-anchor="middle">Notes / CCs / PB / AT</text>
+              <text x="480" y="140" fill="#666666" font-size="9" text-anchor="middle">Arpeggiator / 3 LFOs</text>
+              <text x="480" y="158" fill="#ffaa00" font-size="9" text-anchor="middle">DATA OUTPUT ONLY</text>
+
+              <!-- Shared sequencer -->
+              <rect x="220" y="185" width="320" height="36" fill="#0a0a0a" stroke="#ffaa00" stroke-width="1" />
+              <text x="380" y="208" fill="#ffaa00" font-size="10" font-weight="700" text-anchor="middle">SHARED 16-STEP SEQUENCER PER PATTERN</text>
+
+              <!-- Mute keys -->
+              <rect x="220" y="235" width="320" height="36" fill="#0a0a0a" stroke="#333333" stroke-width="1" />
+              <text x="380" y="250" fill="#666666" font-size="9" text-anchor="middle">[TRIG 1-8] = mute audio tracks</text>
+              <text x="380" y="264" fill="#666666" font-size="9" text-anchor="middle">[TRIG 9-16] = mute MIDI tracks</text>
+
+              <!-- MIDI OUT -->
+              <line x1="480" y1="168" x2="480" y2="310" stroke="#ff00ff" stroke-width="1" stroke-dasharray="4,4" />
+              <rect x="400" y="310" width="160" height="36" fill="none" stroke="#ff00ff" stroke-width="2" />
+              <text x="480" y="333" fill="#ff00ff" font-size="10" font-weight="700" text-anchor="middle">MIDI OUT PORT</text>
+
+              <!-- External Gear -->
+              <line x1="480" y1="346" x2="480" y2="370" stroke="#ff00ff" stroke-width="1" />
+              <text x="480" y="390" fill="#666666" font-size="10" text-anchor="middle">External Synths / Drum Machines / DAW</text>
+
+              <!-- Audio OUT -->
+              <line x1="280" y1="168" x2="280" y2="310" stroke="#00ff41" stroke-width="1" stroke-dasharray="4,4" />
+              <rect x="200" y="310" width="160" height="36" fill="none" stroke="#00ff41" stroke-width="2" />
+              <text x="280" y="333" fill="#00ff41" font-size="10" font-weight="700" text-anchor="middle">AUDIO OUTPUTS</text>
+
+              <!-- Toggle key -->
+              <rect x="10" y="130" width="140" height="36" fill="none" stroke="#00ffff" stroke-width="1" stroke-dasharray="4,4" />
+              <text x="80" y="153" fill="#00ffff" font-size="10" font-weight="700" text-anchor="middle">[MIDI] TO TOGGLE</text>
+              <line x1="150" y1="148" x2="180" y2="148" stroke="#00ffff" stroke-width="1" />
+            </svg>
+          </div>
+
+          <h3>MIDI Tracks vs Audio Tracks</h3>
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Audio Tracks</th>
+                <th scope="col">MIDI Tracks</th>
+              </tr>
+              <tr>
+                <td>Sound generation</td>
+                <td>Yes (samples, inputs)</td>
+                <td>No (data only)</td>
+              </tr>
+              <tr>
+                <td>16-step sequencer</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Parameter locks</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Trig conditions</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Micro timing</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Slide trigs</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Recorder trigs</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>LFOs</td>
+                <td>3 per track</td>
+                <td>3 per track (MIDI-specific)</td>
+              </tr>
+              <tr>
+                <td>Arpeggiator</td>
+                <td>No</td>
+                <td>Yes (built-in)</td>
+              </tr>
+              <tr>
+                <td>Scene locks</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Muting tip:</strong>
+              When in mute mode ([FUNC] + [BANK] on MK2), [TRIG 1] through [TRIG 8] mute audio tracks and [TRIG 9] through [TRIG 16] mute MIDI tracks. This works regardless of whether you are in audio
+              or MIDI editing mode.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 2: NOTE MODES -->
+        <section class="section" id="note-modes" data-section="note-modes">
+          <h2>Note Modes</h2>
+
+          <p>
+            Each MIDI track has a
+            <strong>NOTE MAIN</strong>
+            page and a
+            <strong>NOTE SETUP</strong>
+            page. These are accessed by pressing [SRC] for the main page, or [FUNC] + [SRC] (or double-tap [SRC]) for the setup page, while in MIDI mode.
+          </p>
+
+          <h3>NOTE MAIN Page Parameters</h3>
+          <p>The NOTE MAIN page is where you set what notes the MIDI track sends out. Access it by pressing [SRC] while in MIDI mode.</p>
+
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Knob</th>
+                <th scope="col">What It Does</th>
+              </tr>
+              <tr>
+                <td><code>NOTE</code></td>
+                <td>A</td>
+                <td>Root note to send. Hold a [TRIG] key in [REC] mode to see a mini-keyboard on screen. Turn knob A to set the note.</td>
+              </tr>
+              <tr>
+                <td><code>VEL</code></td>
+                <td>B</td>
+                <td>Velocity of the note (0&ndash;127). A value of 0 sends a NOTE OFF command.</td>
+              </tr>
+              <tr>
+                <td><code>LEN</code></td>
+                <td>C</td>
+                <td>Duration of the note. When it expires, a NOTE OFF is sent. Max = infinite length. Also controls arpeggio duration.</td>
+              </tr>
+              <tr>
+                <td><code>NOT2&ndash;NOT4</code></td>
+                <td>D&ndash;F</td>
+                <td>Add up to 3 additional notes offset from the root to create chords (up to 4 notes total). Value of 0 removes the offset note.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Chord trick:</strong>
+              Set NOTE to C3, NOT2 to +4 (E3), NOT3 to +7 (G3), NOT4 to +12 (C4) &mdash; you now have a C major chord with an octave doubling, all from one trig on one MIDI track.
+            </p>
+          </div>
+
+          <h3>NOTE SETUP Page Parameters</h3>
+          <p>Access by pressing [FUNC] + [SRC] or double-tapping [SRC] while in MIDI mode. This is where you assign the MIDI channel.</p>
+
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Knob</th>
+                <th scope="col">What It Does</th>
+              </tr>
+              <tr>
+                <td><code>CHAN</code></td>
+                <td>A</td>
+                <td>MIDI channel this track sends data on (1&ndash;16, or OFF). Press the knob to confirm your selection.</td>
+              </tr>
+              <tr>
+                <td><code>BANK</code></td>
+                <td>B</td>
+                <td>Bank change message (MSB, 0&ndash;127). Sent when switching to a pattern linked to another Part. Max = OFF.</td>
+              </tr>
+              <tr>
+                <td><code>PROG</code></td>
+                <td>C</td>
+                <td>Program change message (0&ndash;127). Sent when switching to a pattern linked to another Part. Max = OFF.</td>
+              </tr>
+              <tr>
+                <td><code>SBNK</code></td>
+                <td>D</td>
+                <td>Sub-bank change message (LSB, 0&ndash;127). Max = OFF.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Important:</strong>
+              When you select a value in the NOTE SETUP menu, the parameter graphic becomes inverted. This means the value has not been activated yet. You must press the corresponding DATA ENTRY knob
+              or [YES] to confirm and send the change.
+            </p>
+          </div>
+
+          <h3>Trig Modes in MIDI Mode</h3>
+          <p>The [TRIG] keys behave differently in MIDI mode depending on the current trig mode:</p>
+          <ul>
+            <li>
+              <strong>STANDARD:</strong>
+              [TRIG 1]&ndash;[TRIG 8] send notes C1&ndash;G1, [TRIG 9]&ndash;[TRIG 16] send C2&ndash;G2
+            </li>
+            <li>
+              <strong>CHROMATIC:</strong>
+              [TRIG] keys send note on/off commands on the active MIDI track's channel, mapped chromatically across 2+ octaves
+            </li>
+            <li>
+              <strong>SLOTS / SLICES:</strong>
+              [TRIG] keys map to sound slots or slice positions &mdash; useful for controlling external samplers
+            </li>
+          </ul>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 15.4.1 &mdash; NOTE MAIN (page 91), Section 15.4.2 &mdash; NOTE SETUP (page 92).
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: MIDI ARPEGGIATOR -->
+        <section class="section" id="midi-arpeggiator" data-section="midi-arpeggiator">
+          <h2>MIDI Arpeggiator</h2>
+
+          <p>
+            Every MIDI track has a built-in arpeggiator that generates rhythmical note progressions from the notes you place on each trig. The arpeggiator takes your root note (and any chord notes
+            from NOT2&ndash;NOT4) and plays them in sequence at a speed synchronized to the project BPM.
+          </p>
+
+          <h3>Arpeggiator MAIN Page</h3>
+          <p>Access by pressing [AMP] while in MIDI mode. In MIDI mode, the [AMP] key opens the ARPEGGIATOR parameter pages instead of the AMP pages used by audio tracks.</p>
+
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Knob</th>
+                <th scope="col">What It Does</th>
+              </tr>
+              <tr>
+                <td><code>TRAN</code></td>
+                <td>A</td>
+                <td>Transpose the arpeggio up or down by semitones. Affects note trigs even if MODE is OFF.</td>
+              </tr>
+              <tr>
+                <td><code>LEG</code></td>
+                <td>B</td>
+                <td>Legato mode. ON = overlapping notes play legato (old note released after new one). OFF = note off sent before each new note.</td>
+              </tr>
+              <tr>
+                <td><code>MODE</code></td>
+                <td>C</td>
+                <td>Arpeggiator mode &mdash; see table below</td>
+              </tr>
+              <tr>
+                <td><code>SPD</code></td>
+                <td>D</td>
+                <td>Speed, synced to BPM. 6 = 16th notes, 12 = 8th notes, 24 = quarter notes.</td>
+              </tr>
+              <tr>
+                <td><code>RNGE</code></td>
+                <td>E</td>
+                <td>Octave range. After each arpeggio cycle, notes transpose up one octave until reaching this limit, then reset.</td>
+              </tr>
+              <tr>
+                <td><code>NLEN</code></td>
+                <td>F</td>
+                <td>Note length of arpeggiated notes (separate from the LEN parameter on NOTE MAIN).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Arpeggiator Modes</h3>
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Mode</th>
+                <th scope="col">Behavior</th>
+              </tr>
+              <tr>
+                <td><code>OFF</code></td>
+                <td>Arpeggiator disabled</td>
+              </tr>
+              <tr>
+                <td><code>TRUE</code></td>
+                <td>Plays notes in the order they were inserted</td>
+              </tr>
+              <tr>
+                <td><code>UP</code></td>
+                <td>Ascending order, lowest to highest, per octave</td>
+              </tr>
+              <tr>
+                <td><code>DOWN</code></td>
+                <td>Descending order, highest to lowest, per octave</td>
+              </tr>
+              <tr>
+                <td><code>CYCL</code></td>
+                <td>Ascending then descending (ping-pong)</td>
+              </tr>
+              <tr>
+                <td><code>SHFL</code></td>
+                <td>Random order within each octave range; moves to next octave after all notes played</td>
+              </tr>
+              <tr>
+                <td><code>RANDOM</code></td>
+                <td>Fully random playback of arpeggiated notes</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Arpeggiator SETUP Page</h3>
+          <p>Access by pressing [FUNC] + [AMP] or double-tapping [AMP] while in MIDI mode. This page lets you customize the arpeggio pattern step by step.</p>
+          <ul>
+            <li>The [TRIG] keys show the arpeggio length &mdash; lit keys are active steps, set length with knob C</li>
+            <li>
+              <strong>Green [TRIG]</strong>
+              = active arpeggio step. Press to deactivate (turns
+              <strong>red</strong>
+              ).
+            </li>
+            <li>Hold a [TRIG] key and turn the [LEVEL] knob or press [UP]/[DOWN] to add a note offset to that step</li>
+            <li>Knob F sets a key scale constraint &mdash; when not OFF, all notes are quantized to the selected scale</li>
+            <li>[FUNC] + [LEFT]/[RIGHT] rotates the arpeggio sequence</li>
+          </ul>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Pro tip:</strong>
+              Set a 4-note chord (NOTE + NOT2&ndash;NOT4), then set MODE to UP with RNGE = 2OCT and SPD = 6. You get a classic 16th-note arpeggio spanning 2 octaves &mdash; perfect for acid-style
+              basslines or trance leads on an external synth. P-lock the MODE on different steps to switch between UP and DOWN mid-pattern.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 15.4.3 &mdash; Arpeggiator Main (page 92), Section 15.4.4 &mdash; Arpeggiator Setup (page 93).
+            </p>
+          </div>
+
+          <!-- Video Embed -->
+          <div class="video-embed">
+            <div class="video-embed-title">Watch: Octatrack Tip Video #7 &mdash; MIDI (Elektron Official)</div>
+            <iframe
+              src="https://www.youtube.com/embed/LF9FLufV6ac"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Octatrack Tip Video 7 MIDI"
+            ></iframe>
+          </div>
+        </section>
+
+        <!-- SECTION 4: MIDI LFO & CC CONTROL -->
+        <section class="section" id="midi-lfo-cc" data-section="midi-lfo-cc">
+          <h2>MIDI LFO &amp; CC Control</h2>
+
+          <p>
+            Each MIDI track has
+            <strong>3 dedicated MIDI LFOs</strong>
+            and
+            <strong>10 assignable CC slots</strong>
+            split across two CTRL pages. This is how you automate parameters on external synths &mdash; filter sweeps, resonance movements, effect sends, and anything else your gear exposes via MIDI
+            CC.
+          </p>
+
+          <h3>CTRL 1 Page (4 CC Slots + Pitch Bend + Aftertouch)</h3>
+          <p>Access the CTRL 1 MAIN page by pressing [FX1] while in MIDI mode. Access CTRL 1 SETUP by pressing [FUNC] + [FX1] or double-tapping [FX1].</p>
+
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Page</th>
+                <th scope="col">Parameters</th>
+                <th scope="col">What They Do</th>
+              </tr>
+              <tr>
+                <td><strong>CTRL 1 MAIN</strong></td>
+                <td>
+                  <code>PB</code>
+                  ,
+                  <code>AT</code>
+                  ,
+                  <code>CC1&ndash;CC4</code>
+                </td>
+                <td>PB = pitch bend, AT = aftertouch, CC1&ndash;CC4 = values for the CCs assigned in SETUP. Default is OFF &mdash; enable with [FUNC] + knob press.</td>
+              </tr>
+              <tr>
+                <td><strong>CTRL 1 SETUP</strong></td>
+                <td><code>CC1&ndash;CC4</code></td>
+                <td>
+                  Select which CC numbers CC1&ndash;CC4 control. Use [FUNC] + knob C&ndash;F for
+                  <strong>MIDI CC LEARN</strong>
+                  .
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>CTRL 2 Page (6 CC Slots)</h3>
+          <p>Access the CTRL 2 MAIN page by pressing [FX2] while in MIDI mode. Access CTRL 2 SETUP by pressing [FUNC] + [FX2] or double-tapping [FX2].</p>
+
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Page</th>
+                <th scope="col">Parameters</th>
+                <th scope="col">What They Do</th>
+              </tr>
+              <tr>
+                <td><strong>CTRL 2 MAIN</strong></td>
+                <td><code>CC5&ndash;CC10</code></td>
+                <td>Values for the CCs assigned in CTRL 2 SETUP. Same enable/disable as CTRL 1.</td>
+              </tr>
+              <tr>
+                <td><strong>CTRL 2 SETUP</strong></td>
+                <td><code>CC5&ndash;CC10</code></td>
+                <td>Select which CC numbers CC5&ndash;CC10 control. MIDI CC LEARN available here too.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="recipe-card">
+            <h4>MIDI CC Learn Workflow</h4>
+            <p>Instead of looking up CC numbers in your synth's manual, use MIDI CC LEARN:</p>
+            <div class="step-guide">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <p>In MIDI mode, select the track controlling your synth.</p>
+                  <div class="button-sequence">
+                    <span class="button-key">[MIDI]</span>
+                    <span style="color: var(--text-muted)">&rarr;</span>
+                    <span class="button-key">[T1]</span>
+                  </div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <p>Open CTRL 1 SETUP by double-tapping [FX1] or pressing [FUNC] + [FX1].</p>
+                  <div class="button-sequence">
+                    <span class="button-key">[FUNC]</span>
+                    <span style="color: var(--text-muted)">+</span>
+                    <span class="button-key">[FX1]</span>
+                  </div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <p>Press [FUNC] + knob C to enter MIDI CC LEARN for the CC1 slot.</p>
+                  <div class="button-sequence">
+                    <span class="button-key">[FUNC]</span>
+                    <span style="color: var(--text-muted)">+ knob C</span>
+                  </div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <p>
+                    <strong>Turn the cutoff knob on your synth.</strong>
+                    The OT reads the incoming CC message and auto-assigns it to the CC1 slot.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3>MIDI LFOs</h3>
+          <p>
+            Access the MIDI LFO MAIN page by pressing [LFO] while in MIDI mode. The 3 MIDI LFOs work exactly like audio LFOs (same modes: FREE, TRIG, HOLD, ONE, HALF, etc.) but they are exclusive to
+            MIDI tracks and can target any MIDI track parameter, including CC values.
+          </p>
+
+          <p>
+            The MIDI LFO SETUP page (press [FUNC] + [LFO]) lets you set LFO destinations and access the
+            <strong>LFO Designer</strong>
+            for custom waveforms. MIDI LFO designer waveforms are separate from audio LFO designer waveforms.
+          </p>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Filter sweep recipe:</strong>
+              Assign CC1 to your synth's filter cutoff (via MIDI CC LEARN). Then on the MIDI LFO SETUP page, set LFO1's destination to CC1. Set LFO1 to TRIG mode, triangle wave, SPD = 24 (1 bar
+              cycle), DEPTH = 64. Every note trig will now start a smooth filter sweep on your external synth, all sequenced from the Octatrack.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 15.4.5 &mdash; MIDI LFO Main (page 93), Section 15.4.6 &mdash; MIDI LFO Setup (page 94), Section 15.4.7&ndash;15.4.10 &mdash; CTRL 1/2 Main &amp; Setup (pages 94&ndash;95).
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 5: SYNC SETUP -->
+        <section class="section" id="sync-setup" data-section="sync-setup">
+          <h2>Sync Setup</h2>
+
+          <p>
+            The Octatrack can be a MIDI
+            <strong>master</strong>
+            (sending clock and transport to other gear) or a
+            <strong>slave</strong>
+            (receiving clock from a DAW or another device). All sync settings live under PROJECT &gt; MIDI &gt; SYNC.
+          </p>
+
+          <h3>Accessing Sync Settings</h3>
+          <div class="button-sequence">
+            <span class="button-key">[FUNC]</span>
+            <span style="color: var(--text-muted)">+</span>
+            <span class="button-key">[MIDI]</span>
+            <span style="color: var(--text-muted)">or</span>
+            <span class="button-key">[PROJ]</span>
+            <span style="color: var(--text-muted)">&rarr; MIDI &rarr; SYNC &rarr;</span>
+            <span class="button-key">[YES]</span>
+          </div>
+
+          <h3>Sync Parameters</h3>
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">What It Does</th>
+              </tr>
+              <tr>
+                <td><code>TRANSPORT SEND</code></td>
+                <td>When active, the OT sends system realtime messages: play, stop, continue, song position pointer.</td>
+              </tr>
+              <tr>
+                <td><code>TRANSPORT RECEIVE</code></td>
+                <td>When active, the OT responds to incoming play, stop, continue, and song position pointer.</td>
+              </tr>
+              <tr>
+                <td><code>CLOCK SEND</code></td>
+                <td>When active, the OT transmits MIDI clock. External gear syncs to OT tempo.</td>
+              </tr>
+              <tr>
+                <td><code>CLOCK RECEIVE</code></td>
+                <td>When active, the OT receives MIDI clock from an external device and syncs its BPM to it.</td>
+              </tr>
+              <tr>
+                <td><code>PROG CH SEND</code></td>
+                <td>Sends program change messages when the active OT pattern changes. Useful for switching presets on synths when you switch patterns.</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>CHANNEL</code>
+                  (send)
+                </td>
+                <td>Which MIDI channel program changes are sent on. AUTO = first audio track channel not used by any MIDI track.</td>
+              </tr>
+              <tr>
+                <td><code>PROG CH RECEIVE</code></td>
+                <td>OT listens for incoming program change messages to switch its own patterns externally.</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>CHANNEL</code>
+                  (receive)
+                </td>
+                <td>Which MIDI channel to listen on for incoming program changes. AUTO = any channel in the CHANNELS menu.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- SVG: Sync Flow Diagram -->
+          <div class="diagram-container">
+            <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Space Mono', monospace">
+              <text x="380" y="24" fill="#00ffff" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2">SYNC CONFIGURATIONS</text>
+
+              <!-- OT as Master -->
+              <rect x="30" y="50" width="320" height="250" fill="#0a0a0a" stroke="#00ff41" stroke-width="2" />
+              <text x="190" y="72" fill="#00ff41" font-size="12" font-weight="700" text-anchor="middle">OT AS MASTER</text>
+
+              <rect x="110" y="88" width="160" height="36" fill="none" stroke="#00ffff" stroke-width="1" />
+              <text x="190" y="111" fill="#00ffff" font-size="10" font-weight="700" text-anchor="middle">OCTATRACK MK2</text>
+
+              <text x="190" y="145" fill="#00ff41" font-size="9" text-anchor="middle">CLOCK SEND = ON</text>
+              <text x="190" y="160" fill="#00ff41" font-size="9" text-anchor="middle">TRANSPORT SEND = ON</text>
+
+              <line x1="190" y1="170" x2="190" y2="195" stroke="#00ff41" stroke-width="1" />
+              <text x="190" y="188" fill="#666666" font-size="8" text-anchor="middle">MIDI OUT</text>
+
+              <rect x="60" y="200" width="120" height="30" fill="#1a0a1a" stroke="#ff00ff" stroke-width="1" />
+              <text x="120" y="220" fill="#e0e0e0" font-size="9" text-anchor="middle">SYNTH 1</text>
+
+              <rect x="200" y="200" width="120" height="30" fill="#1a0a1a" stroke="#ff00ff" stroke-width="1" />
+              <text x="260" y="220" fill="#e0e0e0" font-size="9" text-anchor="middle">DRUM MACHINE</text>
+
+              <line x1="190" y1="195" x2="120" y2="200" stroke="#00ff41" stroke-width="1" />
+              <line x1="190" y1="195" x2="260" y2="200" stroke="#00ff41" stroke-width="1" />
+
+              <text x="190" y="255" fill="#666666" font-size="9" text-anchor="middle">OT sets the BPM.</text>
+              <text x="190" y="270" fill="#666666" font-size="9" text-anchor="middle">Press [PLAY] on OT = all gear starts.</text>
+              <text x="190" y="285" fill="#666666" font-size="9" text-anchor="middle">Press [STOP] on OT = all gear stops.</text>
+
+              <!-- OT as Slave -->
+              <rect x="410" y="50" width="320" height="250" fill="#0a0a0a" stroke="#ffaa00" stroke-width="2" />
+              <text x="570" y="72" fill="#ffaa00" font-size="12" font-weight="700" text-anchor="middle">OT AS SLAVE</text>
+
+              <rect x="450" y="88" width="240" height="36" fill="none" stroke="#ff00ff" stroke-width="1" />
+              <text x="570" y="111" fill="#ff00ff" font-size="10" font-weight="700" text-anchor="middle">ABLETON / DAW / MASTER CLOCK</text>
+
+              <text x="570" y="145" fill="#ffaa00" font-size="9" text-anchor="middle">CLOCK RECEIVE = ON</text>
+              <text x="570" y="160" fill="#ffaa00" font-size="9" text-anchor="middle">TRANSPORT RECEIVE = ON</text>
+
+              <line x1="570" y1="170" x2="570" y2="195" stroke="#ffaa00" stroke-width="1" />
+              <text x="570" y="188" fill="#666666" font-size="8" text-anchor="middle">MIDI IN</text>
+
+              <rect x="490" y="200" width="160" height="36" fill="none" stroke="#00ffff" stroke-width="1" />
+              <text x="570" y="223" fill="#00ffff" font-size="10" font-weight="700" text-anchor="middle">OCTATRACK MK2</text>
+
+              <text x="570" y="255" fill="#666666" font-size="9" text-anchor="middle">DAW sets the BPM.</text>
+              <text x="570" y="270" fill="#666666" font-size="9" text-anchor="middle">OT follows and locks to external tempo.</text>
+              <text x="570" y="285" fill="#666666" font-size="9" text-anchor="middle">[TEMPO] on OT shows received BPM.</text>
+            </svg>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Sync timeout:</strong>
+              If both CLOCK RECEIVE and TRANSPORT RECEIVE are enabled, the OT will wait up to 16 seconds for MIDI clock after receiving a start/continue message before considering external sync lost.
+              If only TRANSPORT RECEIVE is enabled, it starts immediately after receiving start/continue.
+            </p>
+          </div>
+
+          <h3>Setting Up OT as Master (Most Common)</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p>
+                  Connect a MIDI cable from the OT's
+                  <strong>MIDI OUT</strong>
+                  to your synth's MIDI IN.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p>Open SYNC settings: press [FUNC] + [MIDI] or navigate [PROJ] &gt; MIDI &gt; SYNC &gt; [YES].</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[MIDI]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p>
+                  Enable
+                  <strong>CLOCK SEND</strong>
+                  and
+                  <strong>TRANSPORT SEND</strong>
+                  by pressing [YES] on each.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p>Make sure your external gear is set to receive external MIDI clock.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <p>Press [PLAY] on the OT &mdash; all connected gear should start in sync.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[PLAY]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 8.7.2 &mdash; SYNC (page 40), Section 16.1 &mdash; Octatrack MKII as a Performance Hub (page 96).
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 6: ABLETON INTEGRATION -->
+        <section class="section" id="ableton-integration" data-section="ableton-integration">
+          <h2>Ableton Integration</h2>
+
+          <p>
+            The Octatrack and Ableton Live make a powerful combo. You can use the OT as a MIDI master controlling Ableton, or let Ableton be the master with the OT as a slave. Here are the most
+            practical setups.
+          </p>
+
+          <h3>Connection Options</h3>
+          <table class="param-table">
+            <tbody>
+              <tr>
+                <th scope="col">Method</th>
+                <th scope="col">What You Need</th>
+                <th scope="col">Pros / Cons</th>
+              </tr>
+              <tr>
+                <td><strong>DIN MIDI</strong></td>
+                <td>MIDI interface on your computer + DIN MIDI cables</td>
+                <td>Rock-solid timing, no drivers needed on OT side. Requires a MIDI interface.</td>
+              </tr>
+              <tr>
+                <td><strong>USB MIDI</strong></td>
+                <td>USB cable (OT MK2 sends MIDI over USB)</td>
+                <td>Convenient, no extra hardware. May have slightly more jitter than DIN. Cannot use USB Disk Mode at the same time.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Setup A: OT as MIDI Master, Ableton as Slave</h3>
+          <p>Best for: live jams where the OT drives the tempo and Ableton provides additional sounds.</p>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p>Connect OT MIDI OUT (DIN or USB) to your computer.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p>On the OT: [FUNC] + [MIDI] &rarr; enable CLOCK SEND and TRANSPORT SEND.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[MIDI]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p>
+                  In Ableton: Preferences &gt; Link/Tempo/MIDI. Under MIDI Ports, find the OT's MIDI input. Enable
+                  <strong>Sync</strong>
+                  for that input. Set Ableton to "EXT" sync mode (top-left of the arrangement).
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p>Press [PLAY] on the OT. Ableton follows the OT's tempo and starts/stops with it.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[PLAY]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Setup B: Ableton as Master, OT as Slave</h3>
+          <p>Best for: studio production where Ableton is the main DAW and OT provides sampling/effects.</p>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p>Connect MIDI from your computer to OT MIDI IN.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p>On the OT: [FUNC] + [MIDI] &rarr; enable CLOCK RECEIVE and TRANSPORT RECEIVE.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[MIDI]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p>
+                  In Ableton: Preferences &gt; Link/Tempo/MIDI. Find the OT's MIDI output. Enable
+                  <strong>Sync</strong>
+                  for that output.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p>Press Play in Ableton. The OT locks to Ableton's tempo and starts playback.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Sending MIDI Notes from OT to Ableton Instruments</h3>
+          <p>You can use OT MIDI tracks to sequence soft synths in Ableton:</p>
+          <ol>
+            <li>Press [MIDI] on the OT and select a MIDI track.</li>
+            <li>Open NOTE SETUP ([FUNC] + [SRC]) and set CHAN to a specific MIDI channel (e.g., channel 1).</li>
+            <li>In Ableton, create a MIDI track and set its input to the OT's MIDI port, channel 1.</li>
+            <li>Load any instrument (Wavetable, Operator, a VST) on that Ableton track.</li>
+            <li>Arm the Ableton track for monitoring. Place note trigs on the OT &mdash; Ableton plays the sound.</li>
+          </ol>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Pro tip:</strong>
+              Use multiple OT MIDI tracks on different channels to sequence multiple Ableton instruments simultaneously. You get the OT's p-locks, trig conditions, and arpeggiator controlling your
+              software synths &mdash; the best of both worlds.
+            </p>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>USB Disk Mode conflict:</strong>
+              You cannot use USB MIDI and USB Disk Mode at the same time. If you need to transfer files to the CF card, you must disconnect MIDI first. Use DIN MIDI if you want to keep the sync
+              connection active while managing files.
+            </p>
+          </div>
+
+          <!-- Video Embed -->
+          <div class="video-embed">
+            <div class="video-embed-title">Watch: Octatrack &amp; Ableton Workflow Tips</div>
+            <iframe
+              src="https://www.youtube.com/embed/wEHb8Yx0Jq8"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Octatrack Ableton Workflow Tips"
+            ></iframe>
+          </div>
+        </section>
+
+        <!-- SECTION 7: PRACTICAL EXERCISE -->
+        <section class="section" id="practical-exercise" data-section="practical-exercise">
+          <h2>Practical Exercise: Control an External Synth</h2>
+
+          <p>
+            In this exercise you will set up a MIDI track to send notes and CC automation to an external synthesizer (or a software synth via MIDI). By the end, you will have a working pattern with
+            note trigs, velocity p-locks, an arpeggiator, and an LFO-driven filter sweep.
+          </p>
+
+          <h3>What You Need</h3>
+          <ul>
+            <li>Octatrack MK2</li>
+            <li>An external synth with MIDI IN (or a computer running a soft synth, connected via MIDI)</li>
+            <li>MIDI cable (DIN or USB)</li>
+          </ul>
+
+          <h3>Step-by-Step</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p><strong>Enter MIDI mode</strong></p>
+                <p>Press [MIDI] to switch to MIDI editing mode. The [MIDI] LED lights up.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[MIDI]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p><strong>Select MIDI track 1</strong></p>
+                <p>Press [T1] to select the first MIDI track.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[T1]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p><strong>Set the MIDI channel</strong></p>
+                <p>
+                  Open NOTE SETUP by double-tapping [SRC] or pressing [FUNC] + [SRC]. Turn knob A to set CHAN to the MIDI channel your synth listens on (e.g., channel 1). Press knob A or [YES] to
+                  confirm.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[SRC]</span>
+                  <span style="color: var(--text-muted)">&rarr; CHAN = 1 &rarr;</span>
+                  <span class="button-key">[YES]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p><strong>Place note trigs</strong></p>
+                <p>
+                  Press [REC] to enter Grid Recording mode. Press [TRIG 1], [TRIG 5], [TRIG 9], and [TRIG 13] to place trigs on the four beats. Your synth should already be making sound if connected.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[REC]</span>
+                  <span style="color: var(--text-muted)">&rarr;</span>
+                  <span class="button-key">[TRIG 1]</span>
+                  <span class="button-key">[TRIG 5]</span>
+                  <span class="button-key">[TRIG 9]</span>
+                  <span class="button-key">[TRIG 13]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <p><strong>Set different notes per trig (p-locks)</strong></p>
+                <p>
+                  Go to the NOTE MAIN page by pressing [SRC]. Hold [TRIG 1] and turn knob A to set its note (e.g., C3). Hold [TRIG 5] and turn knob A to a different note (e.g., E3). Do the same for
+                  [TRIG 9] (G3) and [TRIG 13] (C4). You have just p-locked a melody.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[SRC]</span>
+                  <span style="color: var(--text-muted)">&rarr; hold</span>
+                  <span class="button-key">[TRIG 1]</span>
+                  <span style="color: var(--text-muted)">+ turn knob A</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <p><strong>Add velocity variation</strong></p>
+                <p>Still on NOTE MAIN, hold [TRIG 9] and turn knob B to lower the velocity (e.g., 80). Hold [TRIG 13] and set velocity to 127 for an accent. This p-locks velocity per step.</p>
+                <div class="button-sequence">
+                  <span style="color: var(--text-muted)">hold</span>
+                  <span class="button-key">[TRIG 9]</span>
+                  <span style="color: var(--text-muted)">+ turn knob B (VEL)</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">7</div>
+              <div class="step-content">
+                <p><strong>Enable the arpeggiator</strong></p>
+                <p>
+                  Press [AMP] to go to the Arpeggiator MAIN page (in MIDI mode, [AMP] opens the arpeggiator). Turn knob C to set MODE to UP. Set SPD (knob D) to 6 for 16th-note arpeggios. Set RNGE
+                  (knob E) to 2OCT.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[AMP]</span>
+                  <span style="color: var(--text-muted)">&rarr; MODE = UP, SPD = 6, RNGE = 2OCT</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">8</div>
+              <div class="step-content">
+                <p><strong>Set up CC control for filter</strong></p>
+                <p>Open CTRL 1 SETUP: press [FUNC] + [FX1]. Press [FUNC] + knob C to enter MIDI CC LEARN. Turn your synth's filter cutoff knob &mdash; the CC number auto-assigns to CC1.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[FX1]</span>
+                  <span style="color: var(--text-muted)">&rarr;</span>
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+ knob C &rarr; turn synth knob</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">9</div>
+              <div class="step-content">
+                <p><strong>Add LFO to the filter CC</strong></p>
+                <p>
+                  Press [LFO] to open MIDI LFO MAIN. On the LFO SETUP page ([FUNC] + [LFO]), set LFO1's destination to CC1. Back on LFO MAIN, set the waveform to TRI (triangle), SPD to 12, DEPTH to
+                  64. Now the filter sweeps automatically, synced to the pattern tempo.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[LFO]</span>
+                  <span style="color: var(--text-muted)">&rarr; set waveform, speed, depth</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">10</div>
+              <div class="step-content">
+                <p><strong>Play it!</strong></p>
+                <p>Press [PLAY] to hear your MIDI-sequenced pattern with arpeggiated notes and automated filter sweeps. Try pressing [YES] to hear any FILL condition trigs you might add later.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[PLAY]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive MIDI Sequencer Widget -->
+          <div class="midi-widget" id="midi-seq-widget">
+            <div class="midi-widget-title">MIDI Step Visualizer</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px">
+              Click steps to toggle note trigs. Cyan = note trig. The "Play" button simulates one loop &mdash; arpeggiator steps shown in orange.
+            </p>
+            <div class="midi-seq-row" id="midi-numbers"></div>
+            <div class="midi-seq-row" id="midi-notes"></div>
+            <div class="midi-seq-row" id="midi-arp-result"></div>
+            <div class="midi-controls">
+              <button type="button" id="midi-play-btn" onclick="midiPlay()">Play Loop</button>
+              <button type="button" onclick="midiReset()">Reset</button>
+              <button type="button" id="midi-arp-toggle" onclick="midiToggleArp()">ARP: OFF</button>
+            </div>
+            <div class="midi-legend">
+              <div class="midi-legend-item">
+                <div class="midi-legend-swatch" style="background: var(--accent-cyan)"></div>
+                Note trig
+              </div>
+              <div class="midi-legend-item">
+                <div class="midi-legend-swatch" style="background: var(--accent-orange)"></div>
+                Arp step
+              </div>
+              <div class="midi-legend-item">
+                <div class="midi-legend-swatch" style="background: var(--bg-tertiary); border-color: var(--accent-lime)"></div>
+                Silent
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- QUIZ -->
+        <section class="quiz-section section" id="quiz" data-section="quiz">
+          <h2>Test Yourself</h2>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q1: How do you access the MIDI editing mode on the Octatrack MK2?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">Press [FUNC] + [T1]</div>
+              <div class="quiz-option" data-answer="true">Press [MIDI]</div>
+              <div class="quiz-option" data-answer="false">Press [PROJ] and select MIDI MODE</div>
+              <div class="quiz-option" data-answer="false">Hold [TRACK] + [BANK]</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q2: How many notes can a single MIDI track trig send simultaneously (as a chord)?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">1 note only</div>
+              <div class="quiz-option" data-answer="false">2 notes (root + one offset)</div>
+              <div class="quiz-option" data-answer="true">Up to 4 notes (root + NOT2, NOT3, NOT4)</div>
+              <div class="quiz-option" data-answer="false">Up to 8 notes</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q3: You want the Octatrack to be the master clock. Which two settings must be enabled under PROJECT &gt; MIDI &gt; SYNC?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">CLOCK RECEIVE + TRANSPORT RECEIVE</div>
+              <div class="quiz-option" data-answer="false">PROG CH SEND + CLOCK SEND</div>
+              <div class="quiz-option" data-answer="true">CLOCK SEND + TRANSPORT SEND</div>
+              <div class="quiz-option" data-answer="false">TURBO SPEED + CLOCK SEND</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q4: How do you use MIDI CC LEARN to auto-assign a synth knob to a CTRL slot?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">Press [REC] + turn the synth knob</div>
+              <div class="quiz-option" data-answer="true">Open CTRL SETUP, press [FUNC] + the CC slot knob, then turn the synth knob</div>
+              <div class="quiz-option" data-answer="false">Hold [MIDI] + turn the synth knob</div>
+              <div class="quiz-option" data-answer="false">Turn the [LEVEL] encoder while on the CTRL page</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q5: An audio track and a MIDI track are both assigned to MIDI channel 3. What happens?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">They merge their output on channel 3</div>
+              <div class="quiz-option" data-answer="false">The audio track takes priority and the MIDI track is muted</div>
+              <div class="quiz-option" data-answer="true">The MIDI track blocks the audio track from sending, and the audio track blocks the MIDI track from receiving</div>
+              <div class="quiz-option" data-answer="false">The OT shows an error and prevents the conflict</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Answers</button>
+            <div id="quiz-score" style="margin-top: 20px; font-size: 16px; font-weight: 600; display: none"></div>
+          </div>
+        </section>
+
+        <!-- CONFIDENCE -->
+        <section class="confidence-section section" id="confidence" data-section="confidence">
+          <h2>Confidence Check</h2>
+          <p>
+            How confident are you with the MIDI sequencer? Can you press [MIDI], set up a MIDI channel on the NOTE SETUP page, place note trigs with p-locked velocities, enable the arpeggiator, assign
+            CC values via MIDI CC LEARN, and configure sync settings from memory?
+          </p>
+          <div class="confidence-scale">
+            <button type="button" class="confidence-btn" data-confidence="1">1</button>
+            <button type="button" class="confidence-btn" data-confidence="2">2</button>
+            <button type="button" class="confidence-btn" data-confidence="3">3</button>
+            <button type="button" class="confidence-btn" data-confidence="4">4</button>
+            <button type="button" class="confidence-btn" data-confidence="5">5</button>
+          </div>
+          <p id="confidence-msg" style="color: var(--text-muted); margin-top: 15px; font-size: 13px"></p>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <a href="13-arranger.html">&larr; PREV: ARRANGER</a>
+          <a href="15-pickup-machines.html">NEXT: PICKUP MACHINES &rarr;</a>
+        </div>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid var(--border-primary);
+              color: var(--text-muted);
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = 'var(--accent-error)';
+              this.style.color = 'var(--accent-error)';
+            "
+            onmouseout="
+              this.style.borderColor = 'var(--border-primary)';
+              this.style.color = 'var(--text-muted)';
+            "
+          >
+            RESET PROGRESS
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: var(--bg-tertiary); border: 1px solid var(--border-primary); padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: var(--accent-error); margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: var(--accent-cyan)">14 &mdash; MIDI Sequencer &amp; External Sync</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid var(--border-primary); color: var(--text-muted); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: var(--accent-error); border: none; color: var(--text-heading); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            YES, RESET
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ======================================================================
+         Tutorial 14 — MIDI Sequencer & External Sync
+         Vanilla JS (ES5 compatible)
+         ====================================================================== */
+
+      var STORAGE_KEY = 'octatrack-tutorials';
+      var TUTORIAL_ID = '14-midi-sequencing';
+      var TOTAL_QUESTIONS = 5;
+
+      /* ---- State management ---- */
+      function getState() {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      }
+
+      function setState(id, updates) {
+        var state = getState();
+        var current = state[id] || {};
+        for (var key in updates) {
+          if (updates.hasOwnProperty(key)) {
+            current[key] = updates[key];
+          }
+        }
+        current.lastAccessed = new Date().toISOString();
+        state[id] = current;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function resetTutorialProgress() {
+        var state = getState();
+        delete state[TUTORIAL_ID];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        window.location.reload();
+      }
+
+      /* ---- Sidebar navigation ---- */
+      var navItems = document.querySelectorAll('.sidebar-nav-item');
+      var sections = document.querySelectorAll('.section');
+      var sectionMap = {};
+      for (var i = 0; i < sections.length; i++) {
+        sectionMap[sections[i].id] = sections[i];
+      }
+
+      /* ---- IntersectionObserver ---- */
+      var visitedSections = {};
+      var savedState = getState()[TUTORIAL_ID] || {};
+      if (savedState.sectionsCompleted) {
+        for (var sc = 0; sc < savedState.sectionsCompleted.length; sc++) {
+          visitedSections[savedState.sectionsCompleted[sc]] = true;
+          var navItem = document.querySelector('.sidebar-nav-item[data-section="' + savedState.sectionsCompleted[sc] + '"]');
+          if (navItem) {
+            var cb = navItem.querySelector('.sidebar-checkbox');
+            if (cb) {
+              cb.classList.add('checked');
+              cb.textContent = '\u2713';
+            }
+          }
+        }
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          for (var e = 0; e < entries.length; e++) {
+            var entry = entries[e];
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              visitedSections[entry.target.id] = true;
+              var nav = document.querySelector('.sidebar-nav-item[data-section="' + entry.target.id + '"]');
+              if (nav) {
+                for (var j = 0; j < navItems.length; j++) {
+                  navItems[j].classList.remove('active');
+                }
+                nav.classList.add('active');
+                var cb = nav.querySelector('.sidebar-checkbox');
+                if (cb) {
+                  cb.classList.add('checked');
+                  cb.textContent = '\u2713';
+                }
+              }
+            } else {
+              entry.target.classList.remove('in-view');
+            }
+          }
+          updateProgress();
+        },
+        { threshold: 0.3 }
+      );
+
+      for (var s = 0; s < sections.length; s++) {
+        observer.observe(sections[s]);
+      }
+
+      /* ---- MIDI Step Visualizer Widget ---- */
+      var midiSteps = [];
+      var midiArpEnabled = false;
+
+      function midiInit() {
+        var numbersRow = document.getElementById('midi-numbers');
+        var notesRow = document.getElementById('midi-notes');
+        var arpRow = document.getElementById('midi-arp-result');
+
+        if (!numbersRow || !notesRow || !arpRow) return;
+
+        var labelN = document.createElement('div');
+        labelN.className = 'midi-seq-label';
+        labelN.textContent = 'STEP';
+        numbersRow.appendChild(labelN);
+
+        var labelP = document.createElement('div');
+        labelP.className = 'midi-seq-label';
+        labelP.textContent = 'NOTES';
+        notesRow.appendChild(labelP);
+
+        var labelR = document.createElement('div');
+        labelR.className = 'midi-seq-label';
+        labelR.textContent = 'OUTPUT';
+        arpRow.appendChild(labelR);
+
+        var noteNames = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5'];
+
+        for (var i = 0; i < 16; i++) {
+          var numDiv = document.createElement('div');
+          numDiv.className = 'midi-seq-step-number';
+          numDiv.textContent = i + 1;
+          numbersRow.appendChild(numDiv);
+
+          var stepDiv = document.createElement('div');
+          stepDiv.className = 'midi-seq-step';
+          stepDiv.setAttribute('data-midi-step', i);
+          /* Default pattern: steps 0,4,8,12 have note trigs */
+          if (i % 4 === 0) {
+            stepDiv.classList.add('note-on');
+            stepDiv.textContent = noteNames[i];
+            midiSteps[i] = { on: true, note: noteNames[i] };
+          } else {
+            midiSteps[i] = { on: false, note: noteNames[i] };
+          }
+          (function (idx, div, names) {
+            div.addEventListener('click', function () {
+              if (midiSteps[idx].on) {
+                midiSteps[idx].on = false;
+                div.classList.remove('note-on');
+                div.textContent = '';
+              } else {
+                midiSteps[idx].on = true;
+                div.classList.add('note-on');
+                div.textContent = names[idx];
+              }
+            });
+          })(i, stepDiv, noteNames);
+          notesRow.appendChild(stepDiv);
+
+          var resDiv = document.createElement('div');
+          resDiv.className = 'midi-seq-step';
+          resDiv.id = 'midi-res-' + i;
+          resDiv.style.cursor = 'default';
+          arpRow.appendChild(resDiv);
+        }
+      }
+
+      function midiPlay() {
+        var arpNotes = ['C3', 'E3', 'G3', 'C4'];
+        var arpIdx = 0;
+
+        for (var i = 0; i < 16; i++) {
+          var resEl = document.getElementById('midi-res-' + i);
+          if (!resEl) continue;
+          resEl.className = 'midi-seq-step';
+          resEl.style.cursor = 'default';
+          resEl.textContent = '';
+
+          if (midiSteps[i].on) {
+            if (midiArpEnabled) {
+              resEl.classList.add('arp-on');
+              resEl.textContent = arpNotes[arpIdx % arpNotes.length];
+              arpIdx++;
+            } else {
+              resEl.classList.add('note-on');
+              resEl.textContent = midiSteps[i].note;
+            }
+          }
+        }
+      }
+
+      function midiReset() {
+        for (var i = 0; i < 16; i++) {
+          var resEl = document.getElementById('midi-res-' + i);
+          if (resEl) {
+            resEl.className = 'midi-seq-step';
+            resEl.style.cursor = 'default';
+            resEl.textContent = '';
+          }
+        }
+      }
+
+      function midiToggleArp() {
+        midiArpEnabled = !midiArpEnabled;
+        var btn = document.getElementById('midi-arp-toggle');
+        if (btn) {
+          btn.textContent = midiArpEnabled ? 'ARP: UP' : 'ARP: OFF';
+          if (midiArpEnabled) {
+            btn.style.borderColor = 'var(--accent-orange)';
+            btn.style.color = 'var(--accent-orange)';
+          } else {
+            btn.style.borderColor = '';
+            btn.style.color = '';
+          }
+        }
+      }
+
+      midiInit();
+
+      /* ---- Quiz ---- */
+      var quizOptions = document.querySelectorAll('.quiz-option');
+      var quizAnswers = {};
+
+      for (var qi = 0; qi < quizOptions.length; qi++) {
+        (function (idx) {
+          quizOptions[idx].addEventListener('click', function () {
+            var questionIdx = Math.floor(idx / 4);
+            var optionIdx = idx % 4;
+            var questions = document.querySelectorAll('.quiz-question');
+
+            for (var q = 0; q < questions.length; q++) {
+              var opts = questions[q].querySelectorAll('.quiz-option');
+              for (var o = 0; o < opts.length; o++) {
+                if (q === questionIdx && o === optionIdx) {
+                  opts[o].classList.add('selected');
+                  quizAnswers[questionIdx] = opts[o].getAttribute('data-answer') === 'true';
+                } else if (q === questionIdx) {
+                  opts[o].classList.remove('selected');
+                }
+              }
+            }
+          });
+        })(qi);
+      }
+
+      function checkQuiz() {
+        var score = 0;
+        var questions = document.querySelectorAll('.quiz-question');
+
+        for (var q = 0; q < questions.length; q++) {
+          var selected = questions[q].querySelector('.quiz-option.selected');
+          if (!selected) continue;
+
+          var isCorrect = selected.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            selected.classList.add('correct');
+            score++;
+          } else {
+            selected.classList.add('incorrect');
+            var correct = questions[q].querySelector('[data-answer="true"]');
+            if (correct) correct.classList.add('correct');
+          }
+          var feedback = questions[q].querySelector('.quiz-feedback');
+          feedback.classList.add('show');
+          feedback.textContent = isCorrect ? 'Correct!' : 'Incorrect \u2014 see highlighted answer.';
+        }
+
+        var scoreEl = document.getElementById('quiz-score');
+        scoreEl.style.display = 'block';
+        scoreEl.textContent = '';
+        var scoreSpan = document.createElement('span');
+        scoreSpan.style.color = 'var(--accent-lime)';
+        scoreSpan.textContent = 'Score: ' + score + ' / ' + TOTAL_QUESTIONS;
+        scoreEl.appendChild(scoreSpan);
+        setState(TUTORIAL_ID, { quizScore: score, quizTotal: TOTAL_QUESTIONS });
+        updateProgress();
+      }
+
+      /* ---- Confidence ---- */
+      var confBtns = document.querySelectorAll('.confidence-btn');
+      for (var ci = 0; ci < confBtns.length; ci++) {
+        (function (btn) {
+          btn.addEventListener('click', function () {
+            for (var b = 0; b < confBtns.length; b++) {
+              confBtns[b].classList.remove('selected');
+            }
+            btn.classList.add('selected');
+            var level = parseInt(btn.getAttribute('data-confidence'));
+            var msgs = [
+              '',
+              'Not ready yet \u2014 review the basics',
+              'Getting there \u2014 try setting up a MIDI channel first',
+              'Fairly confident \u2014 can set up notes and CC control',
+              'Very confident \u2014 MIDI sequencing, arp, and sync make sense',
+              'Expert \u2014 ready to control a full MIDI rig from the OT',
+            ];
+            document.getElementById('confidence-msg').textContent = msgs[level] || '';
+            setState(TUTORIAL_ID, { confidence: level });
+            updateProgress();
+          });
+        })(confBtns[ci]);
+      }
+
+      /* Restore confidence from state */
+      if (savedState.confidence) {
+        var savedConf = savedState.confidence;
+        for (var rc = 0; rc < confBtns.length; rc++) {
+          if (parseInt(confBtns[rc].getAttribute('data-confidence')) === savedConf) {
+            confBtns[rc].classList.add('selected');
+          }
+        }
+      }
+
+      /* ---- Progress tracking ---- */
+      function updateProgress() {
+        var tutorialState = getState()[TUTORIAL_ID] || {};
+        var totalSections = sections.length;
+        var visitedCount = 0;
+        for (var key in visitedSections) {
+          if (visitedSections.hasOwnProperty(key)) visitedCount++;
+        }
+
+        var percent = totalSections > 0 ? Math.round((visitedCount / totalSections) * 100) : 0;
+
+        var progressBar = document.getElementById('sidebarProgress');
+        if (progressBar) progressBar.style.width = percent + '%';
+        var percentEl = document.getElementById('completionPercent');
+        if (percentEl) percentEl.textContent = percent;
+
+        var status = 'not-started';
+        if (visitedCount > 0) status = 'in-progress';
+        if (visitedCount === totalSections) status = 'completed';
+
+        var visitedArr = [];
+        for (var vk in visitedSections) {
+          if (visitedSections.hasOwnProperty(vk)) visitedArr.push(vk);
+        }
+
+        setState(TUTORIAL_ID, {
+          status: status,
+          completion: percent,
+          sectionsCompleted: visitedArr,
+        });
+      }
+
+      updateProgress();
+    </script>
+    <script src="assets/theme.js" defer></script>
+    <script src="assets/svg-overlay.js"></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid var(--border-primary);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none">@alkloihd</a>
+        &middot;
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-magenta); text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: var(--accent-lime); text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

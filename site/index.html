@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OCTATRACK MK2 // LEARNING SYSTEM</title>
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -14,8 +15,8 @@
       @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap');
 
       body {
-        background: #0a0a0a;
-        color: #e0e0e0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -28,8 +29,8 @@
 
       /* HEADER */
       .header {
-        background: #0a0a0a;
-        border-bottom: 3px solid #00ffff;
+        background: var(--bg-primary);
+        border-bottom: 3px solid var(--accent-cyan);
         padding: 2rem;
         margin-bottom: 3rem;
         position: sticky;
@@ -44,7 +45,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.5rem;
         animation: glitch 0.3s ease-in-out;
       }
@@ -69,7 +70,7 @@
 
       .header-subtitle {
         font-size: 1.1rem;
-        color: #999999;
+        color: var(--text-muted);
         letter-spacing: 0.05em;
         font-style: italic;
         min-height: 1.5em;
@@ -78,7 +79,7 @@
       .subtitle-cursor {
         display: inline-block;
         width: 2px;
-        background: #00ffff;
+        background: var(--accent-cyan);
         margin-left: 0.2em;
         animation: blink 0.6s infinite;
       }
@@ -104,8 +105,8 @@
       }
 
       .stat-card {
-        background: #111111;
-        border: 2px solid #00ffff;
+        background: var(--bg-surface);
+        border: 2px solid var(--accent-cyan);
         padding: 1.5rem;
         position: relative;
         transition: all 0.2s ease;
@@ -138,7 +139,7 @@
       }
 
       .stat-card:hover {
-        border-color: #ff00ff;
+        border-color: var(--accent-magenta);
         box-shadow: 0 0 24px rgba(255, 0, 255, 0.4);
         transform: translateY(-2px);
       }
@@ -148,7 +149,7 @@
         font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #00ff41;
+        color: var(--accent-lime);
         margin-bottom: 1rem;
       }
 
@@ -156,13 +157,13 @@
         font-family: 'Space Mono', monospace;
         font-size: 2.5rem;
         font-weight: 700;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.5rem;
       }
 
       .stat-card-subtext {
         font-size: 0.9rem;
-        color: #666666;
+        color: var(--text-muted);
       }
 
       .progress-ring-container {
@@ -178,13 +179,13 @@
       }
 
       .progress-ring-circle {
-        stroke: #333333;
+        stroke: var(--border-primary);
         fill: transparent;
         stroke-width: 3;
       }
 
       .progress-ring-circle-progress {
-        stroke: #00ffff;
+        stroke: var(--accent-cyan);
         fill: transparent;
         stroke-width: 3;
         stroke-linecap: round;
@@ -203,14 +204,14 @@
       .confidence-dot {
         width: 8px;
         height: 8px;
-        border: 2px solid #666666;
+        border: 2px solid var(--text-muted);
         background: transparent;
         transition: all 0.2s ease;
       }
 
       .confidence-dot.filled {
-        background: #ff00ff;
-        border-color: #ff00ff;
+        background: var(--accent-magenta);
+        border-color: var(--accent-magenta);
       }
 
       /* RECOMMENDED NEXT */
@@ -221,7 +222,7 @@
 
       .recommended-banner {
         background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%);
-        border: 2px solid #ffaa00;
+        border: 2px solid var(--accent-orange);
         padding: 2rem;
         position: relative;
         overflow: hidden;
@@ -230,7 +231,7 @@
       }
 
       .recommended-banner:hover {
-        border-color: #ff00ff;
+        border-color: var(--accent-magenta);
         box-shadow: 0 0 24px rgba(255, 0, 255, 0.3);
         transform: translateY(-2px);
       }
@@ -260,7 +261,7 @@
         font-size: 0.8rem;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffaa00;
+        color: var(--accent-orange);
         margin-bottom: 0.5rem;
       }
 
@@ -269,7 +270,7 @@
         font-size: 1.8rem;
         font-weight: 700;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.5rem;
       }
 
@@ -278,7 +279,7 @@
         gap: 1.5rem;
         margin-top: 1rem;
         font-size: 0.9rem;
-        color: #999999;
+        color: var(--text-muted);
       }
 
       .recommended-meta-item {
@@ -298,18 +299,18 @@
       }
 
       .difficulty-beginner {
-        border-color: #00ff41;
-        color: #00ff41;
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .difficulty-intermediate {
-        border-color: #ffaa00;
-        color: #ffaa00;
+        border-color: var(--accent-orange);
+        color: var(--accent-orange);
       }
 
       .difficulty-advanced {
-        border-color: #ff3333;
-        color: #ff3333;
+        border-color: var(--accent-error);
+        color: var(--accent-error);
       }
 
       /* LEARNING PATH VISUALIZATION */
@@ -324,7 +325,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 2rem;
       }
 
@@ -333,8 +334,8 @@
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
         gap: 2rem;
         padding: 2rem;
-        background: #111111;
-        border: 2px solid #333333;
+        background: var(--bg-surface);
+        border: 2px solid var(--border-primary);
       }
 
       .path-node {
@@ -347,24 +348,24 @@
         position: relative;
         cursor: pointer;
         transition: all 0.2s ease;
-        background: #0a0a0a;
+        background: var(--bg-primary);
       }
 
       .path-node.not-started {
         border-color: #444444;
-        color: #666666;
+        color: var(--text-muted);
       }
 
       .path-node.in-progress {
-        border-color: #ffaa00;
+        border-color: var(--accent-orange);
         background: rgba(255, 170, 0, 0.1);
-        color: #ffaa00;
+        color: var(--accent-orange);
       }
 
       .path-node.completed {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background: rgba(0, 255, 65, 0.1);
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .path-node:hover:not(.not-started) {
@@ -392,11 +393,11 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #00ffff;
+        color: var(--accent-cyan);
         margin: 2rem 0 1rem 0;
         padding: 1rem 0;
-        border-top: 2px solid #333333;
-        border-bottom: 2px solid #333333;
+        border-top: 2px solid var(--border-primary);
+        border-bottom: 2px solid var(--border-primary);
       }
 
       /* TUTORIAL GRID */
@@ -411,7 +412,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 2rem;
       }
 
@@ -422,7 +423,7 @@
       }
 
       .tutorial-card {
-        background: #111111;
+        background: var(--bg-surface);
         border: 2px solid;
         padding: 1.5rem;
         position: relative;
@@ -439,11 +440,11 @@
       }
 
       .tutorial-card.in-progress {
-        border-color: #ffaa00;
+        border-color: var(--accent-orange);
       }
 
       .tutorial-card.completed {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
       }
 
       .tutorial-card.coming-soon {
@@ -453,7 +454,7 @@
       }
 
       .tutorial-card:not(.coming-soon):hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         box-shadow: 0 0 24px rgba(0, 255, 255, 0.3);
         transform: translateY(-4px);
       }
@@ -487,15 +488,15 @@
         font-weight: 700;
         line-height: 1;
         margin-bottom: 0.5rem;
-        color: #00ffff;
+        color: var(--accent-cyan);
       }
 
       .tutorial-card.completed .tutorial-number {
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .tutorial-card.in-progress .tutorial-number {
-        color: #ffaa00;
+        color: var(--accent-orange);
       }
 
       .tutorial-title {
@@ -504,13 +505,13 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.3rem;
       }
 
       .tutorial-subtitle {
         font-size: 0.9rem;
-        color: #999999;
+        color: var(--text-muted);
         margin-bottom: 1rem;
       }
 
@@ -530,7 +531,7 @@
 
       .tutorial-meta-icon {
         font-size: 0.8rem;
-        color: #666666;
+        color: var(--text-muted);
       }
 
       .tutorial-progress-container {
@@ -541,30 +542,30 @@
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #666666;
+        color: var(--text-muted);
         margin-bottom: 0.4rem;
       }
 
       .progress-bar {
         height: 12px;
-        background: #1a1a1a;
-        border: 1px solid #333333;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
         overflow: hidden;
       }
 
       .progress-bar-fill {
         height: 100%;
-        background: #00ffff;
+        background: var(--accent-cyan);
         width: 0%;
         transition: width 0.6s ease;
       }
 
       .tutorial-card.in-progress .progress-bar-fill {
-        background: #ffaa00;
+        background: var(--accent-orange);
       }
 
       .tutorial-card.completed .progress-bar-fill {
-        background: #00ff41;
+        background: var(--accent-lime);
       }
 
       .tutorial-confidence {
@@ -575,7 +576,7 @@
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #666666;
+        color: var(--text-muted);
         margin-bottom: 0.4rem;
       }
 
@@ -594,19 +595,19 @@
       }
 
       .confidence-star.active {
-        background: #ff00ff;
-        border-color: #ff00ff;
+        background: var(--accent-magenta);
+        border-color: var(--accent-magenta);
       }
 
       .quiz-score {
         font-size: 0.85rem;
-        color: #666666;
+        color: var(--text-muted);
         margin: 1rem 0;
       }
 
       .tutorial-prerequisites {
         font-size: 0.8rem;
-        color: #666666;
+        color: var(--text-muted);
         margin: 1rem 0;
         display: none;
       }
@@ -617,8 +618,8 @@
 
       .prerequisite-item {
         display: inline-block;
-        background: #1a1a1a;
-        border: 1px solid #333333;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
         padding: 0.2rem 0.6rem;
         margin-right: 0.4rem;
         margin-bottom: 0.4rem;
@@ -630,22 +631,22 @@
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #666666;
+        color: var(--text-muted);
         margin-top: auto;
         padding-top: 1rem;
-        border-top: 1px solid #222222;
+        border-top: 1px solid var(--border-subtle);
       }
 
       .tutorial-status.active {
-        color: #00ffff;
+        color: var(--accent-cyan);
       }
 
       .tutorial-status.in-progress {
-        color: #ffaa00;
+        color: var(--accent-orange);
       }
 
       .tutorial-status.completed {
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .tutorial-button {
@@ -653,7 +654,7 @@
         padding: 0.8rem 1.2rem;
         background: transparent;
         border: 2px solid;
-        color: #ffffff;
+        color: var(--text-heading);
         font-family: 'Space Mono', monospace;
         font-size: 0.8rem;
         font-weight: 700;
@@ -665,8 +666,8 @@
       }
 
       .tutorial-card.not-started .tutorial-button {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
       }
 
       .tutorial-card.not-started .tutorial-button:hover {
@@ -675,8 +676,8 @@
       }
 
       .tutorial-card.in-progress .tutorial-button {
-        border-color: #ffaa00;
-        color: #ffaa00;
+        border-color: var(--accent-orange);
+        color: var(--accent-orange);
       }
 
       .tutorial-card.in-progress .tutorial-button:hover {
@@ -685,8 +686,8 @@
       }
 
       .tutorial-card.completed .tutorial-button {
-        border-color: #00ff41;
-        color: #00ff41;
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .tutorial-card.completed .tutorial-button:hover {
@@ -695,15 +696,15 @@
       }
 
       .tutorial-card.coming-soon .tutorial-button {
-        border-color: #666666;
-        color: #666666;
+        border-color: var(--text-muted);
+        color: var(--text-muted);
         cursor: not-allowed;
       }
 
       /* FOOTER */
       .footer {
-        background: #111111;
-        border-top: 2px solid #333333;
+        background: var(--bg-surface);
+        border-top: 2px solid var(--border-primary);
         padding: 2rem;
         margin-top: 4rem;
       }
@@ -720,11 +721,11 @@
         flex-direction: column;
         gap: 0.5rem;
         font-size: 0.9rem;
-        color: #666666;
+        color: var(--text-muted);
       }
 
       .footer-info-highlight {
-        color: #00ffff;
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 0.85rem;
       }
@@ -739,8 +740,8 @@
       .footer-button {
         padding: 0.6rem 1rem;
         background: transparent;
-        border: 2px solid #666666;
-        color: #666666;
+        border: 2px solid var(--text-muted);
+        color: var(--text-muted);
         font-family: 'Space Mono', monospace;
         font-size: 0.75rem;
         font-weight: 700;
@@ -751,8 +752,8 @@
       }
 
       .footer-button:hover {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
         transform: translateY(-2px);
       }
 
@@ -785,8 +786,8 @@
       }
 
       .modal-content {
-        background: #111111;
-        border: 2px solid #00ffff;
+        background: var(--bg-surface);
+        border: 2px solid var(--accent-cyan);
         padding: 2rem;
         max-width: 500px;
         width: 90%;
@@ -810,12 +811,12 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1rem;
       }
 
       .modal-body {
-        color: #e0e0e0;
+        color: var(--text-primary);
         margin-bottom: 1.5rem;
         line-height: 1.8;
       }
@@ -830,7 +831,7 @@
         padding: 0.7rem 1.5rem;
         border: 2px solid;
         background: transparent;
-        color: #ffffff;
+        color: var(--text-heading);
         font-family: 'Space Mono', monospace;
         font-size: 0.8rem;
         font-weight: 700;
@@ -841,8 +842,8 @@
       }
 
       .modal-button.primary {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
       }
 
       .modal-button.primary:hover {
@@ -851,13 +852,13 @@
       }
 
       .modal-button.secondary {
-        border-color: #666666;
-        color: #666666;
+        border-color: var(--text-muted);
+        color: var(--text-muted);
       }
 
       .modal-button.secondary:hover {
-        border-color: #ffffff;
-        color: #ffffff;
+        border-color: var(--text-heading);
+        color: var(--text-heading);
         transform: translateY(-2px);
       }
 
@@ -955,7 +956,9 @@
         <div class="stat-card-value" id="completionPercentage">0%</div>
         <div class="stat-card-subtext">
           <span id="completionCount">0</span>
-          /8 tutorials
+          /
+          <span id="totalTutorialCount">16</span>
+          tutorials
         </div>
       </div>
 
@@ -1078,6 +1081,16 @@
       <div class="tutorials-grid" id="tutorialsGridTier2"></div>
     </section>
 
+    <section class="tutorials-section">
+      <h2 class="tutorials-title">Tier 3 — Advanced Techniques</h2>
+      <div class="tutorials-grid" id="tutorialsGridTier3"></div>
+    </section>
+
+    <section class="tutorials-section">
+      <h2 class="tutorials-title">Tier 4 — Performance &amp; Integration</h2>
+      <div class="tutorials-grid" id="tutorialsGridTier4"></div>
+    </section>
+
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-content">
@@ -1123,6 +1136,7 @@
       </div>
     </div>
 
+    <script src="assets/theme.js" defer></script>
     <script>
       const TUTORIALS = {
         '01-set-sail': {
@@ -1205,6 +1219,86 @@
           prerequisites: ['01-set-sail', '02-load-and-lock', '03-beat-basics', '05-slice-and-dice'],
           file: '08-parts-banks-scenes.html',
         },
+        '09-trig-conditions': {
+          tier: 3,
+          number: 9,
+          title: 'Trig Conditions',
+          subtitle: 'Adding Variety',
+          time: 25,
+          difficulty: 'Intermediate',
+          prerequisites: ['03-beat-basics', '05-slice-and-dice', '06-sample-locks'],
+          file: '09-trig-conditions.html',
+        },
+        '10-resampling': {
+          tier: 3,
+          number: 10,
+          title: 'Resampling',
+          subtitle: 'Creative Mangling',
+          time: 30,
+          difficulty: 'Intermediate',
+          prerequisites: ['02-load-and-lock', '03-beat-basics', '08-parts-banks-scenes'],
+          file: '10-resampling.html',
+        },
+        '11-fx-and-neighbors': {
+          tier: 3,
+          number: 11,
+          title: 'FX &amp; Neighbors',
+          subtitle: 'Effects Chains',
+          time: 30,
+          difficulty: 'Intermediate',
+          prerequisites: ['02-load-and-lock', '03-beat-basics', '08-parts-banks-scenes'],
+          file: '11-fx-and-neighbors.html',
+        },
+        '12-lfos-and-modulation': {
+          tier: 3,
+          number: 12,
+          title: 'LFOs &amp; Modulation',
+          subtitle: 'Bring Tracks to Life',
+          time: 30,
+          difficulty: 'Intermediate',
+          prerequisites: ['03-beat-basics', '08-parts-banks-scenes', '11-fx-and-neighbors'],
+          file: '12-lfos-and-modulation.html',
+        },
+        '13-arranger': {
+          tier: 4,
+          number: 13,
+          title: 'Arranger',
+          subtitle: 'Pattern Chaining',
+          time: 30,
+          difficulty: 'Advanced',
+          prerequisites: ['03-beat-basics', '08-parts-banks-scenes', '09-trig-conditions'],
+          file: '13-arranger.html',
+        },
+        '14-midi-sequencing': {
+          tier: 4,
+          number: 14,
+          title: 'MIDI Sequencing',
+          subtitle: 'External Sync',
+          time: 30,
+          difficulty: 'Advanced',
+          prerequisites: ['03-beat-basics', '08-parts-banks-scenes', '09-trig-conditions'],
+          file: '14-midi-sequencing.html',
+        },
+        '15-pickup-machines': {
+          tier: 4,
+          number: 15,
+          title: 'Pickup Machines',
+          subtitle: 'Live Looping',
+          time: 25,
+          difficulty: 'Advanced',
+          prerequisites: ['02-load-and-lock', '03-beat-basics', '10-resampling'],
+          file: '15-pickup-machines.html',
+        },
+        '16-performance-and-dj': {
+          tier: 4,
+          number: 16,
+          title: 'Performance &amp; DJ',
+          subtitle: 'Putting It Together',
+          time: 35,
+          difficulty: 'Advanced',
+          prerequisites: ['08-parts-banks-scenes', '10-resampling', '11-fx-and-neighbors', '13-arranger'],
+          file: '16-performance-and-dj.html',
+        },
       };
 
       const DEFAULT_STATE = {
@@ -1218,6 +1312,14 @@
           '06-sample-locks': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
           '07-loop-stretching': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
           '08-parts-banks-scenes': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '09-trig-conditions': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '10-resampling': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '11-fx-and-neighbors': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '12-lfos-and-modulation': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 4, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '13-arranger': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 5, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '14-midi-sequencing': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 5, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '15-pickup-machines': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 5, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
+          '16-performance-and-dj': { status: 'not-started', completion: 0, confidence: 0, quizScore: 0, quizTotal: 5, timeSpent: 0, sectionsCompleted: [], lastAccessed: null },
         },
         streakDays: 0,
         lastActiveDate: null,
@@ -1370,6 +1472,12 @@
           document.getElementById('tutorialsGridTier1').innerHTML = tier1.map(([id, tutorial]) => this.createTutorialCard(id, tutorial)).join('');
 
           document.getElementById('tutorialsGridTier2').innerHTML = tier2.map(([id, tutorial]) => this.createTutorialCard(id, tutorial)).join('');
+
+          const tier3 = Object.entries(TUTORIALS).filter(([_, t]) => t.tier === 3);
+          document.getElementById('tutorialsGridTier3').innerHTML = tier3.map(([id, tutorial]) => this.createTutorialCard(id, tutorial)).join('');
+
+          const tier4 = Object.entries(TUTORIALS).filter(([_, t]) => t.tier === 4);
+          document.getElementById('tutorialsGridTier4').innerHTML = tier4.map(([id, tutorial]) => this.createTutorialCard(id, tutorial)).join('');
 
           document.querySelectorAll('.tutorial-card').forEach((card) => {
             card.addEventListener('click', (e) => {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial 01: SET SAIL - Octatrack MK2 Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -13,8 +14,8 @@
       }
 
       body {
-        background-color: #0a0a0a;
-        color: #e0e0e0;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -29,8 +30,8 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-        background-color: #0a0a0a;
-        border-bottom: 3px solid #00ffff;
+        background-color: var(--bg-primary);
+        border-bottom: 3px solid var(--accent-cyan);
         padding: 1rem 2rem;
         display: flex;
         justify-content: space-between;
@@ -44,19 +45,19 @@
       }
 
       .top-bar-link {
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-decoration: none;
         font-family: 'Space Mono', monospace;
         font-size: 14px;
         letter-spacing: 0.1em;
-        border: 2px solid #00ffff;
+        border: 2px solid var(--accent-cyan);
         padding: 0.5rem 1rem;
         transition: all 0.2s ease;
         font-weight: 700;
       }
 
       .top-bar-link:hover {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
       }
 
@@ -65,7 +66,7 @@
         font-size: 18px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         font-weight: 700;
       }
 
@@ -80,10 +81,10 @@
         font-size: 12px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        background-color: #00ff41;
+        background-color: var(--accent-lime);
         color: #0a0a0a;
         padding: 0.5rem 1rem;
-        border: 2px solid #00ff41;
+        border: 2px solid var(--accent-lime);
         font-weight: 700;
       }
 
@@ -92,8 +93,8 @@
         font-size: 12px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        border: 2px solid #ff00ff;
-        color: #ff00ff;
+        border: 2px solid var(--accent-magenta);
+        color: var(--accent-magenta);
         padding: 0.5rem 1rem;
         font-weight: 700;
       }
@@ -106,8 +107,8 @@
 
       .sidebar {
         width: 280px;
-        background-color: #111111;
-        border-right: 3px solid #ff00ff;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
         padding: 2rem 1.5rem;
         overflow-y: auto;
         position: sticky;
@@ -120,10 +121,10 @@
         font-size: 12px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-bottom: 1.5rem;
         font-weight: 700;
-        border-bottom: 2px solid #ff00ff;
+        border-bottom: 2px solid var(--accent-magenta);
         padding-bottom: 0.5rem;
       }
 
@@ -143,7 +144,7 @@
         cursor: pointer;
         border: 2px solid transparent;
         background-color: transparent;
-        color: #e0e0e0;
+        color: var(--text-primary);
         text-decoration: none;
         font-size: 13px;
         transition: all 0.2s ease;
@@ -153,33 +154,33 @@
       }
 
       .sidebar-nav-item:hover {
-        background-color: #1a1a1a;
-        border-color: #ff00ff;
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-magenta);
       }
 
       .sidebar-nav-item.active {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background-color: #0a2a2a;
-        color: #00ffff;
+        color: var(--accent-cyan);
       }
 
       .sidebar-checkbox {
         width: 18px;
         height: 18px;
-        border: 2px solid #666666;
+        border: 2px solid var(--text-muted);
         background-color: transparent;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: bold;
-        color: #00ff41;
+        color: var(--accent-lime);
         font-size: 12px;
       }
 
       .sidebar-checkbox.checked {
-        background-color: #00ff41;
-        border-color: #00ff41;
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
         color: #0a0a0a;
       }
 
@@ -187,21 +188,21 @@
       .main {
         flex: 1;
         padding: 3rem;
-        background-color: #0a0a0a;
+        background-color: var(--bg-primary);
         overflow-y: auto;
       }
 
       .section {
         margin-bottom: 4rem;
         padding: 2rem;
-        background-color: #111111;
-        border: 3px solid #333333;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--border-primary);
         transition: all 0.3s ease;
       }
 
       .section:hover {
-        border-color: #00ffff;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 20px var(--accent-cyan-glow);
       }
 
       .section h2 {
@@ -209,9 +210,9 @@
         font-size: 22px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1.5rem;
-        border-bottom: 3px solid #00ffff;
+        border-bottom: 3px solid var(--accent-cyan);
         padding-bottom: 0.75rem;
         font-weight: 700;
       }
@@ -221,7 +222,7 @@
         font-size: 14px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-top: 1.5rem;
         margin-bottom: 1rem;
         font-weight: 700;
@@ -229,7 +230,7 @@
 
       .section p {
         margin-bottom: 1rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .section ul,
@@ -240,7 +241,7 @@
 
       .section li {
         margin-bottom: 0.75rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       /* SVG DIAGRAM */
@@ -248,9 +249,9 @@
         margin: 2rem 0;
         display: flex;
         justify-content: center;
-        background-color: #0a0a0a;
+        background-color: var(--bg-primary);
         padding: 2rem;
-        border: 2px solid #333333;
+        border: 2px solid var(--border-primary);
         overflow-x: auto;
       }
 
@@ -265,9 +266,9 @@
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         padding: 0.75rem;
-        border: 2px solid #333333;
-        background-color: #1a1a1a;
-        color: #00ffff;
+        border: 2px solid var(--border-primary);
+        background-color: var(--bg-tertiary);
+        color: var(--accent-cyan);
         margin-bottom: 0.5rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -277,12 +278,12 @@
       }
 
       .tree-toggle:hover {
-        border-color: #00ffff;
-        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 10px var(--accent-cyan-glow);
       }
 
       .tree-toggle.active {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
       }
 
@@ -290,11 +291,11 @@
         display: none;
         margin-top: 0.5rem;
         padding: 1rem;
-        background-color: #1a1a1a;
-        border-left: 3px solid #ff00ff;
+        background-color: var(--bg-tertiary);
+        border-left: 3px solid var(--accent-magenta);
         font-family: 'Space Mono', monospace;
         font-size: 12px;
-        color: #e0e0e0;
+        color: var(--text-primary);
         line-height: 1.6;
       }
 
@@ -305,9 +306,9 @@
       .tree-explanation {
         margin-top: 1rem;
         padding: 1rem;
-        background-color: #0a0a0a;
-        border: 2px solid #00ff41;
-        color: #00ff41;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-lime);
+        color: var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-size: 12px;
       }
@@ -324,19 +325,19 @@
         gap: 1rem;
         padding: 1rem;
         margin-bottom: 0.75rem;
-        background-color: #1a1a1a;
-        border: 2px solid #333333;
+        background-color: var(--bg-tertiary);
+        border: 2px solid var(--border-primary);
         cursor: pointer;
         transition: all 0.2s ease;
       }
 
       .checklist-item:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background-color: #0a2a2a;
       }
 
       .checklist-item.checked {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background-color: #0a2a0a;
       }
 
@@ -344,7 +345,7 @@
         flex-shrink: 0;
         width: 22px;
         height: 22px;
-        border: 2px solid #666666;
+        border: 2px solid var(--text-muted);
         background-color: transparent;
         display: flex;
         align-items: center;
@@ -356,20 +357,20 @@
       }
 
       .checklist-item.checked .checklist-checkbox {
-        background-color: #00ff41;
-        border-color: #00ff41;
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
         color: #0a0a0a;
       }
 
       .checklist-text {
         flex: 1;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       /* QUIZ */
       .quiz-section {
-        background-color: #1a1a1a;
-        border: 3px solid #ff00ff;
+        background-color: var(--bg-tertiary);
+        border: 3px solid var(--accent-magenta);
         padding: 2rem;
         margin-top: 2rem;
       }
@@ -379,7 +380,7 @@
         font-size: 18px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-bottom: 2rem;
         font-weight: 700;
       }
@@ -387,8 +388,8 @@
       .quiz-question {
         margin-bottom: 2rem;
         padding: 1.5rem;
-        background-color: #0a0a0a;
-        border: 2px solid #333333;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--border-primary);
       }
 
       .quiz-question-text {
@@ -396,7 +397,7 @@
         font-size: 13px;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1rem;
         font-weight: 700;
       }
@@ -407,15 +408,15 @@
         gap: 0.75rem;
         padding: 0.75rem;
         margin-bottom: 0.75rem;
-        border: 2px solid #333333;
-        background-color: #111111;
+        border: 2px solid var(--border-primary);
+        background-color: var(--bg-surface);
         cursor: pointer;
         transition: all 0.2s ease;
         font-size: 14px;
       }
 
       .quiz-option:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background-color: #0a2a2a;
       }
 
@@ -423,21 +424,21 @@
         width: 18px;
         height: 18px;
         cursor: pointer;
-        accent-color: #00ffff;
+        accent-color: var(--accent-cyan);
       }
 
       .quiz-option.selected {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background-color: #0a2a2a;
       }
 
       .quiz-option.correct {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background-color: #0a2a0a;
       }
 
       .quiz-option.incorrect {
-        border-color: #ff3333;
+        border-color: var(--accent-error);
         background-color: #2a0a0a;
       }
 
@@ -445,9 +446,9 @@
         display: none;
         margin-top: 1rem;
         padding: 1rem;
-        border-left: 3px solid #00ffff;
+        border-left: 3px solid var(--accent-cyan);
         font-size: 13px;
-        color: #e0e0e0;
+        color: var(--text-primary);
         font-family: 'Space Mono', monospace;
       }
 
@@ -456,19 +457,19 @@
       }
 
       .quiz-feedback.correct {
-        border-left-color: #00ff41;
-        color: #00ff41;
+        border-left-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .quiz-feedback.incorrect {
-        border-left-color: #ff3333;
-        color: #ff3333;
+        border-left-color: var(--accent-error);
+        color: var(--accent-error);
       }
 
       .quiz-submit {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
-        border: 3px solid #00ffff;
+        border: 3px solid var(--accent-cyan);
         padding: 1rem 2rem;
         font-family: 'Space Mono', monospace;
         font-size: 13px;
@@ -482,15 +483,15 @@
 
       .quiz-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
+        box-shadow: 0 4px 12px var(--accent-cyan-glow);
       }
 
       .quiz-result {
         margin-top: 2rem;
         padding: 1.5rem;
         background-color: #0a2a0a;
-        border: 2px solid #00ff41;
-        color: #00ff41;
+        border: 2px solid var(--accent-lime);
+        color: var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         display: none;
@@ -502,8 +503,8 @@
 
       /* CONFIDENCE RATING */
       .confidence-section {
-        background-color: #1a1a1a;
-        border: 3px solid #ffaa00;
+        background-color: var(--bg-tertiary);
+        border: 3px solid var(--accent-orange);
         padding: 2rem;
         margin-top: 2rem;
       }
@@ -513,7 +514,7 @@
         font-size: 15px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ffaa00;
+        color: var(--accent-orange);
         margin-bottom: 1.5rem;
         font-weight: 700;
       }
@@ -527,9 +528,9 @@
       .confidence-btn {
         width: 56px;
         height: 56px;
-        border: 3px solid #666666;
-        background-color: #0a0a0a;
-        color: #e0e0e0;
+        border: 3px solid var(--text-muted);
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
         font-family: 'Space Mono', monospace;
         font-size: 18px;
         font-weight: 700;
@@ -541,20 +542,20 @@
       }
 
       .confidence-btn:hover {
-        border-color: #ffaa00;
-        box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        border-color: var(--accent-orange);
+        box-shadow: 0 0 15px var(--accent-orange-glow);
       }
 
       .confidence-btn.selected {
-        background-color: #ffaa00;
-        border-color: #ffaa00;
+        background-color: var(--accent-orange);
+        border-color: var(--accent-orange);
         color: #0a0a0a;
       }
 
       /* PROGRESS BAR */
       .progress-container {
-        background-color: #111111;
-        border: 3px solid #00ffff;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-cyan);
         padding: 1.5rem;
         margin-bottom: 2rem;
       }
@@ -564,21 +565,21 @@
         font-size: 11px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #00ffff;
+        color: var(--accent-cyan);
         margin-bottom: 0.75rem;
         font-weight: 700;
       }
 
       .progress-bar {
         height: 14px;
-        background-color: #0a0a0a;
-        border: 2px solid #00ffff;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-cyan);
         overflow: hidden;
       }
 
       .progress-fill {
         height: 100%;
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         width: 0%;
         transition: width 0.3s ease;
       }
@@ -590,15 +591,15 @@
         gap: 2rem;
         margin-top: 4rem;
         padding-top: 2rem;
-        border-top: 3px solid #333333;
+        border-top: 3px solid var(--border-primary);
       }
 
       .nav-button {
         flex: 1;
         padding: 1.5rem;
-        border: 3px solid #00ffff;
+        border: 3px solid var(--accent-cyan);
         background-color: transparent;
-        color: #00ffff;
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         letter-spacing: 0.1em;
@@ -614,7 +615,7 @@
       }
 
       .nav-button:hover {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
         transform: translateY(-2px);
       }
@@ -629,7 +630,7 @@
           width: 100%;
           max-height: 280px;
           border-right: none;
-          border-bottom: 3px solid #ff00ff;
+          border-bottom: 3px solid var(--accent-magenta);
           position: static;
         }
 
@@ -1000,48 +1001,61 @@
 
         <!-- SECTION: CARD LAYOUT -->
         <div class="section" id="card-layout" data-section="card-layout">
-          <h2>YOUR CARD LAYOUT</h2>
-          <p>Here's your actual CF card structure. You can browse it on the OT by pressing [FUNC] + [AED] to open the Audio Editor, or use [FUNC] + [CUE] to browse the sample pool.</p>
+          <h2>CF CARD STRUCTURE</h2>
+          <p>
+            Every Octatrack CF card follows the same anatomy: one Set folder at the top, an AUDIO subfolder that acts as the shared sample pool, and one or more Project folders created by the OT. You
+            can browse it on the OT by pressing [FUNC] + [AED] to open the Audio Editor, or use [FUNC] + [CUE] to browse the sample pool.
+          </p>
           <div style="font-family: 'Space Mono', monospace; font-size: 12px; background-color: #0a0a0a; border: 2px solid #00ffff; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto">
-            <div style="color: #ff00ff; margin-bottom: 0.5rem; font-weight: 700">/OCTATRACK/RESTART 2024/</div>
+            <div style="color: #ff00ff; margin-bottom: 0.5rem; font-weight: 700">/OCTATRACK/MY_SET/</div>
             <div style="color: #e0e0e0; line-height: 1.8">
               ├─
               <span style="color: #00ffff; font-weight: 700">AUDIO/</span>
               <br />
-              │ ├─ !!Samples:Loops/ (Drum, Melodic, Dark...)
+              │ ├─ Drums/
               <br />
-              │ ├─ Loopmasters/
+              │ │ ├─ kick_punchy.wav
               <br />
-              │ └─ Samples From Mars/
+              │ │ └─ snare_crack.wav
+              <br />
+              │ ├─ Loops/
+              <br />
+              │ │ ├─ funk_loop_120bpm.wav
+              <br />
+              │ │ └─ ambient_pad_90bpm.wav
+              <br />
+              │ └─ One-Shots/
+              <br />
+              │ &nbsp;&nbsp;&nbsp;└─ vocal_chop.wav
               <br />
               ├─
-              <span style="color: #ff00ff; font-weight: 700">REstart040424/</span>
+              <span style="color: #ff00ff; font-weight: 700">My_Project/</span>
               <br />
               │ ├─ project.work
               <br />
               │ ├─ project.strd
               <br />
-              │ └─ [A.strd through P.strd]
+              │ └─ [bank files A.strd through P.strd]
               <br />
               └─
-              <span style="color: #ff00ff; font-weight: 700">Feb220226_FOURTETFUN/</span>
+              <span style="color: #ff00ff; font-weight: 700">Live_Set_02/</span>
               <br />
               &nbsp;&nbsp;&nbsp;&nbsp;└─ [project files]
             </div>
           </div>
-          <h3>What You Have</h3>
+          <h3>What's Inside</h3>
           <ul>
             <li>
-              <strong>RESTART 2024</strong>
-              — Your SET folder (top level)
+              <strong>MY_SET</strong>
+              — Your Set folder (top level container)
             </li>
             <li>
               <strong>AUDIO/</strong>
-              — Organized sample library with themed folders
+              — Shared sample pool with organized subfolders
             </li>
             <li>
-              <strong>REstart040424, Feb220226_FOURTETFUN</strong>
-              — Two active projects
+              <strong>My_Project, Live_Set_02</strong>
+              — Project folders created by the OT
             </li>
           </ul>
         </div>
@@ -1435,6 +1449,7 @@
         saveState({ timeSpent: (current.timeSpent || 0) + elapsed });
       });
     </script>
+    <script src="assets/theme.js" defer></script>
     <script src="assets/svg-overlay.js" defer></script>
 
     <!-- Creator / Support -->

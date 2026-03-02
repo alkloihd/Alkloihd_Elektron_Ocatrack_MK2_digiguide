@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -15,8 +16,8 @@
       }
 
       body {
-        background: #0a0a0a;
-        color: #e0e0e0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -27,7 +28,7 @@
       }
 
       a {
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-decoration: none;
       }
 
@@ -37,8 +38,8 @@
 
       /* TOP BAR */
       .top-bar {
-        background: #111111;
-        border-bottom: 3px solid #00ffff;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-cyan);
         padding: 16px 24px;
         display: flex;
         align-items: center;
@@ -56,8 +57,8 @@
 
       .dashboard-link {
         padding: 8px 12px;
-        border: 2px solid #00ffff;
-        color: #00ffff;
+        border: 2px solid var(--accent-cyan);
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         font-weight: 700;
@@ -69,8 +70,8 @@
 
       .dashboard-link:hover {
         transform: translateY(-2px);
-        background: #00ffff;
-        color: #0a0a0a;
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
       }
 
       .top-bar-title {
@@ -79,7 +80,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
       }
 
       .top-bar-meta {
@@ -92,9 +93,9 @@
       }
 
       .meta-item {
-        border: 2px solid #666666;
+        border: 2px solid var(--text-muted);
         padding: 6px 10px;
-        color: #666666;
+        color: var(--text-muted);
       }
 
       /* LAYOUT */
@@ -106,8 +107,8 @@
 
       /* SIDEBAR */
       .sidebar {
-        background: #111111;
-        border-right: 3px solid #666666;
+        background: var(--bg-surface);
+        border-right: 3px solid var(--text-muted);
         padding: 24px;
         position: sticky;
         top: 60px;
@@ -123,25 +124,25 @@
 
       .sidebar-item {
         padding: 10px 12px;
-        border: 2px solid #333333;
+        border: 2px solid var(--border-primary);
         font-family: 'Space Mono', monospace;
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #666666;
+        color: var(--text-muted);
         cursor: pointer;
         transition: all 0.2s;
         position: relative;
       }
 
       .sidebar-item:hover {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
       }
 
       .sidebar-item.active {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
         background: rgba(0, 255, 255, 0.05);
       }
 
@@ -171,15 +172,15 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 20px;
-        border-bottom: 3px solid #00ff41;
+        border-bottom: 3px solid var(--accent-lime);
         padding-bottom: 12px;
       }
 
       .section-content {
         margin-bottom: 24px;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .section-content p {
@@ -188,8 +189,8 @@
 
       /* CARDS */
       .card {
-        background: #111111;
-        border: 3px solid #333333;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
         padding: 20px;
         margin: 20px 0;
       }
@@ -200,12 +201,12 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #00ffff;
+        color: var(--accent-cyan);
         margin-bottom: 12px;
       }
 
       .card-content {
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       /* BUTTONS */
@@ -218,9 +219,9 @@
 
       .button {
         padding: 12px 20px;
-        border: 3px solid #00ffff;
+        border: 3px solid var(--accent-cyan);
         background: transparent;
-        color: #00ffff;
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         font-weight: 700;
@@ -232,34 +233,34 @@
 
       .button:hover {
         transform: translateY(-2px);
-        background: #00ffff;
-        color: #0a0a0a;
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
       }
 
       .button.secondary {
-        border-color: #ff00ff;
-        color: #ff00ff;
+        border-color: var(--accent-magenta);
+        color: var(--accent-magenta);
       }
 
       .button.secondary:hover {
-        background: #ff00ff;
-        color: #0a0a0a;
+        background: var(--accent-magenta);
+        color: var(--bg-primary);
       }
 
       .button.accent {
-        border-color: #00ff41;
-        color: #00ff41;
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .button.accent:hover {
-        background: #00ff41;
-        color: #0a0a0a;
+        background: var(--accent-lime);
+        color: var(--bg-primary);
       }
 
       /* WAVEFORM SLICER */
       .waveform-container {
-        background: #111111;
-        border: 3px solid #00ffff;
+        background: var(--bg-surface);
+        border: 3px solid var(--accent-cyan);
         padding: 20px;
         margin: 20px 0;
       }
@@ -267,8 +268,8 @@
       .waveform-svg {
         width: 100%;
         height: 200px;
-        background: #0a0a0a;
-        border: 2px solid #333333;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-primary);
         display: block;
         margin-bottom: 16px;
       }
@@ -292,22 +293,22 @@
 
       .waveform-controls input {
         padding: 6px 10px;
-        border: 2px solid #00ffff;
-        background: #0a0a0a;
-        color: #00ffff;
+        border: 2px solid var(--accent-cyan);
+        background: var(--bg-primary);
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         width: 60px;
       }
 
       .slice-info {
-        background: #0a0a0a;
-        border: 2px solid #666666;
+        background: var(--bg-primary);
+        border: 2px solid var(--text-muted);
         padding: 12px;
         margin-top: 12px;
         font-family: 'Space Mono', monospace;
         font-size: 12px;
-        color: #666666;
+        color: var(--text-muted);
       }
 
       /* SEQUENCER DEMO */
@@ -317,14 +318,14 @@
         gap: 8px;
         margin: 20px 0;
         padding: 20px;
-        background: #111111;
-        border: 3px solid #ff00ff;
+        background: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
       }
 
       .sequencer-step {
         aspect-ratio: 1;
-        border: 2px solid #333333;
-        background: #0a0a0a;
+        border: 2px solid var(--border-primary);
+        background: var(--bg-primary);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -332,22 +333,22 @@
         font-family: 'Space Mono', monospace;
         font-size: 11px;
         font-weight: 700;
-        color: #666666;
+        color: var(--text-muted);
         transition: all 0.2s;
       }
 
       .sequencer-step:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
       }
 
       .sequencer-step.active {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background: rgba(0, 255, 65, 0.1);
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .sequencer-step.locked {
-        border-color: #ff00ff;
+        border-color: var(--accent-magenta);
         background: rgba(255, 0, 255, 0.1);
       }
 
@@ -379,28 +380,28 @@
         width: 100%;
         border-collapse: collapse;
         margin: 20px 0;
-        border: 3px solid #333333;
+        border: 3px solid var(--border-primary);
       }
 
       th,
       td {
         padding: 12px;
         text-align: left;
-        border: 2px solid #333333;
+        border: 2px solid var(--border-primary);
         font-family: 'Space Mono', monospace;
         font-size: 12px;
       }
 
       th {
-        background: #111111;
-        color: #00ffff;
+        background: var(--bg-surface);
+        color: var(--accent-cyan);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
       }
 
       td {
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       tr:nth-child(even) {
@@ -411,12 +412,12 @@
       .quiz-section {
         margin-top: 40px;
         padding-top: 40px;
-        border-top: 3px solid #ff00ff;
+        border-top: 3px solid var(--accent-magenta);
       }
 
       .quiz-item {
-        background: #111111;
-        border: 3px solid #333333;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
         padding: 20px;
         margin-bottom: 20px;
       }
@@ -427,7 +428,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-bottom: 16px;
       }
 
@@ -439,9 +440,9 @@
 
       .quiz-option {
         padding: 12px;
-        border: 2px solid #333333;
-        background: #0a0a0a;
-        color: #e0e0e0;
+        border: 2px solid var(--border-primary);
+        background: var(--bg-primary);
+        color: var(--text-primary);
         cursor: pointer;
         font-family: 'Space Mono', monospace;
         font-size: 13px;
@@ -449,45 +450,45 @@
       }
 
       .quiz-option:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
       }
 
       .quiz-option.selected {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background: rgba(0, 255, 255, 0.1);
       }
 
       .quiz-option.correct {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background: rgba(0, 255, 65, 0.1);
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .quiz-option.incorrect {
-        border-color: #ff3333;
+        border-color: var(--accent-error);
         background: rgba(255, 51, 51, 0.1);
-        color: #ff3333;
+        color: var(--accent-error);
       }
 
       .quiz-feedback {
         margin-top: 12px;
         padding: 12px;
-        border-left: 3px solid #00ff41;
+        border-left: 3px solid var(--accent-lime);
         background: rgba(0, 255, 65, 0.05);
         font-size: 13px;
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .quiz-feedback.incorrect {
-        border-color: #ff3333;
+        border-color: var(--accent-error);
         background: rgba(255, 51, 51, 0.05);
-        color: #ff3333;
+        color: var(--accent-error);
       }
 
       /* CONFIDENCE SCALE */
       .confidence-section {
-        background: #111111;
-        border: 3px solid #00ff41;
+        background: var(--bg-surface);
+        border: 3px solid var(--accent-lime);
         padding: 24px;
         margin: 40px 0;
       }
@@ -498,7 +499,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #00ff41;
+        color: var(--accent-lime);
         margin-bottom: 20px;
       }
 
@@ -511,9 +512,9 @@
       .confidence-button {
         width: 50px;
         height: 50px;
-        border: 3px solid #00ff41;
-        background: #0a0a0a;
-        color: #00ff41;
+        border: 3px solid var(--accent-lime);
+        background: var(--bg-primary);
+        color: var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-weight: 700;
         cursor: pointer;
@@ -525,8 +526,8 @@
       }
 
       .confidence-button.selected {
-        background: #00ff41;
-        color: #0a0a0a;
+        background: var(--accent-lime);
+        color: var(--bg-primary);
       }
 
       /* BOTTOM NAV */
@@ -535,16 +536,16 @@
         justify-content: space-between;
         align-items: center;
         padding: 24px 40px;
-        border-top: 3px solid #666666;
+        border-top: 3px solid var(--text-muted);
         margin-top: 60px;
-        background: #0a0a0a;
+        background: var(--bg-primary);
       }
 
       .nav-button {
         padding: 12px 20px;
-        border: 3px solid #00ffff;
+        border: 3px solid var(--accent-cyan);
         background: transparent;
-        color: #00ffff;
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         font-weight: 700;
@@ -556,8 +557,8 @@
 
       .nav-button:hover:not(:disabled) {
         transform: translateY(-2px);
-        background: #00ffff;
-        color: #0a0a0a;
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
       }
 
       .nav-button:disabled {
@@ -568,7 +569,7 @@
       .nav-progress {
         font-family: 'Space Mono', monospace;
         font-size: 12px;
-        color: #666666;
+        color: var(--text-muted);
         text-transform: uppercase;
         letter-spacing: 0.1em;
       }
@@ -584,7 +585,7 @@
           top: auto;
           max-height: auto;
           border-right: none;
-          border-bottom: 3px solid #666666;
+          border-bottom: 3px solid var(--text-muted);
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
           padding: 12px;
@@ -644,7 +645,7 @@
           <div class="section-content">
             <p>
               Slices are how you divide a sample into rhythmic chunks. Think of it like cutting a drum loop into individual hits. Each slice becomes its own playable segment, numbered 1-64 (max 64
-              slices per sample). You create and manage slices in the Audio Editor, opened with [FUNC] + [AUD].
+              slices per sample). You create and manage slices in the Audio Editor, opened with [FUNC] + [AED].
             </p>
             <p>
               Once sliced, you can play any slice independently using the [TRIG] keys, chop them into a new rhythm, reverse them, pitch them, or sequence them with [REC] (Grid Recording). This is the
@@ -670,7 +671,7 @@
               <div class="card-content">
                 1. Select a track with a sample loaded
                 <br />
-                2. Press [FUNC] + [AUD] to open Audio Editor
+                2. Press [FUNC] + [AED] to open Audio Editor
                 <br />
                 3. You'll see the waveform displayed
               </div>
@@ -850,7 +851,7 @@
             <div class="card" style="margin-top: 20px">
               <div class="card-title">EXAMPLE: GLITCH BEAT</div>
               <div class="card-content">
-                1. Slice a drum loop into 32 pieces in the Audio Editor ([FUNC] + [AUD])
+                1. Slice a drum loop into 32 pieces in the Audio Editor ([FUNC] + [AED])
                 <br />
                 2. Enter [REC] mode and sequence slices 1-16 on [TRIG] keys
                 <br />
@@ -1241,6 +1242,7 @@
         initConfidence();
       });
     </script>
+    <script src="assets/theme.js" defer></script>
     <script src="assets/svg-overlay.js" defer></script>
 
     <!-- Creator / Support -->
