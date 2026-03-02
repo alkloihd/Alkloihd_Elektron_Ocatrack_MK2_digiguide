@@ -1643,16 +1643,28 @@
       "label": "1",
       "sublabel": "T1",
       "manual": {
-        "primary": "GRID REC: place trig. Real-time: trig active track machine",
-        "func_combo": "Place lock trig / one-shot trig",
-        "other_combos": [
-          "[TRIG]+[UP/DOWN] = Sample lock menu",
-          "[TRIG]+[LEFT/RIGHT] = Micro timing",
-          "[BANK]+[TRIG] = Select bank",
-          "[PTN]+[TRIG] = Select pattern",
-          "[SCENE]+[TRIG] = Assign scene"
+        "primary": "Multi-purpose key. In Grid Recording: places/removes trigs on step 1. With [BANK]: selects Bank A. With [PTN]: selects Pattern 1. With [SCENE A/B]: assigns Scene 1. In Tracks mode (no recording): trigs Track 1 if disconnected.",
+        "func_combo": "[FUNC] + [TRIG 1] = Place lock trig on step 1 (Grid Recording) / One-shot trig toggle.",
+        "all_combos": ["[TRIG 1] = Place/remove trig on step 1 (Grid Rec) / Trig disconnected Track 1 (Tracks mode)", "[BANK] + [TRIG 1] = Select Bank A", "[PTN] + [TRIG 1] = Select Pattern 1 in current bank", "[SCENE A/B] + [TRIG 1] = Assign Scene 1 to slot A or B", "[FUNC] + [TRIG 1] = Place lock trig / Toggle one-shot (Grid Rec)", "[TRIG 1] + encoder turn = Parameter lock for step 1", "[TRIG 1] + [UP/DOWN] = Sample Lock menu (Grid Rec)", "[TRIG 1] + [LEFT/RIGHT] = Micro Timing menu (Grid Rec)", "[TRIG 1] + [YES] = Preview trig on main outputs", "[TRIG 1] + [CUE] = Preview trig on cue outputs", "[TRIG 1] + [RECORD] = Copy trig", "[TRIG 1] + [PLAY] = Clear trig locks", "[TRIG 1] + [STOP] = Paste trig", "[TRIG 1] + [NO] = Convert trig type (sample→trigless→lock cycle)"],
+        "menu_path": "N/A — context-dependent key.",
+        "parameters": [],
+        "leds": "Red = sample trig. Flashing red = sample trig with p-lock or sample lock. Green (bright) = trigless trig. Green (dim) = lock trig. Yellow = one-shot trig. Yellow/red alternating = fired one-shot. Unlit = no trig.",
+        "tips": ["In LIVE RECORDING mode, [TRIG 9-16] input sample trigs on tracks 1-8 (not [TRIG 1-8]).", "In Chromatic mode, TRIG keys become a mini-keyboard. Yellow = C notes, red = white keys, unlit = black keys.", "In Quick Mute mode, [TRIG 1-8] mute audio tracks, [TRIG 9-16] mute MIDI tracks.", "Hold a trig and turn LEVEL knob to open the Sample Lock browser."],
+        "section": "3.1 (item 21), 12",
+        "merlin_tips": [
+          "Merlin's sample lock revelation: 'By using sample locks, I can play any sample from the sample list at any step on any track that contains a flex machine in any pattern in any bank.' The trig keys + LEVEL encoder are the gateway to this.",
+          "Hold a trig + turn LEVEL encoder = sample lock browser. Select any sample from the slot list for that step.",
+          "Hold a trig + lock the START parameter = slice lock. Select which slice plays on that step.",
+          "The math: 128 slots x 64 slices = 8,192 available sounds per sample list. With Static list too, that's 16,384 total.",
+          "One-shot trigs ([FUNC]+[TRIG]) are essential for recorder triggers — they fire once and don't repeat, preventing overwrite on pattern loop.",
+          "Merlin's pattern variation technique: same Part, different trigger patterns. Strip triggers for a break, add extra triggers + locks for a buildup."
         ],
-        "section": "12.2"
+        "workflow_context": "In Grid Recording mode, press [TRIG] to place/remove triggers. Hold [TRIG]+[UP/DOWN] for sample locks. Hold [TRIG]+turn LEVEL for sample lock via encoder. P-lock parameters by holding [TRIG] and turning any encoder. [FUNC]+[TRIG] places a one-shot or lock trig.",
+        "common_mistakes": [
+          "Not understanding that a trig key's LED color tells you what's on it: steady red = normal trig, flashing red = sample lock",
+          "Placing triggers without being in Grid Recording mode",
+          "Forgetting that [FUNC]+[TRIG] places special trig types (one-shot, lock trigs) — not regular trigs"
+        ]
       },
       "tutorials": ["03-beat-basics", "05-slice-and-dice", "06-sample-locks"]
     },
@@ -1662,7 +1674,7 @@
       "zone": "trig_grid",
       "label": "2",
       "sublabel": "T2",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 2 / Bank B / Pattern 2 / Scene 2.", "func_combo": "[FUNC] + [TRIG 2] = Lock trig / one-shot toggle on step 2.", "all_combos": ["Same combos as TRIG 1, applied to position 2: [BANK]+[TRIG 2]=Bank B, [PTN]+[TRIG 2]=Pattern 2, etc."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": ["[TRIG 2] in Startup Menu = EMPTY RESET (reinitializes battery-backed RAM, clears internal settings, CF card unaffected)."], "section": "3.1 (item 21), 12, 18.2", "merlin_tips": ["Same principles as trig_1 — all 16 trigs work identically."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_3": {
@@ -1671,7 +1683,7 @@
       "zone": "trig_grid",
       "label": "3",
       "sublabel": "T3",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 3 / Bank C / Pattern 3 / Scene 3.", "func_combo": "[FUNC] + [TRIG 3] = Lock trig / one-shot toggle on step 3.", "all_combos": ["Same combos as TRIG 1, applied to position 3."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_4": {
@@ -1680,7 +1692,7 @@
       "zone": "trig_grid",
       "label": "4",
       "sublabel": "T4",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 4 / Bank D / Pattern 4 / Scene 4.", "func_combo": "[FUNC] + [TRIG 4] = Lock trig / one-shot toggle on step 4.", "all_combos": ["Same combos as TRIG 1, applied to position 4."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_5": {
@@ -1689,7 +1701,7 @@
       "zone": "trig_grid",
       "label": "5",
       "sublabel": "T5",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 5 / Bank E / Pattern 5 / Scene 5.", "func_combo": "[FUNC] + [TRIG 5] = Lock trig / one-shot toggle on step 5.", "all_combos": ["Same combos as TRIG 1, applied to position 5."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1. In Merlin's examples, step 5 (beat 2) and step 13 (beat 4) are classic snare/clap positions."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_6": {
@@ -1698,7 +1710,7 @@
       "zone": "trig_grid",
       "label": "6",
       "sublabel": "T6",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 6 / Bank F / Pattern 6 / Scene 6.", "func_combo": "[FUNC] + [TRIG 6] = Lock trig / one-shot toggle on step 6.", "all_combos": ["Same combos as TRIG 1, applied to position 6."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_7": {
@@ -1707,7 +1719,7 @@
       "zone": "trig_grid",
       "label": "7",
       "sublabel": "T7",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 7 / Bank G / Pattern 7 / Scene 7.", "func_combo": "[FUNC] + [TRIG 7] = Lock trig / one-shot toggle on step 7.", "all_combos": ["Same combos as TRIG 1, applied to position 7."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_8": {
@@ -1716,7 +1728,7 @@
       "zone": "trig_grid",
       "label": "8",
       "sublabel": "T8",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Same as TRIG 1 but for step 8 / Bank H / Pattern 8 / Scene 8.", "func_combo": "[FUNC] + [TRIG 8] = Lock trig / one-shot toggle on step 8.", "all_combos": ["Same combos as TRIG 1, applied to position 8."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_9": {
@@ -1725,7 +1737,7 @@
       "zone": "trig_grid",
       "label": "9",
       "sublabel": "T1",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 9 in Grid Recording. In TRACKS mode without recording, trigs Track 1's machine. In LIVE RECORDING, inputs a sample trig on Track 1. With [BANK]: selects Bank I. With [PTN]: Pattern 9.", "func_combo": "[FUNC] + [TRIG 9] = Lock trig on step 9 / Manually trig trigless trig on Track 1 (no recording mode, Tracks/Chromatic).", "all_combos": ["Same combos as TRIG 1 applied to position 9. [BANK]+[TRIG 9]=Bank I. In Tracks mode: trigs Track 1 machine. In Live Recording: places sample trig on Track 1."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys. Outside Grid Rec, flashes when Track 1's trig fires.", "tips": ["In LIVE RECORDING, [TRIG 9-16] are the primary way to input sample trigs on tracks 1-8 in real time.", "In TRACKS mode (no recording), [TRIG 9] plays Track 1's sample like pressing a drum pad."], "section": "3.1 (item 21), 12.7.1", "merlin_tips": ["Same principles as trig_1. Steps 9-16 represent the second half of a 1-bar pattern."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_10": {
@@ -1734,7 +1746,7 @@
       "zone": "trig_grid",
       "label": "10",
       "sublabel": "T2",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 10 / Bank J / Pattern 10. In Tracks mode, trigs Track 2. In Live Recording, inputs trig on Track 2.", "func_combo": "[FUNC] + [TRIG 10] = Lock trig on step 10.", "all_combos": ["Same as TRIG 9, applied to position 10 / Track 2."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_11": {
@@ -1743,7 +1755,7 @@
       "zone": "trig_grid",
       "label": "11",
       "sublabel": "T3",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 11 / Bank K / Pattern 11. In Tracks mode, trigs Track 3. In Live Recording, inputs trig on Track 3.", "func_combo": "[FUNC] + [TRIG 11] = Lock trig on step 11.", "all_combos": ["Same as TRIG 9, applied to position 11 / Track 3."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_12": {
@@ -1752,7 +1764,7 @@
       "zone": "trig_grid",
       "label": "12",
       "sublabel": "T4",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 12 / Bank L / Pattern 12. In Tracks mode, trigs Track 4. In Live Recording, inputs trig on Track 4.", "func_combo": "[FUNC] + [TRIG 12] = Lock trig on step 12.", "all_combos": ["Same as TRIG 9, applied to position 12 / Track 4."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_13": {
@@ -1761,7 +1773,7 @@
       "zone": "trig_grid",
       "label": "13",
       "sublabel": "T5",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 13 / Bank M / Pattern 13. In Tracks mode, trigs Track 5. In Live Recording, inputs trig on Track 5. In Chromatic mode, this is the ROOT NOTE (C at octave 0).", "func_combo": "[FUNC] + [TRIG 13] = Lock trig on step 13.", "all_combos": ["Same as TRIG 9, applied to position 13 / Track 5."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys. In Chromatic mode: yellow (C note).", "tips": ["In CHROMATIC mode, [TRIG 13] is the root note C at octave 0 — the reference pitch of the sample."], "section": "3.1 (item 21), 12, 12.7.2", "merlin_tips": ["Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": ["03-beat-basics"]
     },
     "trig_14": {
@@ -1770,7 +1782,7 @@
       "zone": "trig_grid",
       "label": "14",
       "sublabel": "T6",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 14 / Bank N / Pattern 14. In Tracks mode, trigs Track 6. In Live Recording, inputs trig on Track 6.", "func_combo": "[FUNC] + [TRIG 14] = Lock trig on step 14.", "all_combos": ["Same as TRIG 9, applied to position 14 / Track 6."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": []
     },
     "trig_15": {
@@ -1779,7 +1791,7 @@
       "zone": "trig_grid",
       "label": "15",
       "sublabel": "T7",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 15 / Bank O / Pattern 15. In Tracks mode, trigs Track 7. In Live Recording, inputs trig on Track 7.", "func_combo": "[FUNC] + [TRIG 15] = Lock trig on step 15.", "all_combos": ["Same as TRIG 9, applied to position 15 / Track 7."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": []
     },
     "trig_16": {
@@ -1788,7 +1800,7 @@
       "zone": "trig_grid",
       "label": "16",
       "sublabel": "T8",
-      "manual": { "primary": "Same as trig_1", "section": "12.2" },
+      "manual": { "primary": "Step 16 / Bank P / Pattern 16. In Tracks mode, trigs Track 8. In Live Recording, inputs trig on Track 8.", "func_combo": "[FUNC] + [TRIG 16] = Lock trig on step 16.", "all_combos": ["Same as TRIG 9, applied to position 16 / Track 8."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12", "merlin_tips": ["Same principles as trig_1. The last step of a 1-bar pattern — Merlin sometimes uses this for fill triggers or transition elements."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."] },
       "tutorials": []
     },
     "page": {
@@ -1798,14 +1810,41 @@
       "label": "PAGE",
       "sublabel": "Scale",
       "manual": {
-        "primary": "Selects active pattern page (4 LEDs show which pages in use)",
-        "func_combo": "Opens SCALE SETUP menu (track length, time signature)",
-        "other_combos": [
-          "[PAGE]+[RECORD] = Copy active pattern page",
-          "[PAGE]+[PLAY] = Clear active pattern page",
-          "[PAGE]+[STOP] = Paste pattern page"
+        "primary": "Selects the active pattern page when GRID RECORDING mode is active. Patterns can have 1-4 pages (16-64 steps). Also used in Slots/Slices trig modes to navigate sample slot/slice pages.",
+        "func_combo": "[FUNC] + [PAGE] = Opens the SCALE SETUP menu where pattern/track length, time signature, and tempo multiplier are set.",
+        "all_combos": [
+          "[PAGE] = Switch pattern page (in Grid Recording) / Navigate slot/slice pages (in Slots/Slices mode)",
+          "[FUNC] + [PAGE] = Open Scale Setup menu",
+          "[PAGE] + [RECORD] = Copy active pattern page",
+          "[PAGE] + [PLAY] = Clear active pattern page",
+          "[PAGE] + [STOP] = Paste to active pattern page",
+          "[PAGE] (in Chromatic mode) = Acts as an additional keyboard key",
+          "[PAGE] (in Scale Setup) = Quick-change total pattern/track length",
+          "[UP] + [PAGE] = Activate FILL mode (hold for duration)",
+          "[DOWN] + [PAGE] = Activate FILL mode for one pattern cycle",
+          "[UP] + [DOWN] + [PAGE] = Latch FILL mode"
         ],
-        "section": "8.6.3"
+        "menu_path": "SCALE SETUP menu (via FUNC+PAGE) → NORMAL mode: Pattern Scale (steps/total), Tempo Multiplier. PER TRACK mode: Scale Track, Tempo Multiplier, Master Length, Master Scale.",
+        "parameters": [
+          "NORMAL: PATTERN SCALE (1-64 steps / 16,32,48,64 total), TEMPO MULTIPLIER (1/8X to 2X)",
+          "PER TRACK: SCALE TRACK (per-track length), TEMPO MULTIPLIER (per-track), MASTER LENGTH (overall pattern restart), MASTER SCALE (overall time signature)"
+        ],
+        "leds": "Four <PAGE> LEDs above the [PAGE] key indicate which page is active/playing. For 16-step patterns, only LED 1:4 is lit and [PAGE] has no effect.",
+        "tips": [
+          "Trigs are auto-copied when extending pattern length (e.g., extending from 16 to 32 steps copies page 1 to page 2). Disable in Personalize.",
+          "In Scale Setup, press [TRIG] keys to quickly set the number of steps; press [PAGE] to quickly set total length.",
+          "FILL mode ([UP/DOWN]+[PAGE]) is essential for drum fills and conditional trig patterns.",
+          "2X tempo multiplier doubles the step resolution to 32nd notes — great for detailed hi-hat patterns."
+        ],
+        "section": "3.1 (item 10), 12.14, 12.15",
+        "merlin_tips": [
+          "Merlin's examples all use 16-step (1-page) patterns, but the principles extend to multi-page patterns for longer sequences."
+        ],
+        "workflow_context": "Press [PAGE] to cycle through pattern pages (up to 4 pages = 64 steps). [FUNC]+[PAGE] opens Scale Setup for changing track length and time signature. 4 LEDs show which pages have content.",
+        "common_mistakes": [
+          "Not realizing patterns can be longer than 16 steps — press PAGE to access steps 17-32, 33-48, 49-64",
+          "Forgetting that each track can have a DIFFERENT length via Scale Setup — creating polyrhythms"
+        ]
       },
       "tutorials": ["03-beat-basics"]
     },

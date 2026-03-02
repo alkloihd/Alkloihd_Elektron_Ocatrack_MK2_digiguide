@@ -5,16 +5,29 @@
     "creator": "Cuckoo",
     "channelUrl": "https://www.youtube.com/@cuckoomusic",
     "videoUrl": "https://www.youtube.com/watch?v=NrhPOGzn7LI",
-    "relevantTutorials": ["01-set-sail", "03-beat-basics"],
-    "relevantSections": ["hardware-overview", "navigation-basics", "getting-started"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "hardware-overview",
+      "navigation-basics",
+      "getting-started"
+    ],
     "duration": "22:14",
     "uploadDate": "2015-03-20",
-    "tags": ["basics", "beginner", "overview", "tutorial"],
+    "tags": [
+      "basics",
+      "beginner",
+      "overview",
+      "tutorial"
+    ],
     "description": "Cuckoo's first Octatrack tutorial covering basic navigation, hardware overview, and first steps. Made with newcomers in mind for a machine with a LOT of possibilities.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list, Matrixsynth",
-    "notes": "Foundational tutorial by one of the most respected Octatrack educators. MK1-focused but all core concepts apply to MK2."
+    "notes": "Foundational tutorial by one of the most respected Octatrack educators. MK1-focused but all core concepts apply to MK2.",
+    "transcriptFile": "knowledge/transcripts/Cuckoo_-_Octatrack_Tutorial_1_-_CUCKOO.txt"
   },
   {
     "id": "cuckoo-octatrack-tutorial-2",
@@ -22,16 +35,29 @@
     "creator": "Cuckoo",
     "channelUrl": "https://www.youtube.com/@cuckoomusic",
     "videoUrl": "https://www.youtube.com/watch?v=WJT_JoWO2tU",
-    "relevantTutorials": ["02-load-and-lock", "04-audio-pool"],
-    "relevantSections": ["manual-sampling", "flex-machine", "recording-basics"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "04-audio-pool"
+    ],
+    "relevantSections": [
+      "manual-sampling",
+      "flex-machine",
+      "recording-basics"
+    ],
     "duration": "19:45",
     "uploadDate": "2015-06-10",
-    "tags": ["sampling", "beginner", "recording", "Flex"],
+    "tags": [
+      "sampling",
+      "beginner",
+      "recording",
+      "Flex"
+    ],
     "description": "Easy sampling for total beginners. Features sampling from PO-12 and vinyl. Goal is quick basic understanding from day one with very little or no prior Elektron experience.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list, OP Forums",
-    "notes": "Excellent entry point for sampling. Very beginner-friendly, shows real-world workflow with external audio sources."
+    "notes": "Excellent entry point for sampling. Very beginner-friendly, shows real-world workflow with external audio sources.",
+    "transcriptFile": "knowledge/transcripts/Cuckoo_-_OCTATRACK_Tutorial_2_-_sampling.txt"
   },
   {
     "id": "cuckoo-octatrack-mkii-performance",
@@ -39,16 +65,30 @@
     "creator": "Cuckoo",
     "channelUrl": "https://www.youtube.com/@cuckoomusic",
     "videoUrl": "https://www.youtube.com/watch?v=K30QBq83NL8",
-    "relevantTutorials": ["01-set-sail", "08-parts-banks-scenes"],
-    "relevantSections": ["live-performance", "sampling-workflow", "song-building"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "live-performance",
+      "sampling-workflow",
+      "song-building"
+    ],
     "duration": "9:00",
     "uploadDate": "2017-10-15",
-    "tags": ["performance", "MK2", "sampling", "live", "inspiration"],
+    "tags": [
+      "performance",
+      "MK2",
+      "sampling",
+      "live",
+      "inspiration"
+    ],
     "description": "Cuckoo creates a song/jam with the Octatrack MKII, heavily edited from a 48-minute session down to 9 minutes. Samples and builds up a track from scratch.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list, confirmed via forum discussion",
-    "notes": "Great for seeing MKII in action and understanding what's possible. Inspirational rather than step-by-step tutorial."
+    "notes": "Great for seeing MKII in action and understanding what's possible. Inspirational rather than step-by-step tutorial.",
+    "transcriptFile": "knowledge/transcripts/Cuckoo_-_Octatrack_MKII_Cuckoo_Heavily_Edited_Performance.txt"
   },
   {
     "id": "cuckoo-octatrack-loopbox-pickup",
@@ -56,16 +96,29 @@
     "creator": "Cuckoo",
     "channelUrl": "https://www.youtube.com/@cuckoomusic",
     "videoUrl": "https://www.youtube.com/watch?v=JnbQ8ichm54",
-    "relevantTutorials": ["02-load-and-lock", "07-loop-stretching"],
-    "relevantSections": ["pickup-machine", "loopbox", "live-looping"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "pickup-machine",
+      "loopbox",
+      "live-looping"
+    ],
     "duration": "18:00",
     "uploadDate": "2015-11-20",
-    "tags": ["pickup-machine", "looper", "loopbox", "live-looping"],
+    "tags": [
+      "pickup-machine",
+      "looper",
+      "loopbox",
+      "live-looping"
+    ],
     "description": "Tutorial on setting up the Octatrack for loopbox style jamming with pickup machines. Covers multi-track loop box recording for beginners.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Essential for understanding pickup machines and live looping workflow."
+    "notes": "Essential for understanding pickup machines and live looping workflow.",
+    "transcriptFile": "knowledge/transcripts/Cuckoo_-_Octatrack_Pickup_machine_Looper.txt"
   },
   {
     "id": "elektron-octatrack-mkii-overview",
@@ -73,50 +126,89 @@
     "creator": "Elektron",
     "channelUrl": "https://www.youtube.com/@elektron",
     "videoUrl": "https://www.youtube.com/watch?v=hFanh2PT4Ew",
-    "relevantTutorials": ["01-set-sail"],
-    "relevantSections": ["hardware-overview", "official-demo", "features"],
+    "relevantTutorials": [
+      "01-set-sail"
+    ],
+    "relevantSections": [
+      "hardware-overview",
+      "official-demo",
+      "features"
+    ],
     "duration": "5:00",
     "uploadDate": "2017-09-01",
-    "tags": ["official", "overview", "MK2", "introduction"],
+    "tags": [
+      "official",
+      "overview",
+      "MK2",
+      "introduction"
+    ],
     "description": "Elektron's official Octatrack MKII introduction video. Overview of the hardware, new features, and what makes it a limitless performance sampler.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Official Elektron video. Short but gives a good first look at the MKII hardware."
+    "notes": "Official Elektron video. Short but gives a good first look at the MKII hardware.",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Elektron_-_Octatrack_MKII.txt"
   },
   {
     "id": "elektron-know-how-lesson-1",
-    "title": "Octatrack Know-How — Lesson #1: Sets, Audio Pool & Projects",
+    "title": "Octatrack Know-How \u2014 Lesson #1: Sets, Audio Pool & Projects",
     "creator": "Elektron",
     "channelUrl": "https://www.youtube.com/@elektron",
     "videoUrl": "https://www.youtube.com/watch?v=-w_PlGzqTYM",
-    "relevantTutorials": ["01-set-sail", "04-audio-pool"],
-    "relevantSections": ["sets", "audio-pool", "projects", "structure-overview"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "04-audio-pool"
+    ],
+    "relevantSections": [
+      "sets",
+      "audio-pool",
+      "projects",
+      "structure-overview"
+    ],
     "duration": "6:00",
     "uploadDate": "2011-07-15",
-    "tags": ["official", "basics", "file-structure", "sets", "projects"],
+    "tags": [
+      "official",
+      "basics",
+      "file-structure",
+      "sets",
+      "projects"
+    ],
     "description": "Official Elektron Know-How series. Lesson 1 covers the foundational hierarchy: Sets, Audio Pool, and Projects. Essential for understanding file organization.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Matrixsynth, Elektronauts curated list",
-    "notes": "Part of official 9-lesson Know-How series by Elektron. MK1 but structure is identical on MK2."
+    "notes": "Part of official 9-lesson Know-How series by Elektron. MK1 but structure is identical on MK2.",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_1_Sets_Audio_Pool_Projects.txt"
   },
   {
     "id": "elektron-know-how-lesson-2",
-    "title": "Octatrack Know-How — Lesson #2: Selecting A Machine & Assigning Samples",
+    "title": "Octatrack Know-How \u2014 Lesson #2: Selecting A Machine & Assigning Samples",
     "creator": "Elektron",
     "channelUrl": "https://www.youtube.com/@elektron",
     "videoUrl": "https://www.youtube.com/watch?v=l35nnTgChM8",
-    "relevantTutorials": ["02-load-and-lock"],
-    "relevantSections": ["machine-types", "sample-assignment", "flex-static"],
+    "relevantTutorials": [
+      "02-load-and-lock"
+    ],
+    "relevantSections": [
+      "machine-types",
+      "sample-assignment",
+      "flex-static"
+    ],
     "duration": "6:00",
     "uploadDate": "2011-08-01",
-    "tags": ["official", "machines", "samples", "basics"],
+    "tags": [
+      "official",
+      "machines",
+      "samples",
+      "basics"
+    ],
     "description": "Official Elektron Know-How Lesson 2. How to select Flex, Static, Thru, and Neighbor machines and assign samples to tracks.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Directly relevant to understanding machine types. Official source, accurate menu paths."
+    "notes": "Directly relevant to understanding machine types. Official source, accurate menu paths.",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_2_Selecting_A_Machine_Assigning_Samples.txt"
   },
   {
     "id": "octatrack-parts-and-patterns",
@@ -124,16 +216,29 @@
     "creator": "Merlin (Community)",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=zmmGyBp16dY",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["parts", "patterns", "banks", "part-assignment"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "parts",
+      "patterns",
+      "banks",
+      "part-assignment"
+    ],
     "duration": "12:00",
     "uploadDate": "2016-03-01",
-    "tags": ["parts", "patterns", "banks", "intermediate"],
+    "tags": [
+      "parts",
+      "patterns",
+      "banks",
+      "intermediate"
+    ],
     "description": "Clear tutorial explaining how Parts and Patterns work together. Covers Part assignment to patterns, how changing parts affects all patterns sharing that part.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list, Pinterest references",
-    "notes": "Essential for understanding the Parts/Patterns relationship, which is one of the most confusing concepts for beginners."
+    "notes": "Essential for understanding the Parts/Patterns relationship, which is one of the most confusing concepts for beginners.",
+    "transcriptFile": "knowledge/transcripts/Merlin_Community_-_Octatrack_Tutorial_Parts_and_Patterns.txt"
   },
   {
     "id": "octatrack-record-trigs-resampling",
@@ -141,16 +246,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=Uqedqmaa9vY",
-    "relevantTutorials": ["04-audio-pool", "07-loop-stretching"],
-    "relevantSections": ["record-trigs", "resampling", "recorder-setup"],
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "record-trigs",
+      "resampling",
+      "recorder-setup"
+    ],
     "duration": "15:00",
     "uploadDate": "2017-01-01",
-    "tags": ["resampling", "record-trigs", "recording", "intermediate"],
+    "tags": [
+      "resampling",
+      "record-trigs",
+      "recording",
+      "intermediate"
+    ],
     "description": "Tutorial covering recorder trigs and resampling techniques. How to set up record trigs for automatic sampling and internal resampling workflows.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Key tutorial for learning resampling, one of the Octatrack's most powerful features."
+    "notes": "Key tutorial for learning resampling, one of the Octatrack's most powerful features.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Record_Trigs_and_Resampling.txt"
   },
   {
     "id": "octatrack-sampling-made-easy",
@@ -158,16 +276,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=z1vOfuUwUzc",
-    "relevantTutorials": ["02-load-and-lock", "04-audio-pool"],
-    "relevantSections": ["sampling-basics", "recording", "audio-editor"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "04-audio-pool"
+    ],
+    "relevantSections": [
+      "sampling-basics",
+      "recording",
+      "audio-editor"
+    ],
     "duration": "12:00",
     "uploadDate": "2016-06-01",
-    "tags": ["sampling", "beginner", "basics", "recording"],
+    "tags": [
+      "sampling",
+      "beginner",
+      "basics",
+      "recording"
+    ],
     "description": "Beginner-friendly tutorial making sampling on the Octatrack approachable. Covers the basics of recording and editing samples.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Good companion to Cuckoo's Tutorial #2 for additional sampling perspectives."
+    "notes": "Good companion to Cuckoo's Tutorial #2 for additional sampling perspectives.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Sampling_Made_Easy.txt"
   },
   {
     "id": "thomann-going-dawless-octatrack",
@@ -175,16 +306,30 @@
     "creator": "Thomann",
     "channelUrl": "https://www.youtube.com/@Thomann",
     "videoUrl": "https://www.youtube.com/watch?v=DHWF7Z-X9xM",
-    "relevantTutorials": ["01-set-sail", "03-beat-basics"],
-    "relevantSections": ["dawless", "overview", "workflow", "live-setup"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "dawless",
+      "overview",
+      "workflow",
+      "live-setup"
+    ],
     "duration": "20:00",
     "uploadDate": "2020-01-15",
-    "tags": ["dawless", "overview", "live", "beginner"],
+    "tags": [
+      "dawless",
+      "overview",
+      "live",
+      "beginner"
+    ],
     "description": "Thomann's guide to going DAWless with the Octatrack. Covers setup, workflow, and making electronic music without a laptop.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Good overview for understanding the Octatrack's role in a dawless setup."
+    "notes": "Good overview for understanding the Octatrack's role in a dawless setup.",
+    "transcriptFile": "knowledge/transcripts/Thomann_-_Going_Dawless_with_the_Octatrack_Electronic_Music_Without_A_Laptop_Tho.txt"
   },
   {
     "id": "octatrack-mixer-fx-remixer",
@@ -192,16 +337,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=AVyaljnfPDc",
-    "relevantTutorials": ["02-load-and-lock", "08-parts-banks-scenes"],
-    "relevantSections": ["thru-machine", "effects", "external-audio", "routing"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "thru-machine",
+      "effects",
+      "external-audio",
+      "routing"
+    ],
     "duration": "15:00",
     "uploadDate": "2019-06-01",
-    "tags": ["mixer", "effects", "thru-machine", "routing", "intermediate"],
+    "tags": [
+      "mixer",
+      "effects",
+      "thru-machine",
+      "routing",
+      "intermediate"
+    ],
     "description": "How to use the Octatrack as a mixer, FX processor, and external remixer using Thru machines. Covers routing external audio through OT effects.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Excellent for understanding Thru machines and using OT as an effects processor for external gear."
+    "notes": "Excellent for understanding Thru machines and using OT as an effects processor for external gear.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Tutorial_Video_Mixer_FX_Box_External_Remixer.txt"
   },
   {
     "id": "late-night-tips-4-things",
@@ -209,16 +369,29 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=7h92_05OdXk",
-    "relevantTutorials": ["01-set-sail", "03-beat-basics"],
-    "relevantSections": ["tips", "beginner-advice", "workflow"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "tips",
+      "beginner-advice",
+      "workflow"
+    ],
     "duration": "10:00",
     "uploadDate": "2019-01-01",
-    "tags": ["tips", "beginner", "overview", "workflow"],
+    "tags": [
+      "tips",
+      "beginner",
+      "overview",
+      "workflow"
+    ],
     "description": "Four essential things every Octatrack user should know. Beginner-friendly tips from the Late Night Tips series covering common workflow advice.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Good quick overview. Late Night Tips series has excellent, focused Octatrack content."
+    "notes": "Good quick overview. Late Night Tips series has excellent, focused Octatrack content.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_4_things_to_know_about_the_Octatrack_Late_Night_Tips.txt"
   },
   {
     "id": "late-night-tips-echo-freeze",
@@ -226,16 +399,29 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=kzU9ja6jqTA",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["effects", "echo-freeze", "delay", "creative-fx"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "effects",
+      "echo-freeze",
+      "delay",
+      "creative-fx"
+    ],
     "duration": "8:00",
     "uploadDate": "2019-03-01",
-    "tags": ["effects", "echo-freeze", "delay", "creative"],
+    "tags": [
+      "effects",
+      "echo-freeze",
+      "delay",
+      "creative"
+    ],
     "description": "Deep dive into the Echo Freeze effect on the Octatrack. One of the most powerful and creative effects available.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Echo Freeze is one of the OT's signature effects. Essential knowledge for creative performance."
+    "notes": "Echo Freeze is one of the OT's signature effects. Essential knowledge for creative performance.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Workflow_2_Echo_Freeze_Late_Night_Tips.txt"
   },
   {
     "id": "late-night-tips-top-4-effects",
@@ -243,16 +429,30 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=Boe7oz1Fi2E",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["effects", "filter", "reverb", "delay"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "effects",
+      "filter",
+      "reverb",
+      "delay"
+    ],
     "duration": "12:00",
     "uploadDate": "2020-01-01",
-    "tags": ["effects", "filter", "reverb", "delay", "reference"],
+    "tags": [
+      "effects",
+      "filter",
+      "reverb",
+      "delay",
+      "reference"
+    ],
     "description": "Late Night Tips picks the top 4 most useful and creative effects on the Octatrack with demonstrations and use cases.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Great reference for which effects to focus on first. Saves time by highlighting the most impactful ones."
+    "notes": "Great reference for which effects to focus on first. Saves time by highlighting the most impactful ones.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Workflow_14_Top_4_Effects_Late_Night_Tips.txt"
   },
   {
     "id": "late-night-tips-playing-live-1",
@@ -260,16 +460,29 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=pSKAmyAYkjI",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["live-performance", "scenes", "crossfader", "transitions"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "live-performance",
+      "scenes",
+      "crossfader",
+      "transitions"
+    ],
     "duration": "15:00",
     "uploadDate": "2019-07-01",
-    "tags": ["live", "performance", "scenes", "crossfader"],
+    "tags": [
+      "live",
+      "performance",
+      "scenes",
+      "crossfader"
+    ],
     "description": "Part 1 of playing live with the Octatrack. Covers scene setup, crossfader techniques, and live performance workflow.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Essential for live performance preparation. Covers scene/crossfader techniques."
+    "notes": "Essential for live performance preparation. Covers scene/crossfader techniques.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Workflow_6_Playing_Live_p1_Late_Night_Tips.txt"
   },
   {
     "id": "late-night-tips-playing-live-2",
@@ -277,16 +490,29 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=y7HJ4wgExFI",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["live-performance", "pattern-changes", "transitions", "arrangement"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "live-performance",
+      "pattern-changes",
+      "transitions",
+      "arrangement"
+    ],
     "duration": "15:00",
     "uploadDate": "2019-08-01",
-    "tags": ["live", "performance", "transitions", "patterns"],
+    "tags": [
+      "live",
+      "performance",
+      "transitions",
+      "patterns"
+    ],
     "description": "Part 2 of playing live with the Octatrack. Covers pattern transitions, arrangement techniques, and advanced live strategies.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Follow-up to Part 1. Together they form a comprehensive live performance guide."
+    "notes": "Follow-up to Part 1. Together they form a comprehensive live performance guide.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Workflow_8_Playing_Live_p2_Late_Night_Tips.txt"
   },
   {
     "id": "late-night-tips-trig-conditions",
@@ -294,16 +520,31 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=33zUV14zC-o",
-    "relevantTutorials": ["03-beat-basics", "06-sample-locks"],
-    "relevantSections": ["trig-conditions", "probability", "fill", "sequencing"],
+    "relevantTutorials": [
+      "03-beat-basics",
+      "06-sample-locks"
+    ],
+    "relevantSections": [
+      "trig-conditions",
+      "probability",
+      "fill",
+      "sequencing"
+    ],
     "duration": "10:00",
     "uploadDate": "2019-05-01",
-    "tags": ["trig-conditions", "probability", "fill", "sequencing", "intermediate"],
+    "tags": [
+      "trig-conditions",
+      "probability",
+      "fill",
+      "sequencing",
+      "intermediate"
+    ],
     "description": "Explanation of all trig conditions on the Octatrack: FILL, PRE, NEI, percentage-based probability, and A:B patterns.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Trig conditions add massive variation to patterns. Essential for making sequences feel alive."
+    "notes": "Trig conditions add massive variation to patterns. Essential for making sequences feel alive.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Trig_Conditions_Late_Night_Tips.txt"
   },
   {
     "id": "late-night-tips-resampling",
@@ -311,16 +552,29 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=0f6WIMCs_LY",
-    "relevantTutorials": ["04-audio-pool", "07-loop-stretching"],
-    "relevantSections": ["resampling", "internal-recording", "creative-workflow"],
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "resampling",
+      "internal-recording",
+      "creative-workflow"
+    ],
     "duration": "12:00",
     "uploadDate": "2019-09-01",
-    "tags": ["resampling", "recording", "creative", "intermediate"],
+    "tags": [
+      "resampling",
+      "recording",
+      "creative",
+      "intermediate"
+    ],
     "description": "Late Night Tips covers Octatrack resampling workflow. How to capture and manipulate internal audio for creative sound design.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "99Tune reference with video ID",
-    "notes": "Resampling is one of the OT's killer features. This tutorial makes it accessible."
+    "notes": "Resampling is one of the OT's killer features. This tutorial makes it accessible.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Workflow_7_Resampling_Late_Night_Tips.txt"
   },
   {
     "id": "ned-rush-jamming-with-slices",
@@ -328,16 +582,31 @@
     "creator": "Ned Rush",
     "channelUrl": "https://www.youtube.com/@nedrush",
     "videoUrl": "https://www.youtube.com/watch?v=nxXO8qghmTA",
-    "relevantTutorials": ["05-slice-and-dice", "06-sample-locks"],
-    "relevantSections": ["slicing", "live-chopping", "performance", "beat-making"],
+    "relevantTutorials": [
+      "05-slice-and-dice",
+      "06-sample-locks"
+    ],
+    "relevantSections": [
+      "slicing",
+      "live-chopping",
+      "performance",
+      "beat-making"
+    ],
     "duration": "10:00",
     "uploadDate": "2018-06-01",
-    "tags": ["slicing", "chopping", "live", "performance", "creative"],
+    "tags": [
+      "slicing",
+      "chopping",
+      "live",
+      "performance",
+      "creative"
+    ],
     "description": "Ned Rush demonstrates live jamming with sliced samples on the Octatrack. Shows creative slice manipulation in real-time.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Ned Rush's tutorials are highly creative and show advanced slice techniques in musical context."
+    "notes": "Ned Rush's tutorials are highly creative and show advanced slice techniques in musical context.",
+    "transcriptFile": "knowledge/transcripts/Ned_Rush_-_Jamming_with_Slices_Octatrack_Tutorial_Ned_Rush.txt"
   },
   {
     "id": "ned-rush-conditional-amen-break",
@@ -345,16 +614,31 @@
     "creator": "Ned Rush",
     "channelUrl": "https://www.youtube.com/@nedrush",
     "videoUrl": "https://www.youtube.com/watch?v=bXUn8D9TR4g",
-    "relevantTutorials": ["05-slice-and-dice", "03-beat-basics"],
-    "relevantSections": ["trig-conditions", "slicing", "breakbeat", "glitch"],
+    "relevantTutorials": [
+      "05-slice-and-dice",
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "trig-conditions",
+      "slicing",
+      "breakbeat",
+      "glitch"
+    ],
     "duration": "8:00",
     "uploadDate": "2018-09-01",
-    "tags": ["amen-break", "glitch", "trig-conditions", "slicing", "advanced"],
+    "tags": [
+      "amen-break",
+      "glitch",
+      "trig-conditions",
+      "slicing",
+      "advanced"
+    ],
     "description": "Using conditional trigs with sliced Amen breaks for glitchy, ever-evolving breakbeat patterns. Combines trig conditions with slice manipulation.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list, forum discussion",
-    "notes": "Advanced technique combining two powerful OT features. Excellent for breakbeat and jungle producers."
+    "notes": "Advanced technique combining two powerful OT features. Excellent for breakbeat and jungle producers.",
+    "transcriptFile": "knowledge/transcripts/Ned_Rush_-_Conditional_Amen_Break_Glitching_Octatrack_Ned_Rush.txt"
   },
   {
     "id": "ned-rush-granular-crossfades",
@@ -362,16 +646,31 @@
     "creator": "Ned Rush",
     "channelUrl": "https://www.youtube.com/@nedrush",
     "videoUrl": "https://www.youtube.com/watch?v=y3bgvzQkzgo",
-    "relevantTutorials": ["08-parts-banks-scenes", "07-loop-stretching"],
-    "relevantSections": ["scenes", "crossfader", "granular", "sound-design"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "scenes",
+      "crossfader",
+      "granular",
+      "sound-design"
+    ],
     "duration": "8:00",
     "uploadDate": "2018-07-01",
-    "tags": ["granular", "crossfader", "scenes", "sound-design", "advanced"],
+    "tags": [
+      "granular",
+      "crossfader",
+      "scenes",
+      "sound-design",
+      "advanced"
+    ],
     "description": "Ned Rush demonstrates granular-style crossfades using the Octatrack's scene system. Creative sound design through crossfader modulation.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Shows the Octatrack's potential for granular-like effects. Advanced but inspiring."
+    "notes": "Shows the Octatrack's potential for granular-like effects. Advanced but inspiring.",
+    "transcriptFile": "knowledge/transcripts/Ned_Rush_-_Granular_Crossfades_Octatrack_Tutorial_Ned_Rush.txt"
   },
   {
     "id": "octatrack-thru-machine-basics",
@@ -379,16 +678,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=V0QMTiJicVA",
-    "relevantTutorials": ["02-load-and-lock"],
-    "relevantSections": ["thru-machine", "routing", "external-audio", "effects"],
+    "relevantTutorials": [
+      "02-load-and-lock"
+    ],
+    "relevantSections": [
+      "thru-machine",
+      "routing",
+      "external-audio",
+      "effects"
+    ],
     "duration": "10:00",
     "uploadDate": "2017-01-01",
-    "tags": ["thru-machine", "routing", "basics", "external-audio"],
+    "tags": [
+      "thru-machine",
+      "routing",
+      "basics",
+      "external-audio"
+    ],
     "description": "Basic setup and usage of Thru machines on the Octatrack. How to route external audio through OT effects in real-time.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Essential for anyone wanting to process external synths or audio through the Octatrack."
+    "notes": "Essential for anyone wanting to process external synths or audio through the Octatrack.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Thru_Machine_Basics.txt"
   },
   {
     "id": "octatrack-gains-volumes-levels",
@@ -396,16 +708,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=2H9nm2iIAoc",
-    "relevantTutorials": ["01-set-sail", "02-load-and-lock"],
-    "relevantSections": ["gain-staging", "levels", "mixing", "audio-basics"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "02-load-and-lock"
+    ],
+    "relevantSections": [
+      "gain-staging",
+      "levels",
+      "mixing",
+      "audio-basics"
+    ],
     "duration": "10:00",
     "uploadDate": "2017-06-01",
-    "tags": ["gain-staging", "levels", "mixing", "audio", "basics"],
+    "tags": [
+      "gain-staging",
+      "levels",
+      "mixing",
+      "audio",
+      "basics"
+    ],
     "description": "Understanding gain staging on the Octatrack. How VOL, LEV, DIR, and other level controls interact across the signal chain.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Crucial for clean mixes. Poor gain staging is one of the most common issues for beginners."
+    "notes": "Crucial for clean mixes. Poor gain staging is one of the most common issues for beginners.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Gains_Volumes_and_Levels.txt"
   },
   {
     "id": "octatrack-gains-volumes-levels-2",
@@ -413,16 +740,28 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=ADS_kfGq5Pc",
-    "relevantTutorials": ["02-load-and-lock"],
-    "relevantSections": ["gain-staging", "headroom", "mixing"],
+    "relevantTutorials": [
+      "02-load-and-lock"
+    ],
+    "relevantSections": [
+      "gain-staging",
+      "headroom",
+      "mixing"
+    ],
     "duration": "10:00",
     "uploadDate": "2017-07-01",
-    "tags": ["gain-staging", "levels", "mixing", "intermediate"],
+    "tags": [
+      "gain-staging",
+      "levels",
+      "mixing",
+      "intermediate"
+    ],
     "description": "Part 2 of the gain staging tutorial. Advanced level management and headroom optimization across multiple tracks.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Follow-up to Part 1. Together they give a complete picture of OT gain staging."
+    "notes": "Follow-up to Part 1. Together they give a complete picture of OT gain staging.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Gains_Volumes_and_Levels_Part_2.txt"
   },
   {
     "id": "octatrack-sidechain-tutorial",
@@ -430,16 +769,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=7MrusUl-WHE",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["sidechain", "compressor", "effects", "mixing"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "sidechain",
+      "compressor",
+      "effects",
+      "mixing"
+    ],
     "duration": "8:00",
     "uploadDate": "2019-01-01",
-    "tags": ["sidechain", "compressor", "effects", "mixing", "technique"],
+    "tags": [
+      "sidechain",
+      "compressor",
+      "effects",
+      "mixing",
+      "technique"
+    ],
     "description": "How to create a sidechain pumping effect on the Octatrack. Creative use of the compressor and LFO for that classic dance music pump.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Classic technique for dance/electronic music. EZBOT also has a sidechain tutorial worth checking."
+    "notes": "Classic technique for dance/electronic music. EZBOT also has a sidechain tutorial worth checking.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Tutorial_Video_Sidechain_pumping_effect.txt"
   },
   {
     "id": "octatrack-freeze-delay-looper",
@@ -447,16 +800,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=XVghai8leTI",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["delay", "freeze", "effects", "creative-fx"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "delay",
+      "freeze",
+      "effects",
+      "creative-fx"
+    ],
     "duration": "8:00",
     "uploadDate": "2019-02-01",
-    "tags": ["delay", "freeze", "looper", "effects", "creative"],
+    "tags": [
+      "delay",
+      "freeze",
+      "looper",
+      "effects",
+      "creative"
+    ],
     "description": "Tutorial on Freeze Delay and Looper Delay effects. Two powerful delay modes for creative performance and sound design.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Freeze delay is one of the OT's most unique effects. Great for live performance."
+    "notes": "Freeze delay is one of the OT's most unique effects. Great for live performance.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Tutorial_Video_Freeze_Delay_Looper_Delay.txt"
   },
   {
     "id": "octatrack-tape-stop-effect",
@@ -464,16 +831,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=gWgSItoOpLs",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["tape-stop", "effects", "creative-fx", "performance"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "tape-stop",
+      "effects",
+      "creative-fx",
+      "performance"
+    ],
     "duration": "5:00",
     "uploadDate": "2019-03-01",
-    "tags": ["tape-stop", "effects", "creative", "performance"],
+    "tags": [
+      "tape-stop",
+      "effects",
+      "creative",
+      "performance"
+    ],
     "description": "How to create a tape stop effect on the Octatrack. Classic DJ/production technique for transitions and builds.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Quick and practical. Useful DJ-style effect for live performance."
+    "notes": "Quick and practical. Useful DJ-style effect for live performance.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Tutorial_Video_Tape_Stop_Effect.txt"
   },
   {
     "id": "octatrack-fx-send-tutorial",
@@ -481,16 +861,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=Btuoza3LMyw",
-    "relevantTutorials": ["02-load-and-lock", "08-parts-banks-scenes"],
-    "relevantSections": ["cue-output", "fx-send", "routing", "effects"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "cue-output",
+      "fx-send",
+      "routing",
+      "effects"
+    ],
     "duration": "10:00",
     "uploadDate": "2018-06-01",
-    "tags": ["fx-send", "cue-output", "routing", "effects", "intermediate"],
+    "tags": [
+      "fx-send",
+      "cue-output",
+      "routing",
+      "effects",
+      "intermediate"
+    ],
     "description": "How to use the Octatrack's CUE output as an FX send for parallel effects processing. Essential routing technique for advanced mixing.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "CUE-as-send is a powerful routing trick. Adds reverb/delay sends without using up track effect slots."
+    "notes": "CUE-as-send is a powerful routing trick. Adds reverb/delay sends without using up track effect slots.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_FX_Send_Tutorial.txt"
   },
   {
     "id": "octatrack-looper-tutorial",
@@ -498,16 +893,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=V4RYHJUYR-8",
-    "relevantTutorials": ["02-load-and-lock", "07-loop-stretching"],
-    "relevantSections": ["looper", "recording", "flex-machine", "live"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "looper",
+      "recording",
+      "flex-machine",
+      "live"
+    ],
     "duration": "10:00",
     "uploadDate": "2018-01-01",
-    "tags": ["looper", "recording", "live", "flex-machine"],
+    "tags": [
+      "looper",
+      "recording",
+      "live",
+      "flex-machine"
+    ],
     "description": "Tutorial on using the Octatrack as a looper with Flex machines and recorder trigs. Alternative to pickup machines for looping.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Different approach to looping than pickup machines. More flexible but requires more setup."
+    "notes": "Different approach to looping than pickup machines. More flexible but requires more setup.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Tutorial_Video_Looper.txt"
   },
   {
     "id": "octatrack-mk2-pickup-guide",
@@ -515,16 +924,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=-cQu9x4ndY8",
-    "relevantTutorials": ["02-load-and-lock", "07-loop-stretching"],
-    "relevantSections": ["pickup-machine", "looping", "live-performance"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "pickup-machine",
+      "looping",
+      "live-performance"
+    ],
     "duration": "15:00",
     "uploadDate": "2019-06-01",
-    "tags": ["pickup-machine", "looping", "MK2", "guide"],
+    "tags": [
+      "pickup-machine",
+      "looping",
+      "MK2",
+      "guide"
+    ],
     "description": "Comprehensive guide to Pickup Machines on the Octatrack MK2. Setup, usage, and creative applications for live looping.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "MK2-specific pickup machine tutorial. More recent than Cuckoo's loopbox tutorial."
+    "notes": "MK2-specific pickup machine tutorial. More recent than Cuckoo's loopbox tutorial.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_MK2_Tutorial_A_Guide_to_Pickup_Machines.txt"
   },
   {
     "id": "octatrack-live-loop-7min",
@@ -532,16 +954,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=gIlPrwkHp4s",
-    "relevantTutorials": ["02-load-and-lock", "07-loop-stretching"],
-    "relevantSections": ["pickup-machine", "live-looping", "quick-start"],
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "pickup-machine",
+      "live-looping",
+      "quick-start"
+    ],
     "duration": "7:00",
     "uploadDate": "2020-01-01",
-    "tags": ["pickup-machine", "live-looping", "quick", "beginner"],
+    "tags": [
+      "pickup-machine",
+      "live-looping",
+      "quick",
+      "beginner"
+    ],
     "description": "Quick 7-minute guide to live looping with Pickup Machines. Fast, focused tutorial for getting up and running.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Perfect for quick reference. Gets you looping in 7 minutes."
+    "notes": "Perfect for quick reference. Gets you looping in 7 minutes.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_How_To_Live_Loop_with_the_Octatrack_Using_Pickup_Machines_i.txt"
   },
   {
     "id": "octatrack-xfader-transition-trick",
@@ -549,16 +984,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=uAD1MzZgsMM",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["crossfader", "transitions", "scenes", "live-performance"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "crossfader",
+      "transitions",
+      "scenes",
+      "live-performance"
+    ],
     "duration": "8:00",
     "uploadDate": "2019-01-01",
-    "tags": ["crossfader", "transitions", "scenes", "performance", "advanced"],
+    "tags": [
+      "crossfader",
+      "transitions",
+      "scenes",
+      "performance",
+      "advanced"
+    ],
     "description": "The classic crossfader transition trick: record current mix, crossfade to recording, switch patterns, crossfade back for seamless transitions.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "THE essential live performance trick. Enables seamless pattern transitions without audio gaps."
+    "notes": "THE essential live performance trick. Enables seamless pattern transitions without audio gaps.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Xfader_Transition_Trick.txt"
   },
   {
     "id": "octatrack-xfader-transition-variations",
@@ -566,16 +1015,28 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=f1D_UurOook",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["crossfader", "transitions", "variations"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "crossfader",
+      "transitions",
+      "variations"
+    ],
     "duration": "10:00",
     "uploadDate": "2019-02-01",
-    "tags": ["crossfader", "transitions", "advanced", "variations"],
+    "tags": [
+      "crossfader",
+      "transitions",
+      "advanced",
+      "variations"
+    ],
     "description": "Variations on the crossfader transition trick. Multiple approaches to seamless live transitions between patterns and sections.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Builds on the basic transition trick with more advanced variations."
+    "notes": "Builds on the basic transition trick with more advanced variations.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Xfader_Transition_Trick_Variations.txt"
   },
   {
     "id": "octatrack-megabreak-slices",
@@ -583,16 +1044,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=YZ6Dcykjq0E",
-    "relevantTutorials": ["05-slice-and-dice", "06-sample-locks"],
-    "relevantSections": ["slicing", "sample-chains", "breakbeats", "chopping"],
+    "relevantTutorials": [
+      "05-slice-and-dice",
+      "06-sample-locks"
+    ],
+    "relevantSections": [
+      "slicing",
+      "sample-chains",
+      "breakbeats",
+      "chopping"
+    ],
     "duration": "10:00",
     "uploadDate": "2017-01-01",
-    "tags": ["slicing", "breakbeats", "sample-chains", "chopping", "advanced"],
+    "tags": [
+      "slicing",
+      "breakbeats",
+      "sample-chains",
+      "chopping",
+      "advanced"
+    ],
     "description": "64 breakbeats combined into a single sample chain with 16 slices each. Demonstrates the power of sample chains and slice grids for beat chopping.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Shows the extreme potential of sample chains. Inspiring for beat-makers and breakbeat enthusiasts."
+    "notes": "Shows the extreme potential of sample chains. Inspiring for beat-makers and breakbeat enthusiasts.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_-_64_breakbeat_x_16_slices_megabreak_of_doom.txt"
   },
   {
     "id": "octatrack-mk2-ableton-workflow",
@@ -600,33 +1076,61 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=wEHb8Yx0Jq8",
-    "relevantTutorials": ["04-audio-pool", "07-loop-stretching"],
-    "relevantSections": ["ableton", "daw-integration", "workflow", "export"],
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "ableton",
+      "daw-integration",
+      "workflow",
+      "export"
+    ],
     "duration": "15:00",
     "uploadDate": "2019-06-01",
-    "tags": ["ableton", "daw", "workflow", "integration", "intermediate"],
+    "tags": [
+      "ableton",
+      "daw",
+      "workflow",
+      "integration",
+      "intermediate"
+    ],
     "description": "Tips for integrating the Octatrack MK2 with Ableton Live. Covers exporting loops, sync, and hybrid DAW/hardware workflows.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Directly relevant for Rishaal's Ableton-to-Octatrack workflow. Covers the export and integration pipeline."
+    "notes": "Directly relevant for Rishaal's Ableton-to-Octatrack workflow. Covers the export and integration pipeline.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_mk2_Tutorial_Octatrack_Ableton_Workflow_Tips.txt"
   },
   {
     "id": "octatrack-trig-modes-lesson-7",
-    "title": "Octatrack Know-How — Lesson #7: Trig Modes",
+    "title": "Octatrack Know-How \u2014 Lesson #7: Trig Modes",
     "creator": "Elektron",
     "channelUrl": "https://www.youtube.com/@elektron",
     "videoUrl": "https://www.youtube.com/watch?v=XQZTo1aieeQ",
-    "relevantTutorials": ["03-beat-basics", "06-sample-locks"],
-    "relevantSections": ["trig-modes", "one-shot", "sequencing"],
+    "relevantTutorials": [
+      "03-beat-basics",
+      "06-sample-locks"
+    ],
+    "relevantSections": [
+      "trig-modes",
+      "one-shot",
+      "sequencing"
+    ],
     "duration": "6:00",
     "uploadDate": "2012-03-01",
-    "tags": ["official", "trig-modes", "sequencing", "basics"],
+    "tags": [
+      "official",
+      "trig-modes",
+      "sequencing",
+      "basics"
+    ],
     "description": "Official Elektron Know-How Lesson 7 covering trig modes: standard, one-shot, and micro-timing. Essential sequencing concepts.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Part of official Elektron series. Trig modes are fundamental for sequencing and resampling workflows."
+    "notes": "Part of official Elektron series. Trig modes are fundamental for sequencing and resampling workflows.",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_7_Trig_Modes.txt"
   },
   {
     "id": "octatrack-mk2-tutorial-live-setup",
@@ -634,16 +1138,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=polxezNhuMY",
-    "relevantTutorials": ["01-set-sail", "08-parts-banks-scenes"],
-    "relevantSections": ["live-setup", "performance", "routing", "workflow"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "live-setup",
+      "performance",
+      "routing",
+      "workflow"
+    ],
     "duration": "20:00",
     "uploadDate": "2019-01-01",
-    "tags": ["live-setup", "performance", "MK2", "workflow"],
+    "tags": [
+      "live-setup",
+      "performance",
+      "MK2",
+      "workflow"
+    ],
     "description": "Complete walkthrough of a live performance setup using the Octatrack MK2. Covers routing, template design, and performance workflow.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Practical real-world setup guide. Shows how to structure a complete performance-ready configuration."
+    "notes": "Practical real-world setup guide. Shows how to structure a complete performance-ready configuration.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_mk2_Tutorial_-_My_Live_Performance_Setup.txt"
   },
   {
     "id": "octatrack-mk2-arrangement-crash-course",
@@ -651,16 +1169,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=orMXjqVXdrg",
-    "relevantTutorials": ["03-beat-basics", "08-parts-banks-scenes"],
-    "relevantSections": ["arranger", "song-mode", "arrangement", "pattern-chain"],
+    "relevantTutorials": [
+      "03-beat-basics",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "arranger",
+      "song-mode",
+      "arrangement",
+      "pattern-chain"
+    ],
     "duration": "15:00",
     "uploadDate": "2019-06-01",
-    "tags": ["arranger", "arrangement", "song-mode", "MK2"],
+    "tags": [
+      "arranger",
+      "arrangement",
+      "song-mode",
+      "MK2"
+    ],
     "description": "Crash course on using the Octatrack MK2's Arranger mode. How to chain patterns, set up song structures, and build complete arrangements.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "MK2-specific arranger tutorial. More recent complement to Cuckoo's arranger tutorial."
+    "notes": "MK2-specific arranger tutorial. More recent complement to Cuckoo's arranger tutorial.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Mk2_Tutorial_A_Crash_Course_in_Arrangements.txt"
   },
   {
     "id": "octatrack-mk2-samples-into-synths",
@@ -668,16 +1200,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=S2_-tyogg4Y",
-    "relevantTutorials": ["07-loop-stretching", "05-slice-and-dice"],
-    "relevantSections": ["single-cycle", "synthesis", "sound-design", "creative"],
+    "relevantTutorials": [
+      "07-loop-stretching",
+      "05-slice-and-dice"
+    ],
+    "relevantSections": [
+      "single-cycle",
+      "synthesis",
+      "sound-design",
+      "creative"
+    ],
     "duration": "12:00",
     "uploadDate": "2019-06-01",
-    "tags": ["synthesis", "single-cycle", "sound-design", "creative", "advanced"],
+    "tags": [
+      "synthesis",
+      "single-cycle",
+      "sound-design",
+      "creative",
+      "advanced"
+    ],
     "description": "How to turn samples into playable synthesizer-like instruments using single-cycle waveforms, loop points, and creative parameter locking.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Pushes the OT beyond sampling into synthesis territory. Creative and inspiring approach."
+    "notes": "Pushes the OT beyond sampling into synthesis territory. Creative and inspiring approach.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Mk2_Tutorial_-_Turning_Samples_into_Synths_101.txt"
   },
   {
     "id": "octatrack-button-combos",
@@ -685,16 +1232,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=0EKMXrzIAT8",
-    "relevantTutorials": ["01-set-sail", "03-beat-basics"],
-    "relevantSections": ["shortcuts", "button-combos", "navigation", "tips"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "shortcuts",
+      "button-combos",
+      "navigation",
+      "tips"
+    ],
     "duration": "8:00",
     "uploadDate": "2019-01-01",
-    "tags": ["basics", "shortcuts", "button-combos", "navigation", "beginner"],
+    "tags": [
+      "basics",
+      "shortcuts",
+      "button-combos",
+      "navigation",
+      "beginner"
+    ],
     "description": "The two most essential button combinations every Octatrack user needs to know. Quick, practical beginner tips for faster navigation.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Quick win for beginners. Knowing key button combos dramatically speeds up workflow."
+    "notes": "Quick win for beginners. Knowing key button combos dramatically speeds up workflow.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Basics_My_Two_Most_Important_Button_Combos.txt"
   },
   {
     "id": "octatrack-dj-tutorial-1",
@@ -702,16 +1264,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=wkIkWuloKLU",
-    "relevantTutorials": ["08-parts-banks-scenes", "07-loop-stretching"],
-    "relevantSections": ["djing", "crossfader", "transitions", "timestretch"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "djing",
+      "crossfader",
+      "transitions",
+      "timestretch"
+    ],
     "duration": "20:00",
     "uploadDate": "2018-01-01",
-    "tags": ["djing", "crossfader", "transitions", "timestretch", "performance"],
+    "tags": [
+      "djing",
+      "crossfader",
+      "transitions",
+      "timestretch",
+      "performance"
+    ],
     "description": "Part 1 of using the Octatrack as a DJ tool. Covers loading tracks, timestretching to match BPMs, and using the crossfader for mixing.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Shows OT as a DJ tool. Relevant for understanding timestretching and crossfader in a mixing context."
+    "notes": "Shows OT as a DJ tool. Relevant for understanding timestretching and crossfader in a mixing context.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_How_to_DJ_with_the_Elektron_Octatrack_Tutorial_-_Part_1.txt"
   },
   {
     "id": "octatrack-dj-tutorial-2",
@@ -719,16 +1296,31 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=C6k_-d9Dd_k",
-    "relevantTutorials": ["08-parts-banks-scenes", "07-loop-stretching"],
-    "relevantSections": ["djing", "advanced-mixing", "effects", "performance"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "djing",
+      "advanced-mixing",
+      "effects",
+      "performance"
+    ],
     "duration": "20:00",
     "uploadDate": "2018-02-01",
-    "tags": ["djing", "effects", "mixing", "performance", "advanced"],
+    "tags": [
+      "djing",
+      "effects",
+      "mixing",
+      "performance",
+      "advanced"
+    ],
     "description": "Part 2 of the DJ tutorial. Advanced mixing techniques, effects usage during DJ sets, and performance tips.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Continuation of Part 1. Together they show the OT as a complete DJ tool."
+    "notes": "Continuation of Part 1. Together they show the OT as a complete DJ tool.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_How_to_DJ_with_the_Elektron_Octatrack_Tutorial_-_Part_2.txt"
   },
   {
     "id": "octatrack-polyrhythms",
@@ -736,16 +1328,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=cVJmC28OgAI",
-    "relevantTutorials": ["03-beat-basics"],
-    "relevantSections": ["polyrhythms", "track-length", "sequencing", "creative"],
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "polyrhythms",
+      "track-length",
+      "sequencing",
+      "creative"
+    ],
     "duration": "10:00",
     "uploadDate": "2018-06-01",
-    "tags": ["polyrhythms", "track-length", "sequencing", "creative", "intermediate"],
+    "tags": [
+      "polyrhythms",
+      "track-length",
+      "sequencing",
+      "creative",
+      "intermediate"
+    ],
     "description": "How to create polyrhythmic patterns using individual track lengths on the Octatrack. Each track can have a different length for evolving patterns.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Great for making patterns feel more organic and less repetitive."
+    "notes": "Great for making patterns feel more organic and less repetitive.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Creating_Polyrhythms_with_the_Elektron_Octatrack.txt"
   },
   {
     "id": "octatrack-mk2-pattern-chaining",
@@ -753,16 +1359,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=YzAQSPYbKqo",
-    "relevantTutorials": ["03-beat-basics", "08-parts-banks-scenes"],
-    "relevantSections": ["pattern-chain", "arrangement", "sequencing"],
+    "relevantTutorials": [
+      "03-beat-basics",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "pattern-chain",
+      "arrangement",
+      "sequencing"
+    ],
     "duration": "5:00",
     "uploadDate": "2019-01-01",
-    "tags": ["pattern-chain", "patterns", "MK2", "tip"],
+    "tags": [
+      "pattern-chain",
+      "patterns",
+      "MK2",
+      "tip"
+    ],
     "description": "Quick tip on chaining multiple patterns together on the Octatrack MK2 for longer compositions without using the Arranger.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Simple but essential technique for building longer sequences."
+    "notes": "Simple but essential technique for building longer sequences.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_MK2_Tip_Chaining_Multiple_Patterns.txt"
   },
   {
     "id": "ezbot-hyper-fx-template",
@@ -770,16 +1389,30 @@
     "creator": "EZBOT",
     "channelUrl": "https://www.youtube.com/@EZBOT",
     "videoUrl": "https://www.youtube.com/watch?v=yPq4BWICy0A",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["effects", "glitch", "lo-fi", "performance"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "effects",
+      "glitch",
+      "lo-fi",
+      "performance"
+    ],
     "duration": "18:22",
     "uploadDate": "2024-08-30",
-    "tags": ["effects", "glitch", "lo-fi", "template", "performance"],
+    "tags": [
+      "effects",
+      "glitch",
+      "lo-fi",
+      "template",
+      "performance"
+    ],
     "description": "EZBOT's Hyper FX template demo. Showcases glitchy, lo-fi, and punch-in effects designed for live performance on the Octatrack.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Search result confirmed video ID",
-    "notes": "Great for learning creative effect design. Shows how templates can turbocharge performance workflow."
+    "notes": "Great for learning creative effect design. Shows how templates can turbocharge performance workflow.",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Hyper_FX_Template_-_Punch_In_Effects_for_Octatrack.txt"
   },
   {
     "id": "ezbot-octatrack-for-techno",
@@ -787,16 +1420,31 @@
     "creator": "EZBOT",
     "channelUrl": "https://www.youtube.com/@EZBOT",
     "videoUrl": "https://www.youtube.com/watch?v=fyuF0SHQ8UM",
-    "relevantTutorials": ["08-parts-banks-scenes", "03-beat-basics"],
-    "relevantSections": ["live-performance", "techno", "workflow", "template"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes",
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "live-performance",
+      "techno",
+      "workflow",
+      "template"
+    ],
     "duration": "34:00",
     "uploadDate": "2023-12-15",
-    "tags": ["performance", "live", "techno", "workflow", "intermediate"],
+    "tags": [
+      "performance",
+      "live",
+      "techno",
+      "workflow",
+      "intermediate"
+    ],
     "description": "EZBOT shares a live example of using the Octatrack as a performance mixer at a techno show. Real-world performance breakdown.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Matrixsynth page, thumbnail ID confirmed",
-    "notes": "Excellent professional-level performance workflow. Shows how all pieces come together in a real live set."
+    "notes": "Excellent professional-level performance workflow. Shows how all pieces come together in a real live set.",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_How_I_Use_The_Octatrack_For_Techno_At_A_Live_Show.txt"
   },
   {
     "id": "dataline-live-resampling-mk2",
@@ -804,16 +1452,31 @@
     "creator": "Dataline",
     "channelUrl": "https://www.youtube.com/@mrdataline",
     "videoUrl": "https://www.youtube.com/watch?v=-9SYHCHo5SY",
-    "relevantTutorials": ["04-audio-pool", "07-loop-stretching"],
-    "relevantSections": ["resampling", "live-sampling", "routing", "recording"],
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "resampling",
+      "live-sampling",
+      "routing",
+      "recording"
+    ],
     "duration": "28:00",
     "uploadDate": "2017-10-07",
-    "tags": ["resampling", "live", "MK2", "recording", "advanced"],
+    "tags": [
+      "resampling",
+      "live",
+      "MK2",
+      "recording",
+      "advanced"
+    ],
     "description": "Dataline's tutorial on live resampling with the Octatrack MK2 featuring the Roland TB03 and TR09. Explains machine connections, setup, and live sampling configuration.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Bandcamp page, Elektronauts curated list",
-    "notes": "Dataline (Cenk Sayinli) is an Elektron expert. Advanced resampling tutorial with real hardware integration."
+    "notes": "Dataline (Cenk Sayinli) is an Elektron expert. Advanced resampling tutorial with real hardware integration.",
+    "transcriptFile": "knowledge/transcripts/Dataline_-_Elektron_Octatrack_MK2_Live_Resampling.txt"
   },
   {
     "id": "loopop-octatrack-year-8-review",
@@ -821,16 +1484,29 @@
     "creator": "Loopop",
     "channelUrl": "https://www.youtube.com/@loaborat",
     "videoUrl": "https://www.youtube.com/watch?v=UMEFLKHZq5s",
-    "relevantTutorials": ["01-set-sail"],
-    "relevantSections": ["overview", "features", "review", "comparison"],
+    "relevantTutorials": [
+      "01-set-sail"
+    ],
+    "relevantSections": [
+      "overview",
+      "features",
+      "review",
+      "comparison"
+    ],
     "duration": "30:00",
     "uploadDate": "2019-01-14",
-    "tags": ["review", "overview", "features", "comparison"],
+    "tags": [
+      "review",
+      "overview",
+      "features",
+      "comparison"
+    ],
     "description": "Loopop's comprehensive review of the Octatrack 8 years after release. Covers 10 key features and compares with competitors like Deluge and MPC Live.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list, Loopop website",
-    "notes": "Excellent overview of what makes the OT special. Great for understanding its unique strengths."
+    "notes": "Excellent overview of what makes the OT special. Great for understanding its unique strengths.",
+    "transcriptFile": "knowledge/transcripts/Loopop_-_Review_Octatrack_at_year_8_-_Is_it_still_worth_it.txt"
   },
   {
     "id": "octatrack-sample-chain-ableton",
@@ -838,16 +1514,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=QP-KFpfSebM",
-    "relevantTutorials": ["04-audio-pool", "06-sample-locks"],
-    "relevantSections": ["sample-chains", "ableton", "preparation", "workflow"],
+    "relevantTutorials": [
+      "04-audio-pool",
+      "06-sample-locks"
+    ],
+    "relevantSections": [
+      "sample-chains",
+      "ableton",
+      "preparation",
+      "workflow"
+    ],
     "duration": "12:00",
     "uploadDate": "2017-06-01",
-    "tags": ["sample-chains", "ableton", "preparation", "workflow"],
+    "tags": [
+      "sample-chains",
+      "ableton",
+      "preparation",
+      "workflow"
+    ],
     "description": "How to create sample chains in Ableton Live for the Octatrack. Covers concatenating samples and creating .ot metadata files.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Directly relevant for Ableton-to-Octatrack workflow. Sample chains maximize OT slot efficiency."
+    "notes": "Directly relevant for Ableton-to-Octatrack workflow. Sample chains maximize OT slot efficiency.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Ableton_Live_-_Sample_Chain_Making_for_Octatrack.txt"
   },
   {
     "id": "octatrack-conditional-pattern-variations",
@@ -855,16 +1545,29 @@
     "creator": "Late Night Tips",
     "channelUrl": "https://www.youtube.com/@LateNightTips",
     "videoUrl": "https://www.youtube.com/watch?v=C0we66czkws",
-    "relevantTutorials": ["03-beat-basics", "06-sample-locks"],
-    "relevantSections": ["trig-conditions", "pattern-variation", "sequencing"],
+    "relevantTutorials": [
+      "03-beat-basics",
+      "06-sample-locks"
+    ],
+    "relevantSections": [
+      "trig-conditions",
+      "pattern-variation",
+      "sequencing"
+    ],
     "duration": "10:00",
     "uploadDate": "2019-06-01",
-    "tags": ["trig-conditions", "variation", "sequencing", "intermediate"],
+    "tags": [
+      "trig-conditions",
+      "variation",
+      "sequencing",
+      "intermediate"
+    ],
     "description": "Using conditional trigs to create pattern variations that evolve over time. Makes simple patterns sound complex and alive.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Companion to the trig conditions tutorial. Shows practical musical applications."
+    "notes": "Companion to the trig conditions tutorial. Shows practical musical applications.",
+    "transcriptFile": "knowledge/transcripts/Late_Night_Tips_-_Octatrack_Conditional_Pattern_Variations_Late_Night_Tips.txt"
   },
   {
     "id": "octatrack-mk2-pause-resume-tracks",
@@ -872,16 +1575,29 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=sXZMbmbIaOs",
-    "relevantTutorials": ["03-beat-basics"],
-    "relevantSections": ["track-control", "muting", "performance"],
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "track-control",
+      "muting",
+      "performance"
+    ],
     "duration": "5:00",
     "uploadDate": "2019-01-01",
-    "tags": ["track-control", "pause", "resume", "performance", "tip"],
+    "tags": [
+      "track-control",
+      "pause",
+      "resume",
+      "performance",
+      "tip"
+    ],
     "description": "Quick tip on pausing and resuming individual tracks on the Octatrack MK2. Useful performance technique for building tension.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Simple but effective performance technique."
+    "notes": "Simple but effective performance technique.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_MK2_Tip_Pausing_and_Resuming_Tracks.txt"
   },
   {
     "id": "octatrack-performance-walkthrough",
@@ -889,16 +1605,30 @@
     "creator": "Community Tutorial",
     "channelUrl": "",
     "videoUrl": "https://www.youtube.com/watch?v=POhQbfzzfR8",
-    "relevantTutorials": ["08-parts-banks-scenes"],
-    "relevantSections": ["performance", "scenes", "crossfader", "overview"],
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "performance",
+      "scenes",
+      "crossfader",
+      "overview"
+    ],
     "duration": "20:00",
     "uploadDate": "2018-01-01",
-    "tags": ["performance", "scenes", "crossfader", "overview", "intermediate"],
+    "tags": [
+      "performance",
+      "scenes",
+      "crossfader",
+      "overview",
+      "intermediate"
+    ],
     "description": "Casual walkthrough of the Octatrack's performance features including scenes, crossfader, mutes, and live sampling.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Elektronauts curated list",
-    "notes": "Relaxed exploration of performance features. Good for getting comfortable with live manipulation."
+    "notes": "Relaxed exploration of performance features. Good for getting comfortable with live manipulation.",
+    "transcriptFile": "knowledge/transcripts/Community_Tutorial_-_Octatrack_Performance_Features_Casual_Walkthrough.txt"
   },
   {
     "id": "elektronauts-free-tutorials-list",
@@ -906,11 +1636,22 @@
     "creator": "Elektronauts Community",
     "channelUrl": "https://www.elektronauts.com/c/elektron-gear/octatrack/12",
     "videoUrl": "https://www.elektronauts.com/t/free-octatrack-tutorials-list-live-setups-performances-examples/61759",
-    "relevantTutorials": ["all"],
-    "relevantSections": ["resource-guide", "learning-path", "community"],
+    "relevantTutorials": [
+      "all"
+    ],
+    "relevantSections": [
+      "resource-guide",
+      "learning-path",
+      "community"
+    ],
     "duration": "meta",
     "uploadDate": "2017-2025",
-    "tags": ["community", "resource-guide", "curated", "comprehensive"],
+    "tags": [
+      "community",
+      "resource-guide",
+      "curated",
+      "comprehensive"
+    ],
     "description": "Community-curated megathread on Elektronauts listing 150+ free tutorials, live setups, performance examples, and learning resources from all major creators.",
     "addedDate": "2026-03-02",
     "verified": true,
@@ -923,11 +1664,25 @@
     "creator": "Thavius Beck",
     "channelUrl": "https://ask.video/course/elektron-103-octatrack-dynamic-sampling",
     "videoUrl": "https://ask.video/course/elektron-103-octatrack-dynamic-sampling",
-    "relevantTutorials": ["01-set-sail", "04-audio-pool", "05-slice-and-dice"],
-    "relevantSections": ["structure-overview", "sampling-workflow", "slicing-workflow"],
+    "relevantTutorials": [
+      "01-set-sail",
+      "04-audio-pool",
+      "05-slice-and-dice"
+    ],
+    "relevantSections": [
+      "structure-overview",
+      "sampling-workflow",
+      "slicing-workflow"
+    ],
     "duration": "180:00",
     "uploadDate": "2020-11-30",
-    "tags": ["comprehensive", "course", "sampling", "beginner", "paid"],
+    "tags": [
+      "comprehensive",
+      "course",
+      "sampling",
+      "beginner",
+      "paid"
+    ],
     "description": "Thavius Beck's 3-hour+ professional course covering Octatrack structure, step sequencer, sampling, editing, timestretching, and slicing. Beginner to intermediate.",
     "addedDate": "2026-03-02",
     "verified": true,
@@ -940,15 +1695,1129 @@
     "creator": "Thavius Beck",
     "channelUrl": "https://ask.video/course/octatrack-mkii-advanced-sampling",
     "videoUrl": "https://ask.video/course/octatrack-mkii-advanced-sampling",
-    "relevantTutorials": ["04-audio-pool", "05-slice-and-dice", "07-loop-stretching"],
-    "relevantSections": ["flex-machine", "slicing-techniques", "bpm-detection", "resampling"],
+    "relevantTutorials": [
+      "04-audio-pool",
+      "05-slice-and-dice",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "flex-machine",
+      "slicing-techniques",
+      "bpm-detection",
+      "resampling"
+    ],
     "duration": "240:00",
     "uploadDate": "2021-06-15",
-    "tags": ["comprehensive", "course", "MK2", "advanced", "paid"],
+    "tags": [
+      "comprehensive",
+      "course",
+      "MK2",
+      "advanced",
+      "paid"
+    ],
     "description": "Thavius Beck's 19-tutorial advanced sampling course for Octatrack MK2. Covers recording, editing, slicing, BPM detection, step & live sequencing, neighbor machines, pickup machines, and resampling.",
     "addedDate": "2026-03-02",
     "verified": true,
     "verifiedSource": "Ask.Video, macProVideo confirmed",
     "notes": "Comprehensive professional course. Covers neighbor machines, pickup machines, and resampling in detail. Paid content."
+  },
+  {
+    "id": "elektron-know-how-3",
+    "title": "Octatrack Know-How \u2014 Lesson #3: Manual Sampling",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=wnbPwpSKf9Q",
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "04-audio-pool"
+    ],
+    "relevantSections": [
+      "manual-sampling",
+      "recording"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "sampling",
+      "recording",
+      "basics"
+    ],
+    "description": "How the track recorders work, setting up manual recording via the front panel.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts curated list, SoundsLikeJoe",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_3_Manual_Sampling.txt"
+  },
+  {
+    "id": "elektron-know-how-4",
+    "title": "Octatrack Know-How \u2014 Lesson #4: Recorder Trig Sampling",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=tcHmnysMgRE",
+    "relevantTutorials": [
+      "03-beat-basics",
+      "04-audio-pool"
+    ],
+    "relevantSections": [
+      "recorder-trigs",
+      "sampling"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "recorder-trigs",
+      "sampling",
+      "basics"
+    ],
+    "description": "Using recorder trigs to automate the sampling process within a pattern.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts curated list, SoundsLikeJoe",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_4_Recorder_Trig_Sampling.txt"
+  },
+  {
+    "id": "elektron-know-how-5",
+    "title": "Octatrack Know-How \u2014 Lesson #5: Working With Scenes",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=CJsjFSd2Nmw",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "scenes",
+      "crossfader"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "scenes",
+      "crossfader",
+      "basics"
+    ],
+    "description": "What Scenes are, how to assign parameters to them, and using the crossfader for live variation.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts curated list, SoundsLikeJoe",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_5_Working_With_Scenes.txt"
+  },
+  {
+    "id": "elektron-know-how-6",
+    "title": "Octatrack Know-How \u2014 Lesson #6: Individual Track Lengths",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=AgY6VYicIMc",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "track-length",
+      "polyrhythm"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "track-length",
+      "polyrhythm",
+      "basics"
+    ],
+    "description": "Setting per-track length and time signature for polyrhythmic patterns.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts curated list, SoundsLikeJoe",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_6_Individual_Track_Lengths.txt"
+  },
+  {
+    "id": "elektron-know-how-8",
+    "title": "Octatrack Know-How \u2014 Lesson #8: Pickup Machines",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=BtXyfHP7LW8",
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "pickup-machine",
+      "looping"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "pickup-machine",
+      "looping",
+      "basics"
+    ],
+    "description": "How Pickup machines work for live looping, master/slave sync, overdubbing.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts curated list, SoundsLikeJoe",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_8_Pickup_Machines.txt"
+  },
+  {
+    "id": "elektron-know-how-9",
+    "title": "Octatrack Know-How \u2014 Lesson #9: The Audio Editor and Loop Slicing",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=fiTS7hqnElQ",
+    "relevantTutorials": [
+      "05-slice-and-dice"
+    ],
+    "relevantSections": [
+      "audio-editor",
+      "slicing"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "audio-editor",
+      "slicing",
+      "basics"
+    ],
+    "description": "Intro to the Audio Editor, how to slice a loop using the grid slicer.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts curated list, SoundsLikeJoe",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Know-How_Lesson_9_The_Audio_Editor_and_Loop_Slicing.txt"
+  },
+  {
+    "id": "elektron-pro-tip-1",
+    "title": "Octatrack Pro Tip #1: LFO Designer",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=SKZCMjXxJM8",
+    "relevantTutorials": [
+      "03-beat-basics",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "lfo",
+      "modulation"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "lfo",
+      "modulation",
+      "advanced"
+    ],
+    "description": "Drawing custom LFO waveforms in the LFO Designer for rhythmic parameter modulation.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_1_LFO_Designer.txt"
+  },
+  {
+    "id": "elektron-pro-tip-2",
+    "title": "Octatrack Pro Tip #2: Part Variations and Quantized Sampling",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=HqVrQAZtFaI",
+    "relevantTutorials": [
+      "08-parts-banks-scenes",
+      "04-audio-pool"
+    ],
+    "relevantSections": [
+      "parts",
+      "sampling"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "parts",
+      "sampling",
+      "advanced"
+    ],
+    "description": "Switching Parts mid-performance for instant sound variation, combined with quantized recording.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_2_Part_Variations_and_Quantized_Sampling.txt"
+  },
+  {
+    "id": "elektron-pro-tip-3",
+    "title": "Octatrack Pro Tip #3: Sampling and Crossfader Transitions",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=ZBANTG8lWVw",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "crossfader",
+      "transitions",
+      "sampling"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "crossfader",
+      "transitions",
+      "advanced"
+    ],
+    "description": "Using the crossfader to blend between a live mix and a recorded sample for seamless pattern transitions.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_3_Sampling_and_Crossfader_Transitions.txt"
+  },
+  {
+    "id": "elektron-pro-tip-4",
+    "title": "Octatrack Pro Tip #4: Controlling Slices With The Crossfader",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=3ZV-wS9zhUE",
+    "relevantTutorials": [
+      "05-slice-and-dice",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "slicing",
+      "crossfader",
+      "scenes"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "slicing",
+      "crossfader",
+      "advanced"
+    ],
+    "description": "Assigning slice parameters to scenes so the crossfader scrubs through slice points.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_4_Controlling_Slices_With_The_Crossfader.txt"
+  },
+  {
+    "id": "elektron-pro-tip-5",
+    "title": "Octatrack Pro Tip #5: Rearranging a Sample",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=KmfiBD7YSw0",
+    "relevantTutorials": [
+      "05-slice-and-dice"
+    ],
+    "relevantSections": [
+      "slicing",
+      "chromatic"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "slicing",
+      "chromatic",
+      "advanced"
+    ],
+    "description": "Using Slice and Chromatic modes together to make a rhythmic melody from a single sample.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_5_Rearranging_a_Sample.txt"
+  },
+  {
+    "id": "elektron-pro-tip-6",
+    "title": "Octatrack Pro Tip #6: Internal Resampling & Pattern Variations",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=kZFA2-c7M68",
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "resampling",
+      "patterns"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "resampling",
+      "patterns",
+      "advanced"
+    ],
+    "description": "Resampling the internal mix to create new material, then using that recording for variation.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_6_Internal_Resampling_Pattern_Variations.txt"
+  },
+  {
+    "id": "elektron-pro-tip-7",
+    "title": "Octatrack Pro Tip #7: Single Cycle Waveform Pattern",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=zW1laQnOx0M",
+    "relevantTutorials": [
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "single-cycle",
+      "synthesis"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "single-cycle",
+      "synthesis",
+      "advanced"
+    ],
+    "description": "Using the Octatrack as a synthesizer by loading single-cycle waveforms and using p-locks for melody.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_7_Single_Cycle_Waveform_Pattern.txt"
+  },
+  {
+    "id": "elektron-pro-tip-8",
+    "title": "Octatrack Pro Tip #8: Remixing Loops with the Audio Editor",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=fICr_n5NgnI",
+    "relevantTutorials": [
+      "05-slice-and-dice",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "audio-editor",
+      "remixing"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "audio-editor",
+      "remixing",
+      "advanced"
+    ],
+    "description": "Non-destructive loop remixing via slice rearrangement in the Audio Editor.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_8_Remixing_Loops_with_the_Audio_Editor.txt"
+  },
+  {
+    "id": "elektron-pro-tip-9",
+    "title": "Octatrack Pro Tip #9: Track Trigging",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=eZ5iYOInPQw",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "track-trigs",
+      "layering"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "track-trigs",
+      "layering",
+      "advanced"
+    ],
+    "description": "Using Track Trigs to trigger an entire track from another track sequencer for complex layering.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Sonic State, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Pro_Tip_9_Track_Trigging.txt"
+  },
+  {
+    "id": "elektron-tip-1-amp",
+    "title": "Octatrack Tip Video #1: Amp Page and Amp Menu",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=oncL3sAiV44",
+    "relevantTutorials": [
+      "02-load-and-lock"
+    ],
+    "relevantSections": [
+      "amp",
+      "envelope"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "amp",
+      "envelope",
+      "reference"
+    ],
+    "description": "Volume, panning, ADHR envelope parameters; the AMP SETUP sub-menu.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_1_Amp_Page_and_Amp_Menu.txt"
+  },
+  {
+    "id": "elektron-tip-2-playback",
+    "title": "Octatrack Tip Video #2: Playback Page and Menu",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=sGGhaV76qto",
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "playback",
+      "timestretch"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "playback",
+      "timestretch",
+      "reference"
+    ],
+    "description": "Pitch, offset, loop mode, tempo sync, and other playback parameters.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_2_Playback_Page_and_Menu.txt"
+  },
+  {
+    "id": "elektron-tip-3-slices",
+    "title": "Octatrack Tip Video #3: Slices and Retrigger",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=aW_m04bLOk8",
+    "relevantTutorials": [
+      "05-slice-and-dice"
+    ],
+    "relevantSections": [
+      "slicing",
+      "retrigger"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "slicing",
+      "retrigger",
+      "reference"
+    ],
+    "description": "How slices work alongside the retrigger feature for chopping and stutter effects.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_3_Slices_and_Retrigger.txt"
+  },
+  {
+    "id": "elektron-tip-4-lfo1",
+    "title": "Octatrack Tip Video #4: LFOs Part 1",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=dgM4Co-f87E",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "lfo",
+      "modulation"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "lfo",
+      "modulation",
+      "reference"
+    ],
+    "description": "LFO modes (Free, Trig, Hold, One), waveforms, speed/depth/phase, and target assignment.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_4_LFOs_Part_1.txt"
+  },
+  {
+    "id": "elektron-tip-5-lfo2",
+    "title": "Octatrack Tip Video #5: LFOs Part 2",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=eBlGd7VoAsc",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "lfo",
+      "meta-modulation"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "lfo",
+      "meta-modulation",
+      "reference"
+    ],
+    "description": "Advanced LFO usage including meta-modulation and LFO Designer in depth.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_5_LFOs_Part_2.txt"
+  },
+  {
+    "id": "elektron-tip-6-resampling",
+    "title": "Octatrack Tip Video #6: Resampling",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=mvJ6rFBV9zo",
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "resampling",
+      "recording"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "resampling",
+      "recording",
+      "reference"
+    ],
+    "description": "Step-by-step internal resampling workflow: recorder setup, one-shot trigs, saving recordings.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_6_Resampling.txt"
+  },
+  {
+    "id": "elektron-tip-7-midi",
+    "title": "Octatrack Tip Video #7: MIDI",
+    "creator": "Elektron",
+    "channelUrl": "https://www.youtube.com/@Elektron",
+    "videoUrl": "https://www.youtube.com/watch?v=LF9FLufV6ac",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "midi",
+      "external-gear"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "official",
+      "midi",
+      "external-gear",
+      "reference"
+    ],
+    "description": "MIDI track setup, note sequencing, CC automation, and controlling external gear.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "SoundsLikeJoe, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/Elektron_-_Octatrack_Tip_Video_7_MIDI.txt"
+  },
+  {
+    "id": "ezbot-synth-kick",
+    "title": "Octatrack Tutorial: Synthesize a kick drum!",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=EGvzcMIV-Bw",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "synthesis",
+      "sound-design"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "synthesis",
+      "kick",
+      "sound-design",
+      "creative"
+    ],
+    "description": "Synthesizing a kick drum entirely on the Octatrack using machines and LFOs.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Tutorial_Synthesize_a_kick_drum.txt"
+  },
+  {
+    "id": "ezbot-synth-snare",
+    "title": "Octatrack Tutorial: Synthesize a snare drum!",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=eFY2OqJfmNk",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "synthesis",
+      "sound-design"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "synthesis",
+      "snare",
+      "sound-design",
+      "creative"
+    ],
+    "description": "Synthesizing a snare drum on the Octatrack.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Tutorial_Synthesize_a_snare_drum.txt"
+  },
+  {
+    "id": "ezbot-synth-hihat",
+    "title": "Octatrack Tutorial: Synthesize a hi-hat!",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=mYsBHHDnUzI",
+    "relevantTutorials": [
+      "03-beat-basics"
+    ],
+    "relevantSections": [
+      "synthesis",
+      "sound-design"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "synthesis",
+      "hihat",
+      "sound-design",
+      "creative"
+    ],
+    "description": "Synthesizing a hi-hat on the Octatrack.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Tutorial_Synthesize_a_hi-hat.txt"
+  },
+  {
+    "id": "ezbot-quantized-loops",
+    "title": "Octatrack Workflow: Recording Quantized Loops",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=-Ii3aMolKIs",
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "recording",
+      "loops",
+      "workflow"
+    ],
+    "duration": "~10:00",
+    "tags": [
+      "recording",
+      "loops",
+      "workflow",
+      "intermediate"
+    ],
+    "description": "Workflow for making songs out of sampled quantized loops using QREC and QPL.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Workflow_Recording_Quantized_Loops.txt"
+  },
+  {
+    "id": "ezbot-daft-punk",
+    "title": "Octatrack Tutorial: Daft Punk Effect",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=Gqrcn1U9OPs",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "effects",
+      "creative"
+    ],
+    "duration": "~5:00",
+    "tags": [
+      "effects",
+      "bandpass",
+      "creative",
+      "fun"
+    ],
+    "description": "Creating a Daft Punk vocoder-style effect using bandpass filter and looper.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Tutorial_Daft_Punk_Effect.txt"
+  },
+  {
+    "id": "ezbot-random-resampling",
+    "title": "Fun Auto Slicing - Octatrack Random Resampling",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=MPzhVv7Uhp0",
+    "relevantTutorials": [
+      "05-slice-and-dice",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "resampling",
+      "slicing",
+      "random"
+    ],
+    "duration": "~10:00",
+    "tags": [
+      "resampling",
+      "slicing",
+      "glitch",
+      "creative"
+    ],
+    "description": "Setting up a randomized resample track for glitchy stems and live performance.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Fun_Auto_Slicing_-_Octatrack_Random_Resampling.txt"
+  },
+  {
+    "id": "ezbot-best-perf-mixer",
+    "title": "The Best Performance Mixer for Hardware and How to Use It",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=VK8VXybQy_0",
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "mixer",
+      "performance",
+      "template"
+    ],
+    "duration": "~20:00",
+    "tags": [
+      "mixer",
+      "performance",
+      "template",
+      "intermediate"
+    ],
+    "description": "Fundamentals of using the Octatrack as a live performance mixer for other Elektron gear.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_The_Best_Performance_Mixer_for_Hardware_and_How_to_Use_It.txt"
+  },
+  {
+    "id": "ezbot-build-perf-fx",
+    "title": "Build Amazing Performance Effects on The Octatrack",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=zN8661fcAwQ",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "effects",
+      "performance",
+      "creative"
+    ],
+    "duration": "~30:00",
+    "tags": [
+      "effects",
+      "reverse",
+      "echo-freeze",
+      "pitch",
+      "advanced"
+    ],
+    "description": "Building advanced effects from scratch: Reverse, Echo Freeze, Pitch Riser, Live Resampling.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Build_Amazing_Performance_Effects_on_The_Octatrack.txt"
+  },
+  {
+    "id": "ezbot-perf-mixer-2",
+    "title": "Octatrack Performance Mixer 2.0: 64 FX Demo and Tutorial",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=3D4HhduBWKA",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "template",
+      "effects",
+      "performance"
+    ],
+    "duration": "~60:00",
+    "tags": [
+      "template",
+      "effects",
+      "performance",
+      "advanced"
+    ],
+    "description": "Full live stream demo, instruction, and Q&A for the Performance Mixer Template 2.0 (64 FX scenes).",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Performance_Mixer_20_64_FX_Demo_and_Tutorial.txt"
+  },
+  {
+    "id": "ezbot-perf-mixer-3",
+    "title": "Octatrack Performance Mixer 3.0: Huge Update",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=7-Pi5TgpgZY",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "template",
+      "effects",
+      "performance"
+    ],
+    "duration": "~30:00",
+    "tags": [
+      "template",
+      "effects",
+      "performance",
+      "advanced"
+    ],
+    "description": "Demo of Performance Mixer 3.0: 20 new effects, synced modulations, noise risers, sidechain pumping.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Modbang, Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Performance_Mixer_30_Huge_Update.txt"
+  },
+  {
+    "id": "ezbot-templates-demo",
+    "title": "Octatrack Performance Templates Demo: Techno Mixer, Ultimate FX, 2FF",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=ioG37bWxKoA",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "templates",
+      "performance"
+    ],
+    "duration": "~20:00",
+    "tags": [
+      "templates",
+      "performance",
+      "techno",
+      "advanced"
+    ],
+    "description": "Demo of three templates: Techno Performance Mixer, Ultimate FX, and 2FF.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Performance_Templates_Demo_Techno_Mixer_Ultimate_FX_2FF.txt"
+  },
+  {
+    "id": "ezbot-external-fx",
+    "title": "4 Ways To Set Up External Effects On the Octatrack",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=RV49aaEpg18",
+    "relevantTutorials": [
+      "02-load-and-lock",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "routing",
+      "external-fx",
+      "cue"
+    ],
+    "duration": "~12:00",
+    "tags": [
+      "routing",
+      "external-fx",
+      "send",
+      "insert",
+      "intermediate"
+    ],
+    "description": "Four routing methods for external FX: Classic Send, Headphone Send, Studio Mode, External Insert.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_4_Ways_To_Set_Up_External_Effects_On_the_Octatrack.txt"
+  },
+  {
+    "id": "ezbot-ultimate-fx",
+    "title": "Octatrack Ultimate FX Template 1.0: 64 Custom FX, 2 Loopers",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=5m4pvtP-o8I",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "template",
+      "effects",
+      "looper"
+    ],
+    "duration": "~60:00",
+    "tags": [
+      "template",
+      "effects",
+      "looper",
+      "advanced"
+    ],
+    "description": "Full demo and tutorial for the Ultimate FX Template: 64 custom FX, 2 loopers, 2 compressors.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Ultimate_FX_Template_10_64_Custom_FX_2_Loopers.txt"
+  },
+  {
+    "id": "ezbot-perf-mixer-306",
+    "title": "Octatrack Performance Mixer 3.0.6 In-Depth Demo",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=LvWWcA12bLg",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "template",
+      "performance",
+      "deep-dive"
+    ],
+    "duration": "~60:00",
+    "tags": [
+      "template",
+      "performance",
+      "deep-dive",
+      "advanced"
+    ],
+    "description": "60+ minute deep dive into Performance Mixer 3.0.6 with musical examples, DJ Template variant, loopers.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Modbang, EZBOT Shop",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Performance_Mixer_306_In-Depth_Demo.txt"
+  },
+  {
+    "id": "ezbot-volca-workout",
+    "title": "Volca Beats, Volca Keys, and Octatrack MK2 Workout",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=AlZ5XqHc7rE",
+    "relevantTutorials": [
+      "02-load-and-lock"
+    ],
+    "relevantSections": [
+      "external-gear",
+      "performance"
+    ],
+    "duration": "~15:00",
+    "tags": [
+      "volca",
+      "external-gear",
+      "jam",
+      "performance"
+    ],
+    "description": "Live jam using OT as mixer/sampler hub with Volca Beats and Volca Keys.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Volca_Beats_Volca_Keys_and_Octatrack_MK2_Workout.txt"
+  },
+  {
+    "id": "ezbot-hybrid-4x4",
+    "title": "Octatrack Hybrid 4X4 Performance Mixer",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=t7mRITL9zfU",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "template",
+      "performance"
+    ],
+    "duration": "~20:00",
+    "tags": [
+      "template",
+      "performance",
+      "hybrid",
+      "2025"
+    ],
+    "description": "64 performance effects, 4 audio tracks, four parts (EARTH/AIR/FIRE/WATER), 4 Free Flex Tracks.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Octatrack_Hybrid_4X4_Performance_Mixer.txt"
+  },
+  {
+    "id": "ezbot-ambient-hermod",
+    "title": "Ambient From Scratch With Octatrack and Hermod+",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=75Kf40BwIlU",
+    "relevantTutorials": [
+      "04-audio-pool",
+      "07-loop-stretching"
+    ],
+    "relevantSections": [
+      "ambient",
+      "sampling",
+      "external-gear"
+    ],
+    "duration": "~15:00",
+    "tags": [
+      "ambient",
+      "sampling",
+      "hermod",
+      "creative",
+      "2026"
+    ],
+    "description": "Sampling sequences from Hermod+ into a fresh OT project, randomization for ambient sound design.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_Ambient_From_Scratch_With_Octatrack_and_Hermod.txt"
+  },
+  {
+    "id": "ezbot-song-transitions",
+    "title": "How to Transition Between Songs on the Octatrack",
+    "creator": "EZBOT",
+    "channelUrl": "https://www.youtube.com/@EZBOT_",
+    "videoUrl": "https://www.youtube.com/watch?v=mx5f3qTKz4M",
+    "relevantTutorials": [
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "transitions",
+      "patterns",
+      "performance"
+    ],
+    "duration": "~10:00",
+    "tags": [
+      "transitions",
+      "patterns",
+      "performance",
+      "2026"
+    ],
+    "description": "Techniques for smoothly transitioning between songs without stopping the clock.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "MATRIXSYNTH",
+    "transcriptFile": "knowledge/transcripts/EZBOT_-_How_to_Transition_Between_Songs_on_the_Octatrack.txt"
+  },
+  {
+    "id": "cuckoo-arranger-tutorial",
+    "title": "OCTATRACK Arranger Tutorial - How to Structure a Song",
+    "creator": "Cuckoo",
+    "channelUrl": "https://www.youtube.com/@cuckoomusic",
+    "videoUrl": "https://www.youtube.com/watch?v=TnE4rUa46SE",
+    "relevantTutorials": [
+      "03-beat-basics",
+      "08-parts-banks-scenes"
+    ],
+    "relevantSections": [
+      "arranger",
+      "song-mode",
+      "patterns"
+    ],
+    "duration": "~30:00",
+    "tags": [
+      "arranger",
+      "song-mode",
+      "patterns",
+      "intermediate"
+    ],
+    "description": "Building patterns then using the Arranger (song mode) to arrange them into a full track.",
+    "addedDate": "2026-03-02",
+    "verified": true,
+    "verifiedSource": "Elektronauts, Invidious mirror",
+    "transcriptFile": "knowledge/transcripts/Cuckoo_-_OCTATRACK_Arranger_Tutorial_-_How_to_Structure_a_Song.txt"
   }
 ]
