@@ -1331,7 +1331,36 @@
       "zone": "audio_encoders",
       "label": "A",
       "sublabel": "Start Pos",
-      "manual": { "primary": "Data entry knob A — sets parameter values. Press+turn for coarse", "section": "5.2" },
+      "manual": {
+        "primary": "Controls the upper-left parameter on the screen. In track parameter pages, this is typically the first parameter (e.g., PTCH on SRC, ATK on AMP, SPD1 on LFO). Press while turning for larger increments.",
+        "func_combo": "[FUNC] + turn = Parameter value jump (snaps to key values like 0, 64, 127).",
+        "all_combos": [
+          "Turn = Adjust upper-left parameter",
+          "Press + turn = Quick parameter adjustment (increments of 7)",
+          "[FUNC] + turn = Parameter value jump",
+          "[TRIG] + turn = Parameter lock for that step",
+          "[SCENE A/B] + turn = Scene lock for that parameter",
+          "[TRIG] + press = Remove parameter lock for that parameter"
+        ],
+        "menu_path": "N/A — context-dependent encoder.",
+        "parameters": [],
+        "leds": "No LED.",
+        "tips": [
+          "The physical layout of encoders A-F matches the on-screen parameter grid: A/B/C on top, D/E/F on bottom.",
+          "In the Audio Editor TRIM page: A = start point, B = loop point, C = end point.",
+          "Hold [FUNC] while pressing the encoder to enable/disable MIDI CC parameters in CTRL pages."
+        ],
+        "section": "3.1 (item 7), 5.2",
+        "merlin_tips": [
+          "On the SRC/Playback page, Encoder A typically controls the START parameter. When SLICE=ON, this selects which slice to play.",
+          "Merlin's slice lock workflow: p-lock the START parameter (Encoder A on SRC page) per step to select different slices — this is how you build chop patterns.",
+          "In the Audio Editor, Encoder A controls different parameters depending on the active page (TRIM, SLICE, etc.)."
+        ],
+        "workflow_context": "Data entry encoder A — the parameter it controls depends on the active page. On SRC page: typically START (and slice selection when SLICE=ON). In Audio Editor: varies by page. Press+turn for coarse adjustment.",
+        "common_mistakes": [
+          "Not pressing+turning for coarse adjustment when you need to make big changes quickly"
+        ]
+      },
       "tutorials": ["05-slice-and-dice"]
     },
     "encoder_b": {
@@ -1340,7 +1369,19 @@
       "zone": "audio_encoders",
       "label": "B",
       "sublabel": "Loop Pos",
-      "manual": { "primary": "Data entry knob B", "section": "5.2" },
+      "manual": {
+        "primary": "Controls the upper-middle parameter on the screen. Press while turning for larger increments.",
+        "func_combo": "[FUNC] + turn = Parameter value jump.",
+        "all_combos": ["Same combinations as Encoder A, applied to the upper-middle parameter position."],
+        "menu_path": "N/A — context-dependent encoder.",
+        "parameters": [],
+        "leds": "No LED.",
+        "tips": ["Same tips as Encoder A."],
+        "section": "3.1 (item 7), 5.2",
+        "merlin_tips": ["On the SRC page, Encoder B typically controls the LEN (length) parameter — how much of the sample plays from the start point."],
+        "workflow_context": "Data entry encoder B. Context-dependent like all encoders. Press+turn for coarse adjustment.",
+        "common_mistakes": ["Same as encoder_a — not using press+turn for coarse changes."]
+      },
       "tutorials": []
     },
     "encoder_c": {
@@ -1349,7 +1390,19 @@
       "zone": "audio_encoders",
       "label": "C",
       "sublabel": "End Pos",
-      "manual": { "primary": "Data entry knob C", "section": "5.2" },
+      "manual": {
+        "primary": "Controls the upper-right parameter on the screen. Press while turning for larger increments.",
+        "func_combo": "[FUNC] + turn = Parameter value jump.",
+        "all_combos": ["Same combinations as Encoder A, applied to the upper-right parameter position."],
+        "menu_path": "N/A — context-dependent encoder.",
+        "parameters": [],
+        "leds": "No LED.",
+        "tips": ["Same tips as Encoder A."],
+        "section": "3.1 (item 7), 5.2",
+        "merlin_tips": ["On the SRC page, Encoder C typically controls the RATE parameter — playback speed/pitch of the sample."],
+        "workflow_context": "Data entry encoder C. Context-dependent. Press+turn for coarse adjustment.",
+        "common_mistakes": ["Same as encoder_a."]
+      },
       "tutorials": []
     },
     "tap_tempo": {
@@ -1359,10 +1412,35 @@
       "label": "Tap Tempo",
       "redlabel": "Pickup Sync",
       "manual": {
-        "primary": "Opens TEMPO menu. LED flash speed = current BPM",
-        "func_combo": "Tap Tempo mode (tap repeatedly to set BPM average)",
-        "other_combos": ["[TRACK]+[TEMPO] = Sync sequencer to Pickup loop"],
-        "section": "8.9"
+        "primary": "Opens the TEMPO menu where the project BPM is set. The [TEMPO] key LED flashes at the current tempo speed, providing a visual metronome.",
+        "func_combo": "[FUNC] + [TEMPO] = Tap Tempo. Hold [FUNC] and tap [TEMPO] repeatedly in rhythm. After 4 taps, the average BPM is calculated and applied. Continue tapping to refine.",
+        "all_combos": [
+          "[TEMPO] = Open Tempo menu",
+          "[FUNC] + [TEMPO] (repeated taps) = Tap tempo",
+          "[CUE] + [TEMPO] = Toggle metronome on/off",
+          "[TRACK] + [TEMPO] = Sync sequencer to Pickup machine loop on that track",
+          "[FUNC] + [YES] (in Tempo menu) = Switch between PROJECT and PATTERN tempo mode"
+        ],
+        "menu_path": "TEMPO menu → BPM setting (LEVEL knob for integer, [UP/DOWN] for decimal). PROJECT or PATTERN tempo mode.",
+        "parameters": [
+          "BPM: 30.0 to 300.0",
+          "Mode: PROJECT (shared BPM for all patterns) or PATTERN (per-pattern BPM)"
+        ],
+        "leds": "[TEMPO] key LED flashes at the current BPM speed — always visible as a tempo indicator.",
+        "tips": [
+          "Tap tempo needs at least 4 taps before setting the BPM.",
+          "Press [LEFT/RIGHT] arrows (no menu open) to temporarily nudge BPM +/- 10% for manual syncing.",
+          "PATTERN tempo mode allows each pattern to have its own BPM — great for songs with tempo changes.",
+          "Arranger row BPM settings override both project and pattern tempo."
+        ],
+        "section": "3.1 (item 8), 8.9",
+        "merlin_tips": [
+          "Merlin doesn't discuss tempo setting in detail, but his entire workflow assumes all samples are correctly time-stretched to the project tempo. Setting the right BPM is the foundation."
+        ],
+        "workflow_context": "Press to open the TEMPO menu. [FUNC]+[TAP TEMPO] enters tap tempo mode (tap repeatedly to set BPM by feel). The flashing LED speed indicates current BPM. Getting tempo right is essential before Merlin's time-stretch and slice workflows work properly.",
+        "common_mistakes": [
+          "Not setting the project tempo before loading and time-stretching samples — everything depends on this being correct"
+        ]
       },
       "tutorials": ["03-beat-basics", "07-loop-stretching"]
     },
@@ -1372,7 +1450,19 @@
       "zone": "shuttle_encoders",
       "label": "D",
       "sublabel": "Zoom ⬍",
-      "manual": { "primary": "Data entry knob D", "section": "5.2" },
+      "manual": {
+        "primary": "Controls the lower-left parameter on the screen. Press while turning for larger increments.",
+        "func_combo": "[FUNC] + turn = Parameter value jump.",
+        "all_combos": ["Same combinations as Encoder A, applied to the lower-left parameter position."],
+        "menu_path": "N/A — context-dependent encoder.",
+        "parameters": [],
+        "leds": "No LED.",
+        "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: D = y-axis zoom."],
+        "section": "3.1 (item 7), 5.2",
+        "merlin_tips": ["Encoder D is part of the lower encoder row. In the Audio Editor, it often controls zoom level for waveform viewing."],
+        "workflow_context": "Data entry encoder D. In the Audio Editor, controls zoom. On parameter pages, controls the fourth parameter. Press+turn for coarse adjustment.",
+        "common_mistakes": ["Same as encoder_a."]
+      },
       "tutorials": []
     },
     "encoder_e": {
@@ -1381,7 +1471,19 @@
       "zone": "shuttle_encoders",
       "label": "E",
       "sublabel": "Scroll ⬌",
-      "manual": { "primary": "Data entry knob E", "section": "5.2" },
+      "manual": {
+        "primary": "Controls the lower-middle parameter on the screen. Press while turning for larger increments.",
+        "func_combo": "[FUNC] + turn = Parameter value jump.",
+        "all_combos": ["Same combinations as Encoder A, applied to the lower-middle parameter position."],
+        "menu_path": "N/A — context-dependent encoder.",
+        "parameters": [],
+        "leds": "No LED.",
+        "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: E = waveform scroll."],
+        "section": "3.1 (item 7), 5.2",
+        "merlin_tips": ["In the Audio Editor, Encoder E often controls horizontal scroll position — essential for navigating long samples when zoomed in."],
+        "workflow_context": "Data entry encoder E. In the Audio Editor, controls scroll. On parameter pages, controls the fifth parameter.",
+        "common_mistakes": ["Same as encoder_a."]
+      },
       "tutorials": []
     },
     "encoder_f": {
@@ -1390,7 +1492,19 @@
       "zone": "shuttle_encoders",
       "label": "F",
       "sublabel": "Zoom ⬌",
-      "manual": { "primary": "Data entry knob F", "section": "5.2" },
+      "manual": {
+        "primary": "Controls the lower-right parameter on the screen. Press while turning for larger increments.",
+        "func_combo": "[FUNC] + turn = Parameter value jump.",
+        "all_combos": ["Same combinations as Encoder A, applied to the lower-right parameter position."],
+        "menu_path": "N/A — context-dependent encoder.",
+        "parameters": [],
+        "leds": "No LED.",
+        "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: F = x-axis zoom. In Arpeggiator Setup: F = key scale."],
+        "section": "3.1 (item 7), 5.2",
+        "merlin_tips": ["In the Audio Editor, Encoder F often controls horizontal zoom — essential for precise slice placement."],
+        "workflow_context": "Data entry encoder F. In the Audio Editor, controls zoom. On parameter pages, controls the sixth parameter.",
+        "common_mistakes": ["Same as encoder_a."]
+      },
       "tutorials": []
     },
     "scene_a": {
@@ -1400,10 +1514,46 @@
       "label": "A",
       "sublabel": "Mute",
       "manual": {
-        "primary": "Assign scenes to slot A (with [TRIG] and encoders)",
-        "func_combo": "Mute scene A",
-        "other_combos": ["[SCENE A]+[TRIG] = Assign scene to slot A", "[SCENE A]+knob = Assign parameter to scene A"],
-        "section": "10.3"
+        "primary": "Press [SCENE A] + [TRIG 1-16] to assign a scene to the A slot of the crossfader (fully active at leftmost crossfader position). Hold [SCENE A] and turn encoders to lock parameter values to that scene.",
+        "func_combo": "[FUNC] + [SCENE A] = Mute Scene A. Muted scene parameters are ignored, using the part's default values instead.",
+        "all_combos": [
+          "[SCENE A] + [TRIG] = Assign scene to slot A",
+          "[SCENE A] + encoder turn = Lock parameter to Scene A",
+          "[SCENE A] + encoder press = Remove scene lock for that parameter",
+          "[SCENE A] + LEVEL turn = Lock XLV (equal-energy track level) to Scene A",
+          "[SCENE A] + LEVEL press = Remove XLV lock",
+          "[FUNC] + [SCENE A] = Mute/unmute Scene A",
+          "[SCENE A] + [RECORD] = Copy Scene A",
+          "[SCENE A] + [PLAY] = Clear Scene A locks",
+          "[SCENE A] + [STOP] = Paste to Scene A"
+        ],
+        "menu_path": "N/A — scene assignment and locking key.",
+        "parameters": [
+          "XLV: Equal-energy track level (MIN/MAX, scene-only)",
+          "XVOL: Equal-energy pre-FX volume (MIN/MAX, scene-only, on AMP page)",
+          "XDIR AB/CD: Equal-energy input DIR (MIN/MAX, scene-only, on Mixer page)"
+        ],
+        "leds": "When [SCENE A] is pressed: red [TRIG] = currently assigned scene, green [TRIG] = Scene B's assignment, half-bright green = scenes containing locks.",
+        "tips": [
+          "Scene locks override parameter locks — the crossfader always wins.",
+          "Use XLV/XVOL/XDIR for equal-energy crossfading to avoid the volume dip at center position.",
+          "Hold [SCENE A] and check [TRACK] and [TRACK PARAMETER] key brightness to see which tracks/pages have scene locks.",
+          "Muting a scene ([FUNC]+[SCENE]) is great for toggling effect washes on/off during performance."
+        ],
+        "section": "3.1 (item 9), 10.3",
+        "merlin_tips": [
+          "Merlin's scene model: Scene A is on the LEFT of the crossfader. Muting Scene A means the left side plays default settings.",
+          "Scene stacking technique: Scenes 1-8 go on the LEFT (Scene A), Scenes 9-16 go on the RIGHT (Scene B). Build progressively by copying and modifying.",
+          "Scenes are stored in the PART — each Part has its own 16 scenes. Switching Parts loads completely different scenes.",
+          "Parts also store WHICH scene is loaded to slot A and whether it's muted — so switching patterns that use different Parts automatically loads the right scene setup.",
+          "Muting a scene immediately reverts to default settings (or you can fade to it for a gradual return). This is your 'return home' during performance."
+        ],
+        "workflow_context": "Press [SCENE A]+[TRIG] to assign a scene to slot A. Hold [SCENE A] + turn a knob to add that parameter to the scene. [FUNC]+[SCENE A] mutes the scene. Merlin's model: Scene A = left side of crossfader. Start with default (Scene A muted), fade right to Scene B for your first departure.",
+        "common_mistakes": [
+          "Forgetting that scenes override p-locks — the crossfader always wins",
+          "Not muting unused scene slots — an active but empty scene can cause unexpected behavior",
+          "Not saving the Part after setting up scenes — scenes are Part-level data"
+        ]
       },
       "tutorials": ["08-parts-banks-scenes"]
     },
@@ -1414,9 +1564,37 @@
       "label": "B",
       "sublabel": "Mute",
       "manual": {
-        "primary": "Assign scenes to slot B",
-        "func_combo": "Mute scene B",
-        "section": "10.3"
+        "primary": "Press [SCENE B] + [TRIG 1-16] to assign a scene to the B slot of the crossfader (fully active at rightmost crossfader position). Hold [SCENE B] and turn encoders to lock parameter values to that scene.",
+        "func_combo": "[FUNC] + [SCENE B] = Mute Scene B. Muted scene parameters are ignored, using the part's default values instead.",
+        "all_combos": [
+          "[SCENE B] + [TRIG] = Assign scene to slot B",
+          "[SCENE B] + encoder turn = Lock parameter to Scene B",
+          "[SCENE B] + encoder press = Remove scene lock for that parameter",
+          "[SCENE B] + LEVEL turn = Lock XLV to Scene B",
+          "[SCENE B] + LEVEL press = Remove XLV lock",
+          "[FUNC] + [SCENE B] = Mute/unmute Scene B",
+          "[SCENE B] + [RECORD] = Copy Scene B",
+          "[SCENE B] + [PLAY] = Clear Scene B locks",
+          "[SCENE B] + [STOP] = Paste to Scene B"
+        ],
+        "menu_path": "N/A — scene assignment and locking key.",
+        "parameters": ["Same scene-exclusive parameters as Scene A (XLV, XVOL, XDIR)"],
+        "leds": "When [SCENE B] is pressed: red [TRIG] = currently assigned scene, green [TRIG] = Scene A's assignment, half-bright green = scenes containing locks.",
+        "tips": [
+          "Same tips as Scene A. A common setup: Scene A = clean/dry, Scene B = heavy effects/tension.",
+          "16 scenes per Part — plenty of room for variation. Scenes are part of the Part, not the Pattern."
+        ],
+        "section": "3.1 (item 9), 10.3",
+        "merlin_tips": [
+          "Merlin's scene model: Scene B is on the RIGHT. In the buildup example, he loads his buildup scene to slot B and slowly fades right for increasing intensity.",
+          "Scene stacking: Scenes 9-16 go on the RIGHT (Scene B). After fading to Scene B, load the next scene to slot A and fade back left.",
+          "The scene stacking sequence: Start → fade right to Scene 9 → load Scene 2 to A → fade left → load Scene 10 to B → fade right → etc. This creates a natural progression through scenes."
+        ],
+        "workflow_context": "Press [SCENE B]+[TRIG] to assign a scene to slot B. Merlin's buildup technique: load a 'tension' scene to slot B (delay feedback up, filter resonance up, distortion up, reverb up), then slowly crossfade right for a gradual buildup.",
+        "common_mistakes": [
+          "Building scenes that are too extreme — Merlin's approach is gradual, stacking small changes for natural progression",
+          "Forgetting to mute Scene B when switching to a new pattern with its own Part — the new Part loads its own scene assignments"
+        ]
       },
       "tutorials": ["08-parts-banks-scenes"]
     },
@@ -1426,9 +1604,35 @@
       "zone": "scenes_crossfader",
       "label": "Crossfader",
       "manual": {
-        "primary": "Interpolates between Scene A and Scene B parameter values",
+        "primary": "Interpolates between the parameter values of Scene A (leftmost) and Scene B (rightmost). Any crossfader position between the extremes blends the two scenes proportionally.",
+        "func_combo": "N/A — physical slider, no FUNC combination.",
+        "all_combos": [],
+        "menu_path": "N/A — physical control. Crossfader position shown at bottom-right of the screen.",
+        "parameters": [],
+        "leds": "No LED. Position indicated on screen.",
+        "tips": [
+          "Scene locks override parameter locks — the crossfader always takes priority.",
+          "If two empty scenes are assigned, the crossfader does nothing.",
+          "The crossfader center position has a natural volume dip — use XLV/XVOL for equal-energy crossfading.",
+          "The crossfader can control ANY lockable parameter across ALL 8 tracks simultaneously.",
+          "The MKII crossfader is upgraded with a smoother, silkier action compared to the MKI."
+        ],
+        "section": "3.1 (item 11), 10.3",
         "note": "Center position has volume dip — use XVOL for equal-energy crossfading",
-        "section": "10.3"
+        "merlin_tips": [
+          "Merlin identifies 3 key things you can do: (1) Fade from DEFAULT to a scene, (2) Fade from SCENE to SCENE, (3) Fade from SCENE back to DEFAULT.",
+          "His metaphor: 'A scene allows you to undertake an expedition from the base camp (default settings) into new territory (a scene) and move further as you keep loading new scenes. Returning to base camp is always possible by muting a scene and fading to it.'",
+          "Muting a scene while the crossfader is there causes an instant jump — no fade. Use this for dramatic drops.",
+          "For live inputs, XDIR in scenes lets the crossfader control input volume — effectively giving you 10 channels of crossfader control (8 tracks + 2 inputs).",
+          "Use XVOL (AMP page) and XLEV (track level) in scenes for pre/post-FX volume control via crossfader. XVOL lets reverb tails die naturally.",
+          "Scene stacking creates a linear journey through your performance: each new scene builds on the previous one."
+        ],
+        "workflow_context": "The crossfader interpolates between Scene A (left) and Scene B (right). Merlin's performance flow: start with crossfader left (default or Scene A), slowly fade right toward Scene B for buildup, then either snap back (mute scene) or load a new scene and continue fading. XVOL and XLEV give you pre/post-FX volume control through scenes.",
+        "common_mistakes": [
+          "Center position has a volume dip — use XVOL for equal-energy crossfading",
+          "Trying to use the crossfader without setting up scenes first — it does nothing without scene assignments",
+          "Not understanding that scene locks override p-locks — the crossfader ALWAYS wins over step-level parameter locks"
+        ]
       },
       "tutorials": ["08-parts-banks-scenes"]
     },
