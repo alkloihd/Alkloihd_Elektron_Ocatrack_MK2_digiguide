@@ -1,10 +1,11 @@
 # Octatrack MK2 Interactive Tutorial System
 
 ```
-  ___  ___    _____  ___  ___     ___  ___  ___    ___   __ _
- / _ \/ __|  |_   _|/ _ \|_ _|   / _ \/ __|/ __|  | __| / _` |
-| (_) \__ \    | | | (_) || |   | (_) \__ \\\__ \  | _| | (_| |
- \___/|___/    |_|  \___/|___|   \___/|___/|___/  |___| \__,_|
+    ___       __       __ __    __       ____     ____   __  __   ____
+   /   |     / /      / //_/   / /      / __ \   /  _/  / / / /  / __ \
+  / /| |    / /      / ,<     / /      / / / /   / /   / /_/ /  / / / /
+ / ___ |   / /___   / /| |   / /___   / /_/ /  _/ /   / __  /  / /_/ /
+/_/  |_|  /_____/  /_/ |_|  /_____/   \____/  /___/  /_/ /_/  /_____/
 
 Interactive browser-based learning for Elektron Octatrack MK2
 No dependencies. No build step. Just open and learn.
@@ -14,38 +15,50 @@ An interactive, browser-based learning system for the **Elektron Octatrack MK2**
 
 **Perfect for:** Beginners jamming with loops, intermediate users chopping samples, anyone who wants to understand the Octatrack inside-out.
 
+**Like what you're using?** Help me build more tutorials, or request a new topic with a donation:
+https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+
 ---
-Like what you're using? Help me build more of these! https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
 
 ## What's Inside
 
-This repository contains **8 tutorials** across two tiers, covering everything from your first power-on to advanced multi-section arrangements. All tutorials run in your browser with zero setup.
+This repository contains **16 tutorials** across four tiers, covering everything from your first power-on to live DJ performance. All tutorials run in your browser with zero setup.
 
-### Tier 1: The Foundations
+### Tier 1: Foundation
 
-| Tutorial          | Topic                   | Duration | You'll Learn                                    |
-| ----------------- | ----------------------- | -------- | ----------------------------------------------- |
-| 🚀 Set Sail       | Your First Steps        | 15 min   | Power on, navigate menus, the big picture       |
-| 📦 Load & Lock    | Static vs Flex Machines | 20 min   | RAM budgeting, when to use each machine type    |
-| 🥁 Beat Basics    | Your First Pattern      | 25 min   | Creating patterns, placing trigs, tempo         |
-| 🎵 The Audio Pool | Samples & Organization  | 20 min   | Folder structure, WAV format, sample management |
+| Tutorial          | Topic                   | Duration | You'll Learn                                           |
+| ----------------- | ----------------------- | -------- | ------------------------------------------------------ |
+| 01 Set Sail       | Your First Steps        | 15 min   | Power on, navigate menus, Sets/Projects/Banks/Patterns |
+| 02 Load & Lock    | Static vs Flex Machines | 20 min   | RAM budgeting, when to use each machine type           |
+| 03 Beat Basics    | Your First Pattern      | 25 min   | Grid recording, placing trigs, tempo, mixer basics     |
+| 04 The Audio Pool | Samples & Organization  | 20 min   | Folder structure, WAV format, BPM auto-detection       |
 
-### Tier 2: Core Manipulation
+### Tier 2: Core Techniques
 
-| Tutorial                 | Topic                      | Duration | You'll Learn                                             |
-| ------------------------ | -------------------------- | -------- | -------------------------------------------------------- |
-| ✂️ Slice & Dice          | Chopping Loops             | 30 min   | Slicing, grid-based chopping, beat mangling              |
-| 🔒 Sample Locks          | Multiple Clips Per Track   | 25 min   | Sample locks, rapid clip switching, dynamic arrangements |
-| ⏱️ Loop Stretching       | Timestretch & BPM          | 25 min   | Matching tempos, preserving pitch, flex time-stretching  |
-| 🏛️ Parts, Banks & Scenes | Multi-Section Arrangements | 30 min   | Banks, parts, scenes, crossfader transitions             |
+| Tutorial                 | Topic                      | Duration | You'll Learn                                         |
+| ------------------------ | -------------------------- | -------- | ---------------------------------------------------- |
+| 05 Slice & Dice          | Chopping Loops             | 30 min   | Grid/manual slicing, zero-crossing, sample chains    |
+| 06 Sample Locks          | Multiple Clips Per Track   | 25 min   | Sample locks, rapid clip switching, dynamic patterns |
+| 07 Loop Stretching       | Timestretch & BPM          | 25 min   | Matching tempos, preserving pitch, TSTR modes        |
+| 08 Parts, Banks & Scenes | Multi-Section Arrangements | 30 min   | Banks, parts, scenes, crossfader, XVOL               |
 
-### Tier 3+4 (Coming Soon)
+### Tier 3: Advanced Sequencing
 
-- Trig Conditions & Probability
-- Resampling & Creative Recording
-- Effects Chains & Neighbor Tracks
-- LFOs & Modulation Depth
-- Live Performance & External Gear
+| Tutorial             | Topic                   | Duration | You'll Learn                                             |
+| -------------------- | ----------------------- | -------- | -------------------------------------------------------- |
+| 09 Trig Conditions   | Conditional Logic       | 25 min   | FILL, probability, A:B counting, pattern variation       |
+| 10 Resampling        | Creative Recording      | 30 min   | SRC3 setup, recorder trigs, CUE trick, saving recordings |
+| 11 FX & Neighbors    | Effects Chains          | 30 min   | FX1/FX2, Neighbor machines, Thru machines, master bus    |
+| 12 LFOs & Modulation | Bringing Tracks to Life | 30 min   | 3 LFOs/track, LFO Designer, meta-modulation              |
+
+### Tier 4: Performance & Integration
+
+| Tutorial            | Topic                    | Duration | You'll Learn                                        |
+| ------------------- | ------------------------ | -------- | --------------------------------------------------- |
+| 13 Arranger         | Pattern Chaining & Songs | 30 min   | 256-row arranger, HALT/LOOP/JUMP, per-row BPM       |
+| 14 MIDI Sequencing  | External Gear & Sync     | 30 min   | MIDI tracks, arpeggiator, CC automation, clock sync |
+| 15 Pickup Machines  | Live Looping             | 25 min   | Master/slave, overdub, foot controller, RAM budget  |
+| 16 Performance & DJ | Putting It All Together  | 35 min   | Scenes, crossfader, master bus, live set building   |
 
 ---
 
@@ -60,40 +73,20 @@ This repository contains **8 tutorials** across two tiers, covering everything f
 ### Running Locally
 
 ```bash
-# From this repo root:
-cd site
-
-# Start the Python HTTP server
-python3 -m http.server 8080
-
-# Open in your browser
-open http://localhost:8080
-# Or visit: http://localhost:8080 in any browser
-```
-
-That's it. You're in.
-
-### Run From Terminal (No IDE Required)
-
-You can run this from a plain terminal on any major OS.
-
-#### macOS / Linux
-
-```bash
-cd site
+cd "site"
 python3 -m http.server 8080
 ```
 
 Open: `http://localhost:8080`
+
+That's it. You're in.
 
 #### Windows (PowerShell)
 
 ```powershell
-cd site
+cd "site"
 py -m http.server 8080
 ```
-
-Open: `http://localhost:8080`
 
 #### Windows (Command Prompt)
 
@@ -102,51 +95,53 @@ cd site
 py -m http.server 8080
 ```
 
-Open: `http://localhost:8080`
-
-If `py` is not available on Windows, try:
-
-```bat
-python -m http.server 8080
-```
+If `py` is not available on Windows, try `python -m http.server 8080`.
 
 ---
 
 ## Features
 
+### Interactive Hardware Overlay
+
+Every tutorial includes a **real-time SVG overlay** of the Octatrack MK2 hardware. As you scroll through sections, the overlay highlights the buttons and encoders being discussed. Click any control for detailed info pulled from the official manual and Merlin's Guide.
+
+- 68+ mapped hardware controls (buttons, encoders, faders)
+- Tooltips with function descriptions, combos, tips, and common mistakes
+- Animated button sequences showing multi-step procedures
+- Section-aware: overlay follows your reading position
+
+### Theme System
+
+Switch between **Dark**, **Light**, and **System** (auto-detect OS preference) themes. Your choice persists across sessions via localStorage.
+
 ### Learning Experience
 
-- **Dark, Brutalist UI** — clean typography, music-production aesthetic, neon accents
-- **Interactive Diagrams** — hardware layouts, signal flow charts, decision trees (SVG)
-- **Step-by-Step Exercises** — button presses, menu paths, real hardware procedures
-- **Confidence Ratings** — self-assess your understanding (1–5 scale) per tutorial
-- **Built-in Quizzes** — 4 questions per tutorial to verify what you've learned
-- **Time Tracking** — see how long each tutorial took you
+- **Step-by-Step Exercises** with exact button presses and menu paths
+- **Confidence Ratings** (1-5 scale) per tutorial for honest self-assessment
+- **Built-in Quizzes** (3-5 questions per tutorial) with instant feedback
+- **Time Tracking** per tutorial and overall
+- **YouTube Video Embeds** from educators like Cuckoo, EZBOT, and Elektron
 
 ### Interactive Tools
 
-- **RAM Calculator** — instantly see how much flex RAM you're using
-- **Format Validator** — check if your WAV files are OT-compatible
-- **BPM Filename Tester** — verify auto-detection (85–170 BPM range)
-- **Step Sequencer Simulator** — place trigs, hear patterns
-- **Crossfader Demo** — visualize scene transitions and equal-energy crossfading
+- **RAM Calculator** — Flex memory budget at a glance
+- **Step Sequencer Simulator** — place trigs, visualize patterns
+- **Crossfader Demo** — scene transitions with equal-energy (XVOL) visualization
 - **Waveform Slicer** — interactive grid slicing with zero-crossing snap
+- **Arrangement Flow Simulator** — build arranger rows visually
+- **LFO Waveform Visualizer** — see LFO shapes and modulation targets
+- **MIDI Step Visualizer** — note entry and CC automation
 
 ### Progress Tracking
 
 - **Automatic Saves** — progress persists in your browser's localStorage
-- **Section Completion** — tracks which sections you've read (IntersectionObserver)
-- **Dashboard View** — `site/index.html` shows overall completion, confidence trends, streaks
-- **Export Your Data** — download progress as JSON for backup or sharing
-- **Reset Anytime** — clear progress and start fresh from the footer
+- **Section Completion** — scroll tracking marks sections as you read them
+- **Dashboard** — overall completion, confidence trends, streaks, quiz scores
+- **Export / Reset** — download progress as JSON or start fresh
 
-### Technical Highlights
+### Video Library
 
-- **Single-File Tutorials** — each tutorial is one self-contained HTML file (no build step)
-- **Vanilla JS** — no frameworks, no dependencies (except Google Fonts)
-- **Responsive Design** — works on desktop, tablet, and mobile
-- **Fast Load Times** — all CSS/JS inlined; minimal HTTP requests
-- **Accessible** — semantic HTML, ARIA labels, keyboard navigation
+A curated collection of **97 YouTube tutorials** from the best Octatrack educators, searchable and filterable by topic. Add your own videos too.
 
 ---
 
@@ -156,208 +151,138 @@ python -m http.server 8080
 .
 ├── README.md
 ├── LICENSE
-├── .github/workflows/ci.yml            # Public CI checks
-├── docs/                               # Project documentation
+├── .github/workflows/ci.yml
+├── docs/
 │   ├── audit-report.md
 │   ├── CONTENT-SYSTEM-README.md
 │   └── SOURCES-MANIFEST.md
-└── site/                               # Deployable static website
-    ├── index.html                      # Dashboard
-    ├── 01-set-sail.html ... 08-*.html # Tutorials
-    ├── credits.html
-    ├── videos.html
+└── site/
+    ├── index.html                    # Dashboard — progress, stats, tutorial grid
+    ├── videos.html                   # Curated video library (97 videos)
+    ├── credits.html                  # Full attribution and educator links
+    ├── 01-set-sail.html ... 16-performance-and-dj.html
     ├── assets/
+    │   ├── theme.css                 # Dark/Light/System theme
+    │   ├── theme.js                  # Theme toggle (localStorage)
+    │   └── svg-overlay.js            # Interactive hardware overlay engine
     └── data/
+        ├── svg-overlay-map.json
+        ├── button-tooltips.json
+        ├── merlin-tips.json
+        ├── videos.json
+        └── progress.json
 ```
 
-Each tutorial HTML file is fully self-contained. No external CSS files, no build step.
+Each tutorial is a **self-contained HTML file** with inline CSS/JS. No build step, no bundler, no framework.
 
 ---
 
 ## How to Use
 
-### For Students
+### For Learners
 
-1. **Start with the Dashboard** — open `site/index.html` to see all tutorials and your progress
-2. **Pick a Tutorial** — click any tutorial to begin
-3. **Read, Watch, Interact** — follow the step-by-step sections
-4. **Rate Your Confidence** — honest self-assessment helps you identify weak spots
-5. **Take the Quiz** — verify you understood the material
-6. **Track Progress** — your dashboard auto-updates as you complete tutorials
+1. **Open the Dashboard** (`site/index.html`) to see all 16 tutorials and your progress
+2. **Pick a tutorial** — start with Tier 1 if you're new, or jump to your level
+3. **Read, watch, interact** — follow the step-by-step exercises
+4. **Use the hardware overlay** — click buttons on the SVG to see what they do
+5. **Rate your confidence** — honest self-assessment helps identify weak spots
+6. **Take the quiz** — verify you understood the material
+7. **Check the video library** — `site/videos.html` has 97 curated tutorials from top educators
 
-### For Developers / Contributors
+### For Contributors
 
-1. **Create a New Tutorial** — copy an existing tutorial HTML file as a template
-2. **Follow the Design System** — use the same CSS variables, structure, and interactive patterns
-3. **Use localStorage** — save state with key `octatrack-tutorials-{tutorial-id}`
-4. **Add Navigation** — include prev/next tutorial links at the bottom
-5. **Update the Dashboard** — add your tutorial to the config in `site/index.html`
-6. **Test Locally** — run `python3 -m http.server 8080` and verify in your browser
-
-### Tutorial Template Structure
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>[Tutorial Title] • Octatrack Tutorials</title>
-    <style>
-      /* Inline CSS using design system variables */
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Tutorial header, metadata, objectives -->
-      <!-- Sections with content, diagrams, exercises -->
-      <!-- Quiz -->
-      <!-- Confidence rating -->
-      <!-- Next/previous tutorial links -->
-    </div>
-    <script>
-      // Inline JavaScript for interactivity
-    </script>
-  </body>
-</html>
-```
+1. Copy an existing tutorial HTML file as a template
+2. Follow the CSS custom properties in `site/assets/theme.css` for theming
+3. Use `[BRACKET]` notation for hardware controls (powers the SVG overlay)
+4. Add your tutorial to the config in `site/index.html`
+5. Run `python3 -m http.server 8080` and test in browser
 
 ---
 
 ## Data & Progress
 
-### How Progress is Saved
-
-- **localStorage Key:** `octatrack-tutorials` (JSON object)
-- **Stored Data:**
-  - Tutorial completion status (0–100%)
-  - Confidence ratings (1–5 scale)
-  - Time spent per tutorial
-  - Quiz scores
-  - Timestamp of last update
-
-- **Persistence:** Data survives browser restart and persists across sessions
-- **Privacy:** Everything stays on your device; nothing sent to servers
-
-### Resetting Progress
-
-1. Open the **Dashboard** (`site/index.html`)
-2. Scroll to the footer
-3. Click **"Reset All Progress"**
-4. Confirm
-
-Your browser's localStorage will be cleared for the `octatrack-tutorials` key.
-
-### Exporting Progress
-
-From the dashboard footer, click **"Export My Data"** to download a JSON file of your progress. Use this for backup or analysis.
+- **Storage:** localStorage (key: `octatrack-tutorials`)
+- **Tracked:** completion %, confidence (1-5), quiz scores, time spent, sections read
+- **Privacy:** Everything stays on your device. Nothing sent to any server.
+- **Export:** Download progress as JSON from the dashboard footer
+- **Reset:** Clear all progress from the dashboard footer (with confirmation)
 
 ---
 
 ## Design System
 
-### Color Palette
+### Themes
 
-- **Background:** `#0a0a0a` (deep black)
-- **Text (primary):** `#f0f0f0` (off-white)
-- **Text (secondary):** `#888888` (gray)
-- **Accent (primary):** `#00ff00` (neon green)
-- **Accent (secondary):** `#ff00ff` (neon magenta)
-- **Accent (tertiary):** `#00ffff` (neon cyan)
-- **Borders:** `#222222` (dark gray)
+| Mode           | Background  | Text          | Accents                     |
+| -------------- | ----------- | ------------- | --------------------------- |
+| Dark (default) | `#0a0a0a`   | `#e0e0e0`     | Cyan, Magenta, Lime, Orange |
+| Light          | `#f5f5f5`   | `#2a2a2a`     | Adjusted for readability    |
+| System         | Auto-detect | OS preference | Matches OS setting          |
 
 ### Typography
 
-- **Headlines:** Space Mono (monospace, bold, 1.2 line height)
-- **Body:** Inter (sans-serif, 16px, 1.6 line height)
+- **Headlines:** Space Mono (monospace, bold)
+- **Body:** Inter (sans-serif, 16px)
 - **Code:** Space Mono (monospace)
 
-### Interactive Elements
+### Accents
 
-- **Buttons:** Dark background, neon borders, scale on hover
-- **Inputs:** Dark background, neon focus states
-- **Diagrams:** SVG with neon strokes, white fills
-- **Quizzes:** Multi-choice with instant feedback (green for correct, red for wrong)
+- Cyan `#00ffff` — primary interactive elements
+- Magenta `#ff00ff` — highlights, active states
+- Lime `#00ff41` — success, correct answers
+- Orange `#ffaa00` — warnings, tips
 
 ---
 
 ## Roadmap
 
-### Phase 1 (Current)
+### Completed
 
-- [x] 8 foundational & intermediate tutorials
+- [x] 16 tutorials across 4 tiers (Foundation through Performance)
 - [x] Progress tracking with localStorage
-- [x] Interactive diagrams and tools
-- [x] Quiz system
-- [x] Confidence ratings
-- [x] Dashboard with stats
+- [x] Interactive hardware overlay with 68+ mapped controls
+- [x] Dark/Light/System theme toggle
+- [x] Dashboard with stats, streaks, and confidence trends
+- [x] Video library with 97 curated tutorials
+- [x] Built-in quizzes and confidence ratings
+- [x] Credits page with full educator attribution
 
-### Phase 2 (Planned)
+### Planned
 
 - [ ] Notes/notepad per tutorial (user annotations)
-- [ ] Photo integration (Octatrack hardware mapped to SVGs)
-- [ ] Keyboard navigation guide (all OT hotkeys)
-- [ ] Video embeds (official Elektron + community tutorials)
-
-### Phase 3 (Planned)
-
-- [ ] Tier 3 tutorials: Trig Conditions, Resampling, Effects & Neighbors
-- [ ] Tier 4 tutorials: LFOs & Modulation, Live Performance, External Gear Integration
-
-### Phase 4+ (Future)
-
-- [ ] AI-powered Q&A chatbot (local or API-based)
-- [ ] Cloud deployment with user accounts (Firebase or similar)
-- [ ] Mobile app (React Native or Flutter)
 - [ ] Offline-first PWA with service workers
-- [ ] Community contributions (GitHub pull requests)
+- [ ] Community contributions via GitHub pull requests
+- [ ] More interactive widgets and simulators
 
 ---
 
 ## Troubleshooting
 
-### Tutorials won't load
-
-- **Check:** Is `python3 -m http.server 8080` running?
-- **Fix:** Kill any existing server (`lsof -ti:8080 | xargs kill -9`), then restart
-
-### Progress not saving
-
-- **Check:** Is localStorage enabled in your browser?
-- **Fix:** Go to Browser Settings > Privacy > ensure localStorage is allowed
-- **Alternative:** Use a different browser (Chrome, Firefox, Safari all support localStorage)
-
-### Quizzes not working
-
-- **Check:** Are you using a modern browser (released in the last 3 years)?
-- **Fix:** Update your browser or try a different one
-
-### Videos not playing
-
-- **Check:** Are you connected to the internet?
-- **Note:** Video embeds (YouTube iframes) require internet connectivity
-
-### Can't find a tutorial
-
-- **Check:** Did you click the correct link from the dashboard?
-- **Fix:** Go back to `site/index.html` and verify the tutorial exists
+| Problem                 | Fix                                                         |
+| ----------------------- | ----------------------------------------------------------- |
+| Tutorials won't load    | Make sure `python3 -m http.server 8080` is running          |
+| Progress not saving     | Check that localStorage is enabled in your browser settings |
+| Videos not playing      | Video embeds require an internet connection                 |
+| SVG overlay not showing | Reload the page; check browser console for errors           |
+| Theme not switching     | Clear localStorage key `ot-theme` and reload                |
 
 ---
 
 ## Credits
 
-**Created with:** Claude (Anthropic) as a learning tool for the Elektron Octatrack MK2 community.
+**Built with:** Claude (Anthropic) as a learning tool for the Elektron Octatrack MK2 community.
 
 **Content sourced from:**
 
-- Official Elektron Octatrack MK2 Manual
+- Official Elektron Octatrack MK2 Manual (OS 1.40A)
 - Merlin's Octatrack Guide (community reference)
 - Octatrack Quick Start Guide
-- Community knowledge and best practices
 
-**Design inspiration:** Brutalist UI, music production software (Ableton Live, Max/MSP), Elektron's hardware aesthetic.
+**Educators featured:** Cuckoo, EZBOT, Thavius Beck, Dataline, Red Means Recording, Elektron official
 
-**Special thanks:** To the Octatrack community for feedback, bug reports, and ideas.
+**Design inspiration:** Brutalist UI, music production software, Elektron's hardware aesthetic.
+
+For full attribution and educator links, see [site/credits.html](./site/credits.html).
 
 ---
 
@@ -369,85 +294,52 @@ You may:
 
 - Use these tutorials for learning
 - Share the link with friends
-- Print tutorials (for personal reference)
-- Modify tutorials for your own learning (locally, not published)
+- Print for personal reference
+- Modify locally for your own learning
 
 You may not:
 
-- Redistribute tutorials as your own work
+- Redistribute as your own work
 - Sell or charge for access
 - Remove credits or attribution
 
 ---
 
-## Getting Help
-
-### Found a bug?
-
-- Note the tutorial name and section
-- Describe what went wrong
-- Include your browser version and OS
-
-### Have an idea?
-
-- Suggest new topics (Trig Conditions? Resampling? LFOs?)
-- Propose new interactive tools
-- Recommend improvements to existing tutorials
-
-### Need more help?
-
-- Check the official **Elektron Octatrack Manual** (referenced throughout)
-- Visit **Elektronauts** (official community forum)
-- Join the **Octatrack subreddit** (r/Octatrack)
-- Ask in **Elektron Discord** servers
-
----
-
-## Frequently Asked Questions
-
-**Q: Can I use these tutorials offline?**
-A: Not yet, but you can download the HTML files and open them directly (no internet needed). Video embeds will be broken, but all text and exercises work.
-
-**Q: Will my progress sync across devices?**
-A: Not automatically. Progress is stored locally on each device. To sync, export your progress from one device and import on another (coming in Phase 2).
-
-**Q: Can I contribute tutorials?**
-A: Yes! In Phase 3+, we'll accept community contributions via GitHub. Stay tuned.
-
-**Q: Are these tutorials official Elektron content?**
-A: No, but they're built on official documentation and community knowledge. Elektron hasn't endorsed or sponsored these tutorials, but they're accurate and freely shared.
-
-**Q: What if I disagree with something in a tutorial?**
-A: The Octatrack is deep—there's often more than one way to approach a task. If you find an error or outdated info, please report it.
-
----
-
 ## Changelog
+
+### v2.0 (2026-03-02)
+
+- 16 tutorials across 4 tiers (up from 8)
+- Interactive SVG hardware overlay with 68+ mapped controls
+- Dark/Light/System theme toggle
+- Video library with 97 curated tutorials
+- Credits page with full educator attribution
+- Tier 3: Trig Conditions, Resampling, FX & Neighbors, LFOs & Modulation
+- Tier 4: Arranger, MIDI Sequencing, Pickup Machines, Performance & DJ
 
 ### v1.0 (2026-03-02)
 
-- Initial release
-- 8 tutorials (Tiers 1–2)
+- Initial release: 8 tutorials (Tiers 1-2)
 - Progress tracking with localStorage
 - Interactive tools and quizzes
-- Dashboard with stats and reset functionality
+- Dashboard with stats
 
 ---
 
 ## Support the Project
 
-This project is free to use.
+This project is free to use and always will be.
 
-Like what you're using? Help me build more of these!
+**Like what you're using? Help me build more tutorials, or request a new topic with a donation:**
 
-- https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
 
-If you'd rather support by sharing and feedback:
+If you'd rather support by sharing:
 
-- **Share them** with other Octatrack users
-- **Give feedback** — what topics should Tier 3 cover?
+- **Share** with other Octatrack users
+- **Give feedback** — what topics should we cover next?
+- **Star this repo** on GitHub
 - **Contribute ideas** for interactive tools and exercises
-- **Star this repo** if it's on GitHub (coming soon!)
 
 ---
 
@@ -460,11 +352,7 @@ Built and curated by **alkloihd**.
 
 ---
 
-**Happy learning. Make weird sounds. 🎛️**
-
----
-
-## Acknowledgements (Short)
+## Acknowledgements
 
 This project stands on the work of the broader Octatrack community:
 
@@ -474,3 +362,7 @@ This project stands on the work of the broader Octatrack community:
 - The **Elektronauts** community and related forums for techniques, troubleshooting, and shared workflows
 
 For full attribution and links, see [site/credits.html](./site/credits.html).
+
+---
+
+**Happy learning. Make weird sounds.**
