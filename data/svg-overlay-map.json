@@ -1,0 +1,780 @@
+{
+  "version": "1.0.0",
+  "description": "Unified mapping: SVG element positions ↔ tutorial references ↔ manual functions. Used by overlay engine for animated button presses, tooltips, and highlights.",
+  "svgSource": "assets/octatrack svg.svg",
+  "svgViewBox": "0 0 1400 800",
+
+  "zones": {
+    "back_panel": { "description": "Rear panel I/O ports", "y_range": [40, 70] },
+    "branding": { "description": "Elektron logo, model name, tagline" },
+    "screen": { "description": "LCD display area", "bounds": { "x": 520, "y": 160, "w": 290, "h": 190 } },
+    "headphone_midi": { "description": "Headphone volume encoder + MIDI button" },
+    "menu_buttons": { "description": "PROJ / PART / AED / MIX / ARR row", "transform": "translate(65, 335)" },
+    "recording": { "description": "Input LEDs + REC1/REC2/REC3", "transform": "translate(195, 220)" },
+    "transport": { "description": "FUNC, CUE, PTN, BANK, YES/NO, arrows" },
+    "track_buttons_left": { "description": "T1-T4 vertical column", "transform": "translate(435, 160)" },
+    "track_buttons_right": { "description": "T5-T8 vertical column", "transform": "translate(835, 160)" },
+    "parameter_buttons": { "description": "SRC / AMP / LFO / FX1 / FX2 row", "transform": "translate(520, 420)" },
+    "clipboard": { "description": "Copy / Clear / Paste", "transform": "translate(580, 530)" },
+    "audio_encoders": { "description": "Level / A / B / C encoders", "transform": "translate(930, 200)" },
+    "shuttle_encoders": { "description": "Tap Tempo + D / E / F encoders", "transform": "translate(1030, 310)" },
+    "scenes_crossfader": { "description": "Scene A/B buttons + crossfader slider" },
+    "trig_grid": { "description": "16 trig keys + beat LEDs + PAGE", "transform": "translate(65, 620)" },
+    "beat_leds": { "description": "1:4 through 4:4 timing LEDs" }
+  },
+
+  "elements": {
+    "headphone_vol": {
+      "type": "encoder",
+      "svg": { "x": 90, "y": 140, "r": 25, "symbol": "#encoder" },
+      "zone": "headphone_midi",
+      "label": "Headphones Vol",
+      "manual": {
+        "primary": "Set volume for stereo headphones output",
+        "section": "3.1"
+      },
+      "tutorials": []
+    },
+    "midi": {
+      "type": "button",
+      "svg": { "x": 65, "y": 250, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "headphone_midi",
+      "label": "MIDI",
+      "sublabel": "MIDI Sync",
+      "manual": {
+        "primary": "Activate MIDI SEQUENCER editing mode",
+        "func_combo": "Opens MIDI SYNC settings",
+        "section": "15"
+      },
+      "tutorials": []
+    },
+    "proj": {
+      "type": "button",
+      "svg": { "x": 65, "y": 335, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "menu_buttons",
+      "label": "PROJ",
+      "sublabel": "Save Proj",
+      "manual": {
+        "primary": "Opens PROJECT menu (Load/Save projects, System, Control, MIDI, Mixer, Tempo)",
+        "func_combo": "Save current project",
+        "section": "8"
+      },
+      "tutorials": ["03-beat-basics"]
+    },
+    "part": {
+      "type": "button",
+      "svg": { "x": 130, "y": 335, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "menu_buttons",
+      "label": "PART",
+      "sublabel": "Part Edit",
+      "manual": {
+        "primary": "Opens PART SELECT (Quick Select)",
+        "func_combo": "Opens PART EDIT menu (rename/reload)",
+        "note": "Parts are per-bank: 4 parts × 16 banks = 64 parts per project",
+        "section": "10.2"
+      },
+      "tutorials": ["08-parts-banks-scenes"]
+    },
+    "aed": {
+      "type": "button",
+      "svg": { "x": 195, "y": 335, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "menu_buttons",
+      "label": "AED",
+      "sublabel": "Slice Grid",
+      "manual": {
+        "primary": "Opens AUDIO EDITOR (TRIM → SLICE → EDIT → ATTRIBUTES → FILE)",
+        "func_combo": "Opens CREATE SLICE GRID menu",
+        "section": "13"
+      },
+      "tutorials": ["05-slice-and-dice", "07-loop-stretching"]
+    },
+    "mix": {
+      "type": "button",
+      "svg": { "x": 260, "y": 335, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "menu_buttons",
+      "label": "MIX",
+      "sublabel": "Click",
+      "manual": {
+        "primary": "Opens mixer menu (track muting, soloing, I/O)",
+        "func_combo": "Toggle metronome on/off",
+        "section": "8.8"
+      },
+      "tutorials": []
+    },
+    "arr": {
+      "type": "button",
+      "svg": { "x": 325, "y": 335, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "menu_buttons",
+      "label": "ARR",
+      "sublabel": "Arr Mode",
+      "manual": {
+        "primary": "Opens ARRANGER menu (sequences of patterns, up to 256 rows)",
+        "func_combo": "Toggle ARRANGEMENT mode on/off",
+        "section": "14"
+      },
+      "tutorials": []
+    },
+    "rec1": {
+      "type": "button",
+      "svg": { "x": 195, "y": 220, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "recording",
+      "label": "REC1",
+      "sublabel": "Setup 1",
+      "redlabel": "Pickup +",
+      "manual": {
+        "primary": "Real-time sampling from external input A/B",
+        "func_combo": "Opens RECORDING SETUP 1 menu",
+        "other_combos": ["[TRACK]+[REC1] = Sample from external input AB"],
+        "section": "9"
+      },
+      "tutorials": []
+    },
+    "rec2": {
+      "type": "button",
+      "svg": { "x": 260, "y": 220, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "recording",
+      "label": "REC2",
+      "sublabel": "Setup 2",
+      "redlabel": "Pickup ▶/■",
+      "manual": {
+        "primary": "Real-time sampling from external input C/D",
+        "func_combo": "Opens RECORDING SETUP 2 menu",
+        "section": "9"
+      },
+      "tutorials": []
+    },
+    "rec3": {
+      "type": "button",
+      "svg": { "x": 325, "y": 220, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "recording",
+      "label": "REC3",
+      "sublabel": "Rec Edit",
+      "redlabel": "Erase",
+      "manual": {
+        "primary": "Real-time sampling from internal sources",
+        "func_combo": "Opens RECORDING EDIT menu",
+        "section": "9"
+      },
+      "tutorials": []
+    },
+    "func": {
+      "type": "button",
+      "svg": { "x": 65, "y": 440, "w": 60, "h": 38, "symbol": "custom", "class": "btn-func" },
+      "zone": "transport",
+      "label": "FUNC",
+      "manual": {
+        "primary": "Held modifier key — unlocks secondary functions on all other buttons",
+        "note": "Most powerful key on the device. Enables ~30 menu/mode transitions",
+        "section": "3.1, 19"
+      },
+      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching", "08-parts-banks-scenes"]
+    },
+    "cue": {
+      "type": "button",
+      "svg": { "x": 180, "y": 442, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "transport",
+      "label": "CUE",
+      "sublabel": "Reload Part",
+      "manual": {
+        "primary": "Combines with [TRACK], [YES], and LEVEL for cue routing",
+        "func_combo": "Reload parameter settings of selected part",
+        "other_combos": [
+          "[CUE]+[TRACK] = Cue the chosen track to headphones",
+          "[CUE]+[YES] = Preview sample through cue outputs",
+          "[CUE]+LEVEL = Set cue level of a track"
+        ],
+        "section": "11.6.2"
+      },
+      "tutorials": ["02-load-and-lock", "03-beat-basics"]
+    },
+    "ptn": {
+      "type": "button",
+      "svg": { "x": 65, "y": 535, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "transport",
+      "label": "PTN",
+      "sublabel": "Pattern Settings",
+      "manual": {
+        "primary": "Selects pattern within active bank (with [TRIG])",
+        "func_combo": "Opens PATTERN SETTINGS menu",
+        "other_combos": ["[PTN]+[TRIG] = Select active pattern within bank"],
+        "section": "12.2.1"
+      },
+      "tutorials": []
+    },
+    "bank": {
+      "type": "button",
+      "svg": { "x": 180, "y": 535, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "transport",
+      "label": "BANK",
+      "sublabel": "Track Trig Edit",
+      "manual": {
+        "primary": "Selects bank in combination with [TRIG]",
+        "func_combo": "Opens TRACK TRIG EDIT / PATTERN SETTINGS",
+        "other_combos": ["[BANK]+[TRIG] = Select active bank"],
+        "section": "10.1"
+      },
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
+    },
+    "yes": {
+      "type": "button",
+      "svg": { "x": 285, "y": 475, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "transport",
+      "label": "YES",
+      "sublabel": "Arm",
+      "manual": {
+        "primary": "Enter sub-menus and confirm choices. Arms one-shot trigs",
+        "func_combo": "Preview selected sample through MAIN outputs",
+        "other_combos": [
+          "[CUE]+[YES] = Preview through CUE",
+          "[TRIG]+[YES] = Preview trig on MAIN",
+          "[TRACK PARAM]+[YES] = Randomize parameters"
+        ],
+        "section": "5"
+      },
+      "tutorials": ["02-load-and-lock", "03-beat-basics", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+    },
+    "no": {
+      "type": "button",
+      "svg": { "x": 285, "y": 535, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "transport",
+      "label": "NO",
+      "sublabel": "Disarm",
+      "manual": {
+        "primary": "Exit active menu and de-select. Disarms one-shot trigs",
+        "func_combo": "In LIVE RECORDING, remove all parameter locks (while held)",
+        "other_combos": [
+          "[NO]+[TRACK] = Erase trigs (LIVE REC)",
+          "[TRIG]+[NO] = Toggle trig type"
+        ],
+        "section": "5"
+      },
+      "tutorials": ["05-slice-and-dice", "07-loop-stretching"]
+    },
+    "arrow_left": {
+      "type": "button",
+      "svg": { "x": 350, "y": 535, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "transport",
+      "label": "<",
+      "sublabel": "µTime -",
+      "manual": {
+        "primary": "Menu navigation (horizontal). Nudge BPM when no menu open",
+        "func_combo": "Nudge trigs back one step (GRID REC) / Rotate LFO Designer",
+        "other_combos": ["[TRIG]+[LEFT] = Open MICRO TIMING menu"],
+        "section": "5"
+      },
+      "tutorials": ["05-slice-and-dice"]
+    },
+    "arrow_up": {
+      "type": "button",
+      "svg": { "x": 410, "y": 475, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "transport",
+      "label": "▲",
+      "sublabel": "Trig Mode",
+      "manual": {
+        "primary": "Menu navigation (vertical)",
+        "func_combo": "Move cursor one page / Change active TRIG mode",
+        "other_combos": ["[TRIG]+[UP] = Open SAMPLE LOCK menu (GRID REC)"],
+        "section": "5"
+      },
+      "tutorials": ["05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+    },
+    "arrow_down": {
+      "type": "button",
+      "svg": { "x": 410, "y": 535, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "transport",
+      "label": "▼",
+      "sublabel": "Trig Mode",
+      "manual": {
+        "primary": "Menu navigation (vertical)",
+        "func_combo": "Move cursor one page / Change active TRIG mode",
+        "other_combos": ["[TRIG]+[DOWN] = Open SAMPLE LOCK menu (GRID REC)"],
+        "section": "5"
+      },
+      "tutorials": ["05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+    },
+    "arrow_right": {
+      "type": "button",
+      "svg": { "x": 470, "y": 535, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "transport",
+      "label": ">",
+      "sublabel": "µTime +",
+      "manual": {
+        "primary": "Menu navigation (horizontal). Nudge BPM when no menu open",
+        "func_combo": "Nudge trigs forth one step (GRID REC)",
+        "other_combos": ["[TRIG]+[RIGHT] = Open MICRO TIMING menu"],
+        "section": "5"
+      },
+      "tutorials": ["05-slice-and-dice", "07-loop-stretching"]
+    },
+    "t1": {
+      "type": "button",
+      "svg": { "x": 435, "y": 160, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_left",
+      "label": "T1",
+      "sublabel": "Cue/Mute",
+      "manual": {
+        "primary": "Select Track 1. LED: full=active, half=muted",
+        "func_combo": "Mute Track 1",
+        "other_combos": ["[CUE]+[T1] = Cue T1 to headphones", "[T1]+[REC1/2/3] = Record to T1 recorder"],
+        "section": "11"
+      },
+      "tutorials": ["03-beat-basics"]
+    },
+    "t2": {
+      "type": "button",
+      "svg": { "x": 435, "y": 220, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_left",
+      "label": "T2",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 2", "func_combo": "Mute Track 2", "section": "11" },
+      "tutorials": ["03-beat-basics"]
+    },
+    "t3": {
+      "type": "button",
+      "svg": { "x": 435, "y": 280, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_left",
+      "label": "T3",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 3", "func_combo": "Mute Track 3", "section": "11" },
+      "tutorials": ["03-beat-basics"]
+    },
+    "t4": {
+      "type": "button",
+      "svg": { "x": 435, "y": 340, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_left",
+      "label": "T4",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 4", "func_combo": "Mute Track 4", "section": "11" },
+      "tutorials": []
+    },
+    "t5": {
+      "type": "button",
+      "svg": { "x": 835, "y": 160, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_right",
+      "label": "T5",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 5", "func_combo": "Mute Track 5", "section": "11" },
+      "tutorials": []
+    },
+    "t6": {
+      "type": "button",
+      "svg": { "x": 835, "y": 220, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_right",
+      "label": "T6",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 6", "func_combo": "Mute Track 6", "section": "11" },
+      "tutorials": []
+    },
+    "t7": {
+      "type": "button",
+      "svg": { "x": 835, "y": 280, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_right",
+      "label": "T7",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 7", "func_combo": "Mute Track 7", "section": "11" },
+      "tutorials": []
+    },
+    "t8": {
+      "type": "button",
+      "svg": { "x": 835, "y": 340, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "track_buttons_right",
+      "label": "T8",
+      "sublabel": "Cue/Mute",
+      "manual": { "primary": "Select Track 8", "func_combo": "Mute Track 8", "section": "11" },
+      "tutorials": []
+    },
+    "src": {
+      "type": "button",
+      "svg": { "x": 520, "y": 420, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "parameter_buttons",
+      "label": "SRC",
+      "sublabel": "Note",
+      "manual": {
+        "primary": "Opens SRC MAIN page (machine assignment, sample selection, playback)",
+        "func_combo": "Opens SRC SETUP menu",
+        "section": "11.4.3"
+      },
+      "tutorials": ["02-load-and-lock"]
+    },
+    "amp": {
+      "type": "button",
+      "svg": { "x": 580, "y": 420, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "parameter_buttons",
+      "label": "AMP",
+      "sublabel": "Arp",
+      "manual": {
+        "primary": "Opens AMP MAIN page (amplitude, panning, muting)",
+        "func_combo": "Opens AMP SETUP menu",
+        "section": "11.4.5"
+      },
+      "tutorials": []
+    },
+    "lfo": {
+      "type": "button",
+      "svg": { "x": 640, "y": 420, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "parameter_buttons",
+      "label": "LFO",
+      "sublabel": "LFO",
+      "manual": {
+        "primary": "Opens LFO MAIN page (speed, depth, waveform, target)",
+        "func_combo": "Opens LFO SETUP menu",
+        "double_press": "Opens LFO DESIGNER (custom waveform editor)",
+        "section": "11.4.7"
+      },
+      "tutorials": []
+    },
+    "fx1": {
+      "type": "button",
+      "svg": { "x": 700, "y": 420, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "parameter_buttons",
+      "label": "FX1",
+      "sublabel": "Ctrl 1",
+      "manual": {
+        "primary": "Opens FX1 effects slot (filter, EQ, modulation, delay, reverb, etc.)",
+        "func_combo": "Opens FX1 SETUP menu",
+        "section": "11.4.10"
+      },
+      "tutorials": []
+    },
+    "fx2": {
+      "type": "button",
+      "svg": { "x": 760, "y": 420, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "parameter_buttons",
+      "label": "FX2",
+      "sublabel": "Ctrl 2",
+      "manual": {
+        "primary": "Opens FX2 effects slot",
+        "func_combo": "Opens FX2 SETUP menu",
+        "section": "11.4.10"
+      },
+      "tutorials": []
+    },
+    "copy": {
+      "type": "button",
+      "svg": { "x": 580, "y": 530, "w": 46, "h": 40, "symbol": "custom" },
+      "zone": "clipboard",
+      "label": "Copy",
+      "icon": "circle_outline",
+      "manual": { "primary": "Copy (via [FUNC]+[RECORD])", "section": "12.9" },
+      "tutorials": []
+    },
+    "clear": {
+      "type": "button",
+      "svg": { "x": 650, "y": 530, "w": 46, "h": 40, "symbol": "custom" },
+      "zone": "clipboard",
+      "label": "Clear",
+      "icon": "play_triangle",
+      "manual": { "primary": "Clear (via [FUNC]+[PLAY])", "section": "12.9" },
+      "tutorials": []
+    },
+    "paste": {
+      "type": "button",
+      "svg": { "x": 720, "y": 530, "w": 46, "h": 40, "symbol": "custom" },
+      "zone": "clipboard",
+      "label": "Paste",
+      "icon": "square_outline",
+      "manual": { "primary": "Paste (via [FUNC]+[STOP])", "section": "12.9" },
+      "tutorials": []
+    },
+    "encoder_level": {
+      "type": "encoder",
+      "svg": { "x": 930, "y": 200, "r": 25, "symbol": "#encoder" },
+      "zone": "audio_encoders",
+      "label": "Level",
+      "sublabel": "Cursor Pos",
+      "manual": {
+        "primary": "Sets overall volume level of active track",
+        "func_combo": "Adjust MAIN parameter of MIXER menu",
+        "other_combos": ["[CUE]+LEVEL = Set cue level of track"],
+        "section": "11.4.1"
+      },
+      "tutorials": ["03-beat-basics"]
+    },
+    "encoder_a": {
+      "type": "encoder",
+      "svg": { "x": 1030, "y": 200, "r": 25, "symbol": "#encoder" },
+      "zone": "audio_encoders",
+      "label": "A",
+      "sublabel": "Start Pos",
+      "manual": { "primary": "Data entry knob A — sets parameter values. Press+turn for coarse", "section": "5.2" },
+      "tutorials": ["05-slice-and-dice"]
+    },
+    "encoder_b": {
+      "type": "encoder",
+      "svg": { "x": 1130, "y": 200, "r": 25, "symbol": "#encoder" },
+      "zone": "audio_encoders",
+      "label": "B",
+      "sublabel": "Loop Pos",
+      "manual": { "primary": "Data entry knob B", "section": "5.2" },
+      "tutorials": []
+    },
+    "encoder_c": {
+      "type": "encoder",
+      "svg": { "x": 1230, "y": 200, "r": 25, "symbol": "#encoder" },
+      "zone": "audio_encoders",
+      "label": "C",
+      "sublabel": "End Pos",
+      "manual": { "primary": "Data entry knob C", "section": "5.2" },
+      "tutorials": []
+    },
+    "tap_tempo": {
+      "type": "button",
+      "svg": { "x": 965, "y": 315, "w": 36, "h": 36, "symbol": "#btn-square" },
+      "zone": "shuttle_encoders",
+      "label": "Tap Tempo",
+      "redlabel": "Pickup Sync",
+      "manual": {
+        "primary": "Opens TEMPO menu. LED flash speed = current BPM",
+        "func_combo": "Tap Tempo mode (tap repeatedly to set BPM average)",
+        "other_combos": ["[TRACK]+[TEMPO] = Sync sequencer to Pickup loop"],
+        "section": "8.9"
+      },
+      "tutorials": ["03-beat-basics", "07-loop-stretching"]
+    },
+    "encoder_d": {
+      "type": "encoder",
+      "svg": { "x": 1030, "y": 310, "r": 25, "symbol": "#encoder" },
+      "zone": "shuttle_encoders",
+      "label": "D",
+      "sublabel": "Zoom ⬍",
+      "manual": { "primary": "Data entry knob D", "section": "5.2" },
+      "tutorials": []
+    },
+    "encoder_e": {
+      "type": "encoder",
+      "svg": { "x": 1130, "y": 310, "r": 25, "symbol": "#encoder" },
+      "zone": "shuttle_encoders",
+      "label": "E",
+      "sublabel": "Scroll ⬌",
+      "manual": { "primary": "Data entry knob E", "section": "5.2" },
+      "tutorials": []
+    },
+    "encoder_f": {
+      "type": "encoder",
+      "svg": { "x": 1230, "y": 310, "r": 25, "symbol": "#encoder" },
+      "zone": "shuttle_encoders",
+      "label": "F",
+      "sublabel": "Zoom ⬌",
+      "manual": { "primary": "Data entry knob F", "section": "5.2" },
+      "tutorials": []
+    },
+    "scene_a": {
+      "type": "button",
+      "svg": { "x": 880, "y": 480, "w": 56, "h": 50, "symbol": "#btn-scene" },
+      "zone": "scenes_crossfader",
+      "label": "A",
+      "sublabel": "Mute",
+      "manual": {
+        "primary": "Assign scenes to slot A (with [TRIG] and encoders)",
+        "func_combo": "Mute scene A",
+        "other_combos": [
+          "[SCENE A]+[TRIG] = Assign scene to slot A",
+          "[SCENE A]+knob = Assign parameter to scene A"
+        ],
+        "section": "10.3"
+      },
+      "tutorials": ["08-parts-banks-scenes"]
+    },
+    "scene_b": {
+      "type": "button",
+      "svg": { "x": 1260, "y": 480, "w": 56, "h": 50, "symbol": "#btn-scene" },
+      "zone": "scenes_crossfader",
+      "label": "B",
+      "sublabel": "Mute",
+      "manual": {
+        "primary": "Assign scenes to slot B",
+        "func_combo": "Mute scene B",
+        "section": "10.3"
+      },
+      "tutorials": ["08-parts-banks-scenes"]
+    },
+    "crossfader": {
+      "type": "fader",
+      "svg": { "x": 1000, "y": 475, "w": 200, "h": 60, "slider_x": 10, "slider_w": 24, "slider_h": 44 },
+      "zone": "scenes_crossfader",
+      "label": "Crossfader",
+      "manual": {
+        "primary": "Interpolates between Scene A and Scene B parameter values",
+        "note": "Center position has volume dip — use XVOL for equal-energy crossfading",
+        "section": "10.3"
+      },
+      "tutorials": ["08-parts-banks-scenes"]
+    },
+    "trig_1": {
+      "type": "trig",
+      "svg": { "x": 65, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" },
+      "zone": "trig_grid",
+      "label": "1",
+      "sublabel": "T1",
+      "manual": {
+        "primary": "GRID REC: place trig. Real-time: trig active track machine",
+        "func_combo": "Place lock trig / one-shot trig",
+        "other_combos": [
+          "[TRIG]+[UP/DOWN] = Sample lock menu",
+          "[TRIG]+[LEFT/RIGHT] = Micro timing",
+          "[BANK]+[TRIG] = Select bank",
+          "[PTN]+[TRIG] = Select pattern",
+          "[SCENE]+[TRIG] = Assign scene"
+        ],
+        "section": "12.2"
+      },
+      "tutorials": ["03-beat-basics", "05-slice-and-dice", "06-sample-locks"]
+    },
+    "trig_2": { "type": "trig", "svg": { "x": 135, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "2", "sublabel": "T2", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_3": { "type": "trig", "svg": { "x": 205, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "3", "sublabel": "T3", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_4": { "type": "trig", "svg": { "x": 275, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "4", "sublabel": "T4", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_5": { "type": "trig", "svg": { "x": 345, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "5", "sublabel": "T5", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_6": { "type": "trig", "svg": { "x": 415, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "6", "sublabel": "T6", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_7": { "type": "trig", "svg": { "x": 485, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "7", "sublabel": "T7", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_8": { "type": "trig", "svg": { "x": 555, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "8", "sublabel": "T8", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_9": { "type": "trig", "svg": { "x": 625, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "9", "sublabel": "T1", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_10": { "type": "trig", "svg": { "x": 695, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "10", "sublabel": "T2", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_11": { "type": "trig", "svg": { "x": 765, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "11", "sublabel": "T3", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_12": { "type": "trig", "svg": { "x": 835, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "12", "sublabel": "T4", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_13": { "type": "trig", "svg": { "x": 905, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "13", "sublabel": "T5", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": ["03-beat-basics"] },
+    "trig_14": { "type": "trig", "svg": { "x": 975, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "14", "sublabel": "T6", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": [] },
+    "trig_15": { "type": "trig", "svg": { "x": 1045, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "15", "sublabel": "T7", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": [] },
+    "trig_16": { "type": "trig", "svg": { "x": 1115, "y": 620, "w": 48, "h": 52, "symbol": "#btn-trig" }, "zone": "trig_grid", "label": "16", "sublabel": "T8", "manual": { "primary": "Same as trig_1", "section": "12.2" }, "tutorials": [] },
+    "page": {
+      "type": "button",
+      "svg": { "x": 1200, "y": 625, "w": 40, "h": 34, "symbol": "#btn-rect" },
+      "zone": "trig_grid",
+      "label": "PAGE",
+      "sublabel": "Scale",
+      "manual": {
+        "primary": "Selects active pattern page (4 LEDs show which pages in use)",
+        "func_combo": "Opens SCALE SETUP menu (track length, time signature)",
+        "other_combos": [
+          "[PAGE]+[RECORD] = Copy active pattern page",
+          "[PAGE]+[PLAY] = Clear active pattern page",
+          "[PAGE]+[STOP] = Paste pattern page"
+        ],
+        "section": "8.6.3"
+      },
+      "tutorials": ["03-beat-basics"]
+    },
+    "beat_led_1": { "type": "led", "svg": { "x": 1190, "y": 610, "r": 4 }, "zone": "beat_leds", "label": "1:4", "color": "#f5d47a" },
+    "beat_led_2": { "type": "led", "svg": { "x": 1210, "y": 610, "r": 4 }, "zone": "beat_leds", "label": "2:4", "color": "#e85f5f" },
+    "beat_led_3": { "type": "led", "svg": { "x": 1230, "y": 610, "r": 4 }, "zone": "beat_leds", "label": "3:4", "color": "#e85f5f" },
+    "beat_led_4": { "type": "led", "svg": { "x": 1250, "y": 610, "r": 4 }, "zone": "beat_leds", "label": "4:4", "color": "#e85f5f" }
+  },
+
+  "combos": {
+    "func+yes": { "elements": ["func", "yes"], "action": "Save / Preview on MAIN", "tutorials": ["01-set-sail"] },
+    "func+cue": { "elements": ["func", "cue"], "action": "Open sample browser", "tutorials": ["02-load-and-lock", "03-beat-basics"] },
+    "func+level": { "elements": ["func", "encoder_level"], "action": "Open 8-track mixer", "tutorials": ["03-beat-basics"] },
+    "func+page": { "elements": ["func", "page"], "action": "Extend pattern / Scale Setup", "tutorials": ["03-beat-basics"] },
+    "func+aed": { "elements": ["func", "aed"], "action": "Open Audio Editor / Slice Grid", "tutorials": ["05-slice-and-dice", "07-loop-stretching"] },
+    "func+tempo": { "elements": ["func", "tap_tempo"], "action": "Tap Tempo / BPM adjust", "tutorials": ["07-loop-stretching"] },
+    "func+part": { "elements": ["func", "part"], "action": "Switch/edit Parts", "tutorials": ["08-parts-banks-scenes"] },
+    "func+track": { "elements": ["func"], "action": "Mute chosen track", "tutorials": [] },
+    "func+proj": { "elements": ["func", "proj"], "action": "Save project", "tutorials": [] },
+    "func+mix": { "elements": ["func", "mix"], "action": "Toggle metronome", "tutorials": [] },
+    "func+midi": { "elements": ["func", "midi"], "action": "MIDI Sync settings", "tutorials": [] },
+    "func+record": { "elements": ["func"], "action": "COPY command", "tutorials": [] },
+    "func+play": { "elements": ["func"], "action": "CLEAR command", "tutorials": [] },
+    "func+stop": { "elements": ["func"], "action": "PASTE command", "tutorials": [] },
+    "trig+up_down": { "elements": ["arrow_up", "arrow_down"], "action": "Open SAMPLE LOCK menu (GRID REC)", "tutorials": ["06-sample-locks", "07-loop-stretching"] },
+    "trig+left_right": { "elements": ["arrow_left", "arrow_right"], "action": "Open MICRO TIMING menu", "tutorials": [] },
+    "bank+trig": { "elements": ["bank"], "action": "Select active bank", "tutorials": ["03-beat-basics", "08-parts-banks-scenes"] },
+    "scene_a+trig": { "elements": ["scene_a"], "action": "Assign scene to slot A", "tutorials": ["08-parts-banks-scenes"] },
+    "scene_b+trig": { "elements": ["scene_b"], "action": "Assign scene to slot B", "tutorials": ["08-parts-banks-scenes"] }
+  },
+
+  "sequences": [
+    {
+      "id": "beat-basics-four-on-floor",
+      "tutorial": "03-beat-basics",
+      "section": "first-beat",
+      "description": "Place four-on-the-floor kick on steps 1, 5, 9, 13",
+      "steps": [
+        { "action": "press", "element": "trig_1", "delay": 0, "label": "Step 1 — kick" },
+        { "action": "press", "element": "trig_5", "delay": 400, "label": "Step 5 — kick" },
+        { "action": "press", "element": "trig_9", "delay": 400, "label": "Step 9 — kick" },
+        { "action": "press", "element": "trig_13", "delay": 400, "label": "Step 13 — kick" }
+      ]
+    },
+    {
+      "id": "beat-basics-snare-backbeat",
+      "tutorial": "03-beat-basics",
+      "section": "first-beat",
+      "description": "Place snare on backbeat steps 5, 13",
+      "steps": [
+        { "action": "press", "element": "trig_5", "delay": 0, "label": "Step 5 — snare" },
+        { "action": "press", "element": "trig_13", "delay": 400, "label": "Step 13 — snare" }
+      ]
+    },
+    {
+      "id": "beat-basics-hihat-8ths",
+      "tutorial": "03-beat-basics",
+      "section": "first-beat",
+      "description": "Place hi-hats on all even steps (8th notes)",
+      "steps": [
+        { "action": "press", "element": "trig_2", "delay": 0 },
+        { "action": "press", "element": "trig_4", "delay": 200 },
+        { "action": "press", "element": "trig_6", "delay": 200 },
+        { "action": "press", "element": "trig_8", "delay": 200 },
+        { "action": "press", "element": "trig_10", "delay": 200 },
+        { "action": "press", "element": "trig_12", "delay": 200 },
+        { "action": "press", "element": "trig_14", "delay": 200 },
+        { "action": "press", "element": "trig_16", "delay": 200 }
+      ]
+    },
+    {
+      "id": "sample-lock-workflow",
+      "tutorial": "06-sample-locks",
+      "section": "how-to",
+      "description": "Set a sample lock: REC → hold TRIG → UP/DOWN → YES",
+      "steps": [
+        { "action": "press", "element": "trig_1", "delay": 0, "label": "Enter Grid Recording" },
+        { "action": "hold", "element": "trig_1", "delay": 500, "label": "Hold trig key" },
+        { "action": "press", "element": "arrow_up", "delay": 300, "label": "Open sample browser" },
+        { "action": "press", "element": "yes", "delay": 500, "label": "Select sample" }
+      ]
+    },
+    {
+      "id": "open-audio-editor",
+      "tutorial": "05-slice-and-dice",
+      "section": "audio-editor",
+      "description": "Open Audio Editor: FUNC + AED",
+      "steps": [
+        { "action": "hold", "element": "func", "delay": 0, "label": "Hold FUNC" },
+        { "action": "press", "element": "aed", "delay": 300, "label": "Press AED" }
+      ]
+    },
+    {
+      "id": "timestretch-workflow",
+      "tutorial": "07-loop-stretching",
+      "section": "workflow",
+      "description": "Set up timestretch: Audio Editor → Attributes → Playback Setup",
+      "steps": [
+        { "action": "hold", "element": "func", "delay": 0, "label": "Hold FUNC" },
+        { "action": "press", "element": "aed", "delay": 300, "label": "Open Audio Editor" },
+        { "action": "press", "element": "arrow_right", "delay": 500, "label": "Navigate to Attributes" },
+        { "action": "press", "element": "no", "delay": 800, "label": "Exit Audio Editor" },
+        { "action": "hold", "element": "func", "delay": 500, "label": "Hold FUNC" },
+        { "action": "press", "element": "src", "delay": 300, "label": "Open Playback Setup" }
+      ]
+    },
+    {
+      "id": "switch-parts",
+      "tutorial": "08-parts-banks-scenes",
+      "section": "switching-parts",
+      "description": "Switch to Part 2: FUNC + PART",
+      "steps": [
+        { "action": "hold", "element": "func", "delay": 0, "label": "Hold FUNC" },
+        { "action": "press", "element": "part", "delay": 300, "label": "Select Part" }
+      ]
+    }
+  ],
+
+  "led_states": {
+    "record_grid": { "element": "trig_1", "state": "steady", "color": "#e85f5f", "description": "GRID RECORDING active" },
+    "record_live": { "element": "trig_1", "state": "flashing", "color": "#e85f5f", "description": "LIVE RECORDING active" },
+    "sample_lock": { "element": "trig_1", "state": "flashing_red", "color": "#ff0000", "description": "Sample lock active on this step" },
+    "track_active": { "element": "t1", "state": "full", "color": "#ffffff", "description": "Track is selected/active" },
+    "track_muted": { "element": "t1", "state": "dim", "color": "#666666", "description": "Track is muted" },
+    "beat_downbeat": { "element": "beat_led_1", "state": "on", "color": "#f5d47a", "description": "Current beat (yellow)" },
+    "beat_other": { "element": "beat_led_2", "state": "on", "color": "#e85f5f", "description": "Other beats (red)" }
+  }
+}

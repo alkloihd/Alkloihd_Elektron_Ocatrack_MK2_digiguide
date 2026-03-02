@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 - Beat Basics: Your First Pattern</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #111111;
+      border-bottom: 3px solid #00ffff;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 40px;
+      z-index: 1000;
+    }
+
+    .top-bar a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .top-bar a:hover {
+      color: #00ff41;
+      transform: translateY(-2px);
+    }
+
+    .top-bar-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      flex: 1;
+    }
+
+    .top-bar-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .difficulty {
+      color: #00ff41;
+      border: 2px solid #00ff41;
+      padding: 4px 10px;
+    }
+
+    .time {
+      color: #ff00ff;
+      border: 2px solid #ff00ff;
+      padding: 4px 10px;
+    }
+
+    .container {
+      display: flex;
+      margin-top: 60px;
+      min-height: calc(100vh - 60px);
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 60px;
+      width: 280px;
+      height: calc(100vh - 60px);
+      background: #111111;
+      border-right: 3px solid #333333;
+      overflow-y: auto;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .sidebar-section {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #666666;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar-section:first-child {
+      margin-top: 0;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-nav li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      font-size: 13px;
+    }
+
+    .sidebar-nav li:hover {
+      border-left: 2px solid #00ffff;
+      color: #00ffff;
+    }
+
+    .sidebar-nav li.active {
+      background: #1a1a1a;
+      border-left: 2px solid #00ff41;
+      color: #00ff41;
+    }
+
+    .sidebar-nav li.completed::before {
+      content: "✓";
+      color: #00ff41;
+      font-weight: 700;
+      width: 16px;
+    }
+
+    .sidebar-nav li:not(.completed)::before {
+      content: "○";
+      color: #666666;
+      width: 16px;
+    }
+
+    .main {
+      margin-left: 280px;
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .section {
+      background: #111111;
+      border: 3px solid #333333;
+      padding: 40px;
+      margin-bottom: 40px;
+      scroll-margin-top: 80px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .section.in-view {
+      opacity: 1;
+      border-color: #00ffff;
+    }
+
+    .section h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #00ffff;
+    }
+
+    .section p {
+      margin-bottom: 16px;
+      color: #e0e0e0;
+    }
+
+    .section ul, .section ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .section li {
+      margin-bottom: 8px;
+    }
+
+    .sequencer-wrapper {
+      overflow-x: auto;
+      margin: 20px 0;
+      padding: 20px;
+      background: #0a0a0a;
+      border: 2px solid #ff00ff;
+    }
+
+    .sequencer {
+      display: grid;
+      grid-template-columns: 60px repeat(16, 40px);
+      gap: 4px;
+      min-width: fit-content;
+    }
+
+    .sequencer-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #666666;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sequencer-step {
+      width: 40px;
+      height: 40px;
+      background: #1a1a1a;
+      border: 2px solid #333333;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .sequencer-step:hover {
+      border-color: #00ffff;
+    }
+
+    .sequencer-step.active {
+      background: #00ffff;
+      color: #0a0a0a;
+      font-weight: 700;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #111111;
+      color: #00ffff;
+      border: 3px solid #00ffff;
+      padding: 12px 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #00ffff;
+      color: #0a0a0a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 rgba(0, 255, 255, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button.secondary {
+      border-color: #ff00ff;
+      color: #ff00ff;
+    }
+
+    button.secondary:hover {
+      background: #ff00ff;
+      color: #0a0a0a;
+    }
+
+    .mixer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+      padding: 20px;
+      background: #0a0a0a;
+      border: 2px solid #ffaa00;
+    }
+
+    .mixer-channel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mixer-fader {
+      width: 12px;
+      height: 100px;
+      background: #1a1a1a;
+      border: 2px solid #333333;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .mixer-fader-thumb {
+      position: absolute;
+      width: 100%;
+      height: 12px;
+      background: #ffaa00;
+      border: 1px solid #fff;
+      top: 30%;
+      cursor: grab;
+    }
+
+    .mixer-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      color: #666666;
+    }
+
+    .step-guide {
+      background: #0a0a0a;
+      border: 2px solid #00ff41;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #333333;
+    }
+
+    .step:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: #00ff41;
+      color: #0a0a0a;
+      border: 2px solid #00ff41;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content p {
+      margin-bottom: 10px;
+    }
+
+    .button-sequence {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0;
+      flex-wrap: wrap;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+    }
+
+    .button-key {
+      background: #333333;
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      padding: 6px 10px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .quiz-section {
+      background: #111111;
+      border: 3px solid #ff3333;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .quiz-question {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #333333;
+    }
+
+    .quiz-question:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .quiz-q {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-option {
+      padding: 12px;
+      background: #0a0a0a;
+      border: 2px solid #333333;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+
+    .quiz-option:hover {
+      border-color: #00ffff;
+    }
+
+    .quiz-option.selected {
+      border-color: #00ffff;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .quiz-option.correct {
+      border-color: #00ff41;
+      background: rgba(0, 255, 65, 0.15);
+      color: #00ff41;
+    }
+
+    .quiz-option.incorrect {
+      border-color: #ff3333;
+      background: rgba(255, 51, 51, 0.15);
+      color: #ff3333;
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666666;
+      display: none;
+    }
+
+    .quiz-feedback.show {
+      display: block;
+    }
+
+    .confidence-section {
+      background: #111111;
+      border: 3px solid #ff00ff;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .confidence-scale {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .confidence-btn {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #ff00ff;
+      background: #0a0a0a;
+      color: #ff00ff;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.2s;
+      padding: 0;
+    }
+
+    .confidence-btn:hover {
+      background: #ff00ff;
+      color: #0a0a0a;
+      transform: scale(1.1);
+    }
+
+    .confidence-btn.selected {
+      background: #ff00ff;
+      color: #0a0a0a;
+    }
+
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 60px 0 40px;
+      margin-left: 280px;
+      padding: 0 40px;
+    }
+
+    .bottom-nav a {
+      flex: 1;
+      padding: 20px;
+      background: #111111;
+      border: 3px solid #333333;
+      color: #00ffff;
+      text-decoration: none;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .bottom-nav a:hover {
+      border-color: #00ffff;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .progress-container {
+      height: 12px;
+      background: #1a1a1a;
+      border: 2px solid #333333;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #00ffff, #00ff41, #ff00ff);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: auto;
+        border-right: none;
+        border-bottom: 3px solid #333333;
+        max-height: 200px;
+      }
+
+      .container {
+        flex-direction: column;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .bottom-nav {
+        margin-left: 0;
+        padding: 0 20px;
+      }
+
+      .sequencer {
+        grid-template-columns: 50px repeat(8, 30px);
+      }
+
+      .sequencer-step {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="index.html">← DASHBOARD</a>
+    <div class="top-bar-title">03 — BEAT BASICS</div>
+    <div class="top-bar-meta">
+      <span class="difficulty">Beginner</span>
+      <span class="time">25 MIN</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <div class="sidebar-section">SECTIONS</div>
+      <ul class="sidebar-nav">
+        <li data-section="grid-rec">Grid Recording</li>
+        <li data-section="sequencer-viz">Sequencer Grid</li>
+        <li data-section="step-length">Step Length</li>
+        <li data-section="mixer">The Mixer</li>
+        <li data-section="playback">Playback Controls</li>
+        <li data-section="first-beat">First Beat</li>
+        <li data-section="saving">Saving Work</li>
+      </ul>
+
+      <div class="sidebar-section">PROGRESS</div>
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+
+      <div class="sidebar-section">STATUS</div>
+      <div style="font-size: 12px; color: #00ffff; font-weight: 500;">
+        <span id="status-text">Not started</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <section class="section" id="grid-rec">
+        <h2>Grid Recording Mode</h2>
+        <p>Grid Recording is how you build patterns on the Octatrack. When you press <strong>[REC]</strong>, the red LED lights up and you enter a mode where every trig key press (1–16) places or removes a trigger on that step.</p>
+        <p>Think of it like this: your 16 trig keys correspond to 16 steps in time. Press a key to add a trig, press again to remove it. It's instant visual feedback.</p>
+        <p><strong>Why Grid Recording?</strong> Because it lets you think in steps, not time. You don't have to wait for the pattern to loop to place triggers—you can edit the sequence in real-time.</p>
+        <p><strong>Key concept:</strong> Each trig key fires a sample at that step when the pattern plays. If you load different samples on different tracks and place trigs in the right pattern, you get a beat.</p>
+      </section>
+
+      <section class="section" id="sequencer-viz">
+        <h2>Interactive Sequencer Grid</h2>
+        <p>Click the cells below to toggle steps. Watch the playhead animate across—this is how your pattern plays back when you press [PLAY].</p>
+
+        <div class="sequencer-wrapper">
+          <div class="sequencer" id="sequencer">
+            <div class="sequencer-label">TRACK</div>
+            <div class="sequencer-label" style="grid-column: 2 / span 16;">1 — 16 STEPS</div>
+
+            <div class="sequencer-label">Kick</div>
+            <div class="sequencer-step" data-track="0" data-step="0"></div>
+            <div class="sequencer-step" data-track="0" data-step="1"></div>
+            <div class="sequencer-step" data-track="0" data-step="2"></div>
+            <div class="sequencer-step" data-track="0" data-step="3"></div>
+            <div class="sequencer-step" data-track="0" data-step="4"></div>
+            <div class="sequencer-step" data-track="0" data-step="5"></div>
+            <div class="sequencer-step" data-track="0" data-step="6"></div>
+            <div class="sequencer-step" data-track="0" data-step="7"></div>
+            <div class="sequencer-step" data-track="0" data-step="8"></div>
+            <div class="sequencer-step" data-track="0" data-step="9"></div>
+            <div class="sequencer-step" data-track="0" data-step="10"></div>
+            <div class="sequencer-step" data-track="0" data-step="11"></div>
+            <div class="sequencer-step" data-track="0" data-step="12"></div>
+            <div class="sequencer-step" data-track="0" data-step="13"></div>
+            <div class="sequencer-step" data-track="0" data-step="14"></div>
+            <div class="sequencer-step" data-track="0" data-step="15"></div>
+
+            <div class="sequencer-label">Snare</div>
+            <div class="sequencer-step" data-track="1" data-step="0"></div>
+            <div class="sequencer-step" data-track="1" data-step="1"></div>
+            <div class="sequencer-step" data-track="1" data-step="2"></div>
+            <div class="sequencer-step" data-track="1" data-step="3"></div>
+            <div class="sequencer-step" data-track="1" data-step="4"></div>
+            <div class="sequencer-step" data-track="1" data-step="5"></div>
+            <div class="sequencer-step" data-track="1" data-step="6"></div>
+            <div class="sequencer-step" data-track="1" data-step="7"></div>
+            <div class="sequencer-step" data-track="1" data-step="8"></div>
+            <div class="sequencer-step" data-track="1" data-step="9"></div>
+            <div class="sequencer-step" data-track="1" data-step="10"></div>
+            <div class="sequencer-step" data-track="1" data-step="11"></div>
+            <div class="sequencer-step" data-track="1" data-step="12"></div>
+            <div class="sequencer-step" data-track="1" data-step="13"></div>
+            <div class="sequencer-step" data-track="1" data-step="14"></div>
+            <div class="sequencer-step" data-track="1" data-step="15"></div>
+
+            <div class="sequencer-label">Hi-Hat</div>
+            <div class="sequencer-step" data-track="2" data-step="0"></div>
+            <div class="sequencer-step" data-track="2" data-step="1"></div>
+            <div class="sequencer-step" data-track="2" data-step="2"></div>
+            <div class="sequencer-step" data-track="2" data-step="3"></div>
+            <div class="sequencer-step" data-track="2" data-step="4"></div>
+            <div class="sequencer-step" data-track="2" data-step="5"></div>
+            <div class="sequencer-step" data-track="2" data-step="6"></div>
+            <div class="sequencer-step" data-track="2" data-step="7"></div>
+            <div class="sequencer-step" data-track="2" data-step="8"></div>
+            <div class="sequencer-step" data-track="2" data-step="9"></div>
+            <div class="sequencer-step" data-track="2" data-step="10"></div>
+            <div class="sequencer-step" data-track="2" data-step="11"></div>
+            <div class="sequencer-step" data-track="2" data-step="12"></div>
+            <div class="sequencer-step" data-track="2" data-step="13"></div>
+            <div class="sequencer-step" data-track="2" data-step="14"></div>
+            <div class="sequencer-step" data-track="2" data-step="15"></div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button onclick="presetKick()">Load Preset: Kick</button>
+          <button onclick="presetSnare()" class="secondary">Load Preset: Snare</button>
+          <button onclick="presetHiHat()">Load Preset: Hi-Hat</button>
+          <button onclick="resetSequencer()" class="secondary">Reset All</button>
+        </div>
+
+        <p style="color: #00ff41; margin-top: 20px; font-weight: 500;">Cyan = active trig | Click any cell to toggle</p>
+      </section>
+
+      <section class="section" id="step-length">
+        <h2>Step Length & Pattern Length</h2>
+        <p><strong>Default:</strong> 16 steps (1 bar at 4/4 time)</p>
+        <p><strong>Longer patterns:</strong> Press [FUNC] + [PAGE] to extend your pattern to 32, 48, or 64 steps. More space = more room for arrangement.</p>
+        <p><strong>Scale per track:</strong> Each track can have a different length, creating polyrhythms. For example:</p>
+        <ul>
+          <li>Track 1 (Kick): 16 steps</li>
+          <li>Track 2 (Snare): 16 steps</li>
+          <li>Track 3 (Hi-Hat): 32 steps (plays 2x the pattern length for variation)</li>
+        </ul>
+        <p><strong>SCALE menu:</strong> Hold [TRIG] on a track, press [FUNC] to open SCALE. Adjust TRK SCALE to change how many steps that track contains. This creates rhythmic complexity without changing overall pattern length.</p>
+      </section>
+
+      <section class="section" id="mixer">
+        <h2>The Mixer</h2>
+        <p>Press [FUNC] + [LEVEL] to open the mixer. You get 8 track levels + a master level.</p>
+        <p><strong>What you can control:</strong></p>
+        <ul>
+          <li><strong>LEVEL:</strong> Volume for each track (0–127)</li>
+          <li><strong>PAN:</strong> Stereo position (L–R)</li>
+          <li><strong>BAL:</strong> Balance between left/right channels</li>
+          <li><strong>CUE:</strong> Send to headphone output for previewing</li>
+          <li><strong>MASTER:</strong> Overall output level</li>
+        </ul>
+        <p>The mixer is a quick way to balance your mix without diving into track FX. You can also p-lock mixer values to change them per step.</p>
+
+        <div class="mixer">
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T1</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T2</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T3</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T4</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T5</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T6</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T7</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">T8</div>
+          </div>
+          <div class="mixer-channel">
+            <div class="mixer-fader">
+              <div class="mixer-fader-thumb"></div>
+            </div>
+            <div class="mixer-label">MST</div>
+          </div>
+        </div>
+
+        <p style="color: #666666; margin-top: 20px; font-size: 13px;">Visual representation. On the OT, turn encoders to adjust each channel.</p>
+      </section>
+
+      <section class="section" id="playback">
+        <h2>Playback Controls</h2>
+        <p><strong>[PLAY]:</strong> Starts the pattern from step 1. If already playing, it does nothing—press [STOP] first.</p>
+        <p><strong>[STOP]:</strong> Stops playback. Press once to stop at current step, press again to return to step 1.</p>
+        <p><strong>[TEMPO]:</strong> Hold [TEMPO] and turn the encoder to change BPM. Screen shows new tempo in real-time. Range: 30–300 BPM.</p>
+        <p><strong>Pattern looping:</strong> When you press [PLAY], your pattern loops infinitely until you press [STOP]. No manual restart needed—the OT handles it.</p>
+        <p><strong>Pro tip:</strong> Jump to different patterns mid-play. Press [TRIG] 1–16 to switch patterns in same bank (quantized to pattern end). Press [BANK] + letter + number to change banks.</p>
+      </section>
+
+      <section class="section" id="first-beat">
+        <h2>Your First Beat (Step-by-Step)</h2>
+        <p>Follow along on your Octatrack. Building: four-on-the-floor kick, snare on 2&4, hi-hat pulse.</p>
+
+        <div class="step-guide">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <p><strong>Select Track 1</strong></p>
+              <p>Press [TRACK], then [TRIG 1]. Track LED lights. This is your kick drum track.</p>
+              <div class="button-sequence">
+                <span class="button-key">[TRACK]</span>
+                <span style="color: #666666;">then</span>
+                <span class="button-key">[TRIG 1]</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <p><strong>Assign Flex Machine</strong></p>
+              <p>Press [TRACK] again to open Track Type. Select FLEX from list.</p>
+              <div class="button-sequence">
+                <span class="button-key">[TRACK]</span>
+                <span style="color: #666666;">→ FLEX</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <p><strong>Load Kick Sample</strong></p>
+              <p>Press [FUNC] + [CUE] to browse. Navigate: AUDIO → Drums → kick file → [YES] to load.</p>
+              <div class="button-sequence">
+                <span class="button-key">[FUNC]</span>
+                <span style="color: #666666;">+</span>
+                <span class="button-key">[CUE]</span>
+                <span style="color: #666666;">→ [YES]</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <p><strong>Enter Grid Recording</strong></p>
+              <p>Press [REC]. Red LED lights. Trig key presses now place triggers on steps.</p>
+              <div class="button-sequence">
+                <span class="button-key">[REC]</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <p><strong>Place Four-on-the-Floor</strong></p>
+              <p>Press trig keys 1, 5, 9, 13. One kick per beat. LEDs light red when placed.</p>
+              <div class="button-sequence">
+                <span class="button-key">1</span>
+                <span class="button-key">5</span>
+                <span class="button-key">9</span>
+                <span class="button-key">13</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+              <p><strong>Select Track 2 for Snare</strong></p>
+              <p>Press [TRACK], then [TRIG 2]. Assign FLEX. Load snare sample.</p>
+              <div class="button-sequence">
+                <span class="button-key">[TRACK]</span>
+                <span style="color: #666666;">then</span>
+                <span class="button-key">[TRIG 2]</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">7</div>
+            <div class="step-content">
+              <p><strong>Place Snare on 2 & 4</strong></p>
+              <p>Still in Grid Recording. Press trig keys 5, 13. Classic backbeat.</p>
+              <div class="button-sequence">
+                <span class="button-key">5</span>
+                <span class="button-key">13</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">8</div>
+            <div class="step-content">
+              <p><strong>Select Track 3 for Hi-Hat</strong></p>
+              <p>Press [TRACK], then [TRIG 3]. Assign FLEX. Load closed hi-hat sample.</p>
+              <div class="button-sequence">
+                <span class="button-key">[TRACK]</span>
+                <span style="color: #666666;">then</span>
+                <span class="button-key">[TRIG 3]</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">9</div>
+            <div class="step-content">
+              <p><strong>Place Hi-Hats on Every 8th Note</strong></p>
+              <p>Press 2, 4, 6, 8, 10, 12, 14, 16. Driving pulse—twice as fast as kick.</p>
+              <div class="button-sequence">
+                <span class="button-key">2</span>
+                <span class="button-key">4</span>
+                <span class="button-key">6</span>
+                <span class="button-key">8</span>
+                <span class="button-key">10</span>
+                <span class="button-key">12</span>
+                <span class="button-key">14</span>
+                <span class="button-key">16</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">10</div>
+            <div class="step-content">
+              <p><strong>Press [PLAY] to Hear It!</strong></p>
+              <p>Pattern loops continuously. Edit anytime: press [REC], adjust trigs, press [STOP] to pause.</p>
+              <div class="button-sequence">
+                <span class="button-key">[PLAY]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="saving">
+        <h2>Saving Your Work</h2>
+        <p><strong>PROJECT > SAVE:</strong> Saves your working state to a permanent checkpoint. Do this frequently.</p>
+        <p><strong>SAVE TO NEW:</strong> Creates a duplicate project with new name. Safe for experimentation—revert if you mess up.</p>
+        <p><strong>Important:</strong> .work is live working state, auto-saved constantly. .strd is "committed" version. Power off without SAVE = lose .work but keep .strd.</p>
+        <p><strong>Best practice:</strong> After each session, press PROJECT > SAVE. Before risky edits, press PROJECT > SAVE TO NEW for safety.</p>
+        <p style="color: #ffaa00; margin-top: 20px; font-weight: 500;">Warning: Never delete .work or .strd files unless 100% sure you don't need them.</p>
+      </section>
+
+      <section class="quiz-section">
+        <h2>Test Yourself</h2>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q1: How do you enter Grid Recording mode?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">Hold [FUNC] and press [REC]</div>
+            <div class="quiz-option" data-answer="true">Press [REC]</div>
+            <div class="quiz-option" data-answer="false">Press [TRACK] then [REC]</div>
+            <div class="quiz-option" data-answer="false">Hold [YES] and press [REC]</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q2: What is the default number of steps in a pattern?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">8 steps</div>
+            <div class="quiz-option" data-answer="true">16 steps</div>
+            <div class="quiz-option" data-answer="false">32 steps</div>
+            <div class="quiz-option" data-answer="false">64 steps</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q3: To stop playback AND return to step 1, press [STOP]...</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">Once</div>
+            <div class="quiz-option" data-answer="true">Twice</div>
+            <div class="quiz-option" data-answer="false">Three times</div>
+            <div class="quiz-option" data-answer="false">Hold for 2 seconds</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q4: What does SAVE TO NEW do?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">Deletes your current project</div>
+            <div class="quiz-option" data-answer="true">Creates a duplicate project with new name for safe experimentation</div>
+            <div class="quiz-option" data-answer="false">Saves only audio samples, not the project</div>
+            <div class="quiz-option" data-answer="false">Exports project as WAV file</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <button onclick="checkQuiz()">Submit Answers</button>
+          <div id="quiz-score" style="margin-top: 20px; font-size: 16px; font-weight: 600; display: none;"></div>
+        </div>
+      </section>
+
+      <section class="confidence-section">
+        <h2>Confidence Check</h2>
+        <p>How confident about Grid Recording and building a basic beat?</p>
+        <div class="confidence-scale">
+          <button class="confidence-btn" data-confidence="1">1</button>
+          <button class="confidence-btn" data-confidence="2">2</button>
+          <button class="confidence-btn" data-confidence="3">3</button>
+          <button class="confidence-btn" data-confidence="4">4</button>
+          <button class="confidence-btn" data-confidence="5">5</button>
+        </div>
+        <p id="confidence-msg" style="color: #666666; margin-top: 15px; font-size: 13px;"></p>
+      </section>
+
+      <div class="bottom-nav">
+        <a href="02-load-and-lock.html">← Previous</a>
+        <a href="04-audio-pool.html">Next →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'octatrack-tutorials';
+
+    function getState() {
+      const state = localStorage.getItem(STORAGE_KEY);
+      return state ? JSON.parse(state) : {};
+    }
+
+    function setState(tutorialId, updates) {
+      const state = getState();
+      state[tutorialId] = {
+        ...state[tutorialId],
+        ...updates,
+        lastAccessed: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    const navItems = document.querySelectorAll('.sidebar-nav li');
+    const sections = document.querySelectorAll('.section');
+    const sectionMap = {};
+    sections.forEach(s => sectionMap[s.id] = s);
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const sectionId = item.dataset.section;
+        const section = sectionMap[sectionId];
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          navItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        }
+      });
+    });
+
+    let visitedSections = new Set();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          visitedSections.add(entry.target.id);
+          const navItem = document.querySelector(`[data-section="${entry.target.id}"]`);
+          if (navItem) {
+            navItem.classList.add('active');
+          }
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+      updateProgress();
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => observer.observe(s));
+
+    const sequencerSteps = document.querySelectorAll('.sequencer-step');
+    let sequencerState = [
+      [true, false, false, false, true, false, false, false, true, false, false, false, true, false, false, false],
+      [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false],
+      [false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true]
+    ];
+
+    function renderSequencer() {
+      sequencerSteps.forEach(step => {
+        const track = parseInt(step.dataset.track);
+        const stepNum = parseInt(step.dataset.step);
+        if (sequencerState[track][stepNum]) {
+          step.classList.add('active');
+          step.textContent = '●';
+        } else {
+          step.classList.remove('active');
+          step.textContent = '';
+        }
+      });
+    }
+
+    sequencerSteps.forEach(step => {
+      step.addEventListener('click', () => {
+        const track = parseInt(step.dataset.track);
+        const stepNum = parseInt(step.dataset.step);
+        sequencerState[track][stepNum] = !sequencerState[track][stepNum];
+        renderSequencer();
+      });
+    });
+
+    function presetKick() {
+      sequencerState[0] = [true, false, false, false, true, false, false, false, true, false, false, false, true, false, false, false];
+      renderSequencer();
+    }
+
+    function presetSnare() {
+      sequencerState[1] = [false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false];
+      renderSequencer();
+    }
+
+    function presetHiHat() {
+      sequencerState[2] = [false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true];
+      renderSequencer();
+    }
+
+    function resetSequencer() {
+      sequencerState = [Array(16).fill(false), Array(16).fill(false), Array(16).fill(false)];
+      renderSequencer();
+    }
+
+    renderSequencer();
+
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    let quizAnswers = {};
+
+    quizOptions.forEach((opt, idx) => {
+      opt.addEventListener('click', () => {
+        const questionIdx = Math.floor(idx / 4);
+        const optionIdx = idx % 4;
+
+        document.querySelectorAll('.quiz-question').forEach((q, i) => {
+          q.querySelectorAll('.quiz-option').forEach((o, oi) => {
+            if (i === questionIdx && oi === optionIdx) {
+              o.classList.add('selected');
+              quizAnswers[questionIdx] = o.dataset.answer === 'true';
+            } else if (i === questionIdx) {
+              o.classList.remove('selected');
+            }
+          });
+        });
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      document.querySelectorAll('.quiz-question').forEach((q, idx) => {
+        const selected = q.querySelector('.quiz-option.selected');
+        if (!selected) return;
+
+        const isCorrect = selected.dataset.answer === 'true';
+        if (isCorrect) {
+          selected.classList.add('correct');
+          score++;
+        } else {
+          selected.classList.add('incorrect');
+          const correct = q.querySelector('[data-answer="true"]');
+          if (correct) correct.classList.add('correct');
+        }
+        q.querySelector('.quiz-feedback').classList.add('show');
+        q.querySelector('.quiz-feedback').textContent = isCorrect ? '✓ Correct!' : '✗ Try again.';
+      });
+
+      document.getElementById('quiz-score').style.display = 'block';
+      document.getElementById('quiz-score').innerHTML = `<span style="color: #00ff41;">Score: ${score} / 4</span>`;
+
+      setState('03-beat-basics', { quizScore: score, quizTotal: 4 });
+      updateProgress();
+    }
+
+    document.querySelectorAll('.confidence-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.confidence-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const confidence = btn.dataset.confidence;
+        const msgs = ['', 'Not ready yet—review the basics', 'Getting there—practice more', 'Pretty confident—try it on the OT', 'Very confident—you got this!', 'Expert—help others!'];
+        document.getElementById('confidence-msg').textContent = msgs[confidence];
+        setState('03-beat-basics', { confidence: parseInt(confidence) });
+        updateProgress();
+      });
+    });
+
+    function updateProgress() {
+      const tutorialState = getState()['03-beat-basics'] || {};
+      const sections = document.querySelectorAll('.section').length;
+      const visited = visitedSections.size;
+      const hasQuiz = tutorialState.quizScore !== undefined;
+      const hasConfidence = tutorialState.confidence !== undefined;
+
+      let completed = 0;
+      if (visited > 0) completed++;
+      if (visited >= sections * 0.8) completed++;
+      if (hasQuiz) completed++;
+      if (hasConfidence) completed++;
+
+      const progress = (completed / 4) * 100;
+      document.querySelector('.progress-bar').style.width = progress + '%';
+
+      let status = 'not-started';
+      if (visited > 0) status = 'in-progress';
+      if (completed === 4) status = 'completed';
+
+      document.getElementById('status-text').textContent = {
+        'not-started': 'Not started',
+        'in-progress': 'In progress',
+        'completed': 'Completed ✓'
+      }[status];
+
+      setState('03-beat-basics', {
+        status,
+        completion: Math.round(progress),
+        sectionsCompleted: Array.from(visitedSections)
+      });
+    }
+
+    updateProgress();
+  </script>
+</body>
+</html>

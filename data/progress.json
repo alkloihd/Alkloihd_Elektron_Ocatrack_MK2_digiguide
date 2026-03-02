@@ -1,0 +1,139 @@
+{
+  "version": "1.0",
+  "lastUpdated": null,
+  "tutorials": {
+    "01-set-sail": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "02-load-and-lock": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "03-beat-basics": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "04-audio-pool": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "05-slice-and-dice": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "06-sample-locks": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "07-loop-stretching": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "08-parts-banks-scenes": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "09-trig-conditions": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "10-resampling": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "11-effects-neighbors": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "12-lfos-modulation": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    },
+    "13-live-performance": {
+      "status": "not-started",
+      "completion": 0,
+      "confidence": 0,
+      "quizScore": 0,
+      "quizTotal": 3,
+      "timeSpent": 0,
+      "sectionsCompleted": [],
+      "lastAccessed": null
+    }
+  },
+  "streakDays": 0,
+  "lastActiveDate": null,
+  "totalTimeMinutes": 0
+}

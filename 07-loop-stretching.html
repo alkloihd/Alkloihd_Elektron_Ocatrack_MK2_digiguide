@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 07 - Loop Stretching: Making Loops Match Your Tempo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #0a0a0a;
+            border-bottom: 3px solid #00ffff;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .top-bar a {
+            color: #00ffff;
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border: 2px solid #00ffff;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s;
+        }
+
+        .top-bar a:hover {
+            background-color: #00ffff;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+        }
+
+        .top-bar-title {
+            flex: 1;
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #ffffff;
+        }
+
+        .top-bar-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .meta-item {
+            border: 2px solid #666666;
+            padding: 0.5rem 0.8rem;
+            color: #e0e0e0;
+        }
+
+        .meta-item.difficulty-beginner {
+            border-color: #00ff41;
+            color: #00ff41;
+        }
+
+        /* CONTAINER */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background-color: #111111;
+            border-right: 3px solid #ff00ff;
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #ff00ff;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ff00ff;
+            padding-bottom: 0.75rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.75rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 0.5rem 0.75rem;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sidebar-nav a:hover {
+            color: #00ffff;
+            border-left: 2px solid #00ffff;
+            padding-left: 0.5rem;
+        }
+
+        .sidebar-nav a.active {
+            color: #00ffff;
+            border-left: 3px solid #00ffff;
+            padding-left: 0.5rem;
+            font-weight: 600;
+        }
+
+        .checkmark {
+            display: none;
+            color: #00ff41;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .sidebar-nav a.completed .checkmark {
+            display: inline;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            padding: 3rem;
+            max-width: 900px;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #333333;
+            opacity: 0;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #00ffff;
+            padding-left: 1rem;
+        }
+
+        .section h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #00ffff;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+        .highlight-box {
+            background-color: #111111;
+            border: 3px solid #ff00ff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0;
+        }
+
+        .highlight-box.warning {
+            border-color: #ffaa00;
+            border-left: 6px solid #ffaa00;
+        }
+
+        .highlight-box.success {
+            border-color: #00ff41;
+            border-left: 6px solid #00ff41;
+        }
+
+        .highlight-box h4 {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .code-block {
+            background-color: #0a0a0a;
+            border: 2px solid #00ffff;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: #00ffff;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border: 2px solid #333333;
+        }
+
+        th {
+            background-color: #111111;
+            border: 2px solid #333333;
+            padding: 1rem;
+            font-family: 'Space Mono', monospace;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            color: #00ffff;
+            text-align: left;
+        }
+
+        td {
+            border: 2px solid #333333;
+            padding: 1rem;
+            color: #e0e0e0;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #0d0d0d;
+        }
+
+        /* BPM TESTER */
+        .bpm-tester {
+            background-color: #111111;
+            border: 3px solid #00ff41;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+        }
+
+        .bpm-tester-input {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .bpm-tester-input label {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #00ff41;
+        }
+
+        .bpm-tester-input input {
+            background-color: #0a0a0a;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+        }
+
+        .bpm-tester-input input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .bpm-tester-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #0a0a0a;
+            border-left: 4px solid #00ff41;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+
+        .bpm-detected {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .bpm-highlight {
+            background-color: #00ff41;
+            color: #0a0a0a;
+            padding: 0.1em 0.3em;
+            font-weight: bold;
+        }
+
+        /* STEP-BY-STEP */
+        .step-guide {
+            background-color: #111111;
+            border: 3px solid #ff00ff;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #00ffff;
+            color: #0a0a0a;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid #00ffff;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: #e0e0e0;
+            font-size: 15px;
+        }
+
+        .button-demo {
+            display: inline-block;
+            background-color: #0a0a0a;
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 0.5rem 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+            cursor: default;
+        }
+
+        /* QUIZ */
+        .quiz-section {
+            background-color: #111111;
+            border: 3px solid #ff00ff;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+        }
+
+        .quiz-question:last-child {
+            margin-bottom: 0;
+        }
+
+        .quiz-question h4 {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .quiz-option:hover {
+            border: 2px solid #00ffff;
+            background-color: #0d0d0d;
+        }
+
+        .quiz-option input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .quiz-option label {
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .quiz-feedback {
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background-color: #00ff41;
+            color: #0a0a0a;
+        }
+
+        .quiz-feedback.incorrect {
+            background-color: #ff3333;
+            color: #ffffff;
+        }
+
+        /* CONFIDENCE */
+        .confidence-section {
+            background-color: #111111;
+            border: 3px solid #ffaa00;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0;
+        }
+
+        .confidence-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ffaa00;
+            margin-bottom: 1.5rem;
+        }
+
+        .confidence-scale {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .confidence-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ffaa00;
+            background-color: #0a0a0a;
+            color: #ffaa00;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .confidence-btn:hover {
+            background-color: #ffaa00;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+        }
+
+        .confidence-btn.selected {
+            background-color: #ffaa00;
+            color: #0a0a0a;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 3px solid #333333;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 3px solid #00ffff;
+            background-color: #0a0a0a;
+            color: #00ffff;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .nav-btn:hover {
+            background-color: #00ffff;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            transform: none;
+            background-color: #0a0a0a;
+            color: #00ffff;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 3px solid #ff00ff;
+                display: flex;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+
+            .sidebar-title {
+                flex: 0 0 150px;
+                margin-bottom: 0;
+            }
+
+            .sidebar-nav {
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                flex: 1;
+            }
+
+            .sidebar-nav li {
+                margin-bottom: 0;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .top-bar-meta {
+                width: 100%;
+                gap: 0.75rem;
+            }
+
+            .sidebar-nav {
+                flex-direction: column;
+            }
+
+            .step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .confidence-scale {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <a href="index.html">← DASHBOARD</a>
+        <div class="top-bar-title">07 - LOOP STRETCHING</div>
+        <div class="top-bar-meta">
+            <div class="meta-item difficulty-beginner">BEGINNER/INTER</div>
+            <div class="meta-item">25 MIN</div>
+        </div>
+    </div>
+
+    <!-- CONTAINER -->
+    <div class="container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-title">SECTIONS</div>
+            <ul class="sidebar-nav">
+                <li><a href="#section-1" class="nav-link active">
+                    <span class="checkmark">✓</span>
+                    <span>The Problem</span>
+                </a></li>
+                <li><a href="#section-2" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>How TSTR Works</span>
+                </a></li>
+                <li><a href="#section-3" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>BPM Detection</span>
+                </a></li>
+                <li><a href="#section-4" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>NORMAL vs BEAT</span>
+                </a></li>
+                <li><a href="#section-5" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>Static + Flex</span>
+                </a></li>
+                <li><a href="#section-6" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>Practical Exercise</span>
+                </a></li>
+                <li><a href="#section-7" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>Edge Cases</span>
+                </a></li>
+                <li><a href="#section-8" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>Quiz</span>
+                </a></li>
+                <li><a href="#section-9" class="nav-link">
+                    <span class="checkmark">✓</span>
+                    <span>Confidence</span>
+                </a></li>
+            </ul>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- SECTION 1: THE PROBLEM -->
+            <div class="section" id="section-1">
+                <h2>01 - THE PROBLEM</h2>
+                <p>You have a drum loop recorded at 120 BPM. Your current project is at 135 BPM. When you load that loop onto a track, it plays too fast AND at the wrong pitch. Without time-stretching, the loop is essentially useless in your project.</p>
+                <div class="highlight-box success">
+                    <h4>THE SOLUTION</h4>
+                    <p><strong>Timestretch (TSTR)</strong> adapts the loop to match your project tempo WITHOUT changing its pitch. The drum kick stays fat, the vocal stays natural, but everything plays at the right speed.</p>
+                </div>
+                <p>This is one of the most powerful features of the Octatrack because it lets you:</p>
+                <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem;">
+                    <li>✓ Mix loops at different tempos into one project</li>
+                    <li>✓ Change your project tempo mid-jam without loops sounding wrong</li>
+                    <li>✓ Keep long static samples (no RAM cost) while keeping them tempo-locked</li>
+                    <li>✓ Work with material from Ableton, loops packs, anywhere</li>
+                </ul>
+            </div>
+
+            <!-- SECTION 2: HOW TSTR WORKS -->
+            <div class="section" id="section-2">
+                <h2>02 - HOW TIMESTRETCH WORKS ON THE OT</h2>
+                <p>Timestretch requires THREE things to be configured. All three must be set for it to work properly.</p>
+                <div class="highlight-box">
+                    <h4>THE THREE-STEP SETUP</h4>
+                    <p><strong>Step 1: ORIGINAL TEMPO</strong> — Tell the OT the loop's TRUE BPM in the Audio Editor</p>
+                    <p><strong>Step 2: TIMESTRETCH MODE</strong> — Choose the algorithm (NORMAL for tonal, BEAT for drums)</p>
+                    <p><strong>Step 3: TSTR = AUTO</strong> — Enable timestretch in Playback Setup</p>
+                </div>
+
+                <h3>Step-by-Step Navigation</h3>
+                <div class="step-guide">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>OPEN AUDIO EDITOR</h4>
+                            <p>While viewing your sample on any track, press:</p>
+                            <div class="button-demo">[FUNC] + [AUD]</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>NAVIGATE TO ATTRIBUTES</h4>
+                            <p>Press the [RIGHT] arrow key to browse pages of the Audio Editor. You're looking for "Attributes" (usually page 2 or 3).</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>SET ORIGINAL TEMPO</h4>
+                            <p>Use the [KNOB] to adjust. If your loop is 120 BPM, set this to 120. This tells the OT: "This sample was recorded at 120 BPM."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>SET TIMESTRETCH MODE</h4>
+                            <p>Move to the TIMESTRETCH field. Choose:</p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>NORMAL — for tonal material (pads, vocals, melodic)</li>
+                                <li>BEAT — for drums, percussion, rhythmic loops</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>EXIT AUDIO EDITOR</h4>
+                            <p>Press [NO] to return to the main sequencer view.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>OPEN PLAYBACK SETUP</h4>
+                            <p>Select the track, then press:</p>
+                            <div class="button-demo">[FUNC] + [PLAYBACK]</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <h4>SET TSTR = AUTO</h4>
+                            <p>Find the TSTR field and set it to AUTO. This enables the timestretch effect globally for this sample.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">8</div>
+                        <div class="step-content">
+                            <h4>TEST IT!</h4>
+                            <p>Change your project tempo using [FUNC] + [TEMPO]. The loop should now follow your tempo changes without sounding wrong.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: BPM AUTO-DETECTION -->
+            <div class="section" id="section-3">
+                <h2>03 - BPM AUTO-DETECTION</h2>
+                <p>The Octatrack has a clever feature: <strong>it reads numbers from filenames and assumes they're BPM values.</strong></p>
+                <div class="highlight-box warning">
+                    <h4>IMPORTANT RANGE</h4>
+                    <p>The OT only auto-detects numbers in the range <strong>85–170 BPM</strong>. Numbers outside this range are ignored.</p>
+                </div>
+
+                <h3>How It Works</h3>
+                <table>
+                    <tr>
+                        <th>Filename</th>
+                        <th>OT Detects?</th>
+                        <th>Result</th>
+                    </tr>
+                    <tr>
+                        <td>DrumLoop_128bpm.wav</td>
+                        <td>YES ✓</td>
+                        <td>Sets ORIGINAL TEMPO to 128 automatically</td>
+                    </tr>
+                    <tr>
+                        <td>Bass_90.wav</td>
+                        <td>YES ✓</td>
+                        <td>Sets ORIGINAL TEMPO to 90 automatically</td>
+                    </tr>
+                    <tr>
+                        <td>Sample_140_Dark.wav</td>
+                        <td>YES ✓</td>
+                        <td>Sets ORIGINAL TEMPO to 140 (even if "140" is unrelated!)</td>
+                    </tr>
+                    <tr>
+                        <td>Recording_2024.wav</td>
+                        <td>NO ✗</td>
+                        <td>2024 is outside range. You must set ORIGINAL TEMPO manually.</td>
+                    </tr>
+                    <tr>
+                        <td>Pad_96_Ambient.wav</td>
+                        <td>YES ✓</td>
+                        <td>Sets ORIGINAL TEMPO to 96 automatically</td>
+                    </tr>
+                </table>
+
+                <h3>Interactive BPM Filename Tester</h3>
+                <div class="bpm-tester">
+                    <div class="bpm-tester-input">
+                        <label for="bpm-filename">Enter a filename to test:</label>
+                        <input type="text" id="bpm-filename" placeholder="e.g., DrumLoop_128bpm.wav">
+                        <div class="bpm-tester-result" id="bpm-result">
+                            Type a filename above...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning">
+                    <h4>⚠️ THE GOTCHA</h4>
+                    <p>If your filename is "Sample_140_Dark.wav" but the loop is actually 120 BPM, the OT will set ORIGINAL TEMPO to 140 and timestretch will sound wrong. Always <strong>manually verify ORIGINAL TEMPO</strong> in the Audio Editor, especially with ambiguous filenames.</p>
+                </div>
+
+                <h3>Naming Convention (Best Practice)</h3>
+                <p>For easy BPM auto-detection, use this naming scheme:</p>
+                <div class="code-block">Type_Description_BPMvalue.wav
+
+Examples:
+Drum_DarkKick_128bpm.wav
+Bass_Sub_95bpm.wav
+Pad_Ambient_85bpm.wav
+Loop_Vocal_Chop_140bpm.wav</div>
+            </div>
+
+            <!-- SECTION 4: NORMAL vs BEAT -->
+            <div class="section" id="section-4">
+                <h2>04 - NORMAL VS BEAT ALGORITHM</h2>
+                <p>The Octatrack's timestretch engine has two modes. They sound and behave very differently.</p>
+                <table>
+                    <tr>
+                        <th>Property</th>
+                        <th>NORMAL</th>
+                        <th>BEAT</th>
+                    </tr>
+                    <tr>
+                        <td>Best For</td>
+                        <td>Tonal material: pads, melodic loops, vocals, strings, keys</td>
+                        <td>Drums, percussion, rhythmic loops, breaks</td>
+                    </tr>
+                    <tr>
+                        <td>How It Works</td>
+                        <td>Granular time-stretching (stretches the waveform itself)</td>
+                        <td>Slice-based (detects transients, repositions them)</td>
+                    </tr>
+                    <tr>
+                        <td>Artifacts at Extremes</td>
+                        <td>Slight granular shimmer or watering effect</td>
+                        <td>May stutter or have pumping feel</td>
+                    </tr>
+                    <tr>
+                        <td>Quality at Extreme Stretch</td>
+                        <td>Good for moderate stretching (±20%)</td>
+                        <td>Good for rhythmic material (even ±50%)</td>
+                    </tr>
+                </table>
+
+                <h3>Quick Decision Tree</h3>
+                <div class="highlight-box">
+                    <h4>CHOOSE YOUR MODE</h4>
+                    <ul style="margin-left: 2rem; color: #e0e0e0;">
+                        <li>Is it a <strong>drum loop</strong>? → Use BEAT</li>
+                        <li>Is it a <strong>bass loop</strong>? → Use NORMAL</li>
+                        <li>Is it a <strong>vocal chop</strong>? → Use NORMAL</li>
+                        <li>Is it a <strong>break</strong> (drums)? → Use BEAT</li>
+                        <li>Is it a <strong>pad or string</strong>? → Use NORMAL</li>
+                        <li>Is it <strong>mixed material</strong> (drums + bass)? → Try BEAT first, then experiment</li>
+                    </ul>
+                </div>
+
+                <p><strong>Experiment!</strong> Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. The OT's CPU can handle it either way — it's about which sound you prefer.</p>
+            </div>
+
+            <!-- SECTION 5: STATIC AND FLEX -->
+            <div class="section" id="section-5">
+                <h2>05 - STATIC AND FLEX BOTH SUPPORT TSTR</h2>
+                <p>This is a common misconception: "Timestretch only works on Static machines, not Flex."</p>
+                <div class="highlight-box success">
+                    <h4>THE TRUTH</h4>
+                    <p><strong>TSTR works on BOTH Static and Flex machines.</strong> You can use timestretch regardless of which machine type you choose.</p>
+                </div>
+
+                <h3>When to Use Which</h3>
+                <table>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Machine</th>
+                        <th>Why</th>
+                    </tr>
+                    <tr>
+                        <td>Long loop (30+ sec) that needs tempo sync, no slicing needed</td>
+                        <td>Static + TSTR</td>
+                        <td>Zero RAM cost. Loop streams from card and stretches to tempo. Perfect for backing tracks.</td>
+                    </tr>
+                    <tr>
+                        <td>Long loop (30+ sec) that you want to slice and chop</td>
+                        <td>Flex + TSTR</td>
+                        <td>Costs RAM, but you can slice it into 64 pieces and trigger slices p-locked. Slices also timestretch.</td>
+                    </tr>
+                    <tr>
+                        <td>Short loop (1-5 sec) tempo-matched</td>
+                        <td>Flex + TSTR</td>
+                        <td>Low RAM cost (~0.5 MB per loop). Instant access for slicing and manipulation.</td>
+                    </tr>
+                    <tr>
+                        <td>Resampled recording from recorder track</td>
+                        <td>Flex + TSTR</td>
+                        <td>Recordings are short. TSTR will match them to your current tempo.</td>
+                    </tr>
+                </table>
+
+                <h3>Static Machines are Underrated for Long Loops</h3>
+                <p>If you have a 2-minute drum loop and you just want to play it straight (no slicing), use:</p>
+                <div class="highlight-box">
+                    <h4>STATIC MACHINE SETUP</h4>
+                    <ol style="margin-left: 2rem; color: #e0e0e0;">
+                        <li>Assign Static to a track</li>
+                        <li>Load your loop via Sample Lock browser</li>
+                        <li>Set ORIGINAL TEMPO + TIMESTRETCH in Audio Editor</li>
+                        <li>Set TSTR = AUTO in Playback Setup</li>
+                        <li>ZERO RAM used. Loop streams from CF card. Tempo-matched.</li>
+                    </ol>
+                </div>
+
+                <p>This is the most efficient way to use long samples in the OT.</p>
+            </div>
+
+            <!-- SECTION 6: PRACTICAL EXERCISE -->
+            <div class="section" id="section-6">
+                <h2>06 - PRACTICAL EXERCISE: FIX A LOOP</h2>
+                <p>Let's walk through the complete workflow. You'll need any sample or loop on your Octatrack or CF card.</p>
+
+                <div class="highlight-box">
+                    <h4>SETUP</h4>
+                    <p>Choose a drum loop or any audio sample you have. We'll set it up so it follows your project tempo.</p>
+                </div>
+
+                <div class="step-guide">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>LOAD A SAMPLE ONTO A TRACK</h4>
+                            <p>Select any track. Open the Sample Lock browser ([TRIG] + [UP/DOWN]). Pick any sample from your AUDIO/ folder.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>OPEN AUDIO EDITOR</h4>
+                            <p>Press:</p>
+                            <div class="button-demo">[FUNC] + [AUD]</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>FIND ATTRIBUTES PAGE</h4>
+                            <p>Press [RIGHT] arrow key to navigate pages. Stop when you see "ORIGINAL TEMPO" and "TIMESTRETCH" fields.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>SET ORIGINAL TEMPO</h4>
+                            <p>Use the data entry knob to set ORIGINAL TEMPO to the sample's true BPM. If unsure, check the filename or try 120 BPM as a baseline.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>SET TIMESTRETCH MODE</h4>
+                            <p>Move to TIMESTRETCH. If it's drums, choose BEAT. If it's tonal, choose NORMAL. If mixed, try BEAT first.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>EXIT AUDIO EDITOR</h4>
+                            <p>Press [NO].</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">7</div>
+                        <div class="step-content">
+                            <h4>OPEN PLAYBACK SETUP</h4>
+                            <p>Select your track (if not already selected). Press:</p>
+                            <div class="button-demo">[FUNC] + [PLAYBACK]</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">8</div>
+                        <div class="step-content">
+                            <h4>ENABLE TSTR = AUTO</h4>
+                            <p>Find the TSTR field and set it to AUTO. This globally enables timestretch for this sample.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">9</div>
+                        <div class="step-content">
+                            <h4>TEST TEMPO CHANGES</h4>
+                            <p>Press [YES] to arm the track. Trig the sample to hear it play. Now use [FUNC] + [TEMPO] to change your project BPM. The sample should follow your tempo without sounding wrong!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box success">
+                    <h4>✓ WHAT YOU'VE LEARNED</h4>
+                    <p>You've configured a sample to be tempo-aware. This sample will now automatically match any project tempo you set, so you can change your groove without loops sounding wrong.</p>
+                </div>
+            </div>
+
+            <!-- SECTION 7: EDGE CASES -->
+            <div class="section" id="section-7">
+                <h2>07 - EDGE CASES & GOTCHAS</h2>
+
+                <h3>Half-Time and Double-Time Loops</h3>
+                <p>Sometimes a loop sounds like it's playing at double the speed. This usually means the sample was recorded at a different effective tempo.</p>
+                <div class="highlight-box warning">
+                    <h4>HALF-TIME LOOP EXAMPLE</h4>
+                    <p>You load a loop and it sounds like it's playing at 2x speed. The filename says 140 BPM, but it sounds wrong. <strong>Try setting ORIGINAL TEMPO to 70 (half of 140).</strong> Often samples are recorded at double-time internally.</p>
+                </div>
+                <div class="highlight-box warning">
+                    <h4>DOUBLE-TIME LOOP EXAMPLE</h4>
+                    <p>Conversely, a loop sounds too slow. Try <strong>doubling the BPM value</strong> in ORIGINAL TEMPO.</p>
+                </div>
+
+                <h3>Extreme Stretching (>50% Change)</h3>
+                <p>If you stretch a loop more than 50% faster or slower, you'll hear artifacts:</p>
+                <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem;">
+                    <li><strong>NORMAL mode:</strong> Granular shimmer, watering effect</li>
+                    <li><strong>BEAT mode:</strong> Stuttering, pumping feel</li>
+                </ul>
+                <p>This is normal. If it sounds bad, consider using samples closer to your project tempo.</p>
+
+                <h3>Resampled Material Does NOT Auto-Follow Tempo</h3>
+                <p>If you resample a pattern (recording via Recorder track) and then try to timestretch the resampled audio, it won't follow tempo changes. <strong>Recordings are "locked-in"</strong> to the tempo they were recorded at.</p>
+                <p>If you need a resampled loop to be tempo-aware, resample it again at your new tempo.</p>
+
+                <h3>The Ableton → Octatrack Pipeline</h3>
+                <p>If you're exporting loops from Ableton:</p>
+                <ol style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem;">
+                    <li><strong>Warp the loop</strong> to your target tempo in Ableton</li>
+                    <li><strong>Consolidate or export</strong> at exact bar lengths (1/2/4/8 bars)</li>
+                    <li><strong>Export as WAV:</strong> 44.1 kHz, 16 or 24-bit</li>
+                    <li><strong>Include BPM in filename:</strong> e.g., "Drums_Chop_135bpm.wav"</li>
+                    <li><strong>Drag into AUDIO/ folder</strong> on your OT card</li>
+                    <li><strong>Load on OT</strong> and the BPM is auto-detected!</li>
+                </ol>
+            </div>
+
+            <!-- SECTION 8: QUIZ -->
+            <div class="section" id="section-8">
+                <h2>08 - QUIZ</h2>
+                <div class="quiz-section">
+                    <!-- Q1 -->
+                    <div class="quiz-question">
+                        <h4>Q1: What THREE settings must be configured for timestretch to work?</h4>
+                        <div class="quiz-option">
+                            <input type="radio" name="q1" value="wrong1" id="q1a">
+                            <label for="q1a">Only ORIGINAL TEMPO and TIMESTRETCH mode</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q1" value="correct" id="q1b">
+                            <label for="q1b">ORIGINAL TEMPO, TIMESTRETCH mode, and TSTR = AUTO</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q1" value="wrong2" id="q1c">
+                            <label for="q1c">Just set TSTR = AUTO, the OT figures out the rest</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q1" value="wrong3" id="q1d">
+                            <label for="q1d">Set the project tempo and enable audio sync</label>
+                        </div>
+                        <div class="quiz-feedback" id="q1-feedback"></div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="quiz-question">
+                        <h4>Q2: You're loading a drum loop. Which TIMESTRETCH mode should you use?</h4>
+                        <div class="quiz-option">
+                            <input type="radio" name="q2" value="wrong1" id="q2a">
+                            <label for="q2a">NORMAL, because it's better quality</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q2" value="correct" id="q2b">
+                            <label for="q2b">BEAT, because it's optimized for drums</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q2" value="wrong2" id="q2c">
+                            <label for="q2c">It doesn't matter, they sound the same</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q2" value="wrong3" id="q2d">
+                            <label for="q2d">Use AUTO to let the OT decide</label>
+                        </div>
+                        <div class="quiz-feedback" id="q2-feedback"></div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="quiz-question">
+                        <h4>Q3: Can Static machines use timestretch?</h4>
+                        <div class="quiz-option">
+                            <input type="radio" name="q3" value="correct" id="q3a">
+                            <label for="q3a">Yes, Static machines support TSTR and use zero RAM</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q3" value="wrong1" id="q3b">
+                            <label for="q3b">No, only Flex machines support timestretch</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q3" value="wrong2" id="q3c">
+                            <label for="q3c">Only if you manually adjust pitch using TSTR knob</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q3" value="wrong3" id="q3d">
+                            <label for="q3d">Static machines don't support any effects</label>
+                        </div>
+                        <div class="quiz-feedback" id="q3-feedback"></div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="quiz-question">
+                        <h4>Q4: What BPM does the OT auto-detect from the filename "Pad_96_Ambient.wav"?</h4>
+                        <div class="quiz-option">
+                            <input type="radio" name="q4" value="wrong1" id="q4a">
+                            <label for="q4a">It doesn't detect any BPM (96 is too low)</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q4" value="correct" id="q4b">
+                            <label for="q4b">96 BPM</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q4" value="wrong2" id="q4c">
+                            <label for="q4c">120 BPM (default)</label>
+                        </div>
+                        <div class="quiz-option">
+                            <input type="radio" name="q4" value="wrong3" id="q4d">
+                            <label for="q4d">Ambient (it extracts metadata)</label>
+                        </div>
+                        <div class="quiz-feedback" id="q4-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 9: CONFIDENCE -->
+            <div class="section" id="section-9">
+                <h2>09 - CONFIDENCE RATING</h2>
+                <p>How confident do you feel about timestretch after this tutorial?</p>
+                <div class="confidence-section">
+                    <div class="confidence-title">Rate Your Confidence (1-5)</div>
+                    <div class="confidence-scale">
+                        <button class="confidence-btn" data-level="1">1</button>
+                        <button class="confidence-btn" data-level="2">2</button>
+                        <button class="confidence-btn" data-level="3">3</button>
+                        <button class="confidence-btn" data-level="4">4</button>
+                        <button class="confidence-btn" data-level="5">5</button>
+                    </div>
+                    <p id="confidence-message" style="margin-top: 1.5rem; text-align: center; color: #ffaa00; display: none;">
+                        Thanks! Your confidence level has been saved.
+                    </p>
+                </div>
+            </div>
+
+            <!-- BOTTOM NAV -->
+            <div class="bottom-nav">
+                <a href="06-sample-locks.html" class="nav-btn">← PREV: SAMPLE LOCKS</a>
+                <a href="08-parts-banks-scenes.html" class="nav-btn">NEXT: PARTS →</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SIDEBAR TRACKING
+        const navLinks = document.querySelectorAll('.sidebar-nav a.nav-link');
+        const sections = document.querySelectorAll('.section');
+        const topBar = document.querySelector('.top-bar');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(link => {
+                        if (link.href.includes(id)) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // LOCALSTORAGE
+        const storageKey = 'octatrack-tutorials';
+
+        function saveProgress() {
+            const progress = {
+                '07-loop-stretching': {
+                    completedSections: Array.from(navLinks).filter(link => link.classList.contains('active')).length,
+                    quizAnswers: getQuizAnswers(),
+                    confidence: document.querySelector('.confidence-btn.selected')?.dataset.level || null,
+                    lastAccessed: new Date().toISOString()
+                }
+            };
+
+            let allProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
+            allProgress['07-loop-stretching'] = progress['07-loop-stretching'];
+            localStorage.setItem(storageKey, JSON.stringify(allProgress));
+        }
+
+        function getQuizAnswers() {
+            const answers = {};
+            for (let i = 1; i <= 4; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answers[`q${i}`] = selected.value;
+                }
+            }
+            return answers;
+        }
+
+        // SAVE PERIODICALLY
+        window.addEventListener('beforeunload', saveProgress);
+        setInterval(saveProgress, 30000);
+
+        // BPM FILENAME TESTER
+        document.getElementById('bpm-filename').addEventListener('input', function(e) {
+            const filename = e.target.value;
+            const resultDiv = document.getElementById('bpm-result');
+
+            if (!filename) {
+                resultDiv.innerHTML = 'Type a filename above...';
+                return;
+            }
+
+            // Extract numbers from filename
+            const numbers = filename.match(/\d+/g) || [];
+            let detectedBPM = null;
+
+            for (const num of numbers) {
+                const n = parseInt(num);
+                if (n >= 85 && n <= 170) {
+                    detectedBPM = n;
+                    break;
+                }
+            }
+
+            let html = `<strong>Filename:</strong> ${filename}<br>`;
+            if (detectedBPM) {
+                const highlighted = filename.replace(detectedBPM.toString(), `<span class="bpm-highlight">${detectedBPM}</span>`);
+                html += `<strong>OT Auto-Detects:</strong> <span class="bpm-detected">${detectedBPM} BPM</span><br>`;
+                html += `<small>Highlighted number: ${highlighted}</small>`;
+            } else {
+                html += `<strong>OT Auto-Detects:</strong> <span style="color: #ff3333;">NONE</span> (no numbers in 85-170 range)<br>`;
+                html += `<small>You must set ORIGINAL TEMPO manually.</small>`;
+            }
+
+            resultDiv.innerHTML = html;
+        });
+
+        // QUIZ LOGIC
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const questionNum = this.name;
+                const feedback = document.getElementById(`${questionNum}-feedback`);
+                const isCorrect = this.value === 'correct';
+
+                if (isCorrect) {
+                    feedback.textContent = '✓ CORRECT!';
+                    feedback.classList.add('show', 'correct');
+                    feedback.classList.remove('incorrect');
+                } else {
+                    feedback.textContent = '✗ Try again!';
+                    feedback.classList.add('show', 'incorrect');
+                    feedback.classList.remove('correct');
+                }
+
+                saveProgress();
+            });
+        });
+
+        // CONFIDENCE RATING
+        document.querySelectorAll('.confidence-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.confidence-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('confidence-message').style.display = 'block';
+                saveProgress();
+            });
+        });
+
+        // SCROLL TO SECTION
+        document.querySelectorAll('.sidebar-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('href').substring(1);
+                const section = document.getElementById(id);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                        this.classList.add('active');
+                    }, 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

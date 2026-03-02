@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credits & Attribution | Octatrack Learning Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      line-height: 1.7;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 80px;
+      border-bottom: 2px solid #00ffff;
+      padding-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      color: #00ffff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 1.1em;
+      color: #ff00ff;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin: 30px auto 0;
+      font-size: 1em;
+      color: #b0b0b0;
+      text-align: left;
+    }
+
+    .intro p {
+      margin-bottom: 15px;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 80px;
+    }
+
+    section h2 {
+      font-size: 1.8em;
+      color: #00ff00;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-left: 4px solid #ff00ff;
+      padding-left: 15px;
+    }
+
+    /* Creator Cards */
+    .creators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .creator-card {
+      background-color: #111111;
+      border: 2px solid #00ffff;
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .creator-card:hover {
+      background-color: #1a1a1a;
+      border-color: #ff00ff;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .creator-card h3 {
+      font-size: 1.4em;
+      color: #00ffff;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .creator-card .role {
+      color: #ff00ff;
+      font-size: 0.95em;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .creator-card .bio {
+      color: #c0c0c0;
+      font-size: 0.95em;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .creator-card .focus {
+      color: #00ff00;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: #0a1a0a;
+      border-left: 3px solid #00ff00;
+    }
+
+    .creator-card .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .creator-card a {
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: #1a1a1a;
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 0.9em;
+      border: 1px solid #00ffff;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .creator-card a:hover {
+      background-color: #00ffff;
+      color: #0a0a0a;
+    }
+
+    /* Official Resources Section */
+    .resources-table {
+      width: 100%;
+      background-color: #111111;
+      border: 2px solid #00ff00;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .resources-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .resources-table th {
+      background-color: #1a1a1a;
+      border-bottom: 2px solid #00ff00;
+      padding: 15px;
+      text-align: left;
+      color: #00ff00;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .resources-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #222222;
+    }
+
+    .resources-table tr:hover {
+      background-color: #1a1a1a;
+    }
+
+    .resources-table a {
+      color: #00ffff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .resources-table a:hover {
+      color: #ff00ff;
+      text-decoration: underline;
+    }
+
+    /* Community Platforms */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .platform-card {
+      background-color: #111111;
+      border: 2px solid #ff00ff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .platform-card h3 {
+      font-size: 1.3em;
+      color: #ff00ff;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .platform-card .description {
+      color: #b0b0b0;
+      font-size: 0.95em;
+      margin-bottom: 15px;
+    }
+
+    .platform-card a {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #ff00ff;
+      color: #0a0a0a;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .platform-card a:hover {
+      background-color: #00ffff;
+    }
+
+    /* Guiding Principles */
+    .principles {
+      background-color: #111111;
+      border: 2px solid #00ff00;
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+
+    .principles ol {
+      margin-left: 20px;
+    }
+
+    .principles li {
+      margin-bottom: 15px;
+      color: #c0c0c0;
+    }
+
+    .principles strong {
+      color: #00ff00;
+    }
+
+    /* Attribution Notice */
+    .attribution-notice {
+      background-color: #1a0a0a;
+      border-left: 4px solid #ff00ff;
+      padding: 20px;
+      margin-bottom: 40px;
+      color: #d0a0d0;
+      font-size: 0.95em;
+      line-height: 1.8;
+    }
+
+    .attribution-notice strong {
+      color: #ff00ff;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding-top: 40px;
+      border-top: 2px solid #00ffff;
+      color: #606060;
+      margin-top: 60px;
+    }
+
+    footer p {
+      margin-bottom: 8px;
+    }
+
+    .back-link {
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #00ffff;
+      padding: 8px 15px;
+      display: inline-block;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .back-link a:hover {
+      background-color: #00ffff;
+      color: #0a0a0a;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      section h2 {
+        font-size: 1.5em;
+      }
+
+      .creators-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .platforms-grid {
+        grid-template-columns: 1fr;
+      }
+
+      body {
+        padding: 20px 15px;
+      }
+
+      .resources-table {
+        font-size: 0.95em;
+      }
+
+      .resources-table th,
+      .resources-table td {
+        padding: 10px;
+      }
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Credits & Attribution</h1>
+      <p class="subtitle">Built on the shoulders of the Octatrack community</p>
+      <div class="intro">
+        <p>This learning platform exists because an incredible community of educators, developers, and makers have generously shared their knowledge about the Elektron Octatrack.</p>
+        <p>Everything here is built to <strong>complement</strong>, not replace, the excellent resources already available. We credit the original sources, embed their content responsibly, and direct you to learn from the best.</p>
+        <p>If you're using this platform, you're standing on the work of everyone listed below. Thank you all.</p>
+      </div>
+    </header>
+
+    <!-- Primary Educators -->
+    <section>
+      <h2>Core Educators & Tutorial Creators</h2>
+      <p style="margin-bottom: 30px; color: #b0b0b0;">The backbone of Octatrack learning. These creators have invested their time, knowledge, and passion into teaching the world how to use this incredible machine.</p>
+
+      <div class="creators-grid">
+        <div class="creator-card">
+          <h3>Cuckoo</h3>
+          <div class="role">YouTube Educator</div>
+          <div class="bio">Cuckoo is the most prolific early Octatrack tutorial creator. Their beginner-friendly videos on basic workflows, sampling, and the Arranger mode remain essential resources.</div>
+          <div class="focus">Focus: Basics, sampling, workflows, Arranger mode</div>
+          <div class="links">
+            <a href="https://www.youtube.com/@cuckoomusic" target="_blank">YouTube Channel</a>
+            <a href="https://www.cuckoo.no/" target="_blank">Website</a>
+            <a href="https://www.patreon.com/cuckoomusic" target="_blank">Support</a>
+          </div>
+        </div>
+
+        <div class="creator-card">
+          <h3>EZBOT</h3>
+          <div class="role">Performance Templates & Live Setup</div>
+          <div class="bio">Matthew Piecora (EZBOT) has created definitive performance templates for the Octatrack, demonstrating how to design effects chains and perform live with constraints.</div>
+          <div class="focus">Focus: Performance templates, FX design, live sequencing, Techno workflows</div>
+          <div class="links">
+            <a href="https://www.ezbot.live/" target="_blank">EZBOT.Live</a>
+            <a href="https://www.patreon.com/ezbot_live" target="_blank">Patreon</a>
+            <a href="https://ko-fi.com/ezbot" target="_blank">Ko-fi Shop</a>
+          </div>
+        </div>
+
+        <div class="creator-card">
+          <h3>Thavius Beck</h3>
+          <div class="role">Professional Course Instructor</div>
+          <div class="bio">Thavius Beck's structured courses on Octatrack sampling (Ask.Video, macProVideo) are the gold standard for comprehensive, beginner-to-intermediate education. Professional production and pedagogy.</div>
+          <div class="focus">Focus: Sampling fundamentals, audio editing, slicing, structured learning</div>
+          <div class="links">
+            <a href="https://ask.video/course/octatrack-mkii-advanced-sampling" target="_blank">Ask.Video (MKII)</a>
+            <a href="https://ask.video/course/elektron-103-octatrack-dynamic-sampling" target="_blank">Ask.Video (Dynamic)</a>
+            <a href="https://www.macprovideo.com/course/octatrack-mkii-advanced-sampling" target="_blank">macProVideo</a>
+          </div>
+        </div>
+
+        <div class="creator-card">
+          <h3>Dataline</h3>
+          <div class="role">Live Performance & Resampling</div>
+          <div class="bio">Dataline's "Track & Teach" series on live sampling and resampling is cited by the community as "better than anything on YouTube." Focused, efficient, and advanced techniques.</div>
+          <div class="focus">Focus: Live sampling, resampling, routing, advanced performance</div>
+          <div class="links">
+            <a href="https://dataline.gumroad.com/" target="_blank">Gumroad</a>
+            <a href="https://dataline.bandcamp.com/" target="_blank">Bandcamp</a>
+          </div>
+        </div>
+
+        <div class="creator-card">
+          <h3>Red Means Recording</h3>
+          <div class="role">Musical Workflows & Arrangement</div>
+          <div class="bio">Jeremy Blake's Red Means Recording channel showcases how to build complete, musically coherent pieces on the Octatrack. Excellent for understanding arrangement and live performance.</div>
+          <div class="focus">Focus: Complete workflows, arrangement, live performance, musical inspiration</div>
+          <div class="links">
+            <a href="https://www.youtube.com/@redmeansrecording" target="_blank">YouTube Channel</a>
+            <a href="https://www.youtube.com/@redmeansrecordingambient" target="_blank">Ambient Channel</a>
+          </div>
+        </div>
+
+        <div class="creator-card">
+          <h3>Merlin</h3>
+          <div class="role">Community Guide Author</div>
+          <div class="bio">Merlin's Octatrack User Guide is the definitive community-written explanation of the machine's architecture. Essential for understanding "why", not just "how".</div>
+          <div class="focus">Focus: System architecture, conceptual understanding, user perspective</div>
+          <div class="links">
+            <a href="https://www.elektronauts.com/t/a-polished-version-of-merlins-ot-guide-here/42860" target="_blank">Guide (Elektronauts)</a>
+          </div>
+        </div>
+
+        <div class="creator-card">
+          <h3>Inspektor Gadjet</h3>
+          <div class="role">Tips, Tricks & Resource Curator</div>
+          <div class="bio">Inspektor Gadjet maintains a comprehensive video tutorial index and tips collection. Great for finding specific solutions and discovering techniques.</div>
+          <div class="focus">Focus: Tips, tricks, workflows, resource curation</div>
+          <div class="links">
+            <a href="https://www.inspektorgadjet.com/video-tutorials/octatrack/" target="_blank">Website</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Official Documentation -->
+    <section>
+      <h2>Official Documentation</h2>
+      <p style="margin-bottom: 30px; color: #b0b0b0;">The definitive technical reference. Start here for specifications and official workflows.</p>
+
+      <div class="resources-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Resource</th>
+              <th>Type</th>
+              <th>Best For</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Octatrack MKII User Manual</strong></td>
+              <td>PDF Reference</td>
+              <td>Comprehensive specification, menu paths, official settings</td>
+              <td><a href="https://www.elektron.se/products/octatrack/" target="_blank">elektron.se</a></td>
+            </tr>
+            <tr>
+              <td><strong>Octatrack MKII Quick Guide</strong></td>
+              <td>Quick Reference</td>
+              <td>Fast lookup, key concepts, getting started</td>
+              <td><a href="https://www.elektron.se/wp-content/uploads/2024/09/Ocatrack-MKII-Quick-Guide_ENG.pdf" target="_blank">PDF</a></td>
+            </tr>
+            <tr>
+              <td><strong>Elektron Know-How Videos</strong></td>
+              <td>Official Video Series</td>
+              <td>Visual walkthroughs of official workflows</td>
+              <td><a href="https://www.elektron.se/" target="_blank">Elektron.se</a></td>
+            </tr>
+            <tr>
+              <td><strong>Elektron Forum & Support</strong></td>
+              <td>Official Community</td>
+              <td>Official troubleshooting, firmware updates, direct support</td>
+              <td><a href="https://www.elektron.se/en/support/" target="_blank">Support</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Community Platforms -->
+    <section>
+      <h2>Community Platforms</h2>
+      <p style="margin-bottom: 30px; color: #b0b0b0;">Where the Octatrack community gathers, shares knowledge, and discovers techniques together.</p>
+
+      <div class="platforms-grid">
+        <div class="platform-card">
+          <h3>Elektronauts</h3>
+          <div class="description">The largest and most active Octatrack community forum. Curated tutorials, live setups, performance examples, and direct communication with Elektron.</div>
+          <a href="https://www.elektronauts.com/c/elektron-gear/octatrack/12" target="_blank">Visit Forum</a>
+        </div>
+
+        <div class="platform-card">
+          <h3>MOD WIGGLER</h3>
+          <div class="description">Hardware synthesizer enthusiast forum with an active Octatrack community. Long-running "Tips & Tricks" thread full of user discoveries.</div>
+          <a href="https://www.modwiggler.com/forum/viewtopic.php?t=88827" target="_blank">Visit Forum</a>
+        </div>
+
+        <div class="platform-card">
+          <h3>Gearspace</h3>
+          <div class="description">General music gear forum. Occasional in-depth Octatrack discussions and equipment advice.</div>
+          <a href="https://www.gearspace.com/" target="_blank">Visit Forum</a>
+        </div>
+
+        <div class="platform-card">
+          <h3>OP Forums</h3>
+          <div class="description">Teenage Engineering + Elektron gear discussion. Octatrack techniques and ecosystem conversations.</div>
+          <a href="https://www.op-forums.com/" target="_blank">Visit Forum</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guiding Principles -->
+    <section>
+      <h2>Our Philosophy</h2>
+
+      <div class="attribution-notice">
+        <strong>Fair Use & Attribution:</strong> This platform respects copyright, credits creators, and embeds content responsibly. Every tutorial, video, guide, and idea has a documented source. We are a gateway to the larger Octatrack ecosystem, not a silo. If you discover new resources or creators, please let us know so we can expand this platform in service of the community.
+      </div>
+
+      <div class="principles">
+        <ol>
+          <li><strong>Credit creators always.</strong> Every video, guide, forum post, and idea has a source. We name it, link it, and direct you there.</li>
+          <li><strong>Link, don't wall-garden.</strong> This platform is a gateway, not a knowledge silo. We point you to the originals.</li>
+          <li><strong>Respect copyright.</strong> We embed responsibly, quote sparingly, and attribute everything.</li>
+          <li><strong>Community-first.</strong> We celebrate user tips, forum discussions, shared knowledge, and collective learning.</li>
+          <li><strong>Be accessible.</strong> Plain HTML, fast loading, works offline where possible. No paywalls, no tracking.</li>
+          <li><strong>Build for longevity.</strong> Human-readable data formats (JSON), open-source tools, possibility of migration.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Special Thanks -->
+    <section>
+      <h2>Special Thanks</h2>
+      <p style="color: #b0b0b0; line-height: 1.8;">
+        To Elektron for creating a device that inspires such passionate teaching and learning.
+        <br><br>
+        To everyone who has shared Octatrack knowledge freely — in forums, videos, Discord servers, and one-on-one conversations.
+        <br><br>
+        To Merlin for the definitive community guide.
+        <br><br>
+        To Cuckoo for pioneering Octatrack tutorials.
+        <br><br>
+        To EZBOT for demonstrating that live performance with constraints is more creative than freedom.
+        <br><br>
+        To the Elektronauts community for maintaining the best resource hub for a hardware synthesizer.
+        <br><br>
+        <strong>This platform exists because you all made learning the Octatrack possible.</strong>
+      </p>
+    </section>
+
+    <footer>
+      <p>Octatrack Learning Platform | Content Ecosystem v1.0</p>
+      <p style="color: #404040;">2026 | Built in service of the Octatrack community</p>
+      <div class="back-link">
+        <a href="index.html">← Back to Tutorials</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

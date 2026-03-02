@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 - The Audio Pool: Samples & Organization</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #111111;
+      border-bottom: 3px solid #00ffff;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 40px;
+      z-index: 1000;
+    }
+
+    .top-bar a {
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .top-bar a:hover {
+      color: #00ff41;
+      transform: translateY(-2px);
+    }
+
+    .top-bar-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      flex: 1;
+    }
+
+    .top-bar-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .difficulty {
+      color: #00ff41;
+      border: 2px solid #00ff41;
+      padding: 4px 10px;
+    }
+
+    .time {
+      color: #ff00ff;
+      border: 2px solid #ff00ff;
+      padding: 4px 10px;
+    }
+
+    .container {
+      display: flex;
+      margin-top: 60px;
+      min-height: calc(100vh - 60px);
+    }
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 60px;
+      width: 280px;
+      height: calc(100vh - 60px);
+      background: #111111;
+      border-right: 3px solid #333333;
+      overflow-y: auto;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .sidebar-section {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #666666;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar-section:first-child {
+      margin-top: 0;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-nav li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+      font-size: 13px;
+    }
+
+    .sidebar-nav li:hover {
+      border-left: 2px solid #00ffff;
+      color: #00ffff;
+    }
+
+    .sidebar-nav li.active {
+      background: #1a1a1a;
+      border-left: 2px solid #00ff41;
+      color: #00ff41;
+    }
+
+    .sidebar-nav li.completed::before {
+      content: "✓";
+      color: #00ff41;
+      font-weight: 700;
+      width: 16px;
+    }
+
+    .sidebar-nav li:not(.completed)::before {
+      content: "○";
+      color: #666666;
+      width: 16px;
+    }
+
+    .main {
+      margin-left: 280px;
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .section {
+      background: #111111;
+      border: 3px solid #333333;
+      padding: 40px;
+      margin-bottom: 40px;
+      scroll-margin-top: 80px;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .section.in-view {
+      opacity: 1;
+      border-color: #00ffff;
+    }
+
+    .section h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #00ffff;
+    }
+
+    .section p {
+      margin-bottom: 16px;
+      color: #e0e0e0;
+    }
+
+    .section ul, .section ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .section li {
+      margin-bottom: 8px;
+    }
+
+    code {
+      background: #0a0a0a;
+      color: #00ff41;
+      padding: 4px 8px;
+      border: 1px solid #333333;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+    }
+
+    button {
+      background: #111111;
+      color: #00ffff;
+      border: 3px solid #00ffff;
+      padding: 12px 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #00ffff;
+      color: #0a0a0a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 rgba(0, 255, 255, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .validator {
+      background: #0a0a0a;
+      border: 2px solid #ff00ff;
+      padding: 30px;
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+
+    .validator-group {
+      margin-bottom: 20px;
+    }
+
+    .validator-label {
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .validator-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .validator-btn {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      border: 2px solid #333333;
+      padding: 10px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .validator-btn:hover {
+      border-color: #00ffff;
+      color: #00ffff;
+    }
+
+    .validator-btn.selected {
+      background: #00ffff;
+      color: #0a0a0a;
+      border-color: #00ffff;
+      font-weight: 600;
+    }
+
+    .validator-result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 2px solid #333333;
+      background: #0a0a0a;
+      display: none;
+    }
+
+    .validator-result.show {
+      display: block;
+    }
+
+    .validator-result.pass {
+      border-color: #00ff41;
+      color: #00ff41;
+    }
+
+    .validator-result.fail {
+      border-color: #ff3333;
+      color: #ff3333;
+    }
+
+    .filename-input {
+      background: #1a1a1a;
+      border: 2px solid #333333;
+      color: #e0e0e0;
+      padding: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .filename-feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-left: 3px solid;
+      font-size: 13px;
+    }
+
+    .filename-feedback.pass {
+      border-color: #00ff41;
+      color: #00ff41;
+      background: rgba(0, 255, 65, 0.1);
+    }
+
+    .filename-feedback.warn {
+      border-color: #ffaa00;
+      color: #ffaa00;
+      background: rgba(255, 170, 0, 0.1);
+    }
+
+    .filename-feedback.fail {
+      border-color: #ff3333;
+      color: #ff3333;
+      background: rgba(255, 51, 51, 0.1);
+    }
+
+    .folder-tree {
+      background: #0a0a0a;
+      border: 2px solid #00ff41;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .folder-tree-item {
+      margin-left: 20px;
+    }
+
+    .folder-tree-folder {
+      color: #ffaa00;
+      font-weight: 600;
+    }
+
+    .folder-tree-file {
+      color: #00ffff;
+    }
+
+    .folder-tree-root {
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .quiz-section {
+      background: #111111;
+      border: 3px solid #ff3333;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .quiz-question {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #333333;
+    }
+
+    .quiz-question:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .quiz-q {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quiz-option {
+      padding: 12px;
+      background: #0a0a0a;
+      border: 2px solid #333333;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+
+    .quiz-option:hover {
+      border-color: #00ffff;
+    }
+
+    .quiz-option.selected {
+      border-color: #00ffff;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .quiz-option.correct {
+      border-color: #00ff41;
+      background: rgba(0, 255, 65, 0.15);
+      color: #00ff41;
+    }
+
+    .quiz-option.incorrect {
+      border-color: #ff3333;
+      background: rgba(255, 51, 51, 0.15);
+      color: #ff3333;
+    }
+
+    .quiz-feedback {
+      margin-top: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666666;
+      display: none;
+    }
+
+    .quiz-feedback.show {
+      display: block;
+    }
+
+    .confidence-section {
+      background: #111111;
+      border: 3px solid #ff00ff;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .confidence-scale {
+      display: flex;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .confidence-btn {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #ff00ff;
+      background: #0a0a0a;
+      color: #ff00ff;
+      cursor: pointer;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.2s;
+      padding: 0;
+    }
+
+    .confidence-btn:hover {
+      background: #ff00ff;
+      color: #0a0a0a;
+      transform: scale(1.1);
+    }
+
+    .confidence-btn.selected {
+      background: #ff00ff;
+      color: #0a0a0a;
+    }
+
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 60px 0 40px;
+      margin-left: 280px;
+      padding: 0 40px;
+    }
+
+    .bottom-nav a {
+      flex: 1;
+      padding: 20px;
+      background: #111111;
+      border: 3px solid #333333;
+      color: #00ffff;
+      text-decoration: none;
+      text-align: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .bottom-nav a:hover {
+      border-color: #00ffff;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .progress-container {
+      height: 12px;
+      background: #1a1a1a;
+      border: 2px solid #333333;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #00ffff, #00ff41, #ff00ff);
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: auto;
+        border-right: none;
+        border-bottom: 3px solid #333333;
+        max-height: 200px;
+      }
+
+      .container {
+        flex-direction: column;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .bottom-nav {
+        margin-left: 0;
+        padding: 0 20px;
+      }
+
+      .validator-controls {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a href="index.html">← DASHBOARD</a>
+    <div class="top-bar-title">04 — AUDIO POOL</div>
+    <div class="top-bar-meta">
+      <span class="difficulty">Beginner</span>
+      <span class="time">20 MIN</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <div class="sidebar-section">SECTIONS</div>
+      <ul class="sidebar-nav">
+        <li data-section="how-it-works">How It Works</li>
+        <li data-section="format-reqs">Format Requirements</li>
+        <li data-section="file-naming">File Naming</li>
+        <li data-section="organization">Organization</li>
+        <li data-section="your-library">Your Library</li>
+        <li data-section="common-problems">Problems & Fixes</li>
+        <li data-section="ableton-pipeline">Ableton Pipeline</li>
+      </ul>
+
+      <div class="sidebar-section">PROGRESS</div>
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+
+      <div class="sidebar-section">STATUS</div>
+      <div style="font-size: 12px; color: #00ffff; font-weight: 500;">
+        <span id="status-text">Not started</span>
+      </div>
+    </div>
+
+    <div class="main">
+      <section class="section" id="how-it-works">
+        <h2>How the Audio Pool Works</h2>
+        <p>Every sample the Octatrack uses must live inside the Set's <code>AUDIO/</code> folder. The OT doesn't reference samples by absolute path—it uses relative paths like <code>../AUDIO/folder/file.wav</code>.</p>
+        <p><strong>Critical consequences:</strong></p>
+        <ul>
+          <li><strong>Moving samples BREAKS project references.</strong> If you move a file, projects that referenced it can't find it.</li>
+          <li><strong>Renaming the Set folder BREAKS everything.</strong> The relative path becomes invalid. Never rename the Set folder.</li>
+          <li><strong>Renaming the AUDIO folder BREAKS everything.</strong> Same issue.</li>
+          <li><strong>The OT uses FAT32 8.3 short names internally.</strong> Long filenames get truncated: <code>!!Samples:Loops</code> becomes <code>!!SAMP~2</code>.</li>
+        </ul>
+        <p><strong>Best practice:</strong> Organize once, move files rarely. If you need to reorganize, do it BEFORE loading samples into projects, or update project references manually.</p>
+      </section>
+
+      <section class="section" id="format-reqs">
+        <h2>Audio Format Requirements</h2>
+        <p>The Octatrack is picky about audio format. Use ONLY:</p>
+        <ul>
+          <li><strong>Format:</strong> WAV or AIFF</li>
+          <li><strong>Sample Rate:</strong> 44.1 kHz (ONLY—48kHz/96kHz play at wrong pitch/speed)</li>
+          <li><strong>Bit Depth:</strong> 16-bit or 24-bit</li>
+          <li><strong>Channels:</strong> Mono or Stereo</li>
+        </ul>
+
+        <p style="margin-top: 20px; color: #ffaa00; font-weight: 600;">Validator: Test a file's specs</p>
+        
+        <div class="validator">
+          <div class="validator-group">
+            <div class="validator-label">Sample Rate</div>
+            <div class="validator-controls">
+              <button class="validator-btn" data-attr="rate" data-value="44.1">44.1 kHz</button>
+              <button class="validator-btn" data-attr="rate" data-value="48">48 kHz</button>
+              <button class="validator-btn" data-attr="rate" data-value="96">96 kHz</button>
+              <button class="validator-btn" data-attr="rate" data-value="other">Other</button>
+            </div>
+          </div>
+
+          <div class="validator-group">
+            <div class="validator-label">Bit Depth</div>
+            <div class="validator-controls">
+              <button class="validator-btn" data-attr="depth" data-value="16">16-bit</button>
+              <button class="validator-btn" data-attr="depth" data-value="24">24-bit</button>
+              <button class="validator-btn" data-attr="depth" data-value="32">32-bit</button>
+              <button class="validator-btn" data-attr="depth" data-value="8">8-bit</button>
+            </div>
+          </div>
+
+          <div class="validator-group">
+            <div class="validator-label">Format</div>
+            <div class="validator-controls">
+              <button class="validator-btn" data-attr="format" data-value="wav">WAV</button>
+              <button class="validator-btn" data-attr="format" data-value="aiff">AIFF</button>
+              <button class="validator-btn" data-attr="format" data-value="mp3">MP3</button>
+              <button class="validator-btn" data-attr="format" data-value="flac">FLAC</button>
+            </div>
+          </div>
+
+          <div class="validator-group">
+            <div class="validator-label">Channels</div>
+            <div class="validator-controls">
+              <button class="validator-btn" data-attr="channels" data-value="mono">Mono</button>
+              <button class="validator-btn" data-attr="channels" data-value="stereo">Stereo</button>
+            </div>
+          </div>
+
+          <div class="validator-result" id="validator-result">
+            <strong id="validator-title">PASS</strong><br>
+            <span id="validator-msg"></span>
+          </div>
+        </div>
+
+        <p style="margin-top: 20px; color: #666666;"><strong>To check your file:</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; font-family: 'Space Mono', monospace; font-size: 12px; margin: 10px 0;">ffprobe -v quiet -show_streams FILE</p>
+
+        <p style="margin-top: 15px;"><strong>To convert to OT format:</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; font-family: 'Space Mono', monospace; font-size: 12px; margin: 10px 0;">ffmpeg -i INPUT -ar 44100 -c:a pcm_s24le OUTPUT.wav</p>
+      </section>
+
+      <section class="section" id="file-naming">
+        <h2>File Naming Rules</h2>
+        <p><strong>Include BPM for loops:</strong> If your filename has a number between 85–170, the OT assumes it's BPM and auto-detects. Examples:</p>
+        <ul>
+          <li><code>DrumLoop_Dark_128bpm.wav</code> → OT reads 128</li>
+          <li><code>Arp_Bright_110.wav</code> → OT reads 110</li>
+          <li><code>Synth_Pad_2024.wav</code> → Warning! OT might think 2024 is BPM (out of range, ignored)</li>
+        </ul>
+
+        <p style="margin-top: 20px; color: #ffaa00; font-weight: 600;">Filename Validator: Check if your name is OT-compatible</p>
+
+        <div class="validator" style="border-color: #ffaa00;">
+          <div class="validator-group">
+            <div class="validator-label">Type Your Filename</div>
+            <input type="text" class="filename-input" id="filename-input" placeholder="e.g., DrumLoop_Dark_128bpm.wav" oninput="validateFilename()">
+          </div>
+          <div class="filename-feedback" id="filename-feedback"></div>
+        </div>
+
+        <p style="margin-top: 20px;"><strong>Rules:</strong></p>
+        <ul>
+          <li><strong>Keep under 30 characters</strong> (OT screen truncates longer names)</li>
+          <li><strong>No special chars:</strong> colon (:), question mark (?), asterisk (*) — FAT32 limitation</li>
+          <li><strong>Avoid dates in filename</strong> if they're in 85–170 range (causes BPM confusion)</li>
+          <li><strong>Use underscores or hyphens</strong> instead of spaces (cleaner)</li>
+        </ul>
+      </section>
+
+      <section class="section" id="organization">
+        <h2>Folder Organization Best Practices</h2>
+        <ul>
+          <li><strong>Max 1024 files per folder</strong> on the OT browser—split if needed</li>
+          <li><strong>Organize by type:</strong> Drums/, Melodic/, Ambient/, Vocals/</li>
+          <li><strong>Or by BPM:</strong> 120bpm/, 130bpm/, 140bpm/</li>
+          <li><strong>Keep path length under ~200 chars</strong> (some systems have limits)</li>
+          <li><strong>FAT32 truncates long names:</strong> <code>!!Samples:Loops</code> → <code>!!SAMP~2</code> (watch for collisions)</li>
+        </ul>
+
+        <p style="margin-top: 20px; color: #00ff41; font-weight: 600;">Flat structure works great too:</p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.6;">AUDIO/<br>├── Kick_Hard_01.wav<br>├── Kick_Deep_110.wav<br>├── Snare_Tight_01.wav<br>├── Loop_Dark_128bpm.wav<br>└── [etc]</p>
+
+        <p style="margin-top: 20px;">Pro tip: Use a consistent naming scheme and you won't need deep folders. Everything stays fast and visible.</p>
+      </section>
+
+      <section class="section" id="your-library">
+        <h2>Rishaal's Actual Sample Library</h2>
+        <p>Your AUDIO pool on the Octatrack card contains 7,248 WAV files across multiple packs:</p>
+
+        <div class="folder-tree">
+          <div class="folder-tree-root">SET/ → AUDIO/</div>
+          
+          <div class="folder-tree-item"><span class="folder-tree-folder">!!Samples:Loops/</span> (main loops library)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Arp/</span> (arpeggio loops)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Dark/</span> (dark/moody loops)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Drum/</span> (drum loops)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Guitar/</span> (guitar loops)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Melodic/</span> (melodic loops)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Orchestral/</span> (orchestral elements)</div>
+          <div class="folder-tree-item" style="margin-left: 40px;"><span class="folder-tree-folder">Spatial/</span> (ambient/spatial)</div>
+
+          <div class="folder-tree-item"><span class="folder-tree-folder">Loopmasters/</span> (commercial pack)</div>
+          <div class="folder-tree-item"><span class="folder-tree-folder">Modub/</span> (dub samples)</div>
+          <div class="folder-tree-item"><span class="folder-tree-folder">Origin Sound/</span> (sample pack)</div>
+          <div class="folder-tree-item"><span class="folder-tree-folder">Elektron/</span> (factory sounds)</div>
+          <div class="folder-tree-item"><span class="folder-tree-folder">Samples From Mars/</span> (vintage gear samples)</div>
+        </div>
+
+        <p style="margin-top: 20px; color: #ffaa00; font-weight: 600;">Finding Samples:</p>
+        <ul>
+          <li>Main loops: Start in <code>!!Samples:Loops/</code> → navigate by type (Dark, Drum, Melodic, etc.)</li>
+          <li>One-shots & processing: Check subfolders in each pack</li>
+          <li>You have 26 broken file references from earlier projects</li>
+          <li>Consider consolidating or archiving old packs if disk space is tight</li>
+        </ul>
+      </section>
+
+      <section class="section" id="common-problems">
+        <h2>Common Problems & Fixes</h2>
+        
+        <p><strong>Wrong sample rate (48kHz):</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333;">Problem: Sample plays at wrong pitch/speed. Solution: Convert with ffmpeg.</p>
+
+        <p><strong>macOS resource forks (._* files):</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #666666;">Harmless but messy. Delete with: <code>find PATH -name "._*" -delete</code></p>
+
+        <p><strong>.DS_Store files:</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #666666;">Harmless Finder metadata. Safe to delete. OT ignores them.</p>
+
+        <p><strong>Too many files in one folder:</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333;">Problem: OT browser limit = 1024 files. Solution: Split into subfolders.</p>
+
+        <p><strong>Path too long:</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333;">Problem: Very deep nesting (200+ chars). Solution: Flatten or consolidate.</p>
+
+        <p><strong>Projects can't find samples:</strong></p>
+        <p style="background: #0a0a0a; padding: 10px; border: 1px solid #333333; margin: 10px 0; color: #ff3333;">Problem: You moved a sample file. Solution: Move back, or re-load sample in project. Use AUDIO POOL > MISSING to find broken refs.</p>
+      </section>
+
+      <section class="section" id="ableton-pipeline">
+        <h2>Ableton → Octatrack Workflow</h2>
+        <p>Bringing loops from Ableton Live to the OT? Follow this pipeline:</p>
+
+        <ol>
+          <li><strong>In Ableton:</strong> Warp your loop to the correct tempo.</li>
+          <li><strong>Consolidate:</strong> Right-click loop → Consolidate. This locks in any warping/edits.</li>
+          <li><strong>Export as exact bars:</strong> Export 1, 2, 4, or 8 bar sections (power of 2 helps slicing later).</li>
+          <li><strong>Format:</strong> 44.1 kHz, 16 or 24-bit WAV.</li>
+          <li><strong>Filename:</strong> Include BPM: <code>Loop_Ambient_110bpm.wav</code></li>
+          <li><strong>Copy to Set's AUDIO folder:</strong> Use Finder or command line.</li>
+          <li><strong>On OT:</strong> Load sample → Audio Editor → Attributes → set ORIGINAL TEMPO to the BPM.</li>
+          <li><strong>Timestretch:</strong> Set TIMESTRETCH to NORMAL (tonal) or BEAT (drums).</li>
+          <li><strong>Playback Setup:</strong> Set TSTR to AUTO to enable stretching.</li>
+        </ol>
+
+        <p style="margin-top: 20px; color: #00ff41; font-weight: 600;">Result: Stretch loops to any BPM without losing pitch or quality.</p>
+      </section>
+
+      <section class="quiz-section">
+        <h2>Test Yourself</h2>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q1: If you rename the Set folder, what happens to your projects?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="true">All sample paths break—projects can't find samples</div>
+            <div class="quiz-option" data-answer="false">Nothing—the OT automatically updates references</div>
+            <div class="quiz-option" data-answer="false">Only MIDI sync is affected</div>
+            <div class="quiz-option" data-answer="false">Projects rename automatically too</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q2: A filename is "Loop_Synth_140.wav". What does OT assume about it?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">That it's from a synth plugin</div>
+            <div class="quiz-option" data-answer="true">That the BPM is 140</div>
+            <div class="quiz-option" data-answer="false">That it's exactly 140 seconds long</div>
+            <div class="quiz-option" data-answer="false">That it's in the key of B-flat</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q3: What's the max number of files per folder on the OT browser?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">512 files</div>
+            <div class="quiz-option" data-answer="true">1024 files</div>
+            <div class="quiz-option" data-answer="false">2048 files</div>
+            <div class="quiz-option" data-answer="false">Unlimited</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-question">
+          <div class="quiz-q">Q4: Which command converts audio to Octatrack format?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-answer="false">ffmpeg -i INPUT -ar 48000 OUTPUT.wav</div>
+            <div class="quiz-option" data-answer="true">ffmpeg -i INPUT -ar 44100 -c:a pcm_s24le OUTPUT.wav</div>
+            <div class="quiz-option" data-answer="false">ffmpeg -i INPUT -ac 2 OUTPUT.aiff</div>
+            <div class="quiz-option" data-answer="false">ffprobe INPUT | convert</div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <button onclick="checkQuiz()">Submit Answers</button>
+          <div id="quiz-score" style="margin-top: 20px; font-size: 16px; font-weight: 600; display: none;"></div>
+        </div>
+      </section>
+
+      <section class="confidence-section">
+        <h2>Confidence Check</h2>
+        <p>How confident about organizing samples and managing the Audio Pool?</p>
+        <div class="confidence-scale">
+          <button class="confidence-btn" data-confidence="1">1</button>
+          <button class="confidence-btn" data-confidence="2">2</button>
+          <button class="confidence-btn" data-confidence="3">3</button>
+          <button class="confidence-btn" data-confidence="4">4</button>
+          <button class="confidence-btn" data-confidence="5">5</button>
+        </div>
+        <p id="confidence-msg" style="color: #666666; margin-top: 15px; font-size: 13px;"></p>
+      </section>
+
+      <div class="bottom-nav">
+        <a href="03-beat-basics.html">← Previous</a>
+        <a href="05-slice-and-dice.html">Next →</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'octatrack-tutorials';
+
+    function getState() {
+      const state = localStorage.getItem(STORAGE_KEY);
+      return state ? JSON.parse(state) : {};
+    }
+
+    function setState(tutorialId, updates) {
+      const state = getState();
+      state[tutorialId] = {
+        ...state[tutorialId],
+        ...updates,
+        lastAccessed: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    const navItems = document.querySelectorAll('.sidebar-nav li');
+    const sections = document.querySelectorAll('.section');
+    const sectionMap = {};
+    sections.forEach(s => sectionMap[s.id] = s);
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const sectionId = item.dataset.section;
+        const section = sectionMap[sectionId];
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          navItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        }
+      });
+    });
+
+    let visitedSections = new Set();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          visitedSections.add(entry.target.id);
+          const navItem = document.querySelector(`[data-section="${entry.target.id}"]`);
+          if (navItem) {
+            navItem.classList.add('active');
+          }
+        } else {
+          entry.target.classList.remove('in-view');
+        }
+      });
+      updateProgress();
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // FORMAT VALIDATOR
+    const validatorBtns = document.querySelectorAll('.validator-btn');
+    let validatorState = {
+      rate: null,
+      depth: null,
+      format: null,
+      channels: null
+    };
+
+    validatorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const attr = btn.dataset.attr;
+        const value = btn.dataset.value;
+        validatorState[attr] = value;
+
+        document.querySelectorAll(`.validator-btn[data-attr="${attr}"]`).forEach(b => {
+          b.classList.remove('selected');
+        });
+        btn.classList.add('selected');
+        updateValidator();
+      });
+    });
+
+    function updateValidator() {
+      if (!validatorState.rate || !validatorState.depth || !validatorState.format || !validatorState.channels) {
+        document.getElementById('validator-result').classList.remove('show');
+        return;
+      }
+
+      const result = document.getElementById('validator-result');
+      let pass = true;
+      let msg = '';
+
+      if (validatorState.rate !== '44.1') {
+        pass = false;
+        msg = 'Sample rate must be 44.1 kHz. ' + validatorState.rate + ' kHz will play at wrong pitch/speed.';
+      }
+      if (validatorState.depth !== '16' && validatorState.depth !== '24') {
+        pass = false;
+        msg += (msg ? ' | ' : '') + 'Bit depth must be 16 or 24-bit.';
+      }
+      if (validatorState.format !== 'wav' && validatorState.format !== 'aiff') {
+        pass = false;
+        msg += (msg ? ' | ' : '') + 'Format must be WAV or AIFF. OT does not support ' + validatorState.format.toUpperCase() + '.';
+      }
+
+      result.classList.add('show');
+      if (pass) {
+        result.classList.add('pass');
+        result.classList.remove('fail');
+        document.getElementById('validator-title').textContent = '✓ PASS';
+        document.getElementById('validator-msg').textContent = 'This file is OT-compatible!';
+      } else {
+        result.classList.add('fail');
+        result.classList.remove('pass');
+        document.getElementById('validator-title').textContent = '✗ FAIL';
+        document.getElementById('validator-msg').textContent = msg;
+      }
+    }
+
+    // FILENAME VALIDATOR
+    function validateFilename() {
+      const input = document.getElementById('filename-input');
+      const feedback = document.getElementById('filename-feedback');
+      const name = input.value;
+
+      if (!name) {
+        feedback.classList.remove('show');
+        return;
+      }
+
+      feedback.classList.add('show');
+      let status = 'pass';
+      let messages = [];
+
+      if (name.length > 30) {
+        status = 'warn';
+        messages.push(`Length: ${name.length} chars (over 30—OT will truncate)`);
+      } else {
+        messages.push(`Length: ${name.length} chars ✓`);
+      }
+
+      if (/[:?\*]/.test(name)) {
+        status = 'fail';
+        messages.push('Contains forbidden chars: : ? * (FAT32)');
+      } else {
+        messages.push('No forbidden chars ✓');
+      }
+
+      const bpmMatch = name.match(/(\d{2,3})/);
+      if (bpmMatch) {
+        const num = parseInt(bpmMatch[0]);
+        if (num >= 85 && num <= 170) {
+          messages.push(`BPM detected: ${num} ✓`);
+        } else if (num >= 85) {
+          messages.push(`Warning: "${num}" in filename might confuse OT (out of BPM range)`);
+        }
+      }
+
+      feedback.textContent = messages.join(' | ');
+      feedback.classList.remove('pass', 'warn', 'fail');
+      feedback.classList.add(status);
+    }
+
+    // QUIZ
+    const quizOptions = document.querySelectorAll('.quiz-option');
+    quizOptions.forEach((opt, idx) => {
+      opt.addEventListener('click', () => {
+        const questionIdx = Math.floor(idx / 4);
+        const optionIdx = idx % 4;
+
+        document.querySelectorAll('.quiz-question').forEach((q, i) => {
+          q.querySelectorAll('.quiz-option').forEach((o, oi) => {
+            if (i === questionIdx && oi === optionIdx) {
+              o.classList.add('selected');
+            } else if (i === questionIdx) {
+              o.classList.remove('selected');
+            }
+          });
+        });
+      });
+    });
+
+    function checkQuiz() {
+      let score = 0;
+      document.querySelectorAll('.quiz-question').forEach((q, idx) => {
+        const selected = q.querySelector('.quiz-option.selected');
+        if (!selected) return;
+
+        const isCorrect = selected.dataset.answer === 'true';
+        if (isCorrect) {
+          selected.classList.add('correct');
+          score++;
+        } else {
+          selected.classList.add('incorrect');
+          const correct = q.querySelector('[data-answer="true"]');
+          if (correct) correct.classList.add('correct');
+        }
+        q.querySelector('.quiz-feedback').classList.add('show');
+        q.querySelector('.quiz-feedback').textContent = isCorrect ? '✓ Correct!' : '✗ Try again.';
+      });
+
+      document.getElementById('quiz-score').style.display = 'block';
+      document.getElementById('quiz-score').innerHTML = `<span style="color: #00ff41;">Score: ${score} / 4</span>`;
+
+      setState('04-audio-pool', { quizScore: score, quizTotal: 4 });
+      updateProgress();
+    }
+
+    // CONFIDENCE
+    document.querySelectorAll('.confidence-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.confidence-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const confidence = btn.dataset.confidence;
+        const msgs = ['', 'Not ready yet—review the basics', 'Getting there—practice more', 'Pretty confident—I can organize', 'Very confident—I understand it!', 'Expert—ready to teach others!'];
+        document.getElementById('confidence-msg').textContent = msgs[confidence];
+        setState('04-audio-pool', { confidence: parseInt(confidence) });
+        updateProgress();
+      });
+    });
+
+    function updateProgress() {
+      const tutorialState = getState()['04-audio-pool'] || {};
+      const sections = document.querySelectorAll('.section').length;
+      const visited = visitedSections.size;
+      const hasQuiz = tutorialState.quizScore !== undefined;
+      const hasConfidence = tutorialState.confidence !== undefined;
+
+      let completed = 0;
+      if (visited > 0) completed++;
+      if (visited >= sections * 0.8) completed++;
+      if (hasQuiz) completed++;
+      if (hasConfidence) completed++;
+
+      const progress = (completed / 4) * 100;
+      document.querySelector('.progress-bar').style.width = progress + '%';
+
+      let status = 'not-started';
+      if (visited > 0) status = 'in-progress';
+      if (completed === 4) status = 'completed';
+
+      document.getElementById('status-text').textContent = {
+        'not-started': 'Not started',
+        'in-progress': 'In progress',
+        'completed': 'Completed ✓'
+      }[status];
+
+      setState('04-audio-pool', {
+        status,
+        completion: Math.round(progress),
+        sectionsCompleted: Array.from(visitedSections)
+      });
+    }
+
+    updateProgress();
+  </script>
+</body>
+</html>

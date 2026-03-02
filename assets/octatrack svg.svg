@@ -1,0 +1,275 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 800" width="100%" height="100%" style="background-color: #121212;">
+  <defs>
+    <style>
+      .bg-panel { fill: #484b4d; }
+      .bg-edge { fill: #3a3c3e; stroke: #222; stroke-width: 2; }
+      .btn-base { fill: #1c1c1c; stroke: #0a0a0a; stroke-width: 2; }
+      .btn-top { fill: #292a2c; }
+      .btn-func { fill: #9da0a3; stroke: #555; stroke-width: 2; }
+      .btn-func-top { fill: #b5b8bc; }
+      .lbl-main { font-family: 'Arial', sans-serif; font-size: 11px; fill: #ffffff; font-weight: bold; text-anchor: middle; letter-spacing: 0.5px; }
+      .lbl-sub { font-family: 'Arial', sans-serif; font-size: 10px; fill: #a5a7a9; text-anchor: middle; }
+      .lbl-red { font-family: 'Arial', sans-serif; font-size: 9px; fill: #a14d4d; text-anchor: middle; }
+      .lbl-port { font-family: 'Arial', sans-serif; font-size: 9px; fill: #888; text-anchor: middle; }
+      .logo { font-family: 'Impact', 'Arial Black', sans-serif; font-size: 38px; fill: #ffffff; font-style: italic; letter-spacing: 2px; }
+      .mk2 { font-family: 'Arial', sans-serif; font-size: 22px; fill: #ffffff; font-weight: bold; }
+      .mk2-sub { font-family: 'Arial', sans-serif; font-size: 22px; fill: #888; font-weight: normal; }
+      .fader-tick { stroke: #ffffff; stroke-width: 1.5; stroke-linecap: round; }
+    </style>
+
+    <g id="encoder">
+      <circle cx="25" cy="25" r="25" fill="#151515" stroke="#0a0a0a" stroke-width="2"/>
+      <circle cx="25" cy="25" r="20" fill="#222"/>
+      <circle cx="25" cy="25" r="16" fill="#1a1a1a"/>
+      <rect x="24" y="5" width="2" height="8" fill="#e0e0e0"/>
+    </g>
+
+    <g id="btn-rect">
+      <rect width="40" height="34" rx="6" class="btn-base"/>
+      <rect x="2" y="2" width="36" height="30" rx="4" class="btn-top"/>
+    </g>
+
+    <g id="btn-square">
+      <rect width="36" height="36" rx="6" class="btn-base"/>
+      <rect x="2" y="2" width="32" height="32" rx="4" class="btn-top"/>
+    </g>
+
+    <g id="btn-trig">
+      <rect width="48" height="52" rx="6" class="btn-base"/>
+      <rect x="3" y="3" width="42" height="46" rx="4" class="btn-top"/>
+      <rect x="8" y="7" width="32" height="3" rx="1.5" fill="#444"/>
+    </g>
+
+    <g id="btn-scene">
+      <rect width="56" height="50" rx="6" class="btn-base"/>
+      <rect x="3" y="3" width="50" height="44" rx="4" class="btn-top"/>
+    </g>
+
+    <g id="led">
+      <circle cx="4" cy="4" r="4" fill="#111" stroke="#333" stroke-width="1"/>
+      <circle cx="4" cy="4" r="2.5" fill="#333"/>
+    </g>
+    
+    <g id="screw">
+      <circle cx="6" cy="6" r="6" fill="#222"/>
+      <circle cx="6" cy="6" r="4" fill="#333"/>
+      <path d="M 3 6 L 9 6 M 6 3 L 6 9" stroke="#111" stroke-width="1.5"/>
+    </g>
+  </defs>
+
+  <rect x="40" y="40" width="1320" height="720" rx="12" class="bg-edge"/>
+  <rect x="42" y="42" width="1316" height="716" rx="10" class="bg-panel"/>
+
+  <use href="#screw" x="65" y="65"/>
+  <use href="#screw" x="660" y="65"/>
+  <use href="#screw" x="1335" y="65"/>
+  <use href="#screw" x="65" y="730"/>
+  <use href="#screw" x="660" y="730"/>
+  <use href="#screw" x="1335" y="730"/>
+
+  <path d="M 40 40 Q 700 35 1360 40 L 1360 45 L 40 45 Z" fill="#222"/>
+  <text x="80" y="62" class="lbl-port">🎧</text>
+  <text x="145" y="62" class="lbl-port">Main Out</text>
+  <text x="215" y="62" class="lbl-port">Cue Out</text>
+  <text x="285" y="62" class="lbl-port">Input A B</text>
+  <text x="355" y="62" class="lbl-port">Input C D</text>
+  <text x="445" y="62" class="lbl-port">MIDI In</text>
+  <text x="515" y="62" class="lbl-port">MIDI Out</text>
+  <text x="585" y="62" class="lbl-port">MIDI Thru</text>
+  <text x="800" y="62" class="lbl-port">Compact Flash</text>
+  <text x="960" y="62" class="lbl-port">USB</text>
+  <text x="1140" y="62" class="lbl-port">DC In</text>
+  <text x="1270" y="62" class="lbl-port">Power</text>
+
+  <g transform="translate(1080, 110)">
+    <rect x="0" y="0" width="30" height="30" fill="none" stroke="#fff" stroke-width="6"/>
+    <path d="M 0 30 L 30 0" stroke="#fff" stroke-width="6"/>
+    <text x="40" y="28" class="logo">elektron</text>
+  </g>
+
+  <rect x="520" y="160" width="290" height="190" fill="#080808" stroke="#1a1a1a" stroke-width="6" rx="2"/>
+  <rect x="535" y="175" width="260" height="135" fill="#151515"/>
+  <rect x="545" y="185" width="35" height="18" fill="#fff"/>
+  <text x="562.5" y="198" font-family="Arial" font-size="12" font-weight="bold" fill="#000" text-anchor="middle">120.0</text>
+  <rect x="585" y="185" width="200" height="115" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="2,2"/>
+  <text x="550" y="240" font-family="Arial" font-size="10" fill="#fff">Pt:1 KRASUS</text>
+  
+  <text x="520" y="380" class="mk2" text-anchor="start">Octatrack <tspan class="mk2-sub">MKII</tspan></text>
+  <text x="665" y="150" class="lbl-main" style="font-size: 10px; fill:#ccc;">8 Track Dynamic Performance Sampler</text>
+
+  <use href="#encoder" x="90" y="140"/>
+  <text x="115" y="210" class="lbl-main">Headphones Vol</text>
+
+  <use href="#btn-rect" x="65" y="250"/>
+  <text x="85" y="271" class="lbl-main">MIDI</text>
+  <text x="85" y="300" class="lbl-sub">MIDI Sync</text>
+
+  <g transform="translate(65, 335)">
+    <use href="#btn-rect" x="0" y="0"/>   <text x="20" y="21" class="lbl-main">PROJ</text>   <text x="20" y="50" class="lbl-sub">Save Proj</text>
+    <use href="#btn-rect" x="65" y="0"/>  <text x="85" y="21" class="lbl-main">PART</text>   <text x="85" y="50" class="lbl-sub">Part Edit</text>
+    <use href="#btn-rect" x="130" y="0"/> <text x="150" y="21" class="lbl-main">AED</text>    <text x="150" y="50" class="lbl-sub">Slice Grid</text>
+    <use href="#btn-rect" x="195" y="0"/> <text x="215" y="21" class="lbl-main">MIX</text>    <text x="215" y="50" class="lbl-sub">Click</text>
+    <use href="#btn-rect" x="260" y="0"/> <text x="280" y="21" class="lbl-main">ARR</text>    <text x="280" y="50" class="lbl-sub">Arr Mode</text>
+  </g>
+
+  <g transform="translate(195, 220)">
+    <use href="#led" x="0" y="-30"/>  <text x="4" y="-40" class="lbl-sub">A − B</text>
+    <use href="#led" x="65" y="-30"/> <text x="69" y="-40" class="lbl-sub">C − D</text>
+    <use href="#led" x="140" y="-30"/> <text x="144" y="-40" class="lbl-sub">− Int −</text>
+    <use href="#led" x="140" y="50"/> <use href="#btn-rect" x="0" y="0"/>   <text x="20" y="21" class="lbl-main">REC1</text>
+    <text x="20" y="50" class="lbl-sub">Setup 1</text> <text x="20" y="62" class="lbl-red">Pickup +</text>
+
+    <use href="#btn-rect" x="65" y="0"/>  <text x="85" y="21" class="lbl-main">REC2</text>
+    <text x="85" y="50" class="lbl-sub">Setup 2</text> <text x="85" y="62" class="lbl-red">Pickup ▶/■</text>
+
+    <use href="#btn-rect" x="130" y="0"/> <text x="150" y="21" class="lbl-main">REC3</text>
+    <text x="150" y="50" class="lbl-sub">Rec Edit</text> <text x="150" y="62" class="lbl-red">Erase</text>
+  </g>
+
+  <rect x="65" y="440" width="60" height="38" rx="8" class="btn-func"/>
+  <rect x="68" y="443" width="54" height="32" rx="6" class="btn-func-top"/>
+  <text x="95" y="464" class="lbl-main" style="fill:#333;">FUNC</text>
+
+  <use href="#btn-rect" x="180" y="442"/> <text x="200" y="463" class="lbl-main">CUE</text> <text x="200" y="495" class="lbl-sub">Reload Part</text>
+
+  <use href="#btn-rect" x="65" y="535"/>  <text x="85" y="556" class="lbl-main">PTN</text>  <text x="85" y="585" class="lbl-sub">Pattern Settings</text>
+  <use href="#btn-rect" x="180" y="535"/> <text x="200" y="556" class="lbl-main">BANK</text> <text x="200" y="585" class="lbl-sub">Track Trig Edit</text>
+
+  <use href="#btn-square" x="285" y="475"/> <text x="303" y="497" class="lbl-main">YES</text> <text x="303" y="525" class="lbl-sub">Arm</text>
+  <use href="#btn-square" x="285" y="535"/> <text x="303" y="557" class="lbl-main">NO</text>  <text x="303" y="585" class="lbl-sub">Disarm</text>
+
+  <use href="#btn-square" x="350" y="535"/> <text x="368" y="558" class="lbl-main" style="font-size:16px;">&lt;</text> <text x="368" y="585" class="lbl-sub">µTime -</text>
+  <use href="#btn-square" x="410" y="475"/> <text x="428" y="498" class="lbl-main" style="font-size:16px;">ᐱ</text> <text x="428" y="465" class="lbl-sub">Trig Mode</text>
+  <use href="#btn-square" x="410" y="535"/> <text x="428" y="558" class="lbl-main" style="font-size:16px;">ᐯ</text> <text x="428" y="585" class="lbl-sub">Trig Mode</text>
+  <use href="#btn-square" x="470" y="535"/> <text x="488" y="558" class="lbl-main" style="font-size:16px;">&gt;</text> <text x="488" y="585" class="lbl-sub">µTime +</text>
+
+  <g transform="translate(435, 160)">
+    <use href="#btn-rect" x="0" y="0"/>   <text x="20" y="21" class="lbl-main">T1</text> <text x="20" y="45" class="lbl-sub">Cue/Mute</text>
+    <use href="#btn-rect" x="0" y="60"/>  <text x="20" y="81" class="lbl-main">T2</text> <text x="20" y="105" class="lbl-sub">Cue/Mute</text>
+    <use href="#btn-rect" x="0" y="120"/> <text x="20" y="141" class="lbl-main">T3</text> <text x="20" y="165" class="lbl-sub">Cue/Mute</text>
+    <use href="#btn-rect" x="0" y="180"/> <text x="20" y="201" class="lbl-main">T4</text> <text x="20" y="225" class="lbl-sub">Cue/Mute</text>
+  </g>
+
+  <g transform="translate(835, 160)">
+    <use href="#btn-rect" x="0" y="0"/>   <text x="20" y="21" class="lbl-main">T5</text> <text x="20" y="45" class="lbl-sub">Cue/Mute</text>
+    <use href="#btn-rect" x="0" y="60"/>  <text x="20" y="81" class="lbl-main">T6</text> <text x="20" y="105" class="lbl-sub">Cue/Mute</text>
+    <use href="#btn-rect" x="0" y="120"/> <text x="20" y="141" class="lbl-main">T7</text> <text x="20" y="165" class="lbl-sub">Cue/Mute</text>
+    <use href="#btn-rect" x="0" y="180"/> <text x="20" y="201" class="lbl-main">T8</text> <text x="20" y="225" class="lbl-sub">Cue/Mute</text>
+  </g>
+
+  <g transform="translate(520, 420)">
+    <use href="#btn-rect" x="0" y="0"/>   <text x="20" y="21" class="lbl-main">SRC</text> <text x="20" y="50" class="lbl-sub">Note</text>
+    <use href="#btn-rect" x="60" y="0"/>  <text x="80" y="21" class="lbl-main">AMP</text> <text x="80" y="50" class="lbl-sub">Arp</text>
+    <use href="#btn-rect" x="120" y="0"/> <text x="140" y="21" class="lbl-main">LFO</text> <text x="140" y="50" class="lbl-sub">LFO</text>
+    <use href="#btn-rect" x="180" y="0"/> <text x="200" y="21" class="lbl-main">FX1</text> <text x="200" y="50" class="lbl-sub">Ctrl 1</text>
+    <use href="#btn-rect" x="240" y="0"/> <text x="260" y="21" class="lbl-main">FX2</text> <text x="260" y="50" class="lbl-sub">Ctrl 2</text>
+    <path d="M 40 46 L 40 54 L 240 54 L 240 46" fill="none" stroke="#777" stroke-width="1.5"/>
+    <rect x="120" y="48" width="40" height="12" fill="#484b4d"/>
+    <text x="140" y="60" class="lbl-red">Setup</text>
+  </g>
+
+  <g transform="translate(580, 530)">
+    <rect width="46" height="40" rx="8" class="btn-base"/>
+    <rect x="3" y="3" width="40" height="34" rx="6" class="btn-top"/>
+    <circle cx="23" cy="20" r="10" fill="none" stroke="#a14d4d" stroke-width="2.5"/>
+    <text x="23" y="55" class="lbl-sub">Copy</text>
+
+    <rect x="70" y="0" width="46" height="40" rx="8" class="btn-base"/>
+    <rect x="73" y="3" width="40" height="34" rx="6" class="btn-top"/>
+    <path d="M 88 12 L 102 20 L 88 28 Z" fill="none" stroke="#fff" stroke-width="2"/>
+    <text x="93" y="55" class="lbl-sub">Clear</text>
+
+    <rect x="140" y="0" width="46" height="40" rx="8" class="btn-base"/>
+    <rect x="143" y="3" width="40" height="34" rx="6" class="btn-top"/>
+    <rect x="157" y="14" width="12" height="12" fill="none" stroke="#fff" stroke-width="2"/>
+    <text x="163" y="55" class="lbl-sub">Paste</text>
+  </g>
+
+  <g transform="translate(930, 200)">
+    <use href="#encoder" x="0" y="0"/>   <text x="25" y="65" class="lbl-main">Level</text> <text x="25" y="78" class="lbl-sub">Cursor Pos</text>
+    <use href="#encoder" x="100" y="0"/> <text x="125" y="65" class="lbl-main">A</text>     <text x="125" y="78" class="lbl-sub">Start Pos</text>
+    <use href="#encoder" x="200" y="0"/> <text x="225" y="65" class="lbl-main">B</text>     <text x="225" y="78" class="lbl-sub">Loop Pos</text>
+    <use href="#encoder" x="300" y="0"/> <text x="325" y="65" class="lbl-main">C</text>     <text x="325" y="78" class="lbl-sub">End Pos</text>
+  </g>
+
+  <use href="#btn-square" x="965" y="315"/> 
+  <path d="M 977 335 L 987 325 L 980 325" fill="none" stroke="#fff" stroke-width="2"/> <text x="983" y="365" class="lbl-main">Tap Tempo</text>
+  <text x="983" y="378" class="lbl-red">Pickup Sync</text>
+
+  <g transform="translate(1030, 310)">
+    <use href="#encoder" x="0" y="0"/>   <text x="25" y="65" class="lbl-main">D</text> <text x="25" y="78" class="lbl-sub">Zoom ⬍</text>
+    <use href="#encoder" x="100" y="0"/> <text x="125" y="65" class="lbl-main">E</text> <text x="125" y="78" class="lbl-sub">Scroll ⬌</text>
+    <use href="#encoder" x="200" y="0"/> <text x="225" y="65" class="lbl-main">F</text> <text x="225" y="78" class="lbl-sub">Zoom ⬌</text>
+  </g>
+
+  <use href="#btn-scene" x="880" y="480"/>
+  <text x="908" y="512" class="lbl-red" style="font-size: 18px; font-weight: bold;">A</text>
+  <text x="908" y="550" class="lbl-sub">Mute</text>
+  
+  <use href="#btn-scene" x="1260" y="480"/>
+  <text x="1288" y="512" class="lbl-red" style="font-size: 18px; font-weight: bold;">B</text>
+  <text x="1288" y="550" class="lbl-sub">Mute</text>
+
+  <g transform="translate(1000, 475)">
+    <path d="M 0 0 L 0 10 M 15 0 L 15 5 M 30 0 L 30 5 M 45 0 L 45 5 M 60 0 L 60 10 M 75 0 L 75 5 M 90 0 L 90 5 M 105 0 L 105 5 M 120 0 L 120 10 M 135 0 L 135 5 M 150 0 L 150 5 M 165 0 L 165 5 M 180 0 L 180 10" class="fader-tick"/>
+    <path d="M 0 50 L 0 60 M 15 55 L 15 60 M 30 55 L 30 60 M 45 55 L 45 60 M 60 50 L 60 60 M 75 55 L 75 60 M 90 55 L 90 60 M 105 55 L 105 60 M 120 50 L 120 60 M 135 55 L 135 60 M 150 55 L 150 60 M 165 55 L 165 60 M 180 50 L 180 60" class="fader-tick"/>
+    
+    <rect x="-10" y="24" width="200" height="12" rx="6" fill="#000"/>
+    <rect x="-8" y="25" width="196" height="10" rx="5" fill="#111"/>
+    
+    <rect x="10" y="8" width="24" height="44" rx="2" fill="#111" stroke="#333" stroke-width="1.5"/>
+    <rect x="20" y="14" width="4" height="32" fill="#fff" rx="1"/>
+  </g>
+
+  <use href="#screw" x="970" y="505"/>
+  <use href="#screw" x="1225" y="505"/>
+
+  <g transform="translate(65, 620)">
+    
+    <use href="#btn-trig" x="0" y="0"/>   <text x="24" y="35" class="mk2">1</text>   <text x="24" y="70" class="lbl-sub">T1</text>
+    <use href="#btn-trig" x="70" y="0"/>  <text x="94" y="35" class="mk2">2</text>   <text x="94" y="70" class="lbl-sub">T2</text>
+    <use href="#btn-trig" x="140" y="0"/> <text x="164" y="35" class="mk2">3</text>  <text x="164" y="70" class="lbl-sub">T3</text>
+    <use href="#btn-trig" x="210" y="0"/> <text x="234" y="35" class="mk2">4</text>  <text x="234" y="70" class="lbl-sub">T4</text>
+
+    <rect x="278" y="-2" width="52" height="56" rx="8" fill="none" stroke="#a14d4d" stroke-width="2"/>
+    <use href="#btn-trig" x="280" y="0"/> <text x="304" y="35" class="mk2">5</text>  <text x="304" y="70" class="lbl-sub">T5</text>
+    <use href="#btn-trig" x="350" y="0"/> <text x="374" y="35" class="mk2">6</text>  <text x="374" y="70" class="lbl-sub">T6</text>
+    <use href="#btn-trig" x="420" y="0"/> <text x="444" y="35" class="mk2">7</text>  <text x="444" y="70" class="lbl-sub">T7</text>
+    <use href="#btn-trig" x="490" y="0"/> <text x="514" y="35" class="mk2">8</text>  <text x="514" y="70" class="lbl-sub">T8</text>
+
+    <rect x="558" y="-2" width="52" height="56" rx="8" fill="none" stroke="#a14d4d" stroke-width="2"/>
+    <use href="#btn-trig" x="560" y="0"/> <text x="584" y="35" class="mk2">9</text>  <text x="584" y="70" class="lbl-sub">T1</text>
+    <use href="#btn-trig" x="630" y="0"/> <text x="654" y="35" class="mk2">10</text> <text x="654" y="70" class="lbl-sub">T2</text>
+    <use href="#btn-trig" x="700" y="0"/> <text x="724" y="35" class="mk2">11</text> <text x="724" y="70" class="lbl-sub">T3</text>
+    <use href="#btn-trig" x="770" y="0"/> <text x="794" y="35" class="mk2">12</text> <text x="794" y="70" class="lbl-sub">T4</text>
+
+    <rect x="838" y="-2" width="52" height="56" rx="8" fill="none" stroke="#a14d4d" stroke-width="2"/>
+    <use href="#btn-trig" x="840" y="0"/> <text x="864" y="35" class="mk2">13</text> <text x="864" y="70" class="lbl-sub">T5</text>
+    <use href="#btn-trig" x="910" y="0"/> <text x="934" y="35" class="mk2">14</text> <text x="934" y="70" class="lbl-sub">T6</text>
+    <use href="#btn-trig" x="980" y="0"/> <text x="1004" y="35" class="mk2">15</text> <text x="1004" y="70" class="lbl-sub">T7</text>
+    <use href="#btn-trig" x="1050" y="0"/> <text x="1074" y="35" class="mk2">16</text> <text x="1074" y="70" class="lbl-sub">T8</text>
+
+    <path d="M 0 76 L 0 84 L 538 84 L 538 76" fill="none" stroke="#777" stroke-width="1.5"/>
+    <rect x="220" y="78" width="80" height="12" fill="#484b4d"/>
+    <text x="260" y="88" class="lbl-sub">Track Trigs</text>
+
+    <path d="M 560 76 L 560 84 L 1098 84 L 1098 76" fill="none" stroke="#777" stroke-width="1.5"/>
+    <rect x="760" y="78" width="100" height="12" fill="#484b4d"/>
+    <text x="810" y="88" class="lbl-sub">Sample/MIDI Trigs</text>
+
+    <g transform="translate(1120, -10)">
+      <use href="#led" x="5" y="0"/>  <text x="9" y="-10" class="lbl-main" style="font-size: 9px;">1:4</text>
+      <use href="#led" x="25" y="0"/> <text x="29" y="-10" class="lbl-main" style="font-size: 9px;">2:4</text>
+      <use href="#led" x="45" y="0"/> <text x="49" y="-10" class="lbl-main" style="font-size: 9px;">3:4</text>
+      <use href="#led" x="65" y="0"/> <text x="69" y="-10" class="lbl-main" style="font-size: 9px;">4:4</text>
+      <circle cx="9" cy="4" r="2.5" fill="#f5d47a"/>
+      <circle cx="29" cy="4" r="2.5" fill="#e85f5f"/>
+      <circle cx="49" cy="4" r="2.5" fill="#e85f5f"/>
+      <circle cx="69" cy="4" r="2.5" fill="#e85f5f"/>
+
+      <use href="#btn-rect" x="15" y="15"/>
+      <text x="35" y="36" class="lbl-main">PAGE</text>
+      <text x="35" y="65" class="lbl-sub">Scale</text>
+    </g>
+  </g>
+</svg>
