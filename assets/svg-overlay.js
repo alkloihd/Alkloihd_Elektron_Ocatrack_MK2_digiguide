@@ -31,6 +31,9 @@
   var activeHighlights = {};
   var animationTimer = null;
   var currentTutorial = null;
+  var sectionMap = {};          // sectionId -> [elementId, ...]
+  var activeSectionId = null;   // currently visible section
+  var sectionObserver = null;   // IntersectionObserver for sections
 
   function detectTutorial() {
     var path = window.location.pathname;
@@ -188,7 +191,7 @@
       if (stepIdx >= seq.steps.length) {
         animationTimer = setTimeout(function () {
           clearAll();
-          highlightTutorialButtons();
+          restoreHighlights();
         }, 1500);
         return;
       }
@@ -267,6 +270,114 @@
       }
     }
     if (ids.length > 0) highlightButtons(ids, COLORS.highlight);
+  }
+
+  function restoreHighlights() {
+    if (activeSectionId && sectionMap[activeSectionId] && sectionMap[activeSectionId].length > 0) {
+      clearAll();
+      highlightButtons(sectionMap[activeSectionId], COLORS.highlight);
+    } else {
+      highlightTutorialButtons();
+    }
+  }
+
+  function setupSectionTracking() {
+    var main = document.querySelector('.main');
+    if (!main) return;
+
+    var sections = main.querySelectorAll('.section');
+    if (sections.length === 0) return;
+
+    // Build sectionMap: for each section, collect all data-ot-element IDs inside it
+    sectionMap = {};
+    for (var i = 0; i < sections.length; i++) {
+      var sec = sections[i];
+      var secId = sec.id || ('section-' + i);
+      var refs = sec.querySelectorAll('[data-ot-element]');
+      var ids = [];
+      var seen = {};
+      for (var r = 0; r < refs.length; r++) {
+        var eid = refs[r].dataset.otElement;
+        if (eid && !seen[eid]) {
+          ids.push(eid);
+          seen[eid] = true;
+        }
+      }
+      sectionMap[secId] = ids;
+    }
+
+    // Create or find the section indicator element below the SVG
+    var indicator = panelEl.querySelector('.ot-section-indicator');
+    if (!indicator) {
+      indicator = document.createElement('div');
+      indicator.className = 'ot-section-indicator';
+      // Insert after the SVG wrap
+      var svgWrap = panelEl.querySelector('.ot-svg-wrap');
+      if (svgWrap && svgWrap.nextSibling) {
+        svgWrap.parentNode.insertBefore(indicator, svgWrap.nextSibling);
+      } else if (svgWrap) {
+        svgWrap.parentNode.appendChild(indicator);
+      }
+    }
+    indicator.style.display = 'none';
+
+    // Set up IntersectionObserver on sections
+    var visibleSections = {};
+    sectionObserver = new IntersectionObserver(function (entries) {
+      for (var e = 0; e < entries.length; e++) {
+        var entry = entries[e];
+        var id = entry.target.id || entry.target.getAttribute('data-section-idx');
+        if (entry.isIntersecting) {
+          visibleSections[id] = entry.intersectionRatio;
+        } else {
+          delete visibleSections[id];
+        }
+      }
+
+      // Pick the section with the highest intersection ratio
+      var bestId = null;
+      var bestRatio = 0;
+      var vKeys = Object.keys(visibleSections);
+      for (var v = 0; v < vKeys.length; v++) {
+        if (visibleSections[vKeys[v]] > bestRatio) {
+          bestRatio = visibleSections[vKeys[v]];
+          bestId = vKeys[v];
+        }
+      }
+
+      if (bestId && bestId !== activeSectionId) {
+        activeSectionId = bestId;
+        // Update highlights to section-level
+        var secIds = sectionMap[activeSectionId];
+        if (secIds && secIds.length > 0) {
+          clearAll();
+          highlightButtons(secIds, COLORS.highlight);
+        } else {
+          // Section has no button references — fall back to tutorial-level
+          highlightTutorialButtons();
+        }
+        // Update indicator
+        var secEl = main.querySelector('#' + CSS.escape(activeSectionId))
+          || main.querySelector('[data-section-idx="' + activeSectionId + '"]');
+        var secHeading = secEl ? secEl.querySelector('h2, h3, h4') : null;
+        var secName = secHeading ? secHeading.textContent : activeSectionId;
+        indicator.textContent = 'Section: ' + secName;
+        indicator.style.display = 'block';
+      } else if (vKeys.length === 0) {
+        // No section in view — fall back to tutorial-level
+        activeSectionId = null;
+        highlightTutorialButtons();
+        indicator.style.display = 'none';
+      }
+    }, { threshold: 0.3 });
+
+    // Observe all sections
+    for (var s = 0; s < sections.length; s++) {
+      if (!sections[s].id) {
+        sections[s].setAttribute('data-section-idx', 'section-' + s);
+      }
+      sectionObserver.observe(sections[s]);
+    }
   }
 
   function scanButtonReferences() {
@@ -364,7 +475,7 @@
                 sp.style.textShadow = '0 0 8px ' + COLORS.active;
               });
               sp.addEventListener('mouseleave', function () {
-                highlightTutorialButtons();
+                restoreHighlights();
                 hideTooltip();
                 sp.style.color = COLORS.highlight;
                 sp.style.textShadow = 'none';
@@ -418,6 +529,9 @@
         ';padding:8px 12px;font-family:"Space Mono",monospace;font-size:11px;line-height:1.5;color:' +
         COLORS.text +
         ';z-index:200;max-width:260px;pointer-events:none;display:none;box-shadow:0 4px 16px rgba(0,255,255,0.15)}',
+      '.ot-section-indicator{font-family:"Space Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:' +
+        COLORS.highlight +
+        ';padding:6px 10px;margin-top:6px;background:rgba(0,255,255,0.04);border:1px solid rgba(0,255,255,0.15);display:none;text-align:center;transition:all 0.3s ease}',
       '.ot-controls{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}',
       '.ot-ctrl-btn{font-family:"Space Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:5px 10px;background:' +
         COLORS.surface +
@@ -861,6 +975,7 @@
         populateControls();
         highlightTutorialButtons();
         scanButtonReferences();
+        setupSectionTracking();
       })
       .catch(function (err) {
         console.warn('[OT Overlay] Init failed:', err);
@@ -876,6 +991,8 @@
     hideTooltip: hideTooltip,
     animateSequence: animateSequence,
     highlightTutorialButtons: highlightTutorialButtons,
+    restoreHighlights: restoreHighlights,
+    setupSectionTracking: setupSectionTracking,
   };
 
   if (document.readyState === 'loading') {
