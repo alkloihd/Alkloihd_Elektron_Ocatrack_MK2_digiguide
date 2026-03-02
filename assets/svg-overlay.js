@@ -282,7 +282,7 @@
   }
 
   function setupSectionTracking() {
-    var main = document.querySelector('.main');
+    var main = document.querySelector('.main') || document.querySelector('.content') || document.querySelector('.main-content');
     if (!main) return;
 
     var sections = main.querySelectorAll('.section');
@@ -423,7 +423,7 @@
       labelToId[aliasKeys[a]] = aliases[aliasKeys[a]];
     }
 
-    var main = document.querySelector('.main');
+    var main = document.querySelector('.main') || document.querySelector('.content') || document.querySelector('.main-content');
     if (!main) return;
 
     var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, null, false);
