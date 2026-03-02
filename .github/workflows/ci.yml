@@ -1,0 +1,103 @@
+name: Public CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate-content:
+    name: Validate HTML Tutorial Content
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate JSON files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          files = sorted(Path('.').rglob('*.json'))
+          if not files:
+              raise SystemExit('No JSON files found')
+
+          for p in files:
+              with p.open('r', encoding='utf-8') as f:
+                  json.load(f)
+              print(f'OK JSON: {p}')
+          PY
+
+      - name: Validate SVG files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          files = sorted(Path('.').rglob('*.svg'))
+          if not files:
+              raise SystemExit('No SVG files found')
+
+          for p in files:
+              ET.parse(p)
+              print(f'OK SVG: {p}')
+          PY
+
+      - name: Validate internal links in HTML
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          html_files = sorted(Path('.').glob('*.html'))
+          if not html_files:
+              raise SystemExit('No HTML files found at repo root')
+
+          href_src_re = re.compile(r'''(?:href|src)=["']([^"']+)["']''', re.IGNORECASE)
+          errors = []
+
+          for html in html_files:
+              text = html.read_text(encoding='utf-8', errors='ignore')
+              for target in href_src_re.findall(text):
+                  if target.startswith(('http://', 'https://', 'mailto:', 'tel:', '#', 'data:')):
+                      continue
+                  if target.startswith('//'):
+                      continue
+                  path = target.split('?', 1)[0].split('#', 1)[0]
+                  if not path:
+                      continue
+                  candidate = (html.parent / path).resolve()
+                  if not candidate.exists():
+                      errors.append(f'{html}: missing local target {target}')
+
+          if errors:
+              print('\n'.join(errors))
+              raise SystemExit(f'Broken local links/assets: {len(errors)}')
+
+          print(f'OK links across {len(html_files)} HTML files')
+          PY
+
+      - name: JavaScript syntax check
+        run: |
+          shopt -s nullglob
+          files=(assets/*.js)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No JS files to check"
+            exit 0
+          fi
+          for f in "${files[@]}"; do
+            node --check "$f"
+            echo "OK JS syntax: $f"
+          done
