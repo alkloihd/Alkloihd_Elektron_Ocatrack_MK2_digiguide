@@ -1,0 +1,776 @@
+{
+  "source": "Merlin's Guide to the Octatrack (edited by Thermo, April 2013)",
+  "extracted_by": "Claude — practical tips mapped to physical controls for SVG overlay tooltips",
+  "note": "Merlin's guide is conceptual/structural rather than button-by-button. Tips are synthesized from his explanations and mapped to the relevant physical controls.",
+
+  "proj": {
+    "merlin_tips": [
+      "The sample slot lists (Flex + Static) are PROJECT-wide — once you load a sample into a slot, it's available on any track, any pattern, any bank in the whole project.",
+      "Merlin emphasizes: the OT expects you to select a SMALL number of samples and squeeze the most out of them. Think quality over quantity.",
+      "Save your project regularly. Merlin's reloading experiments assume you have a saved state to fall back to."
+    ],
+    "workflow_context": "PROJ is your top-level home base. Use it to save your work before experimenting. Merlin's entire workflow philosophy is: save → experiment → reload if needed. The project menu is where this starts.",
+    "common_mistakes": [
+      "Forgetting that the sample slot list is project-wide, not per-pattern — loading a sample once makes it available everywhere",
+      "Not saving the project before heavy experimentation — you lose your fallback point"
+    ],
+    "related_controls": ["func", "part", "yes"]
+  },
+
+  "part": {
+    "merlin_tips": [
+      "Parts are probably the MOST IMPORTANT concept Merlin covers. He calls the Part system 'the most complicated aspect of the OT' but also its greatest power.",
+      "A Part stores: machines + settings, effects + settings, scenes, and track volumes. That's everything EXCEPT triggers and parameter locks (those live in the Pattern).",
+      "Think of saving a Part as 'setting up a base camp.' Once saved, you can go wild — change parameters, swap machines, replace effects. Hit [FUNC]+[RELOAD] and you're instantly zapped back home.",
+      "Multiple patterns can share the same Part. Change the filter resonance on one pattern and ALL patterns using that Part hear the change. This is by design — it keeps your sound coherent across pattern variations.",
+      "When you copy a pattern (e.g., A1 to A2), the Part is NOT copied — both patterns now point to the SAME Part. This is the #1 source of confusion for beginners.",
+      "The star (*) next to the Part number means you've changed something since the last save. If you see the star, what you're hearing differs from what was saved.",
+      "Merlin describes 'incremental development': listen critically, fine-tune parameters, then save the Part to move your base camp to the improved version.",
+      "Parts store which scenes are loaded to slots A and B, AND whether each scene is muted or active. This is powerful for pattern transitions."
+    ],
+    "workflow_context": "Press [FUNC]+[PART] to enter the Parts menu. Save with [FUNC]+[EDIT]. Reload with [FUNC]+[RELOAD]. Merlin's core loop is: save Part → experiment freely → reload to undo everything. For a new section of your song, copy the Part to a new slot, assign it to the new pattern, then modify independently.",
+    "common_mistakes": [
+      "Thinking that copying a pattern also copies the Part — it doesn't! Both patterns share the same Part.",
+      "Changing a machine or effect while multiple patterns share a Part, then being surprised when ALL those patterns changed.",
+      "Not saving the Part before experimenting — without a saved state, [FUNC]+[RELOAD] has nothing to restore.",
+      "Confusing Part reload with project reload — Part reload only restores Part-level data (machines, effects, scenes, volumes), not triggers or locks."
+    ],
+    "related_controls": ["func", "proj", "scene_a", "scene_b", "crossfader", "fx1", "fx2", "src", "amp", "encoder_level"]
+  },
+
+  "aed": {
+    "merlin_tips": [
+      "Merlin explains that sample preparation in the Audio Editor is SEPARATE from machine assignment. You can slice, trim, and configure a sample in the slot list without ever assigning it to a track.",
+      "Slice operations, loop points, and trim settings are stored IN the sample slot list, not in the Flex machine. The machine just plays what was prepared.",
+      "You can load the SAME sample into multiple slots and prepare it differently in each — e.g., slot 1 with 16 slices, slot 2 with 64 slices, slot 3 with different start/end points. Three different ways to play the same source audio.",
+      "The GAIN parameter in Attributes is your friend for fixing volume mismatches between samples — adjust it here rather than messing with track volumes or amp settings.",
+      "Recordings in record buffers can be sliced just like regular samples — same Audio Editor, same tools."
+    ],
+    "workflow_context": "After loading a sample into a slot, open the Audio Editor ([AED] or [FUNC]+[AED] for slice grid) to prepare it before sequencing. Set loop points, create slices, set the original tempo for time-stretching, and adjust gain. Do this preparation FIRST — then assign to machines. The prep work carries everywhere the sample is used.",
+    "common_mistakes": [
+      "Trying to adjust sample behavior from the machine/track level when it should be done in the Audio Editor at the slot level",
+      "Not understanding that slice/trim settings are per-SLOT, not per-track — if two tracks use the same slot, they share the same slices",
+      "Forgetting to save a recording buffer to CF card before powering off — recordings are volatile!"
+    ],
+    "related_controls": ["func", "src", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e", "encoder_f", "yes", "arrow_left", "arrow_right"]
+  },
+
+  "mix": {
+    "merlin_tips": [
+      "Merlin explains the signal flow for live inputs: GAIN in the mixer sets healthy input levels (set once and forget), then DIR sends inputs straight to main outs.",
+      "The DIR parameter volume can be controlled via scenes using XDIR — this means you can fade live inputs in/out with the crossfader during a performance without opening the mixer page.",
+      "With scenes controlling XDIR, you effectively have 10 channels of audio under crossfader control: 8 OT tracks + 2 stereo live inputs."
+    ],
+    "workflow_context": "Set input GAIN once when you connect external gear — this normalizes signal levels. Use DIR for direct monitoring volume. For performance mixing, set up XDIR in your scenes rather than constantly returning to the mixer page.",
+    "common_mistakes": [
+      "Trying to automate the GAIN parameter — it's fixed by design (set and forget for healthy input levels)",
+      "Using DIR for performance mixing instead of setting up XDIR in scenes — DIR requires navigating to the mixer page every time"
+    ],
+    "related_controls": ["func", "scene_a", "scene_b", "crossfader", "encoder_level", "rec1", "rec2", "rec3"]
+  },
+
+  "arr": {
+    "merlin_tips": [
+      "Merlin doesn't cover the Arranger in depth, but his pattern-chaining and scene-stacking techniques show you can achieve complex arrangements manually before needing the Arranger.",
+      "His performance workflow (A1 → buildup scene → A2 with different Part → A3 as break) is essentially a manual arrangement."
+    ],
+    "workflow_context": "The Arranger automates pattern sequences (up to 256 rows). Consider mastering Merlin's manual pattern-switching and scene-stacking approach first — it teaches you the building blocks that the Arranger automates.",
+    "common_mistakes": [
+      "Jumping to the Arranger before understanding how Parts, Scenes, and Patterns interact manually"
+    ],
+    "related_controls": ["func", "ptn", "bank", "part", "scene_a", "scene_b"]
+  },
+
+  "midi": {
+    "merlin_tips": [
+      "Merlin doesn't focus on MIDI in his guide — his emphasis is on the OT as a self-contained sampling/performance instrument."
+    ],
+    "workflow_context": "MIDI mode switches the trig keys to control external MIDI gear. [FUNC]+[MIDI] opens MIDI Sync settings for clock/transport sync with external equipment.",
+    "common_mistakes": [
+      "Accidentally entering MIDI mode when you meant to stay in audio track editing"
+    ],
+    "related_controls": ["func", "trig_1", "t1"]
+  },
+
+  "func": {
+    "merlin_tips": [
+      "FUNC is the gateway to the OT's secondary layer. Merlin uses it constantly: [FUNC]+[PART] for part menu, [FUNC]+[EDIT] for saving, [FUNC]+[RELOAD] for restoring the saved part state.",
+      "Merlin's 'base camp' philosophy depends entirely on FUNC combos: save your base camp with [FUNC]+[EDIT], experiment freely, then return with [FUNC]+[RELOAD].",
+      "Nearly every workflow Merlin describes involves FUNC at some point — it's not optional, it's essential."
+    ],
+    "workflow_context": "Hold FUNC while pressing other buttons to access secondary functions. You'll use this constantly — it's like Shift on a keyboard. Key combos from Merlin: [FUNC]+[PART] opens Parts menu, [FUNC]+[EDIT] saves the Part, [FUNC]+[RELOAD] restores saved Part state.",
+    "common_mistakes": [
+      "Not holding FUNC long enough — you need to HOLD it while pressing the second button",
+      "Forgetting which combos exist — the OT has ~30+ FUNC combos and Merlin's guide assumes you know the essential ones"
+    ],
+    "related_controls": ["Every other button — FUNC modifies them all. Especially: part, aed, proj, cue, page, src, mix"]
+  },
+
+  "cue": {
+    "merlin_tips": [
+      "Merlin describes 'abusing the cue outputs' as a powerful sampling technique: set a track recorder to record the CUE output, then selectively cue specific tracks to create submixes for resampling.",
+      "CUE outputs are independent of MAIN outputs — you can sample from CUE without the audience hearing what you're recording.",
+      "Use headphones on the CUE output for pre-listening what you're about to resample.",
+      "[FUNC]+[CUE] is Part Reload — Merlin's 'return to base camp' function that undoes all your experiments."
+    ],
+    "workflow_context": "CUE has a dual life: (1) headphone preview/pre-listen via [CUE]+[TRACK], and (2) a secret resampling bus. Merlin's technique: route specific tracks to CUE, set a recorder to record CUE output, and capture internal submixes. Also, [FUNC]+[CUE] is the Part Reload that Merlin considers essential for experimentation.",
+    "common_mistakes": [
+      "Forgetting that CUE is independent of MAIN — what you cue doesn't have to be what the audience hears",
+      "Not using CUE for resampling — it's one of the OT's most powerful hidden features"
+    ],
+    "related_controls": ["func", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "rec1", "rec2", "rec3", "headphone_vol"]
+  },
+
+  "ptn": {
+    "merlin_tips": [
+      "Patterns store ONLY triggers and parameter locks. Everything else (machines, effects, scenes, volumes) lives in the Part.",
+      "Merlin's key insight: because patterns only store triggers/locks, and p-locks can select any sample from any slot AND any slice from any sample, 'triggers and locks alone already create enough mayhem to turn pattern A2 into something very different from A1.'",
+      "Copy a pattern to create variations — all copies share the same Part, so they'll have coherent sound while the trigger differences create the variation."
+    ],
+    "workflow_context": "Use [PTN]+[TRIG] to select patterns within the current bank. Merlin's performance flow: A1 (basic), A2 (buildup with extra triggers and locks), A3 (break with stripped triggers). All share the same Part for coherent sound.",
+    "common_mistakes": [
+      "Thinking patterns store machine/effect settings — they don't, that's the Part's job",
+      "Not realizing that copied patterns share a Part — editing machines on A2 also changes A1 unless you assign a different Part"
+    ],
+    "related_controls": ["bank", "trig_1", "part", "func"]
+  },
+
+  "bank": {
+    "merlin_tips": [
+      "Each bank has 16 patterns and 4 Parts. Merlin's examples stay within Bank A but the same principles scale across all 16 banks.",
+      "Bank switching during performance: Merlin describes pressing [PATTERN]+[bank+pattern] to queue the next pattern, which plays when the current one ends."
+    ],
+    "workflow_context": "Use [BANK]+[TRIG] to select a bank (A through P). Each bank has its own set of 4 Parts, giving you 64 Parts total per project. Start in Bank A and expand to other banks as your arrangement grows.",
+    "common_mistakes": [
+      "Forgetting that Parts are per-BANK — Bank A's 4 Parts are completely separate from Bank B's 4 Parts",
+      "Switching banks mid-performance without understanding the Part change that comes with it"
+    ],
+    "related_controls": ["ptn", "trig_1", "part", "func"]
+  },
+
+  "yes": {
+    "merlin_tips": [
+      "YES confirms selections — Merlin uses it when assigning samples to flex machines from the slot list, confirming Part switches, and saving operations.",
+      "In the sample lock workflow, YES confirms the sample selection after browsing."
+    ],
+    "workflow_context": "YES is your 'confirm' button for nearly everything: selecting samples, entering sub-menus, confirming saves. Also arms one-shot trigs for recorder setups.",
+    "common_mistakes": [
+      "Hitting YES too quickly in menus without checking you're confirming the right thing",
+      "Forgetting that YES also arms one-shot trigs — context matters"
+    ],
+    "related_controls": ["no", "func", "encoder_level", "arrow_up", "arrow_down"]
+  },
+
+  "no": {
+    "merlin_tips": [
+      "NO is your 'back/exit' button. Merlin's exploration workflow depends on being able to back out of menus safely."
+    ],
+    "workflow_context": "NO exits menus and cancels operations. It's the safe escape — if you're lost in a sub-menu, keep pressing NO to back out. In Live Recording mode, holding NO while a track plays erases parameter locks in real-time.",
+    "common_mistakes": [
+      "Pressing NO when you meant YES in a save dialog — double-check before pressing",
+      "Not knowing that NO can erase locks during Live Recording when held"
+    ],
+    "related_controls": ["yes", "func", "arrow_left"]
+  },
+
+  "arrow_up": {
+    "merlin_tips": [
+      "Merlin describes the sample lock workflow: hold a trig key, then press UP/DOWN to open the sample lock browser. This is how you override which sample plays on a specific step.",
+      "Sample locks are the key to Merlin's 'any sample on any step on any track' philosophy."
+    ],
+    "workflow_context": "In Grid Recording, hold a [TRIG] key then press [UP] to open the sample lock browser. This lets you assign a different sample to that specific step. Also used for menu navigation (scrolling up through lists).",
+    "common_mistakes": [
+      "Pressing UP without holding a trig key first — you need to HOLD the trig, THEN press UP",
+      "Confusing the sample lock browser with the regular sample assignment (which is done via the machine/SRC page)"
+    ],
+    "related_controls": ["arrow_down", "trig_1", "yes", "encoder_level"]
+  },
+
+  "arrow_down": {
+    "merlin_tips": [
+      "Same as arrow_up for sample lock browsing — UP/DOWN both open the browser, then you scroll through the slot list."
+    ],
+    "workflow_context": "In Grid Recording, hold a [TRIG] key then press [DOWN] to open the sample lock browser (same as UP). Also used for menu navigation.",
+    "common_mistakes": [
+      "Same as arrow_up — must hold trig first"
+    ],
+    "related_controls": ["arrow_up", "trig_1", "yes", "encoder_level"]
+  },
+
+  "arrow_left": {
+    "merlin_tips": [
+      "Merlin navigates between Audio Editor pages (TRIM → SLICE → EDIT → ATTRIBUTES → FILE) using left/right arrows."
+    ],
+    "workflow_context": "Navigate between menu pages and sub-screens. In the Audio Editor, LEFT moves to the previous page (e.g., from SLICE back to TRIM). Also nudges BPM when no menu is open.",
+    "common_mistakes": [
+      "Not realizing the Audio Editor has multiple pages you navigate with LEFT/RIGHT — many beginners only see the first page"
+    ],
+    "related_controls": ["arrow_right", "aed", "func"]
+  },
+
+  "arrow_right": {
+    "merlin_tips": [
+      "Merlin's timestretch workflow requires navigating RIGHT through Audio Editor pages to reach the Attributes page where you set ORIGINAL TEMPO."
+    ],
+    "workflow_context": "Navigate to the next menu page. In the Audio Editor, press RIGHT to move from TRIM → SLICE → EDIT → ATTRIBUTES → FILE. Critical for reaching the Attributes page where tempo and gain live.",
+    "common_mistakes": [
+      "Same as arrow_left — not exploring all the Audio Editor pages"
+    ],
+    "related_controls": ["arrow_left", "aed", "func"]
+  },
+
+  "t1": {
+    "merlin_tips": [
+      "Merlin's example pattern: Track 1 = bass drum with compressor + delay. He always starts building from Track 1.",
+      "Any track with a Flex machine can play ANY sample from the slot list via sample locks — your starting assignment is just a default.",
+      "Merlin uses [FUNC]+[Track] for muting during performances — mute/unmute is a core performance tool."
+    ],
+    "workflow_context": "Select Track 1 to edit its machine, parameters, and sequencer. [FUNC]+[T1] mutes/unmutes it. [CUE]+[T1] routes it to headphones. Merlin typically assigns kick drums to T1.",
+    "common_mistakes": [
+      "Thinking a track can only play the sample assigned to its machine — sample locks let any step play any sample from the list",
+      "Forgetting to select the right track before editing parameters"
+    ],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t2": {
+    "merlin_tips": [
+      "Merlin's example: Track 2 = clap with filter + reverb."
+    ],
+    "workflow_context": "Same as T1 — select Track 2 for editing. Merlin typically uses T2 for snare/clap sounds.",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t3": {
+    "merlin_tips": [
+      "Merlin's example: Track 3 = hi-hat loop with filter + delay."
+    ],
+    "workflow_context": "Same as T1 — select Track 3 for editing. Merlin typically uses T3 for hi-hats.",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t4": {
+    "merlin_tips": [
+      "Merlin's example: Track 4 = bassline loop with filter + lo-fi."
+    ],
+    "workflow_context": "Same as T1 — select Track 4 for editing. Merlin typically uses T4 for basslines.",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t5": {
+    "merlin_tips": [
+      "Merlin's example: Track 5 = pad with filter + reverb + scenes for movement.",
+      "In his slice example, Track 5's Flex machine is assigned to a sliced sample — he demonstrates slice locks from this track."
+    ],
+    "workflow_context": "Same as T1. Merlin uses T5 for pads or sliced samples in his examples.",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t6": {
+    "merlin_tips": [
+      "Tracks 6-8 are not specifically assigned in Merlin's core examples, but follow the same rules as T1-T5."
+    ],
+    "workflow_context": "Same as T1. Often used for additional elements, effects returns, or Neighbor/Thru machines.",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t7": {
+    "merlin_tips": [
+      "Same as T6 — Merlin's examples use 5 tracks but principles apply to all 8."
+    ],
+    "workflow_context": "Same as T1. Can be used for resampling (recorder + Flex machine on same track).",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "t8": {
+    "merlin_tips": [
+      "Merlin doesn't specifically mention T8, but the 'master bus trick' (Thru machine on T8 listening to main output for compression/EQ) is a well-known community technique consistent with his signal flow explanations."
+    ],
+    "workflow_context": "Same as T1. T8 is commonly used as a master bus (Thru machine → compressor + EQ on the main output).",
+    "common_mistakes": ["Same as T1"],
+    "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
+  },
+
+  "src": {
+    "merlin_tips": [
+      "Merlin explains: when you place a Flex machine on a track, the OT asks you to select a sample from the slot list. This happens on the SRC page.",
+      "SRC is where you configure SLICE = ON for sliced samples. Merlin emphasizes: 'If a sample is sliced, you MUST instruct the flex machine to use those slices' by turning on the slice option in playback setup.",
+      "The START parameter on the SRC/Playback page selects which slice to play when SLICE is ON. You can p-lock this parameter to play different slices on different steps."
+    ],
+    "workflow_context": "Press [SRC] to see the active machine's sample assignment and playback parameters. Press [FUNC]+[SRC] for Playback Setup where you enable SLICE mode and TIMESTRETCH. After slicing a sample in the Audio Editor, you MUST enable SLICE=ON here for the machine to use the slices.",
+    "common_mistakes": [
+      "Slicing a sample in the Audio Editor but forgetting to enable SLICE=ON in the machine's Playback Setup — the slices exist but the machine won't use them",
+      "Not understanding that the START parameter changes meaning when SLICE=ON — it selects slices instead of a raw sample position"
+    ],
+    "related_controls": ["func", "aed", "encoder_a", "encoder_b", "encoder_c", "encoder_d"]
+  },
+
+  "amp": {
+    "merlin_tips": [
+      "Merlin describes the signal chain: machine → AMP envelope (with VOL parameter) → FX1 → FX2 → Track Volume. The AMP VOL is PRE-effects.",
+      "AMP VOL is bipolar (-64 to +63, default 0). Use it for LFO-driven tremolo or sidechain-style ducking.",
+      "For scenes, XVOL on the AMP page fades track volume PRE-effects — this lets reverb/delay tails die naturally when you 'mute' via the crossfader.",
+      "Merlin warns against using track volume or amp p-locks to fix mismatched sample volumes — use the GAIN parameter in the Audio Editor's Attributes page instead."
+    ],
+    "workflow_context": "Press [AMP] to access amplitude envelope, VOL, and panning. Key insight from Merlin: use XVOL (hold Scene button on AMP page) for performance mixing — it's pre-FX so effect tails decay naturally. Use the Audio Editor GAIN to fix sample volume mismatches instead of AMP settings.",
+    "common_mistakes": [
+      "Using AMP VOL to compensate for a too-loud sample — this affects all patterns using this Part. Fix it at the sample level with GAIN in the Audio Editor instead.",
+      "Not understanding that AMP VOL is PRE-effects while Track Level is POST-effects — they serve different purposes",
+      "P-locking AMP VOL on every step to fix a volume mismatch — Merlin calls this 'not very convenient' and recommends using sample GAIN instead"
+    ],
+    "related_controls": ["encoder_level", "fx1", "fx2", "src", "scene_a", "scene_b", "aed"]
+  },
+
+  "lfo": {
+    "merlin_tips": [
+      "Merlin mentions using LFOs for tremolo (modulating AMP VOL) and sidechain compression simulation (LFO ducking volume when kick hits).",
+      "He doesn't dive deep into LFO setup but implies LFOs are essential for adding movement beyond what scenes provide."
+    ],
+    "workflow_context": "Press [LFO] to set up the 3 LFOs per track. Use LFOs to automate any parameter continuously — complements p-locks (per-step) and scenes (crossfader-controlled). Double-press [LFO] for the LFO Designer (custom waveforms).",
+    "common_mistakes": [
+      "Over-using LFOs when p-locks or scenes would be simpler and more controllable",
+      "Not setting LFO mode correctly — TRIG mode restarts per trig (good for rhythmic effects), FREE runs continuously"
+    ],
+    "related_controls": ["amp", "fx1", "fx2", "src", "func"]
+  },
+
+  "fx1": {
+    "merlin_tips": [
+      "Merlin emphasizes that the OT gives you 2 choosable effect slots per track — unlike the Machinedrum/Monomachine which had fixed effect arrays. You pick which effects go where.",
+      "His example setups: T1 = compressor + delay, T2 = filter + reverb, T3 = filter + delay, T4 = filter + lo-fi. Mix and match per track.",
+      "Effects are stored in the PART, not the Pattern. Change an effect and all patterns sharing that Part are affected.",
+      "For buildups, Merlin uses scene-controlled effects: delay feedback, filter resonance, reverb amount, lo-fi distortion — all increasing as the crossfader moves."
+    ],
+    "workflow_context": "Press [FX1] to access the first effects slot. Press [FUNC]+[FX1] to change which effect is loaded. Effects are Part-level — they persist across all patterns using this Part. Merlin's buildup recipe: set scene B to increase delay feedback, open filter resonance, add reverb, increase distortion. Crossfade slowly for a gradual buildup.",
+    "common_mistakes": [
+      "Forgetting that effects live in the Part — changing FX1 on pattern A1 also changes it on A2 if they share a Part",
+      "Not using scene control for effects parameters during performance — twiddling knobs manually is less fluid than crossfading"
+    ],
+    "related_controls": ["fx2", "func", "scene_a", "scene_b", "crossfader", "part", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e"]
+  },
+
+  "fx2": {
+    "merlin_tips": [
+      "Same principles as FX1. Merlin always uses both slots — his track setups consistently load two effects per track.",
+      "Signal chain: Machine → AMP → FX1 → FX2 → Track Volume. FX2 processes the output of FX1."
+    ],
+    "workflow_context": "Press [FX2] to access the second effects slot. Same rules as FX1 — stored in Part, scene-controllable. FX2 processes the signal AFTER FX1, so order matters (e.g., filter before delay sounds different from delay before filter).",
+    "common_mistakes": [
+      "Not considering FX slot order — FX1 feeds into FX2, so a filter in FX1 feeding a delay in FX2 is very different from the reverse"
+    ],
+    "related_controls": ["fx1", "func", "scene_a", "scene_b", "crossfader", "part", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e"]
+  },
+
+  "copy": {
+    "merlin_tips": [
+      "Merlin's workflow depends heavily on copying: copy patterns to create variations, copy parts to create independent sound platforms, copy scenes to build scene stacks.",
+      "Key Copy operations Merlin uses: copy pattern A1 to A2 (creates variation), copy Part 1 to Part 2 (creates independent sound platform), copy Scene 1 to Scene 9 (builds scene stack for progressive fading)."
+    ],
+    "workflow_context": "COPY ([FUNC]+[RECORD]) copies the current context: pattern, part, scene, trig, etc. Merlin's entire multi-pattern workflow starts with copying — copy your base pattern, then modify the copy. Copy your base Part, then evolve the copy independently.",
+    "common_mistakes": [
+      "Copying a pattern and assuming the Part was also copied — it wasn't. Both patterns still share the same Part.",
+      "Not copying the Part separately when you need independent sound control"
+    ],
+    "related_controls": ["func", "paste", "clear", "part", "ptn"]
+  },
+
+  "clear": {
+    "merlin_tips": [
+      "Merlin mentions deleting triggers, removing machines, and clearing scenes as part of his experimentation workflow. 'Be brutal — change the pattern so heavily that the original is completely destroyed' (then reload the Part to undo it all)."
+    ],
+    "workflow_context": "CLEAR ([FUNC]+[PLAY]) deletes/clears the current context. Use it to strip down patterns for breaks (Merlin's example: clear all kick triggers for a breakdown pattern). Safe to experiment because you can always reload the Part.",
+    "common_mistakes": [
+      "Clearing something before saving your Part — without a saved state, there's no undo"
+    ],
+    "related_controls": ["func", "copy", "paste", "part"]
+  },
+
+  "paste": {
+    "merlin_tips": [
+      "Merlin's copy-paste workflow: copy A1 → paste to A2 → modify A2. Copy Part 1 → paste to Part 2 → assign Part 2 to A2 → modify Part 2 independently."
+    ],
+    "workflow_context": "PASTE ([FUNC]+[STOP]) pastes previously copied content. Essential for Merlin's workflow: create pattern variations by copy-paste-modify, create independent Parts by copy-paste-modify.",
+    "common_mistakes": [
+      "Pasting over something important without having saved it first",
+      "Forgetting that pasting a pattern does NOT paste the Part — you must copy/paste Parts separately"
+    ],
+    "related_controls": ["func", "copy", "clear", "part", "ptn"]
+  },
+
+  "rec1": {
+    "merlin_tips": [
+      "Merlin describes track recorders as 'built on top of a track' — always available regardless of what's playing on the track.",
+      "Recorders and track playback are independent. A Flex machine on track 4 won't interfere with the recorder on track 4 — UNLESS you deliberately set them to the same buffer (which creates the live-input pass-through trick).",
+      "Record buffers live in the sample slot list — so a recording is INSTANTLY available on any Flex machine, any track, any pattern, project-wide."
+    ],
+    "workflow_context": "REC1 handles input A/B recording. [FUNC]+[REC1] opens Recording Setup 1. Merlin's advice: use sequencer-triggered recording (place a recorder trig) for guaranteed sync. Use one-shot recorder trigs when you only want to capture once per pattern cycle.",
+    "common_mistakes": [
+      "Forgetting that record buffers are VOLATILE — they disappear when you power off. Save to CF card from the Audio Editor!",
+      "Not understanding that record buffers live in the sample slot list — they're instantly available everywhere but also instantly overwritten on the next recording"
+    ],
+    "related_controls": ["func", "t1", "t2", "t3", "t4", "rec2", "rec3", "aed"]
+  },
+
+  "rec2": {
+    "merlin_tips": [
+      "Same principles as REC1 but for input C/D."
+    ],
+    "workflow_context": "REC2 handles input C/D recording. [FUNC]+[REC2] opens Recording Setup 2. Same principles as REC1.",
+    "common_mistakes": ["Same as REC1"],
+    "related_controls": ["func", "t5", "t6", "t7", "t8", "rec1", "rec3", "aed"]
+  },
+
+  "rec3": {
+    "merlin_tips": [
+      "Merlin describes SRC3 as the 'third source' — can be any track, main output, or CUE output. This is the key to internal resampling.",
+      "His technique: set SRC3 = CUE, then selectively cue tracks to create a custom submix for resampling."
+    ],
+    "workflow_context": "REC3 handles internal source recording. [FUNC]+[REC3] opens Recording Edit. Set SRC3 to record from MAIN (captures everything), CUE (captures only cued tracks), or a specific track. This is how you resample internally.",
+    "common_mistakes": [
+      "Not setting SRC3 to the right source — MAIN captures everything including effects, CUE only captures what you've cued",
+      "Overwriting a valuable recording by not using one-shot trigs"
+    ],
+    "related_controls": ["func", "cue", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "rec1", "rec2"]
+  },
+
+  "scene_a": {
+    "merlin_tips": [
+      "Merlin's scene model: Scene A is on the LEFT of the crossfader. Muting Scene A means the left side plays default settings.",
+      "Scene stacking technique: Scenes 1-8 go on the LEFT (Scene A), Scenes 9-16 go on the RIGHT (Scene B). Build progressively by copying and modifying.",
+      "Scenes are stored in the PART — each Part has its own 16 scenes. Switching Parts loads completely different scenes.",
+      "Parts also store WHICH scene is loaded to slot A and whether it's muted — so switching patterns that use different Parts automatically loads the right scene setup.",
+      "Muting a scene immediately reverts to default settings (or you can fade to it for a gradual return). This is your 'return home' during performance."
+    ],
+    "workflow_context": "Press [SCENE A]+[TRIG] to assign a scene to slot A. Hold [SCENE A] + turn a knob to add that parameter to the scene. [FUNC]+[SCENE A] mutes the scene. Merlin's model: Scene A = left side of crossfader. Start with default (Scene A muted), fade right to Scene B for your first departure.",
+    "common_mistakes": [
+      "Forgetting that scenes override p-locks — the crossfader always wins",
+      "Not muting unused scene slots — an active but empty scene can cause unexpected behavior",
+      "Not saving the Part after setting up scenes — scenes are Part-level data"
+    ],
+    "related_controls": ["scene_b", "crossfader", "func", "trig_1", "part", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e", "encoder_f"]
+  },
+
+  "scene_b": {
+    "merlin_tips": [
+      "Merlin's scene model: Scene B is on the RIGHT. In the buildup example, he loads his buildup scene to slot B and slowly fades right for increasing intensity.",
+      "Scene stacking: Scenes 9-16 go on the RIGHT (Scene B). After fading to Scene B, load the next scene to slot A and fade back left.",
+      "The scene stacking sequence: Start → fade right to Scene 9 → load Scene 2 to A → fade left → load Scene 10 to B → fade right → etc. This creates a natural progression through scenes."
+    ],
+    "workflow_context": "Press [SCENE B]+[TRIG] to assign a scene to slot B. Merlin's buildup technique: load a 'tension' scene to slot B (delay feedback up, filter resonance up, distortion up, reverb up), then slowly crossfade right for a gradual buildup.",
+    "common_mistakes": [
+      "Building scenes that are too extreme — Merlin's approach is gradual, stacking small changes for natural progression",
+      "Forgetting to mute Scene B when switching to a new pattern with its own Part — the new Part loads its own scene assignments"
+    ],
+    "related_controls": ["scene_a", "crossfader", "func", "trig_1", "part"]
+  },
+
+  "crossfader": {
+    "merlin_tips": [
+      "Merlin identifies 3 key things you can do: (1) Fade from DEFAULT to a scene, (2) Fade from SCENE to SCENE, (3) Fade from SCENE back to DEFAULT.",
+      "His metaphor: 'A scene allows you to undertake an expedition from the base camp (default settings) into new territory (a scene) and move further as you keep loading new scenes. Returning to base camp is always possible by muting a scene and fading to it.'",
+      "Muting a scene while the crossfader is there causes an instant jump — no fade. Use this for dramatic drops.",
+      "For live inputs, XDIR in scenes lets the crossfader control input volume — effectively giving you 10 channels of crossfader control (8 tracks + 2 inputs).",
+      "Use XVOL (AMP page) and XLEV (track level) in scenes for pre/post-FX volume control via crossfader. XVOL lets reverb tails die naturally.",
+      "Scene stacking creates a linear journey through your performance: each new scene builds on the previous one."
+    ],
+    "workflow_context": "The crossfader interpolates between Scene A (left) and Scene B (right). Merlin's performance flow: start with crossfader left (default or Scene A), slowly fade right toward Scene B for buildup, then either snap back (mute scene) or load a new scene and continue fading. XVOL and XLEV give you pre/post-FX volume control through scenes.",
+    "common_mistakes": [
+      "Center position has a volume dip — use XVOL for equal-energy crossfading",
+      "Trying to use the crossfader without setting up scenes first — it does nothing without scene assignments",
+      "Not understanding that scene locks override p-locks — the crossfader ALWAYS wins over step-level parameter locks"
+    ],
+    "related_controls": ["scene_a", "scene_b", "func", "part", "amp", "mix"]
+  },
+
+  "trig_1": {
+    "merlin_tips": [
+      "Merlin's sample lock revelation: 'By using sample locks, I can play any sample from the sample list at any step on any track that contains a flex machine in any pattern in any bank.' The trig keys + LEVEL encoder are the gateway to this.",
+      "Hold a trig + turn LEVEL encoder = sample lock browser. Select any sample from the slot list for that step.",
+      "Hold a trig + lock the START parameter = slice lock. Select which slice plays on that step.",
+      "The math: 128 slots × 64 slices = 8,192 available sounds per sample list. With Static list too, that's 16,384 total.",
+      "One-shot trigs ([FUNC]+[TRIG]) are essential for recorder triggers — they fire once and don't repeat, preventing overwrite on pattern loop.",
+      "Merlin's pattern variation technique: same Part, different trigger patterns. Strip triggers for a break, add extra triggers + locks for a buildup."
+    ],
+    "workflow_context": "In Grid Recording mode, press [TRIG] to place/remove triggers. Hold [TRIG]+[UP/DOWN] for sample locks. Hold [TRIG]+turn LEVEL for sample lock via encoder. P-lock parameters by holding [TRIG] and turning any encoder. [FUNC]+[TRIG] places a one-shot or lock trig.",
+    "common_mistakes": [
+      "Not understanding that a trig key's LED color tells you what's on it: steady red = normal trig, flashing red = sample lock",
+      "Placing triggers without being in Grid Recording mode",
+      "Forgetting that [FUNC]+[TRIG] places special trig types (one-shot, lock trigs) — not regular trigs"
+    ],
+    "related_controls": ["func", "encoder_level", "arrow_up", "arrow_down", "src", "amp", "yes"]
+  },
+
+  "trig_2": { "merlin_tips": ["Same principles as trig_1 — all 16 trigs work identically."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_3": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_4": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_5": { "merlin_tips": ["Same principles as trig_1. In Merlin's examples, step 5 (beat 2) and step 13 (beat 4) are classic snare/clap positions."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_6": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_7": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_8": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_9": { "merlin_tips": ["Same principles as trig_1. Steps 9-16 represent the second half of a 1-bar pattern."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_10": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_11": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_12": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_13": { "merlin_tips": ["Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_14": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_15": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_16": { "merlin_tips": ["Same principles as trig_1. The last step of a 1-bar pattern — Merlin sometimes uses this for fill triggers or transition elements."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+
+  "page": {
+    "merlin_tips": [
+      "Merlin's examples all use 16-step (1-page) patterns, but the principles extend to multi-page patterns for longer sequences."
+    ],
+    "workflow_context": "Press [PAGE] to cycle through pattern pages (up to 4 pages = 64 steps). [FUNC]+[PAGE] opens Scale Setup for changing track length and time signature. 4 LEDs show which pages have content.",
+    "common_mistakes": [
+      "Not realizing patterns can be longer than 16 steps — press PAGE to access steps 17-32, 33-48, 49-64",
+      "Forgetting that each track can have a DIFFERENT length via Scale Setup — creating polyrhythms"
+    ],
+    "related_controls": ["func", "trig_1", "copy", "clear", "paste"]
+  },
+
+  "encoder_level": {
+    "merlin_tips": [
+      "The LEVEL encoder has a dual role in Merlin's workflow: (1) Sets track volume, which is stored in the Part, and (2) When held on a trig, opens the sample lock browser.",
+      "Track volume (LEVEL) is POST-effects in the signal chain. Merlin notes: 'the track volume parameter determines the overall volume of the whole track (sample + FX).'",
+      "Parts store track volumes — so saving a Part saves all 8 track levels. Reloading a Part restores them.",
+      "Merlin's advanced technique: set a track's volume to 0 in the Part, save it, then manually increase it during performance for a fade-in effect."
+    ],
+    "workflow_context": "Turn LEVEL to set the active track's output volume (stored in the Part). Hold a [TRIG] + turn LEVEL = open sample lock browser. [CUE]+LEVEL = set the cue send level for the active track.",
+    "common_mistakes": [
+      "Changing track volume to fix a sample volume problem — Merlin says use GAIN in the Audio Editor instead, because LEVEL changes affect the whole Part",
+      "Forgetting that LEVEL changes are Part-level — adjusting one track's volume affects ALL patterns using that Part"
+    ],
+    "related_controls": ["trig_1", "part", "cue", "amp", "aed"]
+  },
+
+  "encoder_a": {
+    "merlin_tips": [
+      "On the SRC/Playback page, Encoder A typically controls the START parameter. When SLICE=ON, this selects which slice to play.",
+      "Merlin's slice lock workflow: p-lock the START parameter (Encoder A on SRC page) per step to select different slices — this is how you build chop patterns.",
+      "In the Audio Editor, Encoder A controls different parameters depending on the active page (TRIM, SLICE, etc.)."
+    ],
+    "workflow_context": "Data entry encoder A — the parameter it controls depends on the active page. On SRC page: typically START (and slice selection when SLICE=ON). In Audio Editor: varies by page. Press+turn for coarse adjustment.",
+    "common_mistakes": [
+      "Not pressing+turning for coarse adjustment when you need to make big changes quickly"
+    ],
+    "related_controls": ["encoder_b", "encoder_c", "encoder_d", "src", "aed"]
+  },
+
+  "encoder_b": {
+    "merlin_tips": [
+      "On the SRC page, Encoder B typically controls the LEN (length) parameter — how much of the sample plays from the start point."
+    ],
+    "workflow_context": "Data entry encoder B. Context-dependent like all encoders. Press+turn for coarse adjustment.",
+    "common_mistakes": ["Same as encoder_a — not using press+turn for coarse changes."],
+    "related_controls": ["encoder_a", "encoder_c", "encoder_d", "src"]
+  },
+
+  "encoder_c": {
+    "merlin_tips": [
+      "On the SRC page, Encoder C typically controls the RATE parameter — playback speed/pitch of the sample."
+    ],
+    "workflow_context": "Data entry encoder C. Context-dependent. Press+turn for coarse adjustment.",
+    "common_mistakes": ["Same as encoder_a."],
+    "related_controls": ["encoder_a", "encoder_b", "encoder_d", "src"]
+  },
+
+  "encoder_d": {
+    "merlin_tips": [
+      "Encoder D is part of the lower encoder row. In the Audio Editor, it often controls zoom level for waveform viewing."
+    ],
+    "workflow_context": "Data entry encoder D. In the Audio Editor, controls zoom. On parameter pages, controls the fourth parameter. Press+turn for coarse adjustment.",
+    "common_mistakes": ["Same as encoder_a."],
+    "related_controls": ["encoder_e", "encoder_f", "encoder_a", "aed"]
+  },
+
+  "encoder_e": {
+    "merlin_tips": [
+      "In the Audio Editor, Encoder E often controls horizontal scroll position — essential for navigating long samples when zoomed in."
+    ],
+    "workflow_context": "Data entry encoder E. In the Audio Editor, controls scroll. On parameter pages, controls the fifth parameter.",
+    "common_mistakes": ["Same as encoder_a."],
+    "related_controls": ["encoder_d", "encoder_f", "encoder_b", "aed"]
+  },
+
+  "encoder_f": {
+    "merlin_tips": [
+      "In the Audio Editor, Encoder F often controls horizontal zoom — essential for precise slice placement."
+    ],
+    "workflow_context": "Data entry encoder F. In the Audio Editor, controls zoom. On parameter pages, controls the sixth parameter.",
+    "common_mistakes": ["Same as encoder_a."],
+    "related_controls": ["encoder_d", "encoder_e", "encoder_c", "aed"]
+  },
+
+  "tap_tempo": {
+    "merlin_tips": [
+      "Merlin doesn't discuss tempo setting in detail, but his entire workflow assumes all samples are correctly time-stretched to the project tempo. Setting the right BPM is the foundation."
+    ],
+    "workflow_context": "Press to open the TEMPO menu. [FUNC]+[TAP TEMPO] enters tap tempo mode (tap repeatedly to set BPM by feel). The flashing LED speed indicates current BPM. Getting tempo right is essential before Merlin's time-stretch and slice workflows work properly.",
+    "common_mistakes": [
+      "Not setting the project tempo before loading and time-stretching samples — everything depends on this being correct"
+    ],
+    "related_controls": ["func", "aed", "src"]
+  },
+
+  "headphone_vol": {
+    "merlin_tips": [
+      "Merlin mentions plugging in headphones and assigning them to the CUE output for pre-listening what you're about to resample.",
+      "Headphones on CUE = you hear what's being sent to the CUE bus without affecting MAIN outs."
+    ],
+    "workflow_context": "Turn to set headphone volume. Assign headphones to CUE output in the Mixer page to pre-listen cued tracks without affecting the main output — essential for Merlin's CUE-based resampling technique.",
+    "common_mistakes": [
+      "Having headphones set to MAIN when you want to preview CUE — check the Mixer page headphone routing"
+    ],
+    "related_controls": ["cue", "mix", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"]
+  },
+
+  "workflows": [
+    {
+      "id": "merlin-base-camp",
+      "name": "The Base Camp Workflow (Save → Experiment → Reload)",
+      "description": "Merlin's fundamental workflow philosophy. Save your Part as a base camp, experiment freely, then reload to undo everything.",
+      "steps": [
+        "[FUNC]+[PART] → Enter Parts menu",
+        "[FUNC]+[EDIT] → Save the Part (set your base camp)",
+        "Experiment: change parameters, swap machines, replace effects — go wild",
+        "[FUNC]+[RELOAD] → Instantly zapped back to saved state",
+        "Repeat: refine → save → experiment → reload"
+      ],
+      "controls_used": ["func", "part", "cue"]
+    },
+    {
+      "id": "merlin-sample-lock",
+      "name": "Sample Lock Workflow",
+      "description": "Play any sample from your slot list on any step of any track. The heart of the OT's sample accessibility.",
+      "steps": [
+        "Enter Grid Recording mode",
+        "Hold a [TRIG] key",
+        "Turn [LEVEL] encoder to browse the sample slot list",
+        "Select the desired sample — that step now plays a different sample than the machine's default",
+        "LED flashes red to indicate a sample lock is active"
+      ],
+      "controls_used": ["trig_1", "encoder_level"]
+    },
+    {
+      "id": "merlin-slice-lock",
+      "name": "Slice Lock Workflow",
+      "description": "Select specific slices per step — build chop patterns across any sliced sample.",
+      "steps": [
+        "Prepare sample in Audio Editor: create slices ([AED])",
+        "Assign sample to Flex machine on a track",
+        "In [FUNC]+[SRC] Playback Setup: set SLICE = ON",
+        "In Grid Recording, hold a [TRIG] and turn Encoder A (START) to select a slice",
+        "Each step can play a different slice — combine with sample locks for maximum variety"
+      ],
+      "controls_used": ["aed", "func", "src", "trig_1", "encoder_a"]
+    },
+    {
+      "id": "merlin-pattern-variation",
+      "name": "Pattern Variation via Copy-Paste",
+      "description": "Create pattern variations that share the same sound platform (Part) but differ in triggers and locks.",
+      "steps": [
+        "Build pattern A1 with saved Part",
+        "Copy pattern A1 → paste to A2, A3, etc.",
+        "All copies share the same Part (coherent sound)",
+        "Modify triggers and p-locks on A2 for a buildup variant",
+        "Strip triggers on A3 for a breakdown variant",
+        "Switch between patterns during performance — sound stays coherent"
+      ],
+      "controls_used": ["copy", "paste", "ptn", "trig_1", "part"]
+    },
+    {
+      "id": "merlin-new-part-transition",
+      "name": "Transition to a New Part (New Sound Territory)",
+      "description": "Use a second Part to radically change sounds while keeping some continuity.",
+      "steps": [
+        "Copy pattern A1 to A2",
+        "Enter Parts menu: copy Part 1 to Part 2",
+        "Select Part 2 for pattern A2, press [YES] to confirm",
+        "Save all Parts",
+        "Modify Part 2: swap machines, change effects, create new scenes",
+        "Perform: play A1 → build up with scene → switch to A2 on the beat → mute the buildup scene",
+        "A2 now plays with its own sound, its own scenes, its own base camp"
+      ],
+      "controls_used": ["copy", "paste", "part", "func", "yes", "scene_a", "scene_b", "crossfader", "ptn"]
+    },
+    {
+      "id": "merlin-scene-stacking",
+      "name": "Scene Stacking (Progressive Performance)",
+      "description": "Build scenes that progressively stack on top of each other for a natural performance journey.",
+      "steps": [
+        "Start with no scene active (default settings)",
+        "Move crossfader right, load Scene 1 to left (A). Fade left = Scene 1 in control.",
+        "Copy Scene 1 to Scene 9, load Scene 9 to right (B). Fade right = same as Scene 1 (no change yet).",
+        "Modify Scene 9 — add changes ON TOP of Scene 1's settings.",
+        "Fade right: now Scene 9 adds its new changes on top of Scene 1.",
+        "Copy Scene 9 to Scene 2, load to A. Modify. Fade left.",
+        "Continue: 1→9→2→10→3→11→... Each new scene builds on the previous.",
+        "Convention: Scenes 1-8 always left (A), 9-16 always right (B)."
+      ],
+      "controls_used": ["scene_a", "scene_b", "crossfader", "copy", "paste", "trig_1"]
+    },
+    {
+      "id": "merlin-buildup-recipe",
+      "name": "Buildup Recipe (Scene-Based)",
+      "description": "Create a tension buildup using a single scene and the crossfader.",
+      "steps": [
+        "Save your Part (base camp)",
+        "Load a buildup scene to Scene B with: delay feedback increased, filter resonance up, lo-fi/distortion parameters up, reverb increased",
+        "Slowly move crossfader from left (clean) to right (chaos)",
+        "At the peak, switch to next pattern and mute scene B",
+        "The new pattern kicks in clean, with a dramatic transition"
+      ],
+      "controls_used": ["part", "scene_b", "crossfader", "fx1", "fx2", "ptn", "func"]
+    },
+    {
+      "id": "merlin-cue-resampling",
+      "name": "CUE Output Resampling",
+      "description": "Use the CUE output as a submix bus for targeted internal resampling.",
+      "steps": [
+        "Set up a track recorder with SRC3 = CUE output",
+        "Selectively CUE the tracks you want to capture ([CUE]+[TRACK])",
+        "Trigger the recorder (sequenced or manual)",
+        "The recording captures ONLY the cued tracks — independent of main output",
+        "Optional: plug headphones into CUE for pre-listening",
+        "Recording is instantly available in the sample slot list"
+      ],
+      "controls_used": ["cue", "rec3", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "headphone_vol"]
+    },
+    {
+      "id": "merlin-live-input-trick",
+      "name": "Live Input Pass-Through Trick",
+      "description": "Use a recorder and Flex machine on the same track/buffer to pass live audio through the OT's effects.",
+      "steps": [
+        "Set up a track recorder to record live input, with record length matching pattern length",
+        "Place a full recorder trigger on step 1 (records every loop, overwriting)",
+        "Set up a Flex machine on the SAME track",
+        "Assign the Flex machine to its OWN record buffer (e.g., track 4 → buffer 4)",
+        "Place a play trigger on step 1 (same step as recorder trigger)",
+        "Result: recorder writes while Flex reads simultaneously = you hear the live input",
+        "Bonus: the live input now passes through the track's FX1 + FX2",
+        "Remove the recorder trigger to switch from live input to the last recording"
+      ],
+      "controls_used": ["rec1", "rec2", "src", "trig_1", "fx1", "fx2", "t1"]
+    },
+    {
+      "id": "merlin-volume-fix",
+      "name": "Fix Sample Volume Mismatches (The Right Way)",
+      "description": "Merlin's recommended approach when a sample-locked sound is too loud or too soft.",
+      "steps": [
+        "Do NOT adjust track volume (affects all patterns sharing the Part)",
+        "Do NOT p-lock AMP VOL on every step (tedious and fragile)",
+        "Instead: open the Audio Editor ([AED])",
+        "Navigate to the Attributes page (press [RIGHT] until you reach it)",
+        "Adjust the GAIN parameter (±24dB range) until the sample sits right",
+        "GAIN is stored per-sample-slot — it fixes the problem at the source"
+      ],
+      "controls_used": ["aed", "arrow_right", "encoder_a", "encoder_level"]
+    }
+  ]
+}
