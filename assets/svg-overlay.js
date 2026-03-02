@@ -663,14 +663,14 @@
       try {
         localStorage.setItem('ot-panel-collapsed', panelEl.classList.contains('collapsed'));
       } catch (e) {
-        /* */
+        void e;
       }
     });
 
     try {
       if (localStorage.getItem('ot-panel-collapsed') === 'true') panelEl.classList.add('collapsed');
     } catch (e) {
-      /* */
+      void e;
     }
   }
 
@@ -753,12 +753,6 @@
       if (!el) return;
       showDetail(el.dataset.otId);
     });
-  }
-
-  function escText(str) {
-    var d = document.createElement('div');
-    d.textContent = str;
-    return d.innerHTML;
   }
 
   function showDetail(elementId) {

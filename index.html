@@ -1012,7 +1012,7 @@
         </div>
         <div class="path-node not-started" data-tutorial="02-load-and-lock">
           <div class="path-node-number">2</div>
-          <div class="path-node-title">Load & Lock</div>
+          <div class="path-node-title">Load &amp; Lock</div>
         </div>
         <div class="path-node not-started" data-tutorial="03-beat-basics">
           <div class="path-node-number">3</div>
@@ -1026,7 +1026,7 @@
         <div class="path-tier-label">TIER 2 — CORE MANIPULATION</div>
         <div class="path-node not-started" data-tutorial="05-slice-and-dice">
           <div class="path-node-number">5</div>
-          <div class="path-node-title">Slice & Dice</div>
+          <div class="path-node-title">Slice &amp; Dice</div>
         </div>
         <div class="path-node not-started" data-tutorial="06-sample-locks">
           <div class="path-node-number">6</div>
@@ -1038,7 +1038,7 @@
         </div>
         <div class="path-node not-started" data-tutorial="08-parts-banks-scenes">
           <div class="path-node-number">8</div>
-          <div class="path-node-title">Parts & Scenes</div>
+          <div class="path-node-title">Parts &amp; Scenes</div>
         </div>
 
         <div class="path-tier-label">TIER 3 — ADVANCED</div>
@@ -1052,13 +1052,13 @@
         </div>
         <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
           <div class="path-node-number">11</div>
-          <div class="path-node-title">FX & Neighbors</div>
+          <div class="path-node-title">FX &amp; Neighbors</div>
         </div>
 
         <div class="path-tier-label">TIER 4 — MASTERY</div>
         <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
           <div class="path-node-number">12</div>
-          <div class="path-node-title">LFOs & Modulation</div>
+          <div class="path-node-title">LFOs &amp; Modulation</div>
         </div>
         <div class="path-node not-started" style="cursor: not-allowed; opacity: 0.3">
           <div class="path-node-number">13</div>
@@ -1089,8 +1089,8 @@
           <div>Progress saves automatically to localStorage</div>
         </div>
         <div class="footer-actions">
-          <button class="footer-button" onclick="app.exportProgress()">Export Progress</button>
-          <button class="footer-button" onclick="app.showResetModal()">Reset Progress</button>
+          <button type="button" class="footer-button" onclick="app.exportProgress()">Export Progress</button>
+          <button type="button" class="footer-button" onclick="app.showResetModal()">Reset Progress</button>
         </div>
       </div>
     </footer>
@@ -1101,8 +1101,8 @@
         <h3 class="modal-title">Reset All Progress?</h3>
         <div class="modal-body">This will clear all your tutorial progress, completion status, and confidence ratings. This action cannot be undone.</div>
         <div class="modal-actions">
-          <button class="modal-button secondary" onclick="app.closeResetModal()">Cancel</button>
-          <button class="modal-button primary" onclick="app.confirmReset()">Reset All</button>
+          <button type="button" class="modal-button secondary" onclick="app.closeResetModal()">Cancel</button>
+          <button type="button" class="modal-button primary" onclick="app.confirmReset()">Reset All</button>
         </div>
       </div>
     </div>
@@ -1117,8 +1117,8 @@
           including section checkmarks, quiz score, and confidence rating.
         </div>
         <div class="modal-actions">
-          <button class="modal-button secondary" onclick="app.closeTutorialResetModal()">Cancel</button>
-          <button class="modal-button primary" style="background: #ff3366; border-color: #ff3366" onclick="app.confirmTutorialReset()">Yes, Reset</button>
+          <button type="button" class="modal-button secondary" onclick="app.closeTutorialResetModal()">Cancel</button>
+          <button type="button" class="modal-button primary" style="background: #ff3366; border-color: #ff3366" onclick="app.confirmTutorialReset()">Yes, Reset</button>
         </div>
       </div>
     </div>
@@ -1138,7 +1138,7 @@
         '02-load-and-lock': {
           tier: 1,
           number: 2,
-          title: 'Load & Lock',
+          title: 'Load &amp; Lock',
           subtitle: 'Static vs Flex',
           time: 20,
           difficulty: 'Beginner',
@@ -1159,7 +1159,7 @@
           tier: 1,
           number: 4,
           title: 'Audio Pool',
-          subtitle: 'Samples & Organization',
+          subtitle: 'Samples &amp; Organization',
           time: 20,
           difficulty: 'Beginner',
           prerequisites: ['01-set-sail'],
@@ -1168,7 +1168,7 @@
         '05-slice-and-dice': {
           tier: 2,
           number: 5,
-          title: 'Slice & Dice',
+          title: 'Slice &amp; Dice',
           subtitle: 'Chopping Loops',
           time: 30,
           difficulty: 'Beginner',
@@ -1198,7 +1198,7 @@
         '08-parts-banks-scenes': {
           tier: 2,
           number: 8,
-          title: 'Parts & Scenes',
+          title: 'Parts &amp; Scenes',
           subtitle: 'Multi-Section',
           time: 30,
           difficulty: 'Intermediate',
@@ -1437,7 +1437,7 @@
 
           return `
                     <div class="tutorial-card ${statusClass}" data-tutorial="${id}">
-                        ${status !== 'not-started' ? `<button class="card-reset-btn" data-reset="${id}">RESET</button>` : ''}
+                        ${status !== 'not-started' ? `<button type="button" class="card-reset-btn" data-reset="${id}">RESET</button>` : ''}
                         <div class="tutorial-number">${tutorial.number}</div>
                         <div class="tutorial-title">${tutorial.title}</div>
                         <div class="tutorial-subtitle">${tutorial.subtitle}</div>
@@ -1479,7 +1479,7 @@
                             ${statusText}
                         </div>
 
-                        <button class="tutorial-button">${buttonText}</button>
+                        <button type="button" class="tutorial-button">${buttonText}</button>
                     </div>
                 `;
         },
@@ -1596,8 +1596,8 @@
       </div>
       <div>
         Like what you're using? Help me build more of these!
-        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
-          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
         </a>
       </div>
     </div>

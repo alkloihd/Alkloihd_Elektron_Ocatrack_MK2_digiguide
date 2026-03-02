@@ -726,17 +726,17 @@
           </div>
 
           <div class="controls">
-            <button onclick="presetKick()">Load Preset: Kick</button>
-            <button onclick="presetSnare()" class="secondary">Load Preset: Snare</button>
-            <button onclick="presetHiHat()">Load Preset: Hi-Hat</button>
-            <button onclick="resetSequencer()" class="secondary">Reset All</button>
+            <button type="button" onclick="presetKick()">Load Preset: Kick</button>
+            <button type="button" onclick="presetSnare()" class="secondary">Load Preset: Snare</button>
+            <button type="button" onclick="presetHiHat()">Load Preset: Hi-Hat</button>
+            <button type="button" onclick="resetSequencer()" class="secondary">Reset All</button>
           </div>
 
           <p style="color: #00ff41; margin-top: 20px; font-weight: 500">Cyan = active trig | Click any cell to toggle</p>
         </section>
 
         <section class="section" id="step-length">
-          <h2>Step Length & Pattern Length</h2>
+          <h2>Step Length &amp; Pattern Length</h2>
           <p>
             <strong>Default:</strong>
             16 steps (1 bar at 4/4 time)
@@ -874,7 +874,7 @@
 
         <section class="section" id="first-beat">
           <h2>Your First Beat (Step-by-Step)</h2>
-          <p>Follow along on your Octatrack. Building: four-on-the-floor kick, snare on 2&4, hi-hat pulse.</p>
+          <p>Follow along on your Octatrack. Building: four-on-the-floor kick, snare on 2&amp;4, hi-hat pulse.</p>
 
           <div class="step-guide">
             <div class="step">
@@ -957,7 +957,7 @@
             <div class="step">
               <div class="step-number">7</div>
               <div class="step-content">
-                <p><strong>Place Snare on 2 & 4</strong></p>
+                <p><strong>Place Snare on 2 &amp; 4</strong></p>
                 <p>Still in Grid Recording. Press trig keys 5, 13. Classic backbeat.</p>
                 <div class="button-sequence">
                   <span class="button-key">5</span>
@@ -1013,7 +1013,7 @@
         <section class="section" id="saving">
           <h2>Saving Your Work</h2>
           <p>
-            <strong>PROJECT > SAVE:</strong>
+            <strong>PROJECT &gt; SAVE:</strong>
             Saves your working state to a permanent checkpoint. Do this frequently.
           </p>
           <p>
@@ -1026,7 +1026,7 @@
           </p>
           <p>
             <strong>Best practice:</strong>
-            After each session, press PROJECT > SAVE. Before risky edits, press PROJECT > SAVE TO NEW for safety.
+            After each session, press PROJECT &gt; SAVE. Before risky edits, press PROJECT &gt; SAVE TO NEW for safety.
           </p>
           <p style="color: #ffaa00; margin-top: 20px; font-weight: 500">Warning: Never delete .work or .strd files unless 100% sure you don't need them.</p>
         </section>
@@ -1079,7 +1079,7 @@
           </div>
 
           <div style="margin-top: 30px">
-            <button onclick="checkQuiz()">Submit Answers</button>
+            <button type="button" onclick="checkQuiz()">Submit Answers</button>
             <div id="quiz-score" style="margin-top: 20px; font-size: 16px; font-weight: 600; display: none"></div>
           </div>
         </section>
@@ -1088,11 +1088,11 @@
           <h2>Confidence Check</h2>
           <p>How confident about Grid Recording and building a basic beat?</p>
           <div class="confidence-scale">
-            <button class="confidence-btn" data-confidence="1">1</button>
-            <button class="confidence-btn" data-confidence="2">2</button>
-            <button class="confidence-btn" data-confidence="3">3</button>
-            <button class="confidence-btn" data-confidence="4">4</button>
-            <button class="confidence-btn" data-confidence="5">5</button>
+            <button type="button" class="confidence-btn" data-confidence="1">1</button>
+            <button type="button" class="confidence-btn" data-confidence="2">2</button>
+            <button type="button" class="confidence-btn" data-confidence="3">3</button>
+            <button type="button" class="confidence-btn" data-confidence="4">4</button>
+            <button type="button" class="confidence-btn" data-confidence="5">5</button>
           </div>
           <p id="confidence-msg" style="color: #666666; margin-top: 15px; font-size: 13px"></p>
         </section>
@@ -1103,6 +1103,7 @@
         </div>
         <div style="text-align: center; margin-top: 2rem">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'flex'"
             style="
               background: none;
@@ -1144,12 +1145,17 @@
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'none'"
             style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
           >
             CANCEL
           </button>
-          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
             YES, RESET
           </button>
         </div>
@@ -1396,8 +1402,8 @@
       </div>
       <div>
         Like what you're using? Help me build more of these!
-        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
-          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
         </a>
       </div>
     </div>

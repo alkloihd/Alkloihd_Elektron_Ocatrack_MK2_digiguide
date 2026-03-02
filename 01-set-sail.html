@@ -683,54 +683,56 @@
       <div class="sidebar">
         <div class="sidebar-title">SECTIONS</div>
         <nav class="sidebar-nav">
-          <li>
-            <a href="#welcome" class="sidebar-nav-item active" data-section="welcome">
-              <span class="sidebar-checkbox"></span>
-              WELCOME
-            </a>
-          </li>
-          <li>
-            <a href="#hardware" class="sidebar-nav-item" data-section="hardware">
-              <span class="sidebar-checkbox"></span>
-              HARDWARE
-            </a>
-          </li>
-          <li>
-            <a href="#hierarchy" class="sidebar-nav-item" data-section="hierarchy">
-              <span class="sidebar-checkbox"></span>
-              HIERARCHY
-            </a>
-          </li>
-          <li>
-            <a href="#save-system" class="sidebar-nav-item" data-section="save-system">
-              <span class="sidebar-checkbox"></span>
-              SAVE SYSTEM
-            </a>
-          </li>
-          <li>
-            <a href="#golden-rules" class="sidebar-nav-item" data-section="golden-rules">
-              <span class="sidebar-checkbox"></span>
-              GOLDEN RULES
-            </a>
-          </li>
-          <li>
-            <a href="#card-layout" class="sidebar-nav-item" data-section="card-layout">
-              <span class="sidebar-checkbox"></span>
-              YOUR CARD
-            </a>
-          </li>
-          <li>
-            <a href="#quiz" class="sidebar-nav-item" data-section="quiz">
-              <span class="sidebar-checkbox"></span>
-              QUIZ
-            </a>
-          </li>
-          <li>
-            <a href="#confidence" class="sidebar-nav-item" data-section="confidence">
-              <span class="sidebar-checkbox"></span>
-              RATE
-            </a>
-          </li>
+          <ul>
+            <li>
+              <a href="#welcome" class="sidebar-nav-item active" data-section="welcome">
+                <span class="sidebar-checkbox"></span>
+                WELCOME
+              </a>
+            </li>
+            <li>
+              <a href="#hardware" class="sidebar-nav-item" data-section="hardware">
+                <span class="sidebar-checkbox"></span>
+                HARDWARE
+              </a>
+            </li>
+            <li>
+              <a href="#hierarchy" class="sidebar-nav-item" data-section="hierarchy">
+                <span class="sidebar-checkbox"></span>
+                HIERARCHY
+              </a>
+            </li>
+            <li>
+              <a href="#save-system" class="sidebar-nav-item" data-section="save-system">
+                <span class="sidebar-checkbox"></span>
+                SAVE SYSTEM
+              </a>
+            </li>
+            <li>
+              <a href="#golden-rules" class="sidebar-nav-item" data-section="golden-rules">
+                <span class="sidebar-checkbox"></span>
+                GOLDEN RULES
+              </a>
+            </li>
+            <li>
+              <a href="#card-layout" class="sidebar-nav-item" data-section="card-layout">
+                <span class="sidebar-checkbox"></span>
+                YOUR CARD
+              </a>
+            </li>
+            <li>
+              <a href="#quiz" class="sidebar-nav-item" data-section="quiz">
+                <span class="sidebar-checkbox"></span>
+                QUIZ
+              </a>
+            </li>
+            <li>
+              <a href="#confidence" class="sidebar-nav-item" data-section="confidence">
+                <span class="sidebar-checkbox"></span>
+                RATE
+              </a>
+            </li>
+          </ul>
         </nav>
         <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #333333">
           <div class="progress-label" style="margin-bottom: 0.5rem">COMPLETION</div>
@@ -1137,7 +1139,7 @@
               <div class="quiz-feedback">Correct! Parts are per Bank. Press [PART] to switch Parts and isolate patterns.</div>
             </div>
 
-            <button class="quiz-submit" id="submitQuiz">SUBMIT QUIZ</button>
+            <button type="button" class="quiz-submit" id="submitQuiz">SUBMIT QUIZ</button>
             <div class="quiz-result" id="quizResult"></div>
           </div>
         </div>
@@ -1148,11 +1150,11 @@
             <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
             <p style="margin-bottom: 1.5rem; color: #e0e0e0">Rate your understanding of these concepts.</p>
             <div class="confidence-scale">
-              <button class="confidence-btn" data-confidence="1">1</button>
-              <button class="confidence-btn" data-confidence="2">2</button>
-              <button class="confidence-btn" data-confidence="3">3</button>
-              <button class="confidence-btn" data-confidence="4">4</button>
-              <button class="confidence-btn" data-confidence="5">5</button>
+              <button type="button" class="confidence-btn" data-confidence="1">1</button>
+              <button type="button" class="confidence-btn" data-confidence="2">2</button>
+              <button type="button" class="confidence-btn" data-confidence="3">3</button>
+              <button type="button" class="confidence-btn" data-confidence="4">4</button>
+              <button type="button" class="confidence-btn" data-confidence="5">5</button>
             </div>
             <div style="text-align: center; margin-top: 1rem; font-family: 'Space Mono', monospace; color: #666666; font-size: 11px">1 = Not ready | 5 = Totally got it</div>
           </div>
@@ -1160,11 +1162,12 @@
 
         <!-- BOTTOM NAV -->
         <div class="bottom-nav">
-          <button class="nav-button" onclick="alert('Tutorial 01 is the first in the series.')">← PREVIOUS (NONE)</button>
-          <a href="02-load-and-lock.html" class="nav-button">NEXT: LOAD & LOCK →</a>
+          <button type="button" class="nav-button" onclick="alert('Tutorial 01 is the first in the series.')">← PREVIOUS (NONE)</button>
+          <a href="02-load-and-lock.html" class="nav-button">NEXT: LOAD &amp; LOCK →</a>
         </div>
         <div style="text-align: center; margin-top: 2rem">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'flex'"
             style="
               background: none;
@@ -1206,12 +1209,17 @@
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'none'"
             style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
           >
             CANCEL
           </button>
-          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
             YES, RESET
           </button>
         </div>
@@ -1219,7 +1227,7 @@
     </div>
 
     <script>
-      // ==================== STORAGE & STATE ====================
+      // ==================== STORAGE &amp; STATE ====================
       const STORAGE_KEY = 'octatrack-tutorials';
       const TUTORIAL_ID = '01-set-sail';
 
@@ -1453,8 +1461,8 @@
       </div>
       <div>
         Like what you're using? Help me build more of these!
-        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
-          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
         </a>
       </div>
     </div>

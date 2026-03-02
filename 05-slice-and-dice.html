@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Octatrack: Slice & Dice</title>
+    <title>Octatrack: Slice &amp; Dice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -620,8 +620,8 @@
     <!-- TOP BAR -->
     <div class="top-bar">
       <div class="top-bar-left">
-        <button class="dashboard-link" onclick="window.location.href = 'index.html'">← DASHBOARD</button>
-        <div class="top-bar-title">SLICE & DICE</div>
+        <button type="button" class="dashboard-link" onclick="window.location.href = 'index.html'">← DASHBOARD</button>
+        <div class="top-bar-title">SLICE &amp; DICE</div>
       </div>
       <div class="top-bar-meta">
         <div class="meta-item">⏱ 30 MIN</div>
@@ -699,8 +699,8 @@
                   SLICES:
                   <input type="number" id="sliceCount" min="4" max="64" value="8" step="4" />
                 </label>
-                <button class="button" onclick="updateWaveform()">APPLY GRID</button>
-                <button class="button secondary" onclick="resetWaveform()">RESET</button>
+                <button type="button" class="button" onclick="updateWaveform()">APPLY GRID</button>
+                <button type="button" class="button secondary" onclick="resetWaveform()">RESET</button>
               </div>
               <div class="slice-info" id="sliceInfo">Select number of slices and click APPLY GRID. Each vertical line = one slice.</div>
             </div>
@@ -708,9 +708,9 @@
             <div class="card">
               <div class="card-title">MENU PATH</div>
               <div class="card-content">
-                Audio Editor > [FUNC] (to access menu) > Slice > CREATE SLICE GRID
+                Audio Editor &gt; [FUNC] (to access menu) &gt; Slice &gt; CREATE SLICE GRID
                 <br />
-                Select number of divisions (4, 8, 16, 32, 64) > [YES] to confirm
+                Select number of divisions (4, 8, 16, 32, 64) &gt; [YES] to confirm
               </div>
             </div>
 
@@ -753,7 +753,7 @@
             <div class="card">
               <div class="card-title">ZERO-CROSSING SNAP</div>
               <div class="card-content">
-                Audio Editor menu > Snap > ZERO CROSSING
+                Audio Editor menu &gt; Snap &gt; ZERO CROSSING
                 <br />
                 Enable this, then place markers. The OT will snap them to the nearest zero crossing automatically.
               </div>
@@ -773,7 +773,7 @@
 
             <div class="card">
               <div class="card-title">ENABLE SLICE PLAYBACK</div>
-              <div class="card-content">[TRACK] button on the sliced track > Playback Setup > SLICE = ON</div>
+              <div class="card-content">[TRACK] button on the sliced track &gt; Playback Setup &gt; SLICE = ON</div>
             </div>
 
             <p style="margin-top: 20px">
@@ -813,36 +813,38 @@
             <p>Slices are just the start. You can manipulate each slice independently:</p>
 
             <table>
-              <tr>
-                <th>TECHNIQUE</th>
-                <th>HOW</th>
-                <th>WHY</th>
-              </tr>
-              <tr>
-                <td>Reverse slices</td>
-                <td>Hold [TRIG] + turn RATE to negative (-100) on [PLAYBACK] page</td>
-                <td>Backwards hits, glitch effects</td>
-              </tr>
-              <tr>
-                <td>Pitch slices</td>
-                <td>Hold [TRIG] + turn TUNE on [PLAYBACK] page</td>
-                <td>Tuned drum kit, melodic loops</td>
-              </tr>
-              <tr>
-                <td>Repeat slices</td>
-                <td>Place same slice number on consecutive [TRIG] steps</td>
-                <td>Stutter effects, rhythmic emphasis</td>
-              </tr>
-              <tr>
-                <td>Skip slices</td>
-                <td>Leave [TRIG] steps empty in your sequence</td>
-                <td>Syncopation, variation, space</td>
-              </tr>
-              <tr>
-                <td>Randomize with [LFO]</td>
-                <td>[LFO] targeting SLICE parameter</td>
-                <td>Generative patterns, chaos</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th scope="col">TECHNIQUE</th>
+                  <th scope="col">HOW</th>
+                  <th scope="col">WHY</th>
+                </tr>
+                <tr>
+                  <td>Reverse slices</td>
+                  <td>Hold [TRIG] + turn RATE to negative (-100) on [PLAYBACK] page</td>
+                  <td>Backwards hits, glitch effects</td>
+                </tr>
+                <tr>
+                  <td>Pitch slices</td>
+                  <td>Hold [TRIG] + turn TUNE on [PLAYBACK] page</td>
+                  <td>Tuned drum kit, melodic loops</td>
+                </tr>
+                <tr>
+                  <td>Repeat slices</td>
+                  <td>Place same slice number on consecutive [TRIG] steps</td>
+                  <td>Stutter effects, rhythmic emphasis</td>
+                </tr>
+                <tr>
+                  <td>Skip slices</td>
+                  <td>Leave [TRIG] steps empty in your sequence</td>
+                  <td>Syncopation, variation, space</td>
+                </tr>
+                <tr>
+                  <td>Randomize with [LFO]</td>
+                  <td>[LFO] targeting SLICE parameter</td>
+                  <td>Generative patterns, chaos</td>
+                </tr>
+              </tbody>
             </table>
 
             <div class="card" style="margin-top: 20px">
@@ -864,9 +866,9 @@
           </div>
         </section>
 
-        <!-- SECTION 7: .ot Files & Sample Chains -->
+        <!-- SECTION 7: .ot Files &amp; Sample Chains -->
         <section class="section" id="sec-7">
-          <h2 class="section-title">7. .OT FILES & SAMPLE CHAINS (ADVANCED)</h2>
+          <h2 class="section-title">7. .OT FILES &amp; SAMPLE CHAINS (ADVANCED)</h2>
           <div class="section-content">
             <p>When you slice a sample on the OT, it creates a .ot metadata file alongside the WAV. This file stores:</p>
             <ul style="margin-left: 20px; margin-bottom: 20px">
@@ -916,14 +918,15 @@
 
         <!-- BOTTOM NAV -->
         <div class="bottom-nav">
-          <button class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
+          <button type="button" class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
           <div class="nav-progress">
             <span id="progressText">TUTORIAL 05 / 06</span>
           </div>
-          <button class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
+          <button type="button" class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
         </div>
         <div style="text-align: center; margin-top: 2rem">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'flex'"
             style="
               background: none;
@@ -960,17 +963,22 @@
         <h3 style="color: #ff3366; margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
         <p style="color: #999; font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
           This will clear all your progress for
-          <strong style="color: #00e5ff">05 — Slice & Dice</strong>
+          <strong style="color: #00e5ff">05 — Slice &amp; Dice</strong>
           including section checkmarks, quiz score, and confidence rating.
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'none'"
             style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
           >
             CANCEL
           </button>
-          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
             YES, RESET
           </button>
         </div>
@@ -1193,7 +1201,7 @@
       // Confidence scale
       function initConfidence() {
         const container = document.getElementById('confidenceScale');
-        container.innerHTML = Array.from({ length: 5 }, (_, i) => `<button class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`).join('');
+        container.innerHTML = Array.from({ length: 5 }, (_, i) => `<button type="button" class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`).join('');
       }
 
       function setConfidence(level) {
@@ -1259,8 +1267,8 @@
       </div>
       <div>
         Like what you're using? Help me build more of these!
-        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
-          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
         </a>
       </div>
     </div>

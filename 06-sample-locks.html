@@ -620,7 +620,7 @@
     <!-- TOP BAR -->
     <div class="top-bar">
       <div class="top-bar-left">
-        <button class="dashboard-link" onclick="window.location.href = 'index.html'">← DASHBOARD</button>
+        <button type="button" class="dashboard-link" onclick="window.location.href = 'index.html'">← DASHBOARD</button>
         <div class="top-bar-title">SAMPLE LOCKS</div>
       </div>
       <div class="top-bar-meta">
@@ -766,36 +766,38 @@
             </p>
 
             <table>
-              <tr>
-                <th>LOCK TYPE</th>
-                <th>EFFECT</th>
-                <th>EXAMPLE</th>
-              </tr>
-              <tr>
-                <td>Sample Lock</td>
-                <td>Different sample per step</td>
-                <td>Step 1 = kick, Step 3 = snare</td>
-              </tr>
-              <tr>
-                <td>Sample Lock + Volume P-Lock</td>
-                <td>Different volume per sample</td>
-                <td>Hold [TRIG], adjust [LEVEL] — Step 1 kick at 100, Step 5 kick at 80</td>
-              </tr>
-              <tr>
-                <td>Sample Lock + Pitch P-Lock</td>
-                <td>Different pitch per sample</td>
-                <td>Hold [TRIG], press [PLAYBACK] page, tune pitch per step</td>
-              </tr>
-              <tr>
-                <td>Sample Lock + Filter P-Lock</td>
-                <td>Different filter per sample</td>
-                <td>Hold [TRIG], press [FX1], tweak filter — closed on step 4, open on step 12</td>
-              </tr>
-              <tr>
-                <td>Sample Lock + Effect Send</td>
-                <td>Different effect amount per step</td>
-                <td>Hold [TRIG], press [FX2], dial reverb — dry kick on step 1, wet snare on step 5</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th scope="col">LOCK TYPE</th>
+                  <th scope="col">EFFECT</th>
+                  <th scope="col">EXAMPLE</th>
+                </tr>
+                <tr>
+                  <td>Sample Lock</td>
+                  <td>Different sample per step</td>
+                  <td>Step 1 = kick, Step 3 = snare</td>
+                </tr>
+                <tr>
+                  <td>Sample Lock + Volume P-Lock</td>
+                  <td>Different volume per sample</td>
+                  <td>Hold [TRIG], adjust [LEVEL] — Step 1 kick at 100, Step 5 kick at 80</td>
+                </tr>
+                <tr>
+                  <td>Sample Lock + Pitch P-Lock</td>
+                  <td>Different pitch per sample</td>
+                  <td>Hold [TRIG], press [PLAYBACK] page, tune pitch per step</td>
+                </tr>
+                <tr>
+                  <td>Sample Lock + Filter P-Lock</td>
+                  <td>Different filter per sample</td>
+                  <td>Hold [TRIG], press [FX1], tweak filter — closed on step 4, open on step 12</td>
+                </tr>
+                <tr>
+                  <td>Sample Lock + Effect Send</td>
+                  <td>Different effect amount per step</td>
+                  <td>Hold [TRIG], press [FX2], dial reverb — dry kick on step 1, wet snare on step 5</td>
+                </tr>
+              </tbody>
             </table>
 
             <div class="card" style="margin-top: 20px">
@@ -827,46 +829,48 @@
             <p>Both are powerful techniques. Here's when to use each:</p>
 
             <table>
-              <tr>
-                <th>FEATURE</th>
-                <th>SAMPLE LOCKS</th>
-                <th>SLICING</th>
-              </tr>
-              <tr>
-                <td>Source</td>
-                <td>Multiple different samples</td>
-                <td>One sample divided</td>
-              </tr>
-              <tr>
-                <td>Slots used</td>
-                <td>1 slot per unique sample</td>
-                <td>1 slot total</td>
-              </tr>
-              <tr>
-                <td>Best for</td>
-                <td>Drum kits, variety, different sounds</td>
-                <td>Chopping loops, beat rearrangement</td>
-              </tr>
-              <tr>
-                <td>RAM cost</td>
-                <td>Each sample (Flex) = memory</td>
-                <td>One sample only = minimal</td>
-              </tr>
-              <tr>
-                <td>Flexibility</td>
-                <td>Totally different sounds per step</td>
-                <td>Variations of the same source</td>
-              </tr>
-              <tr>
-                <td>Setup speed</td>
-                <td>Slower (hold [TRIG] + [UP]/[DOWN] per step)</td>
-                <td>Faster (open [AED], create slice grid once)</td>
-              </tr>
-              <tr>
-                <td>Real-time swaps</td>
-                <td>Yes! Instant sample changes</td>
-                <td>Fixed to sample slices</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <th scope="col">FEATURE</th>
+                  <th scope="col">SAMPLE LOCKS</th>
+                  <th scope="col">SLICING</th>
+                </tr>
+                <tr>
+                  <td>Source</td>
+                  <td>Multiple different samples</td>
+                  <td>One sample divided</td>
+                </tr>
+                <tr>
+                  <td>Slots used</td>
+                  <td>1 slot per unique sample</td>
+                  <td>1 slot total</td>
+                </tr>
+                <tr>
+                  <td>Best for</td>
+                  <td>Drum kits, variety, different sounds</td>
+                  <td>Chopping loops, beat rearrangement</td>
+                </tr>
+                <tr>
+                  <td>RAM cost</td>
+                  <td>Each sample (Flex) = memory</td>
+                  <td>One sample only = minimal</td>
+                </tr>
+                <tr>
+                  <td>Flexibility</td>
+                  <td>Totally different sounds per step</td>
+                  <td>Variations of the same source</td>
+                </tr>
+                <tr>
+                  <td>Setup speed</td>
+                  <td>Slower (hold [TRIG] + [UP]/[DOWN] per step)</td>
+                  <td>Faster (open [AED], create slice grid once)</td>
+                </tr>
+                <tr>
+                  <td>Real-time swaps</td>
+                  <td>Yes! Instant sample changes</td>
+                  <td>Fixed to sample slices</td>
+                </tr>
+              </tbody>
             </table>
 
             <div class="card" style="margin-top: 20px">
@@ -886,7 +890,7 @@
 
         <!-- SECTION 6: Performance Tips -->
         <section class="section" id="sec-6">
-          <h2 class="section-title">6. PERFORMANCE TIPS & TRICKS</h2>
+          <h2 class="section-title">6. PERFORMANCE TIPS &amp; TRICKS</h2>
           <div class="section-content">
             <p>Master these techniques for faster, cleaner sample locking:</p>
 
@@ -991,14 +995,15 @@
 
         <!-- BOTTOM NAV -->
         <div class="bottom-nav">
-          <button class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
+          <button type="button" class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
           <div class="nav-progress">
             <span id="progressText">TUTORIAL 06 / 06</span>
           </div>
-          <button class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
+          <button type="button" class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
         </div>
         <div style="text-align: center; margin-top: 2rem">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'flex'"
             style="
               background: none;
@@ -1040,12 +1045,17 @@
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'none'"
             style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
           >
             CANCEL
           </button>
-          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
             YES, RESET
           </button>
         </div>
@@ -1228,7 +1238,7 @@
       // Confidence scale
       function initConfidence() {
         const container = document.getElementById('confidenceScale');
-        container.innerHTML = Array.from({ length: 5 }, (_, i) => `<button class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`).join('');
+        container.innerHTML = Array.from({ length: 5 }, (_, i) => `<button type="button" class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`).join('');
       }
 
       function setConfidence(level) {
@@ -1293,8 +1303,8 @@
       </div>
       <div>
         Like what you're using? Help me build more of these!
-        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
-          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
         </a>
       </div>
     </div>

@@ -845,36 +845,38 @@
 
           <h3>How It Works</h3>
           <table>
-            <tr>
-              <th>Filename</th>
-              <th>OT Detects?</th>
-              <th>Result</th>
-            </tr>
-            <tr>
-              <td>DrumLoop_128bpm.wav</td>
-              <td>YES ✓</td>
-              <td>Sets ORIGINAL TEMPO to 128 automatically</td>
-            </tr>
-            <tr>
-              <td>Bass_90.wav</td>
-              <td>YES ✓</td>
-              <td>Sets ORIGINAL TEMPO to 90 automatically</td>
-            </tr>
-            <tr>
-              <td>Sample_140_Dark.wav</td>
-              <td>YES ✓</td>
-              <td>Sets ORIGINAL TEMPO to 140 (even if "140" is unrelated!)</td>
-            </tr>
-            <tr>
-              <td>Recording_2024.wav</td>
-              <td>NO ✗</td>
-              <td>2024 is outside range. You must set ORIGINAL TEMPO manually.</td>
-            </tr>
-            <tr>
-              <td>Pad_96_Ambient.wav</td>
-              <td>YES ✓</td>
-              <td>Sets ORIGINAL TEMPO to 96 automatically</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th scope="col">Filename</th>
+                <th scope="col">OT Detects?</th>
+                <th scope="col">Result</th>
+              </tr>
+              <tr>
+                <td>DrumLoop_128bpm.wav</td>
+                <td>YES ✓</td>
+                <td>Sets ORIGINAL TEMPO to 128 automatically</td>
+              </tr>
+              <tr>
+                <td>Bass_90.wav</td>
+                <td>YES ✓</td>
+                <td>Sets ORIGINAL TEMPO to 90 automatically</td>
+              </tr>
+              <tr>
+                <td>Sample_140_Dark.wav</td>
+                <td>YES ✓</td>
+                <td>Sets ORIGINAL TEMPO to 140 (even if "140" is unrelated!)</td>
+              </tr>
+              <tr>
+                <td>Recording_2024.wav</td>
+                <td>NO ✗</td>
+                <td>2024 is outside range. You must set ORIGINAL TEMPO manually.</td>
+              </tr>
+              <tr>
+                <td>Pad_96_Ambient.wav</td>
+                <td>YES ✓</td>
+                <td>Sets ORIGINAL TEMPO to 96 automatically</td>
+              </tr>
+            </tbody>
           </table>
 
           <h3>Interactive BPM Filename Tester</h3>
@@ -905,31 +907,33 @@
           <h2>04 - NORMAL VS BEAT ALGORITHM</h2>
           <p>The Octatrack's timestretch engine has two modes, selectable in the [AUD] Audio Editor attributes page. They sound and behave very differently.</p>
           <table>
-            <tr>
-              <th>Property</th>
-              <th>NORMAL</th>
-              <th>BEAT</th>
-            </tr>
-            <tr>
-              <td>Best For</td>
-              <td>Tonal material: pads, melodic loops, vocals, strings, keys</td>
-              <td>Drums, percussion, rhythmic loops, breaks</td>
-            </tr>
-            <tr>
-              <td>How It Works</td>
-              <td>Granular time-stretching (stretches the waveform itself)</td>
-              <td>Slice-based (detects transients, repositions them)</td>
-            </tr>
-            <tr>
-              <td>Artifacts at Extremes</td>
-              <td>Slight granular shimmer or watering effect</td>
-              <td>May stutter or have pumping feel</td>
-            </tr>
-            <tr>
-              <td>Quality at Extreme Stretch</td>
-              <td>Good for moderate stretching (±20%)</td>
-              <td>Good for rhythmic material (even ±50%)</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th scope="col">Property</th>
+                <th scope="col">NORMAL</th>
+                <th scope="col">BEAT</th>
+              </tr>
+              <tr>
+                <td>Best For</td>
+                <td>Tonal material: pads, melodic loops, vocals, strings, keys</td>
+                <td>Drums, percussion, rhythmic loops, breaks</td>
+              </tr>
+              <tr>
+                <td>How It Works</td>
+                <td>Granular time-stretching (stretches the waveform itself)</td>
+                <td>Slice-based (detects transients, repositions them)</td>
+              </tr>
+              <tr>
+                <td>Artifacts at Extremes</td>
+                <td>Slight granular shimmer or watering effect</td>
+                <td>May stutter or have pumping feel</td>
+              </tr>
+              <tr>
+                <td>Quality at Extreme Stretch</td>
+                <td>Good for moderate stretching (±20%)</td>
+                <td>Good for rhythmic material (even ±50%)</td>
+              </tr>
+            </tbody>
           </table>
 
           <h3>Quick Decision Tree</h3>
@@ -990,31 +994,33 @@
 
           <h3>When to Use Which</h3>
           <table>
-            <tr>
-              <th>Scenario</th>
-              <th>Machine</th>
-              <th>Why</th>
-            </tr>
-            <tr>
-              <td>Long loop (30+ sec) that needs tempo sync, no slicing needed</td>
-              <td>Static + TSTR</td>
-              <td>Zero RAM cost. Loop streams from card and stretches to tempo. Perfect for backing tracks.</td>
-            </tr>
-            <tr>
-              <td>Long loop (30+ sec) that you want to slice and chop</td>
-              <td>Flex + TSTR</td>
-              <td>Costs RAM, but you can slice it into 64 pieces and trigger slices p-locked. Slices also timestretch.</td>
-            </tr>
-            <tr>
-              <td>Short loop (1-5 sec) tempo-matched</td>
-              <td>Flex + TSTR</td>
-              <td>Low RAM cost (~0.5 MB per loop). Instant access for slicing and manipulation.</td>
-            </tr>
-            <tr>
-              <td>Resampled recording from recorder track</td>
-              <td>Flex + TSTR</td>
-              <td>Recordings are short. TSTR will match them to your current tempo.</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th scope="col">Scenario</th>
+                <th scope="col">Machine</th>
+                <th scope="col">Why</th>
+              </tr>
+              <tr>
+                <td>Long loop (30+ sec) that needs tempo sync, no slicing needed</td>
+                <td>Static + TSTR</td>
+                <td>Zero RAM cost. Loop streams from card and stretches to tempo. Perfect for backing tracks.</td>
+              </tr>
+              <tr>
+                <td>Long loop (30+ sec) that you want to slice and chop</td>
+                <td>Flex + TSTR</td>
+                <td>Costs RAM, but you can slice it into 64 pieces and trigger slices p-locked. Slices also timestretch.</td>
+              </tr>
+              <tr>
+                <td>Short loop (1-5 sec) tempo-matched</td>
+                <td>Flex + TSTR</td>
+                <td>Low RAM cost (~0.5 MB per loop). Instant access for slicing and manipulation.</td>
+              </tr>
+              <tr>
+                <td>Resampled recording from recorder track</td>
+                <td>Flex + TSTR</td>
+                <td>Recordings are short. TSTR will match them to your current tempo.</td>
+              </tr>
+            </tbody>
           </table>
 
           <h3>Static Machines are Underrated for Long Loops</h3>
@@ -1122,7 +1128,7 @@
 
         <!-- SECTION 7: EDGE CASES -->
         <div class="section" id="section-7">
-          <h2>07 - EDGE CASES & GOTCHAS</h2>
+          <h2>07 - EDGE CASES &amp; GOTCHAS</h2>
 
           <h3>Half-Time and Double-Time Loops</h3>
           <p>Sometimes a loop sounds like it's playing at double the speed. This usually means the sample was recorded at a different effective tempo.</p>
@@ -1143,7 +1149,7 @@
             </p>
           </div>
 
-          <h3>Extreme Stretching (>50% Change)</h3>
+          <h3>Extreme Stretching (&gt;50% Change)</h3>
           <p>If you stretch a loop more than 50% faster or slower, you'll hear artifacts:</p>
           <ul style="margin-left: 2rem; color: #e0e0e0; margin-bottom: 1rem">
             <li>
@@ -1300,11 +1306,11 @@
           <div class="confidence-section">
             <div class="confidence-title">Rate Your Confidence (1-5)</div>
             <div class="confidence-scale">
-              <button class="confidence-btn" data-level="1">1</button>
-              <button class="confidence-btn" data-level="2">2</button>
-              <button class="confidence-btn" data-level="3">3</button>
-              <button class="confidence-btn" data-level="4">4</button>
-              <button class="confidence-btn" data-level="5">5</button>
+              <button type="button" class="confidence-btn" data-level="1">1</button>
+              <button type="button" class="confidence-btn" data-level="2">2</button>
+              <button type="button" class="confidence-btn" data-level="3">3</button>
+              <button type="button" class="confidence-btn" data-level="4">4</button>
+              <button type="button" class="confidence-btn" data-level="5">5</button>
             </div>
             <p id="confidence-message" style="margin-top: 1.5rem; text-align: center; color: #ffaa00; display: none">Thanks! Your confidence level has been saved.</p>
           </div>
@@ -1317,6 +1323,7 @@
         </div>
         <div style="text-align: center; margin-top: 2rem">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'flex'"
             style="
               background: none;
@@ -1358,12 +1365,17 @@
         </p>
         <div style="display: flex; gap: 1rem; justify-content: center">
           <button
+            type="button"
             onclick="document.getElementById('reset-modal').style.display = 'none'"
             style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
           >
             CANCEL
           </button>
-          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
             YES, RESET
           </button>
         </div>
@@ -1548,8 +1560,8 @@
       </div>
       <div>
         Like what you're using? Help me build more of these!
-        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
-          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
         </a>
       </div>
     </div>
