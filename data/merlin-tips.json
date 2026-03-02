@@ -35,7 +35,18 @@
       "Not saving the Part before experimenting — without a saved state, [FUNC]+[RELOAD] has nothing to restore.",
       "Confusing Part reload with project reload — Part reload only restores Part-level data (machines, effects, scenes, volumes), not triggers or locks."
     ],
-    "related_controls": ["func", "proj", "scene_a", "scene_b", "crossfader", "fx1", "fx2", "src", "amp", "encoder_level"]
+    "related_controls": [
+      "func",
+      "proj",
+      "scene_a",
+      "scene_b",
+      "crossfader",
+      "fx1",
+      "fx2",
+      "src",
+      "amp",
+      "encoder_level"
+    ]
   },
 
   "aed": {
@@ -52,7 +63,19 @@
       "Not understanding that slice/trim settings are per-SLOT, not per-track — if two tracks use the same slot, they share the same slices",
       "Forgetting to save a recording buffer to CF card before powering off — recordings are volatile!"
     ],
-    "related_controls": ["func", "src", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e", "encoder_f", "yes", "arrow_left", "arrow_right"]
+    "related_controls": [
+      "func",
+      "src",
+      "encoder_a",
+      "encoder_b",
+      "encoder_c",
+      "encoder_d",
+      "encoder_e",
+      "encoder_f",
+      "yes",
+      "arrow_left",
+      "arrow_right"
+    ]
   },
 
   "mix": {
@@ -86,9 +109,7 @@
       "Merlin doesn't focus on MIDI in his guide — his emphasis is on the OT as a self-contained sampling/performance instrument."
     ],
     "workflow_context": "MIDI mode switches the trig keys to control external MIDI gear. [FUNC]+[MIDI] opens MIDI Sync settings for clock/transport sync with external equipment.",
-    "common_mistakes": [
-      "Accidentally entering MIDI mode when you meant to stay in audio track editing"
-    ],
+    "common_mistakes": ["Accidentally entering MIDI mode when you meant to stay in audio track editing"],
     "related_controls": ["func", "trig_1", "t1"]
   },
 
@@ -103,7 +124,9 @@
       "Not holding FUNC long enough — you need to HOLD it while pressing the second button",
       "Forgetting which combos exist — the OT has ~30+ FUNC combos and Merlin's guide assumes you know the essential ones"
     ],
-    "related_controls": ["Every other button — FUNC modifies them all. Especially: part, aed, proj, cue, page, src, mix"]
+    "related_controls": [
+      "Every other button — FUNC modifies them all. Especially: part, aed, proj, cue, page, src, mix"
+    ]
   },
 
   "cue": {
@@ -118,7 +141,21 @@
       "Forgetting that CUE is independent of MAIN — what you cue doesn't have to be what the audience hears",
       "Not using CUE for resampling — it's one of the OT's most powerful hidden features"
     ],
-    "related_controls": ["func", "t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "rec1", "rec2", "rec3", "headphone_vol"]
+    "related_controls": [
+      "func",
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "rec1",
+      "rec2",
+      "rec3",
+      "headphone_vol"
+    ]
   },
 
   "ptn": {
@@ -191,9 +228,7 @@
       "Same as arrow_up for sample lock browsing — UP/DOWN both open the browser, then you scroll through the slot list."
     ],
     "workflow_context": "In Grid Recording, hold a [TRIG] key then press [DOWN] to open the sample lock browser (same as UP). Also used for menu navigation.",
-    "common_mistakes": [
-      "Same as arrow_up — must hold trig first"
-    ],
+    "common_mistakes": ["Same as arrow_up — must hold trig first"],
     "related_controls": ["arrow_up", "trig_1", "yes", "encoder_level"]
   },
 
@@ -213,9 +248,7 @@
       "Merlin's timestretch workflow requires navigating RIGHT through Audio Editor pages to reach the Attributes page where you set ORIGINAL TEMPO."
     ],
     "workflow_context": "Navigate to the next menu page. In the Audio Editor, press RIGHT to move from TRIM → SLICE → EDIT → ATTRIBUTES → FILE. Critical for reaching the Attributes page where tempo and gain live.",
-    "common_mistakes": [
-      "Same as arrow_left — not exploring all the Audio Editor pages"
-    ],
+    "common_mistakes": ["Same as arrow_left — not exploring all the Audio Editor pages"],
     "related_controls": ["arrow_left", "aed", "func"]
   },
 
@@ -234,27 +267,21 @@
   },
 
   "t2": {
-    "merlin_tips": [
-      "Merlin's example: Track 2 = clap with filter + reverb."
-    ],
+    "merlin_tips": ["Merlin's example: Track 2 = clap with filter + reverb."],
     "workflow_context": "Same as T1 — select Track 2 for editing. Merlin typically uses T2 for snare/clap sounds.",
     "common_mistakes": ["Same as T1"],
     "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
   },
 
   "t3": {
-    "merlin_tips": [
-      "Merlin's example: Track 3 = hi-hat loop with filter + delay."
-    ],
+    "merlin_tips": ["Merlin's example: Track 3 = hi-hat loop with filter + delay."],
     "workflow_context": "Same as T1 — select Track 3 for editing. Merlin typically uses T3 for hi-hats.",
     "common_mistakes": ["Same as T1"],
     "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
   },
 
   "t4": {
-    "merlin_tips": [
-      "Merlin's example: Track 4 = bassline loop with filter + lo-fi."
-    ],
+    "merlin_tips": ["Merlin's example: Track 4 = bassline loop with filter + lo-fi."],
     "workflow_context": "Same as T1 — select Track 4 for editing. Merlin typically uses T4 for basslines.",
     "common_mistakes": ["Same as T1"],
     "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
@@ -280,9 +307,7 @@
   },
 
   "t7": {
-    "merlin_tips": [
-      "Same as T6 — Merlin's examples use 5 tracks but principles apply to all 8."
-    ],
+    "merlin_tips": ["Same as T6 — Merlin's examples use 5 tracks but principles apply to all 8."],
     "workflow_context": "Same as T1. Can be used for resampling (recorder + Flex machine on same track).",
     "common_mistakes": ["Same as T1"],
     "related_controls": ["func", "cue", "src", "amp", "fx1", "fx2", "trig_1"]
@@ -352,7 +377,19 @@
       "Forgetting that effects live in the Part — changing FX1 on pattern A1 also changes it on A2 if they share a Part",
       "Not using scene control for effects parameters during performance — twiddling knobs manually is less fluid than crossfading"
     ],
-    "related_controls": ["fx2", "func", "scene_a", "scene_b", "crossfader", "part", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e"]
+    "related_controls": [
+      "fx2",
+      "func",
+      "scene_a",
+      "scene_b",
+      "crossfader",
+      "part",
+      "encoder_a",
+      "encoder_b",
+      "encoder_c",
+      "encoder_d",
+      "encoder_e"
+    ]
   },
 
   "fx2": {
@@ -364,7 +401,19 @@
     "common_mistakes": [
       "Not considering FX slot order — FX1 feeds into FX2, so a filter in FX1 feeding a delay in FX2 is very different from the reverse"
     ],
-    "related_controls": ["fx1", "func", "scene_a", "scene_b", "crossfader", "part", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e"]
+    "related_controls": [
+      "fx1",
+      "func",
+      "scene_a",
+      "scene_b",
+      "crossfader",
+      "part",
+      "encoder_a",
+      "encoder_b",
+      "encoder_c",
+      "encoder_d",
+      "encoder_e"
+    ]
   },
 
   "copy": {
@@ -385,9 +434,7 @@
       "Merlin mentions deleting triggers, removing machines, and clearing scenes as part of his experimentation workflow. 'Be brutal — change the pattern so heavily that the original is completely destroyed' (then reload the Part to undo it all)."
     ],
     "workflow_context": "CLEAR ([FUNC]+[PLAY]) deletes/clears the current context. Use it to strip down patterns for breaks (Merlin's example: clear all kick triggers for a breakdown pattern). Safe to experiment because you can always reload the Part.",
-    "common_mistakes": [
-      "Clearing something before saving your Part — without a saved state, there's no undo"
-    ],
+    "common_mistakes": ["Clearing something before saving your Part — without a saved state, there's no undo"],
     "related_controls": ["func", "copy", "paste", "part"]
   },
 
@@ -418,9 +465,7 @@
   },
 
   "rec2": {
-    "merlin_tips": [
-      "Same principles as REC1 but for input C/D."
-    ],
+    "merlin_tips": ["Same principles as REC1 but for input C/D."],
     "workflow_context": "REC2 handles input C/D recording. [FUNC]+[REC2] opens Recording Setup 2. Same principles as REC1.",
     "common_mistakes": ["Same as REC1"],
     "related_controls": ["func", "t5", "t6", "t7", "t8", "rec1", "rec3", "aed"]
@@ -453,7 +498,19 @@
       "Not muting unused scene slots — an active but empty scene can cause unexpected behavior",
       "Not saving the Part after setting up scenes — scenes are Part-level data"
     ],
-    "related_controls": ["scene_b", "crossfader", "func", "trig_1", "part", "encoder_a", "encoder_b", "encoder_c", "encoder_d", "encoder_e", "encoder_f"]
+    "related_controls": [
+      "scene_b",
+      "crossfader",
+      "func",
+      "trig_1",
+      "part",
+      "encoder_a",
+      "encoder_b",
+      "encoder_c",
+      "encoder_d",
+      "encoder_e",
+      "encoder_f"
+    ]
   },
 
   "scene_b": {
@@ -506,21 +563,100 @@
     "related_controls": ["func", "encoder_level", "arrow_up", "arrow_down", "src", "amp", "yes"]
   },
 
-  "trig_2": { "merlin_tips": ["Same principles as trig_1 — all 16 trigs work identically."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_3": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_4": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_5": { "merlin_tips": ["Same principles as trig_1. In Merlin's examples, step 5 (beat 2) and step 13 (beat 4) are classic snare/clap positions."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_6": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_7": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_8": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_9": { "merlin_tips": ["Same principles as trig_1. Steps 9-16 represent the second half of a 1-bar pattern."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_10": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_11": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_12": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_13": { "merlin_tips": ["Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_14": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_15": { "merlin_tips": ["Same principles as trig_1."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
-  "trig_16": { "merlin_tips": ["Same principles as trig_1. The last step of a 1-bar pattern — Merlin sometimes uses this for fill triggers or transition elements."], "workflow_context": "Same as trig_1.", "common_mistakes": ["Same as trig_1."], "related_controls": ["Same as trig_1."] },
+  "trig_2": {
+    "merlin_tips": ["Same principles as trig_1 — all 16 trigs work identically."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_3": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_4": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_5": {
+    "merlin_tips": [
+      "Same principles as trig_1. In Merlin's examples, step 5 (beat 2) and step 13 (beat 4) are classic snare/clap positions."
+    ],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_6": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_7": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_8": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_9": {
+    "merlin_tips": ["Same principles as trig_1. Steps 9-16 represent the second half of a 1-bar pattern."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_10": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_11": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_12": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_13": {
+    "merlin_tips": ["Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_14": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_15": {
+    "merlin_tips": ["Same principles as trig_1."],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
+  "trig_16": {
+    "merlin_tips": [
+      "Same principles as trig_1. The last step of a 1-bar pattern — Merlin sometimes uses this for fill triggers or transition elements."
+    ],
+    "workflow_context": "Same as trig_1.",
+    "common_mistakes": ["Same as trig_1."],
+    "related_controls": ["Same as trig_1."]
+  },
 
   "page": {
     "merlin_tips": [
@@ -556,9 +692,7 @@
       "In the Audio Editor, Encoder A controls different parameters depending on the active page (TRIM, SLICE, etc.)."
     ],
     "workflow_context": "Data entry encoder A — the parameter it controls depends on the active page. On SRC page: typically START (and slice selection when SLICE=ON). In Audio Editor: varies by page. Press+turn for coarse adjustment.",
-    "common_mistakes": [
-      "Not pressing+turning for coarse adjustment when you need to make big changes quickly"
-    ],
+    "common_mistakes": ["Not pressing+turning for coarse adjustment when you need to make big changes quickly"],
     "related_controls": ["encoder_b", "encoder_c", "encoder_d", "src", "aed"]
   },
 

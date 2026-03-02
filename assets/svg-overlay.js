@@ -31,9 +31,9 @@
   var activeHighlights = {};
   var animationTimer = null;
   var currentTutorial = null;
-  var sectionMap = {};          // sectionId -> [elementId, ...]
-  var activeSectionId = null;   // currently visible section
-  var sectionObserver = null;   // IntersectionObserver for sections
+  var sectionMap = {}; // sectionId -> [elementId, ...]
+  var activeSectionId = null; // currently visible section
+  var sectionObserver = null; // IntersectionObserver for sections
 
   function detectTutorial() {
     var path = window.location.pathname;
@@ -282,7 +282,8 @@
   }
 
   function setupSectionTracking() {
-    var main = document.querySelector('.main') || document.querySelector('.content') || document.querySelector('.main-content');
+    var main =
+      document.querySelector('.main') || document.querySelector('.content') || document.querySelector('.main-content');
     if (!main) return;
 
     var sections = main.querySelectorAll('.section');
@@ -292,7 +293,7 @@
     sectionMap = {};
     for (var i = 0; i < sections.length; i++) {
       var sec = sections[i];
-      var secId = sec.id || ('section-' + i);
+      var secId = sec.id || 'section-' + i;
       var refs = sec.querySelectorAll('[data-ot-element]');
       var ids = [];
       var seen = {};
@@ -323,53 +324,57 @@
 
     // Set up IntersectionObserver on sections
     var visibleSections = {};
-    sectionObserver = new IntersectionObserver(function (entries) {
-      for (var e = 0; e < entries.length; e++) {
-        var entry = entries[e];
-        var id = entry.target.id || entry.target.getAttribute('data-section-idx');
-        if (entry.isIntersecting) {
-          visibleSections[id] = entry.intersectionRatio;
-        } else {
-          delete visibleSections[id];
+    sectionObserver = new IntersectionObserver(
+      function (entries) {
+        for (var e = 0; e < entries.length; e++) {
+          var entry = entries[e];
+          var id = entry.target.id || entry.target.getAttribute('data-section-idx');
+          if (entry.isIntersecting) {
+            visibleSections[id] = entry.intersectionRatio;
+          } else {
+            delete visibleSections[id];
+          }
         }
-      }
 
-      // Pick the section with the highest intersection ratio
-      var bestId = null;
-      var bestRatio = 0;
-      var vKeys = Object.keys(visibleSections);
-      for (var v = 0; v < vKeys.length; v++) {
-        if (visibleSections[vKeys[v]] > bestRatio) {
-          bestRatio = visibleSections[vKeys[v]];
-          bestId = vKeys[v];
+        // Pick the section with the highest intersection ratio
+        var bestId = null;
+        var bestRatio = 0;
+        var vKeys = Object.keys(visibleSections);
+        for (var v = 0; v < vKeys.length; v++) {
+          if (visibleSections[vKeys[v]] > bestRatio) {
+            bestRatio = visibleSections[vKeys[v]];
+            bestId = vKeys[v];
+          }
         }
-      }
 
-      if (bestId && bestId !== activeSectionId) {
-        activeSectionId = bestId;
-        // Update highlights to section-level
-        var secIds = sectionMap[activeSectionId];
-        if (secIds && secIds.length > 0) {
-          clearAll();
-          highlightButtons(secIds, COLORS.highlight);
-        } else {
-          // Section has no button references — fall back to tutorial-level
+        if (bestId && bestId !== activeSectionId) {
+          activeSectionId = bestId;
+          // Update highlights to section-level
+          var secIds = sectionMap[activeSectionId];
+          if (secIds && secIds.length > 0) {
+            clearAll();
+            highlightButtons(secIds, COLORS.highlight);
+          } else {
+            // Section has no button references — fall back to tutorial-level
+            highlightTutorialButtons();
+          }
+          // Update indicator
+          var secEl =
+            main.querySelector('#' + CSS.escape(activeSectionId)) ||
+            main.querySelector('[data-section-idx="' + activeSectionId + '"]');
+          var secHeading = secEl ? secEl.querySelector('h2, h3, h4') : null;
+          var secName = secHeading ? secHeading.textContent : activeSectionId;
+          indicator.textContent = 'Section: ' + secName;
+          indicator.style.display = 'block';
+        } else if (vKeys.length === 0) {
+          // No section in view — fall back to tutorial-level
+          activeSectionId = null;
           highlightTutorialButtons();
+          indicator.style.display = 'none';
         }
-        // Update indicator
-        var secEl = main.querySelector('#' + CSS.escape(activeSectionId))
-          || main.querySelector('[data-section-idx="' + activeSectionId + '"]');
-        var secHeading = secEl ? secEl.querySelector('h2, h3, h4') : null;
-        var secName = secHeading ? secHeading.textContent : activeSectionId;
-        indicator.textContent = 'Section: ' + secName;
-        indicator.style.display = 'block';
-      } else if (vKeys.length === 0) {
-        // No section in view — fall back to tutorial-level
-        activeSectionId = null;
-        highlightTutorialButtons();
-        indicator.style.display = 'none';
-      }
-    }, { threshold: 0.3 });
+      },
+      { threshold: 0.3 }
+    );
 
     // Observe all sections
     for (var s = 0; s < sections.length; s++) {
@@ -427,13 +432,22 @@
       'TRIG 6': 'trig_6',
       'TRIG 7': 'trig_7',
       'TRIG 8': 'trig_8',
+      'TRIG 9': 'trig_9',
+      'TRIG 10': 'trig_10',
+      'TRIG 11': 'trig_11',
+      'TRIG 12': 'trig_12',
+      'TRIG 13': 'trig_13',
+      'TRIG 14': 'trig_14',
+      'TRIG 15': 'trig_15',
+      'TRIG 16': 'trig_16',
     };
     var aliasKeys = Object.keys(aliases);
     for (var a = 0; a < aliasKeys.length; a++) {
       labelToId[aliasKeys[a]] = aliases[aliasKeys[a]];
     }
 
-    var main = document.querySelector('.main') || document.querySelector('.content') || document.querySelector('.main-content');
+    var main =
+      document.querySelector('.main') || document.querySelector('.content') || document.querySelector('.main-content');
     if (!main) return;
 
     var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, null, false);
@@ -574,20 +588,38 @@
       '.ot-legend{margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:#666;font-family:"Space Mono",monospace}',
       '.ot-legend-item{display:flex;align-items:center;gap:4px}',
       '.ot-legend-swatch{width:10px;height:10px;border:1px solid}',
-      '.ot-detail{margin-top:12px;border:2px solid ' + COLORS.border + ';background:#0d0d0d;display:none;max-height:45vh;overflow-y:auto}',
+      '.ot-detail{margin-top:12px;border:2px solid ' +
+        COLORS.border +
+        ';background:#0d0d0d;display:none;max-height:45vh;overflow-y:auto}',
       '.ot-detail.active{display:block}',
-      '.ot-detail-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:' + COLORS.surface + ';border-bottom:1px solid ' + COLORS.border + ';position:sticky;top:0;z-index:1}',
-      '.ot-detail-title{font-family:"Space Mono",monospace;font-size:16px;font-weight:700;color:' + COLORS.highlight + '}',
-      '.ot-detail-close{background:none;border:1px solid ' + COLORS.border + ';color:#666;font-size:14px;cursor:pointer;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;transition:all 0.2s}',
+      '.ot-detail-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:' +
+        COLORS.surface +
+        ';border-bottom:1px solid ' +
+        COLORS.border +
+        ';position:sticky;top:0;z-index:1}',
+      '.ot-detail-title{font-family:"Space Mono",monospace;font-size:16px;font-weight:700;color:' +
+        COLORS.highlight +
+        '}',
+      '.ot-detail-close{background:none;border:1px solid ' +
+        COLORS.border +
+        ';color:#666;font-size:14px;cursor:pointer;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-family:"Space Mono",monospace;transition:all 0.2s}',
       '.ot-detail-close:hover{border-color:' + COLORS.active + ';color:' + COLORS.active + '}',
       '.ot-detail-body{padding:12px 14px}',
       '.ot-detail-row{margin-bottom:10px}',
       '.ot-detail-label{font-family:"Space Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.15em;color:#555;margin-bottom:4px}',
       '.ot-detail-value{font-family:"Inter",sans-serif;font-size:15px;line-height:1.6;color:' + COLORS.text + '}',
-      '.ot-detail-combo{display:inline-block;font-family:"Space Mono",monospace;font-size:14px;padding:3px 10px;margin:3px 4px 3px 0;background:rgba(0,255,255,0.06);border:1px solid rgba(0,255,255,0.2);color:' + COLORS.highlight + '}',
-      '.ot-detail-tip{font-family:"Inter",sans-serif;font-size:14px;line-height:1.6;color:' + COLORS.warning + ';padding:8px 12px;margin-top:6px;border-left:2px solid ' + COLORS.warning + ';background:rgba(255,170,0,0.04)}',
+      '.ot-detail-combo{display:inline-block;font-family:"Space Mono",monospace;font-size:14px;padding:3px 10px;margin:3px 4px 3px 0;background:rgba(0,255,255,0.06);border:1px solid rgba(0,255,255,0.2);color:' +
+        COLORS.highlight +
+        '}',
+      '.ot-detail-tip{font-family:"Inter",sans-serif;font-size:14px;line-height:1.6;color:' +
+        COLORS.warning +
+        ';padding:8px 12px;margin-top:6px;border-left:2px solid ' +
+        COLORS.warning +
+        ';background:rgba(255,170,0,0.04)}',
       '.ot-detail-mistake{font-family:"Inter",sans-serif;font-size:14px;line-height:1.6;color:#ff4444;padding:8px 12px;margin-top:6px;border-left:2px solid #ff4444;background:rgba(255,68,68,0.04)}',
-      '.ot-detail-section{font-family:"Space Mono",monospace;font-size:13px;color:#444;margin-top:10px;padding-top:10px;border-top:1px solid ' + COLORS.border + '}',
+      '.ot-detail-section{font-family:"Space Mono",monospace;font-size:13px;color:#444;margin-top:10px;padding-top:10px;border-top:1px solid ' +
+        COLORS.border +
+        '}',
       '@media(max-width:1200px){.ot-panel{display:none}}',
     ].join('\n');
     document.head.appendChild(style);
@@ -790,7 +822,8 @@
     if (m.func_combo) addRow('[FUNC] + [' + info.label + ']', m.func_combo);
 
     // Menu path
-    if (m.menu_path) addRow('Menu Path', m.menu_path, 'font-family:"Space Mono",monospace;font-size:11px;color:' + COLORS.highlight);
+    if (m.menu_path)
+      addRow('Menu Path', m.menu_path, 'font-family:"Space Mono",monospace;font-size:11px;color:' + COLORS.highlight);
 
     // All combos
     var combos = m.all_combos || m.other_combos || [];

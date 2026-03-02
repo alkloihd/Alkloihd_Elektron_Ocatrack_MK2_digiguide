@@ -6,10 +6,7 @@
   "zones": {
     "back_panel": {
       "description": "Rear panel I/O ports",
-      "y_range": [
-        40,
-        70
-      ]
+      "y_range": [40, 70]
     },
     "branding": {
       "description": "Elektron logo, model name, tagline"
@@ -150,9 +147,7 @@
           "Merlin doesn't focus on MIDI in his guide \u2014 his emphasis is on the OT as a self-contained sampling/performance instrument."
         ],
         "workflow_context": "MIDI mode switches the trig keys to control external MIDI gear. [FUNC]+[MIDI] opens MIDI Sync settings for clock/transport sync with external equipment.",
-        "common_mistakes": [
-          "Accidentally entering MIDI mode when you meant to stay in audio track editing"
-        ]
+        "common_mistakes": ["Accidentally entering MIDI mode when you meant to stay in audio track editing"]
       },
       "tutorials": []
     },
@@ -171,9 +166,7 @@
       "manual": {
         "primary": "Opens the PROJECT menu where sets, projects, system settings, MIDI config, mixer, and tempo are accessed. This is the master settings hub of the Octatrack.",
         "func_combo": "[FUNC] + [PROJ] = Quick-save the current project (equivalent to PROJECT > SAVE).",
-        "all_combos": [
-          "[FUNC] + [PROJ] = Save project"
-        ],
+        "all_combos": ["[FUNC] + [PROJ] = Save project"],
         "menu_path": "PROJECT menu \u2192 PROJECT (Load/Save/Reload/Export/Purge) | SYSTEM (USB/OS/Date/Personalize/Card Tools/Status) | CONTROL (Audio/Input/Sequencer/MIDI Seq/Memory/Metronome) | MIDI (Control/Sync/Channels/Turbo) | MIXER | TEMPO",
         "parameters": [
           "PROJECT: Change, Save, Reload, Sync To Card, Save To New, Export To Set, Collect Samples, Purge Samples, Save Current Bank, Reload Current Bank",
@@ -202,9 +195,7 @@
           "Not saving the project before heavy experimentation \u2014 you lose your fallback point"
         ]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["02-load-and-lock", "03-beat-basics"]
     },
     "part": {
       "type": "button",
@@ -258,10 +249,7 @@
           "Confusing Part reload with project reload \u2014 Part reload only restores Part-level data (machines, effects, scenes, volumes), not triggers or locks."
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "08-parts-banks-scenes"]
     },
     "aed": {
       "type": "button",
@@ -371,9 +359,7 @@
           "Using DIR for performance mixing instead of setting up XDIR in scenes \u2014 DIR requires navigating to the mixer page every time"
         ]
       },
-      "tutorials": [
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["08-parts-banks-scenes"]
     },
     "arr": {
       "type": "button",
@@ -390,9 +376,7 @@
       "manual": {
         "primary": "Opens the ARRANGER menu where arrangements (up to 256 rows of sequenced patterns) are edited, renamed, saved, and chained.",
         "func_combo": "[FUNC] + [ARR] = Toggle ARRANGEMENT mode on/off. When lit, the Arranger controls playback.",
-        "all_combos": [
-          "[FUNC] + [ARR] = Toggle Arrangement mode on/off"
-        ],
+        "all_combos": ["[FUNC] + [ARR] = Toggle Arrangement mode on/off"],
         "menu_path": "ARRANGER menu \u2192 EDIT | RENAME | CHANGE | CHAIN | CLEAR | SAVE | RELOAD",
         "parameters": [
           "ROW: Up to 256 rows per arrangement",
@@ -476,13 +460,7 @@
           "Not understanding that record buffers live in the sample slot list \u2014 they're instantly available everywhere but also instantly overwritten on the next recording"
         ]
       },
-      "tutorials": [
-        "02-load-and-lock",
-        "03-beat-basics",
-        "05-slice-and-dice",
-        "06-sample-locks",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["02-load-and-lock", "03-beat-basics", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
     },
     "rec2": {
       "type": "button",
@@ -523,13 +501,9 @@
           "QPL quantizes manual trig playback \u2014 great for keeping manually triggered loops in sync."
         ],
         "section": "3.1 (item 1), 9.1.3",
-        "merlin_tips": [
-          "Same principles as REC1 but for input C/D."
-        ],
+        "merlin_tips": ["Same principles as REC1 but for input C/D."],
         "workflow_context": "REC2 handles input C/D recording. [FUNC]+[REC2] opens Recording Setup 2. Same principles as REC1.",
-        "common_mistakes": [
-          "Same as REC1"
-        ]
+        "common_mistakes": ["Same as REC1"]
       },
       "tutorials": []
     },
@@ -554,9 +528,7 @@
           "[FUNC] + [REC3] = Open Recording Edit menu (save/edit recordings)"
         ],
         "menu_path": "RECORDING EDIT menu \u2192 Edit This Recording (opens Audio Editor) | Save This Recording | Save All Recordings | Go To Memory Config.",
-        "parameters": [
-          "The internal source is configured by SRC3 in Recording Setup 1 (-, MAIN, CUE, T1-T8)"
-        ],
+        "parameters": ["The internal source is configured by SRC3 in Recording Setup 1 (-, MAIN, CUE, T1-T8)"],
         "leds": "No signal-level LED for REC3. When in Recording Setup, a lit [REC3] indicates internal source is activated for a recorder trig.",
         "tips": [
           "SRC3 = MAIN records the master output mix \u2014 perfect for resampling your entire beat.",
@@ -703,11 +675,7 @@
           "Not using CUE for resampling \u2014 it's one of the OT's most powerful hidden features"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "03-beat-basics"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics"]
     },
     "ptn": {
       "type": "button",
@@ -754,9 +722,7 @@
           "Not realizing that copied patterns share a Part \u2014 editing machines on A2 also changes A1 unless you assign a different Part"
         ]
       },
-      "tutorials": [
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["08-parts-banks-scenes"]
     },
     "bank": {
       "type": "button",
@@ -808,11 +774,7 @@
           "Switching banks mid-performance without understanding the Part change that comes with it"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "03-beat-basics",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "03-beat-basics", "08-parts-banks-scenes"]
     },
     "yes": {
       "type": "button",
@@ -911,13 +873,7 @@
           "Not knowing that NO can erase locks during Live Recording when held"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "05-slice-and-dice",
-        "06-sample-locks",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
     },
     "arrow_left": {
       "type": "button",
@@ -957,13 +913,7 @@
           "Not realizing the Audio Editor has multiple pages you navigate with LEFT/RIGHT \u2014 many beginners only see the first page"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "04-audio-pool",
-        "05-slice-and-dice",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "04-audio-pool", "05-slice-and-dice", "07-loop-stretching"]
     },
     "arrow_up": {
       "type": "button",
@@ -1004,13 +954,7 @@
           "Confusing the sample lock browser with the regular sample assignment (which is done via the machine/SRC page)"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "04-audio-pool",
-        "05-slice-and-dice",
-        "06-sample-locks",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["01-set-sail", "04-audio-pool", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
     },
     "arrow_down": {
       "type": "button",
@@ -1044,17 +988,9 @@
           "Same as arrow_up for sample lock browsing \u2014 UP/DOWN both open the browser, then you scroll through the slot list."
         ],
         "workflow_context": "In Grid Recording, hold a [TRIG] key then press [DOWN] to open the sample lock browser (same as UP). Also used for menu navigation.",
-        "common_mistakes": [
-          "Same as arrow_up \u2014 must hold trig first"
-        ]
+        "common_mistakes": ["Same as arrow_up \u2014 must hold trig first"]
       },
-      "tutorials": [
-        "01-set-sail",
-        "04-audio-pool",
-        "05-slice-and-dice",
-        "06-sample-locks",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["01-set-sail", "04-audio-pool", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
     },
     "arrow_right": {
       "type": "button",
@@ -1090,17 +1026,9 @@
           "Merlin's timestretch workflow requires navigating RIGHT through Audio Editor pages to reach the Attributes page where you set ORIGINAL TEMPO."
         ],
         "workflow_context": "Navigate to the next menu page. In the Audio Editor, press RIGHT to move from TRIM \u2192 SLICE \u2192 EDIT \u2192 ATTRIBUTES \u2192 FILE. Critical for reaching the Attributes page where tempo and gain live.",
-        "common_mistakes": [
-          "Same as arrow_left \u2014 not exploring all the Audio Editor pages"
-        ]
+        "common_mistakes": ["Same as arrow_left \u2014 not exploring all the Audio Editor pages"]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "04-audio-pool",
-        "05-slice-and-dice",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "04-audio-pool", "05-slice-and-dice", "07-loop-stretching"]
     },
     "t1": {
       "type": "button",
@@ -1175,27 +1103,17 @@
       "manual": {
         "primary": "Select Track 2 as the active track.",
         "func_combo": "[FUNC] + [TRACK 2] = Mute/unmute Track 2.",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 2."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 2."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
-        "tips": [
-          "Same tips as Track 1."
-        ],
+        "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
-        "merlin_tips": [
-          "Merlin's example: Track 2 = clap with filter + reverb."
-        ],
+        "merlin_tips": ["Merlin's example: Track 2 = clap with filter + reverb."],
         "workflow_context": "Same as T1 \u2014 select Track 2 for editing. Merlin typically uses T2 for snare/clap sounds.",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics", "05-slice-and-dice"]
     },
     "t3": {
       "type": "button",
@@ -1212,27 +1130,17 @@
       "manual": {
         "primary": "Select Track 3 as the active track.",
         "func_combo": "[FUNC] + [TRACK 3] = Mute/unmute Track 3.",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 3."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 3."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
-        "tips": [
-          "Same tips as Track 1."
-        ],
+        "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
-        "merlin_tips": [
-          "Merlin's example: Track 3 = hi-hat loop with filter + delay."
-        ],
+        "merlin_tips": ["Merlin's example: Track 3 = hi-hat loop with filter + delay."],
         "workflow_context": "Same as T1 \u2014 select Track 3 for editing. Merlin typically uses T3 for hi-hats.",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "t4": {
       "type": "button",
@@ -1249,25 +1157,17 @@
       "manual": {
         "primary": "Select Track 4 as the active track.",
         "func_combo": "[FUNC] + [TRACK 4] = Mute/unmute Track 4.",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 4."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 4."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
-        "tips": [
-          "Same tips as Track 1."
-        ],
+        "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
-        "merlin_tips": [
-          "Merlin's example: Track 4 = bassline loop with filter + lo-fi."
-        ],
+        "merlin_tips": ["Merlin's example: Track 4 = bassline loop with filter + lo-fi."],
         "workflow_context": "Same as T1 \u2014 select Track 4 for editing. Merlin typically uses T4 for basslines.",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
-      "tutorials": []
+      "tutorials": ["05-slice-and-dice"]
     },
     "t5": {
       "type": "button",
@@ -1284,9 +1184,7 @@
       "manual": {
         "primary": "Select Track 5 as the active track.",
         "func_combo": "[FUNC] + [TRACK 5] = Mute/unmute Track 5.",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 5."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 5."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
@@ -1299,9 +1197,7 @@
           "In his slice example, Track 5's Flex machine is assigned to a sliced sample \u2014 he demonstrates slice locks from this track."
         ],
         "workflow_context": "Same as T1. Merlin uses T5 for pads or sliced samples in his examples.",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
       "tutorials": []
     },
@@ -1320,23 +1216,17 @@
       "manual": {
         "primary": "Select Track 6 as the active track.",
         "func_combo": "[FUNC] + [TRACK 6] = Mute/unmute Track 6.",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 6."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 6."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
-        "tips": [
-          "Same tips as Track 1."
-        ],
+        "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
         "merlin_tips": [
           "Tracks 6-8 are not specifically assigned in Merlin's core examples, but follow the same rules as T1-T5."
         ],
         "workflow_context": "Same as T1. Often used for additional elements, effects returns, or Neighbor/Thru machines.",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
       "tutorials": []
     },
@@ -1355,23 +1245,15 @@
       "manual": {
         "primary": "Select Track 7 as the active track.",
         "func_combo": "[FUNC] + [TRACK 7] = Mute/unmute Track 7.",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 7."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 7."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
-        "tips": [
-          "Same tips as Track 1."
-        ],
+        "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
-        "merlin_tips": [
-          "Same as T6 \u2014 Merlin's examples use 5 tracks but principles apply to all 8."
-        ],
+        "merlin_tips": ["Same as T6 \u2014 Merlin's examples use 5 tracks but principles apply to all 8."],
         "workflow_context": "Same as T1. Can be used for resampling (recorder + Flex machine on same track).",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
       "tutorials": []
     },
@@ -1390,9 +1272,7 @@
       "manual": {
         "primary": "Select Track 8 as the active track. Track 8 can optionally be set as a MASTER track (PROJECT > CONTROL > AUDIO) which makes its effects process ALL audio including external inputs.",
         "func_combo": "[FUNC] + [TRACK 8] = Mute/unmute Track 8 (unless it's a master track, which can't be muted).",
-        "all_combos": [
-          "Same combinations as Track 1, applied to Track 8."
-        ],
+        "all_combos": ["Same combinations as Track 1, applied to Track 8."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all track keys.",
@@ -1406,9 +1286,7 @@
           "Merlin doesn't specifically mention T8, but the 'master bus trick' (Thru machine on T8 listening to main output for compression/EQ) is a well-known community technique consistent with his signal flow explanations."
         ],
         "workflow_context": "Same as T1. T8 is commonly used as a master bus (Thru machine \u2192 compressor + EQ on the main output).",
-        "common_mistakes": [
-          "Same as T1"
-        ]
+        "common_mistakes": ["Same as T1"]
       },
       "tutorials": []
     },
@@ -1517,11 +1395,7 @@
           "P-locking AMP VOL on every step to fix a volume mismatch \u2014 Merlin calls this 'not very convenient' and recommends using sample GAIN instead"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "lfo": {
       "type": "button",
@@ -1570,13 +1444,7 @@
           "Not setting LFO mode correctly \u2014 TRIG mode restarts per trig (good for rhythmic effects), FREE runs continuously"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "05-slice-and-dice",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "05-slice-and-dice", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "fx1": {
       "type": "button",
@@ -1623,11 +1491,7 @@
           "Not using scene control for effects parameters during performance \u2014 twiddling knobs manually is less fluid than crossfading"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "fx2": {
       "type": "button",
@@ -1671,11 +1535,7 @@
           "Not considering FX slot order \u2014 FX1 feeds into FX2, so a filter in FX1 feeding a delay in FX2 is very different from the reverse"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "copy": {
       "type": "button",
@@ -1762,9 +1622,7 @@
           "Merlin mentions deleting triggers, removing machines, and clearing scenes as part of his experimentation workflow. 'Be brutal \u2014 change the pattern so heavily that the original is completely destroyed' (then reload the Part to undo it all)."
         ],
         "workflow_context": "CLEAR ([FUNC]+[PLAY]) deletes/clears the current context. Use it to strip down patterns for breaks (Merlin's example: clear all kick triggers for a breakdown pattern). Safe to experiment because you can always reload the Part.",
-        "common_mistakes": [
-          "Clearing something before saving your Part \u2014 without a saved state, there's no undo"
-        ]
+        "common_mistakes": ["Clearing something before saving your Part \u2014 without a saved state, there's no undo"]
       },
       "tutorials": [
         "01-set-sail",
@@ -1820,12 +1678,7 @@
           "Forgetting that pasting a pattern does NOT paste the Part \u2014 you must copy/paste Parts separately"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "03-beat-basics",
-        "06-sample-locks",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["01-set-sail", "03-beat-basics", "06-sample-locks", "07-loop-stretching"]
     },
     "encoder_level": {
       "type": "encoder",
@@ -1919,13 +1772,9 @@
           "In the Audio Editor, Encoder A controls different parameters depending on the active page (TRIM, SLICE, etc.)."
         ],
         "workflow_context": "Data entry encoder A \u2014 the parameter it controls depends on the active page. On SRC page: typically START (and slice selection when SLICE=ON). In Audio Editor: varies by page. Press+turn for coarse adjustment.",
-        "common_mistakes": [
-          "Not pressing+turning for coarse adjustment when you need to make big changes quickly"
-        ]
+        "common_mistakes": ["Not pressing+turning for coarse adjustment when you need to make big changes quickly"]
       },
-      "tutorials": [
-        "05-slice-and-dice"
-      ]
+      "tutorials": ["05-slice-and-dice"]
     },
     "encoder_b": {
       "type": "encoder",
@@ -1941,23 +1790,17 @@
       "manual": {
         "primary": "Controls the upper-middle parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
-        "all_combos": [
-          "Same combinations as Encoder A, applied to the upper-middle parameter position."
-        ],
+        "all_combos": ["Same combinations as Encoder A, applied to the upper-middle parameter position."],
         "menu_path": "N/A \u2014 context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
-        "tips": [
-          "Same tips as Encoder A."
-        ],
+        "tips": ["Same tips as Encoder A."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
           "On the SRC page, Encoder B typically controls the LEN (length) parameter \u2014 how much of the sample plays from the start point."
         ],
         "workflow_context": "Data entry encoder B. Context-dependent like all encoders. Press+turn for coarse adjustment.",
-        "common_mistakes": [
-          "Same as encoder_a \u2014 not using press+turn for coarse changes."
-        ]
+        "common_mistakes": ["Same as encoder_a \u2014 not using press+turn for coarse changes."]
       },
       "tutorials": []
     },
@@ -1975,23 +1818,17 @@
       "manual": {
         "primary": "Controls the upper-right parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
-        "all_combos": [
-          "Same combinations as Encoder A, applied to the upper-right parameter position."
-        ],
+        "all_combos": ["Same combinations as Encoder A, applied to the upper-right parameter position."],
         "menu_path": "N/A \u2014 context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
-        "tips": [
-          "Same tips as Encoder A."
-        ],
+        "tips": ["Same tips as Encoder A."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
           "On the SRC page, Encoder C typically controls the RATE parameter \u2014 playback speed/pitch of the sample."
         ],
         "workflow_context": "Data entry encoder C. Context-dependent. Press+turn for coarse adjustment.",
-        "common_mistakes": [
-          "Same as encoder_a."
-        ]
+        "common_mistakes": ["Same as encoder_a."]
       },
       "tutorials": []
     },
@@ -2038,10 +1875,7 @@
           "Not setting the project tempo before loading and time-stretching samples \u2014 everything depends on this being correct"
         ]
       },
-      "tutorials": [
-        "03-beat-basics",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["03-beat-basics", "07-loop-stretching"]
     },
     "encoder_d": {
       "type": "encoder",
@@ -2057,23 +1891,17 @@
       "manual": {
         "primary": "Controls the lower-left parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
-        "all_combos": [
-          "Same combinations as Encoder A, applied to the lower-left parameter position."
-        ],
+        "all_combos": ["Same combinations as Encoder A, applied to the lower-left parameter position."],
         "menu_path": "N/A \u2014 context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
-        "tips": [
-          "Same tips as Encoder A. In Audio Editor TRIM page: D = y-axis zoom."
-        ],
+        "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: D = y-axis zoom."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
           "Encoder D is part of the lower encoder row. In the Audio Editor, it often controls zoom level for waveform viewing."
         ],
         "workflow_context": "Data entry encoder D. In the Audio Editor, controls zoom. On parameter pages, controls the fourth parameter. Press+turn for coarse adjustment.",
-        "common_mistakes": [
-          "Same as encoder_a."
-        ]
+        "common_mistakes": ["Same as encoder_a."]
       },
       "tutorials": []
     },
@@ -2091,23 +1919,17 @@
       "manual": {
         "primary": "Controls the lower-middle parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
-        "all_combos": [
-          "Same combinations as Encoder A, applied to the lower-middle parameter position."
-        ],
+        "all_combos": ["Same combinations as Encoder A, applied to the lower-middle parameter position."],
         "menu_path": "N/A \u2014 context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
-        "tips": [
-          "Same tips as Encoder A. In Audio Editor TRIM page: E = waveform scroll."
-        ],
+        "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: E = waveform scroll."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
           "In the Audio Editor, Encoder E often controls horizontal scroll position \u2014 essential for navigating long samples when zoomed in."
         ],
         "workflow_context": "Data entry encoder E. In the Audio Editor, controls scroll. On parameter pages, controls the fifth parameter.",
-        "common_mistakes": [
-          "Same as encoder_a."
-        ]
+        "common_mistakes": ["Same as encoder_a."]
       },
       "tutorials": []
     },
@@ -2125,9 +1947,7 @@
       "manual": {
         "primary": "Controls the lower-right parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
-        "all_combos": [
-          "Same combinations as Encoder A, applied to the lower-right parameter position."
-        ],
+        "all_combos": ["Same combinations as Encoder A, applied to the lower-right parameter position."],
         "menu_path": "N/A \u2014 context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
@@ -2139,9 +1959,7 @@
           "In the Audio Editor, Encoder F often controls horizontal zoom \u2014 essential for precise slice placement."
         ],
         "workflow_context": "Data entry encoder F. In the Audio Editor, controls zoom. On parameter pages, controls the sixth parameter.",
-        "common_mistakes": [
-          "Same as encoder_a."
-        ]
+        "common_mistakes": ["Same as encoder_a."]
       },
       "tutorials": []
     },
@@ -2199,11 +2017,7 @@
           "Not saving the Part after setting up scenes \u2014 scenes are Part-level data"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "scene_b": {
       "type": "button",
@@ -2232,9 +2046,7 @@
           "[SCENE B] + [STOP] = Paste to Scene B"
         ],
         "menu_path": "N/A \u2014 scene assignment and locking key.",
-        "parameters": [
-          "Same scene-exclusive parameters as Scene A (XLV, XVOL, XDIR)"
-        ],
+        "parameters": ["Same scene-exclusive parameters as Scene A (XLV, XVOL, XDIR)"],
         "leds": "When [SCENE B] is pressed: red [TRIG] = currently assigned scene, green [TRIG] = Scene A's assignment, half-bright green = scenes containing locks.",
         "tips": [
           "Same tips as Scene A. A common setup: Scene A = clean/dry, Scene B = heavy effects/tension.",
@@ -2252,11 +2064,7 @@
           "Forgetting to mute Scene B when switching to a new pattern with its own Part \u2014 the new Part loads its own scene assignments"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "crossfader": {
       "type": "fader",
@@ -2302,11 +2110,7 @@
           "Not understanding that scene locks override p-locks \u2014 the crossfader ALWAYS wins over step-level parameter locks"
         ]
       },
-      "tutorials": [
-        "01-set-sail",
-        "06-sample-locks",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
     },
     "trig_1": {
       "type": "trig",
@@ -2399,18 +2203,11 @@
           "[TRIG 2] in Startup Menu = EMPTY RESET (reinitializes battery-backed RAM, clears internal settings, CF card unaffected)."
         ],
         "section": "3.1 (item 21), 12, 18.2",
-        "merlin_tips": [
-          "Same principles as trig_1 \u2014 all 16 trigs work identically."
-        ],
+        "merlin_tips": ["Same principles as trig_1 \u2014 all 16 trigs work identically."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
     },
     "trig_3": {
       "type": "trig",
@@ -2427,25 +2224,17 @@
       "manual": {
         "primary": "Same as TRIG 1 but for step 3 / Bank C / Pattern 3 / Scene 3.",
         "func_combo": "[FUNC] + [TRIG 3] = Lock trig / one-shot toggle on step 3.",
-        "all_combos": [
-          "Same combos as TRIG 1, applied to position 3."
-        ],
+        "all_combos": ["Same combos as TRIG 1, applied to position 3."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "trig_4": {
       "type": "trig",
@@ -2462,26 +2251,17 @@
       "manual": {
         "primary": "Same as TRIG 1 but for step 4 / Bank D / Pattern 4 / Scene 4.",
         "func_combo": "[FUNC] + [TRIG 4] = Lock trig / one-shot toggle on step 4.",
-        "all_combos": [
-          "Same combos as TRIG 1, applied to position 4."
-        ],
+        "all_combos": ["Same combos as TRIG 1, applied to position 4."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
     },
     "trig_5": {
       "type": "trig",
@@ -2498,9 +2278,7 @@
       "manual": {
         "primary": "Same as TRIG 1 but for step 5 / Bank E / Pattern 5 / Scene 5.",
         "func_combo": "[FUNC] + [TRIG 5] = Lock trig / one-shot toggle on step 5.",
-        "all_combos": [
-          "Same combos as TRIG 1, applied to position 5."
-        ],
+        "all_combos": ["Same combos as TRIG 1, applied to position 5."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
@@ -2510,13 +2288,9 @@
           "Same principles as trig_1. In Merlin's examples, step 5 (beat 2) and step 13 (beat 4) are classic snare/clap positions."
         ],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "trig_6": {
       "type": "trig",
@@ -2533,25 +2307,17 @@
       "manual": {
         "primary": "Same as TRIG 1 but for step 6 / Bank F / Pattern 6 / Scene 6.",
         "func_combo": "[FUNC] + [TRIG 6] = Lock trig / one-shot toggle on step 6.",
-        "all_combos": [
-          "Same combos as TRIG 1, applied to position 6."
-        ],
+        "all_combos": ["Same combos as TRIG 1, applied to position 6."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "trig_7": {
       "type": "trig",
@@ -2568,25 +2334,17 @@
       "manual": {
         "primary": "Same as TRIG 1 but for step 7 / Bank G / Pattern 7 / Scene 7.",
         "func_combo": "[FUNC] + [TRIG 7] = Lock trig / one-shot toggle on step 7.",
-        "all_combos": [
-          "Same combos as TRIG 1, applied to position 7."
-        ],
+        "all_combos": ["Same combos as TRIG 1, applied to position 7."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "trig_8": {
       "type": "trig",
@@ -2603,27 +2361,17 @@
       "manual": {
         "primary": "Same as TRIG 1 but for step 8 / Bank H / Pattern 8 / Scene 8.",
         "func_combo": "[FUNC] + [TRIG 8] = Lock trig / one-shot toggle on step 8.",
-        "all_combos": [
-          "Same combos as TRIG 1, applied to position 8."
-        ],
+        "all_combos": ["Same combos as TRIG 1, applied to position 8."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "03-beat-basics"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics"]
     },
     "trig_9": {
       "type": "trig",
@@ -2651,18 +2399,15 @@
           "In TRACKS mode (no recording), [TRIG 9] plays Track 1's sample like pressing a drum pad."
         ],
         "section": "3.1 (item 21), 12.7.1",
-        "merlin_tips": [
-          "Same principles as trig_1. Steps 9-16 represent the second half of a 1-bar pattern."
-        ],
+        "merlin_tips": ["Same principles as trig_1. Steps 9-16 represent the second half of a 1-bar pattern."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
       "tutorials": [
         "01-set-sail",
         "02-load-and-lock",
         "03-beat-basics",
+        "05-slice-and-dice",
         "07-loop-stretching",
         "08-parts-banks-scenes"
       ]
@@ -2682,26 +2427,17 @@
       "manual": {
         "primary": "Step 10 / Bank J / Pattern 10. In Tracks mode, trigs Track 2. In Live Recording, inputs trig on Track 2.",
         "func_combo": "[FUNC] + [TRIG 10] = Lock trig on step 10.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 10 / Track 2."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 10 / Track 2."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
     },
     "trig_11": {
       "type": "trig",
@@ -2718,26 +2454,17 @@
       "manual": {
         "primary": "Step 11 / Bank K / Pattern 11. In Tracks mode, trigs Track 3. In Live Recording, inputs trig on Track 3.",
         "func_combo": "[FUNC] + [TRIG 11] = Lock trig on step 11.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 11 / Track 3."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 11 / Track 3."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
     },
     "trig_12": {
       "type": "trig",
@@ -2754,25 +2481,17 @@
       "manual": {
         "primary": "Step 12 / Bank L / Pattern 12. In Tracks mode, trigs Track 4. In Live Recording, inputs trig on Track 4.",
         "func_combo": "[FUNC] + [TRIG 12] = Lock trig on step 12.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 12 / Track 4."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 12 / Track 4."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics", "05-slice-and-dice"]
     },
     "trig_13": {
       "type": "trig",
@@ -2789,9 +2508,7 @@
       "manual": {
         "primary": "Step 13 / Bank M / Pattern 13. In Tracks mode, trigs Track 5. In Live Recording, inputs trig on Track 5. In Chromatic mode, this is the ROOT NOTE (C at octave 0).",
         "func_combo": "[FUNC] + [TRIG 13] = Lock trig on step 13.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 13 / Track 5."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 13 / Track 5."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys. In Chromatic mode: yellow (C note).",
@@ -2799,17 +2516,11 @@
           "In CHROMATIC mode, [TRIG 13] is the root note C at octave 0 \u2014 the reference pitch of the sample."
         ],
         "section": "3.1 (item 21), 12, 12.7.2",
-        "merlin_tips": [
-          "Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."
-        ],
+        "merlin_tips": ["Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics", "05-slice-and-dice"]
     },
     "trig_14": {
       "type": "trig",
@@ -2826,23 +2537,17 @@
       "manual": {
         "primary": "Step 14 / Bank N / Pattern 14. In Tracks mode, trigs Track 6. In Live Recording, inputs trig on Track 6.",
         "func_combo": "[FUNC] + [TRIG 14] = Lock trig on step 14.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 14 / Track 6."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 14 / Track 6."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": []
+      "tutorials": ["05-slice-and-dice"]
     },
     "trig_15": {
       "type": "trig",
@@ -2859,23 +2564,17 @@
       "manual": {
         "primary": "Step 15 / Bank O / Pattern 15. In Tracks mode, trigs Track 7. In Live Recording, inputs trig on Track 7.",
         "func_combo": "[FUNC] + [TRIG 15] = Lock trig on step 15.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 15 / Track 7."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 15 / Track 7."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
         "tips": [],
         "section": "3.1 (item 21), 12",
-        "merlin_tips": [
-          "Same principles as trig_1."
-        ],
+        "merlin_tips": ["Same principles as trig_1."],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": []
+      "tutorials": ["05-slice-and-dice"]
     },
     "trig_16": {
       "type": "trig",
@@ -2892,9 +2591,7 @@
       "manual": {
         "primary": "Step 16 / Bank P / Pattern 16. In Tracks mode, trigs Track 8. In Live Recording, inputs trig on Track 8.",
         "func_combo": "[FUNC] + [TRIG 16] = Lock trig on step 16.",
-        "all_combos": [
-          "Same as TRIG 9, applied to position 16 / Track 8."
-        ],
+        "all_combos": ["Same as TRIG 9, applied to position 16 / Track 8."],
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys.",
@@ -2904,16 +2601,9 @@
           "Same principles as trig_1. The last step of a 1-bar pattern \u2014 Merlin sometimes uses this for fill triggers or transition elements."
         ],
         "workflow_context": "Same as trig_1.",
-        "common_mistakes": [
-          "Same as trig_1."
-        ]
+        "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": [
-        "01-set-sail",
-        "02-load-and-lock",
-        "07-loop-stretching",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "07-loop-stretching", "08-parts-banks-scenes"]
     },
     "page": {
       "type": "button",
@@ -2964,10 +2654,7 @@
           "Forgetting that each track can have a DIFFERENT length via Scale Setup \u2014 creating polyrhythms"
         ]
       },
-      "tutorials": [
-        "03-beat-basics",
-        "06-sample-locks"
-      ]
+      "tutorials": ["03-beat-basics", "06-sample-locks"]
     },
     "beat_led_1": {
       "type": "led",
@@ -3016,175 +2703,99 @@
   },
   "combos": {
     "func+yes": {
-      "elements": [
-        "func",
-        "yes"
-      ],
+      "elements": ["func", "yes"],
       "action": "Save / Preview on MAIN",
-      "tutorials": [
-        "01-set-sail"
-      ]
+      "tutorials": ["01-set-sail"]
     },
     "func+cue": {
-      "elements": [
-        "func",
-        "cue"
-      ],
+      "elements": ["func", "cue"],
       "action": "Open sample browser",
-      "tutorials": [
-        "02-load-and-lock",
-        "03-beat-basics"
-      ]
+      "tutorials": ["02-load-and-lock", "03-beat-basics"]
     },
     "func+level": {
-      "elements": [
-        "func",
-        "encoder_level"
-      ],
+      "elements": ["func", "encoder_level"],
       "action": "Open 8-track mixer",
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "func+page": {
-      "elements": [
-        "func",
-        "page"
-      ],
+      "elements": ["func", "page"],
       "action": "Extend pattern / Scale Setup",
-      "tutorials": [
-        "03-beat-basics"
-      ]
+      "tutorials": ["03-beat-basics"]
     },
     "func+aed": {
-      "elements": [
-        "func",
-        "aed"
-      ],
+      "elements": ["func", "aed"],
       "action": "Open Audio Editor / Slice Grid",
-      "tutorials": [
-        "05-slice-and-dice",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["05-slice-and-dice", "07-loop-stretching"]
     },
     "func+tempo": {
-      "elements": [
-        "func",
-        "tap_tempo"
-      ],
+      "elements": ["func", "tap_tempo"],
       "action": "Tap Tempo / BPM adjust",
-      "tutorials": [
-        "07-loop-stretching"
-      ]
+      "tutorials": ["07-loop-stretching"]
     },
     "func+part": {
-      "elements": [
-        "func",
-        "part"
-      ],
+      "elements": ["func", "part"],
       "action": "Switch/edit Parts",
-      "tutorials": [
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["08-parts-banks-scenes"]
     },
     "func+track": {
-      "elements": [
-        "func"
-      ],
+      "elements": ["func"],
       "action": "Mute chosen track",
       "tutorials": []
     },
     "func+proj": {
-      "elements": [
-        "func",
-        "proj"
-      ],
+      "elements": ["func", "proj"],
       "action": "Save project",
       "tutorials": []
     },
     "func+mix": {
-      "elements": [
-        "func",
-        "mix"
-      ],
+      "elements": ["func", "mix"],
       "action": "Toggle metronome",
       "tutorials": []
     },
     "func+midi": {
-      "elements": [
-        "func",
-        "midi"
-      ],
+      "elements": ["func", "midi"],
       "action": "MIDI Sync settings",
       "tutorials": []
     },
     "func+record": {
-      "elements": [
-        "func"
-      ],
+      "elements": ["func"],
       "action": "COPY command",
       "tutorials": []
     },
     "func+play": {
-      "elements": [
-        "func"
-      ],
+      "elements": ["func"],
       "action": "CLEAR command",
       "tutorials": []
     },
     "func+stop": {
-      "elements": [
-        "func"
-      ],
+      "elements": ["func"],
       "action": "PASTE command",
       "tutorials": []
     },
     "trig+up_down": {
-      "elements": [
-        "arrow_up",
-        "arrow_down"
-      ],
+      "elements": ["arrow_up", "arrow_down"],
       "action": "Open SAMPLE LOCK menu (GRID REC)",
-      "tutorials": [
-        "06-sample-locks",
-        "07-loop-stretching"
-      ]
+      "tutorials": ["06-sample-locks", "07-loop-stretching"]
     },
     "trig+left_right": {
-      "elements": [
-        "arrow_left",
-        "arrow_right"
-      ],
+      "elements": ["arrow_left", "arrow_right"],
       "action": "Open MICRO TIMING menu",
       "tutorials": []
     },
     "bank+trig": {
-      "elements": [
-        "bank"
-      ],
+      "elements": ["bank"],
       "action": "Select active bank",
-      "tutorials": [
-        "03-beat-basics",
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
     },
     "scene_a+trig": {
-      "elements": [
-        "scene_a"
-      ],
+      "elements": ["scene_a"],
       "action": "Assign scene to slot A",
-      "tutorials": [
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["08-parts-banks-scenes"]
     },
     "scene_b+trig": {
-      "elements": [
-        "scene_b"
-      ],
+      "elements": ["scene_b"],
       "action": "Assign scene to slot B",
-      "tutorials": [
-        "08-parts-banks-scenes"
-      ]
+      "tutorials": ["08-parts-banks-scenes"]
     }
   },
   "sequences": [

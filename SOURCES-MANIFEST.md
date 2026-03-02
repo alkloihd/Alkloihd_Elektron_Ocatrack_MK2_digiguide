@@ -134,39 +134,42 @@ All information in the content ecosystem was gathered from the following sources
 
 ### 7 Primary Educators (In Videos.json)
 
-| Creator | Platform | Specialty | Content Type |
-|---------|----------|-----------|--------------|
-| **Cuckoo** | YouTube | Basics, sampling | Video tutorials (free) |
-| **EZBOT** | website + YouTube | Performance, FX | Templates + videos |
-| **Thavius Beck** | Ask.Video, macProVideo, SOS | Comprehensive learning | Structured courses |
-| **Dataline** | Gumroad, Bandcamp | Live sampling | Video courses |
-| **Red Means Recording** | YouTube | Workflows, arrangement | Performance videos |
-| **Merlin** | Elektronauts (forum) | System architecture | Community guide (text) |
-| **Inspektor Gadjet** | Website | Tips, curation | Resource hub |
+| Creator                 | Platform                    | Specialty              | Content Type           |
+| ----------------------- | --------------------------- | ---------------------- | ---------------------- |
+| **Cuckoo**              | YouTube                     | Basics, sampling       | Video tutorials (free) |
+| **EZBOT**               | website + YouTube           | Performance, FX        | Templates + videos     |
+| **Thavius Beck**        | Ask.Video, macProVideo, SOS | Comprehensive learning | Structured courses     |
+| **Dataline**            | Gumroad, Bandcamp           | Live sampling          | Video courses          |
+| **Red Means Recording** | YouTube                     | Workflows, arrangement | Performance videos     |
+| **Merlin**              | Elektronauts (forum)        | System architecture    | Community guide (text) |
+| **Inspektor Gadjet**    | Website                     | Tips, curation         | Resource hub           |
 
 ### Additional Referenced Creators
 
-| Creator | Type | Role |
-|---------|------|------|
-| **Elektronista** | YouTube | Recent comprehensive masterclass |
-| **Jeremy Blake** | YouTube/Interview | Red Means Recording founder |
-| **Elektron** | Official | Hardware manufacturer, guides, support |
+| Creator          | Type              | Role                                   |
+| ---------------- | ----------------- | -------------------------------------- |
+| **Elektronista** | YouTube           | Recent comprehensive masterclass       |
+| **Jeremy Blake** | YouTube/Interview | Red Means Recording founder            |
+| **Elektron**     | Official          | Hardware manufacturer, guides, support |
 
 ---
 
 ## Documentation Sources Used
 
 ### Official Manuals
+
 - Elektron Octatrack MKII User Manual (official specification)
 - Octatrack MKII Quick Guide (official reference)
 - Elektron Know-How Video Series (official tutorials)
 
 ### Community Guides
+
 - Merlin's Octatrack User Guide (architecture + user perspective)
 - Free Octatrack Tutorials List (Elektronauts community curation)
 - Octatrack Tips & Tricks Thread (MOD WIGGLER long-running thread)
 
 ### Published Articles
+
 - Synthtopia learning overview (2021)
 - Ask.Audio sampling tools explanation (2022)
 - Perfect Circuit interviews (performance setup)
@@ -221,12 +224,12 @@ All content described in the ecosystem follows these principles:
 
 ### Attribution Standards
 
-| Source Type | Citation Method | Link? |
-|-------------|-----------------|-------|
-| Official Manual | Page number reference | Link to PDF |
-| Community Guide | Section + author | Link to thread |
-| YouTube Videos | Creator name + title | Embed iframe |
-| Forum Posts | Author + thread link | Direct link |
+| Source Type         | Citation Method       | Link?            |
+| ------------------- | --------------------- | ---------------- |
+| Official Manual     | Page number reference | Link to PDF      |
+| Community Guide     | Section + author      | Link to thread   |
+| YouTube Videos      | Creator name + title  | Embed iframe     |
+| Forum Posts         | Author + thread link  | Direct link      |
 | Educational Courses | Course name + creator | Direct to course |
 
 ---
@@ -297,6 +300,7 @@ When new content is discovered:
 ### For Creators
 
 If you are mentioned in this ecosystem and want to:
+
 - **Update information**: Contact Rishaal or curator
 - **Remove content**: Honored immediately
 - **Add exclusive content**: Discuss partnership options
@@ -305,6 +309,7 @@ If you are mentioned in this ecosystem and want to:
 ### For Users
 
 To discover creators:
+
 1. Visit `/credits.html` for full profiles
 2. Click channel links to explore
 3. Subscribe and support your favorites
@@ -313,6 +318,7 @@ To discover creators:
 ### For Community Contributors
 
 To suggest new resources:
+
 1. Post in Elektronauts forum
 2. Include link and relevance
 3. Curator reviews and adds if appropriate

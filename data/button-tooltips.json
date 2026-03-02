@@ -8,9 +8,7 @@
       "label": "PROJECT",
       "primary": "Opens the PROJECT menu where sets, projects, system settings, MIDI config, mixer, and tempo are accessed. This is the master settings hub of the Octatrack.",
       "func_combo": "[FUNC] + [PROJ] = Quick-save the current project (equivalent to PROJECT > SAVE).",
-      "all_combos": [
-        "[FUNC] + [PROJ] = Save project"
-      ],
+      "all_combos": ["[FUNC] + [PROJ] = Save project"],
       "menu_path": "PROJECT menu → PROJECT (Load/Save/Reload/Export/Purge) | SYSTEM (USB/OS/Date/Personalize/Card Tools/Status) | CONTROL (Audio/Input/Sequencer/MIDI Seq/Memory/Metronome) | MIDI (Control/Sync/Channels/Turbo) | MIXER | TEMPO",
       "parameters": [
         "PROJECT: Change, Save, Reload, Sync To Card, Save To New, Export To Set, Collect Samples, Purge Samples, Save Current Bank, Reload Current Bank",
@@ -114,9 +112,7 @@
       "label": "ARRANGER",
       "primary": "Opens the ARRANGER menu where arrangements (up to 256 rows of sequenced patterns) are edited, renamed, saved, and chained.",
       "func_combo": "[FUNC] + [ARR] = Toggle ARRANGEMENT mode on/off. When lit, the Arranger controls playback.",
-      "all_combos": [
-        "[FUNC] + [ARR] = Toggle Arrangement mode on/off"
-      ],
+      "all_combos": ["[FUNC] + [ARR] = Toggle Arrangement mode on/off"],
       "menu_path": "ARRANGER menu → EDIT | RENAME | CHANGE | CHAIN | CLEAR | SAVE | RELOAD",
       "parameters": [
         "ROW: Up to 256 rows per arrangement",
@@ -430,14 +426,116 @@
       "section": "3.1 (item 16), 8.9.2"
     },
 
-    "t1": { "label": "TRACK 1", "primary": "Select Track 1 as the active track for editing. All parameter pages, encoders, and sequencer data now relate to Track 1.", "func_combo": "[FUNC] + [TRACK 1] = Mute/unmute Track 1.", "all_combos": ["[FUNC] + [TRACK] = Mute/unmute track", "[CUE] + [TRACK] = Cue track to headphone/cue outputs", "[TRACK] + [REC1/2/3] = Initiate sampling to this track's recorder", "[TRACK] + [PLAY] = Manually trig the track's machine", "[TRACK] + [STOP] = Stop playback of the track's machine", "[TRACK] + [BANK] = Open the track's sample in Audio Editor", "[TRACK] + [YES] = Re-arm one-shot recorder trigs for this track", "[TRACK] + [NO] = Disarm one-shot recorder trigs for this track", "[TRACK] + [TEMPO] = Sync sequencer to Pickup machine on this track", "[TRACK] + [LEFT/RIGHT] = Nudge sample tempo for this track", "Double-press [TRACK] = Open Quick Assign menu"], "menu_path": "N/A — track selection key.", "parameters": [], "leds": "Lit = active track. Yellow = muted and active. Unlit = muted and not selected. Flashing = cued.", "tips": ["Double-press a [TRACK] key to open the Quick Assign menu for fast machine/sample assignment.", "Track mute status: bright = unmuted & active, dim = unmuted & not active, yellow = muted & active, unlit = muted & not active.", "In the Personalize menu, you can set MUTE FOCUSES TRACK and CUE FOCUSES TRACK to auto-select tracks when muting/cueing."], "section": "3.1 (item 3)" },
-    "t2": { "label": "TRACK 2", "primary": "Select Track 2 as the active track.", "func_combo": "[FUNC] + [TRACK 2] = Mute/unmute Track 2.", "all_combos": ["Same combinations as Track 1, applied to Track 2."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["Same tips as Track 1."], "section": "3.1 (item 3)" },
-    "t3": { "label": "TRACK 3", "primary": "Select Track 3 as the active track.", "func_combo": "[FUNC] + [TRACK 3] = Mute/unmute Track 3.", "all_combos": ["Same combinations as Track 1, applied to Track 3."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["Same tips as Track 1."], "section": "3.1 (item 3)" },
-    "t4": { "label": "TRACK 4", "primary": "Select Track 4 as the active track.", "func_combo": "[FUNC] + [TRACK 4] = Mute/unmute Track 4.", "all_combos": ["Same combinations as Track 1, applied to Track 4."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["Same tips as Track 1."], "section": "3.1 (item 3)" },
-    "t5": { "label": "TRACK 5", "primary": "Select Track 5 as the active track.", "func_combo": "[FUNC] + [TRACK 5] = Mute/unmute Track 5.", "all_combos": ["Same combinations as Track 1, applied to Track 5."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["Same tips as Track 1. Neighbor machines CANNOT be assigned to Track 5 (no preceding track in the second block)."], "section": "3.1 (item 3)" },
-    "t6": { "label": "TRACK 6", "primary": "Select Track 6 as the active track.", "func_combo": "[FUNC] + [TRACK 6] = Mute/unmute Track 6.", "all_combos": ["Same combinations as Track 1, applied to Track 6."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["Same tips as Track 1."], "section": "3.1 (item 3)" },
-    "t7": { "label": "TRACK 7", "primary": "Select Track 7 as the active track.", "func_combo": "[FUNC] + [TRACK 7] = Mute/unmute Track 7.", "all_combos": ["Same combinations as Track 1, applied to Track 7."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["Same tips as Track 1."], "section": "3.1 (item 3)" },
-    "t8": { "label": "TRACK 8", "primary": "Select Track 8 as the active track. Track 8 can optionally be set as a MASTER track (PROJECT > CONTROL > AUDIO) which makes its effects process ALL audio including external inputs.", "func_combo": "[FUNC] + [TRACK 8] = Mute/unmute Track 8 (unless it's a master track, which can't be muted).", "all_combos": ["Same combinations as Track 1, applied to Track 8."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all track keys.", "tips": ["When Track 8 is a master track: only AMP SETUP, LFO, and FX pages are available.", "A master track cannot be muted and has no cue output.", "Use Track 8 as master for 'master bus' processing: assign Compressor + EQ for global mix control."], "section": "3.1 (item 3), 8.6.1" },
+    "t1": {
+      "label": "TRACK 1",
+      "primary": "Select Track 1 as the active track for editing. All parameter pages, encoders, and sequencer data now relate to Track 1.",
+      "func_combo": "[FUNC] + [TRACK 1] = Mute/unmute Track 1.",
+      "all_combos": [
+        "[FUNC] + [TRACK] = Mute/unmute track",
+        "[CUE] + [TRACK] = Cue track to headphone/cue outputs",
+        "[TRACK] + [REC1/2/3] = Initiate sampling to this track's recorder",
+        "[TRACK] + [PLAY] = Manually trig the track's machine",
+        "[TRACK] + [STOP] = Stop playback of the track's machine",
+        "[TRACK] + [BANK] = Open the track's sample in Audio Editor",
+        "[TRACK] + [YES] = Re-arm one-shot recorder trigs for this track",
+        "[TRACK] + [NO] = Disarm one-shot recorder trigs for this track",
+        "[TRACK] + [TEMPO] = Sync sequencer to Pickup machine on this track",
+        "[TRACK] + [LEFT/RIGHT] = Nudge sample tempo for this track",
+        "Double-press [TRACK] = Open Quick Assign menu"
+      ],
+      "menu_path": "N/A — track selection key.",
+      "parameters": [],
+      "leds": "Lit = active track. Yellow = muted and active. Unlit = muted and not selected. Flashing = cued.",
+      "tips": [
+        "Double-press a [TRACK] key to open the Quick Assign menu for fast machine/sample assignment.",
+        "Track mute status: bright = unmuted & active, dim = unmuted & not active, yellow = muted & active, unlit = muted & not active.",
+        "In the Personalize menu, you can set MUTE FOCUSES TRACK and CUE FOCUSES TRACK to auto-select tracks when muting/cueing."
+      ],
+      "section": "3.1 (item 3)"
+    },
+    "t2": {
+      "label": "TRACK 2",
+      "primary": "Select Track 2 as the active track.",
+      "func_combo": "[FUNC] + [TRACK 2] = Mute/unmute Track 2.",
+      "all_combos": ["Same combinations as Track 1, applied to Track 2."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": ["Same tips as Track 1."],
+      "section": "3.1 (item 3)"
+    },
+    "t3": {
+      "label": "TRACK 3",
+      "primary": "Select Track 3 as the active track.",
+      "func_combo": "[FUNC] + [TRACK 3] = Mute/unmute Track 3.",
+      "all_combos": ["Same combinations as Track 1, applied to Track 3."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": ["Same tips as Track 1."],
+      "section": "3.1 (item 3)"
+    },
+    "t4": {
+      "label": "TRACK 4",
+      "primary": "Select Track 4 as the active track.",
+      "func_combo": "[FUNC] + [TRACK 4] = Mute/unmute Track 4.",
+      "all_combos": ["Same combinations as Track 1, applied to Track 4."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": ["Same tips as Track 1."],
+      "section": "3.1 (item 3)"
+    },
+    "t5": {
+      "label": "TRACK 5",
+      "primary": "Select Track 5 as the active track.",
+      "func_combo": "[FUNC] + [TRACK 5] = Mute/unmute Track 5.",
+      "all_combos": ["Same combinations as Track 1, applied to Track 5."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": [
+        "Same tips as Track 1. Neighbor machines CANNOT be assigned to Track 5 (no preceding track in the second block)."
+      ],
+      "section": "3.1 (item 3)"
+    },
+    "t6": {
+      "label": "TRACK 6",
+      "primary": "Select Track 6 as the active track.",
+      "func_combo": "[FUNC] + [TRACK 6] = Mute/unmute Track 6.",
+      "all_combos": ["Same combinations as Track 1, applied to Track 6."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": ["Same tips as Track 1."],
+      "section": "3.1 (item 3)"
+    },
+    "t7": {
+      "label": "TRACK 7",
+      "primary": "Select Track 7 as the active track.",
+      "func_combo": "[FUNC] + [TRACK 7] = Mute/unmute Track 7.",
+      "all_combos": ["Same combinations as Track 1, applied to Track 7."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": ["Same tips as Track 1."],
+      "section": "3.1 (item 3)"
+    },
+    "t8": {
+      "label": "TRACK 8",
+      "primary": "Select Track 8 as the active track. Track 8 can optionally be set as a MASTER track (PROJECT > CONTROL > AUDIO) which makes its effects process ALL audio including external inputs.",
+      "func_combo": "[FUNC] + [TRACK 8] = Mute/unmute Track 8 (unless it's a master track, which can't be muted).",
+      "all_combos": ["Same combinations as Track 1, applied to Track 8."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all track keys.",
+      "tips": [
+        "When Track 8 is a master track: only AMP SETUP, LFO, and FX pages are available.",
+        "A master track cannot be muted and has no cue output.",
+        "Use Track 8 as master for 'master bus' processing: assign Compressor + EQ for global mix control."
+      ],
+      "section": "3.1 (item 3), 8.6.1"
+    },
 
     "src": {
       "label": "SRC (Source)",
@@ -713,9 +811,7 @@
         "[FUNC] + [REC3] = Open Recording Edit menu (save/edit recordings)"
       ],
       "menu_path": "RECORDING EDIT menu → Edit This Recording (opens Audio Editor) | Save This Recording | Save All Recordings | Go To Memory Config.",
-      "parameters": [
-        "The internal source is configured by SRC3 in Recording Setup 1 (-, MAIN, CUE, T1-T8)"
-      ],
+      "parameters": ["The internal source is configured by SRC3 in Recording Setup 1 (-, MAIN, CUE, T1-T8)"],
       "leds": "No signal-level LED for REC3. When in Recording Setup, a lit [REC3] indicates internal source is activated for a recorder trig.",
       "tips": [
         "SRC3 = MAIN records the master output mix — perfect for resampling your entire beat.",
@@ -773,9 +869,7 @@
         "[SCENE B] + [STOP] = Paste to Scene B"
       ],
       "menu_path": "N/A — scene assignment and locking key.",
-      "parameters": [
-        "Same scene-exclusive parameters as Scene A (XLV, XVOL, XDIR)"
-      ],
+      "parameters": ["Same scene-exclusive parameters as Scene A (XLV, XVOL, XDIR)"],
       "leds": "When [SCENE B] is pressed: red [TRIG] = currently assigned scene, green [TRIG] = Scene A's assignment, half-bright green = scenes containing locks.",
       "tips": [
         "Same tips as Scene A. A common setup: Scene A = clean/dry, Scene B = heavy effects/tension.",
@@ -802,22 +896,211 @@
       "section": "3.1 (item 11), 10.3"
     },
 
-    "trig_1": { "label": "TRIG 1", "primary": "Multi-purpose key. In Grid Recording: places/removes trigs on step 1. With [BANK]: selects Bank A. With [PTN]: selects Pattern 1. With [SCENE A/B]: assigns Scene 1. In Tracks mode (no recording): trigs Track 1 if disconnected.", "func_combo": "[FUNC] + [TRIG 1] = Place lock trig on step 1 (Grid Recording) / One-shot trig toggle.", "all_combos": ["[TRIG 1] = Place/remove trig on step 1 (Grid Rec) / Trig disconnected Track 1 (Tracks mode)", "[BANK] + [TRIG 1] = Select Bank A", "[PTN] + [TRIG 1] = Select Pattern 1 in current bank", "[SCENE A/B] + [TRIG 1] = Assign Scene 1 to slot A or B", "[FUNC] + [TRIG 1] = Place lock trig / Toggle one-shot (Grid Rec)", "[TRIG 1] + encoder turn = Parameter lock for step 1", "[TRIG 1] + [UP/DOWN] = Sample Lock menu (Grid Rec)", "[TRIG 1] + [LEFT/RIGHT] = Micro Timing menu (Grid Rec)", "[TRIG 1] + [YES] = Preview trig on main outputs", "[TRIG 1] + [CUE] = Preview trig on cue outputs", "[TRIG 1] + [RECORD] = Copy trig", "[TRIG 1] + [PLAY] = Clear trig locks", "[TRIG 1] + [STOP] = Paste trig", "[TRIG 1] + [NO] = Convert trig type (sample→trigless→lock cycle)"], "menu_path": "N/A — context-dependent key.", "parameters": [], "leds": "Red = sample trig. Flashing red = sample trig with p-lock or sample lock. Green (bright) = trigless trig. Green (dim) = lock trig. Yellow = one-shot trig. Yellow/red alternating = fired one-shot. Unlit = no trig.", "tips": ["In LIVE RECORDING mode, [TRIG 9-16] input sample trigs on tracks 1-8 (not [TRIG 1-8]).", "In Chromatic mode, TRIG keys become a mini-keyboard. Yellow = C notes, red = white keys, unlit = black keys.", "In Quick Mute mode, [TRIG 1-8] mute audio tracks, [TRIG 9-16] mute MIDI tracks.", "Hold a trig and turn LEVEL knob to open the Sample Lock browser."], "section": "3.1 (item 21), 12" },
-    "trig_2": { "label": "TRIG 2", "primary": "Same as TRIG 1 but for step 2 / Bank B / Pattern 2 / Scene 2.", "func_combo": "[FUNC] + [TRIG 2] = Lock trig / one-shot toggle on step 2.", "all_combos": ["Same combos as TRIG 1, applied to position 2: [BANK]+[TRIG 2]=Bank B, [PTN]+[TRIG 2]=Pattern 2, etc."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": ["[TRIG 2] in Startup Menu = EMPTY RESET (reinitializes battery-backed RAM, clears internal settings, CF card unaffected)."], "section": "3.1 (item 21), 12, 18.2" },
-    "trig_3": { "label": "TRIG 3", "primary": "Same as TRIG 1 but for step 3 / Bank C / Pattern 3 / Scene 3.", "func_combo": "[FUNC] + [TRIG 3] = Lock trig / one-shot toggle on step 3.", "all_combos": ["Same combos as TRIG 1, applied to position 3."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_4": { "label": "TRIG 4", "primary": "Same as TRIG 1 but for step 4 / Bank D / Pattern 4 / Scene 4.", "func_combo": "[FUNC] + [TRIG 4] = Lock trig / one-shot toggle on step 4.", "all_combos": ["Same combos as TRIG 1, applied to position 4."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_5": { "label": "TRIG 5", "primary": "Same as TRIG 1 but for step 5 / Bank E / Pattern 5 / Scene 5.", "func_combo": "[FUNC] + [TRIG 5] = Lock trig / one-shot toggle on step 5.", "all_combos": ["Same combos as TRIG 1, applied to position 5."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_6": { "label": "TRIG 6", "primary": "Same as TRIG 1 but for step 6 / Bank F / Pattern 6 / Scene 6.", "func_combo": "[FUNC] + [TRIG 6] = Lock trig / one-shot toggle on step 6.", "all_combos": ["Same combos as TRIG 1, applied to position 6."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_7": { "label": "TRIG 7", "primary": "Same as TRIG 1 but for step 7 / Bank G / Pattern 7 / Scene 7.", "func_combo": "[FUNC] + [TRIG 7] = Lock trig / one-shot toggle on step 7.", "all_combos": ["Same combos as TRIG 1, applied to position 7."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_8": { "label": "TRIG 8", "primary": "Same as TRIG 1 but for step 8 / Bank H / Pattern 8 / Scene 8.", "func_combo": "[FUNC] + [TRIG 8] = Lock trig / one-shot toggle on step 8.", "all_combos": ["Same combos as TRIG 1, applied to position 8."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_9": { "label": "TRIG 9", "primary": "Step 9 in Grid Recording. In TRACKS mode without recording, trigs Track 1's machine. In LIVE RECORDING, inputs a sample trig on Track 1. With [BANK]: selects Bank I. With [PTN]: Pattern 9.", "func_combo": "[FUNC] + [TRIG 9] = Lock trig on step 9 / Manually trig trigless trig on Track 1 (no recording mode, Tracks/Chromatic).", "all_combos": ["Same combos as TRIG 1 applied to position 9. [BANK]+[TRIG 9]=Bank I. In Tracks mode: trigs Track 1 machine. In Live Recording: places sample trig on Track 1."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys. Outside Grid Rec, flashes when Track 1's trig fires.", "tips": ["In LIVE RECORDING, [TRIG 9-16] are the primary way to input sample trigs on tracks 1-8 in real time.", "In TRACKS mode (no recording), [TRIG 9] plays Track 1's sample like pressing a drum pad."], "section": "3.1 (item 21), 12.7.1" },
-    "trig_10": { "label": "TRIG 10", "primary": "Step 10 / Bank J / Pattern 10. In Tracks mode, trigs Track 2. In Live Recording, inputs trig on Track 2.", "func_combo": "[FUNC] + [TRIG 10] = Lock trig on step 10.", "all_combos": ["Same as TRIG 9, applied to position 10 / Track 2."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_11": { "label": "TRIG 11", "primary": "Step 11 / Bank K / Pattern 11. In Tracks mode, trigs Track 3. In Live Recording, inputs trig on Track 3.", "func_combo": "[FUNC] + [TRIG 11] = Lock trig on step 11.", "all_combos": ["Same as TRIG 9, applied to position 11 / Track 3."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_12": { "label": "TRIG 12", "primary": "Step 12 / Bank L / Pattern 12. In Tracks mode, trigs Track 4. In Live Recording, inputs trig on Track 4.", "func_combo": "[FUNC] + [TRIG 12] = Lock trig on step 12.", "all_combos": ["Same as TRIG 9, applied to position 12 / Track 4."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_13": { "label": "TRIG 13", "primary": "Step 13 / Bank M / Pattern 13. In Tracks mode, trigs Track 5. In Live Recording, inputs trig on Track 5. In Chromatic mode, this is the ROOT NOTE (C at octave 0).", "func_combo": "[FUNC] + [TRIG 13] = Lock trig on step 13.", "all_combos": ["Same as TRIG 9, applied to position 13 / Track 5."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys. In Chromatic mode: yellow (C note).", "tips": ["In CHROMATIC mode, [TRIG 13] is the root note C at octave 0 — the reference pitch of the sample."], "section": "3.1 (item 21), 12, 12.7.2" },
-    "trig_14": { "label": "TRIG 14", "primary": "Step 14 / Bank N / Pattern 14. In Tracks mode, trigs Track 6. In Live Recording, inputs trig on Track 6.", "func_combo": "[FUNC] + [TRIG 14] = Lock trig on step 14.", "all_combos": ["Same as TRIG 9, applied to position 14 / Track 6."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_15": { "label": "TRIG 15", "primary": "Step 15 / Bank O / Pattern 15. In Tracks mode, trigs Track 7. In Live Recording, inputs trig on Track 7.", "func_combo": "[FUNC] + [TRIG 15] = Lock trig on step 15.", "all_combos": ["Same as TRIG 9, applied to position 15 / Track 7."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
-    "trig_16": { "label": "TRIG 16", "primary": "Step 16 / Bank P / Pattern 16. In Tracks mode, trigs Track 8. In Live Recording, inputs trig on Track 8.", "func_combo": "[FUNC] + [TRIG 16] = Lock trig on step 16.", "all_combos": ["Same as TRIG 9, applied to position 16 / Track 8."], "menu_path": "N/A", "parameters": [], "leds": "Same LED behavior as all trig keys.", "tips": [], "section": "3.1 (item 21), 12" },
+    "trig_1": {
+      "label": "TRIG 1",
+      "primary": "Multi-purpose key. In Grid Recording: places/removes trigs on step 1. With [BANK]: selects Bank A. With [PTN]: selects Pattern 1. With [SCENE A/B]: assigns Scene 1. In Tracks mode (no recording): trigs Track 1 if disconnected.",
+      "func_combo": "[FUNC] + [TRIG 1] = Place lock trig on step 1 (Grid Recording) / One-shot trig toggle.",
+      "all_combos": [
+        "[TRIG 1] = Place/remove trig on step 1 (Grid Rec) / Trig disconnected Track 1 (Tracks mode)",
+        "[BANK] + [TRIG 1] = Select Bank A",
+        "[PTN] + [TRIG 1] = Select Pattern 1 in current bank",
+        "[SCENE A/B] + [TRIG 1] = Assign Scene 1 to slot A or B",
+        "[FUNC] + [TRIG 1] = Place lock trig / Toggle one-shot (Grid Rec)",
+        "[TRIG 1] + encoder turn = Parameter lock for step 1",
+        "[TRIG 1] + [UP/DOWN] = Sample Lock menu (Grid Rec)",
+        "[TRIG 1] + [LEFT/RIGHT] = Micro Timing menu (Grid Rec)",
+        "[TRIG 1] + [YES] = Preview trig on main outputs",
+        "[TRIG 1] + [CUE] = Preview trig on cue outputs",
+        "[TRIG 1] + [RECORD] = Copy trig",
+        "[TRIG 1] + [PLAY] = Clear trig locks",
+        "[TRIG 1] + [STOP] = Paste trig",
+        "[TRIG 1] + [NO] = Convert trig type (sample→trigless→lock cycle)"
+      ],
+      "menu_path": "N/A — context-dependent key.",
+      "parameters": [],
+      "leds": "Red = sample trig. Flashing red = sample trig with p-lock or sample lock. Green (bright) = trigless trig. Green (dim) = lock trig. Yellow = one-shot trig. Yellow/red alternating = fired one-shot. Unlit = no trig.",
+      "tips": [
+        "In LIVE RECORDING mode, [TRIG 9-16] input sample trigs on tracks 1-8 (not [TRIG 1-8]).",
+        "In Chromatic mode, TRIG keys become a mini-keyboard. Yellow = C notes, red = white keys, unlit = black keys.",
+        "In Quick Mute mode, [TRIG 1-8] mute audio tracks, [TRIG 9-16] mute MIDI tracks.",
+        "Hold a trig and turn LEVEL knob to open the Sample Lock browser."
+      ],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_2": {
+      "label": "TRIG 2",
+      "primary": "Same as TRIG 1 but for step 2 / Bank B / Pattern 2 / Scene 2.",
+      "func_combo": "[FUNC] + [TRIG 2] = Lock trig / one-shot toggle on step 2.",
+      "all_combos": [
+        "Same combos as TRIG 1, applied to position 2: [BANK]+[TRIG 2]=Bank B, [PTN]+[TRIG 2]=Pattern 2, etc."
+      ],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [
+        "[TRIG 2] in Startup Menu = EMPTY RESET (reinitializes battery-backed RAM, clears internal settings, CF card unaffected)."
+      ],
+      "section": "3.1 (item 21), 12, 18.2"
+    },
+    "trig_3": {
+      "label": "TRIG 3",
+      "primary": "Same as TRIG 1 but for step 3 / Bank C / Pattern 3 / Scene 3.",
+      "func_combo": "[FUNC] + [TRIG 3] = Lock trig / one-shot toggle on step 3.",
+      "all_combos": ["Same combos as TRIG 1, applied to position 3."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_4": {
+      "label": "TRIG 4",
+      "primary": "Same as TRIG 1 but for step 4 / Bank D / Pattern 4 / Scene 4.",
+      "func_combo": "[FUNC] + [TRIG 4] = Lock trig / one-shot toggle on step 4.",
+      "all_combos": ["Same combos as TRIG 1, applied to position 4."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_5": {
+      "label": "TRIG 5",
+      "primary": "Same as TRIG 1 but for step 5 / Bank E / Pattern 5 / Scene 5.",
+      "func_combo": "[FUNC] + [TRIG 5] = Lock trig / one-shot toggle on step 5.",
+      "all_combos": ["Same combos as TRIG 1, applied to position 5."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_6": {
+      "label": "TRIG 6",
+      "primary": "Same as TRIG 1 but for step 6 / Bank F / Pattern 6 / Scene 6.",
+      "func_combo": "[FUNC] + [TRIG 6] = Lock trig / one-shot toggle on step 6.",
+      "all_combos": ["Same combos as TRIG 1, applied to position 6."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_7": {
+      "label": "TRIG 7",
+      "primary": "Same as TRIG 1 but for step 7 / Bank G / Pattern 7 / Scene 7.",
+      "func_combo": "[FUNC] + [TRIG 7] = Lock trig / one-shot toggle on step 7.",
+      "all_combos": ["Same combos as TRIG 1, applied to position 7."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_8": {
+      "label": "TRIG 8",
+      "primary": "Same as TRIG 1 but for step 8 / Bank H / Pattern 8 / Scene 8.",
+      "func_combo": "[FUNC] + [TRIG 8] = Lock trig / one-shot toggle on step 8.",
+      "all_combos": ["Same combos as TRIG 1, applied to position 8."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_9": {
+      "label": "TRIG 9",
+      "primary": "Step 9 in Grid Recording. In TRACKS mode without recording, trigs Track 1's machine. In LIVE RECORDING, inputs a sample trig on Track 1. With [BANK]: selects Bank I. With [PTN]: Pattern 9.",
+      "func_combo": "[FUNC] + [TRIG 9] = Lock trig on step 9 / Manually trig trigless trig on Track 1 (no recording mode, Tracks/Chromatic).",
+      "all_combos": [
+        "Same combos as TRIG 1 applied to position 9. [BANK]+[TRIG 9]=Bank I. In Tracks mode: trigs Track 1 machine. In Live Recording: places sample trig on Track 1."
+      ],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys. Outside Grid Rec, flashes when Track 1's trig fires.",
+      "tips": [
+        "In LIVE RECORDING, [TRIG 9-16] are the primary way to input sample trigs on tracks 1-8 in real time.",
+        "In TRACKS mode (no recording), [TRIG 9] plays Track 1's sample like pressing a drum pad."
+      ],
+      "section": "3.1 (item 21), 12.7.1"
+    },
+    "trig_10": {
+      "label": "TRIG 10",
+      "primary": "Step 10 / Bank J / Pattern 10. In Tracks mode, trigs Track 2. In Live Recording, inputs trig on Track 2.",
+      "func_combo": "[FUNC] + [TRIG 10] = Lock trig on step 10.",
+      "all_combos": ["Same as TRIG 9, applied to position 10 / Track 2."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_11": {
+      "label": "TRIG 11",
+      "primary": "Step 11 / Bank K / Pattern 11. In Tracks mode, trigs Track 3. In Live Recording, inputs trig on Track 3.",
+      "func_combo": "[FUNC] + [TRIG 11] = Lock trig on step 11.",
+      "all_combos": ["Same as TRIG 9, applied to position 11 / Track 3."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_12": {
+      "label": "TRIG 12",
+      "primary": "Step 12 / Bank L / Pattern 12. In Tracks mode, trigs Track 4. In Live Recording, inputs trig on Track 4.",
+      "func_combo": "[FUNC] + [TRIG 12] = Lock trig on step 12.",
+      "all_combos": ["Same as TRIG 9, applied to position 12 / Track 4."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_13": {
+      "label": "TRIG 13",
+      "primary": "Step 13 / Bank M / Pattern 13. In Tracks mode, trigs Track 5. In Live Recording, inputs trig on Track 5. In Chromatic mode, this is the ROOT NOTE (C at octave 0).",
+      "func_combo": "[FUNC] + [TRIG 13] = Lock trig on step 13.",
+      "all_combos": ["Same as TRIG 9, applied to position 13 / Track 5."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys. In Chromatic mode: yellow (C note).",
+      "tips": ["In CHROMATIC mode, [TRIG 13] is the root note C at octave 0 — the reference pitch of the sample."],
+      "section": "3.1 (item 21), 12, 12.7.2"
+    },
+    "trig_14": {
+      "label": "TRIG 14",
+      "primary": "Step 14 / Bank N / Pattern 14. In Tracks mode, trigs Track 6. In Live Recording, inputs trig on Track 6.",
+      "func_combo": "[FUNC] + [TRIG 14] = Lock trig on step 14.",
+      "all_combos": ["Same as TRIG 9, applied to position 14 / Track 6."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_15": {
+      "label": "TRIG 15",
+      "primary": "Step 15 / Bank O / Pattern 15. In Tracks mode, trigs Track 7. In Live Recording, inputs trig on Track 7.",
+      "func_combo": "[FUNC] + [TRIG 15] = Lock trig on step 15.",
+      "all_combos": ["Same as TRIG 9, applied to position 15 / Track 7."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
+    "trig_16": {
+      "label": "TRIG 16",
+      "primary": "Step 16 / Bank P / Pattern 16. In Tracks mode, trigs Track 8. In Live Recording, inputs trig on Track 8.",
+      "func_combo": "[FUNC] + [TRIG 16] = Lock trig on step 16.",
+      "all_combos": ["Same as TRIG 9, applied to position 16 / Track 8."],
+      "menu_path": "N/A",
+      "parameters": [],
+      "leds": "Same LED behavior as all trig keys.",
+      "tips": [],
+      "section": "3.1 (item 21), 12"
+    },
 
     "page": {
       "label": "PAGE",
@@ -905,9 +1188,7 @@
       "label": "DATA ENTRY B",
       "primary": "Controls the upper-middle parameter on the screen. Press while turning for larger increments.",
       "func_combo": "[FUNC] + turn = Parameter value jump.",
-      "all_combos": [
-        "Same combinations as Encoder A, applied to the upper-middle parameter position."
-      ],
+      "all_combos": ["Same combinations as Encoder A, applied to the upper-middle parameter position."],
       "menu_path": "N/A — context-dependent encoder.",
       "parameters": [],
       "leds": "No LED.",
@@ -919,9 +1200,7 @@
       "label": "DATA ENTRY C",
       "primary": "Controls the upper-right parameter on the screen. Press while turning for larger increments.",
       "func_combo": "[FUNC] + turn = Parameter value jump.",
-      "all_combos": [
-        "Same combinations as Encoder A, applied to the upper-right parameter position."
-      ],
+      "all_combos": ["Same combinations as Encoder A, applied to the upper-right parameter position."],
       "menu_path": "N/A — context-dependent encoder.",
       "parameters": [],
       "leds": "No LED.",
@@ -941,10 +1220,7 @@
         "[FUNC] + [YES] (in Tempo menu) = Switch between PROJECT and PATTERN tempo mode"
       ],
       "menu_path": "TEMPO menu → BPM setting (LEVEL knob for integer, [UP/DOWN] for decimal). PROJECT or PATTERN tempo mode.",
-      "parameters": [
-        "BPM: 30.0 to 300.0",
-        "Mode: PROJECT (shared BPM for all patterns) or PATTERN (per-pattern BPM)"
-      ],
+      "parameters": ["BPM: 30.0 to 300.0", "Mode: PROJECT (shared BPM for all patterns) or PATTERN (per-pattern BPM)"],
       "leds": "[TEMPO] key LED flashes at the current BPM speed — always visible as a tempo indicator.",
       "tips": [
         "Tap tempo needs at least 4 taps before setting the BPM.",
@@ -959,9 +1235,7 @@
       "label": "DATA ENTRY D",
       "primary": "Controls the lower-left parameter on the screen. Press while turning for larger increments.",
       "func_combo": "[FUNC] + turn = Parameter value jump.",
-      "all_combos": [
-        "Same combinations as Encoder A, applied to the lower-left parameter position."
-      ],
+      "all_combos": ["Same combinations as Encoder A, applied to the lower-left parameter position."],
       "menu_path": "N/A — context-dependent encoder.",
       "parameters": [],
       "leds": "No LED.",
@@ -973,9 +1247,7 @@
       "label": "DATA ENTRY E",
       "primary": "Controls the lower-middle parameter on the screen. Press while turning for larger increments.",
       "func_combo": "[FUNC] + turn = Parameter value jump.",
-      "all_combos": [
-        "Same combinations as Encoder A, applied to the lower-middle parameter position."
-      ],
+      "all_combos": ["Same combinations as Encoder A, applied to the lower-middle parameter position."],
       "menu_path": "N/A — context-dependent encoder.",
       "parameters": [],
       "leds": "No LED.",
@@ -987,13 +1259,13 @@
       "label": "DATA ENTRY F",
       "primary": "Controls the lower-right parameter on the screen. Press while turning for larger increments.",
       "func_combo": "[FUNC] + turn = Parameter value jump.",
-      "all_combos": [
-        "Same combinations as Encoder A, applied to the lower-right parameter position."
-      ],
+      "all_combos": ["Same combinations as Encoder A, applied to the lower-right parameter position."],
       "menu_path": "N/A — context-dependent encoder.",
       "parameters": [],
       "leds": "No LED.",
-      "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: F = x-axis zoom. In Arpeggiator Setup: F = key scale."],
+      "tips": [
+        "Same tips as Encoder A. In Audio Editor TRIM page: F = x-axis zoom. In Arpeggiator Setup: F = key scale."
+      ],
       "section": "3.1 (item 7), 5.2"
     },
 
