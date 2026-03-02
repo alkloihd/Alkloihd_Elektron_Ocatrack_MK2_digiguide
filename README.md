@@ -67,6 +67,13 @@ Next tutorial set targets:
 
 MIT - see [LICENSE](./LICENSE)
 
-## Credits
+## Acknowledgements (Short)
 
-Created by **Alkloihd** for the Octatrack learning community.
+Built by **Alkloihd** with gratitude to the wider Octatrack learning community:
+
+- **Elektron** for the hardware, manual, and official support resources
+- **Merlin** for the community guide that shaped how many users understand the machine
+- Educators including **Cuckoo**, **EZBOT**, **Dataline**, and other creators sharing practical workflows
+- The **Elektronauts** forum and related communities for years of user-led troubleshooting and knowledge sharing
+
+Full attribution and links are available in [`credits.html`](./credits.html).
