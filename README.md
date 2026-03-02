@@ -14,9 +14,6 @@ An interactive, browser-based learning system for the **Elektron Octatrack MK2**
 
 **Perfect for:** Beginners jamming with loops, intermediate users chopping samples, anyone who wants to understand the Octatrack inside-out.
 
-Help me make more of these if you like them, or want to request features: 
-https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
-
 ---
 
 ## What's Inside

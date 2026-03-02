@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VIDEO LIBRARY // OCTATRACK MK2</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -13,8 +14,8 @@
       }
 
       body {
-        background: #0a0a0a;
-        color: #e0e0e0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -30,8 +31,8 @@
         left: 0;
         right: 0;
         height: 60px;
-        background: #111111;
-        border-bottom: 3px solid #ff00ff;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-magenta);
         display: flex;
         align-items: center;
         padding: 0 24px;
@@ -40,7 +41,7 @@
       }
 
       .top-bar a {
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-decoration: none;
         font-weight: 600;
         font-size: 12px;
@@ -50,7 +51,7 @@
       }
 
       .top-bar a:hover {
-        color: #00ff41;
+        color: var(--accent-lime);
         transform: translateY(-2px);
       }
 
@@ -60,15 +61,15 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading) fff;
         flex: 1;
       }
 
       .top-bar-count {
         font-family: 'Space Mono', monospace;
         font-size: 11px;
-        color: #ff00ff;
-        border: 2px solid #ff00ff;
+        color: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
         padding: 4px 10px;
       }
 
@@ -90,12 +91,12 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading) fff;
         margin-bottom: 8px;
       }
 
       .page-header p {
-        color: #999;
+        color: var(--text-muted);
         font-size: 14px;
       }
 
@@ -105,7 +106,7 @@
         gap: 8px;
         margin-bottom: 28px;
         padding-bottom: 20px;
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid var(--border-primary);
       }
 
       .filter-btn {
@@ -114,20 +115,20 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
         padding: 6px 14px;
-        background: #111111;
-        border: 2px solid #333;
-        color: #999;
+        background: var(--bg-surface);
+        border: 2px solid var(--border-primary);
+        color: var(--text-muted);
         cursor: pointer;
         transition: all 0.2s;
       }
 
       .filter-btn:hover {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
       }
       .filter-btn.active {
-        border-color: #ff00ff;
-        color: #ff00ff;
+        border-color: var(--accent-magenta);
+        color: var(--accent-magenta);
         background: rgba(255, 0, 255, 0.05);
       }
 
@@ -135,9 +136,9 @@
         width: 100%;
         max-width: 400px;
         padding: 8px 14px;
-        background: #111;
-        border: 2px solid #333;
-        color: #e0e0e0;
+        background: var(--bg-surface);
+        border: 2px solid var(--border-primary);
+        color: var(--text-primary);
         font-family: 'Inter', sans-serif;
         font-size: 14px;
         margin-bottom: 24px;
@@ -146,10 +147,10 @@
 
       .search-box:focus {
         outline: none;
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
       }
       .search-box::placeholder {
-        color: #555;
+        color: var(--text-muted);
       }
 
       .video-grid {
@@ -160,15 +161,15 @@
       }
 
       .video-card {
-        background: #111111;
-        border: 2px solid #333;
+        background: var(--bg-surface);
+        border: 2px solid var(--border-primary);
         overflow: hidden;
         transition: all 0.2s;
         cursor: pointer;
       }
 
       .video-card:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         transform: translateY(-2px);
       }
 
@@ -176,7 +177,7 @@
         position: relative;
         width: 100%;
         aspect-ratio: 16/9;
-        background: #1a1a1a;
+        background: var(--bg-tertiary);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -213,7 +214,7 @@
         height: 0;
         border-style: solid;
         border-width: 10px 0 10px 18px;
-        border-color: transparent transparent transparent #fff;
+        border-color: transparent transparent transparent var(--text-heading);
         margin-left: 4px;
       }
 
@@ -222,7 +223,7 @@
         bottom: 8px;
         right: 8px;
         background: rgba(0, 0, 0, 0.85);
-        color: #fff;
+        color: var(--text-heading);
         font-family: 'Space Mono', monospace;
         font-size: 11px;
         padding: 2px 6px;
@@ -234,18 +235,18 @@
       .video-title {
         font-weight: 600;
         font-size: 14px;
-        color: #fff;
+        color: var(--text-heading);
         margin-bottom: 6px;
         line-height: 1.4;
       }
       .video-creator {
         font-size: 12px;
-        color: #00ffff;
+        color: var(--accent-cyan);
         margin-bottom: 8px;
       }
       .video-desc {
         font-size: 12px;
-        color: #999;
+        color: var(--text-muted);
         line-height: 1.5;
         margin-bottom: 10px;
         display: -webkit-box;
@@ -264,8 +265,8 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
         padding: 2px 8px;
-        border: 1px solid #333;
-        color: #666;
+        border: 1px solid var(--border-primary);
+        color: var(--text-muted);
       }
 
       .player-modal {
@@ -289,8 +290,8 @@
       .player-wrap {
         width: 100%;
         max-width: 960px;
-        background: #111;
-        border: 3px solid #ff00ff;
+        background: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
       }
 
       .player-header {
@@ -298,7 +299,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 16px;
-        border-bottom: 2px solid #333;
+        border-bottom: 2px solid var(--border-primary);
       }
 
       .player-title {
@@ -307,12 +308,12 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #fff;
+        color: var(--text-heading);
       }
 
       .player-close {
         font-size: 24px;
-        color: #999;
+        color: var(--text-muted);
         cursor: pointer;
         background: none;
         border: none;
@@ -321,7 +322,7 @@
       }
 
       .player-close:hover {
-        color: #ff00ff;
+        color: var(--accent-magenta);
       }
 
       .player-iframe-wrap {
@@ -351,8 +352,8 @@
       }
 
       .add-section {
-        background: #111;
-        border: 2px solid #333;
+        background: var(--bg-surface);
+        border: 2px solid var(--border-primary);
         padding: 24px;
         margin-top: 40px;
       }
@@ -363,10 +364,10 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #fff;
+        color: var(--text-heading);
         margin-bottom: 16px;
         padding-bottom: 10px;
-        border-bottom: 2px solid #ff00ff;
+        border-bottom: 2px solid var(--accent-magenta);
       }
 
       .form-row {
@@ -385,7 +386,7 @@
         font-size: 10px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #666;
+        color: var(--text-muted);
         margin-bottom: 4px;
       }
 
@@ -393,9 +394,9 @@
       .form-field textarea {
         width: 100%;
         padding: 8px 12px;
-        background: #0a0a0a;
-        border: 2px solid #333;
-        color: #e0e0e0;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        color: var(--text-primary);
         font-family: 'Inter', sans-serif;
         font-size: 13px;
         transition: border-color 0.2s;
@@ -404,7 +405,7 @@
       .form-field input:focus,
       .form-field textarea:focus {
         outline: none;
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
       }
       .form-field textarea {
         min-height: 60px;
@@ -427,21 +428,21 @@
       }
 
       .form-btn.primary {
-        background: #ff00ff;
-        border: 2px solid #ff00ff;
-        color: #fff;
+        background: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
+        color: var(--text-heading);
       }
       .form-btn.primary:hover {
         background: #cc00cc;
       }
       .form-btn.secondary {
         background: transparent;
-        border: 2px solid #333;
-        color: #999;
+        border: 2px solid var(--border-primary);
+        color: var(--text-muted);
       }
       .form-btn.secondary:hover {
-        border-color: #999;
-        color: #fff;
+        border-color: var(--text-muted);
+        color: var(--text-heading);
       }
 
       .user-videos-section {
@@ -453,14 +454,14 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffaa00;
+        color: var(--accent-orange);
         margin-bottom: 16px;
       }
 
       .empty-state {
         text-align: center;
         padding: 60px 20px;
-        color: #555;
+        color: var(--text-muted);
         font-family: 'Space Mono', monospace;
       }
 
@@ -553,6 +554,7 @@
       </div>
     </div>
 
+    <script src="assets/theme.js" defer></script>
     <script>
       var curatedVideos = [];
       var userVideos = [];

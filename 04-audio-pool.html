@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>04 - The Audio Pool: Samples &amp; Organization</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -13,8 +14,8 @@
       }
 
       body {
-        background: #0a0a0a;
-        color: #e0e0e0;
+        background: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -31,8 +32,8 @@
         left: 0;
         right: 0;
         height: 60px;
-        background: #111111;
-        border-bottom: 3px solid #00ffff;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-cyan);
         display: flex;
         align-items: center;
         padding: 0 20px;
@@ -41,7 +42,7 @@
       }
 
       .top-bar a {
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-decoration: none;
         font-weight: 600;
         font-size: 12px;
@@ -51,7 +52,7 @@
       }
 
       .top-bar a:hover {
-        color: #00ff41;
+        color: var(--accent-lime);
         transform: translateY(-2px);
       }
 
@@ -61,7 +62,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
         flex: 1;
       }
 
@@ -74,14 +75,14 @@
       }
 
       .difficulty {
-        color: #00ff41;
-        border: 2px solid #00ff41;
+        color: var(--accent-lime);
+        border: 2px solid var(--accent-lime);
         padding: 4px 10px;
       }
 
       .time {
-        color: #ff00ff;
-        border: 2px solid #ff00ff;
+        color: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
         padding: 4px 10px;
       }
 
@@ -97,8 +98,8 @@
         top: 60px;
         width: 280px;
         height: calc(100vh - 60px);
-        background: #111111;
-        border-right: 3px solid #333333;
+        background: var(--bg-surface);
+        border-right: 3px solid var(--border-primary);
         overflow-y: auto;
         padding: 20px;
         z-index: 100;
@@ -110,7 +111,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #666666;
+        color: var(--text-muted);
         margin-top: 20px;
         margin-bottom: 10px;
       }
@@ -138,26 +139,26 @@
       }
 
       .sidebar-nav li:hover {
-        border-left: 2px solid #00ffff;
-        color: #00ffff;
+        border-left: 2px solid var(--accent-cyan);
+        color: var(--accent-cyan);
       }
 
       .sidebar-nav li.active {
-        background: #1a1a1a;
-        border-left: 2px solid #00ff41;
-        color: #00ff41;
+        background: var(--bg-tertiary);
+        border-left: 2px solid var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .sidebar-nav li.completed::before {
         content: '✓';
-        color: #00ff41;
+        color: var(--accent-lime);
         font-weight: 700;
         width: 16px;
       }
 
       .sidebar-nav li:not(.completed)::before {
         content: '○';
-        color: #666666;
+        color: var(--text-muted);
         width: 16px;
       }
 
@@ -169,8 +170,8 @@
       }
 
       .section {
-        background: #111111;
-        border: 3px solid #333333;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
         padding: 40px;
         margin-bottom: 40px;
         scroll-margin-top: 80px;
@@ -180,7 +181,7 @@
 
       .section.in-view {
         opacity: 1;
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
       }
 
       .section h2 {
@@ -189,15 +190,15 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 20px;
         padding-bottom: 15px;
-        border-bottom: 2px solid #00ffff;
+        border-bottom: 2px solid var(--accent-cyan);
       }
 
       .section p {
         margin-bottom: 16px;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .section ul,
@@ -211,18 +212,18 @@
       }
 
       code {
-        background: #0a0a0a;
-        color: #00ff41;
+        background: var(--bg-primary);
+        color: var(--accent-lime);
         padding: 4px 8px;
-        border: 1px solid #333333;
+        border: 1px solid var(--border-primary);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
       }
 
       button {
-        background: #111111;
-        color: #00ffff;
-        border: 3px solid #00ffff;
+        background: var(--bg-surface);
+        color: var(--accent-cyan);
+        border: 3px solid var(--accent-cyan);
         padding: 12px 20px;
         font-family: 'Space Mono', monospace;
         font-size: 11px;
@@ -234,10 +235,10 @@
       }
 
       button:hover {
-        background: #00ffff;
-        color: #0a0a0a;
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
         transform: translateY(-2px);
-        box-shadow: 0 4px 0 rgba(0, 255, 255, 0.3);
+        box-shadow: 0 4px 0 var(--accent-cyan-glow);
       }
 
       button:active {
@@ -245,8 +246,8 @@
       }
 
       .validator {
-        background: #0a0a0a;
-        border: 2px solid #ff00ff;
+        background: var(--bg-primary);
+        border: 2px solid var(--accent-magenta);
         padding: 30px;
         margin: 20px 0;
         border-radius: 2px;
@@ -258,7 +259,7 @@
 
       .validator-label {
         font-weight: 600;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 10px;
         font-family: 'Space Mono', monospace;
         font-size: 12px;
@@ -273,9 +274,9 @@
       }
 
       .validator-btn {
-        background: #1a1a1a;
-        color: #e0e0e0;
-        border: 2px solid #333333;
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border: 2px solid var(--border-primary);
         padding: 10px;
         cursor: pointer;
         font-family: 'Inter', sans-serif;
@@ -284,22 +285,22 @@
       }
 
       .validator-btn:hover {
-        border-color: #00ffff;
-        color: #00ffff;
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
       }
 
       .validator-btn.selected {
-        background: #00ffff;
-        color: #0a0a0a;
-        border-color: #00ffff;
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+        border-color: var(--accent-cyan);
         font-weight: 600;
       }
 
       .validator-result {
         margin-top: 20px;
         padding: 15px;
-        border: 2px solid #333333;
-        background: #0a0a0a;
+        border: 2px solid var(--border-primary);
+        background: var(--bg-primary);
         display: none;
       }
 
@@ -308,19 +309,19 @@
       }
 
       .validator-result.pass {
-        border-color: #00ff41;
-        color: #00ff41;
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .validator-result.fail {
-        border-color: #ff3333;
-        color: #ff3333;
+        border-color: var(--accent-error);
+        color: var(--accent-error);
       }
 
       .filename-input {
-        background: #1a1a1a;
-        border: 2px solid #333333;
-        color: #e0e0e0;
+        background: var(--bg-tertiary);
+        border: 2px solid var(--border-primary);
+        color: var(--text-primary);
         padding: 10px;
         font-family: 'Space Mono', monospace;
         font-size: 13px;
@@ -336,26 +337,26 @@
       }
 
       .filename-feedback.pass {
-        border-color: #00ff41;
-        color: #00ff41;
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
         background: rgba(0, 255, 65, 0.1);
       }
 
       .filename-feedback.warn {
-        border-color: #ffaa00;
-        color: #ffaa00;
+        border-color: var(--accent-orange);
+        color: var(--accent-orange);
         background: rgba(255, 170, 0, 0.1);
       }
 
       .filename-feedback.fail {
-        border-color: #ff3333;
-        color: #ff3333;
+        border-color: var(--accent-error);
+        color: var(--accent-error);
         background: rgba(255, 51, 51, 0.1);
       }
 
       .folder-tree {
-        background: #0a0a0a;
-        border: 2px solid #00ff41;
+        background: var(--bg-primary);
+        border: 2px solid var(--accent-lime);
         padding: 20px;
         margin: 20px 0;
         font-family: 'Space Mono', monospace;
@@ -368,23 +369,23 @@
       }
 
       .folder-tree-folder {
-        color: #ffaa00;
+        color: var(--accent-orange);
         font-weight: 600;
       }
 
       .folder-tree-file {
-        color: #00ffff;
+        color: var(--accent-cyan);
       }
 
       .folder-tree-root {
-        color: #ffffff;
+        color: var(--text-heading);
         font-weight: 700;
         margin-bottom: 10px;
       }
 
       .quiz-section {
-        background: #111111;
-        border: 3px solid #ff3333;
+        background: var(--bg-surface);
+        border: 3px solid var(--accent-error);
         padding: 40px;
         margin-bottom: 40px;
       }
@@ -392,7 +393,7 @@
       .quiz-question {
         margin-bottom: 30px;
         padding-bottom: 20px;
-        border-bottom: 2px solid #333333;
+        border-bottom: 2px solid var(--border-primary);
       }
 
       .quiz-question:last-child {
@@ -404,7 +405,7 @@
       .quiz-q {
         font-weight: 600;
         margin-bottom: 15px;
-        color: #ffffff;
+        color: var(--text-heading);
       }
 
       .quiz-options {
@@ -415,39 +416,39 @@
 
       .quiz-option {
         padding: 12px;
-        background: #0a0a0a;
-        border: 2px solid #333333;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-primary);
         cursor: pointer;
         transition: all 0.2s;
         font-size: 14px;
       }
 
       .quiz-option:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
       }
 
       .quiz-option.selected {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background: rgba(0, 255, 255, 0.1);
       }
 
       .quiz-option.correct {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background: rgba(0, 255, 65, 0.15);
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .quiz-option.incorrect {
-        border-color: #ff3333;
+        border-color: var(--accent-error);
         background: rgba(255, 51, 51, 0.15);
-        color: #ff3333;
+        color: var(--accent-error);
       }
 
       .quiz-feedback {
         margin-top: 10px;
         font-size: 13px;
         font-weight: 500;
-        color: #666666;
+        color: var(--text-muted);
         display: none;
       }
 
@@ -456,8 +457,8 @@
       }
 
       .confidence-section {
-        background: #111111;
-        border: 3px solid #ff00ff;
+        background: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
         padding: 40px;
         margin-bottom: 40px;
       }
@@ -472,9 +473,9 @@
       .confidence-btn {
         width: 50px;
         height: 50px;
-        border: 2px solid #ff00ff;
-        background: #0a0a0a;
-        color: #ff00ff;
+        border: 2px solid var(--accent-magenta);
+        background: var(--bg-primary);
+        color: var(--accent-magenta);
         cursor: pointer;
         font-family: 'Space Mono', monospace;
         font-weight: 700;
@@ -484,14 +485,14 @@
       }
 
       .confidence-btn:hover {
-        background: #ff00ff;
-        color: #0a0a0a;
+        background: var(--accent-magenta);
+        color: var(--bg-primary);
         transform: scale(1.1);
       }
 
       .confidence-btn.selected {
-        background: #ff00ff;
-        color: #0a0a0a;
+        background: var(--accent-magenta);
+        color: var(--bg-primary);
       }
 
       .bottom-nav {
@@ -506,9 +507,9 @@
       .bottom-nav a {
         flex: 1;
         padding: 20px;
-        background: #111111;
-        border: 3px solid #333333;
-        color: #00ffff;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        color: var(--accent-cyan);
         text-decoration: none;
         text-align: center;
         font-family: 'Space Mono', monospace;
@@ -520,22 +521,22 @@
       }
 
       .bottom-nav a:hover {
-        border-color: #00ffff;
-        color: #ffffff;
+        border-color: var(--accent-cyan);
+        color: var(--text-heading);
         transform: translateY(-2px);
       }
 
       .progress-container {
         height: 12px;
-        background: #1a1a1a;
-        border: 2px solid #333333;
+        background: var(--bg-tertiary);
+        border: 2px solid var(--border-primary);
         margin: 20px 0;
         overflow: hidden;
       }
 
       .progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, #00ffff, #00ff41, #ff00ff);
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-lime), var(--accent-magenta));
         width: 0%;
         transition: width 0.3s;
       }
@@ -547,7 +548,7 @@
           position: relative;
           top: auto;
           border-right: none;
-          border-bottom: 3px solid #333333;
+          border-bottom: 3px solid var(--border-primary);
           max-height: 200px;
         }
 
@@ -866,8 +867,8 @@
             </div>
 
             <div class="folder-tree-item">
-              <span class="folder-tree-folder">Loopmasters/</span>
-              (commercial pack)
+              <span class="folder-tree-folder">Pack_A/</span>
+              (commercial sample pack)
             </div>
             <div class="folder-tree-item">
               <span class="folder-tree-folder">Modub/</span>
@@ -882,7 +883,7 @@
               (factory sounds)
             </div>
             <div class="folder-tree-item">
-              <span class="folder-tree-folder">Samples From Mars/</span>
+              <span class="folder-tree-folder">Pack_B/</span>
               (vintage gear samples)
             </div>
           </div>
@@ -1376,6 +1377,7 @@
 
       updateProgress();
     </script>
+    <script src="assets/theme.js" defer></script>
     <script src="assets/svg-overlay.js" defer></script>
 
     <!-- Creator / Support -->

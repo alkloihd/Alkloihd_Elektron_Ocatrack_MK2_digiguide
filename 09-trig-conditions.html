@@ -1,0 +1,2448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>09 - Trig Conditions: Adding Variety</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* TOP BAR */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-cyan);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 40px;
+        z-index: 1000;
+      }
+
+      .top-bar a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .top-bar a:hover {
+        color: var(--accent-lime);
+        transform: translateY(-2px);
+      }
+
+      .top-bar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-heading);
+        flex: 1;
+      }
+
+      .top-bar-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .difficulty {
+        color: var(--accent-orange);
+        border: 2px solid var(--accent-orange);
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: 'Space Mono', monospace;
+      }
+
+      .time {
+        color: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
+        padding: 4px 10px;
+      }
+
+      /* LAYOUT */
+      .container {
+        display: flex;
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        height: calc(100vh - 60px);
+        z-index: 100;
+      }
+
+      .sidebar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent-magenta);
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-magenta);
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.75rem;
+      }
+
+      .sidebar-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        background-color: transparent;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-nav-item:hover {
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-magenta);
+      }
+
+      .sidebar-nav-item.active {
+        border-color: var(--accent-cyan);
+        background-color: var(--highlight-bg);
+        color: var(--accent-cyan);
+      }
+
+      .sidebar-checkbox {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--text-muted);
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--accent-lime);
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-checkbox.checked {
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      /* MAIN CONTENT */
+      .main {
+        margin-left: 280px;
+        padding: 40px;
+        max-width: 900px;
+        width: 100%;
+      }
+
+      .section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .quiz-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .quiz-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .confidence-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .confidence-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      h2 {
+        font-family: 'Space Mono', monospace;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-heading);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-cyan);
+      }
+
+      h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent-magenta);
+        margin: 24px 0 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      p {
+        margin-bottom: 16px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 16px 24px;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+
+      strong {
+        color: var(--text-heading);
+      }
+
+      /* BUTTON REFERENCES */
+      .button-key {
+        display: inline-block;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--accent-cyan);
+        color: var(--accent-cyan);
+        padding: 2px 10px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin: 2px;
+      }
+
+      .button-sequence {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 12px 0;
+        flex-wrap: wrap;
+      }
+
+      /* STEP GUIDES */
+      .step-guide {
+        margin: 20px 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+        padding: 16px;
+        background: var(--bg-primary);
+        border-left: 3px solid var(--accent-cyan);
+      }
+
+      .step-number {
+        font-family: 'Space Mono', monospace;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .step-content {
+        flex: 1;
+      }
+
+      .step-content p {
+        margin-bottom: 8px;
+      }
+
+      /* INFO BOXES */
+      .info-box {
+        padding: 16px 20px;
+        margin: 16px 0;
+        border-left: 3px solid var(--accent-cyan);
+        background: var(--highlight-bg);
+      }
+
+      .info-box.warning {
+        border-left-color: var(--accent-orange);
+        background: var(--warning-bg);
+      }
+
+      .info-box.protip {
+        border-left-color: var(--accent-lime);
+        background: var(--protip-bg);
+      }
+
+      .info-box p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* CONDITION TABLE */
+      .condition-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      }
+
+      .condition-table th {
+        background: var(--bg-tertiary);
+        color: var(--accent-cyan);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 10px 14px;
+        text-align: left;
+        border: 1px solid var(--border-primary);
+      }
+
+      .condition-table td {
+        padding: 10px 14px;
+        border: 1px solid var(--border-subtle);
+        vertical-align: top;
+      }
+
+      .condition-table tr:nth-child(even) {
+        background: var(--bg-primary);
+      }
+
+      .condition-table code {
+        background: var(--code-bg);
+        color: var(--accent-magenta);
+        padding: 1px 6px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* RECIPE CARDS */
+      .recipe-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .recipe-card h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent-orange);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      /* INTERACTIVE SEQUENCER WIDGET */
+      .sequencer-widget {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .sequencer-widget-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+      }
+
+      .seq-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 6px;
+      }
+
+      .seq-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        color: var(--text-muted);
+        width: 60px;
+        text-align: right;
+        margin-right: 8px;
+      }
+
+      .seq-step {
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--border-primary);
+        background: var(--bg-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        color: var(--text-muted);
+        transition: all 0.15s;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      .seq-step:hover {
+        border-color: var(--accent-cyan);
+      }
+
+      .seq-step.active {
+        background: var(--accent-cyan);
+        color: var(--bg-primary);
+        border-color: var(--accent-cyan);
+        font-weight: 700;
+      }
+
+      .seq-step.fill-active {
+        background: var(--accent-magenta);
+        color: var(--bg-primary);
+        border-color: var(--accent-magenta);
+        font-weight: 700;
+      }
+
+      .seq-step.prob-active {
+        background: var(--accent-orange);
+        color: var(--bg-primary);
+        border-color: var(--accent-orange);
+        font-weight: 700;
+      }
+
+      .seq-step.ab-active {
+        background: var(--accent-lime);
+        color: var(--bg-primary);
+        border-color: var(--accent-lime);
+        font-weight: 700;
+      }
+
+      .seq-step.muted {
+        opacity: 0.25;
+      }
+
+      .seq-step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 18px;
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        color: var(--text-muted);
+        text-align: center;
+      }
+
+      .seq-controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+
+      .seq-controls button {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        color: var(--text-primary);
+        padding: 6px 14px;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+      }
+
+      .seq-controls button:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      .seq-controls button.active-ctrl {
+        border-color: var(--accent-magenta);
+        color: var(--accent-magenta);
+        background: var(--accent-magenta-glow);
+      }
+
+      .seq-legend {
+        display: flex;
+        gap: 16px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .seq-legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-family: 'Space Mono', monospace;
+        color: var(--text-muted);
+      }
+
+      .seq-legend-swatch {
+        width: 12px;
+        height: 12px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* LOOP COUNTER */
+      .loop-counter {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-top: 10px;
+      }
+
+      .loop-counter span {
+        color: var(--accent-cyan);
+        font-weight: 700;
+      }
+
+      /* VIDEO EMBED */
+      .video-embed {
+        margin: 20px 0;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 16px;
+      }
+
+      .video-embed-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent-magenta);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+      }
+
+      .video-embed iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border: none;
+      }
+
+      /* SVG DIAGRAM */
+      .diagram-container {
+        margin: 24px 0;
+        padding: 20px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        overflow-x: auto;
+      }
+
+      .diagram-container svg {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        border-color: var(--accent-magenta) !important;
+      }
+
+      .quiz-section h2 {
+        border-bottom-color: var(--accent-magenta);
+      }
+
+      .quiz-question {
+        margin-bottom: 30px;
+      }
+
+      .quiz-q {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text-heading);
+        margin-bottom: 12px;
+      }
+
+      .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .quiz-option {
+        padding: 10px 16px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+      }
+
+      .quiz-option:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      .quiz-option.selected {
+        border-color: var(--accent-cyan);
+        background: var(--accent-cyan-glow);
+        color: var(--accent-cyan);
+      }
+
+      .quiz-option.correct {
+        border-color: var(--accent-lime);
+        background: var(--accent-lime-glow);
+        color: var(--accent-lime);
+      }
+
+      .quiz-option.incorrect {
+        border-color: var(--accent-error);
+        background: rgba(255, 68, 68, 0.1);
+        color: var(--accent-error);
+      }
+
+      .quiz-feedback {
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: none;
+      }
+
+      .quiz-feedback.show {
+        display: block;
+      }
+
+      /* CONFIDENCE */
+      .confidence-section {
+        border-color: var(--accent-magenta) !important;
+      }
+
+      .confidence-section h2 {
+        border-bottom-color: var(--accent-magenta);
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .confidence-btn {
+        width: 48px;
+        height: 48px;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        color: var(--text-muted);
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-btn:hover {
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
+      }
+
+      .confidence-btn.selected {
+        background: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 60px 0 40px;
+        margin-left: 280px;
+        padding: 0 40px;
+      }
+
+      .bottom-nav a {
+        flex: 1;
+        padding: 20px;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        color: var(--accent-cyan);
+        text-decoration: none;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .bottom-nav a:hover {
+        border-color: var(--accent-cyan);
+        color: var(--text-heading);
+        transform: translateY(-2px);
+      }
+
+      /* SUBMIT BUTTON */
+      .submit-btn {
+        background: var(--accent-magenta);
+        border: none;
+        color: var(--text-heading);
+        padding: 10px 30px;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        transition: all 0.2s;
+      }
+
+      .submit-btn:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+
+        .container {
+          flex-direction: column;
+        }
+
+        .main {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        .bottom-nav {
+          margin-left: 0;
+          padding: 0 20px;
+        }
+
+        .seq-step {
+          width: 28px;
+          height: 28px;
+          font-size: 8px;
+        }
+
+        .seq-label {
+          width: 44px;
+          font-size: 9px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <a href="index.html">&larr; DASHBOARD</a>
+      <div class="top-bar-title">09 &mdash; TRIG CONDITIONS</div>
+      <div class="top-bar-meta">
+        <span class="difficulty">Intermediate</span>
+        <span class="time">25 MIN</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="sidebar">
+        <div class="sidebar-title">SECTIONS</div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="#what-are-conditions" class="sidebar-nav-item active" data-section="what-are-conditions">
+                <span class="sidebar-checkbox"></span>
+                WHAT ARE TRIG CONDITIONS?
+              </a>
+            </li>
+            <li>
+              <a href="#fill-mode" class="sidebar-nav-item" data-section="fill-mode">
+                <span class="sidebar-checkbox"></span>
+                FILL &amp; !FILL
+              </a>
+            </li>
+            <li>
+              <a href="#probability" class="sidebar-nav-item" data-section="probability">
+                <span class="sidebar-checkbox"></span>
+                PROBABILITY (X%)
+              </a>
+            </li>
+            <li>
+              <a href="#ab-counting" class="sidebar-nav-item" data-section="ab-counting">
+                <span class="sidebar-checkbox"></span>
+                A:B COUNTING
+              </a>
+            </li>
+            <li>
+              <a href="#sec-1st-pre-nei" class="sidebar-nav-item" data-section="1st-pre-nei">
+                <span class="sidebar-checkbox"></span>
+                1ST, PRE &amp; NEI
+              </a>
+            </li>
+            <li>
+              <a href="#combining" class="sidebar-nav-item" data-section="combining">
+                <span class="sidebar-checkbox"></span>
+                COMBINING WITH P-LOCKS
+              </a>
+            </li>
+            <li>
+              <a href="#recipes" class="sidebar-nav-item" data-section="recipes">
+                <span class="sidebar-checkbox"></span>
+                PRACTICAL RECIPES
+              </a>
+            </li>
+            <li>
+              <a href="#quiz" class="sidebar-nav-item" data-section="quiz">
+                <span class="sidebar-checkbox"></span>
+                QUIZ
+              </a>
+            </li>
+            <li>
+              <a href="#confidence" class="sidebar-nav-item" data-section="confidence">
+                <span class="sidebar-checkbox"></span>
+                CONFIDENCE
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-primary)">
+          <div class="sidebar-title" style="font-size: 11px; margin-bottom: 0.75rem">PREREQUISITES</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem">
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="03-beat-basics.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">03 &mdash; Beat Basics</a>
+            </li>
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="05-slice-and-dice.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">05 &mdash; Slice &amp; Dice</a>
+            </li>
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="06-sample-locks.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">06 &mdash; Sample Locks</a>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top: 0; padding-top: 1rem; border-top: 2px solid var(--border-primary)">
+          <div
+            class="progress-label"
+            style="margin-bottom: 0.5rem; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-magenta); font-weight: 700"
+          >
+            COMPLETION
+          </div>
+          <div class="progress-bar-container" style="height: 6px; background: var(--bg-primary); border: 1px solid var(--border-primary); overflow: hidden">
+            <div
+              class="progress-fill"
+              id="sidebarProgress"
+              style="height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta)); width: 0%; transition: width 0.5s"
+            ></div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 0.5rem">
+            <span id="completionPercent">0</span>
+            %
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <!-- SECTION 1: WHAT ARE TRIG CONDITIONS -->
+        <section class="section" id="what-are-conditions" data-section="what-are-conditions">
+          <h2>What Are Trig Conditions?</h2>
+          <p>
+            By default, every trig you place on the Octatrack's sequencer fires on every loop. Step 1 plays, step 5 plays, step 9 plays &mdash; the same pattern, every time.
+            <strong>Trig conditions</strong>
+            change that.
+          </p>
+
+          <p>
+            A trig condition is a logical rule you attach to any trig. Instead of "always play," you tell the sequencer: "only play this trig
+            <em>if</em>
+            this condition is true." If the condition is false, the trig stays silent for that loop.
+          </p>
+
+          <p>
+            This is one of the Octatrack's most powerful sequencing features. With conditions, a single 16-step pattern can produce variation that sounds like it was programmed across dozens of
+            patterns. You get:
+          </p>
+          <ul>
+            <li>
+              <strong>Drum fills</strong>
+              triggered on demand with [YES]
+            </li>
+            <li>
+              <strong>Probability-based</strong>
+              ghost notes and random hits
+            </li>
+            <li>
+              <strong>Multi-loop evolution</strong>
+              where patterns change over 2, 3, 4, or more bars
+            </li>
+            <li>
+              <strong>Chain reactions</strong>
+              between steps and tracks
+            </li>
+          </ul>
+
+          <p>
+            Conditions work on all trig types: sample trigs, note trigs, lock trigs, trigless trigs, and one-shot trigs. They live in the
+            <strong>MICRO TIMING</strong>
+            menu alongside micro timing offsets.
+          </p>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 12.13 &mdash; Conditional Locks (page 77). FILL mode details in Section 12.14 (page 78).
+            </p>
+          </div>
+
+          <!-- SVG DIAGRAM: Trig Condition Categories -->
+          <div class="diagram-container">
+            <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Space Mono', monospace">
+              <!-- Title -->
+              <text x="380" y="30" fill="#00ffff" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2">TRIG CONDITION TYPES</text>
+
+              <!-- Center node -->
+              <rect x="290" y="50" width="180" height="40" fill="none" stroke="#00ffff" stroke-width="2" />
+              <text x="380" y="75" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">TRIG CONDITION</text>
+
+              <!-- Lines from center -->
+              <line x1="330" y1="90" x2="120" y2="140" stroke="#333333" stroke-width="1" />
+              <line x1="380" y1="90" x2="380" y2="140" stroke="#333333" stroke-width="1" />
+              <line x1="430" y1="90" x2="640" y2="140" stroke="#333333" stroke-width="1" />
+
+              <!-- Category 1: On-Demand -->
+              <rect x="30" y="140" width="180" height="36" fill="none" stroke="#ff00ff" stroke-width="2" />
+              <text x="120" y="163" fill="#ff00ff" font-size="11" font-weight="700" text-anchor="middle">ON-DEMAND</text>
+
+              <rect x="30" y="190" width="85" height="30" fill="#1a0a1a" stroke="#ff00ff" stroke-width="1" />
+              <text x="72" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">FILL</text>
+              <rect x="125" y="190" width="85" height="30" fill="#1a0a1a" stroke="#ff00ff" stroke-width="1" />
+              <text x="167" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">!FILL</text>
+
+              <text x="72" y="238" fill="#666666" font-size="9" text-anchor="middle">Hold [YES]</text>
+              <text x="167" y="238" fill="#666666" font-size="9" text-anchor="middle">Not [YES]</text>
+
+              <!-- Category 2: Random / Counting -->
+              <rect x="260" y="140" width="240" height="36" fill="none" stroke="#ffaa00" stroke-width="2" />
+              <text x="380" y="163" fill="#ffaa00" font-size="11" font-weight="700" text-anchor="middle">RANDOM &amp; COUNTING</text>
+
+              <rect x="265" y="190" width="70" height="30" fill="#1a1500" stroke="#ffaa00" stroke-width="1" />
+              <text x="300" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">X%</text>
+              <rect x="345" y="190" width="70" height="30" fill="#1a1500" stroke="#ffaa00" stroke-width="1" />
+              <text x="380" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">A:B</text>
+              <rect x="425" y="190" width="70" height="30" fill="#1a1500" stroke="#ffaa00" stroke-width="1" />
+              <text x="460" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">1ST</text>
+
+              <text x="300" y="238" fill="#666666" font-size="9" text-anchor="middle">Chance</text>
+              <text x="380" y="238" fill="#666666" font-size="9" text-anchor="middle">Loop count</text>
+              <text x="460" y="238" fill="#666666" font-size="9" text-anchor="middle">First only</text>
+
+              <!-- Category 3: Chain Reaction -->
+              <rect x="550" y="140" width="180" height="36" fill="none" stroke="#00ff41" stroke-width="2" />
+              <text x="640" y="163" fill="#00ff41" font-size="11" font-weight="700" text-anchor="middle">CHAIN REACTION</text>
+
+              <rect x="555" y="190" width="80" height="30" fill="#0a1a0a" stroke="#00ff41" stroke-width="1" />
+              <text x="595" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">PRE</text>
+              <rect x="645" y="190" width="80" height="30" fill="#0a1a0a" stroke="#00ff41" stroke-width="1" />
+              <text x="685" y="209" fill="#e0e0e0" font-size="10" text-anchor="middle">NEI</text>
+
+              <text x="595" y="238" fill="#666666" font-size="9" text-anchor="middle">Prev step</text>
+              <text x="685" y="238" fill="#666666" font-size="9" text-anchor="middle">Neighbor trk</text>
+
+              <!-- Bottom summary boxes -->
+              <rect x="30" y="270" width="180" height="60" fill="#0a0a0a" stroke="#333333" stroke-width="1" />
+              <text x="120" y="290" fill="#ff00ff" font-size="10" font-weight="700" text-anchor="middle">PERFORMER CONTROL</text>
+              <text x="120" y="308" fill="#666666" font-size="9" text-anchor="middle">You decide when fills happen.</text>
+              <text x="120" y="322" fill="#666666" font-size="9" text-anchor="middle">Hold [YES] = instant variation.</text>
+
+              <rect x="260" y="270" width="240" height="60" fill="#0a0a0a" stroke="#333333" stroke-width="1" />
+              <text x="380" y="290" fill="#ffaa00" font-size="10" font-weight="700" text-anchor="middle">AUTOMATIC VARIETY</text>
+              <text x="380" y="308" fill="#666666" font-size="9" text-anchor="middle">The sequencer generates variation</text>
+              <text x="380" y="322" fill="#666666" font-size="9" text-anchor="middle">for you via chance or loop counts.</text>
+
+              <rect x="550" y="270" width="180" height="60" fill="#0a0a0a" stroke="#333333" stroke-width="1" />
+              <text x="640" y="290" fill="#00ff41" font-size="10" font-weight="700" text-anchor="middle">STEP/TRACK LOGIC</text>
+              <text x="640" y="308" fill="#666666" font-size="9" text-anchor="middle">Trigs react to other trigs.</text>
+              <text x="640" y="322" fill="#666666" font-size="9" text-anchor="middle">Creates call-and-response.</text>
+
+              <!-- How to set -->
+              <rect x="140" y="360" width="480" height="50" fill="none" stroke="#00ffff" stroke-width="1" stroke-dasharray="4,4" />
+              <text x="380" y="382" fill="#00ffff" font-size="10" font-weight="700" text-anchor="middle">HOW TO SET A CONDITION</text>
+              <text x="380" y="400" fill="#e0e0e0" font-size="10" text-anchor="middle">[REC] on &rarr; Hold [TRIG] &rarr; Press [LEFT]/[RIGHT] &rarr; Turn [LEVEL] to select</text>
+            </svg>
+          </div>
+        </section>
+
+        <!-- SECTION 2: FILL & !FILL -->
+        <section class="section" id="fill-mode" data-section="fill-mode">
+          <h2>FILL &amp; !FILL</h2>
+
+          <p>
+            FILL is the most hands-on trig condition. A trig set to
+            <code>FILL</code>
+            only fires when
+            <strong>FILL mode</strong>
+            is active. A trig set to
+            <code>!FILL</code>
+            (not-FILL) fires when FILL mode is
+            <strong>not</strong>
+            active. Together, they let you program two versions of the same beat: the "normal" version and the "fill" version.
+          </p>
+
+          <h3>How FILL Mode Works</h3>
+          <p>There are three ways to activate FILL mode while the sequencer is running:</p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Action</th>
+                <th scope="col">Button Combo</th>
+                <th scope="col">Behavior</th>
+              </tr>
+              <tr>
+                <td>One-cycle fill</td>
+                <td>Press [DOWN] + [PAGE]</td>
+                <td>FILL activates on next loop, lasts exactly one cycle, then deactivates</td>
+              </tr>
+              <tr>
+                <td>Hold fill</td>
+                <td>Hold [UP] + [PAGE]</td>
+                <td>FILL stays active for as long as you hold the keys</td>
+              </tr>
+              <tr>
+                <td>Latch fill</td>
+                <td>Press [UP] + [DOWN] + [PAGE]</td>
+                <td>FILL locks on until you press [UP] + [PAGE] to unlatch</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Performance tip:</strong>
+              Holding [YES] while the pattern plays is the quickest way to trigger FILL mode in a live context. Many performers keep a thumb on [YES] and tap it rhythmically to create fills on the
+              fly.
+            </p>
+          </div>
+
+          <h3>Setting a FILL Condition</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p><strong>Enter Grid Recording</strong></p>
+                <p>Press [REC] to activate Grid Recording mode. The red LED lights up.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[REC]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p><strong>Place your trig</strong></p>
+                <p>Press a [TRIG] key (e.g. [TRIG 13]) to place a trig on that step. The LED turns red.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[TRIG 13]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p><strong>Open the Micro Timing menu</strong></p>
+                <p>Hold [TRIG 13] and press [LEFT] or [RIGHT] to open the Micro Timing menu. Keep holding the trig key.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[TRIG 13]</span>
+                  <span style="color: var(--text-muted)">hold +</span>
+                  <span class="button-key">[LEFT]</span>
+                  <span style="color: var(--text-muted)">or</span>
+                  <span class="button-key">[RIGHT]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p><strong>Select the condition</strong></p>
+                <p>
+                  While still holding [TRIG 13], turn the [LEVEL] encoder to scroll through conditions. Select
+                  <code>FILL</code>
+                  .
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[LEVEL]</span>
+                  <span style="color: var(--text-muted)">turn &rarr; FILL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Remember:</strong>
+              You must have [REC] active (Grid Recording mode) to access trig conditions. The condition menu will not open if you are not in Grid Recording.
+            </p>
+          </div>
+
+          <h3>Classic !FILL / FILL Pair</h3>
+          <p>
+            The power move is placing
+            <strong>two trigs on the same step</strong>
+            &mdash; one with
+            <code>!FILL</code>
+            (normal hi-hat) and one with
+            <code>FILL</code>
+            (crash cymbal sample lock). During normal playback, the hi-hat plays. When you activate FILL, the crash replaces it instantly.
+          </p>
+
+          <p>
+            To place two trigs on the same step with different conditions, place the first trig and set it to
+            <code>!FILL</code>
+            . Then on the same step, add a
+            <strong>lock trig</strong>
+            by holding [FUNC] and pressing the same [TRIG] key. Set the lock trig to
+            <code>FILL</code>
+            and assign a different sample via sample lock.
+          </p>
+
+          <!-- Video Embed -->
+          <div class="video-embed">
+            <div class="video-embed-title">Watch: Octatrack Trig Conditions (Late Night Tips)</div>
+            <iframe
+              src="https://www.youtube.com/embed/33zUV14zC-o"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Octatrack Trig Conditions"
+            ></iframe>
+          </div>
+        </section>
+
+        <!-- SECTION 3: PROBABILITY -->
+        <section class="section" id="probability" data-section="probability">
+          <h2>Probability (X%)</h2>
+
+          <p>
+            Probability conditions give each trig a random chance of firing on each loop. Set a trig to
+            <code>50%</code>
+            and it fires roughly half the time. Set it to
+            <code>25%</code>
+            and it fires about once every four loops. The roll happens fresh every time the sequencer passes that step.
+          </p>
+
+          <p>
+            Available probability values:
+            <code>1%</code>
+            ,
+            <code>2%</code>
+            ,
+            <code>4%</code>
+            ,
+            <code>8%</code>
+            ,
+            <code>13%</code>
+            ,
+            <code>17%</code>
+            ,
+            <code>19%</code>
+            ,
+            <code>25%</code>
+            ,
+            <code>33%</code>
+            ,
+            <code>50%</code>
+            ,
+            <code>66%</code>
+            ,
+            <code>75%</code>
+            ,
+            <code>83%</code>
+            ,
+            <code>96%</code>
+            ,
+            <code>99%</code>
+            .
+          </p>
+
+          <h3>Setting a Probability Condition</h3>
+          <p>
+            The method is identical to setting FILL. While in [REC] mode, hold a [TRIG] key, press [LEFT] or [RIGHT] to open the Micro Timing menu, then turn the [LEVEL] encoder to select your
+            percentage. The screen shows the value as you scroll.
+          </p>
+
+          <div class="button-sequence">
+            <span class="button-key">[REC]</span>
+            <span style="color: var(--text-muted)">&rarr;</span>
+            <span class="button-key">[TRIG]</span>
+            <span style="color: var(--text-muted)">hold +</span>
+            <span class="button-key">[RIGHT]</span>
+            <span style="color: var(--text-muted)">&rarr;</span>
+            <span class="button-key">[LEVEL]</span>
+            <span style="color: var(--text-muted)">&rarr; 50%</span>
+          </div>
+
+          <h3>Musical Uses</h3>
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Probability</th>
+                <th scope="col">Best For</th>
+                <th scope="col">Example</th>
+              </tr>
+              <tr>
+                <td><code>50%</code></td>
+                <td>Ghost notes, half-time feel</td>
+                <td>Hi-hat offbeats that appear randomly</td>
+              </tr>
+              <tr>
+                <td><code>25%</code></td>
+                <td>Rare accents, surprises</td>
+                <td>Occasional snare flam or clap</td>
+              </tr>
+              <tr>
+                <td><code>75%</code></td>
+                <td>Mostly-there hits</td>
+                <td>Shaker that drops out sometimes</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>96%</code>
+                  /
+                  <code>99%</code>
+                </td>
+                <td>Humanization</td>
+                <td>A kick that occasionally misses &mdash; feels live</td>
+              </tr>
+              <tr>
+                <td>
+                  <code>1%</code>
+                  /
+                  <code>4%</code>
+                </td>
+                <td>Rare events</td>
+                <td>Random FX hit once every ~25 loops</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Pro tip:</strong>
+              Layer multiple probability trigs on the same step using different percentages and different sample locks. A 75% closed hat and a 25% open hat on the same step creates natural-sounding
+              hi-hat variation.
+            </p>
+          </div>
+
+          <!-- Interactive Probability Simulator -->
+          <div class="sequencer-widget" id="prob-sim">
+            <div class="sequencer-widget-title">Probability Simulator</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px">
+              Click steps to toggle. Orange = 50% probability. Watch which steps fire on each "loop." Hit Play to simulate loops.
+            </p>
+            <div class="seq-row" id="prob-numbers"></div>
+            <div class="seq-row" id="prob-pattern"></div>
+            <div class="seq-row" id="prob-result"></div>
+            <div class="seq-controls">
+              <button type="button" id="prob-play-btn" onclick="probPlay()">Play Loop</button>
+              <button type="button" onclick="probReset()">Reset</button>
+            </div>
+            <div class="loop-counter">
+              Loop:
+              <span id="prob-loop-count">0</span>
+              &mdash;
+              <span id="prob-fire-count">0</span>
+              of
+              <span id="prob-total-count">0</span>
+              probability trigs fired
+            </div>
+            <div class="seq-legend">
+              <div class="seq-legend-item">
+                <div class="seq-legend-swatch" style="background: var(--accent-cyan)"></div>
+                Always plays
+              </div>
+              <div class="seq-legend-item">
+                <div class="seq-legend-swatch" style="background: var(--accent-orange)"></div>
+                50% chance
+              </div>
+              <div class="seq-legend-item">
+                <div class="seq-legend-swatch" style="background: var(--bg-tertiary); border-color: var(--accent-lime)"></div>
+                Fired this loop
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: A:B COUNTING -->
+        <section class="section" id="ab-counting" data-section="ab-counting">
+          <h2>A:B Counting</h2>
+
+          <p>
+            A:B conditions create patterns that evolve over multiple loops. To set one, enter [REC] mode, hold a [TRIG] key, press [LEFT]/[RIGHT] to the condition parameter, and turn the [LEVEL]
+            encoder to select the A:B value. The syntax is
+            <code>A:B</code>
+            where:
+          </p>
+          <ul>
+            <li>
+              <strong>A</strong>
+              = the loop number when the trig fires (counting from 1)
+            </li>
+            <li>
+              <strong>B</strong>
+              = the total loop cycle before the count resets
+            </li>
+          </ul>
+
+          <p>
+            The cycle repeats indefinitely. So
+            <code>1:2</code>
+            means "fire on loop 1, skip loop 2, fire on loop 3, skip loop 4" &mdash; effectively every other loop.
+          </p>
+
+          <h3>A:B Examples</h3>
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Condition</th>
+                <th scope="col">Fires On Loops</th>
+                <th scope="col">Musical Effect</th>
+              </tr>
+              <tr>
+                <td><code>1:2</code></td>
+                <td>1, 3, 5, 7, 9...</td>
+                <td>Every other loop (half-time feel)</td>
+              </tr>
+              <tr>
+                <td><code>2:2</code></td>
+                <td>2, 4, 6, 8, 10...</td>
+                <td>Every other loop, offset by one</td>
+              </tr>
+              <tr>
+                <td><code>1:4</code></td>
+                <td>1, 5, 9, 13...</td>
+                <td>Every 4th loop &mdash; 4-bar variation cycle</td>
+              </tr>
+              <tr>
+                <td><code>4:4</code></td>
+                <td>4, 8, 12, 16...</td>
+                <td>Only on the 4th loop of every cycle</td>
+              </tr>
+              <tr>
+                <td><code>2:4</code></td>
+                <td>2, 6, 10, 14...</td>
+                <td>Fire on loop 2, then every 4th loop after</td>
+              </tr>
+              <tr>
+                <td><code>1:3</code></td>
+                <td>1, 4, 7, 10...</td>
+                <td>3-loop cycle &mdash; combine with 1:4 for polyrhythmic evolution</td>
+              </tr>
+              <tr>
+                <td><code>4:7</code></td>
+                <td>4, 11, 18...</td>
+                <td>Long cycle &mdash; trig fires every 7 loops on loop 4</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box">
+            <p>
+              <strong>Key insight:</strong>
+              Combine
+              <code>1:2</code>
+              and
+              <code>2:2</code>
+              on the same step with different sample locks. On odd loops you hear sound A, on even loops you hear sound B. One step, two alternating sounds.
+            </p>
+          </div>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Polyrhythmic trick:</strong>
+              Place a
+              <code>1:3</code>
+              trig and a
+              <code>1:4</code>
+              trig on different steps. The 3-loop and 4-loop cycles only align every 12 loops, creating a 12-bar evolving phrase from a single 1-bar pattern.
+            </p>
+          </div>
+
+          <!-- Interactive A:B Simulator -->
+          <div class="sequencer-widget" id="ab-sim">
+            <div class="sequencer-widget-title">A:B Loop Visualizer</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px">See which loops a trig fires on. Change A and B values below.</p>
+            <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 14px; flex-wrap: wrap">
+              <label style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent-lime)">
+                A:
+                <select
+                  id="ab-a-val"
+                  onchange="abUpdate()"
+                  style="background: var(--bg-tertiary); border: 1px solid var(--border-primary); color: var(--text-primary); padding: 4px 8px; font-family: 'Space Mono', monospace; font-size: 12px"
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </label>
+              <label style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent-lime)">
+                B:
+                <select
+                  id="ab-b-val"
+                  onchange="abUpdate()"
+                  style="background: var(--bg-tertiary); border: 1px solid var(--border-primary); color: var(--text-primary); padding: 4px 8px; font-family: 'Space Mono', monospace; font-size: 12px"
+                >
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </label>
+              <span id="ab-desc" style="font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-muted)">1:2 &mdash; fires every other loop</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px" id="ab-loops"></div>
+            <div class="seq-legend" style="margin-top: 14px">
+              <div class="seq-legend-item">
+                <div class="seq-legend-swatch" style="background: var(--accent-lime)"></div>
+                Trig fires
+              </div>
+              <div class="seq-legend-item">
+                <div class="seq-legend-swatch" style="background: var(--bg-tertiary)"></div>
+                Trig silent
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: 1ST, PRE, NEI -->
+        <section class="section" id="sec-1st-pre-nei" data-section="1st-pre-nei">
+          <h2>1ST, PRE &amp; NEI</h2>
+
+          <p>These three conditions create logic-driven sequencing: trigs that react to context rather than randomness.</p>
+
+          <h3>1ST &mdash; First Loop Only</h3>
+          <p>
+            <code>1ST</code>
+            fires the trig only on the very first time the pattern plays. After that first loop, it never fires again (until the pattern is restarted). Its inverse,
+            <code>!1ST</code>
+            , fires on every loop
+            <em>except</em>
+            the first.
+          </p>
+          <p>
+            <strong>Use case:</strong>
+            A cymbal crash or intro sample that only plays when you first launch the pattern. Or use
+            <code>!1ST</code>
+            for a variation that kicks in after the intro loop.
+          </p>
+
+          <h3>PRE &mdash; Previous Step Logic</h3>
+          <p>
+            <code>PRE</code>
+            is true if the most recently evaluated trig condition
+            <strong>on the same track</strong>
+            was true.
+            <code>!PRE</code>
+            is true when the previous condition was false. PRE and !PRE conditions themselves are ignored when evaluating the chain &mdash; only other condition types (FILL, X%, A:B, 1ST, NEI) count
+            as "previous."
+          </p>
+
+          <p>From the manual:</p>
+          <div class="info-box">
+            <p>
+              <strong>Example 1:</strong>
+              [TRIG 1] = 50% is True &rarr; [TRIG 2] PRE = False &rarr; [TRIG 3] PRE = False &rarr; [TRIG 4] PRE = True
+            </p>
+            <p>
+              <strong>Example 2:</strong>
+              [TRIG 1] = 50% is False &rarr; [TRIG 2] PRE = True &rarr; [TRIG 3] PRE = True &rarr; [TRIG 4] PRE = False
+            </p>
+            <p style="margin-bottom: 0">
+              <em>Wait &mdash; why does PRE flip?</em>
+              Because PRE looks at the most recent
+              <strong>non-PRE</strong>
+              condition. In example 1, [TRIG 1] was true (50% hit), so PRE on [TRIG 2] evaluates as true. But [TRIG 2] is itself a PRE, so [TRIG 3] still looks back at [TRIG 1]. The chain propagates
+              from the last non-PRE trig.
+            </p>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Correction to the above:</strong>
+              Actually, PRE evaluates based on the last evaluated trig condition result, but PRE/!PRE themselves are skipped in that evaluation chain. So PRE always references the last
+              <em>non-PRE</em>
+              condition on the track. This is subtle but important for building condition chains.
+            </p>
+          </div>
+
+          <h3>NEI &mdash; Neighbor Track Logic</h3>
+          <p>
+            <code>NEI</code>
+            is true if the most recently evaluated trig condition on the
+            <strong>neighbor track</strong>
+            was true. The neighbor track is the track immediately before the current one. For example, Track 3's neighbor is Track 2. Track 4's neighbor is Track 3.
+          </p>
+
+          <p>
+            <code>!NEI</code>
+            is true when the neighbor track's last condition was false. Like PRE, the NEI check ignores PRE and !PRE conditions on the neighbor track.
+          </p>
+
+          <p>If no conditional trigs exist on the neighbor track, NEI evaluates as false.</p>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Call-and-response:</strong>
+              Put a 50% kick on Track 1, step 1. On Track 2, step 2, put a snare with NEI condition. The snare only fires if the kick hit &mdash; creating a "kick answers snare" pattern that is
+              different every loop.
+            </p>
+          </div>
+
+          <h3>Every Condition Has an Inverse</h3>
+          <p>
+            Each condition type has a
+            <code>!</code>
+            (NOT) version. When you scroll through conditions with the [LEVEL] encoder, you will see both the normal and inverted versions:
+          </p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Condition</th>
+                <th scope="col">Fires When</th>
+                <th scope="col">Inverse</th>
+                <th scope="col">Inverse Fires When</th>
+              </tr>
+              <tr>
+                <td><code>FILL</code></td>
+                <td>FILL mode is active</td>
+                <td><code>!FILL</code></td>
+                <td>FILL mode is NOT active</td>
+              </tr>
+              <tr>
+                <td><code>PRE</code></td>
+                <td>Previous condition was true</td>
+                <td><code>!PRE</code></td>
+                <td>Previous condition was false</td>
+              </tr>
+              <tr>
+                <td><code>NEI</code></td>
+                <td>Neighbor track condition was true</td>
+                <td><code>!NEI</code></td>
+                <td>Neighbor track condition was false</td>
+              </tr>
+              <tr>
+                <td><code>1ST</code></td>
+                <td>First loop of pattern</td>
+                <td><code>!1ST</code></td>
+                <td>Every loop EXCEPT the first</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- SECTION 6: COMBINING CONDITIONS WITH P-LOCKS -->
+        <section class="section" id="combining" data-section="combining">
+          <h2>Combining Conditions with P-Locks</h2>
+
+          <p>
+            Trig conditions become truly powerful when combined with parameter locks. A conditional trig does not just decide whether a sound plays &mdash; it can change
+            <em>how</em>
+            it plays.
+          </p>
+
+          <h3>How It Works</h3>
+          <p>After setting a trig condition (hold [TRIG], press [LEFT]/[RIGHT], turn [LEVEL]), you can still hold that same [TRIG] key and adjust any parameter page to p-lock values:</p>
+
+          <ul>
+            <li>
+              <strong>[SRC]</strong>
+              &mdash; Change the sample (sample lock), pitch, timestretch settings
+            </li>
+            <li>
+              <strong>[AMP]</strong>
+              &mdash; Change volume, pan, attack/release envelope
+            </li>
+            <li>
+              <strong>[FX1]</strong>
+              &mdash; Change filter, EQ, or first effect slot
+            </li>
+            <li>
+              <strong>[FX2]</strong>
+              &mdash; Change delay, reverb, or second effect slot
+            </li>
+            <li>
+              <strong>[AED]</strong>
+              &mdash; Open Audio Editor for slice selection
+            </li>
+          </ul>
+
+          <h3>Example: The Conditional Fill Hit</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p><strong>Set up the normal hit</strong></p>
+                <p>On Track 1, step 13 (beat 4), place a trig with [TRIG 13] in [REC] mode. This plays your normal closed hi-hat.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p><strong>Add a conditional lock trig</strong></p>
+                <p>
+                  Hold [FUNC] + press [TRIG 13] to place a lock trig on the same step. Now hold [TRIG 13], press [RIGHT] to open conditions, turn [LEVEL] to select
+                  <code>FILL</code>
+                  .
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[TRIG 13]</span>
+                  <span style="color: var(--text-muted)">&rarr; hold [TRIG 13] +</span>
+                  <span class="button-key">[RIGHT]</span>
+                  <span style="color: var(--text-muted)">&rarr;</span>
+                  <span class="button-key">[LEVEL]</span>
+                  <span style="color: var(--text-muted)">&rarr; FILL</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p><strong>P-lock a different sample</strong></p>
+                <p>Still holding [TRIG 13], press [SRC] to open the sample selector. Choose a crash cymbal. This sample lock only applies to this FILL trig.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[TRIG 13]</span>
+                  <span style="color: var(--text-muted)">hold +</span>
+                  <span class="button-key">[SRC]</span>
+                  <span style="color: var(--text-muted)">&rarr; select crash</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p><strong>P-lock the filter</strong></p>
+                <p>Still holding [TRIG 13], press [FX1] and adjust the filter cutoff. When FILL fires, the crash plays with a filtered sweep.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[TRIG 13]</span>
+                  <span style="color: var(--text-muted)">hold +</span>
+                  <span class="button-key">[FX1]</span>
+                  <span style="color: var(--text-muted)">&rarr; adjust cutoff</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>Stack it all:</strong>
+              One trig can have a condition + sample lock + filter p-lock + volume p-lock + micro timing offset. The condition determines
+              <em>if</em>
+              it plays, and the p-locks determine
+              <em>how</em>
+              it plays.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 7: PRACTICAL RECIPES -->
+        <section class="section" id="recipes" data-section="recipes">
+          <h2>Practical Recipes</h2>
+
+          <div class="recipe-card">
+            <h4>Recipe 1: Evolving Hi-Hat Pattern</h4>
+            <p>
+              <strong>Goal:</strong>
+              A hi-hat line that sounds different every loop without you touching anything.
+            </p>
+            <p>
+              <strong>Setup:</strong>
+              Track 3 with a closed hi-hat loaded via Flex machine.
+            </p>
+            <ol>
+              <li>Enter [REC] mode. Place trigs on steps [TRIG 1], [TRIG 3], [TRIG 5], [TRIG 7], [TRIG 9], [TRIG 11], [TRIG 13], [TRIG 15] (all offbeats).</li>
+              <li>
+                Hold [TRIG 3], press [RIGHT], turn [LEVEL] to
+                <code>50%</code>
+                . This hit fires half the time.
+              </li>
+              <li>
+                Hold [TRIG 7], same process, set to
+                <code>75%</code>
+                . This one fires 3 out of 4 times.
+              </li>
+              <li>
+                Hold [TRIG 11], set to
+                <code>50%</code>
+                .
+              </li>
+              <li>
+                Hold [TRIG 15], set to
+                <code>25%</code>
+                . A rare ghost note.
+              </li>
+              <li>Leave [TRIG 1], [TRIG 5], [TRIG 9], [TRIG 13] with no condition (100% &mdash; the backbone).</li>
+              <li>Press [PLAY] and listen to the variation unfold.</li>
+            </ol>
+            <p style="color: var(--accent-lime); font-weight: 500">Result: 4 guaranteed hits + 4 probability hits = infinite variation.</p>
+          </div>
+
+          <div class="recipe-card">
+            <h4>Recipe 2: 4-Bar Drum Fill</h4>
+            <p>
+              <strong>Goal:</strong>
+              A fill that plays on the 4th bar, triggered by holding [YES].
+            </p>
+            <p>
+              <strong>Setup:</strong>
+              Track 2 (snare) with a Flex machine loaded.
+            </p>
+            <ol>
+              <li>Enter [REC] mode. Normal pattern: snare on [TRIG 5] and [TRIG 13] (beats 2 and 4).</li>
+              <li>
+                Set [TRIG 5] and [TRIG 13] to
+                <code>!FILL</code>
+                condition. These play when you are NOT filling.
+              </li>
+              <li>Now add fill trigs: place trigs on [TRIG 13], [TRIG 14], [TRIG 15], [TRIG 16].</li>
+              <li>
+                Set all four to
+                <code>FILL</code>
+                condition.
+              </li>
+              <li>Sample-lock [TRIG 14] to an open hi-hat, [TRIG 15] to a rim shot, [TRIG 16] to a crash.</li>
+              <li>Press [PLAY]. Normal beat plays. Hold [YES] near bar 4 to trigger the fill.</li>
+            </ol>
+            <p style="color: var(--accent-lime); font-weight: 500">Result: Hold [YES] = instant drum fill with sample variety. Release = back to normal.</p>
+          </div>
+
+          <div class="recipe-card">
+            <h4>Recipe 3: A:B Polyrhythm</h4>
+            <p>
+              <strong>Goal:</strong>
+              A pattern that evolves over 12 loops from a single 1-bar pattern.
+            </p>
+            <p>
+              <strong>Setup:</strong>
+              Track 1 (kick), Track 2 (perc), both with Flex machines.
+            </p>
+            <ol>
+              <li>Track 1: Place kick on [TRIG 1] and [TRIG 9]. No conditions on these &mdash; always play.</li>
+              <li>
+                Track 1: Place a trig on [TRIG 5] with condition
+                <code>1:3</code>
+                . It fires every 3rd loop.
+              </li>
+              <li>
+                Track 2: Place a percussion hit on [TRIG 7] with condition
+                <code>1:4</code>
+                . It fires every 4th loop.
+              </li>
+              <li>
+                Track 2: Place another hit on [TRIG 3] with condition
+                <code>2:3</code>
+                . Different phase from Track 1's
+                <code>1:3</code>
+                .
+              </li>
+              <li>Press [PLAY] and let it loop. The 3-cycle and 4-cycle only align every 12 loops.</li>
+            </ol>
+            <p style="color: var(--accent-lime); font-weight: 500">Result: 12-bar evolving phrase from a 1-bar pattern. Sounds composed, not random.</p>
+          </div>
+
+          <div class="recipe-card">
+            <h4>Recipe 4: Call-and-Response with PRE</h4>
+            <p>
+              <strong>Goal:</strong>
+              A melodic or percussive phrase where step 2 only fires if step 1 fired.
+            </p>
+            <p>
+              <strong>Setup:</strong>
+              One track with a Flex machine and a melodic sample loaded.
+            </p>
+            <ol>
+              <li>
+                Enter [REC] mode. Place a trig on [TRIG 1] with condition
+                <code>50%</code>
+                .
+              </li>
+              <li>
+                Place a trig on [TRIG 3] with condition
+                <code>PRE</code>
+                . This only fires if [TRIG 1] hit.
+              </li>
+              <li>
+                Place a trig on [TRIG 5] with condition
+                <code>!PRE</code>
+                . This fires when [TRIG 1] did NOT hit.
+              </li>
+              <li>P-lock each step with a different pitch: hold [TRIG], press [SRC], adjust pitch.</li>
+              <li>Press [PLAY]. On each loop you get either the "call" phrase ([TRIG 1] &rarr; [TRIG 3]) or the "response" phrase ([TRIG 5]).</li>
+            </ol>
+            <p style="color: var(--accent-lime); font-weight: 500">Result: Two alternating musical phrases, randomly chosen each loop.</p>
+          </div>
+
+          <!-- Video Embed -->
+          <div class="video-embed">
+            <div class="video-embed-title">Watch: Conditional Pattern Variations (Late Night Tips)</div>
+            <iframe
+              src="https://www.youtube.com/embed/C0we66czkws"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Octatrack Conditional Pattern Variations"
+            ></iframe>
+          </div>
+
+          <div class="video-embed">
+            <div class="video-embed-title">Watch: Conditional Amen Break Glitching (Ned Rush)</div>
+            <iframe
+              src="https://www.youtube.com/embed/bXUn8D9TR4g"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Conditional Amen Break Glitching"
+            ></iframe>
+          </div>
+        </section>
+
+        <!-- QUIZ -->
+        <section class="quiz-section section" id="quiz" data-section="quiz">
+          <h2>Test Yourself</h2>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q1: How do you access the trig condition menu?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">Press [FUNC] + [TRIG]</div>
+              <div class="quiz-option" data-answer="true">In [REC] mode, hold [TRIG] then press [LEFT] or [RIGHT]</div>
+              <div class="quiz-option" data-answer="false">Press [AMP] while holding [TRIG]</div>
+              <div class="quiz-option" data-answer="false">Double-press any [TRIG] key</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q2: You place a trig with condition 1:4. On which loops does it fire?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">Loops 1, 2, 3, 4</div>
+              <div class="quiz-option" data-answer="false">Loop 4, then loop 8, then loop 12</div>
+              <div class="quiz-option" data-answer="true">Loop 1, then loop 5, then loop 9, then loop 13</div>
+              <div class="quiz-option" data-answer="false">Every loop except loop 4</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q3: You want a snare fill that only plays when you hold [YES]. What condition should you use on the fill trigs?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">!FILL</div>
+              <div class="quiz-option" data-answer="false">PRE</div>
+              <div class="quiz-option" data-answer="true">FILL</div>
+              <div class="quiz-option" data-answer="false">50%</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q4: Track 3 has a trig with NEI condition on step 1. Track 2 has a 50% condition on step 1 that evaluates to false this loop. What happens to the NEI trig?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">It fires because NEI looks at Track 4, not Track 2</div>
+              <div class="quiz-option" data-answer="true">It does NOT fire because Track 2's condition was false</div>
+              <div class="quiz-option" data-answer="false">It fires because NEI ignores probability conditions</div>
+              <div class="quiz-option" data-answer="false">It fires with 50% probability independently</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q5: What is the difference between !FILL and !1ST?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">They are the same &mdash; both fire when you hold [YES]</div>
+              <div class="quiz-option" data-answer="false">!FILL fires on the first loop only; !1ST fires when not filling</div>
+              <div class="quiz-option" data-answer="true">!FILL fires when FILL mode is NOT active; !1ST fires on every loop EXCEPT the first</div>
+              <div class="quiz-option" data-answer="false">!FILL is for audio tracks only; !1ST is for MIDI tracks only</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Answers</button>
+            <div id="quiz-score" style="margin-top: 20px; font-size: 16px; font-weight: 600; display: none"></div>
+          </div>
+        </section>
+
+        <!-- CONFIDENCE -->
+        <section class="confidence-section section" id="confidence" data-section="confidence">
+          <h2>Confidence Check</h2>
+          <p>How confident are you with trig conditions? Can you enter [REC] mode, hold a [TRIG] key, and set up FILL trigs, probability patterns, and A:B counting from memory?</p>
+          <div class="confidence-scale">
+            <button type="button" class="confidence-btn" data-confidence="1">1</button>
+            <button type="button" class="confidence-btn" data-confidence="2">2</button>
+            <button type="button" class="confidence-btn" data-confidence="3">3</button>
+            <button type="button" class="confidence-btn" data-confidence="4">4</button>
+            <button type="button" class="confidence-btn" data-confidence="5">5</button>
+          </div>
+          <p id="confidence-msg" style="color: var(--text-muted); margin-top: 15px; font-size: 13px"></p>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <a href="08-parts-banks-scenes.html">&larr; PREV: PARTS</a>
+          <a href="10-resampling.html">NEXT: RESAMPLING &rarr;</a>
+        </div>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid var(--border-primary);
+              color: var(--text-muted);
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = 'var(--accent-error)';
+              this.style.color = 'var(--accent-error)';
+            "
+            onmouseout="
+              this.style.borderColor = 'var(--border-primary)';
+              this.style.color = 'var(--text-muted)';
+            "
+          >
+            RESET PROGRESS
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: var(--bg-tertiary); border: 1px solid var(--border-primary); padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: var(--accent-error); margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: var(--accent-cyan)">09 &mdash; Trig Conditions</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid var(--border-primary); color: var(--text-muted); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: var(--accent-error); border: none; color: var(--text-heading); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            YES, RESET
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ======================================================================
+         Tutorial 09 — Trig Conditions
+         Vanilla JS (ES5 compatible)
+         ====================================================================== */
+
+      var STORAGE_KEY = 'octatrack-tutorials';
+      var TUTORIAL_ID = '09-trig-conditions';
+      var TOTAL_QUESTIONS = 5;
+
+      /* ---- State management ---- */
+      function getState() {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      }
+
+      function setState(id, updates) {
+        var state = getState();
+        var current = state[id] || {};
+        for (var key in updates) {
+          if (updates.hasOwnProperty(key)) {
+            current[key] = updates[key];
+          }
+        }
+        current.lastAccessed = new Date().toISOString();
+        state[id] = current;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function resetTutorialProgress() {
+        var state = getState();
+        delete state[TUTORIAL_ID];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        window.location.reload();
+      }
+
+      /* ---- Sidebar navigation ---- */
+      var navItems = document.querySelectorAll('.sidebar-nav-item');
+      var sections = document.querySelectorAll('.section');
+      var sectionMap = {};
+      for (var i = 0; i < sections.length; i++) {
+        sectionMap[sections[i].id] = sections[i];
+      }
+
+      /* ---- IntersectionObserver ---- */
+      var visitedSections = {};
+      var savedState = getState()[TUTORIAL_ID] || {};
+      if (savedState.sectionsCompleted) {
+        for (var sc = 0; sc < savedState.sectionsCompleted.length; sc++) {
+          visitedSections[savedState.sectionsCompleted[sc]] = true;
+          var navItem = document.querySelector('.sidebar-nav-item[data-section="' + savedState.sectionsCompleted[sc] + '"]');
+          if (navItem) {
+            var cb = navItem.querySelector('.sidebar-checkbox');
+            if (cb) {
+              cb.classList.add('checked');
+              cb.textContent = '✓';
+            }
+          }
+        }
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          for (var e = 0; e < entries.length; e++) {
+            var entry = entries[e];
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              visitedSections[entry.target.id] = true;
+              var nav = document.querySelector('.sidebar-nav-item[data-section="' + entry.target.id + '"]');
+              if (nav) {
+                for (var j = 0; j < navItems.length; j++) {
+                  navItems[j].classList.remove('active');
+                }
+                nav.classList.add('active');
+                var cb = nav.querySelector('.sidebar-checkbox');
+                if (cb) {
+                  cb.classList.add('checked');
+                  cb.textContent = '✓';
+                }
+              }
+            } else {
+              entry.target.classList.remove('in-view');
+            }
+          }
+          updateProgress();
+        },
+        { threshold: 0.3 }
+      );
+
+      for (var s = 0; s < sections.length; s++) {
+        observer.observe(sections[s]);
+      }
+
+      /* ---- Probability Simulator ---- */
+      var probSteps = [];
+      var probLoopCount = 0;
+
+      function probInit() {
+        var numbersRow = document.getElementById('prob-numbers');
+        var patternRow = document.getElementById('prob-pattern');
+        var resultRow = document.getElementById('prob-result');
+
+        if (!numbersRow || !patternRow || !resultRow) return;
+
+        var labelN = document.createElement('div');
+        labelN.className = 'seq-label';
+        labelN.textContent = 'STEP';
+        numbersRow.appendChild(labelN);
+
+        var labelP = document.createElement('div');
+        labelP.className = 'seq-label';
+        labelP.textContent = 'PATTERN';
+        patternRow.appendChild(labelP);
+
+        var labelR = document.createElement('div');
+        labelR.className = 'seq-label';
+        labelR.textContent = 'RESULT';
+        resultRow.appendChild(labelR);
+
+        for (var i = 0; i < 16; i++) {
+          var numDiv = document.createElement('div');
+          numDiv.className = 'seq-step-number';
+          numDiv.textContent = i + 1;
+          numbersRow.appendChild(numDiv);
+
+          var stepDiv = document.createElement('div');
+          stepDiv.className = 'seq-step';
+          stepDiv.setAttribute('data-prob-step', i);
+          /* Default pattern: steps 0,4,8,12 always on; 2,6,10,14 = 50% */
+          if (i % 4 === 0) {
+            stepDiv.classList.add('active');
+            stepDiv.textContent = 'ON';
+            probSteps[i] = 'always';
+          } else if (i % 4 === 2) {
+            stepDiv.classList.add('prob-active');
+            stepDiv.textContent = '50%';
+            probSteps[i] = 'prob';
+          } else {
+            probSteps[i] = 'off';
+          }
+          (function (idx, div) {
+            div.addEventListener('click', function () {
+              if (probSteps[idx] === 'off') {
+                probSteps[idx] = 'always';
+                div.classList.add('active');
+                div.classList.remove('prob-active');
+                div.textContent = 'ON';
+              } else if (probSteps[idx] === 'always') {
+                probSteps[idx] = 'prob';
+                div.classList.remove('active');
+                div.classList.add('prob-active');
+                div.textContent = '50%';
+              } else {
+                probSteps[idx] = 'off';
+                div.classList.remove('active');
+                div.classList.remove('prob-active');
+                div.textContent = '';
+              }
+            });
+          })(i, stepDiv);
+          patternRow.appendChild(stepDiv);
+
+          var resDiv = document.createElement('div');
+          resDiv.className = 'seq-step';
+          resDiv.id = 'prob-res-' + i;
+          resDiv.style.cursor = 'default';
+          resultRow.appendChild(resDiv);
+        }
+      }
+
+      function probPlay() {
+        probLoopCount++;
+        document.getElementById('prob-loop-count').textContent = probLoopCount;
+        var fired = 0;
+        var totalProb = 0;
+
+        for (var i = 0; i < 16; i++) {
+          var resEl = document.getElementById('prob-res-' + i);
+          if (!resEl) continue;
+          resEl.className = 'seq-step';
+          resEl.style.cursor = 'default';
+          resEl.textContent = '';
+
+          if (probSteps[i] === 'always') {
+            resEl.classList.add('active');
+            resEl.textContent = 'HIT';
+          } else if (probSteps[i] === 'prob') {
+            totalProb++;
+            if (Math.random() < 0.5) {
+              resEl.classList.add('prob-active');
+              resEl.textContent = 'HIT';
+              fired++;
+            } else {
+              resEl.classList.add('muted');
+              resEl.textContent = '--';
+            }
+          }
+        }
+
+        document.getElementById('prob-fire-count').textContent = fired;
+        document.getElementById('prob-total-count').textContent = totalProb;
+      }
+
+      function probReset() {
+        probLoopCount = 0;
+        document.getElementById('prob-loop-count').textContent = '0';
+        document.getElementById('prob-fire-count').textContent = '0';
+        document.getElementById('prob-total-count').textContent = '0';
+        for (var i = 0; i < 16; i++) {
+          var resEl = document.getElementById('prob-res-' + i);
+          if (resEl) {
+            resEl.className = 'seq-step';
+            resEl.style.cursor = 'default';
+            resEl.textContent = '';
+          }
+        }
+      }
+
+      probInit();
+
+      /* ---- A:B Visualizer ---- */
+      function abUpdate() {
+        var aVal = parseInt(document.getElementById('ab-a-val').value);
+        var bVal = parseInt(document.getElementById('ab-b-val').value);
+        var container = document.getElementById('ab-loops');
+        var descEl = document.getElementById('ab-desc');
+        if (!container || !descEl) return;
+
+        container.innerHTML = '';
+
+        var totalLoops = bVal * 4;
+        if (totalLoops < 12) totalLoops = 12;
+        if (totalLoops > 32) totalLoops = 32;
+
+        for (var i = 1; i <= totalLoops; i++) {
+          var loopDiv = document.createElement('div');
+          loopDiv.className = 'seq-step';
+          loopDiv.style.cursor = 'default';
+          loopDiv.style.width = '32px';
+          loopDiv.style.height = '32px';
+          loopDiv.style.fontSize = '10px';
+          loopDiv.textContent = i;
+
+          if (((i - 1) % bVal) + 1 === aVal) {
+            loopDiv.classList.add('ab-active');
+          }
+          container.appendChild(loopDiv);
+        }
+
+        descEl.textContent = aVal + ':' + bVal + ' -- fires on loop ' + aVal + ', repeats every ' + bVal + ' loops';
+      }
+
+      abUpdate();
+
+      /* ---- Quiz ---- */
+      var quizOptions = document.querySelectorAll('.quiz-option');
+      var quizAnswers = {};
+
+      for (var qi = 0; qi < quizOptions.length; qi++) {
+        (function (idx) {
+          quizOptions[idx].addEventListener('click', function () {
+            var questionIdx = Math.floor(idx / 4);
+            var optionIdx = idx % 4;
+            var questions = document.querySelectorAll('.quiz-question');
+
+            for (var q = 0; q < questions.length; q++) {
+              var opts = questions[q].querySelectorAll('.quiz-option');
+              for (var o = 0; o < opts.length; o++) {
+                if (q === questionIdx && o === optionIdx) {
+                  opts[o].classList.add('selected');
+                  quizAnswers[questionIdx] = opts[o].getAttribute('data-answer') === 'true';
+                } else if (q === questionIdx) {
+                  opts[o].classList.remove('selected');
+                }
+              }
+            }
+          });
+        })(qi);
+      }
+
+      function checkQuiz() {
+        var score = 0;
+        var questions = document.querySelectorAll('.quiz-question');
+
+        for (var q = 0; q < questions.length; q++) {
+          var selected = questions[q].querySelector('.quiz-option.selected');
+          if (!selected) continue;
+
+          var isCorrect = selected.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            selected.classList.add('correct');
+            score++;
+          } else {
+            selected.classList.add('incorrect');
+            var correct = questions[q].querySelector('[data-answer="true"]');
+            if (correct) correct.classList.add('correct');
+          }
+          var feedback = questions[q].querySelector('.quiz-feedback');
+          feedback.classList.add('show');
+          feedback.textContent = isCorrect ? 'Correct!' : 'Incorrect — see highlighted answer.';
+        }
+
+        var scoreEl = document.getElementById('quiz-score');
+        scoreEl.style.display = 'block';
+        scoreEl.innerHTML = '<span style="color: var(--accent-lime);">Score: ' + score + ' / ' + TOTAL_QUESTIONS + '</span>';
+        setState(TUTORIAL_ID, { quizScore: score, quizTotal: TOTAL_QUESTIONS });
+        updateProgress();
+      }
+
+      /* ---- Confidence ---- */
+      var confBtns = document.querySelectorAll('.confidence-btn');
+      for (var ci = 0; ci < confBtns.length; ci++) {
+        (function (btn) {
+          btn.addEventListener('click', function () {
+            for (var b = 0; b < confBtns.length; b++) {
+              confBtns[b].classList.remove('selected');
+            }
+            btn.classList.add('selected');
+            var level = parseInt(btn.getAttribute('data-confidence'));
+            var msgs = [
+              '',
+              'Not ready yet — review the basics',
+              'Getting there — practice more on the OT',
+              'Fairly confident — try building condition patterns',
+              'Very confident — conditions make sense',
+              'Expert — ready for advanced condition chains',
+            ];
+            document.getElementById('confidence-msg').textContent = msgs[level] || '';
+            setState(TUTORIAL_ID, { confidence: level });
+            updateProgress();
+          });
+        })(confBtns[ci]);
+      }
+
+      /* Restore confidence from state */
+      if (savedState.confidence) {
+        var savedConf = savedState.confidence;
+        for (var rc = 0; rc < confBtns.length; rc++) {
+          if (parseInt(confBtns[rc].getAttribute('data-confidence')) === savedConf) {
+            confBtns[rc].classList.add('selected');
+          }
+        }
+      }
+
+      /* ---- Progress tracking ---- */
+      function updateProgress() {
+        var tutorialState = getState()[TUTORIAL_ID] || {};
+        var totalSections = sections.length;
+        var visitedCount = 0;
+        for (var key in visitedSections) {
+          if (visitedSections.hasOwnProperty(key)) visitedCount++;
+        }
+
+        var percent = totalSections > 0 ? Math.round((visitedCount / totalSections) * 100) : 0;
+
+        var progressBar = document.getElementById('sidebarProgress');
+        if (progressBar) progressBar.style.width = percent + '%';
+        var percentEl = document.getElementById('completionPercent');
+        if (percentEl) percentEl.textContent = percent;
+
+        var status = 'not-started';
+        if (visitedCount > 0) status = 'in-progress';
+        if (visitedCount === totalSections) status = 'completed';
+
+        var visitedArr = [];
+        for (var vk in visitedSections) {
+          if (visitedSections.hasOwnProperty(vk)) visitedArr.push(vk);
+        }
+
+        setState(TUTORIAL_ID, {
+          status: status,
+          completion: percent,
+          sectionsCompleted: visitedArr,
+        });
+      }
+
+      updateProgress();
+    </script>
+    <script src="assets/theme.js" defer></script>
+    <script src="assets/svg-overlay.js"></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid var(--border-primary);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none">@alkloihd</a>
+        &middot;
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-magenta); text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: var(--accent-lime); text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

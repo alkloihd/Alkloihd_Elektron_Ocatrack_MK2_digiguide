@@ -1,0 +1,214 @@
+/* ==========================================================================
+   Theme System — Octatrack MK2 Learning Platform
+   Dark / Light / System (auto) themes via CSS custom properties
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Dark theme (default)
+   -------------------------------------------------------------------------- */
+:root,
+[data-theme='dark'] {
+  --bg-primary: #0a0a0a;
+  --bg-surface: #111;
+  --bg-tertiary: #1a1a1a;
+  --bg-hover: #1e1e1e;
+  --border-primary: #333;
+  --border-subtle: #222;
+  --text-primary: #e0e0e0;
+  --text-secondary: #ccc;
+  --text-muted: #666;
+  --text-heading: #fff;
+  --accent-cyan: #0ff;
+  --accent-magenta: #f0f;
+  --accent-lime: #00ff41;
+  --accent-orange: #fa0;
+  --accent-error: #f44;
+  --accent-cyan-glow: rgba(0, 255, 255, 0.15);
+  --accent-magenta-glow: rgba(255, 0, 255, 0.1);
+  --accent-lime-glow: rgba(0, 255, 65, 0.1);
+  --accent-orange-glow: rgba(255, 170, 0, 0.1);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
+  --scrollbar-track: #0a0a0a;
+  --scrollbar-thumb: #333;
+  --code-bg: #0a0a0a;
+  --highlight-bg: #0a2a2a;
+  --warning-bg: #2a1a0a;
+  --protip-bg: #0a2a0a;
+}
+
+/* --------------------------------------------------------------------------
+   Light theme
+   -------------------------------------------------------------------------- */
+[data-theme='light'] {
+  --bg-primary: #f5f5f5;
+  --bg-surface: #fff;
+  --bg-tertiary: #f0f0f0;
+  --bg-hover: #e8e8e8;
+  --border-primary: #d0d0d0;
+  --border-subtle: #e0e0e0;
+  --text-primary: #2a2a2a;
+  --text-secondary: #444;
+  --text-muted: #888;
+  --text-heading: #111;
+  --accent-cyan: #09a;
+  --accent-magenta: #c0c;
+  --accent-lime: #092;
+  --accent-orange: #c70;
+  --accent-error: #c22;
+  --accent-cyan-glow: rgba(0, 153, 170, 0.1);
+  --accent-magenta-glow: rgba(204, 0, 204, 0.08);
+  --accent-lime-glow: rgba(0, 153, 34, 0.08);
+  --accent-orange-glow: rgba(204, 119, 0, 0.08);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --scrollbar-track: #f0f0f0;
+  --scrollbar-thumb: #ccc;
+  --code-bg: #f0f0f0;
+  --highlight-bg: #e0f5f5;
+  --warning-bg: #fff3e0;
+  --protip-bg: #e8f5e9;
+}
+
+/* --------------------------------------------------------------------------
+   System theme — auto-follow OS preference when no explicit choice is set
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark'], [data-theme='light']) {
+    --bg-primary: #f5f5f5;
+    --bg-surface: #fff;
+    --bg-tertiary: #f0f0f0;
+    --bg-hover: #e8e8e8;
+    --border-primary: #d0d0d0;
+    --border-subtle: #e0e0e0;
+    --text-primary: #2a2a2a;
+    --text-secondary: #444;
+    --text-muted: #888;
+    --text-heading: #111;
+    --accent-cyan: #09a;
+    --accent-magenta: #c0c;
+    --accent-lime: #092;
+    --accent-orange: #c70;
+    --accent-error: #c22;
+    --accent-cyan-glow: rgba(0, 153, 170, 0.1);
+    --accent-magenta-glow: rgba(204, 0, 204, 0.08);
+    --accent-lime-glow: rgba(0, 153, 34, 0.08);
+    --accent-orange-glow: rgba(204, 119, 0, 0.08);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --scrollbar-track: #f0f0f0;
+    --scrollbar-thumb: #ccc;
+    --code-bg: #f0f0f0;
+    --highlight-bg: #e0f5f5;
+    --warning-bg: #fff3e0;
+    --protip-bg: #e8f5e9;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Theme toggle pill (3-button: Light / System / Dark)
+   -------------------------------------------------------------------------- */
+.theme-toggle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1px solid var(--border-primary);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.theme-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.theme-pill-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.theme-pill-btn.active {
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
+  box-shadow: 0 0 8px var(--accent-cyan-glow);
+}
+
+.theme-pill-btn.active[data-mode='light'] {
+  background: var(--accent-orange);
+  box-shadow: 0 0 8px var(--accent-orange-glow);
+}
+
+.theme-pill-btn.active[data-mode='dark'] {
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan-glow);
+}
+
+.theme-pill-btn.active[data-mode='system'] {
+  background: var(--text-muted);
+  color: var(--bg-primary);
+  box-shadow: none;
+}
+
+.theme-pill-btn:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+.theme-pill-btn svg {
+  flex-shrink: 0;
+}
+
+.theme-pill-label {
+  display: inline;
+}
+
+@media (width <= 768px) {
+  .theme-pill-label {
+    display: none;
+  }
+}
+
+/* Smooth theme transition on all root elements */
+html {
+  color-scheme: dark;
+}
+
+html[data-theme='light'] {
+  color-scheme: light;
+}
+
+/* Scrollbar theming (webkit) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-primary);
+}
