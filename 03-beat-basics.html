@@ -1101,11 +1101,37 @@
           <a href="02-load-and-lock.html">← Previous</a>
           <a href="04-audio-pool.html">Next →</a>
         </div>
+        <div style="text-align:center; margin-top:2rem;">
+          <button onclick="document.getElementById('reset-modal').style.display='flex'" style="background:none; border:1px solid #333; color:#666; padding:6px 18px; font-family:'Space Mono',monospace; font-size:11px; cursor:pointer; letter-spacing:1px; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3366'; this.style.color='#ff3366'" onmouseout="this.style.borderColor='#333'; this.style.color='#666'">RESET PROGRESS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
+      <div style="background:#1a1a1a; border:1px solid #333; padding:2rem; max-width:400px; width:90%; text-align:center; font-family:'Space Mono',monospace;">
+        <h3 style="color:#ff3366; margin:0 0 1rem; font-size:16px;">Reset Tutorial Progress?</h3>
+        <p style="color:#999; font-size:13px; margin:0 0 1.5rem; line-height:1.5;">This will clear all your progress for <strong style="color:#00e5ff;">03 — Beat Basics</strong> including section checkmarks, quiz score, and confidence rating.</p>
+        <div style="display:flex; gap:1rem; justify-content:center;">
+          <button onclick="document.getElementById('reset-modal').style.display='none'" style="background:none; border:1px solid #333; color:#999; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">CANCEL</button>
+          <button onclick="resetTutorialProgress()" style="background:#ff3366; border:none; color:#fff; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">YES, RESET</button>
+        </div>
       </div>
     </div>
 
     <script>
       const STORAGE_KEY = 'octatrack-tutorials';
+      const TUTORIAL_ID = '03-beat-basics';
+
+      function resetTutorialProgress() {
+        var data = localStorage.getItem(STORAGE_KEY);
+        if (data) {
+          var parsed = JSON.parse(data);
+          delete parsed[TUTORIAL_ID];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
+        window.location.reload();
+      }
 
       function getState() {
         const state = localStorage.getItem(STORAGE_KEY);

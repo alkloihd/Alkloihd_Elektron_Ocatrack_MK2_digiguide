@@ -458,6 +458,29 @@
         transform: translateY(-4px);
       }
 
+      .card-reset-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: 1px solid #441111;
+        color: #663333;
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        padding: 3px 8px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.2s;
+        z-index: 5;
+      }
+
+      .card-reset-btn:hover {
+        border-color: #ff3366;
+        color: #ff3366;
+        background: rgba(255, 51, 102, 0.1);
+      }
+
       .tutorial-number {
         font-family: 'Space Mono', monospace;
         font-size: 3rem;
@@ -1072,14 +1095,26 @@
       </div>
     </footer>
 
-    <!-- RESET CONFIRMATION MODAL -->
+    <!-- RESET ALL CONFIRMATION MODAL -->
     <div class="modal" id="resetModal">
       <div class="modal-content">
-        <h3 class="modal-title">Reset Progress?</h3>
+        <h3 class="modal-title">Reset All Progress?</h3>
         <div class="modal-body">This will clear all your tutorial progress, completion status, and confidence ratings. This action cannot be undone.</div>
         <div class="modal-actions">
           <button class="modal-button secondary" onclick="app.closeResetModal()">Cancel</button>
           <button class="modal-button primary" onclick="app.confirmReset()">Reset All</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SINGLE TUTORIAL RESET MODAL -->
+    <div class="modal" id="tutorialResetModal">
+      <div class="modal-content">
+        <h3 class="modal-title" style="color:#ff3366;">Reset Tutorial Progress?</h3>
+        <div class="modal-body">This will clear all progress for <strong id="resetTutorialName" style="color:#00e5ff;"></strong> including section checkmarks, quiz score, and confidence rating.</div>
+        <div class="modal-actions">
+          <button class="modal-button secondary" onclick="app.closeTutorialResetModal()">Cancel</button>
+          <button class="modal-button primary" style="background:#ff3366; border-color:#ff3366;" onclick="app.confirmTutorialReset()">Yes, Reset</button>
         </div>
       </div>
     </div>
@@ -1339,6 +1374,14 @@
             });
           });
 
+          document.querySelectorAll('.card-reset-btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const id = btn.dataset.reset;
+              app.showTutorialResetModal(id);
+            });
+          });
+
           document.querySelectorAll('.confidence-star').forEach((star) => {
             star.addEventListener('click', (e) => {
               e.stopPropagation();
@@ -1379,6 +1422,7 @@
 
           return `
                     <div class="tutorial-card ${statusClass}" data-tutorial="${id}">
+                        ${status !== 'not-started' ? `<button class="card-reset-btn" data-reset="${id}">RESET</button>` : ''}
                         <div class="tutorial-number">${tutorial.number}</div>
                         <div class="tutorial-title">${tutorial.title}</div>
                         <div class="tutorial-subtitle">${tutorial.subtitle}</div>
@@ -1470,6 +1514,32 @@
           this.renderPathVisualization();
           this.renderRecommendedNext();
         },
+
+        _resetTarget: null,
+
+        showTutorialResetModal(id) {
+          this._resetTarget = id;
+          var tutorial = TUTORIALS[id];
+          document.getElementById('resetTutorialName').textContent = tutorial ? tutorial.number + ' — ' + tutorial.title : id;
+          document.getElementById('tutorialResetModal').classList.add('active');
+        },
+
+        closeTutorialResetModal() {
+          this._resetTarget = null;
+          document.getElementById('tutorialResetModal').classList.remove('active');
+        },
+
+        confirmTutorialReset() {
+          if (this._resetTarget && this.state.tutorials[this._resetTarget]) {
+            this.state.tutorials[this._resetTarget] = JSON.parse(JSON.stringify(DEFAULT_STATE.tutorials[this._resetTarget]));
+            this.saveState();
+            this.closeTutorialResetModal();
+            this.renderStats();
+            this.renderTutorials();
+            this.renderPathVisualization();
+            this.renderRecommendedNext();
+          }
+        },
       };
 
       document.addEventListener('DOMContentLoaded', () => app.init());
@@ -1477,6 +1547,12 @@
       document.getElementById('resetModal').addEventListener('click', (e) => {
         if (e.target.id === 'resetModal') {
           app.closeResetModal();
+        }
+      });
+
+      document.getElementById('tutorialResetModal').addEventListener('click', (e) => {
+        if (e.target.id === 'tutorialResetModal') {
+          app.closeTutorialResetModal();
         }
       });
     </script>
