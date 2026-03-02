@@ -77,3 +77,18 @@ Built by **Alkloihd** with gratitude to the wider Octatrack learning community:
 - The **Elektronauts** forum and related communities for years of user-led troubleshooting and knowledge sharing
 
 Full attribution and links are available in [`credits.html`](./credits.html).
+
+## Creator
+
+Built and curated by **alkloihd**.
+
+- Instagram: https://www.instagram.com/alkloihd/
+- Mixcloud: https://www.mixcloud.com/rish-ku/
+
+## Support This Project
+
+This project is free to use.
+
+Like what you're using? Help me build more of these!
+
+- https://paypal.me/Rishaal?locale.x=en_US&country.x=CA

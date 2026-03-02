@@ -1101,20 +1101,57 @@
           <a href="02-load-and-lock.html">← Previous</a>
           <a href="04-audio-pool.html">Next →</a>
         </div>
-        <div style="text-align:center; margin-top:2rem;">
-          <button onclick="document.getElementById('reset-modal').style.display='flex'" style="background:none; border:1px solid #333; color:#666; padding:6px 18px; font-family:'Space Mono',monospace; font-size:11px; cursor:pointer; letter-spacing:1px; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3366'; this.style.color='#ff3366'" onmouseout="this.style.borderColor='#333'; this.style.color='#666'">RESET PROGRESS</button>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid #333;
+              color: #666;
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = '#ff3366';
+              this.style.color = '#ff3366';
+            "
+            onmouseout="
+              this.style.borderColor = '#333';
+              this.style.color = '#666';
+            "
+          >
+            RESET PROGRESS
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Reset Confirmation Modal -->
-    <div id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
-      <div style="background:#1a1a1a; border:1px solid #333; padding:2rem; max-width:400px; width:90%; text-align:center; font-family:'Space Mono',monospace;">
-        <h3 style="color:#ff3366; margin:0 0 1rem; font-size:16px;">Reset Tutorial Progress?</h3>
-        <p style="color:#999; font-size:13px; margin:0 0 1.5rem; line-height:1.5;">This will clear all your progress for <strong style="color:#00e5ff;">03 — Beat Basics</strong> including section checkmarks, quiz score, and confidence rating.</p>
-        <div style="display:flex; gap:1rem; justify-content:center;">
-          <button onclick="document.getElementById('reset-modal').style.display='none'" style="background:none; border:1px solid #333; color:#999; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">CANCEL</button>
-          <button onclick="resetTutorialProgress()" style="background:#ff3366; border:none; color:#fff; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">YES, RESET</button>
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: #1a1a1a; border: 1px solid #333; padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: #ff3366; margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: #999; font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: #00e5ff">03 — Beat Basics</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+            YES, RESET
+          </button>
         </div>
       </div>
     </div>
@@ -1334,5 +1371,35 @@
       updateProgress();
     </script>
     <script src="assets/svg-overlay.js" defer></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid #333;
+        background: #111;
+        color: #d0d0d0;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none">@alkloihd</a>
+        ·
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: #ff00ff; text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        </a>
+      </div>
+    </div>
   </body>
 </html>

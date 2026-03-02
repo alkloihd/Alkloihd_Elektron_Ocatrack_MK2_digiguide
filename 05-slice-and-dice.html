@@ -1,1161 +1,1268 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Octatrack: Slice & Dice</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            background: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            font-size: 16px;
-            line-height: 1.7;
-        }
+      body {
+        background: #0a0a0a;
+        color: #e0e0e0;
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+      }
 
-        a {
-            color: #00ffff;
-            text-decoration: none;
-        }
+      a {
+        color: #00ffff;
+        text-decoration: none;
+      }
 
-        a:hover {
-            text-decoration: underline;
-        }
+      a:hover {
+        text-decoration: underline;
+      }
 
-        /* TOP BAR */
-        .top-bar {
-            background: #111111;
-            border-bottom: 3px solid #00ffff;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+      /* TOP BAR */
+      .top-bar {
+        background: #111111;
+        border-bottom: 3px solid #00ffff;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
 
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+      .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
 
-        .dashboard-link {
-            padding: 8px 12px;
-            border: 2px solid #00ffff;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+      .dashboard-link {
+        padding: 8px 12px;
+        border: 2px solid #00ffff;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
 
-        .dashboard-link:hover {
-            transform: translateY(-2px);
-            background: #00ffff;
-            color: #0a0a0a;
-        }
+      .dashboard-link:hover {
+        transform: translateY(-2px);
+        background: #00ffff;
+        color: #0a0a0a;
+      }
 
-        .top-bar-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 22px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-        }
+      .top-bar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+      }
 
-        .top-bar-meta {
-            display: flex;
-            gap: 20px;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+      .top-bar-meta {
+        display: flex;
+        gap: 20px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
 
-        .meta-item {
-            border: 2px solid #666666;
-            padding: 6px 10px;
-            color: #666666;
-        }
+      .meta-item {
+        border: 2px solid #666666;
+        padding: 6px 10px;
+        color: #666666;
+      }
 
-        /* LAYOUT */
+      /* LAYOUT */
+      .main-layout {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        background: #111111;
+        border-right: 3px solid #666666;
+        padding: 24px;
+        position: sticky;
+        top: 60px;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .sidebar-item {
+        padding: 10px 12px;
+        border: 2px solid #333333;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #666666;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+      }
+
+      .sidebar-item:hover {
+        border-color: #00ffff;
+        color: #00ffff;
+      }
+
+      .sidebar-item.active {
+        border-color: #00ffff;
+        color: #00ffff;
+        background: rgba(0, 255, 255, 0.05);
+      }
+
+      .sidebar-item::before {
+        content: '□';
+        margin-right: 8px;
+      }
+
+      .sidebar-item.active::before {
+        content: '☒';
+      }
+
+      /* CONTENT */
+      .content {
+        padding: 40px;
+        max-width: 900px;
+      }
+
+      .section {
+        margin-bottom: 60px;
+        scroll-margin-top: 80px;
+      }
+
+      .section-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 28px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #ffffff;
+        margin-bottom: 20px;
+        border-bottom: 3px solid #00ff41;
+        padding-bottom: 12px;
+      }
+
+      .section-content {
+        margin-bottom: 24px;
+        color: #e0e0e0;
+      }
+
+      .section-content p {
+        margin-bottom: 12px;
+      }
+
+      /* CARDS */
+      .card {
+        background: #111111;
+        border: 3px solid #333333;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .card-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ffff;
+        margin-bottom: 12px;
+      }
+
+      .card-content {
+        color: #e0e0e0;
+      }
+
+      /* BUTTONS */
+      .button-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+
+      .button {
+        padding: 12px 20px;
+        border: 3px solid #00ffff;
+        background: transparent;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        background: #00ffff;
+        color: #0a0a0a;
+      }
+
+      .button.secondary {
+        border-color: #ff00ff;
+        color: #ff00ff;
+      }
+
+      .button.secondary:hover {
+        background: #ff00ff;
+        color: #0a0a0a;
+      }
+
+      .button.accent {
+        border-color: #00ff41;
+        color: #00ff41;
+      }
+
+      .button.accent:hover {
+        background: #00ff41;
+        color: #0a0a0a;
+      }
+
+      /* WAVEFORM SLICER */
+      .waveform-container {
+        background: #111111;
+        border: 3px solid #00ffff;
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .waveform-svg {
+        width: 100%;
+        height: 200px;
+        background: #0a0a0a;
+        border: 2px solid #333333;
+        display: block;
+        margin-bottom: 16px;
+      }
+
+      .waveform-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+
+      .waveform-controls label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .waveform-controls input {
+        padding: 6px 10px;
+        border: 2px solid #00ffff;
+        background: #0a0a0a;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        width: 60px;
+      }
+
+      .slice-info {
+        background: #0a0a0a;
+        border: 2px solid #666666;
+        padding: 12px;
+        margin-top: 12px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: #666666;
+      }
+
+      /* SEQUENCER DEMO */
+      .sequencer-grid {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        gap: 8px;
+        margin: 20px 0;
+        padding: 20px;
+        background: #111111;
+        border: 3px solid #ff00ff;
+      }
+
+      .sequencer-step {
+        aspect-ratio: 1;
+        border: 2px solid #333333;
+        background: #0a0a0a;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: #666666;
+        transition: all 0.2s;
+      }
+
+      .sequencer-step:hover {
+        border-color: #00ffff;
+      }
+
+      .sequencer-step.active {
+        border-color: #00ff41;
+        background: rgba(0, 255, 65, 0.1);
+        color: #00ff41;
+      }
+
+      .sequencer-step.locked {
+        border-color: #ff00ff;
+        background: rgba(255, 0, 255, 0.1);
+      }
+
+      .sequencer-legend {
+        display: flex;
+        gap: 20px;
+        margin-top: 16px;
+        font-size: 12px;
+        font-family: 'Space Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        flex-wrap: wrap;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .legend-color {
+        width: 20px;
+        height: 20px;
+        border: 2px solid currentColor;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        border: 3px solid #333333;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border: 2px solid #333333;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+      }
+
+      th {
+        background: #111111;
+        color: #00ffff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      td {
+        color: #e0e0e0;
+      }
+
+      tr:nth-child(even) {
+        background: rgba(0, 255, 255, 0.02);
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        margin-top: 40px;
+        padding-top: 40px;
+        border-top: 3px solid #ff00ff;
+      }
+
+      .quiz-item {
+        background: #111111;
+        border: 3px solid #333333;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .quiz-question {
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ff00ff;
+        margin-bottom: 16px;
+      }
+
+      .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .quiz-option {
+        padding: 12px;
+        border: 2px solid #333333;
+        background: #0a0a0a;
+        color: #e0e0e0;
+        cursor: pointer;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        transition: all 0.2s;
+      }
+
+      .quiz-option:hover {
+        border-color: #00ffff;
+      }
+
+      .quiz-option.selected {
+        border-color: #00ffff;
+        background: rgba(0, 255, 255, 0.1);
+      }
+
+      .quiz-option.correct {
+        border-color: #00ff41;
+        background: rgba(0, 255, 65, 0.1);
+        color: #00ff41;
+      }
+
+      .quiz-option.incorrect {
+        border-color: #ff3333;
+        background: rgba(255, 51, 51, 0.1);
+        color: #ff3333;
+      }
+
+      .quiz-feedback {
+        margin-top: 12px;
+        padding: 12px;
+        border-left: 3px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        font-size: 13px;
+        color: #00ff41;
+      }
+
+      .quiz-feedback.incorrect {
+        border-color: #ff3333;
+        background: rgba(255, 51, 51, 0.05);
+        color: #ff3333;
+      }
+
+      /* CONFIDENCE SCALE */
+      .confidence-section {
+        background: #111111;
+        border: 3px solid #00ff41;
+        padding: 24px;
+        margin: 40px 0;
+      }
+
+      .confidence-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #00ff41;
+        margin-bottom: 20px;
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .confidence-button {
+        width: 50px;
+        height: 50px;
+        border: 3px solid #00ff41;
+        background: #0a0a0a;
+        color: #00ff41;
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-button:hover {
+        transform: translateY(-2px);
+      }
+
+      .confidence-button.selected {
+        background: #00ff41;
+        color: #0a0a0a;
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 40px;
+        border-top: 3px solid #666666;
+        margin-top: 60px;
+        background: #0a0a0a;
+      }
+
+      .nav-button {
+        padding: 12px 20px;
+        border: 3px solid #00ffff;
+        background: transparent;
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .nav-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        background: #00ffff;
+        color: #0a0a0a;
+      }
+
+      .nav-button:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .nav-progress {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: #666666;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
         .main-layout {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            min-height: calc(100vh - 60px);
+          grid-template-columns: 1fr;
         }
 
-        /* SIDEBAR */
         .sidebar {
-            background: #111111;
-            border-right: 3px solid #666666;
-            padding: 24px;
-            position: sticky;
-            top: 60px;
-            max-height: calc(100vh - 60px);
-            overflow-y: auto;
+          position: relative;
+          top: auto;
+          max-height: auto;
+          border-right: none;
+          border-bottom: 3px solid #666666;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          padding: 12px;
         }
 
         .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+          flex-direction: row;
+          gap: 6px;
         }
 
         .sidebar-item {
-            padding: 10px 12px;
-            border: 2px solid #333333;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #666666;
-            cursor: pointer;
-            transition: all 0.2s;
-            position: relative;
+          padding: 8px;
+          font-size: 11px;
         }
 
-        .sidebar-item:hover {
-            border-color: #00ffff;
-            color: #00ffff;
+        .top-bar {
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-start;
         }
 
-        .sidebar-item.active {
-            border-color: #00ffff;
-            color: #00ffff;
-            background: rgba(0, 255, 255, 0.05);
+        .top-bar-meta {
+          gap: 10px;
         }
 
-        .sidebar-item::before {
-            content: '□';
-            margin-right: 8px;
-        }
-
-        .sidebar-item.active::before {
-            content: '☒';
-        }
-
-        /* CONTENT */
-        .content {
-            padding: 40px;
-            max-width: 900px;
-        }
-
-        .section {
-            margin-bottom: 60px;
-            scroll-margin-top: 80px;
-        }
-
-        .section-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 28px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #ffffff;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #00ff41;
-            padding-bottom: 12px;
-        }
-
-        .section-content {
-            margin-bottom: 24px;
-            color: #e0e0e0;
-        }
-
-        .section-content p {
-            margin-bottom: 12px;
-        }
-
-        /* CARDS */
-        .card {
-            background: #111111;
-            border: 3px solid #333333;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .card-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ffff;
-            margin-bottom: 12px;
-        }
-
-        .card-content {
-            color: #e0e0e0;
-        }
-
-        /* BUTTONS */
-        .button-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .button {
-            padding: 12px 20px;
-            border: 3px solid #00ffff;
-            background: transparent;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            background: #00ffff;
-            color: #0a0a0a;
-        }
-
-        .button.secondary {
-            border-color: #ff00ff;
-            color: #ff00ff;
-        }
-
-        .button.secondary:hover {
-            background: #ff00ff;
-            color: #0a0a0a;
-        }
-
-        .button.accent {
-            border-color: #00ff41;
-            color: #00ff41;
-        }
-
-        .button.accent:hover {
-            background: #00ff41;
-            color: #0a0a0a;
-        }
-
-        /* WAVEFORM SLICER */
-        .waveform-container {
-            background: #111111;
-            border: 3px solid #00ffff;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .waveform-svg {
-            width: 100%;
-            height: 200px;
-            background: #0a0a0a;
-            border: 2px solid #333333;
-            display: block;
-            margin-bottom: 16px;
-        }
-
-        .waveform-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .waveform-controls label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .waveform-controls input {
-            padding: 6px 10px;
-            border: 2px solid #00ffff;
-            background: #0a0a0a;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            width: 60px;
-        }
-
-        .slice-info {
-            background: #0a0a0a;
-            border: 2px solid #666666;
-            padding: 12px;
-            margin-top: 12px;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: #666666;
-        }
-
-        /* SEQUENCER DEMO */
         .sequencer-grid {
-            display: grid;
-            grid-template-columns: repeat(16, 1fr);
-            gap: 8px;
-            margin: 20px 0;
-            padding: 20px;
-            background: #111111;
-            border: 3px solid #ff00ff;
+          grid-template-columns: repeat(8, 1fr);
         }
-
-        .sequencer-step {
-            aspect-ratio: 1;
-            border: 2px solid #333333;
-            background: #0a0a0a;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Space Mono', monospace;
-            font-size: 11px;
-            font-weight: 700;
-            color: #666666;
-            transition: all 0.2s;
-        }
-
-        .sequencer-step:hover {
-            border-color: #00ffff;
-        }
-
-        .sequencer-step.active {
-            border-color: #00ff41;
-            background: rgba(0, 255, 65, 0.1);
-            color: #00ff41;
-        }
-
-        .sequencer-step.locked {
-            border-color: #ff00ff;
-            background: rgba(255, 0, 255, 0.1);
-        }
-
-        .sequencer-legend {
-            display: flex;
-            gap: 20px;
-            margin-top: 16px;
-            font-size: 12px;
-            font-family: 'Space Mono', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            flex-wrap: wrap;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border: 2px solid currentColor;
-        }
-
-        /* TABLE */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            border: 3px solid #333333;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 2px solid #333333;
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-        }
-
-        th {
-            background: #111111;
-            color: #00ffff;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        td {
-            color: #e0e0e0;
-        }
-
-        tr:nth-child(even) {
-            background: rgba(0, 255, 255, 0.02);
-        }
-
-        /* QUIZ */
-        .quiz-section {
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 3px solid #ff00ff;
-        }
-
-        .quiz-item {
-            background: #111111;
-            border: 3px solid #333333;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .quiz-question {
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #ff00ff;
-            margin-bottom: 16px;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .quiz-option {
-            padding: 12px;
-            border: 2px solid #333333;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            transition: all 0.2s;
-        }
-
-        .quiz-option:hover {
-            border-color: #00ffff;
-        }
-
-        .quiz-option.selected {
-            border-color: #00ffff;
-            background: rgba(0, 255, 255, 0.1);
-        }
-
-        .quiz-option.correct {
-            border-color: #00ff41;
-            background: rgba(0, 255, 65, 0.1);
-            color: #00ff41;
-        }
-
-        .quiz-option.incorrect {
-            border-color: #ff3333;
-            background: rgba(255, 51, 51, 0.1);
-            color: #ff3333;
-        }
-
-        .quiz-feedback {
-            margin-top: 12px;
-            padding: 12px;
-            border-left: 3px solid #00ff41;
-            background: rgba(0, 255, 65, 0.05);
-            font-size: 13px;
-            color: #00ff41;
-        }
-
-        .quiz-feedback.incorrect {
-            border-color: #ff3333;
-            background: rgba(255, 51, 51, 0.05);
-            color: #ff3333;
-        }
-
-        /* CONFIDENCE SCALE */
-        .confidence-section {
-            background: #111111;
-            border: 3px solid #00ff41;
-            padding: 24px;
-            margin: 40px 0;
-        }
-
-        .confidence-title {
-            font-family: 'Space Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #00ff41;
-            margin-bottom: 20px;
-        }
-
-        .confidence-scale {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .confidence-button {
-            width: 50px;
-            height: 50px;
-            border: 3px solid #00ff41;
-            background: #0a0a0a;
-            color: #00ff41;
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .confidence-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .confidence-button.selected {
-            background: #00ff41;
-            color: #0a0a0a;
-        }
-
-        /* BOTTOM NAV */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 40px;
-            border-top: 3px solid #666666;
-            margin-top: 60px;
-            background: #0a0a0a;
-        }
-
-        .nav-button {
-            padding: 12px 20px;
-            border: 3px solid #00ffff;
-            background: transparent;
-            color: #00ffff;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .nav-button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            background: #00ffff;
-            color: #0a0a0a;
-        }
-
-        .nav-button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .nav-progress {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: relative;
-                top: auto;
-                max-height: auto;
-                border-right: none;
-                border-bottom: 3px solid #666666;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                padding: 12px;
-            }
-
-            .sidebar-nav {
-                flex-direction: row;
-                gap: 6px;
-            }
-
-            .sidebar-item {
-                padding: 8px;
-                font-size: 11px;
-            }
-
-            .top-bar {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-
-            .top-bar-meta {
-                gap: 10px;
-            }
-
-            .sequencer-grid {
-                grid-template-columns: repeat(8, 1fr);
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- TOP BAR -->
     <div class="top-bar">
-        <div class="top-bar-left">
-            <button class="dashboard-link" onclick="window.location.href='index.html'">← DASHBOARD</button>
-            <div class="top-bar-title">SLICE & DICE</div>
-        </div>
-        <div class="top-bar-meta">
-            <div class="meta-item">⏱ 30 MIN</div>
-            <div class="meta-item">⚡ BEGINNER/INT</div>
-        </div>
+      <div class="top-bar-left">
+        <button class="dashboard-link" onclick="window.location.href = 'index.html'">← DASHBOARD</button>
+        <div class="top-bar-title">SLICE & DICE</div>
+      </div>
+      <div class="top-bar-meta">
+        <div class="meta-item">⏱ 30 MIN</div>
+        <div class="meta-item">⚡ BEGINNER/INT</div>
+      </div>
     </div>
 
     <!-- MAIN LAYOUT -->
     <div class="main-layout">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <nav class="sidebar-nav" id="sidebarNav"></nav>
-        </aside>
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+      </aside>
 
-        <!-- CONTENT -->
-        <main class="content">
-            <!-- SECTION 1: What Are Slices? -->
-            <section class="section" id="sec-1">
-                <h2 class="section-title">1. WHAT ARE SLICES?</h2>
-                <div class="section-content">
-                    <p>Slices are how you divide a sample into rhythmic chunks. Think of it like cutting a drum loop into individual hits. Each slice becomes its own playable segment, numbered 1-64 (max 64 slices per sample). You create and manage slices in the Audio Editor, opened with [FUNC] + [AUD].</p>
-                    <p>Once sliced, you can play any slice independently using the [TRIG] keys, chop them into a new rhythm, reverse them, pitch them, or sequence them with [REC] (Grid Recording). This is the foundation of creative loop chopping on the Octatrack.</p>
-                    <div class="card">
-                        <div class="card-title">KEY CONCEPT</div>
-                        <div class="card-content">
-                            A drum loop at 128 BPM might be 8 bars long. If you grid-slice it into 32 slices, you get roughly 2 slices per beat (32 slices ÷ 16 steps = 2 per beat). Now you can play those slices in any order, creating completely new breakbeats.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 2: The Audio Editor -->
-            <section class="section" id="sec-2">
-                <h2 class="section-title">2. THE AUDIO EDITOR</h2>
-                <div class="section-content">
-                    <p>The Audio Editor is where you view, slice, and edit samples. To access it:</p>
-                    <div class="card">
-                        <div class="card-title">MENU PATH</div>
-                        <div class="card-content">
-                            1. Select a track with a sample loaded<br>
-                            2. Press [FUNC] + [AUD] to open Audio Editor<br>
-                            3. You'll see the waveform displayed
-                        </div>
-                    </div>
-                    <p style="margin-top: 20px;"><strong>Navigation in Audio Editor:</strong></p>
-                    <ul style="margin-left: 20px; margin-bottom: 20px;">
-                        <li>[LEFT]/[RIGHT] arrows - move playhead through sample</li>
-                        <li>[FUNC] + [LEFT]/[RIGHT] - zoom in/out on waveform</li>
-                        <li>[UP]/[DOWN] - adjust waveform zoom depth</li>
-                        <li>[YES]/[NO] - confirm/cancel slicing actions</li>
-                    </ul>
-                    <p>The waveform shows silence as flat lines and loud sections as tall peaks. You'll use these visual cues to find where to place slice markers.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 3: Grid Slicing -->
-            <section class="section" id="sec-3">
-                <h2 class="section-title">3. GRID SLICING: THE INTERACTIVE WAY</h2>
-                <div class="section-content">
-                    <p>Grid slicing divides a sample into EVENLY SPACED sections. Perfect for drum loops that are locked to a tempo. Try it below:</p>
-
-                    <div class="waveform-container">
-                        <svg class="waveform-svg" id="waveformSvg"></svg>
-                        <div class="waveform-controls">
-                            <label>
-                                SLICES:
-                                <input type="number" id="sliceCount" min="4" max="64" value="8" step="4">
-                            </label>
-                            <button class="button" onclick="updateWaveform()">APPLY GRID</button>
-                            <button class="button secondary" onclick="resetWaveform()">RESET</button>
-                        </div>
-                        <div class="slice-info" id="sliceInfo">
-                            Select number of slices and click APPLY GRID. Each vertical line = one slice.
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">MENU PATH</div>
-                        <div class="card-content">
-                            Audio Editor > [FUNC] (to access menu) > Slice > CREATE SLICE GRID<br>
-                            Select number of divisions (4, 8, 16, 32, 64) > [YES] to confirm
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;"><strong>When to use grid slicing:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>OK Drum loops locked to tempo</li>
-                        <li>OK 4/4 time signatures (most loops)</li>
-                        <li>OK When you want even rhythmic divisions</li>
-                        <li>OK Quick way to slice without thinking</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- SECTION 4: Manual Slicing -->
-            <section class="section" id="sec-4">
-                <h2 class="section-title">4. MANUAL SLICING: PRECISION CHOPPING</h2>
-                <div class="section-content">
-                    <p>For irregular samples or precise control, manual slicing lets you place markers exactly where you want. Here's the process:</p>
-
-                    <div class="card">
-                        <div class="card-title">STEP-BY-STEP</div>
-                        <div class="card-content">
-                            1. In Audio Editor, use [LEFT]/[RIGHT] to find your slice point<br>
-                            2. Press [YES] to add a marker at that position<br>
-                            3. The marker appears as a vertical line in the waveform<br>
-                            4. Continue placing markers throughout the sample<br>
-                            5. Press [NO] when done, then confirm to save slices
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;"><strong>CRITICAL: Zero-Crossing Snap</strong></p>
-                    <p>Always enable ZERO-CROSSING SNAP before slicing. This automatically places markers at points where the waveform crosses zero (silence). Why? Prevents clicks and pops at slice boundaries when you play them back.</p>
-                    <div class="card">
-                        <div class="card-title">ZERO-CROSSING SNAP</div>
-                        <div class="card-content">
-                            Audio Editor menu > Snap > ZERO CROSSING<br>
-                            Enable this, then place markers. The OT will snap them to the nearest zero crossing automatically.
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;">Manual slicing takes longer than grid slicing, but gives you surgical precision. Perfect for one-shots, vocal chops, or complex loops where grid divisions don't make sense.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 5: Playing Slices -->
-            <section class="section" id="sec-5">
-                <h2 class="section-title">5. PLAYING SLICES: TURNING CHUNKS INTO BEATS</h2>
-                <div class="section-content">
-                    <p>Once your sample is sliced, you need to enable slice playback in the track's Playback Setup:</p>
-
-                    <div class="card">
-                        <div class="card-title">ENABLE SLICE PLAYBACK</div>
-                        <div class="card-content">
-                            [TRACK] button on the sliced track > Playback Setup > SLICE = ON
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;">Now each [TRIG] key can play a specific slice. Here's the interactive demo below - you're building a chopped breakbeat from 16 slices. Click each step to assign a slice number:</p>
-
-                    <div style="background: #111111; border: 3px solid #ff00ff; padding: 20px; margin: 20px 0;">
-                        <div style="font-family: 'Space Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #ff00ff; margin-bottom: 16px;">SLICE SEQUENCER (16 STEPS)</div>
-                        <div class="sequencer-grid" id="sliceSequencer"></div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-title">HOW TO P-LOCK SLICES</div>
-                        <div class="card-content">
-                            1. In GRID RECORDING mode ([REC])<br>
-                            2. Hold [TRIG] key you want to lock<br>
-                            3. Turn the encoder to select slice number (1-64)<br>
-                            4. Release [TRIG]<br>
-                            5. That step now plays the selected slice
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;">The sequencer above shows what a chopped beat looks like. Notice how steps are assigned to different slices? That's you rebuilding the rhythm from the original sample.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 6: Slice Lock Techniques -->
-            <section class="section" id="sec-6">
-                <h2 class="section-title">6. SLICE LOCK TECHNIQUES: BEYOND THE BASICS</h2>
-                <div class="section-content">
-                    <p>Slices are just the start. You can manipulate each slice independently:</p>
-
-                    <table>
-                        <tr>
-                            <th>TECHNIQUE</th>
-                            <th>HOW</th>
-                            <th>WHY</th>
-                        </tr>
-                        <tr>
-                            <td>Reverse slices</td>
-                            <td>Hold [TRIG] + turn RATE to negative (-100) on [PLAYBACK] page</td>
-                            <td>Backwards hits, glitch effects</td>
-                        </tr>
-                        <tr>
-                            <td>Pitch slices</td>
-                            <td>Hold [TRIG] + turn TUNE on [PLAYBACK] page</td>
-                            <td>Tuned drum kit, melodic loops</td>
-                        </tr>
-                        <tr>
-                            <td>Repeat slices</td>
-                            <td>Place same slice number on consecutive [TRIG] steps</td>
-                            <td>Stutter effects, rhythmic emphasis</td>
-                        </tr>
-                        <tr>
-                            <td>Skip slices</td>
-                            <td>Leave [TRIG] steps empty in your sequence</td>
-                            <td>Syncopation, variation, space</td>
-                        </tr>
-                        <tr>
-                            <td>Randomize with [LFO]</td>
-                            <td>[LFO] targeting SLICE parameter</td>
-                            <td>Generative patterns, chaos</td>
-                        </tr>
-                    </table>
-
-                    <div class="card" style="margin-top: 20px;">
-                        <div class="card-title">EXAMPLE: GLITCH BEAT</div>
-                        <div class="card-content">
-                            1. Slice a drum loop into 32 pieces in the Audio Editor ([FUNC] + [AUD])<br>
-                            2. Enter [REC] mode and sequence slices 1-16 on [TRIG] keys<br>
-                            3. On [TRIG 9], hold it and reverse the slice (RATE = -100 on [PLAYBACK])<br>
-                            4. On [TRIG 13], hold it and pitch up 7 semitones (TUNE)<br>
-                            5. On [TRIG 15], repeat step 14's slice twice<br>
-                            Result: a recognizable loop with glitchy variation
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION 7: .ot Files & Sample Chains -->
-            <section class="section" id="sec-7">
-                <h2 class="section-title">7. .OT FILES & SAMPLE CHAINS (ADVANCED)</h2>
-                <div class="section-content">
-                    <p>When you slice a sample on the OT, it creates a .ot metadata file alongside the WAV. This file stores:</p>
-                    <ul style="margin-left: 20px; margin-bottom: 20px;">
-                        <li>Slice point locations (exact sample numbers)</li>
-                        <li>Original tempo and key</li>
-                        <li>Gain and loop settings</li>
-                        <li>Playback mode</li>
-                    </ul>
-
-                    <div class="card">
-                        <div class="card-title">SAMPLE CHAINS</div>
-                        <div class="card-content">
-                            A chain = multiple sounds concatenated into ONE WAV file + ONE .ot file. Each "sound" becomes a slice. So 64 samples become 64 slices in a single slot = massive space savings.
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 20px;"><strong>Why use chains?</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>OK 64 drum hits in 1 slot instead of 64 slots</li>
-                        <li>OK Saves RAM (one Flex allocation)</li>
-                        <li>OK Faster navigation (fewer files)</li>
-                        <li>OK Keep related samples together</li>
-                    </ul>
-
-                    <p style="margin-top: 20px;"><strong>Build chains with:</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>OctaChainer (free Mac app, UI-based)</li>
-                        <li>Python + ffmpeg (CLI, if you're scripting)</li>
-                    </ul>
-
-                    <p style="margin-top: 20px;">Best practice: organize chains by power-of-2 divisions (16, 32, 64 slices). Easier to reason about slice boundaries.</p>
-                </div>
-            </section>
-
-            <!-- QUIZ SECTION -->
-            <section class="quiz-section">
-                <h2 class="section-title">TEST YOURSELF</h2>
-                <div id="quizContainer"></div>
-            </section>
-
-            <!-- CONFIDENCE SECTION -->
-            <section class="confidence-section">
-                <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
-                <div class="confidence-scale" id="confidenceScale"></div>
-                <div style="margin-top: 16px; font-size: 12px; color: #666666;">Rate your confidence (1 = not ready, 5 = totally got it)</div>
-            </section>
-
-            <!-- BOTTOM NAV -->
-            <div class="bottom-nav">
-                <button class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
-                <div class="nav-progress">
-                    <span id="progressText">TUTORIAL 05 / 06</span>
-                </div>
-                <button class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
+      <!-- CONTENT -->
+      <main class="content">
+        <!-- SECTION 1: What Are Slices? -->
+        <section class="section" id="sec-1">
+          <h2 class="section-title">1. WHAT ARE SLICES?</h2>
+          <div class="section-content">
+            <p>
+              Slices are how you divide a sample into rhythmic chunks. Think of it like cutting a drum loop into individual hits. Each slice becomes its own playable segment, numbered 1-64 (max 64
+              slices per sample). You create and manage slices in the Audio Editor, opened with [FUNC] + [AUD].
+            </p>
+            <p>
+              Once sliced, you can play any slice independently using the [TRIG] keys, chop them into a new rhythm, reverse them, pitch them, or sequence them with [REC] (Grid Recording). This is the
+              foundation of creative loop chopping on the Octatrack.
+            </p>
+            <div class="card">
+              <div class="card-title">KEY CONCEPT</div>
+              <div class="card-content">
+                A drum loop at 128 BPM might be 8 bars long. If you grid-slice it into 32 slices, you get roughly 2 slices per beat (32 slices ÷ 16 steps = 2 per beat). Now you can play those slices
+                in any order, creating completely new breakbeats.
+              </div>
             </div>
-            <div style="text-align:center; margin-top:2rem;">
-              <button onclick="document.getElementById('reset-modal').style.display='flex'" style="background:none; border:1px solid #333; color:#666; padding:6px 18px; font-family:'Space Mono',monospace; font-size:11px; cursor:pointer; letter-spacing:1px; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3366'; this.style.color='#ff3366'" onmouseout="this.style.borderColor='#333'; this.style.color='#666'">RESET PROGRESS</button>
+          </div>
+        </section>
+
+        <!-- SECTION 2: The Audio Editor -->
+        <section class="section" id="sec-2">
+          <h2 class="section-title">2. THE AUDIO EDITOR</h2>
+          <div class="section-content">
+            <p>The Audio Editor is where you view, slice, and edit samples. To access it:</p>
+            <div class="card">
+              <div class="card-title">MENU PATH</div>
+              <div class="card-content">
+                1. Select a track with a sample loaded
+                <br />
+                2. Press [FUNC] + [AUD] to open Audio Editor
+                <br />
+                3. You'll see the waveform displayed
+              </div>
             </div>
-        </main>
+            <p style="margin-top: 20px"><strong>Navigation in Audio Editor:</strong></p>
+            <ul style="margin-left: 20px; margin-bottom: 20px">
+              <li>[LEFT]/[RIGHT] arrows - move playhead through sample</li>
+              <li>[FUNC] + [LEFT]/[RIGHT] - zoom in/out on waveform</li>
+              <li>[UP]/[DOWN] - adjust waveform zoom depth</li>
+              <li>[YES]/[NO] - confirm/cancel slicing actions</li>
+            </ul>
+            <p>The waveform shows silence as flat lines and loud sections as tall peaks. You'll use these visual cues to find where to place slice markers.</p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: Grid Slicing -->
+        <section class="section" id="sec-3">
+          <h2 class="section-title">3. GRID SLICING: THE INTERACTIVE WAY</h2>
+          <div class="section-content">
+            <p>Grid slicing divides a sample into EVENLY SPACED sections. Perfect for drum loops that are locked to a tempo. Try it below:</p>
+
+            <div class="waveform-container">
+              <svg class="waveform-svg" id="waveformSvg"></svg>
+              <div class="waveform-controls">
+                <label>
+                  SLICES:
+                  <input type="number" id="sliceCount" min="4" max="64" value="8" step="4" />
+                </label>
+                <button class="button" onclick="updateWaveform()">APPLY GRID</button>
+                <button class="button secondary" onclick="resetWaveform()">RESET</button>
+              </div>
+              <div class="slice-info" id="sliceInfo">Select number of slices and click APPLY GRID. Each vertical line = one slice.</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">MENU PATH</div>
+              <div class="card-content">
+                Audio Editor > [FUNC] (to access menu) > Slice > CREATE SLICE GRID
+                <br />
+                Select number of divisions (4, 8, 16, 32, 64) > [YES] to confirm
+              </div>
+            </div>
+
+            <p style="margin-top: 20px"><strong>When to use grid slicing:</strong></p>
+            <ul style="margin-left: 20px">
+              <li>OK Drum loops locked to tempo</li>
+              <li>OK 4/4 time signatures (most loops)</li>
+              <li>OK When you want even rhythmic divisions</li>
+              <li>OK Quick way to slice without thinking</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 4: Manual Slicing -->
+        <section class="section" id="sec-4">
+          <h2 class="section-title">4. MANUAL SLICING: PRECISION CHOPPING</h2>
+          <div class="section-content">
+            <p>For irregular samples or precise control, manual slicing lets you place markers exactly where you want. Here's the process:</p>
+
+            <div class="card">
+              <div class="card-title">STEP-BY-STEP</div>
+              <div class="card-content">
+                1. In Audio Editor, use [LEFT]/[RIGHT] to find your slice point
+                <br />
+                2. Press [YES] to add a marker at that position
+                <br />
+                3. The marker appears as a vertical line in the waveform
+                <br />
+                4. Continue placing markers throughout the sample
+                <br />
+                5. Press [NO] when done, then confirm to save slices
+              </div>
+            </div>
+
+            <p style="margin-top: 20px"><strong>CRITICAL: Zero-Crossing Snap</strong></p>
+            <p>
+              Always enable ZERO-CROSSING SNAP before slicing. This automatically places markers at points where the waveform crosses zero (silence). Why? Prevents clicks and pops at slice boundaries
+              when you play them back.
+            </p>
+            <div class="card">
+              <div class="card-title">ZERO-CROSSING SNAP</div>
+              <div class="card-content">
+                Audio Editor menu > Snap > ZERO CROSSING
+                <br />
+                Enable this, then place markers. The OT will snap them to the nearest zero crossing automatically.
+              </div>
+            </div>
+
+            <p style="margin-top: 20px">
+              Manual slicing takes longer than grid slicing, but gives you surgical precision. Perfect for one-shots, vocal chops, or complex loops where grid divisions don't make sense.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 5: Playing Slices -->
+        <section class="section" id="sec-5">
+          <h2 class="section-title">5. PLAYING SLICES: TURNING CHUNKS INTO BEATS</h2>
+          <div class="section-content">
+            <p>Once your sample is sliced, you need to enable slice playback in the track's Playback Setup:</p>
+
+            <div class="card">
+              <div class="card-title">ENABLE SLICE PLAYBACK</div>
+              <div class="card-content">[TRACK] button on the sliced track > Playback Setup > SLICE = ON</div>
+            </div>
+
+            <p style="margin-top: 20px">
+              Now each [TRIG] key can play a specific slice. Here's the interactive demo below - you're building a chopped breakbeat from 16 slices. Click each step to assign a slice number:
+            </p>
+
+            <div style="background: #111111; border: 3px solid #ff00ff; padding: 20px; margin: 20px 0">
+              <div style="font-family: 'Space Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #ff00ff; margin-bottom: 16px">SLICE SEQUENCER (16 STEPS)</div>
+              <div class="sequencer-grid" id="sliceSequencer"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">HOW TO P-LOCK SLICES</div>
+              <div class="card-content">
+                1. In GRID RECORDING mode ([REC])
+                <br />
+                2. Hold [TRIG] key you want to lock
+                <br />
+                3. Turn the encoder to select slice number (1-64)
+                <br />
+                4. Release [TRIG]
+                <br />
+                5. That step now plays the selected slice
+              </div>
+            </div>
+
+            <p style="margin-top: 20px">
+              The sequencer above shows what a chopped beat looks like. Notice how steps are assigned to different slices? That's you rebuilding the rhythm from the original sample.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 6: Slice Lock Techniques -->
+        <section class="section" id="sec-6">
+          <h2 class="section-title">6. SLICE LOCK TECHNIQUES: BEYOND THE BASICS</h2>
+          <div class="section-content">
+            <p>Slices are just the start. You can manipulate each slice independently:</p>
+
+            <table>
+              <tr>
+                <th>TECHNIQUE</th>
+                <th>HOW</th>
+                <th>WHY</th>
+              </tr>
+              <tr>
+                <td>Reverse slices</td>
+                <td>Hold [TRIG] + turn RATE to negative (-100) on [PLAYBACK] page</td>
+                <td>Backwards hits, glitch effects</td>
+              </tr>
+              <tr>
+                <td>Pitch slices</td>
+                <td>Hold [TRIG] + turn TUNE on [PLAYBACK] page</td>
+                <td>Tuned drum kit, melodic loops</td>
+              </tr>
+              <tr>
+                <td>Repeat slices</td>
+                <td>Place same slice number on consecutive [TRIG] steps</td>
+                <td>Stutter effects, rhythmic emphasis</td>
+              </tr>
+              <tr>
+                <td>Skip slices</td>
+                <td>Leave [TRIG] steps empty in your sequence</td>
+                <td>Syncopation, variation, space</td>
+              </tr>
+              <tr>
+                <td>Randomize with [LFO]</td>
+                <td>[LFO] targeting SLICE parameter</td>
+                <td>Generative patterns, chaos</td>
+              </tr>
+            </table>
+
+            <div class="card" style="margin-top: 20px">
+              <div class="card-title">EXAMPLE: GLITCH BEAT</div>
+              <div class="card-content">
+                1. Slice a drum loop into 32 pieces in the Audio Editor ([FUNC] + [AUD])
+                <br />
+                2. Enter [REC] mode and sequence slices 1-16 on [TRIG] keys
+                <br />
+                3. On [TRIG 9], hold it and reverse the slice (RATE = -100 on [PLAYBACK])
+                <br />
+                4. On [TRIG 13], hold it and pitch up 7 semitones (TUNE)
+                <br />
+                5. On [TRIG 15], repeat step 14's slice twice
+                <br />
+                Result: a recognizable loop with glitchy variation
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 7: .ot Files & Sample Chains -->
+        <section class="section" id="sec-7">
+          <h2 class="section-title">7. .OT FILES & SAMPLE CHAINS (ADVANCED)</h2>
+          <div class="section-content">
+            <p>When you slice a sample on the OT, it creates a .ot metadata file alongside the WAV. This file stores:</p>
+            <ul style="margin-left: 20px; margin-bottom: 20px">
+              <li>Slice point locations (exact sample numbers)</li>
+              <li>Original tempo and key</li>
+              <li>Gain and loop settings</li>
+              <li>Playback mode</li>
+            </ul>
+
+            <div class="card">
+              <div class="card-title">SAMPLE CHAINS</div>
+              <div class="card-content">
+                A chain = multiple sounds concatenated into ONE WAV file + ONE .ot file. Each "sound" becomes a slice. So 64 samples become 64 slices in a single slot = massive space savings.
+              </div>
+            </div>
+
+            <p style="margin-top: 20px"><strong>Why use chains?</strong></p>
+            <ul style="margin-left: 20px">
+              <li>OK 64 drum hits in 1 slot instead of 64 slots</li>
+              <li>OK Saves RAM (one Flex allocation)</li>
+              <li>OK Faster navigation (fewer files)</li>
+              <li>OK Keep related samples together</li>
+            </ul>
+
+            <p style="margin-top: 20px"><strong>Build chains with:</strong></p>
+            <ul style="margin-left: 20px">
+              <li>OctaChainer (free Mac app, UI-based)</li>
+              <li>Python + ffmpeg (CLI, if you're scripting)</li>
+            </ul>
+
+            <p style="margin-top: 20px">Best practice: organize chains by power-of-2 divisions (16, 32, 64 slices). Easier to reason about slice boundaries.</p>
+          </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section class="quiz-section">
+          <h2 class="section-title">TEST YOURSELF</h2>
+          <div id="quizContainer"></div>
+        </section>
+
+        <!-- CONFIDENCE SECTION -->
+        <section class="confidence-section">
+          <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
+          <div class="confidence-scale" id="confidenceScale"></div>
+          <div style="margin-top: 16px; font-size: 12px; color: #666666">Rate your confidence (1 = not ready, 5 = totally got it)</div>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <button class="nav-button" onclick="goToPrev()" id="prevBtn">← PREVIOUS</button>
+          <div class="nav-progress">
+            <span id="progressText">TUTORIAL 05 / 06</span>
+          </div>
+          <button class="nav-button" onclick="goToNext()" id="nextBtn">NEXT →</button>
+        </div>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid #333;
+              color: #666;
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = '#ff3366';
+              this.style.color = '#ff3366';
+            "
+            onmouseout="
+              this.style.borderColor = '#333';
+              this.style.color = '#666';
+            "
+          >
+            RESET PROGRESS
+          </button>
+        </div>
+      </main>
     </div>
 
     <!-- Reset Confirmation Modal -->
-    <div id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
-      <div style="background:#1a1a1a; border:1px solid #333; padding:2rem; max-width:400px; width:90%; text-align:center; font-family:'Space Mono',monospace;">
-        <h3 style="color:#ff3366; margin:0 0 1rem; font-size:16px;">Reset Tutorial Progress?</h3>
-        <p style="color:#999; font-size:13px; margin:0 0 1.5rem; line-height:1.5;">This will clear all your progress for <strong style="color:#00e5ff;">05 — Slice & Dice</strong> including section checkmarks, quiz score, and confidence rating.</p>
-        <div style="display:flex; gap:1rem; justify-content:center;">
-          <button onclick="document.getElementById('reset-modal').style.display='none'" style="background:none; border:1px solid #333; color:#999; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">CANCEL</button>
-          <button onclick="resetTutorialProgress()" style="background:#ff3366; border:none; color:#fff; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">YES, RESET</button>
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: #1a1a1a; border: 1px solid #333; padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: #ff3366; margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: #999; font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: #00e5ff">05 — Slice & Dice</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+            YES, RESET
+          </button>
         </div>
       </div>
     </div>
 
     <script>
-        const TUTORIAL_ID = '05-slice-and-dice';
+      const TUTORIAL_ID = '05-slice-and-dice';
 
-        function resetTutorialProgress() {
-          var data = localStorage.getItem('octatrack-tutorials');
-          if (data) {
-            var parsed = JSON.parse(data);
-            delete parsed[TUTORIAL_ID];
-            localStorage.setItem('octatrack-tutorials', JSON.stringify(parsed));
-          }
-          window.location.reload();
+      function resetTutorialProgress() {
+        var data = localStorage.getItem('octatrack-tutorials');
+        if (data) {
+          var parsed = JSON.parse(data);
+          delete parsed[TUTORIAL_ID];
+          localStorage.setItem('octatrack-tutorials', JSON.stringify(parsed));
         }
+        window.location.reload();
+      }
 
-        const SECTIONS = [
-            { id: 'sec-1', label: 'What Are Slices?' },
-            { id: 'sec-2', label: 'Audio Editor' },
-            { id: 'sec-3', label: 'Grid Slicing' },
-            { id: 'sec-4', label: 'Manual Slicing' },
-            { id: 'sec-5', label: 'Playing Slices' },
-            { id: 'sec-6', label: 'Lock Techniques' },
-            { id: 'sec-7', label: '.ot Files' }
-        ];
+      const SECTIONS = [
+        { id: 'sec-1', label: 'What Are Slices?' },
+        { id: 'sec-2', label: 'Audio Editor' },
+        { id: 'sec-3', label: 'Grid Slicing' },
+        { id: 'sec-4', label: 'Manual Slicing' },
+        { id: 'sec-5', label: 'Playing Slices' },
+        { id: 'sec-6', label: 'Lock Techniques' },
+        { id: 'sec-7', label: '.ot Files' },
+      ];
 
-        const QUIZ_QUESTIONS = [
-            {
-                q: 'What is the MAXIMUM number of slices per sample on the Octatrack?',
-                opts: ['16', '32', '64', '128'],
-                correct: 2
-            },
-            {
-                q: 'What does ZERO-CROSSING SNAP prevent when slicing?',
-                opts: ['Distortion', 'Clicks and pops at slice boundaries', 'Sample corruption', 'Unwanted pitch shifting'],
-                correct: 1
-            },
-            {
-                q: 'Which Playback Setup parameter MUST be enabled to play slices?',
-                opts: ['TRIG = ON', 'SLICE = ON', 'GRID = ON', 'LOCK = ON'],
-                correct: 1
-            },
-            {
-                q: 'What does a .ot metadata file store?',
-                opts: ['Only slice point locations', 'Only the audio waveform', 'Slice points, tempo, gain, loop settings', 'Only gain and volume'],
-                correct: 2
-            }
-        ];
+      const QUIZ_QUESTIONS = [
+        {
+          q: 'What is the MAXIMUM number of slices per sample on the Octatrack?',
+          opts: ['16', '32', '64', '128'],
+          correct: 2,
+        },
+        {
+          q: 'What does ZERO-CROSSING SNAP prevent when slicing?',
+          opts: ['Distortion', 'Clicks and pops at slice boundaries', 'Sample corruption', 'Unwanted pitch shifting'],
+          correct: 1,
+        },
+        {
+          q: 'Which Playback Setup parameter MUST be enabled to play slices?',
+          opts: ['TRIG = ON', 'SLICE = ON', 'GRID = ON', 'LOCK = ON'],
+          correct: 1,
+        },
+        {
+          q: 'What does a .ot metadata file store?',
+          opts: ['Only slice point locations', 'Only the audio waveform', 'Slice points, tempo, gain, loop settings', 'Only gain and volume'],
+          correct: 2,
+        },
+      ];
 
-        // Initialize sidebar
-        function initSidebar() {
-            const nav = document.getElementById('sidebarNav');
-            nav.innerHTML = SECTIONS.map(s =>
-                `<div class="sidebar-item" onclick="scrollToSection('${s.id}')">${s.label}</div>`
-            ).join('');
-            trackActiveSection();
+      // Initialize sidebar
+      function initSidebar() {
+        const nav = document.getElementById('sidebarNav');
+        nav.innerHTML = SECTIONS.map((s) => `<div class="sidebar-item" onclick="scrollToSection('${s.id}')">${s.label}</div>`).join('');
+        trackActiveSection();
+      }
+
+      // Scroll to section
+      function scrollToSection(id) {
+        const elem = document.getElementById(id);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
         }
+      }
 
-        // Scroll to section
-        function scrollToSection(id) {
-            const elem = document.getElementById(id);
-            if (elem) {
-                elem.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Track active section with IntersectionObserver
-        function trackActiveSection() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        document.querySelectorAll('.sidebar-item').forEach(item => {
-                            item.classList.remove('active');
-                        });
-                        const idx = SECTIONS.findIndex(s => s.id === entry.target.id);
-                        if (idx >= 0) {
-                            document.querySelectorAll('.sidebar-item')[idx].classList.add('active');
-                        }
-                    }
+      // Track active section with IntersectionObserver
+      function trackActiveSection() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                document.querySelectorAll('.sidebar-item').forEach((item) => {
+                  item.classList.remove('active');
                 });
-            }, { threshold: 0.3 });
-
-            SECTIONS.forEach(s => {
-                const elem = document.getElementById(s.id);
-                if (elem) observer.observe(elem);
+                const idx = SECTIONS.findIndex((s) => s.id === entry.target.id);
+                if (idx >= 0) {
+                  document.querySelectorAll('.sidebar-item')[idx].classList.add('active');
+                }
+              }
             });
+          },
+          { threshold: 0.3 }
+        );
+
+        SECTIONS.forEach((s) => {
+          const elem = document.getElementById(s.id);
+          if (elem) observer.observe(elem);
+        });
+      }
+
+      // Waveform visualization
+      function drawWaveform(slices = 8) {
+        const svg = document.getElementById('waveformSvg');
+        svg.innerHTML = '';
+        const width = svg.clientWidth;
+        const height = svg.clientHeight;
+
+        // Draw fake waveform peaks
+        let pathData = `M 0 ${height / 2}`;
+        const samples = 200;
+        for (let i = 0; i < samples; i++) {
+          const x = (i / samples) * width;
+          const freq = Math.sin(i * 0.05) * 0.3 + Math.sin(i * 0.02) * 0.2;
+          const y = height / 2 + Math.sin(i / 20 + freq) * (height * 0.3);
+          pathData += ` L ${x} ${y}`;
         }
+        pathData += ` L ${width} ${height / 2}`;
 
-        // Waveform visualization
-        function drawWaveform(slices = 8) {
-            const svg = document.getElementById('waveformSvg');
-            svg.innerHTML = '';
-            const width = svg.clientWidth;
-            const height = svg.clientHeight;
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('stroke', '#00ffff');
+        path.setAttribute('stroke-width', '2');
+        path.setAttribute('fill', 'none');
+        svg.appendChild(path);
 
-            // Draw fake waveform peaks
-            let pathData = `M 0 ${height / 2}`;
-            const samples = 200;
-            for (let i = 0; i < samples; i++) {
-                const x = (i / samples) * width;
-                const freq = Math.sin(i * 0.05) * 0.3 + Math.sin(i * 0.02) * 0.2;
-                const y = height / 2 + Math.sin((i / 20) + freq) * (height * 0.3);
-                pathData += ` L ${x} ${y}`;
-            }
-            pathData += ` L ${width} ${height / 2}`;
+        // Draw slice lines
+        for (let i = 1; i < slices; i++) {
+          const x = (i / slices) * width;
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', x);
+          line.setAttribute('y1', 0);
+          line.setAttribute('x2', x);
+          line.setAttribute('y2', height);
+          line.setAttribute('stroke', '#00ff41');
+          line.setAttribute('stroke-width', '2');
+          line.setAttribute('stroke-dasharray', '4,4');
+          svg.appendChild(line);
 
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            path.setAttribute('d', pathData);
-            path.setAttribute('stroke', '#00ffff');
-            path.setAttribute('stroke-width', '2');
-            path.setAttribute('fill', 'none');
-            svg.appendChild(path);
-
-            // Draw slice lines
-            for (let i = 1; i < slices; i++) {
-                const x = (i / slices) * width;
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', x);
-                line.setAttribute('y1', 0);
-                line.setAttribute('x2', x);
-                line.setAttribute('y2', height);
-                line.setAttribute('stroke', '#00ff41');
-                line.setAttribute('stroke-width', '2');
-                line.setAttribute('stroke-dasharray', '4,4');
-                svg.appendChild(line);
-
-                // Slice number label
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', x - 5);
-                text.setAttribute('y', 20);
-                text.setAttribute('fill', '#00ff41');
-                text.setAttribute('font-size', '12');
-                text.setAttribute('font-family', 'monospace');
-                text.textContent = i;
-                svg.appendChild(text);
-            }
+          // Slice number label
+          const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          text.setAttribute('x', x - 5);
+          text.setAttribute('y', 20);
+          text.setAttribute('fill', '#00ff41');
+          text.setAttribute('font-size', '12');
+          text.setAttribute('font-family', 'monospace');
+          text.textContent = i;
+          svg.appendChild(text);
         }
+      }
 
-        function updateWaveform() {
-            const count = parseInt(document.getElementById('sliceCount').value);
-            if (count < 4 || count > 64) {
-                alert('Must be between 4-64');
-                return;
-            }
-            drawWaveform(count);
-            document.getElementById('sliceInfo').innerHTML =
-                `<strong>✓ APPLIED:</strong> ${count} slices created. Each slice is ${(100/count).toFixed(1)}% of the sample.`;
+      function updateWaveform() {
+        const count = parseInt(document.getElementById('sliceCount').value);
+        if (count < 4 || count > 64) {
+          alert('Must be between 4-64');
+          return;
         }
+        drawWaveform(count);
+        document.getElementById('sliceInfo').innerHTML = `<strong>✓ APPLIED:</strong> ${count} slices created. Each slice is ${(100 / count).toFixed(1)}% of the sample.`;
+      }
 
-        function resetWaveform() {
-            document.getElementById('sliceCount').value = 8;
-            drawWaveform(8);
-            document.getElementById('sliceInfo').innerHTML =
-                'Select number of slices and click APPLY GRID. Each vertical line = one slice.';
-        }
+      function resetWaveform() {
+        document.getElementById('sliceCount').value = 8;
+        drawWaveform(8);
+        document.getElementById('sliceInfo').innerHTML = 'Select number of slices and click APPLY GRID. Each vertical line = one slice.';
+      }
 
-        // Slice sequencer
-        function initSliceSequencer() {
-            const container = document.getElementById('sliceSequencer');
-            const sliceSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+      // Slice sequencer
+      function initSliceSequencer() {
+        const container = document.getElementById('sliceSequencer');
+        const sliceSequence = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
-            container.innerHTML = sliceSequence.map((slice, idx) =>
-                `<div class="sequencer-step" onclick="toggleStep(${idx})" data-step="${idx}">
+        container.innerHTML = sliceSequence
+          .map(
+            (slice, idx) =>
+              `<div class="sequencer-step" onclick="toggleStep(${idx})" data-step="${idx}">
                     ${slice}
                 </div>`
-            ).join('');
-        }
+          )
+          .join('');
+      }
 
-        function toggleStep(idx) {
-            const step = document.querySelectorAll('.sequencer-step')[idx];
-            step.classList.toggle('active');
-        }
+      function toggleStep(idx) {
+        const step = document.querySelectorAll('.sequencer-step')[idx];
+        step.classList.toggle('active');
+      }
 
-        // Quiz
-        function initQuiz() {
-            const container = document.getElementById('quizContainer');
-            container.innerHTML = QUIZ_QUESTIONS.map((q, qIdx) => `
+      // Quiz
+      function initQuiz() {
+        const container = document.getElementById('quizContainer');
+        container.innerHTML = QUIZ_QUESTIONS.map(
+          (q, qIdx) => `
                 <div class="quiz-item">
                     <div class="quiz-question">Q${qIdx + 1}: ${q.q}</div>
                     <div class="quiz-options">
-                        ${q.opts.map((opt, oIdx) => `
+                        ${q.opts
+                          .map(
+                            (opt, oIdx) => `
                             <div class="quiz-option" onclick="selectQuizOption(${qIdx}, ${oIdx})">
                                 ◯ ${opt}
                             </div>
-                        `).join('')}
+                        `
+                          )
+                          .join('')}
                     </div>
                     <div id="feedback-${qIdx}"></div>
                 </div>
-            `).join('');
-        }
+            `
+        ).join('');
+      }
 
-        function selectQuizOption(qIdx, oIdx) {
-            const correct = QUIZ_QUESTIONS[qIdx].correct === oIdx;
-            const options = document.querySelectorAll(`.quiz-item`)[qIdx].querySelectorAll('.quiz-option');
-            options.forEach((opt, idx) => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-                if (idx === oIdx) {
-                    opt.classList.add('selected', correct ? 'correct' : 'incorrect');
-                }
-            });
-
-            const feedback = document.getElementById(`feedback-${qIdx}`);
-            feedback.className = 'quiz-feedback ' + (correct ? '' : 'incorrect');
-            feedback.innerHTML = correct
-                ? '<strong>✓ CORRECT!</strong> Well done.'
-                : `<strong>✗ NOT QUITE.</strong> The correct answer is: <strong>${QUIZ_QUESTIONS[qIdx].opts[QUIZ_QUESTIONS[qIdx].correct]}</strong>`;
-        }
-
-        // Confidence scale
-        function initConfidence() {
-            const container = document.getElementById('confidenceScale');
-            container.innerHTML = Array.from({length: 5}, (_, i) =>
-                `<button class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`
-            ).join('');
-        }
-
-        function setConfidence(level) {
-            document.querySelectorAll('.confidence-button').forEach((btn, idx) => {
-                btn.classList.toggle('selected', idx + 1 <= level);
-            });
-            saveProgress();
-        }
-
-        // Progress tracking
-        function saveProgress() {
-            let data = JSON.parse(localStorage.getItem('octatrack-tutorials') || '{}');
-            if (!data.tutorials) data.tutorials = {};
-            data.tutorials[TUTORIAL_ID] = {
-                completed: true,
-                timestamp: new Date().toISOString()
-            };
-            localStorage.setItem('octatrack-tutorials', JSON.stringify(data));
-        }
-
-        // Navigation
-        function goToPrev() {
-            window.location.href = '04-audio-pool.html';
-        }
-
-        function goToNext() {
-            saveProgress();
-            window.location.href = '06-sample-locks.html';
-        }
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            initSidebar();
-            drawWaveform(8);
-            initSliceSequencer();
-            initQuiz();
-            initConfidence();
+      function selectQuizOption(qIdx, oIdx) {
+        const correct = QUIZ_QUESTIONS[qIdx].correct === oIdx;
+        const options = document.querySelectorAll(`.quiz-item`)[qIdx].querySelectorAll('.quiz-option');
+        options.forEach((opt, idx) => {
+          opt.classList.remove('selected', 'correct', 'incorrect');
+          if (idx === oIdx) {
+            opt.classList.add('selected', correct ? 'correct' : 'incorrect');
+          }
         });
+
+        const feedback = document.getElementById(`feedback-${qIdx}`);
+        feedback.className = 'quiz-feedback ' + (correct ? '' : 'incorrect');
+        feedback.innerHTML = correct
+          ? '<strong>✓ CORRECT!</strong> Well done.'
+          : `<strong>✗ NOT QUITE.</strong> The correct answer is: <strong>${QUIZ_QUESTIONS[qIdx].opts[QUIZ_QUESTIONS[qIdx].correct]}</strong>`;
+      }
+
+      // Confidence scale
+      function initConfidence() {
+        const container = document.getElementById('confidenceScale');
+        container.innerHTML = Array.from({ length: 5 }, (_, i) => `<button class="confidence-button" onclick="setConfidence(${i + 1})">${i + 1}</button>`).join('');
+      }
+
+      function setConfidence(level) {
+        document.querySelectorAll('.confidence-button').forEach((btn, idx) => {
+          btn.classList.toggle('selected', idx + 1 <= level);
+        });
+        saveProgress();
+      }
+
+      // Progress tracking
+      function saveProgress() {
+        let data = JSON.parse(localStorage.getItem('octatrack-tutorials') || '{}');
+        if (!data.tutorials) data.tutorials = {};
+        data.tutorials[TUTORIAL_ID] = {
+          completed: true,
+          timestamp: new Date().toISOString(),
+        };
+        localStorage.setItem('octatrack-tutorials', JSON.stringify(data));
+      }
+
+      // Navigation
+      function goToPrev() {
+        window.location.href = '04-audio-pool.html';
+      }
+
+      function goToNext() {
+        saveProgress();
+        window.location.href = '06-sample-locks.html';
+      }
+
+      // Init
+      document.addEventListener('DOMContentLoaded', () => {
+        initSidebar();
+        drawWaveform(8);
+        initSliceSequencer();
+        initQuiz();
+        initConfidence();
+      });
     </script>
     <script src="assets/svg-overlay.js" defer></script>
-</body>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid #333;
+        background: #111;
+        color: #d0d0d0;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none">@alkloihd</a>
+        ·
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: #ff00ff; text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        </a>
+      </div>
+    </div>
+  </body>
 </html>

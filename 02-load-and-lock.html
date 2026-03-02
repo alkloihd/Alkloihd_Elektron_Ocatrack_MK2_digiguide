@@ -1002,6 +1002,7 @@
         <div class="section" id="decision-tree" data-section="decision-tree">
           <h2>DECISION TREE: STATIC OR FLEX?</h2>
           <p>Use this flowchart to decide which machine type to use:</p>
+          <p>Sanity check your path on hardware: save first with [FUNC] + [PROJ], pick the destination [TRACK], then confirm your slot and machine page on [SRC].</p>
 
           <div class="svg-diagram">
             <svg width="700" height="500" viewBox="0 0 700 500" style="max-width: 100%; height: auto">
@@ -1129,7 +1130,9 @@
             <div class="step">
               <div class="step-number">6</div>
               <div class="step-title">TRIGGER IT</div>
-              <div class="step-content">Press [PLAY] to start the sequencer, then press any of the [TRIG 1]–[TRIG 8] keys to trigger the sample on that track. Adjust volume with the [LEVEL] encoder. You should hear it play!</div>
+              <div class="step-content">
+                Press [PLAY] to start the sequencer, then press any of the [TRIG 1]–[TRIG 8] keys to trigger the sample on that track. Adjust volume with the [LEVEL] encoder. You should hear it play!
+              </div>
             </div>
           </div>
         </div>
@@ -1203,6 +1206,7 @@
         <div class="section" id="quiz" data-section="quiz">
           <div class="quiz-section">
             <div class="quiz-title">TEST YOURSELF</div>
+            <p style="margin-bottom: 1rem; color: #bbbbbb">As you answer, mentally rehearse the actual workflow: select [TRACK], open [SRC], and use [YES] to confirm choices.</p>
 
             <!-- Q1 -->
             <div class="quiz-question">
@@ -1301,6 +1305,7 @@
         <div class="section" id="confidence" data-section="confidence">
           <div class="confidence-section">
             <div class="confidence-title">HOW CONFIDENT DO YOU FEEL?</div>
+            <p style="margin-bottom: 1rem; color: #bbbbbb">If you scored low, run one more rep: [FUNC] + [PROJ] to save, choose [TRACK], then verify assignment on [SRC] before moving on.</p>
             <p style="margin-bottom: 1.5rem; color: #e0e0e0">Rate your understanding of Static vs Flex machines.</p>
             <div class="confidence-scale">
               <button class="confidence-btn" data-confidence="1">1</button>
@@ -1318,20 +1323,57 @@
           <a href="01-set-sail.html" class="nav-button">← PREVIOUS: SET SAIL</a>
           <a href="03-beat-basics.html" class="nav-button">NEXT: BEAT BASICS →</a>
         </div>
-        <div style="text-align:center; margin-top:2rem;">
-          <button onclick="document.getElementById('reset-modal').style.display='flex'" style="background:none; border:1px solid #333; color:#666; padding:6px 18px; font-family:'Space Mono',monospace; font-size:11px; cursor:pointer; letter-spacing:1px; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3366'; this.style.color='#ff3366'" onmouseout="this.style.borderColor='#333'; this.style.color='#666'">RESET PROGRESS</button>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid #333;
+              color: #666;
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = '#ff3366';
+              this.style.color = '#ff3366';
+            "
+            onmouseout="
+              this.style.borderColor = '#333';
+              this.style.color = '#666';
+            "
+          >
+            RESET PROGRESS
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Reset Confirmation Modal -->
-    <div id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
-      <div style="background:#1a1a1a; border:1px solid #333; padding:2rem; max-width:400px; width:90%; text-align:center; font-family:'Space Mono',monospace;">
-        <h3 style="color:#ff3366; margin:0 0 1rem; font-size:16px;">Reset Tutorial Progress?</h3>
-        <p style="color:#999; font-size:13px; margin:0 0 1.5rem; line-height:1.5;">This will clear all your progress for <strong style="color:#00e5ff;">02 — Load & Lock</strong> including section checkmarks, quiz score, and confidence rating.</p>
-        <div style="display:flex; gap:1rem; justify-content:center;">
-          <button onclick="document.getElementById('reset-modal').style.display='none'" style="background:none; border:1px solid #333; color:#999; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">CANCEL</button>
-          <button onclick="resetTutorialProgress()" style="background:#ff3366; border:none; color:#fff; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">YES, RESET</button>
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: #1a1a1a; border: 1px solid #333; padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: #ff3366; margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: #999; font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: #00e5ff">02 — Load & Lock</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+            YES, RESET
+          </button>
         </div>
       </div>
     </div>
@@ -1485,5 +1527,35 @@
       });
     </script>
     <script src="assets/svg-overlay.js" defer></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid #333;
+        background: #111;
+        color: #d0d0d0;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none">@alkloihd</a>
+        ·
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: #ff00ff; text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        </a>
+      </div>
+    </div>
   </body>
 </html>

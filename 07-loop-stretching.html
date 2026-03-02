@@ -721,8 +721,8 @@
         <div class="section" id="section-1">
           <h2>01 - THE PROBLEM</h2>
           <p>
-            You have a drum loop recorded at 120 BPM. Your current project is at 135 BPM. When you load that loop onto a track, press [PLAY] and it plays too fast AND at the wrong pitch. Without time-stretching, the
-            loop is essentially useless in your project.
+            You have a drum loop recorded at 120 BPM. Your current project is at 135 BPM. When you load that loop onto a track, press [PLAY] and it plays too fast AND at the wrong pitch. Without
+            time-stretching, the loop is essentially useless in your project.
           </p>
           <div class="highlight-box success">
             <h4>THE SOLUTION</h4>
@@ -971,7 +971,8 @@
 
           <p>
             <strong>Experiment!</strong>
-            Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. Open the [AUD] Audio Editor with [FUNC] + [AUD], navigate with [RIGHT] to attributes, and switch modes. The OT's CPU can handle it either way — it's about which sound you prefer.
+            Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. Open the [AUD] Audio Editor with [FUNC] + [AUD], navigate with [RIGHT] to attributes, and
+            switch modes. The OT's CPU can handle it either way — it's about which sound you prefer.
           </p>
         </div>
 
@@ -1105,7 +1106,10 @@
               <div class="step-number">9</div>
               <div class="step-content">
                 <h4>TEST TEMPO CHANGES</h4>
-                <p>Press [YES] to confirm. Place a trig on step [TRIG 1] and press [PLAY] to hear the sample. Now use [FUNC] + [TEMPO] to change your project BPM. Press [STOP] then [PLAY] again. The sample should follow your tempo without sounding wrong!</p>
+                <p>
+                  Press [YES] to confirm. Place a trig on step [TRIG 1] and press [PLAY] to hear the sample. Now use [FUNC] + [TEMPO] to change your project BPM. Press [STOP] then [PLAY] again. The
+                  sample should follow your tempo without sounding wrong!
+                </p>
               </div>
             </div>
           </div>
@@ -1194,6 +1198,9 @@
         <!-- SECTION 8: QUIZ -->
         <div class="section" id="section-8">
           <h2>08 - QUIZ</h2>
+          <p style="margin-bottom: 1rem; color: #bbbbbb">
+            Use these checks exactly like live troubleshooting: open [AUD], toggle [FUNC] for advanced pages, inspect [PLAYBACK], then verify project [TEMPO].
+          </p>
           <div class="quiz-section">
             <!-- Q1 -->
             <div class="quiz-question">
@@ -1288,6 +1295,7 @@
         <!-- SECTION 9: CONFIDENCE -->
         <div class="section" id="section-9">
           <h2>09 - CONFIDENCE RATING</h2>
+          <p style="margin-bottom: 0.75rem; color: #bbbbbb">Before rating yourself, do one fast drill: [AUD] → [PLAYBACK], hold [FUNC] to verify options, and compare against current [TEMPO].</p>
           <p>How confident do you feel about timestretch after this tutorial?</p>
           <div class="confidence-section">
             <div class="confidence-title">Rate Your Confidence (1-5)</div>
@@ -1307,20 +1315,57 @@
           <a href="06-sample-locks.html" class="nav-btn">← PREV: SAMPLE LOCKS</a>
           <a href="08-parts-banks-scenes.html" class="nav-btn">NEXT: PARTS →</a>
         </div>
-        <div style="text-align:center; margin-top:2rem;">
-          <button onclick="document.getElementById('reset-modal').style.display='flex'" style="background:none; border:1px solid #333; color:#666; padding:6px 18px; font-family:'Space Mono',monospace; font-size:11px; cursor:pointer; letter-spacing:1px; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3366'; this.style.color='#ff3366'" onmouseout="this.style.borderColor='#333'; this.style.color='#666'">RESET PROGRESS</button>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid #333;
+              color: #666;
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = '#ff3366';
+              this.style.color = '#ff3366';
+            "
+            onmouseout="
+              this.style.borderColor = '#333';
+              this.style.color = '#666';
+            "
+          >
+            RESET PROGRESS
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Reset Confirmation Modal -->
-    <div id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
-      <div style="background:#1a1a1a; border:1px solid #333; padding:2rem; max-width:400px; width:90%; text-align:center; font-family:'Space Mono',monospace;">
-        <h3 style="color:#ff3366; margin:0 0 1rem; font-size:16px;">Reset Tutorial Progress?</h3>
-        <p style="color:#999; font-size:13px; margin:0 0 1.5rem; line-height:1.5;">This will clear all your progress for <strong style="color:#00e5ff;">07 — Loop Stretching</strong> including section checkmarks, quiz score, and confidence rating.</p>
-        <div style="display:flex; gap:1rem; justify-content:center;">
-          <button onclick="document.getElementById('reset-modal').style.display='none'" style="background:none; border:1px solid #333; color:#999; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">CANCEL</button>
-          <button onclick="resetTutorialProgress()" style="background:#ff3366; border:none; color:#fff; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">YES, RESET</button>
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: #1a1a1a; border: 1px solid #333; padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: #ff3366; margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: #999; font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: #00e5ff">07 — Loop Stretching</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+            YES, RESET
+          </button>
         </div>
       </div>
     </div>
@@ -1478,5 +1523,35 @@
       });
     </script>
     <script src="assets/svg-overlay.js" defer></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid #333;
+        background: #111;
+        color: #d0d0d0;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none">@alkloihd</a>
+        ·
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: #ff00ff; text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        </a>
+      </div>
+    </div>
   </body>
 </html>

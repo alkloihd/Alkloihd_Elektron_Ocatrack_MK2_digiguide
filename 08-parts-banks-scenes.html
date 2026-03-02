@@ -846,7 +846,10 @@
         <!-- SECTION 1: THE BIG PICTURE -->
         <div class="section" id="section-1">
           <h2>01 - THE BIG PICTURE</h2>
-          <p>The Octatrack's architecture is built on a hierarchy. Understanding this hierarchy is the key to arranging multi-section songs, live jams, and organized sets. You navigate this hierarchy using buttons like [BANK], [PART], and [PTN] on the hardware.</p>
+          <p>
+            The Octatrack's architecture is built on a hierarchy. Understanding this hierarchy is the key to arranging multi-section songs, live jams, and organized sets. You navigate this hierarchy
+            using buttons like [BANK], [PART], and [PTN] on the hardware.
+          </p>
 
           <h3>Hierarchy Diagram</h3>
           <div class="diagram">
@@ -914,7 +917,8 @@
               A
               <strong>Part is a complete snapshot</strong>
               of your entire 8-track setup. It stores which samples are on which tracks, which effects you've assigned, all parameter values, and your 16 scenes. When you switch Parts,
-              <strong>EVERYTHING changes instantly</strong> — machines, samples, [FX1], [FX2], and all parameter values.
+              <strong>EVERYTHING changes instantly</strong>
+              — machines, samples, [FX1], [FX2], and all parameter values.
             </p>
           </div>
         </div>
@@ -1236,8 +1240,8 @@
           <div class="highlight-box success">
             <h4>WHAT JUST HAPPENED</h4>
             <p>
-              At the left ([SCENE A]), the Filter Cutoff is open (127) and Delay Send is low (0) — clean sound. At the right ([SCENE B]), the Filter is closed (30) and Delay is high (80) — tension. Moving
-              the [CROSSFADER] smoothly blends these two states.
+              At the left ([SCENE A]), the Filter Cutoff is open (127) and Delay Send is low (0) — clean sound. At the right ([SCENE B]), the Filter is closed (30) and Delay is high (80) — tension.
+              Moving the [CROSSFADER] smoothly blends these two states.
             </p>
           </div>
         </div>
@@ -1290,7 +1294,10 @@
         <!-- SECTION 7: SCENE LOCKS OVERRIDE P-LOCKS -->
         <div class="section" id="section-7">
           <h2>07 - SCENE LOCKS OVERRIDE P-LOCKS</h2>
-          <p>This is important if you're using both per-step parameter locks (p-locks) AND scene locks. P-locks are set by holding a [TRIG 1] through [TRIG 16] key and turning a knob. Scene locks are set by holding [SCENE A] or [SCENE B] and turning a knob.</p>
+          <p>
+            This is important if you're using both per-step parameter locks (p-locks) AND scene locks. P-locks are set by holding a [TRIG 1] through [TRIG 16] key and turning a knob. Scene locks are
+            set by holding [SCENE A] or [SCENE B] and turning a knob.
+          </p>
 
           <div class="highlight-box warning">
             <h4>THE RULE</h4>
@@ -1367,8 +1374,8 @@
           <h3>Scene Setup (Per Part)</h3>
           <p>For EACH Part, set up the Tension/Release recipe using [SCENE A] and [SCENE B]:</p>
           <div class="code-block">
-            [SCENE A]: Clean (Filter open, FX low) [SCENE B]: Tension (Filter closed, FX high) This gives you dynamic control WITHIN each part. You get control at TWO levels: 1. Part switches ([FUNC] + [PART]) → different
-            samples/machines 2. [CROSSFADER] scene morphs → different timbre/space
+            [SCENE A]: Clean (Filter open, FX low) [SCENE B]: Tension (Filter closed, FX high) This gives you dynamic control WITHIN each part. You get control at TWO levels: 1. Part switches ([FUNC]
+            + [PART]) → different samples/machines 2. [CROSSFADER] scene morphs → different timbre/space
           </div>
 
           <h3>Live Performance Flow</h3>
@@ -1420,8 +1427,8 @@
           <div class="highlight-box success">
             <h4>✓ WHAT YOU'VE CREATED</h4>
             <p>
-              A multi-section arrangement with dynamic control at every level. You can perform this live, making real-time [CROSSFADER] movements, switching Parts with [FUNC] at key moments. It's arranging AND
-              performance in one.
+              A multi-section arrangement with dynamic control at every level. You can perform this live, making real-time [CROSSFADER] movements, switching Parts with [FUNC] at key moments. It's
+              arranging AND performance in one.
             </p>
           </div>
         </div>
@@ -1542,20 +1549,57 @@
           <a href="07-loop-stretching.html" class="nav-btn">← PREV: STRETCHING</a>
           <a href="index.html" class="nav-btn">DASHBOARD →</a>
         </div>
-        <div style="text-align:center; margin-top:2rem;">
-          <button onclick="document.getElementById('reset-modal').style.display='flex'" style="background:none; border:1px solid #333; color:#666; padding:6px 18px; font-family:'Space Mono',monospace; font-size:11px; cursor:pointer; letter-spacing:1px; transition:all 0.2s;" onmouseover="this.style.borderColor='#ff3366'; this.style.color='#ff3366'" onmouseout="this.style.borderColor='#333'; this.style.color='#666'">RESET PROGRESS</button>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid #333;
+              color: #666;
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = '#ff3366';
+              this.style.color = '#ff3366';
+            "
+            onmouseout="
+              this.style.borderColor = '#333';
+              this.style.color = '#666';
+            "
+          >
+            RESET PROGRESS
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Reset Confirmation Modal -->
-    <div id="reset-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center;">
-      <div style="background:#1a1a1a; border:1px solid #333; padding:2rem; max-width:400px; width:90%; text-align:center; font-family:'Space Mono',monospace;">
-        <h3 style="color:#ff3366; margin:0 0 1rem; font-size:16px;">Reset Tutorial Progress?</h3>
-        <p style="color:#999; font-size:13px; margin:0 0 1.5rem; line-height:1.5;">This will clear all your progress for <strong style="color:#00e5ff;">08 — Parts, Banks & Scenes</strong> including section checkmarks, quiz score, and confidence rating.</p>
-        <div style="display:flex; gap:1rem; justify-content:center;">
-          <button onclick="document.getElementById('reset-modal').style.display='none'" style="background:none; border:1px solid #333; color:#999; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">CANCEL</button>
-          <button onclick="resetTutorialProgress()" style="background:#ff3366; border:none; color:#fff; padding:8px 24px; font-family:'Space Mono',monospace; font-size:12px; cursor:pointer;">YES, RESET</button>
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: #1a1a1a; border: 1px solid #333; padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: #ff3366; margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: #999; font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: #00e5ff">08 — Parts, Banks & Scenes</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid #333; color: #999; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button onclick="resetTutorialProgress()" style="background: #ff3366; border: none; color: #fff; padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer">
+            YES, RESET
+          </button>
         </div>
       </div>
     </div>
@@ -1735,5 +1779,35 @@
       });
     </script>
     <script src="assets/svg-overlay.js" defer></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid #333;
+        background: #111;
+        color: #d0d0d0;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: #00ffff; text-decoration: none">@alkloihd</a>
+        ·
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: #ff00ff; text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&country.x=CA" target="_blank" rel="noopener noreferrer" style="color: #00ff41; text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
+        </a>
+      </div>
+    </div>
   </body>
 </html>
