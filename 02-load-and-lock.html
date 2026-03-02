@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial 02: LOAD &amp; LOCK - Octatrack MK2 Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -13,8 +14,8 @@
       }
 
       body {
-        background-color: #0a0a0a;
-        color: #e0e0e0;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -29,8 +30,8 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-        background-color: #0a0a0a;
-        border-bottom: 3px solid #00ffff;
+        background-color: var(--bg-primary);
+        border-bottom: 3px solid var(--accent-cyan);
         padding: 1rem 2rem;
         display: flex;
         justify-content: space-between;
@@ -44,19 +45,19 @@
       }
 
       .top-bar-link {
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-decoration: none;
         font-family: 'Space Mono', monospace;
         font-size: 14px;
         letter-spacing: 0.1em;
-        border: 2px solid #00ffff;
+        border: 2px solid var(--accent-cyan);
         padding: 0.5rem 1rem;
         transition: all 0.2s ease;
         font-weight: 700;
       }
 
       .top-bar-link:hover {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
       }
 
@@ -65,7 +66,7 @@
         font-size: 18px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         font-weight: 700;
       }
 
@@ -80,10 +81,10 @@
         font-size: 12px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        background-color: #ff00ff;
+        background-color: var(--accent-magenta);
         color: #0a0a0a;
         padding: 0.5rem 1rem;
-        border: 2px solid #ff00ff;
+        border: 2px solid var(--accent-magenta);
         font-weight: 700;
       }
 
@@ -92,8 +93,8 @@
         font-size: 12px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        border: 2px solid #ffaa00;
-        color: #ffaa00;
+        border: 2px solid var(--accent-orange);
+        color: var(--accent-orange);
         padding: 0.5rem 1rem;
         font-weight: 700;
       }
@@ -106,8 +107,8 @@
 
       .sidebar {
         width: 280px;
-        background-color: #111111;
-        border-right: 3px solid #ff00ff;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
         padding: 2rem 1.5rem;
         overflow-y: auto;
         position: sticky;
@@ -120,10 +121,10 @@
         font-size: 12px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-bottom: 1.5rem;
         font-weight: 700;
-        border-bottom: 2px solid #ff00ff;
+        border-bottom: 2px solid var(--accent-magenta);
         padding-bottom: 0.5rem;
       }
 
@@ -143,7 +144,7 @@
         cursor: pointer;
         border: 2px solid transparent;
         background-color: transparent;
-        color: #e0e0e0;
+        color: var(--text-primary);
         text-decoration: none;
         font-size: 13px;
         transition: all 0.2s ease;
@@ -153,33 +154,33 @@
       }
 
       .sidebar-nav-item:hover {
-        background-color: #1a1a1a;
-        border-color: #ff00ff;
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-magenta);
       }
 
       .sidebar-nav-item.active {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background-color: #0a2a2a;
-        color: #00ffff;
+        color: var(--accent-cyan);
       }
 
       .sidebar-checkbox {
         width: 18px;
         height: 18px;
-        border: 2px solid #666666;
+        border: 2px solid var(--text-muted);
         background-color: transparent;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: bold;
-        color: #00ff41;
+        color: var(--accent-lime);
         font-size: 12px;
       }
 
       .sidebar-checkbox.checked {
-        background-color: #00ff41;
-        border-color: #00ff41;
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
         color: #0a0a0a;
       }
 
@@ -187,21 +188,21 @@
       .main {
         flex: 1;
         padding: 3rem;
-        background-color: #0a0a0a;
+        background-color: var(--bg-primary);
         overflow-y: auto;
       }
 
       .section {
         margin-bottom: 4rem;
         padding: 2rem;
-        background-color: #111111;
-        border: 3px solid #333333;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--border-primary);
         transition: all 0.3s ease;
       }
 
       .section:hover {
-        border-color: #00ffff;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 20px var(--accent-cyan-glow);
       }
 
       .section h2 {
@@ -209,9 +210,9 @@
         font-size: 22px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1.5rem;
-        border-bottom: 3px solid #00ffff;
+        border-bottom: 3px solid var(--accent-cyan);
         padding-bottom: 0.75rem;
         font-weight: 700;
       }
@@ -221,7 +222,7 @@
         font-size: 14px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-top: 1.5rem;
         margin-bottom: 1rem;
         font-weight: 700;
@@ -229,7 +230,7 @@
 
       .section p {
         margin-bottom: 1rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .section ul,
@@ -240,7 +241,7 @@
 
       .section li {
         margin-bottom: 0.75rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       /* SVG DIAGRAM */
@@ -248,16 +249,16 @@
         margin: 2rem 0;
         display: flex;
         justify-content: center;
-        background-color: #0a0a0a;
+        background-color: var(--bg-primary);
         padding: 2rem;
-        border: 2px solid #333333;
+        border: 2px solid var(--border-primary);
         overflow-x: auto;
       }
 
       /* CALCULATOR */
       .calculator {
-        background-color: #1a1a1a;
-        border: 3px solid #00ff41;
+        background-color: var(--bg-tertiary);
+        border: 3px solid var(--accent-lime);
         padding: 2rem;
         margin: 2rem 0;
       }
@@ -267,7 +268,7 @@
         font-size: 14px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #00ff41;
+        color: var(--accent-lime);
         margin-bottom: 1.5rem;
         font-weight: 700;
       }
@@ -283,44 +284,44 @@
         font-size: 12px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #00ff41;
+        color: var(--accent-lime);
         margin-bottom: 0.5rem;
         font-weight: 700;
       }
 
       .calc-input {
         padding: 0.75rem;
-        border: 2px solid #00ff41;
-        background-color: #0a0a0a;
-        color: #00ff41;
+        border: 2px solid var(--accent-lime);
+        background-color: var(--bg-primary);
+        color: var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-size: 14px;
       }
 
       .calc-select {
         padding: 0.75rem;
-        border: 2px solid #00ff41;
-        background-color: #0a0a0a;
-        color: #00ff41;
+        border: 2px solid var(--accent-lime);
+        background-color: var(--bg-primary);
+        color: var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
       }
 
       .calc-result {
         background-color: #0a2a0a;
-        border: 2px solid #00ff41;
+        border: 2px solid var(--accent-lime);
         padding: 1.5rem;
         margin-top: 1.5rem;
         font-family: 'Space Mono', monospace;
-        color: #00ff41;
+        color: var(--accent-lime);
         font-size: 13px;
       }
 
       /* FLOWCHART */
       .flowchart {
-        background-color: #0a0a0a;
+        background-color: var(--bg-primary);
         padding: 2rem;
-        border: 2px solid #ff00ff;
+        border: 2px solid var(--accent-magenta);
         margin: 2rem 0;
         overflow-x: auto;
       }
@@ -331,24 +332,24 @@
       }
 
       .step {
-        background-color: #1a1a1a;
-        border: 2px solid #333333;
-        border-left: 4px solid #00ff41;
+        background-color: var(--bg-tertiary);
+        border: 2px solid var(--border-primary);
+        border-left: 4px solid var(--accent-lime);
         padding: 1.5rem;
         margin-bottom: 1rem;
         transition: all 0.2s ease;
       }
 
       .step:hover {
-        border-color: #00ff41;
-        border-left-color: #00ffff;
+        border-color: var(--accent-lime);
+        border-left-color: var(--accent-cyan);
       }
 
       .step-number {
         font-family: 'Space Mono', monospace;
         font-size: 24px;
         font-weight: 700;
-        color: #00ff41;
+        color: var(--accent-lime);
         margin-bottom: 0.5rem;
       }
 
@@ -357,33 +358,33 @@
         font-size: 13px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.75rem;
         font-weight: 700;
       }
 
       .step-content {
-        color: #e0e0e0;
+        color: var(--text-primary);
         font-size: 14px;
       }
 
       .button-press {
         display: inline-block;
-        background-color: #0a0a0a;
-        border: 2px solid #00ffff;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-cyan);
         padding: 0.5rem 0.75rem;
         margin: 0 0.25rem;
         font-family: 'Space Mono', monospace;
         font-size: 11px;
-        color: #00ffff;
+        color: var(--accent-cyan);
         font-weight: 700;
         letter-spacing: 0.05em;
       }
 
       /* QUIZ */
       .quiz-section {
-        background-color: #1a1a1a;
-        border: 3px solid #ff00ff;
+        background-color: var(--bg-tertiary);
+        border: 3px solid var(--accent-magenta);
         padding: 2rem;
         margin-top: 2rem;
       }
@@ -393,7 +394,7 @@
         font-size: 18px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-bottom: 2rem;
         font-weight: 700;
       }
@@ -401,8 +402,8 @@
       .quiz-question {
         margin-bottom: 2rem;
         padding: 1.5rem;
-        background-color: #0a0a0a;
-        border: 2px solid #333333;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--border-primary);
       }
 
       .quiz-question-text {
@@ -410,7 +411,7 @@
         font-size: 13px;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1rem;
         font-weight: 700;
       }
@@ -421,15 +422,15 @@
         gap: 0.75rem;
         padding: 0.75rem;
         margin-bottom: 0.75rem;
-        border: 2px solid #333333;
-        background-color: #111111;
+        border: 2px solid var(--border-primary);
+        background-color: var(--bg-surface);
         cursor: pointer;
         transition: all 0.2s ease;
         font-size: 14px;
       }
 
       .quiz-option:hover {
-        border-color: #00ffff;
+        border-color: var(--accent-cyan);
         background-color: #0a2a2a;
       }
 
@@ -437,16 +438,16 @@
         width: 18px;
         height: 18px;
         cursor: pointer;
-        accent-color: #00ffff;
+        accent-color: var(--accent-cyan);
       }
 
       .quiz-option.correct {
-        border-color: #00ff41;
+        border-color: var(--accent-lime);
         background-color: #0a2a0a;
       }
 
       .quiz-option.incorrect {
-        border-color: #ff3333;
+        border-color: var(--accent-error);
         background-color: #2a0a0a;
       }
 
@@ -454,9 +455,9 @@
         display: none;
         margin-top: 1rem;
         padding: 1rem;
-        border-left: 3px solid #00ffff;
+        border-left: 3px solid var(--accent-cyan);
         font-size: 13px;
-        color: #e0e0e0;
+        color: var(--text-primary);
         font-family: 'Space Mono', monospace;
       }
 
@@ -465,19 +466,19 @@
       }
 
       .quiz-feedback.correct {
-        border-left-color: #00ff41;
-        color: #00ff41;
+        border-left-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       .quiz-feedback.incorrect {
-        border-left-color: #ff3333;
-        color: #ff3333;
+        border-left-color: var(--accent-error);
+        color: var(--accent-error);
       }
 
       .quiz-submit {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
-        border: 3px solid #00ffff;
+        border: 3px solid var(--accent-cyan);
         padding: 1rem 2rem;
         font-family: 'Space Mono', monospace;
         font-size: 13px;
@@ -491,15 +492,15 @@
 
       .quiz-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 255, 255, 0.4);
+        box-shadow: 0 4px 12px var(--accent-cyan-glow);
       }
 
       .quiz-result {
         margin-top: 2rem;
         padding: 1.5rem;
         background-color: #0a2a0a;
-        border: 2px solid #00ff41;
-        color: #00ff41;
+        border: 2px solid var(--accent-lime);
+        color: var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         display: none;
@@ -511,8 +512,8 @@
 
       /* CONFIDENCE RATING */
       .confidence-section {
-        background-color: #1a1a1a;
-        border: 3px solid #ffaa00;
+        background-color: var(--bg-tertiary);
+        border: 3px solid var(--accent-orange);
         padding: 2rem;
         margin-top: 2rem;
       }
@@ -522,7 +523,7 @@
         font-size: 15px;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: #ffaa00;
+        color: var(--accent-orange);
         margin-bottom: 1.5rem;
         font-weight: 700;
       }
@@ -536,9 +537,9 @@
       .confidence-btn {
         width: 56px;
         height: 56px;
-        border: 3px solid #666666;
-        background-color: #0a0a0a;
-        color: #e0e0e0;
+        border: 3px solid var(--text-muted);
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
         font-family: 'Space Mono', monospace;
         font-size: 18px;
         font-weight: 700;
@@ -550,20 +551,20 @@
       }
 
       .confidence-btn:hover {
-        border-color: #ffaa00;
-        box-shadow: 0 0 15px rgba(255, 170, 0, 0.3);
+        border-color: var(--accent-orange);
+        box-shadow: 0 0 15px var(--accent-orange-glow);
       }
 
       .confidence-btn.selected {
-        background-color: #ffaa00;
-        border-color: #ffaa00;
+        background-color: var(--accent-orange);
+        border-color: var(--accent-orange);
         color: #0a0a0a;
       }
 
       /* PROGRESS BAR */
       .progress-container {
-        background-color: #111111;
-        border: 3px solid #00ffff;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-cyan);
         padding: 1.5rem;
         margin-bottom: 2rem;
       }
@@ -573,21 +574,21 @@
         font-size: 11px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #00ffff;
+        color: var(--accent-cyan);
         margin-bottom: 0.75rem;
         font-weight: 700;
       }
 
       .progress-bar {
         height: 14px;
-        background-color: #0a0a0a;
-        border: 2px solid #00ffff;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-cyan);
         overflow: hidden;
       }
 
       .progress-fill {
         height: 100%;
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         width: 0%;
         transition: width 0.3s ease;
       }
@@ -599,15 +600,15 @@
         gap: 2rem;
         margin-top: 4rem;
         padding-top: 2rem;
-        border-top: 3px solid #333333;
+        border-top: 3px solid var(--border-primary);
       }
 
       .nav-button {
         flex: 1;
         padding: 1.5rem;
-        border: 3px solid #00ffff;
+        border: 3px solid var(--accent-cyan);
         background-color: transparent;
-        color: #00ffff;
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         letter-spacing: 0.1em;
@@ -623,7 +624,7 @@
       }
 
       .nav-button:hover {
-        background-color: #00ffff;
+        background-color: var(--accent-cyan);
         color: #0a0a0a;
         transform: translateY(-2px);
       }
@@ -638,7 +639,7 @@
           width: 100%;
           max-height: 280px;
           border-right: none;
-          border-bottom: 3px solid #ff00ff;
+          border-bottom: 3px solid var(--accent-magenta);
           position: static;
         }
 
@@ -872,7 +873,9 @@
             <li>Perfect for backing tracks, stems, long ambient pads</li>
           </ul>
 
-          <p>To assign a Static machine: select a track with [TRACK] + [TRIG 1]–[TRIG 8], then open [PLAYBACK] setup (hold [FUNC] + press [PLAYBACK]) and set the machine type to STATIC.</p>
+          <p>
+            To assign a Static machine: select a track by pressing a [TRACK] button ([T1] through [T8]), then open [PLAYBACK] setup (hold [FUNC] + press [PLAYBACK]) and set the machine type to STATIC.
+          </p>
 
           <h3>Strengths</h3>
           <ul>
@@ -906,7 +909,9 @@
             <li>128 Flex slots per project</li>
           </ul>
 
-          <p>To assign a Flex machine: select a track with [TRACK] + [TRIG 1]–[TRIG 8], open [PLAYBACK] setup (hold [FUNC] + press [PLAYBACK]) and set the machine type to FLEX.</p>
+          <p>
+            To assign a Flex machine: select a track by pressing a [TRACK] button ([T1] through [T8]), then open [PLAYBACK] setup (hold [FUNC] + press [PLAYBACK]) and set the machine type to FLEX.
+          </p>
 
           <h3>Strengths</h3>
           <ul>
@@ -1534,6 +1539,7 @@
         saveState({ timeSpent: (current.timeSpent || 0) + elapsed });
       });
     </script>
+    <script src="assets/theme.js" defer></script>
     <script src="assets/svg-overlay.js" defer></script>
 
     <!-- Creator / Support -->

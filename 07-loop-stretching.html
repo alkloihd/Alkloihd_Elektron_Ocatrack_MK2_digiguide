@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
     <style>
       * {
         margin: 0;
@@ -15,8 +16,8 @@
       }
 
       body {
-        background-color: #0a0a0a;
-        color: #e0e0e0;
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
         font-family:
           'Inter',
           -apple-system,
@@ -32,8 +33,8 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        background-color: #0a0a0a;
-        border-bottom: 3px solid #00ffff;
+        background-color: var(--bg-primary);
+        border-bottom: 3px solid var(--accent-cyan);
         padding: 1rem 2rem;
         display: flex;
         align-items: center;
@@ -41,20 +42,20 @@
       }
 
       .top-bar a {
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-decoration: none;
         font-family: 'Space Mono', monospace;
         font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        border: 2px solid #00ffff;
+        border: 2px solid var(--accent-cyan);
         padding: 0.5rem 1rem;
         transition: all 0.2s;
       }
 
       .top-bar a:hover {
-        background-color: #00ffff;
-        color: #0a0a0a;
+        background-color: var(--accent-cyan);
+        color: var(--bg-primary);
         transform: translateY(-2px);
       }
 
@@ -65,7 +66,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
       }
 
       .top-bar-meta {
@@ -78,14 +79,14 @@
       }
 
       .meta-item {
-        border: 2px solid #666666;
+        border: 2px solid var(--text-muted);
         padding: 0.5rem 0.8rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .meta-item.difficulty-beginner {
-        border-color: #00ff41;
-        color: #00ff41;
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
       }
 
       /* CONTAINER */
@@ -97,8 +98,8 @@
       /* SIDEBAR */
       .sidebar {
         width: 280px;
-        background-color: #111111;
-        border-right: 3px solid #ff00ff;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
         padding: 2rem 1.5rem;
         position: sticky;
         top: 60px;
@@ -111,9 +112,9 @@
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ff00ff;
+        color: var(--accent-magenta);
         margin-bottom: 1.5rem;
-        border-bottom: 2px solid #ff00ff;
+        border-bottom: 2px solid var(--accent-magenta);
         padding-bottom: 0.75rem;
       }
 
@@ -129,7 +130,7 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
         text-decoration: none;
         font-size: 14px;
         padding: 0.5rem 0.75rem;
@@ -138,21 +139,21 @@
       }
 
       .sidebar-nav a:hover {
-        color: #00ffff;
-        border-left: 2px solid #00ffff;
+        color: var(--accent-cyan);
+        border-left: 2px solid var(--accent-cyan);
         padding-left: 0.5rem;
       }
 
       .sidebar-nav a.active {
-        color: #00ffff;
-        border-left: 3px solid #00ffff;
+        color: var(--accent-cyan);
+        border-left: 3px solid var(--accent-cyan);
         padding-left: 0.5rem;
         font-weight: 600;
       }
 
       .checkmark {
         display: none;
-        color: #00ff41;
+        color: var(--accent-lime);
         font-weight: bold;
         font-size: 16px;
       }
@@ -171,7 +172,7 @@
       .section {
         margin-bottom: 4rem;
         padding-bottom: 2rem;
-        border-bottom: 2px solid #333333;
+        border-bottom: 2px solid var(--border-primary);
         opacity: 0;
         animation: fadeIn 0.4s ease-out forwards;
       }
@@ -197,9 +198,9 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1.5rem;
-        border-left: 4px solid #00ffff;
+        border-left: 4px solid var(--accent-cyan);
         padding-left: 1rem;
       }
 
@@ -209,32 +210,32 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #00ffff;
+        color: var(--accent-cyan);
         margin-top: 1.5rem;
         margin-bottom: 1rem;
       }
 
       .section p {
         margin-bottom: 1rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .highlight-box {
-        background-color: #111111;
-        border: 3px solid #ff00ff;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
         padding: 1.5rem;
         margin: 1.5rem 0;
         border-radius: 0;
       }
 
       .highlight-box.warning {
-        border-color: #ffaa00;
-        border-left: 6px solid #ffaa00;
+        border-color: var(--accent-orange);
+        border-left: 6px solid var(--accent-orange);
       }
 
       .highlight-box.success {
-        border-color: #00ff41;
-        border-left: 6px solid #00ff41;
+        border-color: var(--accent-lime);
+        border-left: 6px solid var(--accent-lime);
       }
 
       .highlight-box h4 {
@@ -242,18 +243,18 @@
         font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.75rem;
       }
 
       .code-block {
-        background-color: #0a0a0a;
-        border: 2px solid #00ffff;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-cyan);
         padding: 1rem;
         margin: 1.5rem 0;
         font-family: 'Space Mono', monospace;
         font-size: 13px;
-        color: #00ffff;
+        color: var(--accent-cyan);
         overflow-x: auto;
         white-space: pre-wrap;
         word-wrap: break-word;
@@ -264,35 +265,35 @@
         width: 100%;
         border-collapse: collapse;
         margin: 1.5rem 0;
-        border: 2px solid #333333;
+        border: 2px solid var(--border-primary);
       }
 
       th {
-        background-color: #111111;
-        border: 2px solid #333333;
+        background-color: var(--bg-surface);
+        border: 2px solid var(--border-primary);
         padding: 1rem;
         font-family: 'Space Mono', monospace;
         text-transform: uppercase;
         font-size: 12px;
         letter-spacing: 0.1em;
-        color: #00ffff;
+        color: var(--accent-cyan);
         text-align: left;
       }
 
       td {
-        border: 2px solid #333333;
+        border: 2px solid var(--border-primary);
         padding: 1rem;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       tr:nth-child(even) td {
-        background-color: #0d0d0d;
+        background-color: var(--bg-hover);
       }
 
       /* BPM TESTER */
       .bpm-tester {
-        background-color: #111111;
-        border: 3px solid #00ff41;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-lime);
         padding: 2rem;
         margin: 2rem 0;
         border-radius: 0;
@@ -309,13 +310,13 @@
         font-size: 13px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #00ff41;
+        color: var(--accent-lime);
       }
 
       .bpm-tester-input input {
-        background-color: #0a0a0a;
-        border: 2px solid #00ff41;
-        color: #00ff41;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-lime);
+        color: var(--accent-lime);
         padding: 0.75rem;
         font-family: 'Space Mono', monospace;
         font-size: 14px;
@@ -329,29 +330,29 @@
       .bpm-tester-result {
         margin-top: 1.5rem;
         padding: 1rem;
-        background-color: #0a0a0a;
-        border-left: 4px solid #00ff41;
+        background-color: var(--bg-primary);
+        border-left: 4px solid var(--accent-lime);
         font-family: 'Space Mono', monospace;
         font-size: 14px;
-        color: #e0e0e0;
+        color: var(--text-primary);
       }
 
       .bpm-detected {
-        color: #00ff41;
+        color: var(--accent-lime);
         font-weight: bold;
       }
 
       .bpm-highlight {
-        background-color: #00ff41;
-        color: #0a0a0a;
+        background-color: var(--accent-lime);
+        color: var(--bg-primary);
         padding: 0.1em 0.3em;
         font-weight: bold;
       }
 
       /* STEP-BY-STEP */
       .step-guide {
-        background-color: #111111;
-        border: 3px solid #ff00ff;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
         padding: 2rem;
         margin: 2rem 0;
         border-radius: 0;
@@ -373,12 +374,12 @@
         justify-content: center;
         width: 50px;
         height: 50px;
-        background-color: #00ffff;
-        color: #0a0a0a;
+        background-color: var(--accent-cyan);
+        color: var(--bg-primary);
         font-family: 'Space Mono', monospace;
         font-weight: 700;
         font-size: 18px;
-        border: 2px solid #00ffff;
+        border: 2px solid var(--accent-cyan);
         flex-shrink: 0;
       }
 
@@ -387,20 +388,20 @@
         font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 0.5rem;
       }
 
       .step-content p {
-        color: #e0e0e0;
+        color: var(--text-primary);
         font-size: 15px;
       }
 
       .button-demo {
         display: inline-block;
-        background-color: #0a0a0a;
-        border: 2px solid #00ffff;
-        color: #00ffff;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-cyan);
+        color: var(--accent-cyan);
         padding: 0.5rem 1rem;
         font-family: 'Space Mono', monospace;
         font-size: 12px;
@@ -412,8 +413,8 @@
 
       /* QUIZ */
       .quiz-section {
-        background-color: #111111;
-        border: 3px solid #ff00ff;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
         padding: 2rem;
         margin: 2rem 0;
         border-radius: 0;
@@ -432,7 +433,7 @@
         font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffffff;
+        color: var(--text-heading);
         margin-bottom: 1rem;
       }
 
@@ -448,8 +449,8 @@
       }
 
       .quiz-option:hover {
-        border: 2px solid #00ffff;
-        background-color: #0d0d0d;
+        border: 2px solid var(--accent-cyan);
+        background-color: var(--bg-hover);
       }
 
       .quiz-option input[type='radio'] {
@@ -476,19 +477,19 @@
       }
 
       .quiz-feedback.correct {
-        background-color: #00ff41;
-        color: #0a0a0a;
+        background-color: var(--accent-lime);
+        color: var(--bg-primary);
       }
 
       .quiz-feedback.incorrect {
-        background-color: #ff3333;
-        color: #ffffff;
+        background-color: var(--accent-error);
+        color: var(--text-heading);
       }
 
       /* CONFIDENCE */
       .confidence-section {
-        background-color: #111111;
-        border: 3px solid #ffaa00;
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-orange);
         padding: 2rem;
         margin: 2rem 0;
         border-radius: 0;
@@ -499,7 +500,7 @@
         font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #ffaa00;
+        color: var(--accent-orange);
         margin-bottom: 1.5rem;
       }
 
@@ -512,9 +513,9 @@
       .confidence-btn {
         width: 50px;
         height: 50px;
-        border: 2px solid #ffaa00;
-        background-color: #0a0a0a;
-        color: #ffaa00;
+        border: 2px solid var(--accent-orange);
+        background-color: var(--bg-primary);
+        color: var(--accent-orange);
         font-family: 'Space Mono', monospace;
         font-weight: 700;
         font-size: 16px;
@@ -523,14 +524,14 @@
       }
 
       .confidence-btn:hover {
-        background-color: #ffaa00;
-        color: #0a0a0a;
+        background-color: var(--accent-orange);
+        color: var(--bg-primary);
         transform: translateY(-2px);
       }
 
       .confidence-btn.selected {
-        background-color: #ffaa00;
-        color: #0a0a0a;
+        background-color: var(--accent-orange);
+        color: var(--bg-primary);
       }
 
       /* BOTTOM NAV */
@@ -539,15 +540,15 @@
         gap: 1rem;
         margin-top: 3rem;
         padding-top: 2rem;
-        border-top: 3px solid #333333;
+        border-top: 3px solid var(--border-primary);
       }
 
       .nav-btn {
         flex: 1;
         padding: 1rem;
-        border: 3px solid #00ffff;
-        background-color: #0a0a0a;
-        color: #00ffff;
+        border: 3px solid var(--accent-cyan);
+        background-color: var(--bg-primary);
+        color: var(--accent-cyan);
         font-family: 'Space Mono', monospace;
         font-size: 13px;
         text-transform: uppercase;
@@ -560,8 +561,8 @@
       }
 
       .nav-btn:hover {
-        background-color: #00ffff;
-        color: #0a0a0a;
+        background-color: var(--accent-cyan);
+        color: var(--bg-primary);
         transform: translateY(-2px);
       }
 
@@ -572,8 +573,8 @@
 
       .nav-btn.disabled:hover {
         transform: none;
-        background-color: #0a0a0a;
-        color: #00ffff;
+        background-color: var(--bg-primary);
+        color: var(--accent-cyan);
       }
 
       /* RESPONSIVE */
@@ -587,7 +588,7 @@
           height: auto;
           position: static;
           border-right: none;
-          border-bottom: 3px solid #ff00ff;
+          border-bottom: 3px solid var(--accent-magenta);
           display: flex;
           gap: 2rem;
           padding: 1.5rem;
@@ -748,7 +749,7 @@
             <h4>THE THREE-STEP SETUP</h4>
             <p>
               <strong>Step 1: ORIGINAL TEMPO</strong>
-              — Tell the OT the loop's TRUE BPM in the [AUD] Audio Editor
+              — Tell the OT the loop's TRUE BPM in the [AED] Audio Editor
             </p>
             <p>
               <strong>Step 2: TIMESTRETCH MODE</strong>
@@ -767,14 +768,14 @@
               <div class="step-content">
                 <h4>OPEN AUDIO EDITOR</h4>
                 <p>While viewing your sample on any [TRACK], press:</p>
-                <div class="button-demo">[FUNC] + [AUD]</div>
+                <div class="button-demo">[FUNC] + [AED]</div>
               </div>
             </div>
             <div class="step">
               <div class="step-number">2</div>
               <div class="step-content">
                 <h4>NAVIGATE TO ATTRIBUTES</h4>
-                <p>Press the [RIGHT] arrow key to browse pages of the [AUD] Audio Editor. You're looking for "Attributes" (usually page 2 or 3).</p>
+                <p>Press the [RIGHT] arrow key to browse pages of the [AED] Audio Editor. You're looking for "Attributes" (usually page 2 or 3).</p>
               </div>
             </div>
             <div class="step">
@@ -798,7 +799,7 @@
             <div class="step">
               <div class="step-number">5</div>
               <div class="step-content">
-                <h4>EXIT [AUD] AUDIO EDITOR</h4>
+                <h4>EXIT [AED] AUDIO EDITOR</h4>
                 <p>Press [NO] to return to the main sequencer view.</p>
               </div>
             </div>
@@ -893,7 +894,7 @@
             <p>
               If your filename is "Sample_140_Dark.wav" but the loop is actually 120 BPM, the OT will set ORIGINAL TEMPO to 140 and timestretch will sound wrong. Always
               <strong>manually verify ORIGINAL TEMPO</strong>
-              in the [AUD] Audio Editor (press [FUNC] + [AUD] to open), especially with ambiguous filenames.
+              in the [AED] Audio Editor (press [FUNC] + [AED] to open), especially with ambiguous filenames.
             </p>
           </div>
 
@@ -905,7 +906,7 @@
         <!-- SECTION 4: NORMAL vs BEAT -->
         <div class="section" id="section-4">
           <h2>04 - NORMAL VS BEAT ALGORITHM</h2>
-          <p>The Octatrack's timestretch engine has two modes, selectable in the [AUD] Audio Editor attributes page. They sound and behave very differently.</p>
+          <p>The Octatrack's timestretch engine has two modes, selectable in the [AED] Audio Editor attributes page. They sound and behave very differently.</p>
           <table>
             <tbody>
               <tr>
@@ -975,7 +976,7 @@
 
           <p>
             <strong>Experiment!</strong>
-            Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. Open the [AUD] Audio Editor with [FUNC] + [AUD], navigate with [RIGHT] to attributes, and
+            Both modes sound different on the same material. If BEAT sounds bad on a drum loop, try NORMAL. Open the [AED] Audio Editor with [FUNC] + [AED], navigate with [RIGHT] to attributes, and
             switch modes. The OT's CPU can handle it either way — it's about which sound you prefer.
           </p>
         </div>
@@ -1030,7 +1031,7 @@
             <ol style="margin-left: 2rem; color: #e0e0e0">
               <li>Assign Static to a [TRACK] (press [TRACK] to select, then assign via [SRC] setup)</li>
               <li>Load your loop via the sample browser (hold a [TRIG 1] key + [UP])</li>
-              <li>Set ORIGINAL TEMPO + TIMESTRETCH in [AUD] Audio Editor ([FUNC] + [AUD])</li>
+              <li>Set ORIGINAL TEMPO + TIMESTRETCH in [AED] Audio Editor ([FUNC] + [AED])</li>
               <li>Set TSTR = AUTO in [PLAYBACK] Setup ([FUNC] + [PLAYBACK])</li>
               <li>ZERO RAM used. Loop streams from CF card. Press [PLAY] — tempo-matched.</li>
             </ol>
@@ -1062,7 +1063,7 @@
               <div class="step-content">
                 <h4>OPEN AUDIO EDITOR</h4>
                 <p>Press:</p>
-                <div class="button-demo">[FUNC] + [AUD]</div>
+                <div class="button-demo">[FUNC] + [AED]</div>
               </div>
             </div>
             <div class="step">
@@ -1089,7 +1090,7 @@
             <div class="step">
               <div class="step-number">6</div>
               <div class="step-content">
-                <h4>EXIT [AUD] AUDIO EDITOR</h4>
+                <h4>EXIT [AED] AUDIO EDITOR</h4>
                 <p>Press [NO] to exit back to the main view.</p>
               </div>
             </div>
@@ -1136,14 +1137,14 @@
             <h4>HALF-TIME LOOP EXAMPLE</h4>
             <p>
               You load a loop and press [PLAY] but it sounds like it's playing at 2x speed. The filename says 140 BPM, but it sounds wrong.
-              <strong>Open the [AUD] Audio Editor ([FUNC] + [AUD]) and try setting ORIGINAL TEMPO to 70 (half of 140).</strong>
+              <strong>Open the [AED] Audio Editor ([FUNC] + [AED]) and try setting ORIGINAL TEMPO to 70 (half of 140).</strong>
               Often samples are recorded at double-time internally.
             </p>
           </div>
           <div class="highlight-box warning">
             <h4>DOUBLE-TIME LOOP EXAMPLE</h4>
             <p>
-              Conversely, a loop sounds too slow. Open [FUNC] + [AUD] and try
+              Conversely, a loop sounds too slow. Open [FUNC] + [AED] and try
               <strong>doubling the BPM value</strong>
               in ORIGINAL TEMPO using the [LEVEL] encoder.
             </p>
@@ -1205,7 +1206,7 @@
         <div class="section" id="section-8">
           <h2>08 - QUIZ</h2>
           <p style="margin-bottom: 1rem; color: #bbbbbb">
-            Use these checks exactly like live troubleshooting: open [AUD], toggle [FUNC] for advanced pages, inspect [PLAYBACK], then verify project [TEMPO].
+            Use these checks exactly like live troubleshooting: open [AED], toggle [FUNC] for advanced pages, inspect [PLAYBACK], then verify project [TEMPO].
           </p>
           <div class="quiz-section">
             <!-- Q1 -->
@@ -1301,7 +1302,7 @@
         <!-- SECTION 9: CONFIDENCE -->
         <div class="section" id="section-9">
           <h2>09 - CONFIDENCE RATING</h2>
-          <p style="margin-bottom: 0.75rem; color: #bbbbbb">Before rating yourself, do one fast drill: [AUD] → [PLAYBACK], hold [FUNC] to verify options, and compare against current [TEMPO].</p>
+          <p style="margin-bottom: 0.75rem; color: #bbbbbb">Before rating yourself, do one fast drill: [AED] → [PLAYBACK], hold [FUNC] to verify options, and compare against current [TEMPO].</p>
           <p>How confident do you feel about timestretch after this tutorial?</p>
           <div class="confidence-section">
             <div class="confidence-title">Rate Your Confidence (1-5)</div>
@@ -1534,6 +1535,7 @@
         });
       });
     </script>
+    <script src="assets/theme.js" defer></script>
     <script src="assets/svg-overlay.js" defer></script>
 
     <!-- Creator / Support -->

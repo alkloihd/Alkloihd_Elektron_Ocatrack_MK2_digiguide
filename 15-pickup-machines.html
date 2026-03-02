@@ -1,0 +1,2720 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15 - Pickup Machines: Live Looping</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/theme.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* TOP BAR */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-cyan);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 40px;
+        z-index: 1000;
+      }
+
+      .top-bar a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .top-bar a:hover {
+        color: var(--accent-lime);
+        transform: translateY(-2px);
+      }
+
+      .top-bar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-heading);
+        flex: 1;
+      }
+
+      .top-bar-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .difficulty {
+        color: var(--accent-error);
+        border: 2px solid var(--accent-error);
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: 'Space Mono', monospace;
+      }
+
+      .time {
+        color: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
+        padding: 4px 10px;
+      }
+
+      /* LAYOUT */
+      .container {
+        display: flex;
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        position: fixed;
+        left: 0;
+        top: 60px;
+        height: calc(100vh - 60px);
+        z-index: 100;
+      }
+
+      .sidebar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent-magenta);
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-magenta);
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.75rem;
+      }
+
+      .sidebar-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        background-color: transparent;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-nav-item:hover {
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-magenta);
+      }
+
+      .sidebar-nav-item.active {
+        border-color: var(--accent-cyan);
+        background-color: var(--highlight-bg);
+        color: var(--accent-cyan);
+      }
+
+      .sidebar-checkbox {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--text-muted);
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--accent-lime);
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-checkbox.checked {
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      /* MAIN CONTENT */
+      .main {
+        margin-left: 280px;
+        padding: 40px;
+        max-width: 900px;
+        width: 100%;
+      }
+
+      .section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .quiz-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .quiz-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .confidence-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .confidence-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      h2 {
+        font-family: 'Space Mono', monospace;
+        font-size: 22px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-heading);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-cyan);
+      }
+
+      h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--accent-magenta);
+        margin: 24px 0 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      p {
+        margin-bottom: 16px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 16px 24px;
+      }
+
+      li {
+        margin-bottom: 6px;
+      }
+
+      strong {
+        color: var(--text-heading);
+      }
+
+      code {
+        background: var(--code-bg);
+        color: var(--accent-magenta);
+        padding: 1px 6px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* BUTTON REFERENCES */
+      .button-key {
+        display: inline-block;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--accent-cyan);
+        color: var(--accent-cyan);
+        padding: 2px 10px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        margin: 2px;
+      }
+
+      .button-sequence {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 12px 0;
+        flex-wrap: wrap;
+      }
+
+      /* STEP GUIDES */
+      .step-guide {
+        margin: 20px 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+        padding: 16px;
+        background: var(--bg-primary);
+        border-left: 3px solid var(--accent-cyan);
+      }
+
+      .step-number {
+        font-family: 'Space Mono', monospace;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .step-content {
+        flex: 1;
+      }
+
+      .step-content p {
+        margin-bottom: 8px;
+      }
+
+      /* INFO BOXES */
+      .info-box {
+        padding: 16px 20px;
+        margin: 16px 0;
+        border-left: 3px solid var(--accent-cyan);
+        background: var(--highlight-bg);
+      }
+
+      .info-box.warning {
+        border-left-color: var(--accent-orange);
+        background: var(--warning-bg);
+      }
+
+      .info-box.protip {
+        border-left-color: var(--accent-lime);
+        background: var(--protip-bg);
+      }
+
+      .info-box p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* TABLES */
+      .condition-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+      }
+
+      .condition-table th {
+        background: var(--bg-tertiary);
+        color: var(--accent-cyan);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 10px 14px;
+        text-align: left;
+        border: 1px solid var(--border-primary);
+      }
+
+      .condition-table td {
+        padding: 10px 14px;
+        border: 1px solid var(--border-subtle);
+        vertical-align: top;
+      }
+
+      .condition-table tr:nth-child(even) {
+        background: var(--bg-primary);
+      }
+
+      .condition-table code {
+        background: var(--code-bg);
+        color: var(--accent-magenta);
+        padding: 1px 6px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      /* RECIPE CARDS */
+      .recipe-card {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .recipe-card h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent-orange);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      /* SVG DIAGRAM */
+      .diagram-container {
+        margin: 24px 0;
+        padding: 20px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        overflow-x: auto;
+      }
+
+      .diagram-container svg {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* STATE INDICATOR WIDGET */
+      .state-widget {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .state-widget-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+      }
+
+      .state-display {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 16px 0;
+        flex-wrap: wrap;
+      }
+
+      .state-led {
+        width: 24px;
+        height: 24px;
+        border: 2px solid var(--border-primary);
+        transition: all 0.3s;
+      }
+
+      .state-led.red {
+        background: #ff4444;
+        border-color: #ff4444;
+        box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+      }
+      .state-led.green {
+        background: #00ff41;
+        border-color: #00ff41;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+      }
+      .state-led.orange {
+        background: #ffaa00;
+        border-color: #ffaa00;
+        box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+      }
+      .state-led.magenta {
+        background: #ff00ff;
+        border-color: #ff00ff;
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+      }
+      .state-led.off {
+        background: var(--bg-tertiary);
+        border-color: var(--border-primary);
+        box-shadow: none;
+      }
+
+      .state-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-heading);
+        min-width: 120px;
+      }
+
+      .state-desc {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .state-controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+
+      .state-controls button {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        color: var(--text-primary);
+        padding: 8px 16px;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        transition: all 0.2s;
+      }
+
+      .state-controls button:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      /* VIDEO EMBED */
+      .video-embed {
+        margin: 20px 0;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 16px;
+      }
+
+      .video-embed-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent-magenta);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 10px;
+      }
+
+      .video-embed iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border: none;
+      }
+
+      /* RAM CALCULATOR WIDGET */
+      .ram-widget {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        padding: 20px;
+        margin: 20px 0;
+      }
+
+      .ram-widget-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 12px;
+      }
+
+      .ram-bar-container {
+        height: 24px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        overflow: hidden;
+        margin: 10px 0;
+        position: relative;
+      }
+
+      .ram-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+        transition: width 0.5s;
+      }
+
+      .ram-bar-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-heading);
+      }
+
+      .ram-inputs {
+        display: flex;
+        gap: 16px;
+        margin: 12px 0;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .ram-inputs label {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: var(--accent-lime);
+      }
+
+      .ram-inputs select,
+      .ram-inputs input {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-primary);
+        color: var(--text-primary);
+        padding: 4px 8px;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        border-color: var(--accent-magenta) !important;
+      }
+
+      .quiz-section h2 {
+        border-bottom-color: var(--accent-magenta);
+      }
+
+      .quiz-question {
+        margin-bottom: 30px;
+      }
+
+      .quiz-q {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text-heading);
+        margin-bottom: 12px;
+      }
+
+      .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .quiz-option {
+        padding: 10px 16px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 14px;
+      }
+
+      .quiz-option:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      .quiz-option.selected {
+        border-color: var(--accent-cyan);
+        background: var(--accent-cyan-glow);
+        color: var(--accent-cyan);
+      }
+
+      .quiz-option.correct {
+        border-color: var(--accent-lime);
+        background: var(--accent-lime-glow);
+        color: var(--accent-lime);
+      }
+
+      .quiz-option.incorrect {
+        border-color: var(--accent-error);
+        background: rgba(255, 68, 68, 0.1);
+        color: var(--accent-error);
+      }
+
+      .quiz-feedback {
+        margin-top: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: none;
+      }
+
+      .quiz-feedback.show {
+        display: block;
+      }
+
+      /* CONFIDENCE */
+      .confidence-section {
+        border-color: var(--accent-magenta) !important;
+      }
+
+      .confidence-section h2 {
+        border-bottom-color: var(--accent-magenta);
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      .confidence-btn {
+        width: 48px;
+        height: 48px;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        color: var(--text-muted);
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-btn:hover {
+        border-color: var(--accent-lime);
+        color: var(--accent-lime);
+      }
+
+      .confidence-btn.selected {
+        background: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        margin: 60px 0 40px;
+        margin-left: 280px;
+        padding: 0 40px;
+      }
+
+      .bottom-nav a {
+        flex: 1;
+        padding: 20px;
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        color: var(--accent-cyan);
+        text-decoration: none;
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .bottom-nav a:hover {
+        border-color: var(--accent-cyan);
+        color: var(--text-heading);
+        transform: translateY(-2px);
+      }
+
+      /* SUBMIT BUTTON */
+      .submit-btn {
+        background: var(--accent-magenta);
+        border: none;
+        color: var(--text-heading);
+        padding: 10px 30px;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        transition: all 0.2s;
+      }
+
+      .submit-btn:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+
+        .container {
+          flex-direction: column;
+        }
+
+        .main {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        .bottom-nav {
+          margin-left: 0;
+          padding: 0 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar">
+      <a href="index.html">&larr; DASHBOARD</a>
+      <div class="top-bar-title">15 &mdash; PICKUP MACHINES</div>
+      <div class="top-bar-meta">
+        <span class="difficulty">Advanced</span>
+        <span class="time">25 MIN</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="sidebar">
+        <div class="sidebar-title">SECTIONS</div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="#what-is-pickup" class="sidebar-nav-item active" data-section="what-is-pickup">
+                <span class="sidebar-checkbox"></span>
+                WHAT IS A PICKUP MACHINE?
+              </a>
+            </li>
+            <li>
+              <a href="#pickup-setup" class="sidebar-nav-item" data-section="pickup-setup">
+                <span class="sidebar-checkbox"></span>
+                PICKUP SETUP
+              </a>
+            </li>
+            <li>
+              <a href="#master-and-slave" class="sidebar-nav-item" data-section="master-and-slave">
+                <span class="sidebar-checkbox"></span>
+                MASTER &amp; SLAVE
+              </a>
+            </li>
+            <li>
+              <a href="#recording-overdubbing" class="sidebar-nav-item" data-section="recording-overdubbing">
+                <span class="sidebar-checkbox"></span>
+                RECORDING &amp; OVERDUBBING
+              </a>
+            </li>
+            <li>
+              <a href="#midi-foot-controller" class="sidebar-nav-item" data-section="midi-foot-controller">
+                <span class="sidebar-checkbox"></span>
+                MIDI FOOT CONTROLLER
+              </a>
+            </li>
+            <li>
+              <a href="#ram-considerations" class="sidebar-nav-item" data-section="ram-considerations">
+                <span class="sidebar-checkbox"></span>
+                RAM CONSIDERATIONS
+              </a>
+            </li>
+            <li>
+              <a href="#practical-exercise" class="sidebar-nav-item" data-section="practical-exercise">
+                <span class="sidebar-checkbox"></span>
+                PRACTICAL EXERCISE
+              </a>
+            </li>
+            <li>
+              <a href="#quiz" class="sidebar-nav-item" data-section="quiz">
+                <span class="sidebar-checkbox"></span>
+                QUIZ
+              </a>
+            </li>
+            <li>
+              <a href="#confidence" class="sidebar-nav-item" data-section="confidence">
+                <span class="sidebar-checkbox"></span>
+                CONFIDENCE
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-primary)">
+          <div class="sidebar-title" style="font-size: 11px; margin-bottom: 0.75rem">PREREQUISITES</div>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem">
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="02-load-and-lock.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">02 &mdash; Load &amp; Lock</a>
+            </li>
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="03-beat-basics.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">03 &mdash; Beat Basics</a>
+            </li>
+            <li style="font-size: 11px; color: var(--text-muted)">
+              <a href="10-resampling.html" style="color: var(--accent-cyan); text-decoration: none; font-size: 11px; font-family: 'Space Mono', monospace">10 &mdash; Resampling</a>
+            </li>
+          </ul>
+        </div>
+        <div style="margin-top: 0; padding-top: 1rem; border-top: 2px solid var(--border-primary)">
+          <div
+            class="progress-label"
+            style="margin-bottom: 0.5rem; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-magenta); font-weight: 700"
+          >
+            COMPLETION
+          </div>
+          <div class="progress-bar-container" style="height: 6px; background: var(--bg-primary); border: 1px solid var(--border-primary); overflow: hidden">
+            <div
+              class="progress-fill"
+              id="sidebarProgress"
+              style="height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta)); width: 0%; transition: width 0.5s"
+            ></div>
+          </div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 0.5rem">
+            <span id="completionPercent">0</span>
+            %
+          </div>
+        </div>
+      </div>
+
+      <div class="main">
+        <!-- SECTION 1: WHAT IS A PICKUP MACHINE? -->
+        <section class="section" id="what-is-pickup" data-section="what-is-pickup">
+          <h2>What Is a Pickup Machine?</h2>
+
+          <p>
+            A Pickup machine turns the Octatrack into a
+            <strong>loop pedal</strong>
+            . Unlike Flex machines (which play pre-loaded samples from RAM) or Static machines (which stream from the card), a Pickup machine
+            <strong>records live audio and immediately loops it</strong>
+            . No pre-set recording length is required &mdash; the first recording defines the loop length.
+          </p>
+
+          <p>The workflow is simple and physical:</p>
+          <ul>
+            <li>
+              Press [REC1] once to
+              <strong>start recording</strong>
+            </li>
+            <li>
+              Press [REC2] to
+              <strong>stop recording and start looping</strong>
+            </li>
+            <li>
+              Press [REC1] again to
+              <strong>start overdubbing</strong>
+            </li>
+          </ul>
+
+          <p>
+            This makes Pickup machines ideal for
+            <strong>live performance</strong>
+            : layering guitar loops, building vocal textures, stacking synth parts, or constructing entire compositions on the fly. Add a MIDI foot controller and you can do it all hands-free.
+          </p>
+
+          <p>Key characteristics that make Pickup machines unique:</p>
+          <ul>
+            <li>
+              <strong>Hard-linked to track recorder and buffer</strong>
+              &mdash; no manual buffer assignment needed
+            </li>
+            <li>
+              <strong>Cannot be sequenced or parameter-locked</strong>
+              &mdash; they are live performance tools
+            </li>
+            <li>
+              <strong>Master/Slave system</strong>
+              &mdash; the first recorded loop sets the tempo for everything
+            </li>
+            <li>
+              <strong>Use Flex RAM</strong>
+              &mdash; they share the same 64 MB pool as Flex machines
+            </li>
+            <li>
+              <strong>Recordings are volatile</strong>
+              &mdash; they disappear on power-off unless saved to the card
+            </li>
+          </ul>
+
+          <div class="info-box">
+            <p>
+              <strong>Manual reference:</strong>
+              Section 9.3 &mdash; Pickup Machine Sampling (page 49). Appendix A.5 &mdash; Pickup Machine reference (page 121). Tutorial 17.1.4 (page 105).
+            </p>
+          </div>
+
+          <!-- SVG DIAGRAM: Machine Type Comparison -->
+          <div class="diagram-container">
+            <svg viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Space Mono', monospace">
+              <text x="380" y="30" fill="#00ffff" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2">MACHINE TYPES COMPARED</text>
+
+              <!-- Column Headers -->
+              <rect x="30" y="50" width="160" height="36" fill="none" stroke="#00ffff" stroke-width="2" />
+              <text x="110" y="73" fill="#00ffff" font-size="11" font-weight="700" text-anchor="middle">FLEX</text>
+
+              <rect x="210" y="50" width="160" height="36" fill="none" stroke="#ffaa00" stroke-width="2" />
+              <text x="290" y="73" fill="#ffaa00" font-size="11" font-weight="700" text-anchor="middle">STATIC</text>
+
+              <rect x="390" y="50" width="160" height="36" fill="none" stroke="#ff00ff" stroke-width="2" />
+              <text x="470" y="73" fill="#ff00ff" font-size="11" font-weight="700" text-anchor="middle">PICKUP</text>
+
+              <rect x="570" y="50" width="160" height="36" fill="none" stroke="#00ff41" stroke-width="2" />
+              <text x="650" y="73" fill="#00ff41" font-size="11" font-weight="700" text-anchor="middle">THRU</text>
+
+              <!-- Row: Source -->
+              <text x="15" y="118" fill="#666666" font-size="9" font-weight="700">SOURCE</text>
+              <rect x="30" y="100" width="160" height="30" fill="#0a1a1a" stroke="#333333" stroke-width="1" />
+              <text x="110" y="119" fill="#e0e0e0" font-size="10" text-anchor="middle">Pre-loaded WAV</text>
+              <rect x="210" y="100" width="160" height="30" fill="#1a1500" stroke="#333333" stroke-width="1" />
+              <text x="290" y="119" fill="#e0e0e0" font-size="10" text-anchor="middle">Streamed WAV</text>
+              <rect x="390" y="100" width="160" height="30" fill="#1a0a1a" stroke="#333333" stroke-width="1" />
+              <text x="470" y="119" fill="#e0e0e0" font-size="10" text-anchor="middle">Live recording</text>
+              <rect x="570" y="100" width="160" height="30" fill="#0a1a0a" stroke="#333333" stroke-width="1" />
+              <text x="650" y="119" fill="#e0e0e0" font-size="10" text-anchor="middle">Live input</text>
+
+              <!-- Row: RAM -->
+              <text x="15" y="158" fill="#666666" font-size="9" font-weight="700">RAM</text>
+              <rect x="30" y="140" width="160" height="30" fill="#0a1a1a" stroke="#333333" stroke-width="1" />
+              <text x="110" y="159" fill="#ff4444" font-size="10" text-anchor="middle">Uses Flex RAM</text>
+              <rect x="210" y="140" width="160" height="30" fill="#1a1500" stroke="#333333" stroke-width="1" />
+              <text x="290" y="159" fill="#00ff41" font-size="10" text-anchor="middle">Zero RAM</text>
+              <rect x="390" y="140" width="160" height="30" fill="#1a0a1a" stroke="#333333" stroke-width="1" />
+              <text x="470" y="159" fill="#ff4444" font-size="10" text-anchor="middle">Uses Flex RAM</text>
+              <rect x="570" y="140" width="160" height="30" fill="#0a1a0a" stroke="#333333" stroke-width="1" />
+              <text x="650" y="159" fill="#00ff41" font-size="10" text-anchor="middle">Zero RAM</text>
+
+              <!-- Row: Sequencer -->
+              <text x="15" y="198" fill="#666666" font-size="9" font-weight="700">SEQUENCER</text>
+              <rect x="30" y="180" width="160" height="30" fill="#0a1a1a" stroke="#333333" stroke-width="1" />
+              <text x="110" y="199" fill="#e0e0e0" font-size="10" text-anchor="middle">Full sequencing</text>
+              <rect x="210" y="180" width="160" height="30" fill="#1a1500" stroke="#333333" stroke-width="1" />
+              <text x="290" y="199" fill="#e0e0e0" font-size="10" text-anchor="middle">Full sequencing</text>
+              <rect x="390" y="180" width="160" height="30" fill="#1a0a1a" stroke="#333333" stroke-width="1" />
+              <text x="470" y="199" fill="#ffaa00" font-size="10" text-anchor="middle">No sequencing</text>
+              <rect x="570" y="180" width="160" height="30" fill="#0a1a0a" stroke="#333333" stroke-width="1" />
+              <text x="650" y="199" fill="#e0e0e0" font-size="10" text-anchor="middle">Full sequencing</text>
+
+              <!-- Row: P-Locks -->
+              <text x="15" y="238" fill="#666666" font-size="9" font-weight="700">P-LOCKS</text>
+              <rect x="30" y="220" width="160" height="30" fill="#0a1a1a" stroke="#333333" stroke-width="1" />
+              <text x="110" y="239" fill="#00ff41" font-size="10" text-anchor="middle">Yes</text>
+              <rect x="210" y="220" width="160" height="30" fill="#1a1500" stroke="#333333" stroke-width="1" />
+              <text x="290" y="239" fill="#00ff41" font-size="10" text-anchor="middle">Yes</text>
+              <rect x="390" y="220" width="160" height="30" fill="#1a0a1a" stroke="#333333" stroke-width="1" />
+              <text x="470" y="239" fill="#ff4444" font-size="10" text-anchor="middle">No</text>
+              <rect x="570" y="220" width="160" height="30" fill="#0a1a0a" stroke="#333333" stroke-width="1" />
+              <text x="650" y="239" fill="#00ff41" font-size="10" text-anchor="middle">Yes</text>
+
+              <!-- Row: Best For -->
+              <text x="15" y="278" fill="#666666" font-size="9" font-weight="700">BEST FOR</text>
+              <rect x="30" y="260" width="160" height="40" fill="#0a1a1a" stroke="#333333" stroke-width="1" />
+              <text x="110" y="277" fill="#e0e0e0" font-size="9" text-anchor="middle">Short loops, slicing,</text>
+              <text x="110" y="291" fill="#e0e0e0" font-size="9" text-anchor="middle">chopping, retrigger</text>
+              <rect x="210" y="260" width="160" height="40" fill="#1a1500" stroke="#333333" stroke-width="1" />
+              <text x="290" y="277" fill="#e0e0e0" font-size="9" text-anchor="middle">Long stems, backing</text>
+              <text x="290" y="291" fill="#e0e0e0" font-size="9" text-anchor="middle">tracks, full songs</text>
+              <rect x="390" y="260" width="160" height="40" fill="#1a0a1a" stroke="#333333" stroke-width="1" />
+              <text x="470" y="277" fill="#e0e0e0" font-size="9" text-anchor="middle">Live looping,</text>
+              <text x="470" y="291" fill="#e0e0e0" font-size="9" text-anchor="middle">building layers</text>
+              <rect x="570" y="260" width="160" height="40" fill="#0a1a0a" stroke="#333333" stroke-width="1" />
+              <text x="650" y="277" fill="#e0e0e0" font-size="9" text-anchor="middle">External synths,</text>
+              <text x="650" y="291" fill="#e0e0e0" font-size="9" text-anchor="middle">live FX processing</text>
+
+              <!-- Highlight box around Pickup -->
+              <rect x="385" y="45" width="170" height="262" fill="none" stroke="#ff00ff" stroke-width="2" stroke-dasharray="6,3" />
+              <text x="470" y="330" fill="#ff00ff" font-size="10" font-weight="700" text-anchor="middle">THIS TUTORIAL</text>
+
+              <!-- Bottom note -->
+              <rect x="100" y="360" width="560" height="60" fill="#0a0a0a" stroke="#333333" stroke-width="1" />
+              <text x="380" y="382" fill="#00ffff" font-size="10" font-weight="700" text-anchor="middle">KEY DIFFERENCE</text>
+              <text x="380" y="400" fill="#e0e0e0" font-size="10" text-anchor="middle">Pickup = records live audio into loops. No pre-loaded samples needed.</text>
+              <text x="380" y="414" fill="#666666" font-size="9" text-anchor="middle">Think of it as a loop pedal built into the Octatrack.</text>
+            </svg>
+          </div>
+        </section>
+
+        <!-- SECTION 2: PICKUP SETUP -->
+        <section class="section" id="pickup-setup" data-section="pickup-setup">
+          <h2>Pickup Setup</h2>
+
+          <p>Setting up a Pickup machine requires configuring the machine assignment, audio input source, monitoring, and fade settings. Follow these steps exactly.</p>
+
+          <h3>Step-by-Step: Assign a Pickup Machine</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p><strong>Select a track</strong></p>
+                <p>Press the [TRACK] key for the track you want to use (e.g. [T1] for Track 1).</p>
+                <div class="button-sequence">
+                  <span class="button-key">[T1]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p><strong>Open Playback Setup</strong></p>
+                <p>Double-tap the [TRACK] key (or press [FUNC] + [SRC]) to open the PLAYBACK SETUP menu. The top of the screen shows the MACHINE parameter.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[T1]</span>
+                  <span style="color: var(--text-muted)">double-tap</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p><strong>Select Pickup machine</strong></p>
+                <p>
+                  Turn the first encoder to scroll through machine types: FLEX, STATIC, THRU, NEIGHBOR, PICKUP. Select
+                  <code>PICKUP</code>
+                  . The track icon in the top bar changes to "P".
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p><strong>Open Recording Setup 1</strong></p>
+                <p>Press [FUNC] + [REC1] to access RECORDING SETUP 1. This is where you configure the audio source.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[REC1]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <p><strong>Configure the recording source</strong></p>
+                <p>Set the parameters for your input:</p>
+                <ul>
+                  <li>
+                    <code>INAB</code>
+                    =
+                    <strong>A B</strong>
+                    (record from input pair AB)
+                  </li>
+                  <li>
+                    <code>INCD</code>
+                    =
+                    <strong>-</strong>
+                    (disable CD inputs)
+                  </li>
+                  <li>
+                    <code>RLEN</code>
+                    =
+                    <strong>MAX</strong>
+                    (allow maximum recording length)
+                  </li>
+                  <li>
+                    <code>TRIG</code>
+                    =
+                    <strong>ONE2</strong>
+                    (lets you manually define the loop end point)
+                  </li>
+                  <li>
+                    <code>SRC3</code>
+                    =
+                    <strong>-</strong>
+                    (no internal source &mdash; external only)
+                  </li>
+                  <li>
+                    <code>LOOP</code>
+                    =
+                    <strong>ON</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <p><strong>Open Recording Setup 2</strong></p>
+                <p>Press [FUNC] + [REC2] to configure fades and monitoring.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[REC2]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">7</div>
+              <div class="step-content">
+                <p><strong>Set fade and monitoring</strong></p>
+                <ul>
+                  <li>
+                    <code>FIN</code>
+                    =
+                    <strong>0.063</strong>
+                    (minimal fade in &mdash; prevents click at loop start)
+                  </li>
+                  <li>
+                    <code>FOUT</code>
+                    =
+                    <strong>0.063</strong>
+                    (minimal fade out &mdash; prevents click at loop end)
+                  </li>
+                  <li>
+                    <code>AB</code>
+                    =
+                    <strong>127</strong>
+                    (full monitoring of input pair AB)
+                  </li>
+                  <li>
+                    <code>QREC</code>
+                    =
+                    <strong>OFF</strong>
+                    (no recording quantization for now)
+                  </li>
+                  <li>
+                    <code>QPL</code>
+                    =
+                    <strong>OFF</strong>
+                    (no playback quantization for now)
+                  </li>
+                </ul>
+                <p>Press [NO] to exit the menu.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[NO]</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box protip">
+            <p>
+              <strong>About FIN/FOUT:</strong>
+              These add a very short fade to the recording to prevent clicks at the loop boundary.
+              <code>FOUT</code>
+              behaves differently for Pickup machines than for regular track recorders: the fade out is applied to the
+              <strong>beginning</strong>
+              of the captured loop (creating a crossfade at the loop point). Keep both at
+              <code>0.063</code>
+              for the cleanest transitions.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>About TRIG modes:</strong>
+              The TRIG setting in RECORDING SETUP 1 controls how the Pickup machine behaves.
+              <code>ONE</code>
+              uses the RLEN value to set a fixed loop length.
+              <code>ONE2</code>
+              lets you press [REC1] or [REC2] to manually end the recording (most flexible).
+              <code>HOLD</code>
+              records only while you hold [REC1].
+            </p>
+          </div>
+
+          <h3>SRC Page Parameters</h3>
+          <p>After assigning the Pickup machine, press [SRC] to see the PICKUP MAIN page. These parameters control playback behavior:</p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Parameter</th>
+                <th scope="col">Function</th>
+                <th scope="col">Recommended</th>
+              </tr>
+              <tr>
+                <td><code>PTCH</code></td>
+                <td>
+                  Pitch of the loop (+/- 1 octave). Must be
+                  <strong>0</strong>
+                  for overdubbing/replacing to work.
+                </td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td><code>DIR</code></td>
+                <td>Playback direction: FWD, REV, or PIPO (ping-pong)</td>
+                <td>FWD</td>
+              </tr>
+              <tr>
+                <td><code>LEN</code></td>
+                <td>Slave loop length relative to master: OFF, X1, X2, X4, X8 (only affects slave machines)</td>
+                <td>OFF (master) / X1 (slave)</td>
+              </tr>
+              <tr>
+                <td><code>GAIN</code></td>
+                <td>Volume of recordings/overdubs in dB. Use negative values for gradual fade-outs.</td>
+                <td>0 dB</td>
+              </tr>
+              <tr>
+                <td><code>OP</code></td>
+                <td>Operation mode: DUB (overdub on top), GAIN (volume changes only, no recording)</td>
+                <td>DUB</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Critical:</strong>
+              If
+              <code>PTCH</code>
+              is set to anything other than 0, overdubbing and replacing will be
+              <strong>disabled</strong>
+              . Always return PTCH to 0 before attempting to record or overdub.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: MASTER & SLAVE -->
+        <section class="section" id="master-and-slave" data-section="master-and-slave">
+          <h2>Master &amp; Slave</h2>
+
+          <p>
+            The Pickup machine system has a
+            <strong>master/slave hierarchy</strong>
+            . Understanding it is essential for multi-track looping.
+          </p>
+
+          <h3>How Master Works</h3>
+          <p>
+            The
+            <strong>first Pickup machine that records a loop</strong>
+            automatically becomes the
+            <strong>master</strong>
+            . When the master loop is captured:
+          </p>
+          <ul>
+            <li>
+              The Octatrack's
+              <strong>BPM automatically changes</strong>
+              to match the calculated tempo of the recorded loop
+            </li>
+            <li>
+              The master loop defines the
+              <strong>base loop length</strong>
+              that all slave loops sync to
+            </li>
+            <li>
+              The track icon shows "P" with
+              <strong>two dots at the top-left</strong>
+              = master
+            </li>
+          </ul>
+
+          <h3>How Slaves Work</h3>
+          <p>
+            Any other Pickup machines on other tracks become
+            <strong>slaves</strong>
+            to the master. Slave behavior depends on the
+            <code>LEN</code>
+            parameter on the [SRC] page:
+          </p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">LEN Setting</th>
+                <th scope="col">Slave Loop Length</th>
+                <th scope="col">Use Case</th>
+              </tr>
+              <tr>
+                <td><code>X1</code></td>
+                <td>Same length as master</td>
+                <td>Locked layers (bass, melody) that loop in perfect sync</td>
+              </tr>
+              <tr>
+                <td><code>X2</code></td>
+                <td>Double the master length</td>
+                <td>B-section variations, longer melodic phrases</td>
+              </tr>
+              <tr>
+                <td><code>X4</code></td>
+                <td>4x the master length</td>
+                <td>Extended progressions over 4 bars while master is 1 bar</td>
+              </tr>
+              <tr>
+                <td><code>X8</code></td>
+                <td>8x the master length</td>
+                <td>Full song sections against a short master loop</td>
+              </tr>
+              <tr>
+                <td><code>OFF</code></td>
+                <td>Free length (no sync to master)</td>
+                <td>Independent loop &mdash; will drift against master</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            Slave track icons show "P" with
+            <strong>two dots at the bottom-left</strong>
+            .
+          </p>
+
+          <!-- SVG DIAGRAM: Master/Slave Hierarchy -->
+          <div class="diagram-container">
+            <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Space Mono', monospace">
+              <text x="350" y="30" fill="#00ffff" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="2">MASTER / SLAVE HIERARCHY</text>
+
+              <!-- Master box -->
+              <rect x="230" y="50" width="240" height="60" fill="none" stroke="#ff00ff" stroke-width="2" />
+              <text x="350" y="75" fill="#ff00ff" font-size="12" font-weight="700" text-anchor="middle">MASTER PICKUP</text>
+              <text x="350" y="95" fill="#e0e0e0" font-size="10" text-anchor="middle">First to record = sets BPM + loop length</text>
+
+              <!-- Lines to slaves -->
+              <line x1="290" y1="110" x2="120" y2="160" stroke="#666666" stroke-width="1" />
+              <line x1="350" y1="110" x2="350" y2="160" stroke="#666666" stroke-width="1" />
+              <line x1="410" y1="110" x2="580" y2="160" stroke="#666666" stroke-width="1" />
+
+              <!-- Slave 1 -->
+              <rect x="30" y="160" width="180" height="50" fill="none" stroke="#ffaa00" stroke-width="1" />
+              <text x="120" y="183" fill="#ffaa00" font-size="11" font-weight="700" text-anchor="middle">SLAVE (LEN = X1)</text>
+              <text x="120" y="200" fill="#e0e0e0" font-size="9" text-anchor="middle">Same length as master</text>
+
+              <!-- Slave 2 -->
+              <rect x="260" y="160" width="180" height="50" fill="none" stroke="#ffaa00" stroke-width="1" />
+              <text x="350" y="183" fill="#ffaa00" font-size="11" font-weight="700" text-anchor="middle">SLAVE (LEN = X2)</text>
+              <text x="350" y="200" fill="#e0e0e0" font-size="9" text-anchor="middle">Double master length</text>
+
+              <!-- Slave 3 -->
+              <rect x="490" y="160" width="180" height="50" fill="none" stroke="#ffaa00" stroke-width="1" />
+              <text x="580" y="183" fill="#ffaa00" font-size="11" font-weight="700" text-anchor="middle">SLAVE (LEN = X4)</text>
+              <text x="580" y="200" fill="#e0e0e0" font-size="9" text-anchor="middle">4x master length</text>
+
+              <!-- Loop length visualizer -->
+              <text x="350" y="240" fill="#666666" font-size="10" font-weight="700" text-anchor="middle">LOOP LENGTH VISUALIZATION</text>
+
+              <!-- Master bar -->
+              <rect x="30" y="255" width="640" height="14" fill="none" stroke="#333333" stroke-width="1" />
+              <rect x="30" y="255" width="160" height="14" fill="#ff00ff" opacity="0.4" />
+              <text x="15" y="266" fill="#ff00ff" font-size="8" text-anchor="end">M</text>
+
+              <!-- X1 bar -->
+              <rect x="30" y="275" width="640" height="14" fill="none" stroke="#333333" stroke-width="1" />
+              <rect x="30" y="275" width="160" height="14" fill="#ffaa00" opacity="0.3" />
+              <text x="15" y="286" fill="#ffaa00" font-size="8" text-anchor="end">X1</text>
+
+              <!-- X2 bar -->
+              <rect x="30" y="295" width="640" height="14" fill="none" stroke="#333333" stroke-width="1" />
+              <rect x="30" y="295" width="320" height="14" fill="#00ffff" opacity="0.3" />
+              <text x="15" y="306" fill="#00ffff" font-size="8" text-anchor="end">X2</text>
+
+              <!-- X4 bar -->
+              <rect x="30" y="315" width="640" height="14" fill="none" stroke="#333333" stroke-width="1" />
+              <rect x="30" y="315" width="640" height="14" fill="#00ff41" opacity="0.2" />
+              <text x="15" y="326" fill="#00ff41" font-size="8" text-anchor="end">X4</text>
+
+              <!-- Divider lines -->
+              <line x1="190" y1="255" x2="190" y2="329" stroke="#444444" stroke-width="1" stroke-dasharray="3,3" />
+              <line x1="350" y1="255" x2="350" y2="329" stroke="#444444" stroke-width="1" stroke-dasharray="3,3" />
+              <line x1="510" y1="255" x2="510" y2="329" stroke="#444444" stroke-width="1" stroke-dasharray="3,3" />
+            </svg>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Important:</strong>
+              If all Pickup machines are stopped and a new one starts recording, that machine becomes the
+              <strong>new master</strong>
+              . Plan your track layout so the intended master always records first.
+            </p>
+          </div>
+
+          <h3>Sequencer Sync</h3>
+          <p>You can lock the Octatrack's sequencer tempo to a Pickup machine loop. This is essential when mixing pre-programmed sequenced patterns with live Pickup loops:</p>
+          <div class="button-sequence">
+            <span class="button-key">[TRACK]</span>
+            <span style="color: var(--text-muted)">+</span>
+            <span class="button-key">[TEMPO]</span>
+          </div>
+          <p>
+            The BPM display will change to show which Pickup machine is controlling the tempo. If Pickup sync is active and the sequencer is stopped, pressing [PLAY] will start the sequencer in sync
+            with the next loop restart.
+          </p>
+        </section>
+
+        <!-- SECTION 4: RECORDING & OVERDUBBING -->
+        <section class="section" id="recording-overdubbing" data-section="recording-overdubbing">
+          <h2>Recording &amp; Overdubbing</h2>
+
+          <p>
+            The heart of the Pickup machine is its loop pedal workflow. The function of the [REC1] and [REC2] keys changes when a Pickup machine is assigned to the active track. How they behave
+            depends on the
+            <code>TRIG</code>
+            setting in RECORDING SETUP 1.
+          </p>
+
+          <h3>ONE2 Mode (Recommended)</h3>
+          <p>
+            <code>ONE2</code>
+            is the most flexible mode. It lets you manually define where the loop ends by pressing [REC1] or [REC2]:
+          </p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">State</th>
+                <th scope="col">Action</th>
+                <th scope="col">Result</th>
+                <th scope="col">LED</th>
+              </tr>
+              <tr>
+                <td>Stopped</td>
+                <td>Press [REC1]</td>
+                <td>Recording starts</td>
+                <td style="color: #ff4444; font-weight: 700">Red (recording)</td>
+              </tr>
+              <tr>
+                <td>Recording</td>
+                <td>Press [REC1]</td>
+                <td>
+                  Stop recording, start
+                  <strong>overdubbing</strong>
+                </td>
+                <td style="color: #ffaa00; font-weight: 700">Orange (overdubbing)</td>
+              </tr>
+              <tr>
+                <td>Recording</td>
+                <td>Press [REC2]</td>
+                <td>
+                  Stop recording, start
+                  <strong>playback</strong>
+                  (no overdub)
+                </td>
+                <td style="color: #00ff41; font-weight: 700">Green (playing)</td>
+              </tr>
+              <tr>
+                <td>Playing</td>
+                <td>Press [REC1]</td>
+                <td>Start overdubbing</td>
+                <td style="color: #ffaa00; font-weight: 700">Orange (overdubbing)</td>
+              </tr>
+              <tr>
+                <td>Overdubbing</td>
+                <td>Press [REC2]</td>
+                <td>Stop overdubbing, continue playback</td>
+                <td style="color: #00ff41; font-weight: 700">Green (playing)</td>
+              </tr>
+              <tr>
+                <td>Playing</td>
+                <td>Press [REC2]</td>
+                <td>Stop playback</td>
+                <td>Off (stopped)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>ONE Mode</h3>
+          <p>
+            In
+            <code>ONE</code>
+            mode, the recording length is pre-set by the
+            <code>RLEN</code>
+            parameter. When [REC1] is pressed, the Pickup records for exactly that length and automatically enters overdubbing. Use [REC2] to switch to playback-only.
+          </p>
+
+          <h3>HOLD Mode</h3>
+          <p>
+            In
+            <code>HOLD</code>
+            mode, the Pickup records
+            <strong>only while you hold [REC1]</strong>
+            . Release [REC1] and it immediately starts looping. Press and hold [REC1] again to overdub. Replacing is not available in HOLD mode, but you can achieve the same effect by setting
+            <code>GAIN</code>
+            to
+            <code>-INF</code>
+            with
+            <code>OP</code>
+            set to
+            <code>DUB</code>
+            .
+          </p>
+
+          <!-- Interactive State Machine Widget -->
+          <div class="state-widget" id="pickup-state-sim">
+            <div class="state-widget-title">Interactive: Pickup Machine State Simulator (ONE2 Mode)</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px">Click [REC1] and [REC2] to step through the Pickup machine states. Watch the LED change color.</p>
+
+            <div class="state-display">
+              <div class="state-led off" id="sim-led"></div>
+              <div class="state-label" id="sim-state">STOPPED</div>
+              <div class="state-desc" id="sim-desc">Press [REC1] to start recording.</div>
+            </div>
+
+            <div class="state-controls">
+              <button type="button" id="sim-rec1" onclick="simRec1()">[REC1]</button>
+              <button type="button" id="sim-rec2" onclick="simRec2()">[REC2]</button>
+              <button type="button" onclick="simReset()">RESET</button>
+            </div>
+
+            <div style="margin-top: 14px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-muted)">
+              History:
+              <span id="sim-history">--</span>
+            </div>
+          </div>
+
+          <h3>Overdub vs Replace</h3>
+          <p>
+            In
+            <code>ONE</code>
+            and
+            <code>ONE2</code>
+            modes, you can toggle between
+            <strong>overdubbing</strong>
+            (layering on top) and
+            <strong>replacing</strong>
+            (overwriting the loop) using the [REC1] key while the loop is playing. Overdub = adds your new audio on top. Replace = erases the old audio and records fresh.
+          </p>
+
+          <h3>Saving Your Recordings</h3>
+          <p>
+            Pickup machine recordings live in the recorder buffer (Flex RAM). They are
+            <strong>not saved automatically</strong>
+            . If you power off the Octatrack, all Pickup recordings are lost. To save a recording permanently, open the RECORDING EDIT menu and save to the Compact Flash card:
+          </p>
+
+          <div class="button-sequence">
+            <span class="button-key">[FUNC]</span>
+            <span style="color: var(--text-muted)">+</span>
+            <span class="button-key">[REC3]</span>
+            <span style="color: var(--text-muted)">&rarr; save recording to CF card</span>
+          </div>
+
+          <p>You can also save from the Audio Editor by pressing [AED].</p>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Volatile recordings:</strong>
+              Always save important Pickup recordings before powering off or changing projects. The recorder buffer contents are not retained across power cycles.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 5: MIDI FOOT CONTROLLER -->
+        <section class="section" id="midi-foot-controller" data-section="midi-foot-controller">
+          <h2>MIDI Foot Controller</h2>
+
+          <p>A MIDI foot controller is the best way to use Pickup machines in a live performance. It frees your hands for playing an instrument while your feet control the loop recording.</p>
+
+          <h3>Setup</h3>
+          <ol>
+            <li>Connect the MIDI OUT of your foot controller to the MIDI IN of the Octatrack</li>
+            <li>
+              Make sure the foot controller sends on the Octatrack's
+              <strong>auto channel</strong>
+              (set in PROJECT &gt; MIDI &gt; CHANNELS)
+            </li>
+            <li>Assign Pickup machines to the tracks you want to control</li>
+            <li>Configure the foot controller pedals to send MIDI notes</li>
+          </ol>
+
+          <h3>MIDI Note Mapping for Pickup Machines</h3>
+          <p>The Octatrack responds to specific MIDI notes sent on the auto channel. These are the key mappings from Appendix C of the manual:</p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">MIDI Note</th>
+                <th scope="col">Note Name</th>
+                <th scope="col">Function</th>
+              </tr>
+              <tr>
+                <td>60</td>
+                <td>C4</td>
+                <td>
+                  <strong>Combo Record</strong>
+                  &mdash; equivalent to [REC1]. Starts recording from all configured sources.
+                </td>
+              </tr>
+              <tr>
+                <td>61</td>
+                <td>C#4</td>
+                <td>
+                  <strong>INAB Record</strong>
+                  &mdash; records from input pair AB only
+                </td>
+              </tr>
+              <tr>
+                <td>62</td>
+                <td>D4</td>
+                <td>
+                  <strong>INCD Record</strong>
+                  &mdash; records from input pair CD only
+                </td>
+              </tr>
+              <tr>
+                <td>63</td>
+                <td>D#4</td>
+                <td>
+                  <strong>SRC3 Record</strong>
+                  &mdash; records from internal source only
+                </td>
+              </tr>
+              <tr>
+                <td>64</td>
+                <td>E4</td>
+                <td>
+                  <strong>Pickup Play/Stop</strong>
+                  &mdash; equivalent to [REC2]. Toggles playback.
+                </td>
+              </tr>
+              <tr>
+                <td>68</td>
+                <td>G#4</td>
+                <td>
+                  <strong>Active Track Up</strong>
+                  &mdash; moves to next track
+                </td>
+              </tr>
+              <tr>
+                <td>69</td>
+                <td>A4</td>
+                <td>
+                  <strong>Active Track Down</strong>
+                  &mdash; moves to previous track
+                </td>
+              </tr>
+              <tr>
+                <td>71</td>
+                <td>B4</td>
+                <td>
+                  <strong>Toggle Seq Sync + Start</strong>
+                  &mdash; syncs sequencer to Pickup and starts
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>5-Pedal Setup Example</h3>
+          <p>From the manual's tutorial (section 17.1.5): a practical 5-pedal foot controller layout for a guitarist:</p>
+
+          <div class="recipe-card">
+            <h4>Foot Controller Pedal Assignments</h4>
+            <table class="condition-table">
+              <tbody>
+                <tr>
+                  <th scope="col">Pedal</th>
+                  <th scope="col">MIDI Note</th>
+                  <th scope="col">Function</th>
+                </tr>
+                <tr>
+                  <td>Pedal 1</td>
+                  <td>C4 (60)</td>
+                  <td>Start/stop recording (Combo Rec = [REC1])</td>
+                </tr>
+                <tr>
+                  <td>Pedal 2</td>
+                  <td>E4 (64)</td>
+                  <td>Play/Stop loop ([REC2])</td>
+                </tr>
+                <tr>
+                  <td>Pedal 3</td>
+                  <td>B4 (71)</td>
+                  <td>Sync sequencer to Pickup + start playing</td>
+                </tr>
+                <tr>
+                  <td>Pedal 4</td>
+                  <td>A4 (69)</td>
+                  <td>Previous track (move focus up)</td>
+                </tr>
+                <tr>
+                  <td>Pedal 5</td>
+                  <td>G#4 (68)</td>
+                  <td>Next track (move focus down)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="info-box protip">
+            <p>
+              <strong>CC alternative:</strong>
+              If your foot controller only sends MIDI CCs (not notes), send
+              <strong>CC 59</strong>
+              on the auto channel. The CC
+              <em>value</em>
+              is interpreted as the equivalent MIDI note number. For example, CC 59 with value 60 = Combo Record.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <p>
+              <strong>Workflow:</strong>
+              Use Pedal 1 to start recording. Play your instrument. Hit Pedal 2 to end recording and start looping. Use Pedal 5 to switch to the next track. Hit Pedal 1 again to start a new layer on
+              that track. Use Pedal 3 to sync the sequencer and mix Pickup loops with pre-programmed patterns.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 6: RAM CONSIDERATIONS -->
+        <section class="section" id="ram-considerations" data-section="ram-considerations">
+          <h2>RAM Considerations</h2>
+
+          <p>
+            Pickup machines use
+            <strong>Flex RAM</strong>
+            &mdash; the same 64 MB pool shared by all Flex machines and recorder buffers. Every second of Pickup recording eats into your Flex budget. Check your current usage by pressing [FUNC] +
+            [PROJ] to open the PROJECT menu, then navigate to CONTROL &gt; MEMORY. Plan carefully before committing to long loops.
+          </p>
+
+          <h3>RAM Usage per Second</h3>
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Bit Depth</th>
+                <th scope="col">Channels</th>
+                <th scope="col">Per Second</th>
+                <th scope="col">Per Minute</th>
+              </tr>
+              <tr>
+                <td>24-bit</td>
+                <td>Stereo</td>
+                <td>~264 KB/s</td>
+                <td>~15.5 MB/min</td>
+              </tr>
+              <tr>
+                <td>16-bit</td>
+                <td>Stereo</td>
+                <td>~176 KB/s</td>
+                <td>~10.3 MB/min</td>
+              </tr>
+              <tr>
+                <td>24-bit</td>
+                <td>Mono</td>
+                <td>~132 KB/s</td>
+                <td>~7.7 MB/min</td>
+              </tr>
+              <tr>
+                <td>16-bit</td>
+                <td>Mono</td>
+                <td>~88 KB/s</td>
+                <td>~5.2 MB/min</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Practical Scenarios</h3>
+          <p>At 120 BPM, a 4-bar loop = 8 seconds. Here is what that costs in RAM:</p>
+
+          <table class="condition-table">
+            <tbody>
+              <tr>
+                <th scope="col">Scenario</th>
+                <th scope="col">Duration</th>
+                <th scope="col">RAM Cost (24-bit stereo)</th>
+                <th scope="col">RAM Cost (16-bit mono)</th>
+              </tr>
+              <tr>
+                <td>1-bar loop @ 120 BPM</td>
+                <td>2 sec</td>
+                <td>~0.5 MB</td>
+                <td>~0.2 MB</td>
+              </tr>
+              <tr>
+                <td>4-bar loop @ 120 BPM</td>
+                <td>8 sec</td>
+                <td>~2.1 MB</td>
+                <td>~0.7 MB</td>
+              </tr>
+              <tr>
+                <td>8-bar loop @ 120 BPM</td>
+                <td>16 sec</td>
+                <td>~4.1 MB</td>
+                <td>~1.4 MB</td>
+              </tr>
+              <tr>
+                <td>16-bar loop @ 90 BPM</td>
+                <td>~43 sec</td>
+                <td>~11.1 MB</td>
+                <td>~3.7 MB</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- RAM Calculator Widget -->
+          <div class="ram-widget" id="ram-calc">
+            <div class="ram-widget-title">Pickup RAM Budget Calculator</div>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 10px">Enter your loop parameters to see RAM usage. Total Flex RAM pool = 64 MB.</p>
+
+            <div class="ram-inputs">
+              <label>
+                BPM:
+                <input type="number" id="ram-bpm" value="120" min="30" max="300" style="width: 60px" onchange="calcRAM()" />
+              </label>
+              <label>
+                Bars:
+                <select id="ram-bars" onchange="calcRAM()">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="4" selected>4</option>
+                  <option value="8">8</option>
+                  <option value="16">16</option>
+                  <option value="32">32</option>
+                </select>
+              </label>
+              <label>
+                Tracks:
+                <select id="ram-tracks" onchange="calcRAM()">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </label>
+              <label>
+                Quality:
+                <select id="ram-quality" onchange="calcRAM()">
+                  <option value="24stereo">24-bit Stereo</option>
+                  <option value="16stereo">16-bit Stereo</option>
+                  <option value="24mono">24-bit Mono</option>
+                  <option value="16mono" selected>16-bit Mono</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="ram-bar-container">
+              <div class="ram-bar-fill" id="ram-fill" style="width: 0%"></div>
+              <div class="ram-bar-label" id="ram-label">0 / 64 MB</div>
+            </div>
+
+            <div id="ram-detail" style="font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text-muted); margin-top: 8px"></div>
+          </div>
+
+          <div class="info-box protip">
+            <p>
+              <strong>RAM savings tip:</strong>
+              Record with
+              <strong>mono input</strong>
+              whenever possible (set
+              <code>INAB</code>
+              to
+              <code>A</code>
+              instead of
+              <code>A B</code>
+              ). A mono recording uses half the RAM of stereo. For guitar, bass, or single-mic vocals, mono is usually sufficient.
+            </p>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Shared pool:</strong>
+              If you are also using Flex machines for drum samples or other loops, their RAM usage reduces what is available for Pickup recording. Press [PROJ] and navigate to CONTROL &gt; MEMORY to
+              check your RAM budget before starting a live looping session. Consider using [SRC] to switch some tracks to Static machines (which stream from the card at zero RAM cost) to free up Flex
+              headroom.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 7: PRACTICAL EXERCISE -->
+        <section class="section" id="practical-exercise" data-section="practical-exercise">
+          <h2>Practical Exercise: Build a 3-Layer Loop</h2>
+
+          <p>
+            In this exercise you will build a multi-layer loop from scratch using three Pickup machines. You need an audio source connected to input A or AB (guitar, synth, mic, or a phone playing a
+            backing track).
+          </p>
+
+          <h3>Goal</h3>
+          <p>Create a 3-track loop with a rhythm layer, a bass/melody layer, and an ambient texture layer, each on its own track with independent effects.</p>
+
+          <h3>Setup</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <p><strong>Assign Pickup to Track 1 (Master)</strong></p>
+                <p>
+                  Double-tap [T1] to open PLAYBACK SETUP. Set machine to
+                  <code>PICKUP</code>
+                  .
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[T1]</span>
+                  <span style="color: var(--text-muted)">double-tap &rarr; select PICKUP</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <p><strong>Configure Track 1 Recording</strong></p>
+                <p>
+                  Press [FUNC] + [REC1]: set
+                  <code>INAB</code>
+                  = A B,
+                  <code>INCD</code>
+                  = -,
+                  <code>RLEN</code>
+                  = MAX,
+                  <code>TRIG</code>
+                  = ONE2,
+                  <code>SRC3</code>
+                  = -,
+                  <code>LOOP</code>
+                  = ON.
+                </p>
+                <p>
+                  Press [FUNC] + [REC2]: set
+                  <code>FIN</code>
+                  = 0.063,
+                  <code>FOUT</code>
+                  = 0.063,
+                  <code>AB</code>
+                  = 127.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[REC1]</span>
+                  <span style="color: var(--text-muted)">&rarr; configure &rarr;</span>
+                  <span class="button-key">[FUNC]</span>
+                  <span style="color: var(--text-muted)">+</span>
+                  <span class="button-key">[REC2]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <p><strong>Configure Track 1 SRC page</strong></p>
+                <p>
+                  Press [SRC] to open the PICKUP MAIN page. Set
+                  <code>PTCH</code>
+                  = 0,
+                  <code>DIR</code>
+                  = FWD,
+                  <code>GAIN</code>
+                  = 0,
+                  <code>OP</code>
+                  = DUB. Leave
+                  <code>LEN</code>
+                  at OFF (this is the master, LEN has no effect).
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[SRC]</span>
+                  <span style="color: var(--text-muted)">&rarr; configure parameters</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <p><strong>Assign Pickup to Track 2 (Slave)</strong></p>
+                <p>
+                  Double-tap [T2], set machine to
+                  <code>PICKUP</code>
+                  . Copy the same RECORDING SETUP settings from Track 1. On the [SRC] page, set
+                  <code>LEN</code>
+                  =
+                  <strong>X1</strong>
+                  (same length as master).
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[T2]</span>
+                  <span style="color: var(--text-muted)">double-tap &rarr; PICKUP &rarr;</span>
+                  <span class="button-key">[SRC]</span>
+                  <span style="color: var(--text-muted)">&rarr; LEN = X1</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">5</div>
+              <div class="step-content">
+                <p><strong>Assign Pickup to Track 3 (Slave)</strong></p>
+                <p>
+                  Double-tap [T3], set machine to
+                  <code>PICKUP</code>
+                  . Same RECORDING SETUP. On [SRC] page, set
+                  <code>LEN</code>
+                  =
+                  <strong>X2</strong>
+                  (double the master length for longer phrases).
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[T3]</span>
+                  <span style="color: var(--text-muted)">double-tap &rarr; PICKUP &rarr;</span>
+                  <span class="button-key">[SRC]</span>
+                  <span style="color: var(--text-muted)">&rarr; LEN = X2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Record the Loops</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">6</div>
+              <div class="step-content">
+                <p><strong>Record the Master Loop (Track 1)</strong></p>
+                <p>Make sure [T1] is the active track. Play your instrument. Press [REC1] to start recording. Play a 4-bar rhythmic pattern. Press [REC2] to stop recording and start looping.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[T1]</span>
+                  <span style="color: var(--text-muted)">&rarr; play &rarr;</span>
+                  <span class="button-key">[REC1]</span>
+                  <span style="color: var(--text-muted)">&rarr; perform 4 bars &rarr;</span>
+                  <span class="button-key">[REC2]</span>
+                </div>
+                <p>
+                  The Octatrack's BPM will change to match your recorded loop. Track 1 is now the
+                  <strong>master</strong>
+                  .
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">7</div>
+              <div class="step-content">
+                <p><strong>Add effects to Track 1</strong></p>
+                <p>Press [FX1] on Track 1 and add a filter or EQ. Press [FX2] and add a compressor or lo-fi effect. The effects process the loop in real-time.</p>
+                <div class="button-sequence">
+                  <span class="button-key">[FX1]</span>
+                  <span style="color: var(--text-muted)">&rarr; choose effect &rarr;</span>
+                  <span class="button-key">[FX2]</span>
+                  <span style="color: var(--text-muted)">&rarr; choose effect</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">8</div>
+              <div class="step-content">
+                <p><strong>Record Slave Loop on Track 2</strong></p>
+                <p>
+                  Press [T2] to switch to Track 2 (the active track must be the one you want to record on). Press [REC1] to start recording. Play a bass or melody part. Press [REC2] to stop and loop.
+                  Because
+                  <code>LEN</code>
+                  = X1, this loop will be the exact same length as the master.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[T2]</span>
+                  <span style="color: var(--text-muted)">&rarr;</span>
+                  <span class="button-key">[REC1]</span>
+                  <span style="color: var(--text-muted)">&rarr; perform &rarr;</span>
+                  <span class="button-key">[REC2]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">9</div>
+              <div class="step-content">
+                <p><strong>Record Slave Loop on Track 3</strong></p>
+                <p>
+                  Press [T3] to switch. Record an ambient texture or pad. Because
+                  <code>LEN</code>
+                  = X2, this loop will be
+                  <strong>twice as long</strong>
+                  as the master &mdash; giving you an 8-bar phrase over the 4-bar rhythm.
+                </p>
+                <div class="button-sequence">
+                  <span class="button-key">[T3]</span>
+                  <span style="color: var(--text-muted)">&rarr;</span>
+                  <span class="button-key">[REC1]</span>
+                  <span style="color: var(--text-muted)">&rarr; perform &rarr;</span>
+                  <span class="button-key">[REC2]</span>
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">10</div>
+              <div class="step-content">
+                <p><strong>Overdub and sculpt</strong></p>
+                <p>
+                  Switch back to any track and press [REC1] to add overdubs. Use [FX1] and [FX2] on each track for different effects. Adjust track [LEVEL] to mix the layers. Try setting
+                  <code>DIR</code>
+                  = REV on Track 3's [SRC] page to reverse the ambient loop for a dreamy texture.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-box protip">
+            <p>
+              <strong>Performance tip:</strong>
+              Use the [CUE] button + [TRACK] keys to preview individual layers in your headphones before unmuting them to the main output. This lets you rehearse an overdub before committing.
+            </p>
+          </div>
+
+          <div class="info-box warning">
+            <p>
+              <strong>Remember to save:</strong>
+              When you are happy with a loop, save it to the Compact Flash card via [FUNC] + [REC3] to open the RECORDING EDIT menu, then save. Otherwise it will be lost when you power off or change
+              projects.
+            </p>
+          </div>
+        </section>
+
+        <!-- QUIZ -->
+        <section class="quiz-section section" id="quiz" data-section="quiz">
+          <h2>Test Yourself</h2>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q1: What determines which Pickup machine becomes the master?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">The Pickup machine on the lowest-numbered track</div>
+              <div class="quiz-option" data-answer="true">The first Pickup machine that records a loop</div>
+              <div class="quiz-option" data-answer="false">The one with the highest LEN setting</div>
+              <div class="quiz-option" data-answer="false">You manually assign master status in the PLAYBACK SETUP menu</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q2: What happens to Pickup recordings when you power off the Octatrack?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">They are automatically saved to the project folder</div>
+              <div class="quiz-option" data-answer="false">They persist in Flex RAM across power cycles</div>
+              <div class="quiz-option" data-answer="true">They are lost unless manually saved to the CF card</div>
+              <div class="quiz-option" data-answer="false">They are saved to the recorder buffer permanently</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q3: A slave Pickup machine has LEN set to X2. If the master loop is 4 bars, how long is the slave loop?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">2 bars</div>
+              <div class="quiz-option" data-answer="false">4 bars</div>
+              <div class="quiz-option" data-answer="true">8 bars</div>
+              <div class="quiz-option" data-answer="false">16 bars</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q4: Which RAM pool do Pickup machines use?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">Static RAM (streams from card)</div>
+              <div class="quiz-option" data-answer="true">Flex RAM (shared 64 MB pool)</div>
+              <div class="quiz-option" data-answer="false">A dedicated Pickup RAM pool of 32 MB</div>
+              <div class="quiz-option" data-answer="false">They use no RAM at all</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div class="quiz-question">
+            <div class="quiz-q">Q5: In ONE2 mode, you press [REC1] to start recording and then press [REC2] to stop. What state does the Pickup enter?</div>
+            <div class="quiz-options">
+              <div class="quiz-option" data-answer="false">Overdubbing</div>
+              <div class="quiz-option" data-answer="false">Stopped</div>
+              <div class="quiz-option" data-answer="false">Replacing</div>
+              <div class="quiz-option" data-answer="true">Playback (looping without overdubbing)</div>
+            </div>
+            <div class="quiz-feedback"></div>
+          </div>
+
+          <div style="margin-top: 30px">
+            <button type="button" class="submit-btn" onclick="checkQuiz()">Submit Answers</button>
+            <div id="quiz-score" style="margin-top: 20px; font-size: 16px; font-weight: 600; display: none"></div>
+          </div>
+        </section>
+
+        <!-- CONFIDENCE -->
+        <section class="confidence-section section" id="confidence" data-section="confidence">
+          <h2>Confidence Check</h2>
+          <p>
+            How confident are you with Pickup machines? Can you assign a Pickup machine using [SRC], record a master loop with [REC1], add slave loops on other tracks via [TRACK] + [REC1], and manage
+            the [PROJ] &gt; MEMORY RAM budget without looking at notes?
+          </p>
+          <div class="confidence-scale">
+            <button type="button" class="confidence-btn" data-confidence="1">1</button>
+            <button type="button" class="confidence-btn" data-confidence="2">2</button>
+            <button type="button" class="confidence-btn" data-confidence="3">3</button>
+            <button type="button" class="confidence-btn" data-confidence="4">4</button>
+            <button type="button" class="confidence-btn" data-confidence="5">5</button>
+          </div>
+          <p id="confidence-msg" style="color: var(--text-muted); margin-top: 15px; font-size: 13px"></p>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <a href="14-midi-sequencing.html">&larr; PREV: MIDI SEQUENCING</a>
+          <a href="16-performance-and-dj.html">NEXT: PERFORMANCE &amp; DJ SETUP &rarr;</a>
+        </div>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid var(--border-primary);
+              color: var(--text-muted);
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = 'var(--accent-error)';
+              this.style.color = 'var(--accent-error)';
+            "
+            onmouseout="
+              this.style.borderColor = 'var(--border-primary)';
+              this.style.color = 'var(--text-muted)';
+            "
+          >
+            RESET PROGRESS
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: var(--bg-tertiary); border: 1px solid var(--border-primary); padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: var(--accent-error); margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: var(--accent-cyan)">15 &mdash; Pickup Machines</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid var(--border-primary); color: var(--text-muted); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: var(--accent-error); border: none; color: var(--text-heading); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            YES, RESET
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ======================================================================
+         Tutorial 15 — Pickup Machines: Live Looping
+         Vanilla JS (ES5 compatible)
+         ====================================================================== */
+
+      var STORAGE_KEY = 'octatrack-tutorials';
+      var TUTORIAL_ID = '15-pickup-machines';
+      var TOTAL_QUESTIONS = 5;
+
+      /* ---- State management ---- */
+      function getState() {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      }
+
+      function setState(id, updates) {
+        var state = getState();
+        var current = state[id] || {};
+        for (var key in updates) {
+          if (updates.hasOwnProperty(key)) {
+            current[key] = updates[key];
+          }
+        }
+        current.lastAccessed = new Date().toISOString();
+        state[id] = current;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function resetTutorialProgress() {
+        var state = getState();
+        delete state[TUTORIAL_ID];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        window.location.reload();
+      }
+
+      /* ---- Sidebar navigation ---- */
+      var navItems = document.querySelectorAll('.sidebar-nav-item');
+      var sections = document.querySelectorAll('.section');
+      var sectionMap = {};
+      for (var i = 0; i < sections.length; i++) {
+        sectionMap[sections[i].id] = sections[i];
+      }
+
+      /* ---- IntersectionObserver ---- */
+      var visitedSections = {};
+      var savedState = getState()[TUTORIAL_ID] || {};
+      if (savedState.sectionsCompleted) {
+        for (var sc = 0; sc < savedState.sectionsCompleted.length; sc++) {
+          visitedSections[savedState.sectionsCompleted[sc]] = true;
+          var navItem = document.querySelector('.sidebar-nav-item[data-section="' + savedState.sectionsCompleted[sc] + '"]');
+          if (navItem) {
+            var cb = navItem.querySelector('.sidebar-checkbox');
+            if (cb) {
+              cb.classList.add('checked');
+              cb.textContent = '\u2713';
+            }
+          }
+        }
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          for (var e = 0; e < entries.length; e++) {
+            var entry = entries[e];
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              visitedSections[entry.target.id] = true;
+              var nav = document.querySelector('.sidebar-nav-item[data-section="' + entry.target.id + '"]');
+              if (nav) {
+                for (var j = 0; j < navItems.length; j++) {
+                  navItems[j].classList.remove('active');
+                }
+                nav.classList.add('active');
+                var cb = nav.querySelector('.sidebar-checkbox');
+                if (cb) {
+                  cb.classList.add('checked');
+                  cb.textContent = '\u2713';
+                }
+              }
+            } else {
+              entry.target.classList.remove('in-view');
+            }
+          }
+          updateProgress();
+        },
+        { threshold: 0.3 }
+      );
+
+      for (var s = 0; s < sections.length; s++) {
+        observer.observe(sections[s]);
+      }
+
+      /* ---- Pickup State Simulator ---- */
+      var simCurrentState = 'stopped';
+      var simHistoryArr = [];
+
+      function simUpdateUI(state, desc) {
+        var led = document.getElementById('sim-led');
+        var stateEl = document.getElementById('sim-state');
+        var descEl = document.getElementById('sim-desc');
+        var histEl = document.getElementById('sim-history');
+
+        if (!led || !stateEl || !descEl) return;
+
+        led.className = 'state-led';
+        simCurrentState = state;
+
+        if (state === 'stopped') {
+          led.classList.add('off');
+          stateEl.textContent = 'STOPPED';
+          stateEl.style.color = 'var(--text-heading)';
+        } else if (state === 'recording') {
+          led.classList.add('red');
+          stateEl.textContent = 'RECORDING';
+          stateEl.style.color = '#ff4444';
+        } else if (state === 'playing') {
+          led.classList.add('green');
+          stateEl.textContent = 'PLAYING';
+          stateEl.style.color = '#00ff41';
+        } else if (state === 'overdubbing') {
+          led.classList.add('orange');
+          stateEl.textContent = 'OVERDUBBING';
+          stateEl.style.color = '#ffaa00';
+        } else if (state === 'replacing') {
+          led.classList.add('magenta');
+          stateEl.textContent = 'REPLACING';
+          stateEl.style.color = '#ff00ff';
+        }
+
+        descEl.textContent = desc;
+        simHistoryArr.push(state);
+        if (histEl) {
+          histEl.textContent = simHistoryArr.join(' > ');
+        }
+      }
+
+      function simRec1() {
+        if (simCurrentState === 'stopped') {
+          simUpdateUI('recording', 'Recording started. Press [REC1] to end + overdub, or [REC2] to end + play.');
+        } else if (simCurrentState === 'recording') {
+          simUpdateUI('overdubbing', 'Loop captured. Overdubbing. Press [REC2] to stop overdub and play.');
+        } else if (simCurrentState === 'playing') {
+          simUpdateUI('overdubbing', 'Overdubbing on top of loop. Press [REC2] to stop overdub.');
+        } else if (simCurrentState === 'overdubbing') {
+          simUpdateUI('replacing', 'Replacing loop content. Press [REC2] to stop replacing.');
+        } else if (simCurrentState === 'replacing') {
+          simUpdateUI('overdubbing', 'Switched back to overdubbing. Press [REC2] to stop.');
+        }
+      }
+
+      function simRec2() {
+        if (simCurrentState === 'recording') {
+          simUpdateUI('playing', 'Loop captured. Playing back (no overdub). Press [REC1] to overdub.');
+        } else if (simCurrentState === 'overdubbing') {
+          simUpdateUI('playing', 'Overdub stopped. Loop playing. Press [REC1] to overdub again.');
+        } else if (simCurrentState === 'replacing') {
+          simUpdateUI('playing', 'Replacing stopped. Loop playing. Press [REC1] to overdub.');
+        } else if (simCurrentState === 'playing') {
+          simUpdateUI('stopped', 'Playback stopped. Press [REC1] to record a new loop.');
+        } else if (simCurrentState === 'stopped') {
+          simUpdateUI('stopped', 'Already stopped. Press [REC1] to start recording.');
+        }
+      }
+
+      function simReset() {
+        simCurrentState = 'stopped';
+        simHistoryArr = [];
+        simUpdateUI('stopped', 'Press [REC1] to start recording.');
+        var histEl = document.getElementById('sim-history');
+        if (histEl) histEl.textContent = '--';
+      }
+
+      /* ---- RAM Calculator ---- */
+      function calcRAM() {
+        var bpm = parseInt(document.getElementById('ram-bpm').value) || 120;
+        var bars = parseInt(document.getElementById('ram-bars').value) || 4;
+        var tracks = parseInt(document.getElementById('ram-tracks').value) || 3;
+        var quality = document.getElementById('ram-quality').value;
+
+        var beatsPerBar = 4;
+        var secPerBeat = 60.0 / bpm;
+        var loopSec = bars * beatsPerBar * secPerBeat;
+
+        var bytesPerSec = 0;
+        if (quality === '24stereo') bytesPerSec = 44100 * 3 * 2;
+        else if (quality === '16stereo') bytesPerSec = 44100 * 2 * 2;
+        else if (quality === '24mono') bytesPerSec = 44100 * 3;
+        else if (quality === '16mono') bytesPerSec = 44100 * 2;
+
+        var perTrackBytes = loopSec * bytesPerSec;
+        var totalBytes = perTrackBytes * tracks;
+        var totalMB = totalBytes / (1024 * 1024);
+        var maxMB = 64;
+        var percent = Math.min((totalMB / maxMB) * 100, 100);
+
+        var fill = document.getElementById('ram-fill');
+        var label = document.getElementById('ram-label');
+        var detail = document.getElementById('ram-detail');
+
+        if (fill) {
+          fill.style.width = percent + '%';
+          if (percent > 80) {
+            fill.style.background = 'linear-gradient(90deg, var(--accent-orange), var(--accent-error))';
+          } else {
+            fill.style.background = 'linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta))';
+          }
+        }
+        if (label) label.textContent = totalMB.toFixed(1) + ' / ' + maxMB + ' MB';
+        if (detail) {
+          detail.textContent =
+            tracks +
+            ' tracks x ' +
+            bars +
+            ' bars @ ' +
+            bpm +
+            ' BPM = ' +
+            loopSec.toFixed(1) +
+            's per track | ' +
+            (perTrackBytes / (1024 * 1024)).toFixed(1) +
+            ' MB/track | ' +
+            (maxMB - totalMB).toFixed(1) +
+            ' MB remaining';
+        }
+      }
+
+      calcRAM();
+
+      /* ---- Quiz ---- */
+      var quizOptions = document.querySelectorAll('.quiz-option');
+      var quizAnswers = {};
+
+      for (var qi = 0; qi < quizOptions.length; qi++) {
+        (function (idx) {
+          quizOptions[idx].addEventListener('click', function () {
+            var questionIdx = Math.floor(idx / 4);
+            var optionIdx = idx % 4;
+            var questions = document.querySelectorAll('.quiz-question');
+
+            for (var q = 0; q < questions.length; q++) {
+              var opts = questions[q].querySelectorAll('.quiz-option');
+              for (var o = 0; o < opts.length; o++) {
+                if (q === questionIdx && o === optionIdx) {
+                  opts[o].classList.add('selected');
+                  quizAnswers[questionIdx] = opts[o].getAttribute('data-answer') === 'true';
+                } else if (q === questionIdx) {
+                  opts[o].classList.remove('selected');
+                }
+              }
+            }
+          });
+        })(qi);
+      }
+
+      function checkQuiz() {
+        var score = 0;
+        var questions = document.querySelectorAll('.quiz-question');
+
+        for (var q = 0; q < questions.length; q++) {
+          var selected = questions[q].querySelector('.quiz-option.selected');
+          if (!selected) continue;
+
+          var isCorrect = selected.getAttribute('data-answer') === 'true';
+          if (isCorrect) {
+            selected.classList.add('correct');
+            score++;
+          } else {
+            selected.classList.add('incorrect');
+            var correct = questions[q].querySelector('[data-answer="true"]');
+            if (correct) correct.classList.add('correct');
+          }
+          var feedback = questions[q].querySelector('.quiz-feedback');
+          feedback.classList.add('show');
+          feedback.textContent = isCorrect ? 'Correct!' : 'Incorrect \u2014 see highlighted answer.';
+        }
+
+        var scoreEl = document.getElementById('quiz-score');
+        scoreEl.style.display = 'block';
+        scoreEl.textContent = 'Score: ' + score + ' / ' + TOTAL_QUESTIONS;
+        scoreEl.style.color = 'var(--accent-lime)';
+        setState(TUTORIAL_ID, { quizScore: score, quizTotal: TOTAL_QUESTIONS });
+        updateProgress();
+      }
+
+      /* ---- Confidence ---- */
+      var confBtns = document.querySelectorAll('.confidence-btn');
+      for (var ci = 0; ci < confBtns.length; ci++) {
+        (function (btn) {
+          btn.addEventListener('click', function () {
+            for (var b = 0; b < confBtns.length; b++) {
+              confBtns[b].classList.remove('selected');
+            }
+            btn.classList.add('selected');
+            var level = parseInt(btn.getAttribute('data-confidence'));
+            var msgs = [
+              '',
+              'Not ready yet \u2014 review the setup steps',
+              'Getting there \u2014 try the 3-layer exercise on the OT',
+              'Fairly confident \u2014 can set up Pickup machines from memory',
+              'Very confident \u2014 master/slave and overdubbing make sense',
+              'Expert \u2014 ready to build entire performances with live looping',
+            ];
+            document.getElementById('confidence-msg').textContent = msgs[level] || '';
+            setState(TUTORIAL_ID, { confidence: level });
+            updateProgress();
+          });
+        })(confBtns[ci]);
+      }
+
+      /* Restore confidence from state */
+      if (savedState.confidence) {
+        var savedConf = savedState.confidence;
+        for (var rc = 0; rc < confBtns.length; rc++) {
+          if (parseInt(confBtns[rc].getAttribute('data-confidence')) === savedConf) {
+            confBtns[rc].classList.add('selected');
+          }
+        }
+      }
+
+      /* ---- Progress tracking ---- */
+      function updateProgress() {
+        var tutorialState = getState()[TUTORIAL_ID] || {};
+        var totalSections = sections.length;
+        var visitedCount = 0;
+        for (var key in visitedSections) {
+          if (visitedSections.hasOwnProperty(key)) visitedCount++;
+        }
+
+        var percent = totalSections > 0 ? Math.round((visitedCount / totalSections) * 100) : 0;
+
+        var progressBar = document.getElementById('sidebarProgress');
+        if (progressBar) progressBar.style.width = percent + '%';
+        var percentEl = document.getElementById('completionPercent');
+        if (percentEl) percentEl.textContent = percent;
+
+        var status = 'not-started';
+        if (visitedCount > 0) status = 'in-progress';
+        if (visitedCount === totalSections) status = 'completed';
+
+        var visitedArr = [];
+        for (var vk in visitedSections) {
+          if (visitedSections.hasOwnProperty(vk)) visitedArr.push(vk);
+        }
+
+        setState(TUTORIAL_ID, {
+          status: status,
+          completion: percent,
+          sectionsCompleted: visitedArr,
+        });
+      }
+
+      updateProgress();
+    </script>
+    <script src="assets/theme.js" defer></script>
+    <script src="assets/svg-overlay.js"></script>
+
+    <!-- Creator / Support -->
+    <div
+      class="support-note"
+      style="
+        margin: 2.5rem auto 1rem;
+        max-width: 900px;
+        padding: 14px 16px;
+        border: 1px solid var(--border-primary);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        text-align: center;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+      "
+    >
+      <div style="margin-bottom: 6px">
+        Built by
+        <a href="https://www.instagram.com/alkloihd/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none">@alkloihd</a>
+        &middot;
+        <a href="https://www.mixcloud.com/rish-ku/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-magenta); text-decoration: none">Mixcloud</a>
+      </div>
+      <div>
+        Like what you're using? Help me build more of these!
+        <a href="https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA" target="_blank" rel="noopener noreferrer" style="color: var(--accent-lime); text-decoration: none">
+          https://paypal.me/Rishaal?locale.x=en_US&amp;country.x=CA
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

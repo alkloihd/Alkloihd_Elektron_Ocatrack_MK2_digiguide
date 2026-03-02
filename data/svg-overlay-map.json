@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "description": "Unified mapping: SVG element positions \u2194 tutorial references \u2194 manual functions. Used by overlay engine for animated button presses, tooltips, and highlights.",
+  "description": "Unified mapping: SVG element positions ↔ tutorial references ↔ manual functions. Used by overlay engine for animated button presses, tooltips, and highlights.",
   "svgSource": "assets/octatrack svg.svg",
   "svgViewBox": "0 0 1400 800",
   "zones": {
@@ -82,13 +82,13 @@
       "label": "Headphones Vol",
       "manual": {
         "primary": "Dedicated encoder that sets the volume for the stereo headphones output jack on the rear panel. Independent of main output volume.",
-        "func_combo": "N/A \u2014 no secondary function.",
+        "func_combo": "N/A — no secondary function.",
         "all_combos": [],
-        "menu_path": "N/A \u2014 hardware volume control for headphone output.",
+        "menu_path": "N/A — hardware volume control for headphone output.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
-          "The headphone output mirrors either the main outputs, the cue outputs, or a mix of both \u2014 controlled by the MIX parameter in the Mixer menu.",
+          "The headphone output mirrors either the main outputs, the cue outputs, or a mix of both — controlled by the MIX parameter in the Mixer menu.",
           "Independent from the MAIN/CUE OUT levels in the Mixer menu.",
           "Use with the MIX parameter to DJ-style cue preview tracks in headphones while the audience hears the main mix."
         ],
@@ -97,9 +97,9 @@
           "Merlin mentions plugging in headphones and assigning them to the CUE output for pre-listening what you're about to resample.",
           "Headphones on CUE = you hear what's being sent to the CUE bus without affecting MAIN outs."
         ],
-        "workflow_context": "Turn to set headphone volume. Assign headphones to CUE output in the Mixer page to pre-listen cued tracks without affecting the main output \u2014 essential for Merlin's CUE-based resampling technique.",
+        "workflow_context": "Turn to set headphone volume. Assign headphones to CUE output in the Mixer page to pre-listen cued tracks without affecting the main output — essential for Merlin's CUE-based resampling technique.",
         "common_mistakes": [
-          "Having headphones set to MAIN when you want to preview CUE \u2014 check the Mixer page headphone routing"
+          "Having headphones set to MAIN when you want to preview CUE — check the Mixer page headphone routing"
         ]
       },
       "tutorials": []
@@ -144,12 +144,12 @@
         ],
         "section": "15",
         "merlin_tips": [
-          "Merlin doesn't focus on MIDI in his guide \u2014 his emphasis is on the OT as a self-contained sampling/performance instrument."
+          "Merlin doesn't focus on MIDI in his guide — his emphasis is on the OT as a self-contained sampling/performance instrument."
         ],
         "workflow_context": "MIDI mode switches the trig keys to control external MIDI gear. [FUNC]+[MIDI] opens MIDI Sync settings for clock/transport sync with external equipment.",
         "common_mistakes": ["Accidentally entering MIDI mode when you meant to stay in audio track editing"]
       },
-      "tutorials": []
+      "tutorials": ["14-midi-sequencing"]
     },
     "proj": {
       "type": "button",
@@ -167,7 +167,7 @@
         "primary": "Opens the PROJECT menu where sets, projects, system settings, MIDI config, mixer, and tempo are accessed. This is the master settings hub of the Octatrack.",
         "func_combo": "[FUNC] + [PROJ] = Quick-save the current project (equivalent to PROJECT > SAVE).",
         "all_combos": ["[FUNC] + [PROJ] = Save project"],
-        "menu_path": "PROJECT menu \u2192 PROJECT (Load/Save/Reload/Export/Purge) | SYSTEM (USB/OS/Date/Personalize/Card Tools/Status) | CONTROL (Audio/Input/Sequencer/MIDI Seq/Memory/Metronome) | MIDI (Control/Sync/Channels/Turbo) | MIXER | TEMPO",
+        "menu_path": "PROJECT menu → PROJECT (Load/Save/Reload/Export/Purge) | SYSTEM (USB/OS/Date/Personalize/Card Tools/Status) | CONTROL (Audio/Input/Sequencer/MIDI Seq/Memory/Metronome) | MIDI (Control/Sync/Channels/Turbo) | MIXER | TEMPO",
         "parameters": [
           "PROJECT: Change, Save, Reload, Sync To Card, Save To New, Export To Set, Collect Samples, Purge Samples, Save Current Bank, Reload Current Bank",
           "SYSTEM: USB Disk Mode, OS Upgrade, Date/Time, Personalize, Card Tools, Status",
@@ -180,22 +180,22 @@
         "tips": [
           "Always save your project (FUNC+PROJ) before switching projects or ejecting the CF card.",
           "SYNC TO CARD should be performed before removing the CF card to avoid data corruption.",
-          "SAVE TO NEW is essential when experimenting \u2014 it preserves your working template.",
+          "SAVE TO NEW is essential when experimenting — it preserves your working template.",
           "PURGE SAMPLES removes unused samples from Flex/Static slot lists only, not from the Audio Pool."
         ],
         "section": "8.4",
         "merlin_tips": [
-          "The sample slot lists (Flex + Static) are PROJECT-wide \u2014 once you load a sample into a slot, it's available on any track, any pattern, any bank in the whole project.",
+          "The sample slot lists (Flex + Static) are PROJECT-wide — once you load a sample into a slot, it's available on any track, any pattern, any bank in the whole project.",
           "Merlin emphasizes: the OT expects you to select a SMALL number of samples and squeeze the most out of them. Think quality over quantity.",
           "Save your project regularly. Merlin's reloading experiments assume you have a saved state to fall back to."
         ],
-        "workflow_context": "PROJ is your top-level home base. Use it to save your work before experimenting. Merlin's entire workflow philosophy is: save \u2192 experiment \u2192 reload if needed. The project menu is where this starts.",
+        "workflow_context": "PROJ is your top-level home base. Use it to save your work before experimenting. Merlin's entire workflow philosophy is: save → experiment → reload if needed. The project menu is where this starts.",
         "common_mistakes": [
-          "Forgetting that the sample slot list is project-wide, not per-pattern \u2014 loading a sample once makes it available everywhere",
-          "Not saving the project before heavy experimentation \u2014 you lose your fallback point"
+          "Forgetting that the sample slot list is project-wide, not per-pattern — loading a sample once makes it available everywhere",
+          "Not saving the project before heavy experimentation — you lose your fallback point"
         ]
       },
-      "tutorials": ["02-load-and-lock", "03-beat-basics"]
+      "tutorials": ["02-load-and-lock", "03-beat-basics", "14-midi-sequencing", "15-pickup-machines"]
     },
     "part": {
       "type": "button",
@@ -216,37 +216,37 @@
           "[FUNC] + [PART] = Part Edit menu (Rename/Reload/Save/Save All)",
           "[FUNC] + [CUE] = Reload active part to saved settings (Part Reload)"
         ],
-        "menu_path": "PART QUICK SELECT \u2192 Select Part 1-4 for the active pattern. PART EDIT (via FUNC) \u2192 Rename / Reload / Save / Save All.",
+        "menu_path": "PART QUICK SELECT → Select Part 1-4 for the active pattern. PART EDIT (via FUNC) → Rename / Reload / Save / Save All.",
         "parameters": [
           "4 parts per bank (64 parts per project)",
           "Each part holds: machine assignments, sample slot assignments, FX assignments, track parameter settings, 16 scenes"
         ],
         "leds": "No dedicated LED. The active part name is shown on screen below the tempo display.",
         "tips": [
-          "Patterns sharing the same Part also share machine assignments \u2014 edit one and you edit both!",
+          "Patterns sharing the same Part also share machine assignments — edit one and you edit both!",
           "Parts are PER-BANK: 4 parts x 16 banks = 64 parts per project.",
           "An asterisk (*) next to a part name means it has been modified but not saved.",
           "Quick-link a part by holding [FUNC] while selecting it in the PART menu.",
-          "Press [FUNC] + [CUE] to reload a part to its saved state \u2014 great for live recovery after heavy tweaking."
+          "Press [FUNC] + [CUE] to reload a part to its saved state — great for live recovery after heavy tweaking."
         ],
         "section": "10.2",
-        "note": "Parts are per-bank: 4 parts \u00d7 16 banks = 64 parts per project",
+        "note": "Parts are per-bank: 4 parts × 16 banks = 64 parts per project",
         "merlin_tips": [
           "Parts are probably the MOST IMPORTANT concept Merlin covers. He calls the Part system 'the most complicated aspect of the OT' but also its greatest power.",
           "A Part stores: machines + settings, effects + settings, scenes, and track volumes. That's everything EXCEPT triggers and parameter locks (those live in the Pattern).",
-          "Think of saving a Part as 'setting up a base camp.' Once saved, you can go wild \u2014 change parameters, swap machines, replace effects. Hit [FUNC]+[RELOAD] and you're instantly zapped back home.",
-          "Multiple patterns can share the same Part. Change the filter resonance on one pattern and ALL patterns using that Part hear the change. This is by design \u2014 it keeps your sound coherent across pattern variations.",
-          "When you copy a pattern (e.g., A1 to A2), the Part is NOT copied \u2014 both patterns now point to the SAME Part. This is the #1 source of confusion for beginners.",
+          "Think of saving a Part as 'setting up a base camp.' Once saved, you can go wild — change parameters, swap machines, replace effects. Hit [FUNC]+[RELOAD] and you're instantly zapped back home.",
+          "Multiple patterns can share the same Part. Change the filter resonance on one pattern and ALL patterns using that Part hear the change. This is by design — it keeps your sound coherent across pattern variations.",
+          "When you copy a pattern (e.g., A1 to A2), the Part is NOT copied — both patterns now point to the SAME Part. This is the #1 source of confusion for beginners.",
           "The star (*) next to the Part number means you've changed something since the last save. If you see the star, what you're hearing differs from what was saved.",
           "Merlin describes 'incremental development': listen critically, fine-tune parameters, then save the Part to move your base camp to the improved version.",
           "Parts store which scenes are loaded to slots A and B, AND whether each scene is muted or active. This is powerful for pattern transitions."
         ],
-        "workflow_context": "Press [FUNC]+[PART] to enter the Parts menu. Save with [FUNC]+[EDIT]. Reload with [FUNC]+[RELOAD]. Merlin's core loop is: save Part \u2192 experiment freely \u2192 reload to undo everything. For a new section of your song, copy the Part to a new slot, assign it to the new pattern, then modify independently.",
+        "workflow_context": "Press [FUNC]+[PART] to enter the Parts menu. Save with [FUNC]+[EDIT]. Reload with [FUNC]+[RELOAD]. Merlin's core loop is: save Part → experiment freely → reload to undo everything. For a new section of your song, copy the Part to a new slot, assign it to the new pattern, then modify independently.",
         "common_mistakes": [
-          "Thinking that copying a pattern also copies the Part \u2014 it doesn't! Both patterns share the same Part.",
+          "Thinking that copying a pattern also copies the Part — it doesn't! Both patterns share the same Part.",
           "Changing a machine or effect while multiple patterns share a Part, then being surprised when ALL those patterns changed.",
-          "Not saving the Part before experimenting \u2014 without a saved state, [FUNC]+[RELOAD] has nothing to restore.",
-          "Confusing Part reload with project reload \u2014 Part reload only restores Part-level data (machines, effects, scenes, volumes), not triggers or locks."
+          "Not saving the Part before experimenting — without a saved state, [FUNC]+[RELOAD] has nothing to restore.",
+          "Confusing Part reload with project reload — Part reload only restores Part-level data (machines, effects, scenes, volumes), not triggers or locks."
         ]
       },
       "tutorials": ["01-set-sail", "08-parts-banks-scenes"]
@@ -272,7 +272,7 @@
           "[REC1/2] + [BANK] = Open the recorder buffer of the active track in the Audio Editor",
           "[FUNC] + [BANK] (in sample slot list) = Open selected sample in Audio Editor"
         ],
-        "menu_path": "AUDIO EDITOR \u2192 TRIM ([SRC]) | SLICE ([AMP]) | EDIT ([LFO]) | ATTRIBUTES ([FX1]) | FILE ([FX2])",
+        "menu_path": "AUDIO EDITOR → TRIM ([SRC]) | SLICE ([AMP]) | EDIT ([LFO]) | ATTRIBUTES ([FX1]) | FILE ([FX2])",
         "parameters": [
           "TRIM: Start point, Loop point, End point, Waveform zoom/scroll",
           "SLICE: Add/Delete slices, Create Slice Grid (2-64 slices), Create Linear/Random Locks, Reverse/Normalize slices",
@@ -282,7 +282,7 @@
         ],
         "leds": "No dedicated LED.",
         "tips": [
-          "Hold [FUNC] while moving start/end/loop markers to snap to zero-amplitude crossings \u2014 prevents clicks.",
+          "Hold [FUNC] while moving start/end/loop markers to snap to zero-amplitude crossings — prevents clicks.",
           "Press [FUNC] + [YES] to preview the sample from the main outputs; [CUE] + [YES] for cue outputs.",
           "Sample edits on Flex samples are session-only! Save them via FILE or they're lost on reboot.",
           "A blinking star next to a sample name in the slot list indicates unsaved edits.",
@@ -292,15 +292,15 @@
         "merlin_tips": [
           "Merlin explains that sample preparation in the Audio Editor is SEPARATE from machine assignment. You can slice, trim, and configure a sample in the slot list without ever assigning it to a track.",
           "Slice operations, loop points, and trim settings are stored IN the sample slot list, not in the Flex machine. The machine just plays what was prepared.",
-          "You can load the SAME sample into multiple slots and prepare it differently in each \u2014 e.g., slot 1 with 16 slices, slot 2 with 64 slices, slot 3 with different start/end points. Three different ways to play the same source audio.",
-          "The GAIN parameter in Attributes is your friend for fixing volume mismatches between samples \u2014 adjust it here rather than messing with track volumes or amp settings.",
-          "Recordings in record buffers can be sliced just like regular samples \u2014 same Audio Editor, same tools."
+          "You can load the SAME sample into multiple slots and prepare it differently in each — e.g., slot 1 with 16 slices, slot 2 with 64 slices, slot 3 with different start/end points. Three different ways to play the same source audio.",
+          "The GAIN parameter in Attributes is your friend for fixing volume mismatches between samples — adjust it here rather than messing with track volumes or amp settings.",
+          "Recordings in record buffers can be sliced just like regular samples — same Audio Editor, same tools."
         ],
-        "workflow_context": "After loading a sample into a slot, open the Audio Editor ([AED] or [FUNC]+[AED] for slice grid) to prepare it before sequencing. Set loop points, create slices, set the original tempo for time-stretching, and adjust gain. Do this preparation FIRST \u2014 then assign to machines. The prep work carries everywhere the sample is used.",
+        "workflow_context": "After loading a sample into a slot, open the Audio Editor ([AED] or [FUNC]+[AED] for slice grid) to prepare it before sequencing. Set loop points, create slices, set the original tempo for time-stretching, and adjust gain. Do this preparation FIRST — then assign to machines. The prep work carries everywhere the sample is used.",
         "common_mistakes": [
           "Trying to adjust sample behavior from the machine/track level when it should be done in the Audio Editor at the slot level",
-          "Not understanding that slice/trim settings are per-SLOT, not per-track \u2014 if two tracks use the same slot, they share the same slices",
-          "Forgetting to save a recording buffer to CF card before powering off \u2014 recordings are volatile!"
+          "Not understanding that slice/trim settings are per-SLOT, not per-track — if two tracks use the same slot, they share the same slices",
+          "Forgetting to save a recording buffer to CF card before powering off — recordings are volatile!"
         ]
       },
       "tutorials": [
@@ -309,7 +309,9 @@
         "04-audio-pool",
         "05-slice-and-dice",
         "06-sample-locks",
-        "07-loop-stretching"
+        "07-loop-stretching",
+        "13-arranger",
+        "15-pickup-machines"
       ]
     },
     "mix": {
@@ -331,7 +333,7 @@
           "[FUNC] + [MIX] = Toggle metronome on/off",
           "[CUE] + [TEMPO] = Toggle metronome on/off (alternative shortcut)"
         ],
-        "menu_path": "MIXER menu \u2192 MIX (headphone blend) | MAIN OUT | CUE OUT | AB DIR | CD DIR | AB GAIN | CD GAIN | MUTE (trig keys 1-8 audio, 9-16 MIDI)",
+        "menu_path": "MIXER menu → MIX (headphone blend) | MAIN OUT | CUE OUT | AB DIR | CD DIR | AB GAIN | CD GAIN | MUTE (trig keys 1-8 audio, 9-16 MIDI)",
         "parameters": [
           "MIX: Headphone blend between main output mirror (left) and cue-only (right)",
           "MAIN/CUE OUT: Final output level (+12dB max boost at +63, 0 = unity)",
@@ -344,22 +346,22 @@
           "When not in the Mixer menu, press [FUNC] + LEVEL knob to quickly adjust the MAIN output volume.",
           "DIR sound bypasses track effects but IS affected by the master track if Track 8 is set as master.",
           "Solo tracks by pressing [CUE] + [TRIG] keys while in the Mixer menu.",
-          "Hold [FUNC] while pressing mute [TRIG] keys to queue multiple mute changes \u2014 they all take effect when you release [FUNC].",
+          "Hold [FUNC] while pressing mute [TRIG] keys to queue multiple mute changes — they all take effect when you release [FUNC].",
           "If Neighbor machines are used, you can only mute the last Neighbor in the chain, not preceding tracks."
         ],
         "section": "8.8",
         "merlin_tips": [
           "Merlin explains the signal flow for live inputs: GAIN in the mixer sets healthy input levels (set once and forget), then DIR sends inputs straight to main outs.",
-          "The DIR parameter volume can be controlled via scenes using XDIR \u2014 this means you can fade live inputs in/out with the crossfader during a performance without opening the mixer page.",
+          "The DIR parameter volume can be controlled via scenes using XDIR — this means you can fade live inputs in/out with the crossfader during a performance without opening the mixer page.",
           "With scenes controlling XDIR, you effectively have 10 channels of audio under crossfader control: 8 OT tracks + 2 stereo live inputs."
         ],
-        "workflow_context": "Set input GAIN once when you connect external gear \u2014 this normalizes signal levels. Use DIR for direct monitoring volume. For performance mixing, set up XDIR in your scenes rather than constantly returning to the mixer page.",
+        "workflow_context": "Set input GAIN once when you connect external gear — this normalizes signal levels. Use DIR for direct monitoring volume. For performance mixing, set up XDIR in your scenes rather than constantly returning to the mixer page.",
         "common_mistakes": [
-          "Trying to automate the GAIN parameter \u2014 it's fixed by design (set and forget for healthy input levels)",
-          "Using DIR for performance mixing instead of setting up XDIR in scenes \u2014 DIR requires navigating to the mixer page every time"
+          "Trying to automate the GAIN parameter — it's fixed by design (set and forget for healthy input levels)",
+          "Using DIR for performance mixing instead of setting up XDIR in scenes — DIR requires navigating to the mixer page every time"
         ]
       },
-      "tutorials": ["08-parts-banks-scenes"]
+      "tutorials": ["08-parts-banks-scenes", "13-arranger", "16-performance-and-dj"]
     },
     "arr": {
       "type": "button",
@@ -377,7 +379,7 @@
         "primary": "Opens the ARRANGER menu where arrangements (up to 256 rows of sequenced patterns) are edited, renamed, saved, and chained.",
         "func_combo": "[FUNC] + [ARR] = Toggle ARRANGEMENT mode on/off. When lit, the Arranger controls playback.",
         "all_combos": ["[FUNC] + [ARR] = Toggle Arrangement mode on/off"],
-        "menu_path": "ARRANGER menu \u2192 EDIT | RENAME | CHANGE | CHAIN | CLEAR | SAVE | RELOAD",
+        "menu_path": "ARRANGER menu → EDIT | RENAME | CHANGE | CHAIN | CLEAR | SAVE | RELOAD",
         "parameters": [
           "ROW: Up to 256 rows per arrangement",
           "PAT: Pattern assignment per row (also HALT, LOOP, JUMP, REM commands)",
@@ -391,7 +393,7 @@
         ],
         "leds": "[ARR] key lights up when ARRANGEMENT mode is active.",
         "tips": [
-          "8 arrangements per project \u2014 use CHANGE to switch between them.",
+          "8 arrangements per project — use CHANGE to switch between them.",
           "LOOP commands can be nested for complex song structures.",
           "Arrangement tempo settings override any pattern or project tempo settings.",
           "Insert rows with [FUNC] + [DOWN], remove with [FUNC] + [UP].",
@@ -400,14 +402,14 @@
         "section": "14",
         "merlin_tips": [
           "Merlin doesn't cover the Arranger in depth, but his pattern-chaining and scene-stacking techniques show you can achieve complex arrangements manually before needing the Arranger.",
-          "His performance workflow (A1 \u2192 buildup scene \u2192 A2 with different Part \u2192 A3 as break) is essentially a manual arrangement."
+          "His performance workflow (A1 → buildup scene → A2 with different Part → A3 as break) is essentially a manual arrangement."
         ],
-        "workflow_context": "The Arranger automates pattern sequences (up to 256 rows). Consider mastering Merlin's manual pattern-switching and scene-stacking approach first \u2014 it teaches you the building blocks that the Arranger automates.",
+        "workflow_context": "The Arranger automates pattern sequences (up to 256 rows). Consider mastering Merlin's manual pattern-switching and scene-stacking approach first — it teaches you the building blocks that the Arranger automates.",
         "common_mistakes": [
           "Jumping to the Arranger before understanding how Parts, Scenes, and Patterns interact manually"
         ]
       },
-      "tutorials": []
+      "tutorials": ["13-arranger"]
     },
     "rec1": {
       "type": "button",
@@ -432,7 +434,7 @@
           "[REC1] + [BANK] = Open recorder buffer of active track in Audio Editor",
           "[REC1] (with Pickup machine) = Controls record/overdub function"
         ],
-        "menu_path": "RECORDING SETUP 1 \u2192 INAB, INCD, RLEN, TRIG (ONE/ONE2/HOLD), SRC3, LOOP. Also shows recorder buffer bar with record/playback positions.",
+        "menu_path": "RECORDING SETUP 1 → INAB, INCD, RLEN, TRIG (ONE/ONE2/HOLD), SRC3, LOOP. Also shows recorder buffer bar with record/playback positions.",
         "parameters": [
           "INAB: Input A/B source selection (-, A B, A, B, A+B)",
           "INCD: Input C/D source selection (-, C D, C, D, C+D)",
@@ -446,21 +448,31 @@
           "With RECORD QUICK MODE enabled in Personalize, just pressing [REC1] alone starts sampling (no need to hold [TRACK]).",
           "For Pickup machines, [REC1] becomes the record/overdub button and [REC2] becomes play/stop.",
           "Press [REC1/2] + [BANK] to quickly open the recorder buffer in the Audio Editor.",
-          "Recorder buffers are VOLATILE \u2014 save them before powering off or changing projects!"
+          "Recorder buffers are VOLATILE — save them before powering off or changing projects!"
         ],
         "section": "3.1 (item 1), 9.1, 9.2",
         "merlin_tips": [
-          "Merlin describes track recorders as 'built on top of a track' \u2014 always available regardless of what's playing on the track.",
-          "Recorders and track playback are independent. A Flex machine on track 4 won't interfere with the recorder on track 4 \u2014 UNLESS you deliberately set them to the same buffer (which creates the live-input pass-through trick).",
-          "Record buffers live in the sample slot list \u2014 so a recording is INSTANTLY available on any Flex machine, any track, any pattern, project-wide."
+          "Merlin describes track recorders as 'built on top of a track' — always available regardless of what's playing on the track.",
+          "Recorders and track playback are independent. A Flex machine on track 4 won't interfere with the recorder on track 4 — UNLESS you deliberately set them to the same buffer (which creates the live-input pass-through trick).",
+          "Record buffers live in the sample slot list — so a recording is INSTANTLY available on any Flex machine, any track, any pattern, project-wide."
         ],
         "workflow_context": "REC1 handles input A/B recording. [FUNC]+[REC1] opens Recording Setup 1. Merlin's advice: use sequencer-triggered recording (place a recorder trig) for guaranteed sync. Use one-shot recorder trigs when you only want to capture once per pattern cycle.",
         "common_mistakes": [
-          "Forgetting that record buffers are VOLATILE \u2014 they disappear when you power off. Save to CF card from the Audio Editor!",
-          "Not understanding that record buffers live in the sample slot list \u2014 they're instantly available everywhere but also instantly overwritten on the next recording"
+          "Forgetting that record buffers are VOLATILE — they disappear when you power off. Save to CF card from the Audio Editor!",
+          "Not understanding that record buffers live in the sample slot list — they're instantly available everywhere but also instantly overwritten on the next recording"
         ]
       },
-      "tutorials": ["02-load-and-lock", "03-beat-basics", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+      "tutorials": [
+        "02-load-and-lock",
+        "03-beat-basics",
+        "05-slice-and-dice",
+        "06-sample-locks",
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
+      ]
     },
     "rec2": {
       "type": "button",
@@ -474,7 +486,7 @@
       "zone": "recording",
       "label": "REC2",
       "sublabel": "Setup 2",
-      "redlabel": "Pickup \u25b6/\u25a0",
+      "redlabel": "Pickup ▶/■",
       "manual": {
         "primary": "Used for real-time sampling from external input pair C/D. Press [TRACK] + [REC2] to start recording from inputs C/D to the active track's recorder.",
         "func_combo": "[FUNC] + [REC2] = Opens RECORDING SETUP 2 menu (FIN, FOUT, AB monitor, QREC, QPL, CD monitor).",
@@ -485,7 +497,7 @@
           "[REC2] + [BANK] = Open recorder buffer of active track in Audio Editor",
           "[REC2] (with Pickup machine) = Controls play/stop function"
         ],
-        "menu_path": "RECORDING SETUP 2 \u2192 FIN, FOUT, AB (monitor level), QREC, QPL, CD (monitor level).",
+        "menu_path": "RECORDING SETUP 2 → FIN, FOUT, AB (monitor level), QREC, QPL, CD (monitor level).",
         "parameters": [
           "FIN: Fade-in length for recording (in steps)",
           "FOUT: Fade-out length for recording (in steps, added after recording ends)",
@@ -498,14 +510,14 @@
         "tips": [
           "Set FIN and FOUT to their lowest values (0.063) to avoid clicks when recorded samples loop.",
           "QREC is essential for perfectly timed loop captures when synced to external gear.",
-          "QPL quantizes manual trig playback \u2014 great for keeping manually triggered loops in sync."
+          "QPL quantizes manual trig playback — great for keeping manually triggered loops in sync."
         ],
         "section": "3.1 (item 1), 9.1.3",
         "merlin_tips": ["Same principles as REC1 but for input C/D."],
         "workflow_context": "REC2 handles input C/D recording. [FUNC]+[REC2] opens Recording Setup 2. Same principles as REC1.",
         "common_mistakes": ["Same as REC1"]
       },
-      "tutorials": []
+      "tutorials": ["15-pickup-machines", "16-performance-and-dj"]
     },
     "rec3": {
       "type": "button",
@@ -527,27 +539,27 @@
           "[TRACK] + [REC3] = Start internal sampling to that track's recorder",
           "[FUNC] + [REC3] = Open Recording Edit menu (save/edit recordings)"
         ],
-        "menu_path": "RECORDING EDIT menu \u2192 Edit This Recording (opens Audio Editor) | Save This Recording | Save All Recordings | Go To Memory Config.",
+        "menu_path": "RECORDING EDIT menu → Edit This Recording (opens Audio Editor) | Save This Recording | Save All Recordings | Go To Memory Config.",
         "parameters": ["The internal source is configured by SRC3 in Recording Setup 1 (-, MAIN, CUE, T1-T8)"],
         "leds": "No signal-level LED for REC3. When in Recording Setup, a lit [REC3] indicates internal source is activated for a recorder trig.",
         "tips": [
-          "SRC3 = MAIN records the master output mix \u2014 perfect for resampling your entire beat.",
-          "SRC3 = CUE records only cue-routed tracks \u2014 use this for internal send effects.",
-          "SRC3 = T1-T8 records a specific track's output \u2014 great for bouncing down processed tracks.",
+          "SRC3 = MAIN records the master output mix — perfect for resampling your entire beat.",
+          "SRC3 = CUE records only cue-routed tracks — use this for internal send effects.",
+          "SRC3 = T1-T8 records a specific track's output — great for bouncing down processed tracks.",
           "Save recordings promptly! The RECORDING EDIT menu ([FUNC]+[REC3]) has save commands."
         ],
         "section": "3.1 (item 2), 9.1.1",
         "merlin_tips": [
-          "Merlin describes SRC3 as the 'third source' \u2014 can be any track, main output, or CUE output. This is the key to internal resampling.",
+          "Merlin describes SRC3 as the 'third source' — can be any track, main output, or CUE output. This is the key to internal resampling.",
           "His technique: set SRC3 = CUE, then selectively cue tracks to create a custom submix for resampling."
         ],
         "workflow_context": "REC3 handles internal source recording. [FUNC]+[REC3] opens Recording Edit. Set SRC3 to record from MAIN (captures everything), CUE (captures only cued tracks), or a specific track. This is how you resample internally.",
         "common_mistakes": [
-          "Not setting SRC3 to the right source \u2014 MAIN captures everything including effects, CUE only captures what you've cued",
+          "Not setting SRC3 to the right source — MAIN captures everything including effects, CUE only captures what you've cued",
           "Overwriting a valuable recording by not using one-shot trigs"
         ]
       },
-      "tutorials": []
+      "tutorials": ["15-pickup-machines"]
     },
     "func": {
       "type": "button",
@@ -562,7 +574,7 @@
       "zone": "transport",
       "label": "FUNC",
       "manual": {
-        "primary": "Modifier key \u2014 press and hold to access secondary functions of other buttons. Secondary functions are printed in gray text on the front panel. Also used for quick parameter value jumps when held while turning encoders.",
+        "primary": "Modifier key — press and hold to access secondary functions of other buttons. Secondary functions are printed in gray text on the front panel. Also used for quick parameter value jumps when held while turning encoders.",
         "func_combo": "N/A (this IS the function key).",
         "all_combos": [
           "[FUNC] + [PROJ] = Save project",
@@ -594,11 +606,11 @@
           "[FUNC] + LEVEL = Adjust MAIN output volume (global)",
           "[FUNC] + encoder turn = Parameter value jump (snap to 0, 64, 127 etc.)"
         ],
-        "menu_path": "N/A \u2014 modifier key, accesses secondary functions across all menus.",
+        "menu_path": "N/A — modifier key, accesses secondary functions across all menus.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
-          "FUNC is a modifier key \u2014 it does nothing alone. Always used in combination with another button.",
+          "FUNC is a modifier key — it does nothing alone. Always used in combination with another button.",
           "Holding FUNC while turning a parameter encoder makes values jump to key positions (0, 64, 127, etc.).",
           "The gray text printed below many buttons on the panel shows what FUNC + that button does.",
           "FUNC + encoder press is used in some contexts (e.g., FUNC + DATA ENTRY knob press to enable/disable MIDI CC parameters)."
@@ -608,12 +620,12 @@
         "merlin_tips": [
           "FUNC is the gateway to the OT's secondary layer. Merlin uses it constantly: [FUNC]+[PART] for part menu, [FUNC]+[EDIT] for saving, [FUNC]+[RELOAD] for restoring the saved part state.",
           "Merlin's 'base camp' philosophy depends entirely on FUNC combos: save your base camp with [FUNC]+[EDIT], experiment freely, then return with [FUNC]+[RELOAD].",
-          "Nearly every workflow Merlin describes involves FUNC at some point \u2014 it's not optional, it's essential."
+          "Nearly every workflow Merlin describes involves FUNC at some point — it's not optional, it's essential."
         ],
-        "workflow_context": "Hold FUNC while pressing other buttons to access secondary functions. You'll use this constantly \u2014 it's like Shift on a keyboard. Key combos from Merlin: [FUNC]+[PART] opens Parts menu, [FUNC]+[EDIT] saves the Part, [FUNC]+[RELOAD] restores saved Part state.",
+        "workflow_context": "Hold FUNC while pressing other buttons to access secondary functions. You'll use this constantly — it's like Shift on a keyboard. Key combos from Merlin: [FUNC]+[PART] opens Parts menu, [FUNC]+[EDIT] saves the Part, [FUNC]+[RELOAD] restores saved Part state.",
         "common_mistakes": [
-          "Not holding FUNC long enough \u2014 you need to HOLD it while pressing the second button",
-          "Forgetting which combos exist \u2014 the OT has ~30+ FUNC combos and Merlin's guide assumes you know the essential ones"
+          "Not holding FUNC long enough — you need to HOLD it while pressing the second button",
+          "Forgetting which combos exist — the OT has ~30+ FUNC combos and Merlin's guide assumes you know the essential ones"
         ]
       },
       "tutorials": [
@@ -624,7 +636,11 @@
         "05-slice-and-dice",
         "06-sample-locks",
         "07-loop-stretching",
-        "08-parts-banks-scenes"
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
       ]
     },
     "cue": {
@@ -652,11 +668,11 @@
           "[CUE] + [NO] = Erase character in naming menu without opening pop-up",
           "[FUNC] + [CUE] = Reload active part to saved settings"
         ],
-        "menu_path": "N/A \u2014 modifier key for cue routing and preview operations.",
+        "menu_path": "N/A — modifier key for cue routing and preview operations.",
         "parameters": [],
         "leds": "No dedicated LED. Cued tracks indicated by flashing [TRACK] keys. Cued inputs shown by alternating <REC> LEDs.",
         "tips": [
-          "A cued track still plays on the main outputs too \u2014 cueing adds it to cue, doesn't remove from main.",
+          "A cued track still plays on the main outputs too — cueing adds it to cue, doesn't remove from main.",
           "Enable CUE MUTES TRACK in Personalize to auto-mute a track from main when cueing it.",
           "In STUDIO mode (PROJECT > CONTROL > AUDIO), CUE becomes an independent assignable output pair.",
           "CUE output is NOT available on Track 8 if it's set as the master track.",
@@ -665,17 +681,17 @@
         "section": "3.1 (item 20), 11.6.2",
         "merlin_tips": [
           "Merlin describes 'abusing the cue outputs' as a powerful sampling technique: set a track recorder to record the CUE output, then selectively cue specific tracks to create submixes for resampling.",
-          "CUE outputs are independent of MAIN outputs \u2014 you can sample from CUE without the audience hearing what you're recording.",
+          "CUE outputs are independent of MAIN outputs — you can sample from CUE without the audience hearing what you're recording.",
           "Use headphones on the CUE output for pre-listening what you're about to resample.",
-          "[FUNC]+[CUE] is Part Reload \u2014 Merlin's 'return to base camp' function that undoes all your experiments."
+          "[FUNC]+[CUE] is Part Reload — Merlin's 'return to base camp' function that undoes all your experiments."
         ],
         "workflow_context": "CUE has a dual life: (1) headphone preview/pre-listen via [CUE]+[TRACK], and (2) a secret resampling bus. Merlin's technique: route specific tracks to CUE, set a recorder to record CUE output, and capture internal submixes. Also, [FUNC]+[CUE] is the Part Reload that Merlin considers essential for experimentation.",
         "common_mistakes": [
-          "Forgetting that CUE is independent of MAIN \u2014 what you cue doesn't have to be what the audience hears",
-          "Not using CUE for resampling \u2014 it's one of the OT's most powerful hidden features"
+          "Forgetting that CUE is independent of MAIN — what you cue doesn't have to be what the audience hears",
+          "Not using CUE for resampling — it's one of the OT's most powerful hidden features"
         ]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics"]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics", "15-pickup-machines", "16-performance-and-dj"]
     },
     "ptn": {
       "type": "button",
@@ -697,7 +713,7 @@
           "[FUNC] + [PTN] = Open Pattern Settings menu",
           "Hold [PTN] + press multiple [TRIG] keys in sequence = Pattern Chain (loop a sequence of patterns)"
         ],
-        "menu_path": "PATTERN SETTINGS menu (via FUNC+PTN) \u2192 PATTERN: Scale Mode (Normal/Per Track), Chain Behavior | TRACK 1-8: Start Silent, Plays Free, Oneshot Track, Trig Mode, Trig Quant",
+        "menu_path": "PATTERN SETTINGS menu (via FUNC+PTN) → PATTERN: Scale Mode (Normal/Per Track), Chain Behavior | TRACK 1-8: Start Silent, Plays Free, Oneshot Track, Trig Mode, Trig Quant",
         "parameters": [
           "SCALE MODE: Normal (shared length) or Per Track (individual lengths)",
           "CHAIN BEHAVIOR: Pattern length or custom step count before next chained pattern",
@@ -705,24 +721,24 @@
         ],
         "leds": "When [PTN] is pressed, [TRIG] keys show: green = patterns with data, red = active pattern, unlit = empty patterns.",
         "tips": [
-          "Pattern chaining: hold [PTN] and press TRIG keys in order \u2014 patterns loop in that sequence.",
+          "Pattern chaining: hold [PTN] and press TRIG keys in order — patterns loop in that sequence.",
           "Chaining only works within the same bank and cannot contain the same pattern twice.",
           "Press [NO] to cancel pattern selection if you change your mind within the 4-second timeout.",
-          "Each pattern is linked to one of 4 Parts \u2014 changing patterns may change Parts and all machine settings."
+          "Each pattern is linked to one of 4 Parts — changing patterns may change Parts and all machine settings."
         ],
         "section": "12.2, 12.11",
         "merlin_tips": [
           "Patterns store ONLY triggers and parameter locks. Everything else (machines, effects, scenes, volumes) lives in the Part.",
           "Merlin's key insight: because patterns only store triggers/locks, and p-locks can select any sample from any slot AND any slice from any sample, 'triggers and locks alone already create enough mayhem to turn pattern A2 into something very different from A1.'",
-          "Copy a pattern to create variations \u2014 all copies share the same Part, so they'll have coherent sound while the trigger differences create the variation."
+          "Copy a pattern to create variations — all copies share the same Part, so they'll have coherent sound while the trigger differences create the variation."
         ],
         "workflow_context": "Use [PTN]+[TRIG] to select patterns within the current bank. Merlin's performance flow: A1 (basic), A2 (buildup with extra triggers and locks), A3 (break with stripped triggers). All share the same Part for coherent sound.",
         "common_mistakes": [
-          "Thinking patterns store machine/effect settings \u2014 they don't, that's the Part's job",
-          "Not realizing that copied patterns share a Part \u2014 editing machines on A2 also changes A1 unless you assign a different Part"
+          "Thinking patterns store machine/effect settings — they don't, that's the Part's job",
+          "Not realizing that copied patterns share a Part — editing machines on A2 also changes A1 unless you assign a different Part"
         ]
       },
-      "tutorials": ["08-parts-banks-scenes"]
+      "tutorials": ["08-parts-banks-scenes", "13-arranger"]
     },
     "bank": {
       "type": "button",
@@ -749,7 +765,7 @@
           "[TRACK] + [BANK] = Open track's sample in Audio Editor",
           "[REC1/2] + [BANK] = Open recorder buffer in Audio Editor"
         ],
-        "menu_path": "TRACK TRIG EDIT menu (via FUNC+BANK in Grid Rec) \u2192 TRIGS | SLIDE | SWING | REC TRIGS",
+        "menu_path": "TRACK TRIG EDIT menu (via FUNC+BANK in Grid Rec) → TRIGS | SLIDE | SWING | REC TRIGS",
         "parameters": [
           "TRIGS: Shows/edits sample trigs, lock trigs, trigless trigs, one shot trigs",
           "SLIDE: Shows/edits slide trigs (gradual parameter value transitions)",
@@ -759,7 +775,7 @@
         "leds": "When [BANK] is pressed, [TRIG] keys show: green = banks with data, red = active bank.",
         "tips": [
           "16 banks x 16 patterns = 256 patterns per project.",
-          "Bank switching is seamless \u2014 playback won't halt or cut audio.",
+          "Bank switching is seamless — playback won't halt or cut audio.",
           "The Track Trig Edit menu gives you a complete visual overview of all trig types on the active track.",
           "When copying a track with Track Trig Edit open, only trigs are copied (no machine/FX assignments)."
         ],
@@ -770,11 +786,18 @@
         ],
         "workflow_context": "Use [BANK]+[TRIG] to select a bank (A through P). Each bank has its own set of 4 Parts, giving you 64 Parts total per project. Start in Bank A and expand to other banks as your arrangement grows.",
         "common_mistakes": [
-          "Forgetting that Parts are per-BANK \u2014 Bank A's 4 Parts are completely separate from Bank B's 4 Parts",
+          "Forgetting that Parts are per-BANK — Bank A's 4 Parts are completely separate from Bank B's 4 Parts",
           "Switching banks mid-performance without understanding the Part change that comes with it"
         ]
       },
-      "tutorials": ["01-set-sail", "03-beat-basics", "08-parts-banks-scenes"]
+      "tutorials": [
+        "01-set-sail",
+        "03-beat-basics",
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "16-performance-and-dj"
+      ]
     },
     "yes": {
       "type": "button",
@@ -799,7 +822,7 @@
           "[TRACK] + [YES] = Re-arm one-shot recorder trigs for that track",
           "[TRACK PARAMETER] + [YES] = Randomize all parameters on that track parameter page"
         ],
-        "menu_path": "N/A \u2014 universal confirm/enter key.",
+        "menu_path": "N/A — universal confirm/enter key.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
@@ -810,13 +833,13 @@
         ],
         "section": "3.1 (item 18)",
         "merlin_tips": [
-          "YES confirms selections \u2014 Merlin uses it when assigning samples to flex machines from the slot list, confirming Part switches, and saving operations.",
+          "YES confirms selections — Merlin uses it when assigning samples to flex machines from the slot list, confirming Part switches, and saving operations.",
           "In the sample lock workflow, YES confirms the sample selection after browsing."
         ],
         "workflow_context": "YES is your 'confirm' button for nearly everything: selecting samples, entering sub-menus, confirming saves. Also arms one-shot trigs for recorder setups.",
         "common_mistakes": [
           "Hitting YES too quickly in menus without checking you're confirming the right thing",
-          "Forgetting that YES also arms one-shot trigs \u2014 context matters"
+          "Forgetting that YES also arms one-shot trigs — context matters"
         ]
       },
       "tutorials": [
@@ -826,7 +849,9 @@
         "04-audio-pool",
         "05-slice-and-dice",
         "06-sample-locks",
-        "07-loop-stretching"
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing"
       ]
     },
     "no": {
@@ -848,18 +873,18 @@
           "[NO] = Exit menu / Cancel / Disarm one-shot trigs",
           "[FUNC] + [NO] = Remove parameter locks in Live Recording / Disarm trigs / Erase characters in naming",
           "[CUE] + [NO] = Erase characters in naming without opening pop-up",
-          "[TRIG] + [NO] = Convert trig type: sample trig\u2192trigless trig\u2192lock trig (cycle)",
+          "[TRIG] + [NO] = Convert trig type: sample trig→trigless trig→lock trig (cycle)",
           "[NO] + [TRACK] = Erase trigs from that track in LIVE RECORDING mode",
           "[NO] + knob push = Erase specific parameter locks in LIVE RECORDING mode",
           "[NO] + LEVEL push = Remove sample locks in LIVE RECORDING mode",
           "[TRACK] + [NO] = Disarm one-shot recorder trigs for that track"
         ],
-        "menu_path": "N/A \u2014 universal exit/cancel key.",
+        "menu_path": "N/A — universal exit/cancel key.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
           "All windows and menus can be closed with [NO].",
-          "[TRIG] + [NO] cycles through trig types: sample trig \u2192 trigless trig \u2192 lock trig \u2192 (press TRIG to make sample trig again).",
+          "[TRIG] + [NO] cycles through trig types: sample trig → trigless trig → lock trig → (press TRIG to make sample trig again).",
           "In LIVE RECORDING: [NO] + [TRACK] erases all trigs hit by the running sequencer on that track.",
           "YES/NO arm/disarm of one-shot trigs can be disabled in the Personalize menu to avoid accidental triggering."
         ],
@@ -867,13 +892,20 @@
         "merlin_tips": [
           "NO is your 'back/exit' button. Merlin's exploration workflow depends on being able to back out of menus safely."
         ],
-        "workflow_context": "NO exits menus and cancels operations. It's the safe escape \u2014 if you're lost in a sub-menu, keep pressing NO to back out. In Live Recording mode, holding NO while a track plays erases parameter locks in real-time.",
+        "workflow_context": "NO exits menus and cancels operations. It's the safe escape — if you're lost in a sub-menu, keep pressing NO to back out. In Live Recording mode, holding NO while a track plays erases parameter locks in real-time.",
         "common_mistakes": [
-          "Pressing NO when you meant YES in a save dialog \u2014 double-check before pressing",
+          "Pressing NO when you meant YES in a save dialog — double-check before pressing",
           "Not knowing that NO can erase locks during Live Recording when held"
         ]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+      "tutorials": [
+        "01-set-sail",
+        "02-load-and-lock",
+        "05-slice-and-dice",
+        "06-sample-locks",
+        "07-loop-stretching",
+        "15-pickup-machines"
+      ]
     },
     "arrow_left": {
       "type": "button",
@@ -886,7 +918,7 @@
       },
       "zone": "transport",
       "label": "<",
-      "sublabel": "\u00b5Time -",
+      "sublabel": "µTime -",
       "manual": {
         "primary": "Navigate left in menus. When no menu is open, temporarily nudges the BPM DOWN by ~10% (releases when key is released). In naming menus, moves cursor left.",
         "func_combo": "[FUNC] + [LEFT] = Shift all trigs backward one step (in Grid Recording). Change octave down (in Chromatic mode). Rotate LFO designer/arpeggiator sequence.",
@@ -897,23 +929,31 @@
           "[TRACK] + [LEFT] = Nudge sample tempo down for that track",
           "[FUNC] + [LEFT] (in sample slot list) = Load previous sample from same directory"
         ],
-        "menu_path": "N/A \u2014 navigation key.",
+        "menu_path": "N/A — navigation key.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
           "Tempo nudge (pressing LEFT/RIGHT with no menu open) is great for manually syncing to a turntable or external source.",
-          "The nudge is temporary \u2014 tempo reverts when the key is released."
+          "The nudge is temporary — tempo reverts when the key is released."
         ],
         "section": "3.1 (item 16), 8.9.2",
         "merlin_tips": [
-          "Merlin navigates between Audio Editor pages (TRIM \u2192 SLICE \u2192 EDIT \u2192 ATTRIBUTES \u2192 FILE) using left/right arrows."
+          "Merlin navigates between Audio Editor pages (TRIM → SLICE → EDIT → ATTRIBUTES → FILE) using left/right arrows."
         ],
         "workflow_context": "Navigate between menu pages and sub-screens. In the Audio Editor, LEFT moves to the previous page (e.g., from SLICE back to TRIM). Also nudges BPM when no menu is open.",
         "common_mistakes": [
-          "Not realizing the Audio Editor has multiple pages you navigate with LEFT/RIGHT \u2014 many beginners only see the first page"
+          "Not realizing the Audio Editor has multiple pages you navigate with LEFT/RIGHT — many beginners only see the first page"
         ]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "04-audio-pool", "05-slice-and-dice", "07-loop-stretching"]
+      "tutorials": [
+        "01-set-sail",
+        "02-load-and-lock",
+        "04-audio-pool",
+        "05-slice-and-dice",
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing"
+      ]
     },
     "arrow_up": {
       "type": "button",
@@ -925,7 +965,7 @@
         "symbol": "#btn-square"
       },
       "zone": "transport",
-      "label": "\u25b2",
+      "label": "▲",
       "sublabel": "Trig Mode",
       "manual": {
         "primary": "Navigate upward in menus and lists. Adjusts parameter values in some menus (e.g., naming, date/time). Also used with [FUNC] for quick scrolling and changing Trig modes.",
@@ -936,7 +976,7 @@
           "[UP] + [PAGE] = Activate FILL mode (held = active while held)",
           "[UP] + [DOWN] + [PAGE] = Latch FILL mode"
         ],
-        "menu_path": "N/A \u2014 navigation key.",
+        "menu_path": "N/A — navigation key.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
@@ -950,11 +990,19 @@
         ],
         "workflow_context": "In Grid Recording, hold a [TRIG] key then press [UP] to open the sample lock browser. This lets you assign a different sample to that specific step. Also used for menu navigation (scrolling up through lists).",
         "common_mistakes": [
-          "Pressing UP without holding a trig key first \u2014 you need to HOLD the trig, THEN press UP",
+          "Pressing UP without holding a trig key first — you need to HOLD the trig, THEN press UP",
           "Confusing the sample lock browser with the regular sample assignment (which is done via the machine/SRC page)"
         ]
       },
-      "tutorials": ["01-set-sail", "04-audio-pool", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+      "tutorials": [
+        "01-set-sail",
+        "04-audio-pool",
+        "05-slice-and-dice",
+        "06-sample-locks",
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing"
+      ]
     },
     "arrow_down": {
       "type": "button",
@@ -966,7 +1014,7 @@
         "symbol": "#btn-square"
       },
       "zone": "transport",
-      "label": "\u25bc",
+      "label": "▼",
       "sublabel": "Trig Mode",
       "manual": {
         "primary": "Navigate downward in menus and lists. Adjusts parameter values in some menus.",
@@ -977,20 +1025,28 @@
           "[DOWN] + [PAGE] = Activate FILL mode for one pattern cycle",
           "[FUNC] + [DOWN] (in Arranger Edit) = Insert arrangement row"
         ],
-        "menu_path": "N/A \u2014 navigation key.",
+        "menu_path": "N/A — navigation key.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
-          "[FUNC] + [UP/DOWN] changes the active Trig mode when no menu list is open: Tracks \u2192 Chromatic \u2192 Slots \u2192 Slices \u2192 Quick Mute \u2192 Delay Control."
+          "[FUNC] + [UP/DOWN] changes the active Trig mode when no menu list is open: Tracks → Chromatic → Slots → Slices → Quick Mute → Delay Control."
         ],
         "section": "3.1 (item 16)",
         "merlin_tips": [
-          "Same as arrow_up for sample lock browsing \u2014 UP/DOWN both open the browser, then you scroll through the slot list."
+          "Same as arrow_up for sample lock browsing — UP/DOWN both open the browser, then you scroll through the slot list."
         ],
         "workflow_context": "In Grid Recording, hold a [TRIG] key then press [DOWN] to open the sample lock browser (same as UP). Also used for menu navigation.",
-        "common_mistakes": ["Same as arrow_up \u2014 must hold trig first"]
+        "common_mistakes": ["Same as arrow_up — must hold trig first"]
       },
-      "tutorials": ["01-set-sail", "04-audio-pool", "05-slice-and-dice", "06-sample-locks", "07-loop-stretching"]
+      "tutorials": [
+        "01-set-sail",
+        "04-audio-pool",
+        "05-slice-and-dice",
+        "06-sample-locks",
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing"
+      ]
     },
     "arrow_right": {
       "type": "button",
@@ -1003,7 +1059,7 @@
       },
       "zone": "transport",
       "label": ">",
-      "sublabel": "\u00b5Time +",
+      "sublabel": "µTime +",
       "manual": {
         "primary": "Navigate right in menus. When no menu is open, temporarily nudges the BPM UP by ~10% (releases when key is released). In naming menus, moves cursor right.",
         "func_combo": "[FUNC] + [RIGHT] = Shift all trigs forward one step (in Grid Recording). Change octave up (in Chromatic mode). Rotate LFO designer/arpeggiator sequence.",
@@ -1014,7 +1070,7 @@
           "[TRACK] + [RIGHT] = Nudge sample tempo up for that track",
           "[FUNC] + [RIGHT] (in sample slot list) = Load next sample from same directory"
         ],
-        "menu_path": "N/A \u2014 navigation key.",
+        "menu_path": "N/A — navigation key.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
@@ -1025,10 +1081,18 @@
         "merlin_tips": [
           "Merlin's timestretch workflow requires navigating RIGHT through Audio Editor pages to reach the Attributes page where you set ORIGINAL TEMPO."
         ],
-        "workflow_context": "Navigate to the next menu page. In the Audio Editor, press RIGHT to move from TRIM \u2192 SLICE \u2192 EDIT \u2192 ATTRIBUTES \u2192 FILE. Critical for reaching the Attributes page where tempo and gain live.",
-        "common_mistakes": ["Same as arrow_left \u2014 not exploring all the Audio Editor pages"]
+        "workflow_context": "Navigate to the next menu page. In the Audio Editor, press RIGHT to move from TRIM → SLICE → EDIT → ATTRIBUTES → FILE. Critical for reaching the Attributes page where tempo and gain live.",
+        "common_mistakes": ["Same as arrow_left — not exploring all the Audio Editor pages"]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "04-audio-pool", "05-slice-and-dice", "07-loop-stretching"]
+      "tutorials": [
+        "01-set-sail",
+        "02-load-and-lock",
+        "04-audio-pool",
+        "05-slice-and-dice",
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing"
+      ]
     },
     "t1": {
       "type": "button",
@@ -1058,7 +1122,7 @@
           "[TRACK] + [LEFT/RIGHT] = Nudge sample tempo for this track",
           "Double-press [TRACK] = Open Quick Assign menu"
         ],
-        "menu_path": "N/A \u2014 track selection key.",
+        "menu_path": "N/A — track selection key.",
         "parameters": [],
         "leds": "Lit = active track. Yellow = muted and active. Unlit = muted and not selected. Flashing = cued.",
         "tips": [
@@ -1069,12 +1133,12 @@
         "section": "3.1 (item 3)",
         "merlin_tips": [
           "Merlin's example pattern: Track 1 = bass drum with compressor + delay. He always starts building from Track 1.",
-          "Any track with a Flex machine can play ANY sample from the slot list via sample locks \u2014 your starting assignment is just a default.",
-          "Merlin uses [FUNC]+[Track] for muting during performances \u2014 mute/unmute is a core performance tool."
+          "Any track with a Flex machine can play ANY sample from the slot list via sample locks — your starting assignment is just a default.",
+          "Merlin uses [FUNC]+[Track] for muting during performances — mute/unmute is a core performance tool."
         ],
         "workflow_context": "Select Track 1 to edit its machine, parameters, and sequencer. [FUNC]+[T1] mutes/unmutes it. [CUE]+[T1] routes it to headphones. Merlin typically assigns kick drums to T1.",
         "common_mistakes": [
-          "Thinking a track can only play the sample assigned to its machine \u2014 sample locks let any step play any sample from the list",
+          "Thinking a track can only play the sample assigned to its machine — sample locks let any step play any sample from the list",
           "Forgetting to select the right track before editing parameters"
         ]
       },
@@ -1085,7 +1149,11 @@
         "05-slice-and-dice",
         "06-sample-locks",
         "07-loop-stretching",
-        "08-parts-banks-scenes"
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
       ]
     },
     "t2": {
@@ -1110,10 +1178,10 @@
         "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
         "merlin_tips": ["Merlin's example: Track 2 = clap with filter + reverb."],
-        "workflow_context": "Same as T1 \u2014 select Track 2 for editing. Merlin typically uses T2 for snare/clap sounds.",
+        "workflow_context": "Same as T1 — select Track 2 for editing. Merlin typically uses T2 for snare/clap sounds.",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": ["03-beat-basics", "05-slice-and-dice"]
+      "tutorials": ["03-beat-basics", "05-slice-and-dice", "15-pickup-machines", "16-performance-and-dj"]
     },
     "t3": {
       "type": "button",
@@ -1137,10 +1205,10 @@
         "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
         "merlin_tips": ["Merlin's example: Track 3 = hi-hat loop with filter + delay."],
-        "workflow_context": "Same as T1 \u2014 select Track 3 for editing. Merlin typically uses T3 for hi-hats.",
+        "workflow_context": "Same as T1 — select Track 3 for editing. Merlin typically uses T3 for hi-hats.",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": ["03-beat-basics"]
+      "tutorials": ["03-beat-basics", "15-pickup-machines", "16-performance-and-dj"]
     },
     "t4": {
       "type": "button",
@@ -1164,10 +1232,10 @@
         "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
         "merlin_tips": ["Merlin's example: Track 4 = bassline loop with filter + lo-fi."],
-        "workflow_context": "Same as T1 \u2014 select Track 4 for editing. Merlin typically uses T4 for basslines.",
+        "workflow_context": "Same as T1 — select Track 4 for editing. Merlin typically uses T4 for basslines.",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": ["05-slice-and-dice"]
+      "tutorials": ["05-slice-and-dice", "16-performance-and-dj"]
     },
     "t5": {
       "type": "button",
@@ -1194,12 +1262,12 @@
         "section": "3.1 (item 3)",
         "merlin_tips": [
           "Merlin's example: Track 5 = pad with filter + reverb + scenes for movement.",
-          "In his slice example, Track 5's Flex machine is assigned to a sliced sample \u2014 he demonstrates slice locks from this track."
+          "In his slice example, Track 5's Flex machine is assigned to a sliced sample — he demonstrates slice locks from this track."
         ],
         "workflow_context": "Same as T1. Merlin uses T5 for pads or sliced samples in his examples.",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": []
+      "tutorials": ["16-performance-and-dj"]
     },
     "t6": {
       "type": "button",
@@ -1228,7 +1296,7 @@
         "workflow_context": "Same as T1. Often used for additional elements, effects returns, or Neighbor/Thru machines.",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": []
+      "tutorials": ["13-arranger", "16-performance-and-dj"]
     },
     "t7": {
       "type": "button",
@@ -1251,11 +1319,11 @@
         "leds": "Same LED behavior as all track keys.",
         "tips": ["Same tips as Track 1."],
         "section": "3.1 (item 3)",
-        "merlin_tips": ["Same as T6 \u2014 Merlin's examples use 5 tracks but principles apply to all 8."],
+        "merlin_tips": ["Same as T6 — Merlin's examples use 5 tracks but principles apply to all 8."],
         "workflow_context": "Same as T1. Can be used for resampling (recorder + Flex machine on same track).",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": []
+      "tutorials": ["16-performance-and-dj"]
     },
     "t8": {
       "type": "button",
@@ -1285,10 +1353,10 @@
         "merlin_tips": [
           "Merlin doesn't specifically mention T8, but the 'master bus trick' (Thru machine on T8 listening to main output for compression/EQ) is a well-known community technique consistent with his signal flow explanations."
         ],
-        "workflow_context": "Same as T1. T8 is commonly used as a master bus (Thru machine \u2192 compressor + EQ on the main output).",
+        "workflow_context": "Same as T1. T8 is commonly used as a master bus (Thru machine → compressor + EQ on the main output).",
         "common_mistakes": ["Same as T1"]
       },
-      "tutorials": []
+      "tutorials": ["13-arranger", "14-midi-sequencing", "16-performance-and-dj"]
     },
     "src": {
       "type": "button",
@@ -1311,7 +1379,7 @@
           "Double-press [SRC] = Open SRC SETUP page",
           "[SRC] (in Audio Editor) = Open TRIM sub-page"
         ],
-        "menu_path": "SRC MAIN \u2192 Machine-specific parameters. SRC SETUP \u2192 Machine list + Sample slot list + Setup parameters (LOOP, SLIC, LEN, RATE, TSTR, TSNS).",
+        "menu_path": "SRC MAIN → Machine-specific parameters. SRC SETUP → Machine list + Sample slot list + Setup parameters (LOOP, SLIC, LEN, RATE, TSTR, TSNS).",
         "parameters": [
           "FLEX/STATIC MAIN: PTCH (pitch), STRT (start/slice), LEN (length), RATE (speed), RTRG (retrig count), RTIM (retrig time)",
           "FLEX/STATIC SETUP: LOOP (Auto/Off/On), SLIC (On/Off), LEN (Off/Time/Slic), RATE (affects timestretch or pitch), TSTR (Auto/Off/Normal/Beat), TSNS (transient sensitivity)",
@@ -1333,8 +1401,8 @@
         ],
         "workflow_context": "Press [SRC] to see the active machine's sample assignment and playback parameters. Press [FUNC]+[SRC] for Playback Setup where you enable SLICE mode and TIMESTRETCH. After slicing a sample in the Audio Editor, you MUST enable SLICE=ON here for the machine to use the slices.",
         "common_mistakes": [
-          "Slicing a sample in the Audio Editor but forgetting to enable SLICE=ON in the machine's Playback Setup \u2014 the slices exist but the machine won't use them",
-          "Not understanding that the START parameter changes meaning when SLICE=ON \u2014 it selects slices instead of a raw sample position"
+          "Slicing a sample in the Audio Editor but forgetting to enable SLICE=ON in the machine's Playback Setup — the slices exist but the machine won't use them",
+          "Not understanding that the START parameter changes meaning when SLICE=ON — it selects slices instead of a raw sample position"
         ]
       },
       "tutorials": [
@@ -1344,7 +1412,11 @@
         "05-slice-and-dice",
         "06-sample-locks",
         "07-loop-stretching",
-        "08-parts-banks-scenes"
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
       ]
     },
     "amp": {
@@ -1368,7 +1440,7 @@
           "Double-press [AMP] = Open AMP SETUP page",
           "[AMP] (in Audio Editor) = Open SLICE sub-page"
         ],
-        "menu_path": "AMP MAIN \u2192 ATK, HOLD, REL, VOL, BAL, XVOL (scene only). AMP SETUP \u2192 AMP (ANLG/RTRG/R+T/TTRG), SYNC, ATCK (LIN/LOG), FX1, FX2.",
+        "menu_path": "AMP MAIN → ATK, HOLD, REL, VOL, BAL, XVOL (scene only). AMP SETUP → AMP (ANLG/RTRG/R+T/TTRG), SYNC, ATCK (LIN/LOG), FX1, FX2.",
         "parameters": [
           "AMP MAIN: ATK (attack time), HOLD (hold time in steps), REL (release time), VOL (pre-effects volume), BAL (stereo balance), XVOL (scene-only equal-energy volume)",
           "AMP SETUP: AMP (envelope retrig mode), SYNC (BPM sync on/off), ATCK (linear/logarithmic curve), FX1/FX2 (filter/modulator envelope behavior)"
@@ -1378,24 +1450,30 @@
           "VOL is pre-effects; LEVEL (the knob) is post-effects. Both affect output volume differently.",
           "HOLD parameter is expressed in sequencer steps and is BPM-dependent by default.",
           "Set HOLD to infinite + use a keyboard: sound sustains as long as you hold the key.",
-          "XVOL is only visible when holding a [SCENE] key \u2014 it provides equal-energy fading to avoid center dip.",
+          "XVOL is only visible when holding a [SCENE] key — it provides equal-energy fading to avoid center dip.",
           "AMP SETUP is one of the few pages available on a master track."
         ],
         "section": "11.4.5, 11.4.6",
         "merlin_tips": [
-          "Merlin describes the signal chain: machine \u2192 AMP envelope (with VOL parameter) \u2192 FX1 \u2192 FX2 \u2192 Track Volume. The AMP VOL is PRE-effects.",
+          "Merlin describes the signal chain: machine → AMP envelope (with VOL parameter) → FX1 → FX2 → Track Volume. The AMP VOL is PRE-effects.",
           "AMP VOL is bipolar (-64 to +63, default 0). Use it for LFO-driven tremolo or sidechain-style ducking.",
-          "For scenes, XVOL on the AMP page fades track volume PRE-effects \u2014 this lets reverb/delay tails die naturally when you 'mute' via the crossfader.",
-          "Merlin warns against using track volume or amp p-locks to fix mismatched sample volumes \u2014 use the GAIN parameter in the Audio Editor's Attributes page instead."
+          "For scenes, XVOL on the AMP page fades track volume PRE-effects — this lets reverb/delay tails die naturally when you 'mute' via the crossfader.",
+          "Merlin warns against using track volume or amp p-locks to fix mismatched sample volumes — use the GAIN parameter in the Audio Editor's Attributes page instead."
         ],
-        "workflow_context": "Press [AMP] to access amplitude envelope, VOL, and panning. Key insight from Merlin: use XVOL (hold Scene button on AMP page) for performance mixing \u2014 it's pre-FX so effect tails decay naturally. Use the Audio Editor GAIN to fix sample volume mismatches instead of AMP settings.",
+        "workflow_context": "Press [AMP] to access amplitude envelope, VOL, and panning. Key insight from Merlin: use XVOL (hold Scene button on AMP page) for performance mixing — it's pre-FX so effect tails decay naturally. Use the Audio Editor GAIN to fix sample volume mismatches instead of AMP settings.",
         "common_mistakes": [
-          "Using AMP VOL to compensate for a too-loud sample \u2014 this affects all patterns using this Part. Fix it at the sample level with GAIN in the Audio Editor instead.",
-          "Not understanding that AMP VOL is PRE-effects while Track Level is POST-effects \u2014 they serve different purposes",
-          "P-locking AMP VOL on every step to fix a volume mismatch \u2014 Merlin calls this 'not very convenient' and recommends using sample GAIN instead"
+          "Using AMP VOL to compensate for a too-loud sample — this affects all patterns using this Part. Fix it at the sample level with GAIN in the Audio Editor instead.",
+          "Not understanding that AMP VOL is PRE-effects while Track Level is POST-effects — they serve different purposes",
+          "P-locking AMP VOL on every step to fix a volume mismatch — Merlin calls this 'not very convenient' and recommends using sample GAIN instead"
         ]
       },
-      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
+      "tutorials": [
+        "01-set-sail",
+        "06-sample-locks",
+        "08-parts-banks-scenes",
+        "14-midi-sequencing",
+        "16-performance-and-dj"
+      ]
     },
     "lfo": {
       "type": "button",
@@ -1418,7 +1496,7 @@
           "Double-press [LFO] = Open LFO SETUP page",
           "[LFO] (in Audio Editor) = Open EDIT sub-page"
         ],
-        "menu_path": "LFO MAIN \u2192 SPD1, SPD2, SPD3, DEP1, DEP2, DEP3. LFO SETUP \u2192 LFO1/LFO2/LFO3 pages (PMTR, WAVE, MULT, TRIG, SPD, DEP) + DESIGNER page.",
+        "menu_path": "LFO MAIN → SPD1, SPD2, SPD3, DEP1, DEP2, DEP3. LFO SETUP → LFO1/LFO2/LFO3 pages (PMTR, WAVE, MULT, TRIG, SPD, DEP) + DESIGNER page.",
         "parameters": [
           "Per LFO: PMTR (target parameter), WAVE (11 basic + 8 designer waveforms), MULT (speed multiplier), TRIG (FREE/TRIG/HOLD/ONE/HALF/SYNC TRIG/SYNC ONE/SYNC HALF), SPD (base speed), DEP (modulation depth)",
           "LFO DESIGNER: 16-step custom waveform, stepped or interpolated, with randomize and invert options"
@@ -1438,13 +1516,20 @@
           "Merlin mentions using LFOs for tremolo (modulating AMP VOL) and sidechain compression simulation (LFO ducking volume when kick hits).",
           "He doesn't dive deep into LFO setup but implies LFOs are essential for adding movement beyond what scenes provide."
         ],
-        "workflow_context": "Press [LFO] to set up the 3 LFOs per track. Use LFOs to automate any parameter continuously \u2014 complements p-locks (per-step) and scenes (crossfader-controlled). Double-press [LFO] for the LFO Designer (custom waveforms).",
+        "workflow_context": "Press [LFO] to set up the 3 LFOs per track. Use LFOs to automate any parameter continuously — complements p-locks (per-step) and scenes (crossfader-controlled). Double-press [LFO] for the LFO Designer (custom waveforms).",
         "common_mistakes": [
           "Over-using LFOs when p-locks or scenes would be simpler and more controllable",
-          "Not setting LFO mode correctly \u2014 TRIG mode restarts per trig (good for rhythmic effects), FREE runs continuously"
+          "Not setting LFO mode correctly — TRIG mode restarts per trig (good for rhythmic effects), FREE runs continuously"
         ]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "05-slice-and-dice", "06-sample-locks", "08-parts-banks-scenes"]
+      "tutorials": [
+        "01-set-sail",
+        "02-load-and-lock",
+        "05-slice-and-dice",
+        "06-sample-locks",
+        "08-parts-banks-scenes",
+        "14-midi-sequencing"
+      ]
     },
     "fx1": {
       "type": "button",
@@ -1467,31 +1552,39 @@
           "Double-press [FX1] = Open FX1 SETUP page",
           "[FX1] (in Audio Editor) = Open ATTRIBUTES sub-page"
         ],
-        "menu_path": "FX1 MAIN \u2192 Effect-specific parameters. FX1 SETUP \u2192 Effect list + Setup parameters.",
+        "menu_path": "FX1 MAIN → Effect-specific parameters. FX1 SETUP → Effect list + Setup parameters.",
         "parameters": [
           "Available FX1 effects: 12/24dB Multi Mode Filter, 2-Band Parametric EQ, DJ-style Kill EQ, 2-10 Stage Phaser, Flanger, 2-10 Tap Chorus, Spatializer, Comb Filter, Dynamix Compressor, Lo-Fi Collection"
         ],
         "leds": "No dedicated LED.",
         "tips": [
-          "FX1 does NOT have delay or reverb options \u2014 those are FX2 only.",
+          "FX1 does NOT have delay or reverb options — those are FX2 only.",
           "Chain Neighbor machines to get more than 2 effects per sound (up to 8 effects across 4 chained tracks).",
           "FX1 parameters can be parameter-locked, scene-locked, and LFO-modulated.",
           "The Multi Mode Filter has its own envelope, controlled by the FX1 setting in AMP SETUP."
         ],
         "section": "11.4.10, Appendix B",
         "merlin_tips": [
-          "Merlin emphasizes that the OT gives you 2 choosable effect slots per track \u2014 unlike the Machinedrum/Monomachine which had fixed effect arrays. You pick which effects go where.",
+          "Merlin emphasizes that the OT gives you 2 choosable effect slots per track — unlike the Machinedrum/Monomachine which had fixed effect arrays. You pick which effects go where.",
           "His example setups: T1 = compressor + delay, T2 = filter + reverb, T3 = filter + delay, T4 = filter + lo-fi. Mix and match per track.",
           "Effects are stored in the PART, not the Pattern. Change an effect and all patterns sharing that Part are affected.",
-          "For buildups, Merlin uses scene-controlled effects: delay feedback, filter resonance, reverb amount, lo-fi distortion \u2014 all increasing as the crossfader moves."
+          "For buildups, Merlin uses scene-controlled effects: delay feedback, filter resonance, reverb amount, lo-fi distortion — all increasing as the crossfader moves."
         ],
-        "workflow_context": "Press [FX1] to access the first effects slot. Press [FUNC]+[FX1] to change which effect is loaded. Effects are Part-level \u2014 they persist across all patterns using this Part. Merlin's buildup recipe: set scene B to increase delay feedback, open filter resonance, add reverb, increase distortion. Crossfade slowly for a gradual buildup.",
+        "workflow_context": "Press [FX1] to access the first effects slot. Press [FUNC]+[FX1] to change which effect is loaded. Effects are Part-level — they persist across all patterns using this Part. Merlin's buildup recipe: set scene B to increase delay feedback, open filter resonance, add reverb, increase distortion. Crossfade slowly for a gradual buildup.",
         "common_mistakes": [
-          "Forgetting that effects live in the Part \u2014 changing FX1 on pattern A1 also changes it on A2 if they share a Part",
-          "Not using scene control for effects parameters during performance \u2014 twiddling knobs manually is less fluid than crossfading"
+          "Forgetting that effects live in the Part — changing FX1 on pattern A1 also changes it on A2 if they share a Part",
+          "Not using scene control for effects parameters during performance — twiddling knobs manually is less fluid than crossfading"
         ]
       },
-      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
+      "tutorials": [
+        "01-set-sail",
+        "06-sample-locks",
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
+      ]
     },
     "fx2": {
       "type": "button",
@@ -1514,28 +1607,36 @@
           "Double-press [FX2] = Open FX2 SETUP page",
           "[FX2] (in Audio Editor) = Open FILE sub-page"
         ],
-        "menu_path": "FX2 MAIN \u2192 Effect-specific parameters. FX2 SETUP \u2192 Effect list + Setup parameters.",
+        "menu_path": "FX2 MAIN → Effect-specific parameters. FX2 SETUP → Effect list + Setup parameters.",
         "parameters": [
           "Available FX2 effects: All 10 from FX1 PLUS: Echo Freeze Delay, Gatebox Plate Reverb, Spring Reverb, Dark Reverb"
         ],
         "leds": "No dedicated LED.",
         "tips": [
           "Delays and reverbs are ONLY available in the FX2 slot.",
-          "The Echo Freeze Delay continues to ring out even after muting a track \u2014 press [STOP]+[STOP] to kill it.",
+          "The Echo Freeze Delay continues to ring out even after muting a track — press [STOP]+[STOP] to kill it.",
           "Use the DELAY CONTROL trig mode for quick live delay time changes.",
           "FX2 parameters can be parameter-locked, scene-locked, and LFO-modulated."
         ],
         "section": "11.4.10, Appendix B",
         "merlin_tips": [
-          "Same principles as FX1. Merlin always uses both slots \u2014 his track setups consistently load two effects per track.",
-          "Signal chain: Machine \u2192 AMP \u2192 FX1 \u2192 FX2 \u2192 Track Volume. FX2 processes the output of FX1."
+          "Same principles as FX1. Merlin always uses both slots — his track setups consistently load two effects per track.",
+          "Signal chain: Machine → AMP → FX1 → FX2 → Track Volume. FX2 processes the output of FX1."
         ],
-        "workflow_context": "Press [FX2] to access the second effects slot. Same rules as FX1 \u2014 stored in Part, scene-controllable. FX2 processes the signal AFTER FX1, so order matters (e.g., filter before delay sounds different from delay before filter).",
+        "workflow_context": "Press [FX2] to access the second effects slot. Same rules as FX1 — stored in Part, scene-controllable. FX2 processes the signal AFTER FX1, so order matters (e.g., filter before delay sounds different from delay before filter).",
         "common_mistakes": [
-          "Not considering FX slot order \u2014 FX1 feeds into FX2, so a filter in FX1 feeding a delay in FX2 is very different from the reverse"
+          "Not considering FX slot order — FX1 feeds into FX2, so a filter in FX1 feeding a delay in FX2 is very different from the reverse"
         ]
       },
-      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
+      "tutorials": [
+        "01-set-sail",
+        "06-sample-locks",
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
+      ]
     },
     "copy": {
       "type": "button",
@@ -1561,7 +1662,7 @@
           "[SCENE] + [RECORD] = Copy the assigned scene",
           "[TRACK PARAMETER] + [RECORD] = Copy track parameter page settings"
         ],
-        "menu_path": "N/A \u2014 dual-function key (recording mode + copy).",
+        "menu_path": "N/A — dual-function key (recording mode + copy).",
         "parameters": [],
         "leds": "Steady red = GRID RECORDING mode active. Flashing red = LIVE RECORDING mode active. Unlit = no recording mode.",
         "tips": [
@@ -1575,9 +1676,9 @@
           "Merlin's workflow depends heavily on copying: copy patterns to create variations, copy parts to create independent sound platforms, copy scenes to build scene stacks.",
           "Key Copy operations Merlin uses: copy pattern A1 to A2 (creates variation), copy Part 1 to Part 2 (creates independent sound platform), copy Scene 1 to Scene 9 (builds scene stack for progressive fading)."
         ],
-        "workflow_context": "COPY ([FUNC]+[RECORD]) copies the current context: pattern, part, scene, trig, etc. Merlin's entire multi-pattern workflow starts with copying \u2014 copy your base pattern, then modify the copy. Copy your base Part, then evolve the copy independently.",
+        "workflow_context": "COPY ([FUNC]+[RECORD]) copies the current context: pattern, part, scene, trig, etc. Merlin's entire multi-pattern workflow starts with copying — copy your base pattern, then modify the copy. Copy your base Part, then evolve the copy independently.",
         "common_mistakes": [
-          "Copying a pattern and assuming the Part was also copied \u2014 it wasn't. Both patterns still share the same Part.",
+          "Copying a pattern and assuming the Part was also copied — it wasn't. Both patterns still share the same Part.",
           "Not copying the Part separately when you need independent sound control"
         ]
       },
@@ -1608,7 +1709,7 @@
           "[TRACK PARAMETER] + [PLAY] = Initialize track parameter page to defaults",
           "[TRACK] + [PLAY] = Manually trig the track's machine (play sample)"
         ],
-        "menu_path": "N/A \u2014 dual-function key (transport play + clear).",
+        "menu_path": "N/A — dual-function key (transport play + clear).",
         "parameters": [],
         "leds": "Green LED indicates the sequencer is playing.",
         "tips": [
@@ -1619,10 +1720,10 @@
         ],
         "section": "3.1 (item 13), 5.4, 12.2.2, 12.9",
         "merlin_tips": [
-          "Merlin mentions deleting triggers, removing machines, and clearing scenes as part of his experimentation workflow. 'Be brutal \u2014 change the pattern so heavily that the original is completely destroyed' (then reload the Part to undo it all)."
+          "Merlin mentions deleting triggers, removing machines, and clearing scenes as part of his experimentation workflow. 'Be brutal — change the pattern so heavily that the original is completely destroyed' (then reload the Part to undo it all)."
         ],
         "workflow_context": "CLEAR ([FUNC]+[PLAY]) deletes/clears the current context. Use it to strip down patterns for breaks (Merlin's example: clear all kick triggers for a breakdown pattern). Safe to experiment because you can always reload the Part.",
-        "common_mistakes": ["Clearing something before saving your Part \u2014 without a saved state, there's no undo"]
+        "common_mistakes": ["Clearing something before saving your Part — without a saved state, there's no undo"]
       },
       "tutorials": [
         "01-set-sail",
@@ -1630,7 +1731,11 @@
         "03-beat-basics",
         "04-audio-pool",
         "06-sample-locks",
-        "07-loop-stretching"
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
       ]
     },
     "paste": {
@@ -1658,27 +1763,35 @@
           "[TRACK PARAMETER] + [STOP] = Paste copied track parameter page",
           "[TRACK] + [STOP] = Stop playback of the track's machine"
         ],
-        "menu_path": "N/A \u2014 dual-function key (transport stop + paste).",
+        "menu_path": "N/A — dual-function key (transport stop + paste).",
         "parameters": [],
         "leds": "No dedicated play/stop LED (playback status shown on screen).",
         "tips": [
           "This is the same physical button for both STOP (transport) and PASTE (editing) functions!",
-          "Double-stop ([STOP]+[STOP]) is the panic button \u2014 kills everything including delay tails.",
+          "Double-stop ([STOP]+[STOP]) is the panic button — kills everything including delay tails.",
           "Double-stop while sequencer is stopped also re-arms all one-shot trigs (can be disabled in Personalize).",
           "All PASTE operations can be UNDONE by pressing the same key combination again immediately.",
           "Pressing [STOP] while a pattern chain is playing resets the chain. A second [STOP] unlinks the chain entirely."
         ],
         "section": "3.1 (item 12), 5.4, 12.2.2, 12.9",
         "merlin_tips": [
-          "Merlin's copy-paste workflow: copy A1 \u2192 paste to A2 \u2192 modify A2. Copy Part 1 \u2192 paste to Part 2 \u2192 assign Part 2 to A2 \u2192 modify Part 2 independently."
+          "Merlin's copy-paste workflow: copy A1 → paste to A2 → modify A2. Copy Part 1 → paste to Part 2 → assign Part 2 to A2 → modify Part 2 independently."
         ],
         "workflow_context": "PASTE ([FUNC]+[STOP]) pastes previously copied content. Essential for Merlin's workflow: create pattern variations by copy-paste-modify, create independent Parts by copy-paste-modify.",
         "common_mistakes": [
           "Pasting over something important without having saved it first",
-          "Forgetting that pasting a pattern does NOT paste the Part \u2014 you must copy/paste Parts separately"
+          "Forgetting that pasting a pattern does NOT paste the Part — you must copy/paste Parts separately"
         ]
       },
-      "tutorials": ["01-set-sail", "03-beat-basics", "06-sample-locks", "07-loop-stretching"]
+      "tutorials": [
+        "01-set-sail",
+        "03-beat-basics",
+        "06-sample-locks",
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing",
+        "16-performance-and-dj"
+      ]
     },
     "encoder_level": {
       "type": "encoder",
@@ -1704,26 +1817,26 @@
           "LEVEL (in Sample Lock menu) = Navigate sample list",
           "LEVEL (in Micro Timing) = Select trig condition"
         ],
-        "menu_path": "N/A \u2014 encoder with context-dependent function.",
+        "menu_path": "N/A — encoder with context-dependent function.",
         "parameters": [],
         "leds": "No LED. Level bar shown on the left side of the screen display.",
         "tips": [
           "LEVEL is post-effects; VOL on the AMP page is pre-effects. Use both for flexible volume control.",
           "LEVEL only affects the main output routing. Use [CUE]+LEVEL for the cue output level.",
           "Press the encoder while turning for quick parameter sweeps (increments of 7).",
-          "The LEVEL encoder is incredibly versatile \u2014 it adjusts different parameters depending on which menu is open."
+          "The LEVEL encoder is incredibly versatile — it adjusts different parameters depending on which menu is open."
         ],
         "section": "3.1 (item 6), 11.4.1",
         "merlin_tips": [
           "The LEVEL encoder has a dual role in Merlin's workflow: (1) Sets track volume, which is stored in the Part, and (2) When held on a trig, opens the sample lock browser.",
           "Track volume (LEVEL) is POST-effects in the signal chain. Merlin notes: 'the track volume parameter determines the overall volume of the whole track (sample + FX).'",
-          "Parts store track volumes \u2014 so saving a Part saves all 8 track levels. Reloading a Part restores them.",
+          "Parts store track volumes — so saving a Part saves all 8 track levels. Reloading a Part restores them.",
           "Merlin's advanced technique: set a track's volume to 0 in the Part, save it, then manually increase it during performance for a fade-in effect."
         ],
         "workflow_context": "Turn LEVEL to set the active track's output volume (stored in the Part). Hold a [TRIG] + turn LEVEL = open sample lock browser. [CUE]+LEVEL = set the cue send level for the active track.",
         "common_mistakes": [
-          "Changing track volume to fix a sample volume problem \u2014 Merlin says use GAIN in the Audio Editor instead, because LEVEL changes affect the whole Part",
-          "Forgetting that LEVEL changes are Part-level \u2014 adjusting one track's volume affects ALL patterns using that Part"
+          "Changing track volume to fix a sample volume problem — Merlin says use GAIN in the Audio Editor instead, because LEVEL changes affect the whole Part",
+          "Forgetting that LEVEL changes are Part-level — adjusting one track's volume affects ALL patterns using that Part"
         ]
       },
       "tutorials": [
@@ -1732,7 +1845,11 @@
         "03-beat-basics",
         "04-audio-pool",
         "06-sample-locks",
-        "07-loop-stretching"
+        "07-loop-stretching",
+        "13-arranger",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
       ]
     },
     "encoder_a": {
@@ -1757,7 +1874,7 @@
           "[SCENE A/B] + turn = Scene lock for that parameter",
           "[TRIG] + press = Remove parameter lock for that parameter"
         ],
-        "menu_path": "N/A \u2014 context-dependent encoder.",
+        "menu_path": "N/A — context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
@@ -1768,10 +1885,10 @@
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
           "On the SRC/Playback page, Encoder A typically controls the START parameter. When SLICE=ON, this selects which slice to play.",
-          "Merlin's slice lock workflow: p-lock the START parameter (Encoder A on SRC page) per step to select different slices \u2014 this is how you build chop patterns.",
+          "Merlin's slice lock workflow: p-lock the START parameter (Encoder A on SRC page) per step to select different slices — this is how you build chop patterns.",
           "In the Audio Editor, Encoder A controls different parameters depending on the active page (TRIM, SLICE, etc.)."
         ],
-        "workflow_context": "Data entry encoder A \u2014 the parameter it controls depends on the active page. On SRC page: typically START (and slice selection when SLICE=ON). In Audio Editor: varies by page. Press+turn for coarse adjustment.",
+        "workflow_context": "Data entry encoder A — the parameter it controls depends on the active page. On SRC page: typically START (and slice selection when SLICE=ON). In Audio Editor: varies by page. Press+turn for coarse adjustment.",
         "common_mistakes": ["Not pressing+turning for coarse adjustment when you need to make big changes quickly"]
       },
       "tutorials": ["05-slice-and-dice"]
@@ -1791,16 +1908,16 @@
         "primary": "Controls the upper-middle parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
         "all_combos": ["Same combinations as Encoder A, applied to the upper-middle parameter position."],
-        "menu_path": "N/A \u2014 context-dependent encoder.",
+        "menu_path": "N/A — context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
         "tips": ["Same tips as Encoder A."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
-          "On the SRC page, Encoder B typically controls the LEN (length) parameter \u2014 how much of the sample plays from the start point."
+          "On the SRC page, Encoder B typically controls the LEN (length) parameter — how much of the sample plays from the start point."
         ],
         "workflow_context": "Data entry encoder B. Context-dependent like all encoders. Press+turn for coarse adjustment.",
-        "common_mistakes": ["Same as encoder_a \u2014 not using press+turn for coarse changes."]
+        "common_mistakes": ["Same as encoder_a — not using press+turn for coarse changes."]
       },
       "tutorials": []
     },
@@ -1819,13 +1936,13 @@
         "primary": "Controls the upper-right parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
         "all_combos": ["Same combinations as Encoder A, applied to the upper-right parameter position."],
-        "menu_path": "N/A \u2014 context-dependent encoder.",
+        "menu_path": "N/A — context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
         "tips": ["Same tips as Encoder A."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
-          "On the SRC page, Encoder C typically controls the RATE parameter \u2014 playback speed/pitch of the sample."
+          "On the SRC page, Encoder C typically controls the RATE parameter — playback speed/pitch of the sample."
         ],
         "workflow_context": "Data entry encoder C. Context-dependent. Press+turn for coarse adjustment.",
         "common_mistakes": ["Same as encoder_a."]
@@ -1854,16 +1971,16 @@
           "[TRACK] + [TEMPO] = Sync sequencer to Pickup machine loop on that track",
           "[FUNC] + [YES] (in Tempo menu) = Switch between PROJECT and PATTERN tempo mode"
         ],
-        "menu_path": "TEMPO menu \u2192 BPM setting (LEVEL knob for integer, [UP/DOWN] for decimal). PROJECT or PATTERN tempo mode.",
+        "menu_path": "TEMPO menu → BPM setting (LEVEL knob for integer, [UP/DOWN] for decimal). PROJECT or PATTERN tempo mode.",
         "parameters": [
           "BPM: 30.0 to 300.0",
           "Mode: PROJECT (shared BPM for all patterns) or PATTERN (per-pattern BPM)"
         ],
-        "leds": "[TEMPO] key LED flashes at the current BPM speed \u2014 always visible as a tempo indicator.",
+        "leds": "[TEMPO] key LED flashes at the current BPM speed — always visible as a tempo indicator.",
         "tips": [
           "Tap tempo needs at least 4 taps before setting the BPM.",
           "Press [LEFT/RIGHT] arrows (no menu open) to temporarily nudge BPM +/- 10% for manual syncing.",
-          "PATTERN tempo mode allows each pattern to have its own BPM \u2014 great for songs with tempo changes.",
+          "PATTERN tempo mode allows each pattern to have its own BPM — great for songs with tempo changes.",
           "Arranger row BPM settings override both project and pattern tempo."
         ],
         "section": "3.1 (item 8), 8.9",
@@ -1872,10 +1989,16 @@
         ],
         "workflow_context": "Press to open the TEMPO menu. [FUNC]+[TAP TEMPO] enters tap tempo mode (tap repeatedly to set BPM by feel). The flashing LED speed indicates current BPM. Getting tempo right is essential before Merlin's time-stretch and slice workflows work properly.",
         "common_mistakes": [
-          "Not setting the project tempo before loading and time-stretching samples \u2014 everything depends on this being correct"
+          "Not setting the project tempo before loading and time-stretching samples — everything depends on this being correct"
         ]
       },
-      "tutorials": ["03-beat-basics", "07-loop-stretching"]
+      "tutorials": [
+        "03-beat-basics",
+        "07-loop-stretching",
+        "14-midi-sequencing",
+        "15-pickup-machines",
+        "16-performance-and-dj"
+      ]
     },
     "encoder_d": {
       "type": "encoder",
@@ -1887,12 +2010,12 @@
       },
       "zone": "shuttle_encoders",
       "label": "D",
-      "sublabel": "Zoom \u2b0d",
+      "sublabel": "Zoom ⬍",
       "manual": {
         "primary": "Controls the lower-left parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
         "all_combos": ["Same combinations as Encoder A, applied to the lower-left parameter position."],
-        "menu_path": "N/A \u2014 context-dependent encoder.",
+        "menu_path": "N/A — context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
         "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: D = y-axis zoom."],
@@ -1915,18 +2038,18 @@
       },
       "zone": "shuttle_encoders",
       "label": "E",
-      "sublabel": "Scroll \u2b0c",
+      "sublabel": "Scroll ⬌",
       "manual": {
         "primary": "Controls the lower-middle parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
         "all_combos": ["Same combinations as Encoder A, applied to the lower-middle parameter position."],
-        "menu_path": "N/A \u2014 context-dependent encoder.",
+        "menu_path": "N/A — context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
         "tips": ["Same tips as Encoder A. In Audio Editor TRIM page: E = waveform scroll."],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
-          "In the Audio Editor, Encoder E often controls horizontal scroll position \u2014 essential for navigating long samples when zoomed in."
+          "In the Audio Editor, Encoder E often controls horizontal scroll position — essential for navigating long samples when zoomed in."
         ],
         "workflow_context": "Data entry encoder E. In the Audio Editor, controls scroll. On parameter pages, controls the fifth parameter.",
         "common_mistakes": ["Same as encoder_a."]
@@ -1943,12 +2066,12 @@
       },
       "zone": "shuttle_encoders",
       "label": "F",
-      "sublabel": "Zoom \u2b0c",
+      "sublabel": "Zoom ⬌",
       "manual": {
         "primary": "Controls the lower-right parameter on the screen. Press while turning for larger increments.",
         "func_combo": "[FUNC] + turn = Parameter value jump.",
         "all_combos": ["Same combinations as Encoder A, applied to the lower-right parameter position."],
-        "menu_path": "N/A \u2014 context-dependent encoder.",
+        "menu_path": "N/A — context-dependent encoder.",
         "parameters": [],
         "leds": "No LED.",
         "tips": [
@@ -1956,7 +2079,7 @@
         ],
         "section": "3.1 (item 7), 5.2",
         "merlin_tips": [
-          "In the Audio Editor, Encoder F often controls horizontal zoom \u2014 essential for precise slice placement."
+          "In the Audio Editor, Encoder F often controls horizontal zoom — essential for precise slice placement."
         ],
         "workflow_context": "Data entry encoder F. In the Audio Editor, controls zoom. On parameter pages, controls the sixth parameter.",
         "common_mistakes": ["Same as encoder_a."]
@@ -1989,7 +2112,7 @@
           "[SCENE A] + [PLAY] = Clear Scene A locks",
           "[SCENE A] + [STOP] = Paste to Scene A"
         ],
-        "menu_path": "N/A \u2014 scene assignment and locking key.",
+        "menu_path": "N/A — scene assignment and locking key.",
         "parameters": [
           "XLV: Equal-energy track level (MIN/MAX, scene-only)",
           "XVOL: Equal-energy pre-FX volume (MIN/MAX, scene-only, on AMP page)",
@@ -1997,7 +2120,7 @@
         ],
         "leds": "When [SCENE A] is pressed: red [TRIG] = currently assigned scene, green [TRIG] = Scene B's assignment, half-bright green = scenes containing locks.",
         "tips": [
-          "Scene locks override parameter locks \u2014 the crossfader always wins.",
+          "Scene locks override parameter locks — the crossfader always wins.",
           "Use XLV/XVOL/XDIR for equal-energy crossfading to avoid the volume dip at center position.",
           "Hold [SCENE A] and check [TRACK] and [TRACK PARAMETER] key brightness to see which tracks/pages have scene locks.",
           "Muting a scene ([FUNC]+[SCENE]) is great for toggling effect washes on/off during performance."
@@ -2006,18 +2129,18 @@
         "merlin_tips": [
           "Merlin's scene model: Scene A is on the LEFT of the crossfader. Muting Scene A means the left side plays default settings.",
           "Scene stacking technique: Scenes 1-8 go on the LEFT (Scene A), Scenes 9-16 go on the RIGHT (Scene B). Build progressively by copying and modifying.",
-          "Scenes are stored in the PART \u2014 each Part has its own 16 scenes. Switching Parts loads completely different scenes.",
-          "Parts also store WHICH scene is loaded to slot A and whether it's muted \u2014 so switching patterns that use different Parts automatically loads the right scene setup.",
+          "Scenes are stored in the PART — each Part has its own 16 scenes. Switching Parts loads completely different scenes.",
+          "Parts also store WHICH scene is loaded to slot A and whether it's muted — so switching patterns that use different Parts automatically loads the right scene setup.",
           "Muting a scene immediately reverts to default settings (or you can fade to it for a gradual return). This is your 'return home' during performance."
         ],
         "workflow_context": "Press [SCENE A]+[TRIG] to assign a scene to slot A. Hold [SCENE A] + turn a knob to add that parameter to the scene. [FUNC]+[SCENE A] mutes the scene. Merlin's model: Scene A = left side of crossfader. Start with default (Scene A muted), fade right to Scene B for your first departure.",
         "common_mistakes": [
-          "Forgetting that scenes override p-locks \u2014 the crossfader always wins",
-          "Not muting unused scene slots \u2014 an active but empty scene can cause unexpected behavior",
-          "Not saving the Part after setting up scenes \u2014 scenes are Part-level data"
+          "Forgetting that scenes override p-locks — the crossfader always wins",
+          "Not muting unused scene slots — an active but empty scene can cause unexpected behavior",
+          "Not saving the Part after setting up scenes — scenes are Part-level data"
         ]
       },
-      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes", "13-arranger", "16-performance-and-dj"]
     },
     "scene_b": {
       "type": "button",
@@ -2045,26 +2168,26 @@
           "[SCENE B] + [PLAY] = Clear Scene B locks",
           "[SCENE B] + [STOP] = Paste to Scene B"
         ],
-        "menu_path": "N/A \u2014 scene assignment and locking key.",
+        "menu_path": "N/A — scene assignment and locking key.",
         "parameters": ["Same scene-exclusive parameters as Scene A (XLV, XVOL, XDIR)"],
         "leds": "When [SCENE B] is pressed: red [TRIG] = currently assigned scene, green [TRIG] = Scene A's assignment, half-bright green = scenes containing locks.",
         "tips": [
           "Same tips as Scene A. A common setup: Scene A = clean/dry, Scene B = heavy effects/tension.",
-          "16 scenes per Part \u2014 plenty of room for variation. Scenes are part of the Part, not the Pattern."
+          "16 scenes per Part — plenty of room for variation. Scenes are part of the Part, not the Pattern."
         ],
         "section": "3.1 (item 9), 10.3",
         "merlin_tips": [
           "Merlin's scene model: Scene B is on the RIGHT. In the buildup example, he loads his buildup scene to slot B and slowly fades right for increasing intensity.",
           "Scene stacking: Scenes 9-16 go on the RIGHT (Scene B). After fading to Scene B, load the next scene to slot A and fade back left.",
-          "The scene stacking sequence: Start \u2192 fade right to Scene 9 \u2192 load Scene 2 to A \u2192 fade left \u2192 load Scene 10 to B \u2192 fade right \u2192 etc. This creates a natural progression through scenes."
+          "The scene stacking sequence: Start → fade right to Scene 9 → load Scene 2 to A → fade left → load Scene 10 to B → fade right → etc. This creates a natural progression through scenes."
         ],
         "workflow_context": "Press [SCENE B]+[TRIG] to assign a scene to slot B. Merlin's buildup technique: load a 'tension' scene to slot B (delay feedback up, filter resonance up, distortion up, reverb up), then slowly crossfade right for a gradual buildup.",
         "common_mistakes": [
-          "Building scenes that are too extreme \u2014 Merlin's approach is gradual, stacking small changes for natural progression",
-          "Forgetting to mute Scene B when switching to a new pattern with its own Part \u2014 the new Part loads its own scene assignments"
+          "Building scenes that are too extreme — Merlin's approach is gradual, stacking small changes for natural progression",
+          "Forgetting to mute Scene B when switching to a new pattern with its own Part — the new Part loads its own scene assignments"
         ]
       },
-      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
+      "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes", "13-arranger", "16-performance-and-dj"]
     },
     "crossfader": {
       "type": "fader",
@@ -2081,33 +2204,33 @@
       "label": "Crossfader",
       "manual": {
         "primary": "Interpolates between the parameter values of Scene A (leftmost) and Scene B (rightmost). Any crossfader position between the extremes blends the two scenes proportionally.",
-        "func_combo": "N/A \u2014 physical slider, no FUNC combination.",
+        "func_combo": "N/A — physical slider, no FUNC combination.",
         "all_combos": [],
-        "menu_path": "N/A \u2014 physical control. Crossfader position shown at bottom-right of the screen.",
+        "menu_path": "N/A — physical control. Crossfader position shown at bottom-right of the screen.",
         "parameters": [],
         "leds": "No LED. Position indicated on screen.",
         "tips": [
-          "Scene locks override parameter locks \u2014 the crossfader always takes priority.",
+          "Scene locks override parameter locks — the crossfader always takes priority.",
           "If two empty scenes are assigned, the crossfader does nothing.",
-          "The crossfader center position has a natural volume dip \u2014 use XLV/XVOL for equal-energy crossfading.",
+          "The crossfader center position has a natural volume dip — use XLV/XVOL for equal-energy crossfading.",
           "The crossfader can control ANY lockable parameter across ALL 8 tracks simultaneously.",
           "The MKII crossfader is upgraded with a smoother, silkier action compared to the MKI."
         ],
         "section": "3.1 (item 11), 10.3",
-        "note": "Center position has volume dip \u2014 use XVOL for equal-energy crossfading",
+        "note": "Center position has volume dip — use XVOL for equal-energy crossfading",
         "merlin_tips": [
           "Merlin identifies 3 key things you can do: (1) Fade from DEFAULT to a scene, (2) Fade from SCENE to SCENE, (3) Fade from SCENE back to DEFAULT.",
           "His metaphor: 'A scene allows you to undertake an expedition from the base camp (default settings) into new territory (a scene) and move further as you keep loading new scenes. Returning to base camp is always possible by muting a scene and fading to it.'",
-          "Muting a scene while the crossfader is there causes an instant jump \u2014 no fade. Use this for dramatic drops.",
-          "For live inputs, XDIR in scenes lets the crossfader control input volume \u2014 effectively giving you 10 channels of crossfader control (8 tracks + 2 inputs).",
+          "Muting a scene while the crossfader is there causes an instant jump — no fade. Use this for dramatic drops.",
+          "For live inputs, XDIR in scenes lets the crossfader control input volume — effectively giving you 10 channels of crossfader control (8 tracks + 2 inputs).",
           "Use XVOL (AMP page) and XLEV (track level) in scenes for pre/post-FX volume control via crossfader. XVOL lets reverb tails die naturally.",
           "Scene stacking creates a linear journey through your performance: each new scene builds on the previous one."
         ],
         "workflow_context": "The crossfader interpolates between Scene A (left) and Scene B (right). Merlin's performance flow: start with crossfader left (default or Scene A), slowly fade right toward Scene B for buildup, then either snap back (mute scene) or load a new scene and continue fading. XVOL and XLEV give you pre/post-FX volume control through scenes.",
         "common_mistakes": [
-          "Center position has a volume dip \u2014 use XVOL for equal-energy crossfading",
-          "Trying to use the crossfader without setting up scenes first \u2014 it does nothing without scene assignments",
-          "Not understanding that scene locks override p-locks \u2014 the crossfader ALWAYS wins over step-level parameter locks"
+          "Center position has a volume dip — use XVOL for equal-energy crossfading",
+          "Trying to use the crossfader without setting up scenes first — it does nothing without scene assignments",
+          "Not understanding that scene locks override p-locks — the crossfader ALWAYS wins over step-level parameter locks"
         ]
       },
       "tutorials": ["01-set-sail", "06-sample-locks", "08-parts-banks-scenes"]
@@ -2123,7 +2246,7 @@
       },
       "zone": "trig_grid",
       "label": "1",
-      "sublabel": "T1",
+      "sublabel": "Step 1",
       "manual": {
         "primary": "Multi-purpose key. In Grid Recording: places/removes trigs on step 1. With [BANK]: selects Bank A. With [PTN]: selects Pattern 1. With [SCENE A/B]: assigns Scene 1. In Tracks mode (no recording): trigs Track 1 if disconnected.",
         "func_combo": "[FUNC] + [TRIG 1] = Place lock trig on step 1 (Grid Recording) / One-shot trig toggle.",
@@ -2141,9 +2264,9 @@
           "[TRIG 1] + [RECORD] = Copy trig",
           "[TRIG 1] + [PLAY] = Clear trig locks",
           "[TRIG 1] + [STOP] = Paste trig",
-          "[TRIG 1] + [NO] = Convert trig type (sample\u2192trigless\u2192lock cycle)"
+          "[TRIG 1] + [NO] = Convert trig type (sample→trigless→lock cycle)"
         ],
-        "menu_path": "N/A \u2014 context-dependent key.",
+        "menu_path": "N/A — context-dependent key.",
         "parameters": [],
         "leds": "Red = sample trig. Flashing red = sample trig with p-lock or sample lock. Green (bright) = trigless trig. Green (dim) = lock trig. Yellow = one-shot trig. Yellow/red alternating = fired one-shot. Unlit = no trig.",
         "tips": [
@@ -2158,14 +2281,14 @@
           "Hold a trig + turn LEVEL encoder = sample lock browser. Select any sample from the slot list for that step.",
           "Hold a trig + lock the START parameter = slice lock. Select which slice plays on that step.",
           "The math: 128 slots x 64 slices = 8,192 available sounds per sample list. With Static list too, that's 16,384 total.",
-          "One-shot trigs ([FUNC]+[TRIG]) are essential for recorder triggers \u2014 they fire once and don't repeat, preventing overwrite on pattern loop.",
+          "One-shot trigs ([FUNC]+[TRIG]) are essential for recorder triggers — they fire once and don't repeat, preventing overwrite on pattern loop.",
           "Merlin's pattern variation technique: same Part, different trigger patterns. Strip triggers for a break, add extra triggers + locks for a buildup."
         ],
         "workflow_context": "In Grid Recording mode, press [TRIG] to place/remove triggers. Hold [TRIG]+[UP/DOWN] for sample locks. Hold [TRIG]+turn LEVEL for sample lock via encoder. P-lock parameters by holding [TRIG] and turning any encoder. [FUNC]+[TRIG] places a one-shot or lock trig.",
         "common_mistakes": [
           "Not understanding that a trig key's LED color tells you what's on it: steady red = normal trig, flashing red = sample lock",
           "Placing triggers without being in Grid Recording mode",
-          "Forgetting that [FUNC]+[TRIG] places special trig types (one-shot, lock trigs) \u2014 not regular trigs"
+          "Forgetting that [FUNC]+[TRIG] places special trig types (one-shot, lock trigs) — not regular trigs"
         ]
       },
       "tutorials": [
@@ -2175,7 +2298,10 @@
         "05-slice-and-dice",
         "06-sample-locks",
         "07-loop-stretching",
-        "08-parts-banks-scenes"
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "16-performance-and-dj"
       ]
     },
     "trig_2": {
@@ -2189,7 +2315,7 @@
       },
       "zone": "trig_grid",
       "label": "2",
-      "sublabel": "T2",
+      "sublabel": "Step 2",
       "manual": {
         "primary": "Same as TRIG 1 but for step 2 / Bank B / Pattern 2 / Scene 2.",
         "func_combo": "[FUNC] + [TRIG 2] = Lock trig / one-shot toggle on step 2.",
@@ -2203,11 +2329,11 @@
           "[TRIG 2] in Startup Menu = EMPTY RESET (reinitializes battery-backed RAM, clears internal settings, CF card unaffected)."
         ],
         "section": "3.1 (item 21), 12, 18.2",
-        "merlin_tips": ["Same principles as trig_1 \u2014 all 16 trigs work identically."],
+        "merlin_tips": ["Same principles as trig_1 — all 16 trigs work identically."],
         "workflow_context": "Same as trig_1.",
         "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": ["03-beat-basics", "08-parts-banks-scenes"]
+      "tutorials": ["03-beat-basics", "08-parts-banks-scenes", "13-arranger", "16-performance-and-dj"]
     },
     "trig_3": {
       "type": "trig",
@@ -2220,7 +2346,7 @@
       },
       "zone": "trig_grid",
       "label": "3",
-      "sublabel": "T3",
+      "sublabel": "Step 3",
       "manual": {
         "primary": "Same as TRIG 1 but for step 3 / Bank C / Pattern 3 / Scene 3.",
         "func_combo": "[FUNC] + [TRIG 3] = Lock trig / one-shot toggle on step 3.",
@@ -2234,7 +2360,7 @@
         "workflow_context": "Same as trig_1.",
         "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": ["03-beat-basics"]
+      "tutorials": ["03-beat-basics", "13-arranger", "16-performance-and-dj"]
     },
     "trig_4": {
       "type": "trig",
@@ -2247,7 +2373,7 @@
       },
       "zone": "trig_grid",
       "label": "4",
-      "sublabel": "T4",
+      "sublabel": "Step 4",
       "manual": {
         "primary": "Same as TRIG 1 but for step 4 / Bank D / Pattern 4 / Scene 4.",
         "func_combo": "[FUNC] + [TRIG 4] = Lock trig / one-shot toggle on step 4.",
@@ -2274,7 +2400,7 @@
       },
       "zone": "trig_grid",
       "label": "5",
-      "sublabel": "T5",
+      "sublabel": "Step 5",
       "manual": {
         "primary": "Same as TRIG 1 but for step 5 / Bank E / Pattern 5 / Scene 5.",
         "func_combo": "[FUNC] + [TRIG 5] = Lock trig / one-shot toggle on step 5.",
@@ -2290,7 +2416,7 @@
         "workflow_context": "Same as trig_1.",
         "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": ["03-beat-basics"]
+      "tutorials": ["03-beat-basics", "13-arranger", "14-midi-sequencing", "16-performance-and-dj"]
     },
     "trig_6": {
       "type": "trig",
@@ -2303,7 +2429,7 @@
       },
       "zone": "trig_grid",
       "label": "6",
-      "sublabel": "T6",
+      "sublabel": "Step 6",
       "manual": {
         "primary": "Same as TRIG 1 but for step 6 / Bank F / Pattern 6 / Scene 6.",
         "func_combo": "[FUNC] + [TRIG 6] = Lock trig / one-shot toggle on step 6.",
@@ -2330,7 +2456,7 @@
       },
       "zone": "trig_grid",
       "label": "7",
-      "sublabel": "T7",
+      "sublabel": "Step 7",
       "manual": {
         "primary": "Same as TRIG 1 but for step 7 / Bank G / Pattern 7 / Scene 7.",
         "func_combo": "[FUNC] + [TRIG 7] = Lock trig / one-shot toggle on step 7.",
@@ -2357,7 +2483,7 @@
       },
       "zone": "trig_grid",
       "label": "8",
-      "sublabel": "T8",
+      "sublabel": "Step 8",
       "manual": {
         "primary": "Same as TRIG 1 but for step 8 / Bank H / Pattern 8 / Scene 8.",
         "func_combo": "[FUNC] + [TRIG 8] = Lock trig / one-shot toggle on step 8.",
@@ -2371,7 +2497,7 @@
         "workflow_context": "Same as trig_1.",
         "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics"]
+      "tutorials": ["01-set-sail", "02-load-and-lock", "03-beat-basics", "13-arranger", "14-midi-sequencing"]
     },
     "trig_9": {
       "type": "trig",
@@ -2384,7 +2510,7 @@
       },
       "zone": "trig_grid",
       "label": "9",
-      "sublabel": "T1",
+      "sublabel": "Step 9",
       "manual": {
         "primary": "Step 9 in Grid Recording. In TRACKS mode without recording, trigs Track 1's machine. In LIVE RECORDING, inputs a sample trig on Track 1. With [BANK]: selects Bank I. With [PTN]: Pattern 9.",
         "func_combo": "[FUNC] + [TRIG 9] = Lock trig on step 9 / Manually trig trigless trig on Track 1 (no recording mode, Tracks/Chromatic).",
@@ -2409,7 +2535,10 @@
         "03-beat-basics",
         "05-slice-and-dice",
         "07-loop-stretching",
-        "08-parts-banks-scenes"
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing",
+        "16-performance-and-dj"
       ]
     },
     "trig_10": {
@@ -2423,7 +2552,7 @@
       },
       "zone": "trig_grid",
       "label": "10",
-      "sublabel": "T2",
+      "sublabel": "Step 10",
       "manual": {
         "primary": "Step 10 / Bank J / Pattern 10. In Tracks mode, trigs Track 2. In Live Recording, inputs trig on Track 2.",
         "func_combo": "[FUNC] + [TRIG 10] = Lock trig on step 10.",
@@ -2450,7 +2579,7 @@
       },
       "zone": "trig_grid",
       "label": "11",
-      "sublabel": "T3",
+      "sublabel": "Step 11",
       "manual": {
         "primary": "Step 11 / Bank K / Pattern 11. In Tracks mode, trigs Track 3. In Live Recording, inputs trig on Track 3.",
         "func_combo": "[FUNC] + [TRIG 11] = Lock trig on step 11.",
@@ -2477,7 +2606,7 @@
       },
       "zone": "trig_grid",
       "label": "12",
-      "sublabel": "T4",
+      "sublabel": "Step 12",
       "manual": {
         "primary": "Step 12 / Bank L / Pattern 12. In Tracks mode, trigs Track 4. In Live Recording, inputs trig on Track 4.",
         "func_combo": "[FUNC] + [TRIG 12] = Lock trig on step 12.",
@@ -2504,7 +2633,7 @@
       },
       "zone": "trig_grid",
       "label": "13",
-      "sublabel": "T5",
+      "sublabel": "Step 13",
       "manual": {
         "primary": "Step 13 / Bank M / Pattern 13. In Tracks mode, trigs Track 5. In Live Recording, inputs trig on Track 5. In Chromatic mode, this is the ROOT NOTE (C at octave 0).",
         "func_combo": "[FUNC] + [TRIG 13] = Lock trig on step 13.",
@@ -2512,15 +2641,13 @@
         "menu_path": "N/A",
         "parameters": [],
         "leds": "Same LED behavior as all trig keys. In Chromatic mode: yellow (C note).",
-        "tips": [
-          "In CHROMATIC mode, [TRIG 13] is the root note C at octave 0 \u2014 the reference pitch of the sample."
-        ],
+        "tips": ["In CHROMATIC mode, [TRIG 13] is the root note C at octave 0 — the reference pitch of the sample."],
         "section": "3.1 (item 21), 12, 12.7.2",
         "merlin_tips": ["Same principles as trig_1. Step 13 = beat 4, classic snare/clap position alongside step 5."],
         "workflow_context": "Same as trig_1.",
         "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": ["03-beat-basics", "05-slice-and-dice"]
+      "tutorials": ["03-beat-basics", "05-slice-and-dice", "13-arranger", "14-midi-sequencing"]
     },
     "trig_14": {
       "type": "trig",
@@ -2533,7 +2660,7 @@
       },
       "zone": "trig_grid",
       "label": "14",
-      "sublabel": "T6",
+      "sublabel": "Step 14",
       "manual": {
         "primary": "Step 14 / Bank N / Pattern 14. In Tracks mode, trigs Track 6. In Live Recording, inputs trig on Track 6.",
         "func_combo": "[FUNC] + [TRIG 14] = Lock trig on step 14.",
@@ -2560,7 +2687,7 @@
       },
       "zone": "trig_grid",
       "label": "15",
-      "sublabel": "T7",
+      "sublabel": "Step 15",
       "manual": {
         "primary": "Step 15 / Bank O / Pattern 15. In Tracks mode, trigs Track 7. In Live Recording, inputs trig on Track 7.",
         "func_combo": "[FUNC] + [TRIG 15] = Lock trig on step 15.",
@@ -2587,7 +2714,7 @@
       },
       "zone": "trig_grid",
       "label": "16",
-      "sublabel": "T8",
+      "sublabel": "Step 16",
       "manual": {
         "primary": "Step 16 / Bank P / Pattern 16. In Tracks mode, trigs Track 8. In Live Recording, inputs trig on Track 8.",
         "func_combo": "[FUNC] + [TRIG 16] = Lock trig on step 16.",
@@ -2598,12 +2725,19 @@
         "tips": [],
         "section": "3.1 (item 21), 12",
         "merlin_tips": [
-          "Same principles as trig_1. The last step of a 1-bar pattern \u2014 Merlin sometimes uses this for fill triggers or transition elements."
+          "Same principles as trig_1. The last step of a 1-bar pattern — Merlin sometimes uses this for fill triggers or transition elements."
         ],
         "workflow_context": "Same as trig_1.",
         "common_mistakes": ["Same as trig_1."]
       },
-      "tutorials": ["01-set-sail", "02-load-and-lock", "07-loop-stretching", "08-parts-banks-scenes"]
+      "tutorials": [
+        "01-set-sail",
+        "02-load-and-lock",
+        "07-loop-stretching",
+        "08-parts-banks-scenes",
+        "13-arranger",
+        "14-midi-sequencing"
+      ]
     },
     "page": {
       "type": "button",
@@ -2632,7 +2766,7 @@
           "[DOWN] + [PAGE] = Activate FILL mode for one pattern cycle",
           "[UP] + [DOWN] + [PAGE] = Latch FILL mode"
         ],
-        "menu_path": "SCALE SETUP menu (via FUNC+PAGE) \u2192 NORMAL mode: Pattern Scale (steps/total), Tempo Multiplier. PER TRACK mode: Scale Track, Tempo Multiplier, Master Length, Master Scale.",
+        "menu_path": "SCALE SETUP menu (via FUNC+PAGE) → NORMAL mode: Pattern Scale (steps/total), Tempo Multiplier. PER TRACK mode: Scale Track, Tempo Multiplier, Master Length, Master Scale.",
         "parameters": [
           "NORMAL: PATTERN SCALE (1-64 steps / 16,32,48,64 total), TEMPO MULTIPLIER (1/8X to 2X)",
           "PER TRACK: SCALE TRACK (per-track length), TEMPO MULTIPLIER (per-track), MASTER LENGTH (overall pattern restart), MASTER SCALE (overall time signature)"
@@ -2642,7 +2776,7 @@
           "Trigs are auto-copied when extending pattern length (e.g., extending from 16 to 32 steps copies page 1 to page 2). Disable in Personalize.",
           "In Scale Setup, press [TRIG] keys to quickly set the number of steps; press [PAGE] to quickly set total length.",
           "FILL mode ([UP/DOWN]+[PAGE]) is essential for drum fills and conditional trig patterns.",
-          "2X tempo multiplier doubles the step resolution to 32nd notes \u2014 great for detailed hi-hat patterns."
+          "2X tempo multiplier doubles the step resolution to 32nd notes — great for detailed hi-hat patterns."
         ],
         "section": "3.1 (item 10), 12.14, 12.15",
         "merlin_tips": [
@@ -2650,8 +2784,8 @@
         ],
         "workflow_context": "Press [PAGE] to cycle through pattern pages (up to 4 pages = 64 steps). [FUNC]+[PAGE] opens Scale Setup for changing track length and time signature. 4 LEDs show which pages have content.",
         "common_mistakes": [
-          "Not realizing patterns can be longer than 16 steps \u2014 press PAGE to access steps 17-32, 33-48, 49-64",
-          "Forgetting that each track can have a DIFFERENT length via Scale Setup \u2014 creating polyrhythms"
+          "Not realizing patterns can be longer than 16 steps — press PAGE to access steps 17-32, 33-48, 49-64",
+          "Forgetting that each track can have a DIFFERENT length via Scale Setup — creating polyrhythms"
         ]
       },
       "tutorials": ["03-beat-basics", "06-sample-locks"]
@@ -2665,7 +2799,8 @@
       },
       "zone": "beat_leds",
       "label": "1:4",
-      "color": "#f5d47a"
+      "color": "#f5d47a",
+      "tutorials": []
     },
     "beat_led_2": {
       "type": "led",
@@ -2676,7 +2811,8 @@
       },
       "zone": "beat_leds",
       "label": "2:4",
-      "color": "#e85f5f"
+      "color": "#e85f5f",
+      "tutorials": []
     },
     "beat_led_3": {
       "type": "led",
@@ -2687,7 +2823,8 @@
       },
       "zone": "beat_leds",
       "label": "3:4",
-      "color": "#e85f5f"
+      "color": "#e85f5f",
+      "tutorials": []
     },
     "beat_led_4": {
       "type": "led",
@@ -2698,7 +2835,8 @@
       },
       "zone": "beat_leds",
       "label": "4:4",
-      "color": "#e85f5f"
+      "color": "#e85f5f",
+      "tutorials": []
     }
   },
   "combos": {
@@ -2809,25 +2947,25 @@
           "action": "press",
           "element": "trig_1",
           "delay": 0,
-          "label": "Step 1 \u2014 kick"
+          "label": "Step 1 — kick"
         },
         {
           "action": "press",
           "element": "trig_5",
           "delay": 400,
-          "label": "Step 5 \u2014 kick"
+          "label": "Step 5 — kick"
         },
         {
           "action": "press",
           "element": "trig_9",
           "delay": 400,
-          "label": "Step 9 \u2014 kick"
+          "label": "Step 9 — kick"
         },
         {
           "action": "press",
           "element": "trig_13",
           "delay": 400,
-          "label": "Step 13 \u2014 kick"
+          "label": "Step 13 — kick"
         }
       ]
     },
@@ -2841,13 +2979,13 @@
           "action": "press",
           "element": "trig_5",
           "delay": 0,
-          "label": "Step 5 \u2014 snare"
+          "label": "Step 5 — snare"
         },
         {
           "action": "press",
           "element": "trig_13",
           "delay": 400,
-          "label": "Step 13 \u2014 snare"
+          "label": "Step 13 — snare"
         }
       ]
     },
@@ -2903,7 +3041,7 @@
       "id": "sample-lock-workflow",
       "tutorial": "06-sample-locks",
       "section": "how-to",
-      "description": "Set a sample lock: REC \u2192 hold TRIG \u2192 UP/DOWN \u2192 YES",
+      "description": "Set a sample lock: REC → hold TRIG → UP/DOWN → YES",
       "steps": [
         {
           "action": "press",
@@ -2955,7 +3093,7 @@
       "id": "timestretch-workflow",
       "tutorial": "07-loop-stretching",
       "section": "workflow",
-      "description": "Set up timestretch: Audio Editor \u2192 Attributes \u2192 Playback Setup",
+      "description": "Set up timestretch: Audio Editor → Attributes → Playback Setup",
       "steps": [
         {
           "action": "hold",

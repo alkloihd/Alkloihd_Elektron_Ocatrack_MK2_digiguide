@@ -1,0 +1,2632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial 12 - LFOs &amp; Modulation: Bring Tracks to Life</title>
+    <link rel="stylesheet" href="assets/theme.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family:
+          'Inter',
+          -apple-system,
+          system-ui,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* TOP BAR */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: var(--bg-surface);
+        border-bottom: 3px solid var(--accent-cyan);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 40px;
+        z-index: 1000;
+      }
+
+      .top-bar a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .top-bar a:hover {
+        color: var(--accent-lime);
+        transform: translateY(-2px);
+      }
+
+      .top-bar-title {
+        flex: 1;
+        font-family: 'Space Mono', monospace;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-heading);
+      }
+
+      .top-bar-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .difficulty {
+        color: var(--accent-orange);
+        border: 2px solid var(--accent-orange);
+        padding: 4px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: 'Space Mono', monospace;
+      }
+
+      .time {
+        color: var(--accent-magenta);
+        border: 2px solid var(--accent-magenta);
+        padding: 4px 10px;
+      }
+
+      .meta-item {
+        border: 2px solid var(--text-muted);
+        padding: 0.5rem 0.8rem;
+        color: var(--text-primary);
+      }
+
+      .meta-item.difficulty-intermediate {
+        border-color: var(--accent-orange);
+        color: var(--accent-orange);
+      }
+
+      /* CONTAINER */
+      .container {
+        display: flex;
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 280px;
+        background-color: var(--bg-surface);
+        border-right: 3px solid var(--accent-magenta);
+        padding: 2rem 1.5rem;
+        overflow-y: auto;
+        position: sticky;
+        top: 60px;
+        max-height: calc(100vh - 60px);
+      }
+
+      .sidebar-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent-magenta);
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--accent-magenta);
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-nav {
+        list-style: none;
+      }
+
+      .sidebar-nav li {
+        margin-bottom: 0.75rem;
+      }
+
+      .sidebar-nav-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        background-color: transparent;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        font-family: 'Space Mono', monospace;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-nav-item:hover {
+        background-color: var(--bg-tertiary);
+        border-color: var(--accent-magenta);
+      }
+
+      .sidebar-nav-item.active {
+        border-color: var(--accent-cyan);
+        background-color: #0a2a2a;
+        color: var(--accent-cyan);
+      }
+
+      .sidebar-checkbox {
+        width: 18px;
+        height: 18px;
+        border: 2px solid var(--text-muted);
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--accent-lime);
+        font-size: 12px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-checkbox.checked {
+        background-color: var(--accent-lime);
+        border-color: var(--accent-lime);
+        color: #0a0a0a;
+      }
+
+      /* MAIN CONTENT */
+      .main-content {
+        flex: 1;
+        padding: 40px;
+        max-width: 900px;
+        overflow-y: auto;
+      }
+
+      .section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .section h2 {
+        font-family: 'Space Mono', monospace;
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-heading);
+        margin-bottom: 1.5rem;
+        border-left: 4px solid var(--accent-magenta);
+        padding-left: 1rem;
+      }
+
+      .section h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-magenta);
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .section p {
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+
+      /* HIGHLIGHT BOXES */
+      .highlight-box {
+        background-color: var(--highlight-bg);
+        border: 3px solid var(--accent-cyan);
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+
+      .highlight-box.warning {
+        background-color: var(--warning-bg);
+        border-color: var(--accent-orange);
+        border-left: 6px solid var(--accent-orange);
+      }
+
+      .highlight-box.success {
+        background-color: var(--protip-bg);
+        border-color: var(--accent-lime);
+        border-left: 6px solid var(--accent-lime);
+      }
+
+      .highlight-box h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-heading);
+        margin-bottom: 0.75rem;
+      }
+
+      .highlight-box ul,
+      .highlight-box ol {
+        margin-left: 2rem;
+        margin-top: 0.75rem;
+        color: var(--text-primary);
+      }
+
+      .highlight-box li {
+        margin-bottom: 0.4rem;
+      }
+
+      /* CODE BLOCK */
+      .code-block {
+        background-color: var(--code-bg);
+        border: 2px solid var(--accent-magenta);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        color: var(--accent-magenta);
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        border: 2px solid var(--border-primary);
+      }
+
+      th {
+        background-color: var(--bg-surface);
+        border: 2px solid var(--border-primary);
+        padding: 1rem;
+        font-family: 'Space Mono', monospace;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        color: var(--accent-magenta);
+        text-align: left;
+      }
+
+      td {
+        border: 2px solid var(--border-primary);
+        padding: 1rem;
+        color: var(--text-primary);
+      }
+
+      tr:nth-child(even) td {
+        background-color: var(--bg-surface);
+      }
+
+      /* SVG DIAGRAM */
+      .diagram {
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-lime);
+        padding: 1.5rem;
+        margin: 2rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 300px;
+      }
+
+      /* STEP-BY-STEP */
+      .step-guide {
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-cyan);
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+
+      .step {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .step:last-child {
+        margin-bottom: 0;
+      }
+
+      .step-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background-color: var(--accent-magenta);
+        color: var(--bg-primary);
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        font-size: 18px;
+        border: 2px solid var(--accent-magenta);
+        flex-shrink: 0;
+      }
+
+      .step-content h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-heading);
+        margin-bottom: 0.5rem;
+      }
+
+      .step-content p {
+        color: var(--text-primary);
+        font-size: 15px;
+      }
+
+      /* LFO SIMULATOR */
+      .lfo-simulator {
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-cyan);
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+
+      .lfo-simulator h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-cyan);
+        margin-bottom: 1.5rem;
+      }
+
+      .lfo-controls {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .lfo-control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .lfo-control-group label {
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-cyan);
+      }
+
+      .lfo-control-group select,
+      .lfo-control-group input[type='range'] {
+        width: 100%;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        color: var(--text-primary);
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        padding: 0.5rem;
+      }
+
+      .lfo-control-group select {
+        cursor: pointer;
+      }
+
+      .lfo-control-group input[type='range'] {
+        height: 30px;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .lfo-control-group input[type='range']::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 24px;
+        background-color: var(--accent-cyan);
+        cursor: pointer;
+        border: none;
+      }
+
+      .lfo-control-group input[type='range']::-moz-range-thumb {
+        width: 16px;
+        height: 24px;
+        background-color: var(--accent-cyan);
+        cursor: pointer;
+        border: none;
+      }
+
+      .lfo-canvas-wrap {
+        background-color: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        padding: 1rem;
+        position: relative;
+      }
+
+      .lfo-canvas-wrap canvas {
+        width: 100%;
+        height: 200px;
+        display: block;
+      }
+
+      .lfo-value-readout {
+        margin-top: 1rem;
+        display: flex;
+        gap: 2rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .lfo-value-readout span {
+        color: var(--accent-cyan);
+      }
+
+      /* LFO DESIGNER WIDGET */
+      .lfo-designer {
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-magenta);
+        padding: 2rem;
+        margin: 2rem 0;
+      }
+
+      .lfo-designer h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-magenta);
+        margin-bottom: 1.5rem;
+      }
+
+      .designer-grid {
+        display: grid;
+        grid-template-columns: repeat(16, 1fr);
+        gap: 4px;
+        margin-bottom: 1.5rem;
+      }
+
+      .designer-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      .designer-bar-container {
+        width: 100%;
+        height: 120px;
+        background-color: var(--bg-primary);
+        border: 1px solid var(--border-primary);
+        position: relative;
+        cursor: pointer;
+      }
+
+      .designer-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--accent-magenta);
+        transition: height 0.1s;
+      }
+
+      .designer-bar-container:hover .designer-bar {
+        opacity: 0.8;
+      }
+
+      .designer-step-label {
+        font-family: 'Space Mono', monospace;
+        font-size: 9px;
+        color: var(--text-muted);
+      }
+
+      .designer-canvas-wrap {
+        background-color: var(--bg-primary);
+        border: 2px solid var(--border-primary);
+        padding: 1rem;
+      }
+
+      .designer-canvas-wrap canvas {
+        width: 100%;
+        height: 120px;
+        display: block;
+      }
+
+      .designer-actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .designer-btn {
+        padding: 0.5rem 1rem;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-magenta);
+        color: var(--accent-magenta);
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .designer-btn:hover {
+        background-color: var(--accent-magenta);
+        color: var(--bg-primary);
+      }
+
+      /* QUIZ */
+      .quiz-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .quiz-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .quiz-question {
+        margin-bottom: 2rem;
+      }
+
+      .quiz-question:last-child {
+        margin-bottom: 0;
+      }
+
+      .quiz-question h4 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
+      }
+
+      .quiz-option {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        padding: 0.75rem;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+
+      .quiz-option:hover {
+        border: 2px solid var(--accent-magenta);
+        background-color: var(--bg-tertiary);
+      }
+
+      .quiz-option input[type='radio'] {
+        cursor: pointer;
+      }
+
+      .quiz-option label {
+        cursor: pointer;
+        flex: 1;
+      }
+
+      .quiz-feedback {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        font-family: 'Space Mono', monospace;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        display: none;
+      }
+
+      .quiz-feedback.show {
+        display: block;
+      }
+
+      .quiz-feedback.correct {
+        background-color: var(--accent-lime);
+        color: var(--bg-primary);
+      }
+
+      .quiz-feedback.incorrect {
+        background-color: var(--accent-error);
+        color: var(--text-heading);
+      }
+
+      .quiz-score {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: var(--bg-primary);
+        border: 2px solid var(--accent-cyan);
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-align: center;
+        color: var(--accent-cyan);
+        display: none;
+      }
+
+      .quiz-score.show {
+        display: block;
+      }
+
+      /* CONFIDENCE */
+      .confidence-section {
+        background: var(--bg-surface);
+        border: 3px solid var(--border-primary);
+        padding: 40px;
+        margin-bottom: 40px;
+        scroll-margin-top: 80px;
+        opacity: 0.7;
+        transition: opacity 0.3s;
+      }
+
+      .confidence-section.in-view {
+        opacity: 1;
+        border-color: var(--accent-cyan);
+      }
+
+      .confidence-title {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-orange);
+        margin-bottom: 1.5rem;
+      }
+
+      .confidence-scale {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      .confidence-btn {
+        width: 50px;
+        height: 50px;
+        border: 2px solid var(--accent-orange);
+        background-color: var(--bg-primary);
+        color: var(--accent-orange);
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .confidence-btn:hover {
+        background-color: var(--accent-orange);
+        color: var(--bg-primary);
+        transform: translateY(-2px);
+      }
+
+      .confidence-btn.selected {
+        background-color: var(--accent-orange);
+        color: var(--bg-primary);
+      }
+
+      /* BOTTOM NAV */
+      .bottom-nav {
+        display: flex;
+        gap: 1rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 3px solid var(--border-primary);
+      }
+
+      .nav-btn {
+        flex: 1;
+        padding: 1rem;
+        border: 3px solid var(--accent-magenta);
+        background-color: var(--bg-primary);
+        color: var(--accent-magenta);
+        font-family: 'Space Mono', monospace;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        text-align: center;
+        display: block;
+      }
+
+      .nav-btn:hover {
+        background-color: var(--accent-magenta);
+        color: var(--bg-primary);
+        transform: translateY(-2px);
+      }
+
+      .nav-btn.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      .nav-btn.disabled:hover {
+        transform: none;
+        background-color: var(--bg-primary);
+        color: var(--accent-magenta);
+      }
+
+      /* LEARNING OBJECTIVES */
+      .objectives {
+        background-color: var(--bg-surface);
+        border: 3px solid var(--accent-cyan);
+        padding: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .objectives h3 {
+        font-family: 'Space Mono', monospace;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-cyan);
+        margin-bottom: 1rem;
+        margin-top: 0;
+      }
+
+      .objectives ul {
+        list-style: none;
+        margin: 0;
+      }
+
+      .objectives li {
+        padding: 0.4rem 0;
+        color: var(--text-primary);
+        font-size: 15px;
+      }
+
+      .objectives li::before {
+        content: '// ';
+        color: var(--accent-cyan);
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+      }
+
+      /* PREREQUISITES */
+      .prereqs {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+
+      .prereqs a {
+        padding: 0.4rem 0.8rem;
+        border: 2px solid var(--border-primary);
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: 'Space Mono', monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        transition: all 0.2s;
+      }
+
+      .prereqs a:hover {
+        border-color: var(--accent-cyan);
+        color: var(--accent-cyan);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 768px) {
+        .sidebar {
+          display: none;
+        }
+
+        .container {
+          flex-direction: column;
+        }
+
+        .main-content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        .step {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .lfo-controls {
+          grid-template-columns: 1fr;
+        }
+
+        .designer-grid {
+          grid-template-columns: repeat(8, 1fr);
+        }
+
+        .confidence-scale {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+      <a href="index.html">&larr; DASHBOARD</a>
+      <div class="top-bar-title">12 &mdash; LFOs &amp; MODULATION</div>
+      <div class="top-bar-meta">
+        <div class="meta-item difficulty-intermediate">INTERMEDIATE+</div>
+        <div class="meta-item">30 MIN</div>
+      </div>
+    </div>
+
+    <!-- CONTAINER -->
+    <div class="container">
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div class="sidebar-title">SECTIONS</div>
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a href="#section-1" class="sidebar-nav-item active" data-section="section-1">
+                <span class="sidebar-checkbox"></span>
+                3 LFOS PER TRACK
+              </a>
+            </li>
+            <li>
+              <a href="#section-2" class="sidebar-nav-item" data-section="section-2">
+                <span class="sidebar-checkbox"></span>
+                LFO MODES
+              </a>
+            </li>
+            <li>
+              <a href="#section-3" class="sidebar-nav-item" data-section="section-3">
+                <span class="sidebar-checkbox"></span>
+                LFO DESIGNER
+              </a>
+            </li>
+            <li>
+              <a href="#section-4" class="sidebar-nav-item" data-section="section-4">
+                <span class="sidebar-checkbox"></span>
+                ASSIGNING TARGETS
+              </a>
+            </li>
+            <li>
+              <a href="#section-5" class="sidebar-nav-item" data-section="section-5">
+                <span class="sidebar-checkbox"></span>
+                META-MODULATION
+              </a>
+            </li>
+            <li>
+              <a href="#section-6" class="sidebar-nav-item" data-section="section-6">
+                <span class="sidebar-checkbox"></span>
+                AUDIO-RATE TRICKS
+              </a>
+            </li>
+            <li>
+              <a href="#section-7" class="sidebar-nav-item" data-section="section-7">
+                <span class="sidebar-checkbox"></span>
+                EXERCISES
+              </a>
+            </li>
+            <li>
+              <a href="#section-8" class="sidebar-nav-item" data-section="section-8">
+                <span class="sidebar-checkbox"></span>
+                QUIZ
+              </a>
+            </li>
+            <li>
+              <a href="#section-9" class="sidebar-nav-item" data-section="section-9">
+                <span class="sidebar-checkbox"></span>
+                CONFIDENCE
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #333333">
+          <div
+            class="progress-label"
+            style="margin-bottom: 0.5rem; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-cyan); font-weight: 700"
+          >
+            COMPLETION
+          </div>
+          <div class="progress-bar" style="height: 14px; background-color: var(--bg-primary); border: 2px solid var(--accent-cyan); overflow: hidden">
+            <div class="progress-fill" id="sidebarProgress" style="height: 100%; background-color: var(--accent-cyan); width: 0%; transition: width 0.3s ease"></div>
+          </div>
+          <div style="font-size: 11px; color: #666666; margin-top: 0.5rem">
+            <span id="completionPercent">0</span>
+            %
+          </div>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <!-- PREREQUISITES -->
+        <div class="prereqs">
+          <a href="03-beat-basics.html">Prereq: 03 Beat Basics</a>
+          <a href="08-parts-banks-scenes.html">Prereq: 08 Parts &amp; Scenes</a>
+          <a href="11-fx-and-neighbors.html">Prereq: 11 FX &amp; Neighbors</a>
+        </div>
+
+        <!-- LEARNING OBJECTIVES -->
+        <div class="objectives">
+          <h3>What You Will Learn</h3>
+          <ul>
+            <li>How to access and configure all 3 LFOs on every audio track</li>
+            <li>The difference between FREE, TRIG, HOLD, ONE, HALF, and SYNC modes</li>
+            <li>Drawing custom waveforms in the LFO Designer</li>
+            <li>Assigning LFO targets to any parameter on the [SRC], [AMP], [FX1], [FX2], and [MIX] pages</li>
+            <li>Meta-modulation: using LFO3 to modulate LFO1/LFO2</li>
+            <li>Audio-rate LFO tricks for aggressive timbral effects</li>
+          </ul>
+        </div>
+
+        <!-- SECTION 1: 3 LFOs PER TRACK -->
+        <section class="section" id="section-1" data-section="section-1">
+          <h2>01 &mdash; 3 LFOs Per Track</h2>
+          <p>
+            Every audio track on the Octatrack has
+            <strong>three dedicated LFOs</strong>
+            (Low Frequency Oscillators). These are automated modulation sources that continuously change parameter values for you &mdash; creating movement, rhythm, and life in your sounds without
+            touching a single knob.
+          </p>
+
+          <h3>Accessing the LFO Page</h3>
+          <p>Select a track using the [TRACK] buttons ([T1] through [T8]), then press the [LFO] button to open the LFO MAIN page. You will see six parameters:</p>
+
+          <div class="highlight-box">
+            <h4>LFO MAIN Page Parameters</h4>
+            <table>
+              <tbody>
+                <tr>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">What It Controls</th>
+                </tr>
+                <tr>
+                  <td>SPD1</td>
+                  <td>Speed of LFO1 &mdash; higher = faster modulation</td>
+                </tr>
+                <tr>
+                  <td>SPD2</td>
+                  <td>Speed of LFO2</td>
+                </tr>
+                <tr>
+                  <td>SPD3</td>
+                  <td>Speed of LFO3</td>
+                </tr>
+                <tr>
+                  <td>DEP1</td>
+                  <td>Depth (amount) of LFO1 modulation</td>
+                </tr>
+                <tr>
+                  <td>DEP2</td>
+                  <td>Depth of LFO2 modulation</td>
+                </tr>
+                <tr>
+                  <td>DEP3</td>
+                  <td>Depth of LFO3 modulation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            LFOs are always
+            <strong>synced to the BPM</strong>
+            of the Octatrack. For LFO speeds that lock to straight beats, try SPD values of
+            <strong>16, 32, or 64</strong>
+            .
+          </p>
+
+          <div class="highlight-box success">
+            <h4>PRO TIP: Beat-Synced Speeds</h4>
+            <p>
+              The MULT parameter in the [LFO] SETUP page (press [FUNC] + [LFO]) multiplies the base SPD value. Combined, SPD and MULT let you range from glacially slow sweeps to audio-rate modulation.
+              The key musical values:
+            </p>
+            <ul>
+              <li>SPD 16 = one full cycle per bar (4/4 time)</li>
+              <li>SPD 32 = two cycles per bar (8th note feel)</li>
+              <li>SPD 64 = four cycles per bar (16th note feel)</li>
+              <li>SPD 128 = eight cycles per bar (32nd note feel)</li>
+            </ul>
+          </div>
+
+          <h3>LFO Routing Diagram</h3>
+          <div class="diagram">
+            <svg width="100%" height="380" viewBox="0 0 600 380" style="max-width: 100%">
+              <!-- Title -->
+              <text x="300" y="22" font-family="'Space Mono', monospace" font-size="14" font-weight="bold" text-anchor="middle" fill="var(--text-heading)" text-transform="uppercase">
+                LFO ROUTING PER TRACK
+              </text>
+
+              <!-- LFO Boxes -->
+              <rect x="20" y="50" width="120" height="50" fill="var(--bg-primary)" stroke="var(--accent-cyan)" stroke-width="2" />
+              <text x="80" y="80" font-family="'Space Mono', monospace" font-size="13" text-anchor="middle" fill="var(--accent-cyan)" font-weight="bold">LFO 1</text>
+
+              <rect x="20" y="120" width="120" height="50" fill="var(--bg-primary)" stroke="var(--accent-magenta)" stroke-width="2" />
+              <text x="80" y="150" font-family="'Space Mono', monospace" font-size="13" text-anchor="middle" fill="var(--accent-magenta)" font-weight="bold">LFO 2</text>
+
+              <rect x="20" y="190" width="120" height="50" fill="var(--bg-primary)" stroke="var(--accent-orange)" stroke-width="2" />
+              <text x="80" y="220" font-family="'Space Mono', monospace" font-size="13" text-anchor="middle" fill="var(--accent-orange)" font-weight="bold">LFO 3</text>
+
+              <!-- Target Parameter Boxes -->
+              <rect x="250" y="40" width="140" height="35" fill="var(--bg-primary)" stroke="var(--accent-lime)" stroke-width="2" />
+              <text x="320" y="63" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="var(--accent-lime)">[SRC] PARAMS</text>
+
+              <rect x="250" y="85" width="140" height="35" fill="var(--bg-primary)" stroke="var(--accent-lime)" stroke-width="2" />
+              <text x="320" y="108" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="var(--accent-lime)">[AMP] PARAMS</text>
+
+              <rect x="250" y="130" width="140" height="35" fill="var(--bg-primary)" stroke="var(--accent-lime)" stroke-width="2" />
+              <text x="320" y="153" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="var(--accent-lime)">[FX1] PARAMS</text>
+
+              <rect x="250" y="175" width="140" height="35" fill="var(--bg-primary)" stroke="var(--accent-lime)" stroke-width="2" />
+              <text x="320" y="198" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="var(--accent-lime)">[FX2] PARAMS</text>
+
+              <rect x="250" y="220" width="140" height="35" fill="var(--bg-primary)" stroke="var(--accent-lime)" stroke-width="2" />
+              <text x="320" y="243" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="var(--accent-lime)">[LFO] PARAMS</text>
+
+              <rect x="250" y="265" width="140" height="35" fill="var(--bg-primary)" stroke="var(--accent-lime)" stroke-width="2" />
+              <text x="320" y="288" font-family="'Space Mono', monospace" font-size="11" text-anchor="middle" fill="var(--accent-lime)">[MIX] PARAMS</text>
+
+              <!-- Arrows from LFO1 -->
+              <line x1="140" y1="70" x2="248" y2="57" stroke="var(--accent-cyan)" stroke-width="2" />
+              <line x1="140" y1="75" x2="248" y2="102" stroke="var(--accent-cyan)" stroke-width="1" stroke-dasharray="4,3" />
+              <line x1="140" y1="80" x2="248" y2="147" stroke="var(--accent-cyan)" stroke-width="1" stroke-dasharray="4,3" />
+
+              <!-- Arrows from LFO2 -->
+              <line x1="140" y1="145" x2="248" y2="147" stroke="var(--accent-magenta)" stroke-width="2" />
+              <line x1="140" y1="140" x2="248" y2="102" stroke="var(--accent-magenta)" stroke-width="1" stroke-dasharray="4,3" />
+              <line x1="140" y1="150" x2="248" y2="192" stroke="var(--accent-magenta)" stroke-width="1" stroke-dasharray="4,3" />
+
+              <!-- Arrows from LFO3 (including meta-modulation) -->
+              <line x1="140" y1="215" x2="248" y2="237" stroke="var(--accent-orange)" stroke-width="2" />
+              <line x1="140" y1="210" x2="248" y2="192" stroke="var(--accent-orange)" stroke-width="1" stroke-dasharray="4,3" />
+
+              <!-- META-MODULATION path from LFO3 back to LFO1/LFO2 -->
+              <path d="M 80 240 L 80 280 Q 80 300 100 300 L 460 300 Q 480 300 480 280 L 480 75 L 395 75" stroke="var(--accent-orange)" stroke-width="2" stroke-dasharray="6,3" fill="none" />
+              <polygon points="397,70 397,80 387,75" fill="var(--accent-orange)" />
+
+              <path d="M 90 240 L 90 270 Q 90 290 110 290 L 450 290 Q 470 290 470 270 L 470 145 L 395 145" stroke="var(--accent-orange)" stroke-width="2" stroke-dasharray="6,3" fill="none" />
+              <polygon points="397,140 397,150 387,145" fill="var(--accent-orange)" />
+
+              <!-- Meta-modulation label -->
+              <rect x="430" y="310" width="160" height="50" fill="var(--bg-primary)" stroke="var(--accent-orange)" stroke-width="2" />
+              <text x="510" y="330" font-family="'Space Mono', monospace" font-size="10" text-anchor="middle" fill="var(--accent-orange)" font-weight="bold">META-MODULATION</text>
+              <text x="510" y="350" font-family="'Space Mono', monospace" font-size="9" text-anchor="middle" fill="var(--text-muted)">LFO3 &rarr; LFO1/2 SPD+DEP</text>
+
+              <!-- Legend -->
+              <line x1="20" y1="330" x2="50" y2="330" stroke="var(--accent-cyan)" stroke-width="2" />
+              <text x="55" y="335" font-family="'Space Mono', monospace" font-size="10" fill="var(--text-muted)">LFO1</text>
+              <line x1="100" y1="330" x2="130" y2="330" stroke="var(--accent-magenta)" stroke-width="2" />
+              <text x="135" y="335" font-family="'Space Mono', monospace" font-size="10" fill="var(--text-muted)">LFO2</text>
+              <line x1="180" y1="330" x2="210" y2="330" stroke="var(--accent-orange)" stroke-width="2" />
+              <text x="215" y="335" font-family="'Space Mono', monospace" font-size="10" fill="var(--text-muted)">LFO3</text>
+              <line x1="260" y1="330" x2="290" y2="330" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,3" />
+              <text x="295" y="335" font-family="'Space Mono', monospace" font-size="10" fill="var(--text-muted)">alt targets</text>
+            </svg>
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>IMPORTANT: MAIN Pages Only</h4>
+            <p>
+              LFOs can
+              <strong>only modulate parameters found on MAIN pages</strong>
+              (accessed by pressing [SRC], [AMP], [FX1], [FX2], [LFO], or [MIX] once). Parameters on SETUP pages (accessed via [FUNC] + [TRACK PARAMETER]) cannot be LFO targets. They also cannot be
+              parameter-locked or assigned to scenes.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 2: LFO MODES -->
+        <section class="section" id="section-2" data-section="section-2">
+          <h2>02 &mdash; LFO Modes: FREE, TRIG, HOLD, ONE &amp; More</h2>
+          <p>
+            Each LFO has a TRIG mode setting that determines
+            <strong>when and how</strong>
+            the LFO cycles. Access this by pressing [FUNC] + [LFO] to open the LFO SETUP page, then navigate to LFO 1, 2, or 3 using the [UP]/[DOWN] arrow keys.
+          </p>
+
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col">Mode</th>
+                <th scope="col">Behavior</th>
+                <th scope="col">Best For</th>
+              </tr>
+              <tr>
+                <td style="color: var(--accent-cyan); font-family: 'Space Mono', monospace; font-weight: 700">FREE</td>
+                <td>Runs continuously, never restarts</td>
+                <td>Evolving textures, slow drifting pads, organic movement</td>
+              </tr>
+              <tr>
+                <td style="color: var(--accent-magenta); font-family: 'Space Mono', monospace; font-weight: 700">TRIG</td>
+                <td>Restarts from zero on every sample trig, then runs until next trig</td>
+                <td>Wobble bass, per-hit filter sweeps, synchronized effects</td>
+              </tr>
+              <tr>
+                <td style="color: var(--accent-lime); font-family: 'Space Mono', monospace; font-weight: 700">HOLD</td>
+                <td>Runs in the background but latches its value on each trig</td>
+                <td>Random-ish stepped modulation, sample &amp; hold textures</td>
+              </tr>
+              <tr>
+                <td style="color: var(--accent-orange); font-family: 'Space Mono', monospace; font-weight: 700">ONE</td>
+                <td>Restarts on trig, runs one full cycle, then stops</td>
+                <td>Envelope-like behavior: filter plucks, pitch drops, volume swells</td>
+              </tr>
+              <tr>
+                <td style="font-family: 'Space Mono', monospace; font-weight: 700">HALF</td>
+                <td>Restarts on trig, runs half a cycle, then stops</td>
+                <td>Attack-only envelopes, one-way sweeps</td>
+              </tr>
+              <tr>
+                <td style="font-family: 'Space Mono', monospace; font-weight: 700">SYNC TRIG</td>
+                <td>Restarts on track start and every pattern loop</td>
+                <td>Pattern-length sweeps that always reset with the loop</td>
+              </tr>
+              <tr>
+                <td style="font-family: 'Space Mono', monospace; font-weight: 700">SYNC ONE</td>
+                <td>Restarts on track start, plays one period</td>
+                <td>One-shot pattern-level envelopes</td>
+              </tr>
+              <tr>
+                <td style="font-family: 'Space Mono', monospace; font-weight: 700">SYNC HALF</td>
+                <td>Restarts on track start, plays half a period</td>
+                <td>Build-up ramps across a pattern</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Interactive LFO Mode Simulator</h3>
+          <div class="lfo-simulator">
+            <h4>LFO Waveform Visualizer</h4>
+            <div class="lfo-controls">
+              <div class="lfo-control-group">
+                <label>Waveform</label>
+                <select id="lfo-wave">
+                  <option value="sine">Sine</option>
+                  <option value="triangle">Triangle</option>
+                  <option value="saw">Saw</option>
+                  <option value="square">Square</option>
+                  <option value="random">Random (S&amp;H)</option>
+                </select>
+              </div>
+              <div class="lfo-control-group">
+                <label>Mode</label>
+                <select id="lfo-mode">
+                  <option value="free">FREE</option>
+                  <option value="trig">TRIG</option>
+                  <option value="hold">HOLD</option>
+                  <option value="one">ONE</option>
+                </select>
+              </div>
+              <div class="lfo-control-group">
+                <label>
+                  SPD:
+                  <span id="spd-label">32</span>
+                </label>
+                <input type="range" id="lfo-spd" min="1" max="128" value="32" />
+              </div>
+              <div class="lfo-control-group">
+                <label>
+                  DEP:
+                  <span id="dep-label">64</span>
+                </label>
+                <input type="range" id="lfo-dep" min="0" max="127" value="64" />
+              </div>
+            </div>
+            <div class="lfo-canvas-wrap">
+              <canvas id="lfo-canvas" width="800" height="200"></canvas>
+            </div>
+            <div class="lfo-value-readout">
+              <div>
+                Wave:
+                <span id="readout-wave">SINE</span>
+              </div>
+              <div>
+                Mode:
+                <span id="readout-mode">FREE</span>
+              </div>
+              <div>
+                Output:
+                <span id="readout-value">64</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box success">
+            <h4>PRO TIP: TRIG Mode for Wobble Bass</h4>
+            <p>
+              The classic dubstep wobble: set LFO1 to TRIG mode with a
+              <strong>triangle wave</strong>
+              targeting the filter cutoff in [FX1]. Every time a step triggers, the LFO restarts &mdash; giving you perfectly synchronized filter sweeps. Adjust SPD to control the wobble rate.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 3: LFO DESIGNER -->
+        <section class="section" id="section-3" data-section="section-3">
+          <h2>03 &mdash; LFO Designer</h2>
+          <p>
+            The LFO Designer lets you draw
+            <strong>custom waveforms</strong>
+            using the 16 [TRIG 1] through [TRIG 16] keys as faders. Each trig key represents one step of the waveform. This goes far beyond simple sine and triangle shapes &mdash; you can create
+            rhythmic gate patterns, complex modulation shapes, and pseudo-sequencer effects.
+          </p>
+
+          <h3>How to Access</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Open LFO Setup</h4>
+                <p>Press [FUNC] + [LFO] to open the LFO SETUP page.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Navigate to Designer</h4>
+                <p>Use the [UP]/[DOWN] arrow keys to navigate past LFO 1, 2, and 3 to the DESIGNER page at the bottom of the left column.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Draw Your Waveform</h4>
+                <p>Hold a [TRIG 1] through [TRIG 16] key and turn a DATA ENTRY knob (top row) to set that step's value. The waveform updates live on screen.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Interpolation (Optional)</h4>
+                <p>Hold a [TRIG] key and press [TEMPO] to add smooth interpolation between that step and the next. Interpolated steps show as yellow [TRACK] keys.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <h4>LFO Designer Quick Reference</h4>
+            <ul>
+              <li>
+                <strong>16 steps</strong>
+                per waveform &mdash; each step has a unique value
+              </li>
+              <li>
+                <strong>Stepped or interpolated</strong>
+                &mdash; toggle per-step with [TRIG] + [TEMPO]
+              </li>
+              <li>
+                <strong>8 designer slots</strong>
+                per track (labeled T1-T8) &mdash; all available to all 3 LFOs
+              </li>
+              <li>
+                <strong>Randomize:</strong>
+                [FUNC] + [BANK] then select RANDOMIZE
+              </li>
+              <li>
+                <strong>Invert:</strong>
+                [FUNC] + [BANK] then select INVERT
+              </li>
+              <li>
+                <strong>Rotate:</strong>
+                [FUNC] + [LEFT]/[RIGHT] to shift the waveform
+              </li>
+              <li>
+                <strong>Copy/Paste:</strong>
+                Standard copy operations work &mdash; copy waveforms between tracks
+              </li>
+            </ul>
+          </div>
+
+          <h3>Interactive LFO Designer</h3>
+          <div class="lfo-designer">
+            <h4>Draw a Custom Waveform</h4>
+            <p style="margin-bottom: 1rem; font-size: 14px; color: var(--text-muted)">
+              Click and drag on the bars below to shape your LFO waveform. Each bar represents one of the 16 [TRIG 1]-[TRIG 16] steps.
+            </p>
+            <div class="designer-grid" id="designer-grid">
+              <!-- 16 step bars generated by JS -->
+            </div>
+            <div class="designer-canvas-wrap">
+              <canvas id="designer-canvas" width="800" height="120"></canvas>
+            </div>
+            <div class="designer-actions">
+              <button type="button" class="designer-btn" id="designer-random">[FUNC]+[BANK] RANDOMIZE</button>
+              <button type="button" class="designer-btn" id="designer-invert">[FUNC]+[BANK] INVERT</button>
+              <button type="button" class="designer-btn" id="designer-clear">CLEAR</button>
+            </div>
+          </div>
+
+          <div class="highlight-box success">
+            <h4>PRO TIP: Rhythmic Gates</h4>
+            <p>
+              Use the LFO Designer targeting VOL on the [AMP] page with TRIG mode. Set alternating high/low steps to create rhythmic gate patterns. Combine with the [CROSSFADER] and scenes for
+              controllable gating intensity.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 4: ASSIGNING TARGETS -->
+        <section class="section" id="section-4" data-section="section-4">
+          <h2>04 &mdash; Assigning LFO Targets</h2>
+          <p>
+            The real power of LFOs comes from
+            <strong>what they modulate</strong>
+            . Each LFO targets one parameter, chosen via the PMTR (parameter) setting on the [LFO] SETUP page.
+          </p>
+
+          <h3>How to Set a Target</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Open LFO Setup</h4>
+                <p>Press [FUNC] + [LFO] (or double-tap [LFO]) to open the LFO SETUP menu.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Select Which LFO</h4>
+                <p>Use [UP]/[DOWN] to navigate to LFO 1, LFO 2, or LFO 3.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Set PMTR (Destination)</h4>
+                <p>Turn the [LEVEL] encoder to browse through all available MAIN page parameters. The screen shows which [TRACK PARAMETER] page the target belongs to.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Set WAVE, MULT, TRIG, SPD, DEP</h4>
+                <p>Configure the waveform shape, speed multiplier, trig mode, base speed, and modulation depth.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Common LFO Targets</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col">Page</th>
+                <th scope="col">Parameter</th>
+                <th scope="col">Effect When Modulated</th>
+              </tr>
+              <tr>
+                <td>[SRC]</td>
+                <td>PTCH (Pitch)</td>
+                <td>Vibrato, pitch drift, FM-style effects at high speeds</td>
+              </tr>
+              <tr>
+                <td>[SRC]</td>
+                <td>STRT (Start)</td>
+                <td>Scanning through sample, granular-like textures (Flex only)</td>
+              </tr>
+              <tr>
+                <td>[AMP]</td>
+                <td>VOL (Volume)</td>
+                <td>Tremolo, rhythmic gating, amplitude envelopes</td>
+              </tr>
+              <tr>
+                <td>[AMP]</td>
+                <td>PAN</td>
+                <td>Auto-pan, stereo movement, spatial effects</td>
+              </tr>
+              <tr>
+                <td>[FX1]/[FX2]</td>
+                <td>Filter Cutoff</td>
+                <td>Wobble, filter sweeps, acid-style squelch</td>
+              </tr>
+              <tr>
+                <td>[FX1]/[FX2]</td>
+                <td>Delay Time</td>
+                <td>Pitch-warping echoes, tape-speed effects</td>
+              </tr>
+              <tr>
+                <td>[FX1]/[FX2]</td>
+                <td>Delay Send</td>
+                <td>Rhythmic delay throws, dub-style echo bursts</td>
+              </tr>
+              <tr>
+                <td>[MIX]</td>
+                <td>MAIN Level</td>
+                <td>Master volume modulation, ducking effects</td>
+              </tr>
+              <tr>
+                <td>[LFO]</td>
+                <td>LFO1/2 SPD</td>
+                <td>Meta-modulation: speeding up/slowing down another LFO</td>
+              </tr>
+              <tr>
+                <td>[LFO]</td>
+                <td>LFO1/2 DEP</td>
+                <td>Meta-modulation: waxing/waning another LFO's intensity</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="highlight-box warning">
+            <h4>STATIC MACHINE LIMITATION</h4>
+            <p>
+              The track LFOs
+              <strong>cannot modulate the STRT parameter</strong>
+              of a Static machine. The crossfader can, but if modulation is too fast the Static machine will not be able to update the start position correctly. Use
+              <strong>Flex machines</strong>
+              for LFO-driven start-point modulation and granular effects.
+            </p>
+          </div>
+
+          <div class="highlight-box">
+            <h4>SETUP Parameters: 6 Per LFO</h4>
+            <p>Each LFO in the SETUP page has these parameters:</p>
+            <ul>
+              <li>
+                <strong>PMTR</strong>
+                &mdash; target parameter (destination)
+              </li>
+              <li>
+                <strong>WAVE</strong>
+                &mdash; waveform shape (11 built-in + 8 designer)
+              </li>
+              <li>
+                <strong>MULT</strong>
+                &mdash; speed multiplier
+              </li>
+              <li>
+                <strong>TRIG</strong>
+                &mdash; trigger mode (FREE, TRIG, HOLD, ONE, HALF, SYNC...)
+              </li>
+              <li>
+                <strong>SPD</strong>
+                &mdash; base speed (synced to BPM)
+              </li>
+              <li>
+                <strong>DEP</strong>
+                &mdash; modulation depth (0-127)
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 5: META-MODULATION -->
+        <section class="section" id="section-5" data-section="section-5">
+          <h2>05 &mdash; Meta-Modulation</h2>
+          <p>
+            This is where things get deep.
+            <strong>LFO3 can modulate LFO1 or LFO2's speed or depth.</strong>
+            An LFO modulating another LFO. The result: complex, evolving modulations that would be impossible to create manually.
+          </p>
+
+          <div class="highlight-box">
+            <h4>The Meta-Modulation Rule</h4>
+            <p>
+              An LFO can only modulate LFOs with a
+              <strong>lower number</strong>
+              :
+            </p>
+            <ul>
+              <li>
+                <strong>LFO3</strong>
+                can modulate LFO1 SPD, LFO1 DEP, LFO2 SPD, LFO2 DEP
+              </li>
+              <li>
+                <strong>LFO2</strong>
+                can modulate LFO1 SPD, LFO1 DEP
+              </li>
+              <li>
+                <strong>LFO1</strong>
+                cannot modulate other LFOs (it is the lowest number)
+              </li>
+            </ul>
+          </div>
+
+          <h3>Setting Up Meta-Modulation</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Configure LFO1 First</h4>
+                <p>
+                  In [LFO] SETUP (press [FUNC] + [LFO]), set LFO1 to target your desired parameter &mdash; for example, filter cutoff on [FX1]. Set the WAVE to triangle, TRIG mode to TRIG, SPD to 32,
+                  DEP to 64.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Set LFO3 to Target LFO1 SPD</h4>
+                <p>Navigate to LFO3 in the SETUP page (use [DOWN]). Set PMTR to "LFO SPD1". Now LFO3 will modulate LFO1's speed. Set LFO3 WAVE to sine, TRIG to FREE, SPD to 8, DEP to 32.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Listen to the Result</h4>
+                <p>Press [PLAY]. LFO1 sweeps the filter, but its speed now rises and falls according to LFO3's slow sine wave. The wobble speeds up and slows down in a complex, evolving cycle.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Meta-Modulation Recipes</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col">Recipe</th>
+                <th scope="col">LFO1 Target</th>
+                <th scope="col">LFO3 Target</th>
+                <th scope="col">Result</th>
+              </tr>
+              <tr>
+                <td>Breathing Wobble</td>
+                <td>[FX1] Cutoff</td>
+                <td>LFO1 SPD</td>
+                <td>Filter wobble that speeds up and slows down rhythmically</td>
+              </tr>
+              <tr>
+                <td>Fading Vibrato</td>
+                <td>[SRC] PTCH</td>
+                <td>LFO1 DEP</td>
+                <td>Vibrato that waxes and wanes in intensity</td>
+              </tr>
+              <tr>
+                <td>Evolving Pan</td>
+                <td>[AMP] PAN</td>
+                <td>LFO1 SPD</td>
+                <td>Auto-pan that varies in speed &mdash; organic stereo movement</td>
+              </tr>
+              <tr>
+                <td>Chaos Engine</td>
+                <td>[FX1] Cutoff</td>
+                <td>LFO1 DEP</td>
+                <td>Filter intensity that surges and retreats unpredictably</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="highlight-box success">
+            <h4>PRO TIP: LFO2 as a Second Modulator</h4>
+            <p>
+              Do not forget LFO2 can also meta-modulate LFO1. Use LFO1 on filter cutoff, LFO2 on LFO1's speed, and LFO3 on LFO2's depth. Three layers of modulation creates genuinely unpredictable,
+              generative textures &mdash; great for ambient and experimental work.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 6: AUDIO-RATE TRICKS -->
+        <section class="section" id="section-6" data-section="section-6">
+          <h2>06 &mdash; Audio-Rate Tricks</h2>
+          <p>
+            When you push LFO speeds to extreme values (SPD at high settings combined with high MULT multipliers), the LFO enters
+            <strong>audio-rate territory</strong>
+            . The modulation is so fast that it stops sounding like movement and starts creating new timbres.
+          </p>
+
+          <h3>What Happens at Audio Rate</h3>
+          <table>
+            <tbody>
+              <tr>
+                <th scope="col">Target</th>
+                <th scope="col">Effect</th>
+                <th scope="col">Sound</th>
+              </tr>
+              <tr>
+                <td>[SRC] PTCH</td>
+                <td>FM Synthesis</td>
+                <td>Metallic, bell-like, inharmonic tones &mdash; similar to FM synths</td>
+              </tr>
+              <tr>
+                <td>[AMP] VOL</td>
+                <td>Ring Modulation</td>
+                <td>Ring-mod-like sidebands, robotic timbres</td>
+              </tr>
+              <tr>
+                <td>[FX1] Cutoff</td>
+                <td>Aggressive Filtering</td>
+                <td>Harsh, buzzy filter resonance effects</td>
+              </tr>
+              <tr>
+                <td>[SRC] STRT</td>
+                <td>Granular Chaos</td>
+                <td>Rapid sample-scanning creating glitchy, granular textures (Flex only)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>How to Set Up Audio-Rate LFO</h3>
+          <div class="code-block">
+            1. Open [LFO] SETUP: [FUNC] + [LFO] 2. Set PMTR to [SRC] PTCH for FM synthesis effects 3. Set WAVE to SINE (smoothest FM tones) 4. Set MULT to x16 or higher 5. Set SPD to 64-128 6. Set DEP
+            to taste &mdash; start low (10-20), increase gradually 7. Press [PLAY] and sweep DEP to control intensity
+          </div>
+
+          <div class="highlight-box warning">
+            <h4>WARNING: Ear Safety</h4>
+            <p>
+              Audio-rate LFO modulation can produce
+              <strong>very loud, harsh, and unexpected sounds</strong>
+              . Always start with low DEP values and increase gradually. Keep your monitor volume at a safe level when experimenting with these techniques.
+            </p>
+          </div>
+
+          <div class="highlight-box success">
+            <h4>PRO TIP: P-Lock the Depth</h4>
+            <p>
+              Use parameter locks on individual steps to control where the audio-rate effect kicks in. Hold [TRIG 5] and turn the DEP1 knob on the [LFO] page to p-lock the LFO depth only on that step.
+              This way, most of your pattern plays clean while specific hits get the aggressive FM treatment.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION 7: PRACTICAL EXERCISES -->
+        <section class="section" id="section-7" data-section="section-7">
+          <h2>07 &mdash; Practical Exercises</h2>
+          <p>Put it all together with these hands-on exercises. Load any sample onto a Flex machine on [T1] and follow along.</p>
+
+          <h3>Exercise 1: Wobble Bass</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Set Up the Filter</h4>
+                <p>Select [T1], press [FX1], and assign a 2-Pole Lowpass Filter. Set the base cutoff to about 40.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Assign LFO1 to Cutoff</h4>
+                <p>Press [FUNC] + [LFO]. Navigate to LFO1. Set PMTR to [FX1] cutoff. Set WAVE to triangle, TRIG mode to TRIG, SPD to 32, DEP to 64.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Place Trigs and Play</h4>
+                <p>
+                  Press [REC], then press [TRIG 1], [TRIG 5], [TRIG 9], [TRIG 13] for a 4-on-the-floor pattern. Press [PLAY]. You should hear a classic wobble bass with the filter opening and closing
+                  on every beat.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Experiment</h4>
+                <p>
+                  Change SPD on the [LFO] MAIN page (press [LFO]) to alter the wobble rate. Try SPD 16 for slower, SPD 64 for faster. P-lock different SPD values per step for varying wobble speeds.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Exercise 2: Auto-Pan</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Assign LFO2 to PAN</h4>
+                <p>Press [FUNC] + [LFO], navigate to LFO2. Set PMTR to [AMP] PAN. Set WAVE to sine, TRIG mode to FREE, SPD to 8, DEP to 50.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Listen</h4>
+                <p>Press [PLAY]. The sound drifts slowly between left and right speakers. Because FREE mode never restarts, the panning is continuous and organic.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Exercise 3: Evolving Meta-Mod Texture</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>LFO1: Filter Sweep</h4>
+                <p>Set LFO1 PMTR to [FX1] cutoff. WAVE = saw, TRIG = TRIG, SPD = 32, DEP = 64.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>LFO3: Modulate LFO1 Speed</h4>
+                <p>Set LFO3 PMTR to LFO SPD1. WAVE = sine, TRIG = FREE, SPD = 4, DEP = 40. Now LFO1's filter sweep will accelerate and decelerate over time.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Let It Evolve</h4>
+                <p>Press [PLAY] and listen for 30+ seconds. The sound constantly changes as LFO3 pushes LFO1 through different speed ranges. No two bars sound exactly the same.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>Exercise 4: LFO Designer Rhythmic Gate</h3>
+          <div class="step-guide">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Open LFO Designer</h4>
+                <p>
+                  Press [FUNC] + [LFO], navigate to DESIGNER using [DOWN]. Draw a pattern: set [TRIG 1], [TRIG 3], [TRIG 5], [TRIG 9], [TRIG 11] to maximum (127) and all others to 0. This creates an
+                  irregular rhythmic pattern.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Assign to VOL</h4>
+                <p>Navigate to LFO1 in SETUP. Set PMTR to [AMP] VOL. Set WAVE to the designer waveform (T1). Set TRIG to TRIG, SPD to 64, DEP to 127.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Play and Adjust</h4>
+                <p>Press [PLAY]. The volume gates rhythmically according to your custom pattern. Go back to the DESIGNER and reshape the waveform while it plays &mdash; changes are instant.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8: QUIZ -->
+        <section class="section" id="section-8" data-section="section-8">
+          <h2>08 &mdash; Quiz</h2>
+          <div class="quiz-section">
+            <!-- Q1 -->
+            <div class="quiz-question">
+              <h4>Q1: How many LFOs does each audio track have?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="wrong1" id="q1a" />
+                <label for="q1a">1 LFO per track</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="wrong2" id="q1b" />
+                <label for="q1b">2 LFOs per track</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="correct" id="q1c" />
+                <label for="q1c">3 LFOs per track</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q1" value="wrong3" id="q1d" />
+                <label for="q1d">8 LFOs per track (one per [TRIG] key pair)</label>
+              </div>
+              <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="quiz-question">
+              <h4>Q2: Which [LFO] mode restarts on every trig and runs for exactly one cycle?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="wrong1" id="q2a" />
+                <label for="q2a">FREE</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="wrong2" id="q2b" />
+                <label for="q2b">TRIG</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="wrong3" id="q2c" />
+                <label for="q2c">HOLD</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q2" value="correct" id="q2d" />
+                <label for="q2d">ONE</label>
+              </div>
+              <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="quiz-question">
+              <h4>Q3: Which LFO can meta-modulate the speed of LFO1 and LFO2?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="wrong1" id="q3a" />
+                <label for="q3a">LFO1 (it is the master)</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="wrong2" id="q3b" />
+                <label for="q3b">LFO2 (it can modulate both LFO1 and LFO3)</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="correct" id="q3c" />
+                <label for="q3c">LFO3 (an LFO can only modulate LFOs with a lower number)</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q3" value="wrong3" id="q3d" />
+                <label for="q3d">Any LFO can modulate any other LFO</label>
+              </div>
+              <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="quiz-question">
+              <h4>Q4: Can LFOs modulate parameters on the SETUP pages (accessed via [FUNC] + [TRACK PARAMETER])?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="wrong1" id="q4a" />
+                <label for="q4a">Yes, LFOs can modulate any parameter</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="correct" id="q4b" />
+                <label for="q4b">No, LFOs can only modulate MAIN page parameters</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="wrong2" id="q4c" />
+                <label for="q4c">Only LFO3 can access SETUP parameters</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q4" value="wrong3" id="q4d" />
+                <label for="q4d">Yes, but only if the track uses a Flex machine</label>
+              </div>
+              <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="quiz-question">
+              <h4>Q5: How many steps make up a custom LFO Designer waveform?</h4>
+              <div class="quiz-option">
+                <input type="radio" name="q5" value="wrong1" id="q5a" />
+                <label for="q5a">8 steps</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q5" value="correct" id="q5b" />
+                <label for="q5b">16 steps</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q5" value="wrong2" id="q5c" />
+                <label for="q5c">32 steps</label>
+              </div>
+              <div class="quiz-option">
+                <input type="radio" name="q5" value="wrong3" id="q5d" />
+                <label for="q5d">64 steps</label>
+              </div>
+              <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+
+            <div class="quiz-score" id="quiz-score"></div>
+          </div>
+        </section>
+
+        <!-- SECTION 9: CONFIDENCE -->
+        <section class="section" id="section-9" data-section="section-9">
+          <h2>09 &mdash; Confidence Rating</h2>
+          <p>How confident do you feel about [LFO] modulation, the LFO Designer, meta-modulation, and audio-rate tricks after this tutorial?</p>
+          <div class="confidence-section">
+            <div class="confidence-title">Rate Your Confidence (1-5)</div>
+            <div class="confidence-scale">
+              <button type="button" class="confidence-btn" data-level="1">1</button>
+              <button type="button" class="confidence-btn" data-level="2">2</button>
+              <button type="button" class="confidence-btn" data-level="3">3</button>
+              <button type="button" class="confidence-btn" data-level="4">4</button>
+              <button type="button" class="confidence-btn" data-level="5">5</button>
+            </div>
+            <p id="confidence-message" style="margin-top: 1.5rem; text-align: center; color: var(--accent-orange); display: none">Thanks! Your confidence level has been saved.</p>
+          </div>
+        </section>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottom-nav">
+          <a href="11-fx-and-neighbors.html" class="nav-btn">&larr; PREV: FX &amp; NEIGHBORS</a>
+          <a href="13-arranger.html" class="nav-btn">NEXT: ARRANGER &rarr;</a>
+        </div>
+        <div style="text-align: center; margin-top: 2rem">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'flex'"
+            style="
+              background: none;
+              border: 1px solid var(--border-primary);
+              color: var(--text-muted);
+              padding: 6px 18px;
+              font-family: 'Space Mono', monospace;
+              font-size: 11px;
+              cursor: pointer;
+              letter-spacing: 1px;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.borderColor = 'var(--accent-error)';
+              this.style.color = 'var(--accent-error)';
+            "
+            onmouseout="
+              this.style.borderColor = 'var(--border-primary)';
+              this.style.color = 'var(--text-muted)';
+            "
+          >
+            RESET PROGRESS
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div
+      id="reset-modal"
+      style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 10000; align-items: center; justify-content: center"
+    >
+      <div style="background: var(--bg-tertiary); border: 1px solid var(--border-primary); padding: 2rem; max-width: 400px; width: 90%; text-align: center; font-family: 'Space Mono', monospace">
+        <h3 style="color: var(--accent-error); margin: 0 0 1rem; font-size: 16px">Reset Tutorial Progress?</h3>
+        <p style="color: var(--text-muted); font-size: 13px; margin: 0 0 1.5rem; line-height: 1.5">
+          This will clear all your progress for
+          <strong style="color: var(--accent-cyan)">12 &mdash; LFOs &amp; Modulation</strong>
+          including section checkmarks, quiz score, and confidence rating.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center">
+          <button
+            type="button"
+            onclick="document.getElementById('reset-modal').style.display = 'none'"
+            style="background: none; border: 1px solid var(--border-primary); color: var(--text-muted); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            CANCEL
+          </button>
+          <button
+            type="button"
+            onclick="resetTutorialProgress()"
+            style="background: var(--accent-error); border: none; color: var(--text-heading); padding: 8px 24px; font-family: 'Space Mono', monospace; font-size: 12px; cursor: pointer"
+          >
+            YES, RESET
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ==============================================================
+         Tutorial 12 — LFOs & Modulation
+         Vanilla JS (ES5). No arrow functions, no const/let, no template literals.
+         ============================================================== */
+
+      var TUTORIAL_SLUG = '12-lfos-and-modulation';
+      var STORAGE_KEY = 'octatrack-tutorials';
+      var TOTAL_QUESTIONS = 5;
+
+      /* ----------------------------------------------------------
+         Reset Progress
+         ---------------------------------------------------------- */
+      function resetTutorialProgress() {
+        var data = localStorage.getItem(STORAGE_KEY);
+        if (data) {
+          var parsed = JSON.parse(data);
+          delete parsed[TUTORIAL_SLUG];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+        }
+        window.location.reload();
+      }
+
+      /* ----------------------------------------------------------
+         State Helpers
+         ---------------------------------------------------------- */
+      function loadState() {
+        var data = localStorage.getItem(STORAGE_KEY);
+        if (!data) return {};
+        var parsed = JSON.parse(data);
+        return parsed[TUTORIAL_SLUG] || {};
+      }
+
+      function saveState(updates) {
+        var allProgress = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        var current = allProgress[TUTORIAL_SLUG] || {};
+        for (var key in updates) {
+          current[key] = updates[key];
+        }
+        current.lastAccessed = new Date().toISOString();
+        allProgress[TUTORIAL_SLUG] = current;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(allProgress));
+      }
+
+      /* ----------------------------------------------------------
+         Progress Bar + Checkbox Update
+         ---------------------------------------------------------- */
+      function updateProgress() {
+        var state = loadState();
+        var allSections = document.querySelectorAll('[data-section]');
+        var completedSet = {};
+        var arr = state.sectionsCompleted || [];
+        for (var ci = 0; ci < arr.length; ci++) {
+          completedSet[arr[ci]] = true;
+        }
+
+        var total = allSections.length;
+        var done = arr.length;
+        var percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+        var sidebarFill = document.getElementById('sidebarProgress');
+        var pct = document.getElementById('completionPercent');
+        if (sidebarFill) sidebarFill.style.width = percent + '%';
+        if (pct) pct.textContent = percent;
+
+        var navItems = document.querySelectorAll('.sidebar-nav-item');
+        for (var ni = 0; ni < navItems.length; ni++) {
+          var section = navItems[ni].getAttribute('data-section');
+          var checkbox = navItems[ni].querySelector('.sidebar-checkbox');
+          if (checkbox) {
+            if (completedSet[section]) {
+              checkbox.classList.add('checked');
+              checkbox.textContent = '\u2713';
+            } else {
+              checkbox.classList.remove('checked');
+              checkbox.textContent = '';
+            }
+          }
+        }
+      }
+
+      /* ----------------------------------------------------------
+         Sidebar Tracking (IntersectionObserver)
+         ---------------------------------------------------------- */
+      var sections = document.querySelectorAll('.section');
+
+      function loadSavedState() {
+        var state = loadState();
+
+        // Restore quiz answers
+        if (state.quizAnswers) {
+          for (var q in state.quizAnswers) {
+            var radio = document.querySelector('input[name="' + q + '"][value="' + state.quizAnswers[q] + '"]');
+            if (radio) {
+              radio.checked = true;
+              handleQuizAnswer(q, state.quizAnswers[q]);
+            }
+          }
+        }
+
+        // Restore confidence
+        if (state.confidence) {
+          var btns = document.querySelectorAll('.confidence-btn');
+          for (var c = 0; c < btns.length; c++) {
+            if (btns[c].getAttribute('data-level') === String(state.confidence)) {
+              btns[c].classList.add('selected');
+              document.getElementById('confidence-message').style.display = 'block';
+            }
+          }
+        }
+
+        updateProgress();
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var sectionId = entry.target.getAttribute('data-section');
+              var state = loadState();
+              var completedArr = state.sectionsCompleted || [];
+              var alreadyIn = false;
+              for (var ci = 0; ci < completedArr.length; ci++) {
+                if (completedArr[ci] === sectionId) {
+                  alreadyIn = true;
+                  break;
+                }
+              }
+              if (!alreadyIn) {
+                completedArr.push(sectionId);
+              }
+              saveState({ sectionsCompleted: completedArr, status: 'in-progress' });
+              updateProgress();
+
+              // Update active item in sidebar
+              var navItems = document.querySelectorAll('.sidebar-nav-item');
+              for (var ni = 0; ni < navItems.length; ni++) {
+                navItems[ni].classList.remove('active');
+              }
+              var activeItem = document.querySelector('.sidebar-nav-item[data-section="' + sectionId + '"]');
+              if (activeItem) activeItem.classList.add('active');
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+
+      for (var s = 0; s < sections.length; s++) {
+        observer.observe(sections[s]);
+      }
+
+      /* ----------------------------------------------------------
+         Save Progress
+         ---------------------------------------------------------- */
+      function getQuizAnswers() {
+        var answers = {};
+        for (var i = 1; i <= TOTAL_QUESTIONS; i++) {
+          var selected = document.querySelector('input[name="q' + i + '"]:checked');
+          if (selected) {
+            answers['q' + i] = selected.value;
+          }
+        }
+        return answers;
+      }
+
+      function saveProgress() {
+        var confBtn = document.querySelector('.confidence-btn.selected');
+        saveState({
+          quizAnswers: getQuizAnswers(),
+          confidence: confBtn ? confBtn.getAttribute('data-level') : null,
+        });
+      }
+
+      window.addEventListener('beforeunload', saveProgress);
+      setInterval(saveProgress, 30000);
+
+      /* ----------------------------------------------------------
+         Quiz Logic
+         ---------------------------------------------------------- */
+      function handleQuizAnswer(qName, value) {
+        var feedback = document.getElementById(qName + '-feedback');
+        if (!feedback) return;
+        feedback.classList.add('show');
+        if (value === 'correct') {
+          feedback.className = 'quiz-feedback show correct';
+          feedback.textContent = 'CORRECT!';
+        } else {
+          feedback.className = 'quiz-feedback show incorrect';
+          feedback.textContent = 'INCORRECT -- Try again or review the section above.';
+        }
+        updateQuizScore();
+      }
+
+      function updateQuizScore() {
+        var correct = 0;
+        var answered = 0;
+        for (var i = 1; i <= TOTAL_QUESTIONS; i++) {
+          var selected = document.querySelector('input[name="q' + i + '"]:checked');
+          if (selected) {
+            answered++;
+            if (selected.value === 'correct') correct++;
+          }
+        }
+        if (answered === TOTAL_QUESTIONS) {
+          var scoreEl = document.getElementById('quiz-score');
+          scoreEl.textContent = 'SCORE: ' + correct + ' / ' + TOTAL_QUESTIONS;
+          scoreEl.classList.add('show');
+        }
+      }
+
+      // Bind quiz events
+      var quizOptions = document.querySelectorAll('.quiz-option input[type="radio"]');
+      for (var qi = 0; qi < quizOptions.length; qi++) {
+        quizOptions[qi].addEventListener('change', function () {
+          handleQuizAnswer(this.name, this.value);
+        });
+      }
+
+      /* ----------------------------------------------------------
+         Confidence Rating
+         ---------------------------------------------------------- */
+      var confBtns = document.querySelectorAll('.confidence-btn');
+      for (var cb = 0; cb < confBtns.length; cb++) {
+        confBtns[cb].addEventListener('click', function () {
+          for (var j = 0; j < confBtns.length; j++) {
+            confBtns[j].classList.remove('selected');
+          }
+          this.classList.add('selected');
+          document.getElementById('confidence-message').style.display = 'block';
+          saveProgress();
+        });
+      }
+
+      /* ----------------------------------------------------------
+         LFO Waveform Simulator
+         ---------------------------------------------------------- */
+      var lfoCanvas = document.getElementById('lfo-canvas');
+      var lfoCtx = lfoCanvas ? lfoCanvas.getContext('2d') : null;
+      var lfoAnimFrame = null;
+      var lfoPhase = 0;
+      var randomValues = [];
+
+      // Generate initial random values for S&H
+      for (var rv = 0; rv < 64; rv++) {
+        randomValues.push(Math.random());
+      }
+
+      function generateWave(type, phase) {
+        var p = phase % 1;
+        if (p < 0) p += 1;
+        switch (type) {
+          case 'sine':
+            return Math.sin(p * 2 * Math.PI) * 0.5 + 0.5;
+          case 'triangle':
+            return p < 0.5 ? p * 2 : 2 - p * 2;
+          case 'saw':
+            return p;
+          case 'square':
+            return p < 0.5 ? 1 : 0;
+          case 'random':
+            return randomValues[Math.floor(p * 16) % randomValues.length];
+          default:
+            return 0.5;
+        }
+      }
+
+      function drawLFO() {
+        if (!lfoCtx) return;
+
+        var waveSelect = document.getElementById('lfo-wave');
+        var modeSelect = document.getElementById('lfo-mode');
+        var spdSlider = document.getElementById('lfo-spd');
+        var depSlider = document.getElementById('lfo-dep');
+
+        var wave = waveSelect ? waveSelect.value : 'sine';
+        var mode = modeSelect ? modeSelect.value : 'free';
+        var spd = spdSlider ? parseInt(spdSlider.value, 10) : 32;
+        var dep = depSlider ? parseInt(depSlider.value, 10) : 64;
+
+        // Update labels
+        var spdLabel = document.getElementById('spd-label');
+        var depLabel = document.getElementById('dep-label');
+        if (spdLabel) spdLabel.textContent = spd;
+        if (depLabel) depLabel.textContent = dep;
+
+        var w = lfoCanvas.width;
+        var h = lfoCanvas.height;
+        var depFactor = dep / 127;
+
+        lfoCtx.clearRect(0, 0, w, h);
+
+        // Background grid
+        lfoCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+        lfoCtx.lineWidth = 1;
+        for (var gy = 0; gy < h; gy += 25) {
+          lfoCtx.beginPath();
+          lfoCtx.moveTo(0, gy);
+          lfoCtx.lineTo(w, gy);
+          lfoCtx.stroke();
+        }
+        for (var gx = 0; gx < w; gx += 50) {
+          lfoCtx.beginPath();
+          lfoCtx.moveTo(gx, 0);
+          lfoCtx.lineTo(gx, h);
+          lfoCtx.stroke();
+        }
+
+        // Center line
+        lfoCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+        lfoCtx.beginPath();
+        lfoCtx.moveTo(0, h / 2);
+        lfoCtx.lineTo(w, h / 2);
+        lfoCtx.stroke();
+
+        // Draw waveform
+        lfoCtx.strokeStyle = '#00ffff';
+        lfoCtx.lineWidth = 2;
+        lfoCtx.beginPath();
+
+        var cycles = spd / 16;
+        var onePoint = false;
+        for (var x = 0; x < w; x++) {
+          var t = x / w;
+          var phaseOffset = lfoPhase + t * cycles;
+
+          // Apply mode behavior
+          var val;
+          if (mode === 'one') {
+            // Show one full cycle then flat
+            if (t * cycles > 1) {
+              val = 0.5;
+            } else {
+              val = generateWave(wave, phaseOffset);
+            }
+          } else if (mode === 'hold') {
+            // Stepped version
+            var stepIdx = Math.floor(phaseOffset * 4);
+            val = generateWave(wave, stepIdx / 4);
+          } else if (mode === 'trig') {
+            // Restart each cycle
+            val = generateWave(wave, t * cycles);
+          } else {
+            // FREE
+            val = generateWave(wave, phaseOffset);
+          }
+
+          // Apply depth
+          val = 0.5 + (val - 0.5) * depFactor;
+
+          var y = h - val * h;
+          if (x === 0) {
+            lfoCtx.moveTo(x, y);
+          } else {
+            lfoCtx.lineTo(x, y);
+          }
+        }
+        lfoCtx.stroke();
+
+        // Trig markers for TRIG/ONE modes
+        if (mode === 'trig' || mode === 'one') {
+          lfoCtx.strokeStyle = 'rgba(255,0,255,0.4)';
+          lfoCtx.lineWidth = 1;
+          lfoCtx.setLineDash([4, 4]);
+          for (var tm = 0; tm < cycles; tm++) {
+            var tx = (tm / cycles) * w;
+            lfoCtx.beginPath();
+            lfoCtx.moveTo(tx, 0);
+            lfoCtx.lineTo(tx, h);
+            lfoCtx.stroke();
+          }
+          lfoCtx.setLineDash([]);
+        }
+
+        // Update readouts
+        var readoutWave = document.getElementById('readout-wave');
+        var readoutMode = document.getElementById('readout-mode');
+        if (readoutWave) readoutWave.textContent = wave.toUpperCase();
+        if (readoutMode) readoutMode.textContent = mode.toUpperCase();
+
+        // Animate phase
+        lfoPhase += 0.003 * (spd / 32);
+        lfoAnimFrame = requestAnimationFrame(drawLFO);
+      }
+
+      // Start animation
+      if (lfoCanvas) {
+        drawLFO();
+      }
+
+      // Bind control changes
+      var lfoControls = ['lfo-wave', 'lfo-mode', 'lfo-spd', 'lfo-dep'];
+      for (var lci = 0; lci < lfoControls.length; lci++) {
+        var ctrl = document.getElementById(lfoControls[lci]);
+        if (ctrl) {
+          ctrl.addEventListener('input', function () {
+            // Regenerate random for S&H on wave change
+            if (this.id === 'lfo-wave' && this.value === 'random') {
+              for (var r = 0; r < randomValues.length; r++) {
+                randomValues[r] = Math.random();
+              }
+            }
+          });
+        }
+      }
+
+      /* ----------------------------------------------------------
+         LFO Designer Widget
+         ---------------------------------------------------------- */
+      var designerSteps = [];
+      var designerGrid = document.getElementById('designer-grid');
+      var designerCanvas = document.getElementById('designer-canvas');
+      var designerCtx = designerCanvas ? designerCanvas.getContext('2d') : null;
+      var isDragging = false;
+
+      // Initialize 16 steps
+      for (var ds = 0; ds < 16; ds++) {
+        designerSteps.push(0.5);
+      }
+
+      function buildDesignerGrid() {
+        if (!designerGrid) return;
+        designerGrid.innerHTML = '';
+
+        for (var i = 0; i < 16; i++) {
+          var step = document.createElement('div');
+          step.className = 'designer-step';
+          step.setAttribute('data-index', i);
+
+          var barContainer = document.createElement('div');
+          barContainer.className = 'designer-bar-container';
+          barContainer.setAttribute('data-index', i);
+
+          var bar = document.createElement('div');
+          bar.className = 'designer-bar';
+          bar.style.height = designerSteps[i] * 100 + '%';
+
+          barContainer.appendChild(bar);
+
+          var label = document.createElement('div');
+          label.className = 'designer-step-label';
+          label.textContent = i + 1;
+
+          step.appendChild(barContainer);
+          step.appendChild(label);
+          designerGrid.appendChild(step);
+        }
+      }
+
+      function updateDesignerStep(container, clientY) {
+        var rect = container.getBoundingClientRect();
+        var relY = (rect.bottom - clientY) / rect.height;
+        relY = Math.max(0, Math.min(1, relY));
+        var idx = parseInt(container.getAttribute('data-index'), 10);
+        designerSteps[idx] = relY;
+
+        var bar = container.querySelector('.designer-bar');
+        if (bar) {
+          bar.style.height = relY * 100 + '%';
+        }
+        drawDesignerWaveform();
+      }
+
+      if (designerGrid) {
+        designerGrid.addEventListener('mousedown', function (e) {
+          var target = e.target.closest('.designer-bar-container');
+          if (target) {
+            isDragging = true;
+            updateDesignerStep(target, e.clientY);
+          }
+        });
+
+        designerGrid.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          var target = e.target.closest('.designer-bar-container');
+          if (target) {
+            updateDesignerStep(target, e.clientY);
+          }
+        });
+
+        document.addEventListener('mouseup', function () {
+          isDragging = false;
+        });
+
+        // Touch support
+        designerGrid.addEventListener('touchstart', function (e) {
+          var touch = e.touches[0];
+          var target = document.elementFromPoint(touch.clientX, touch.clientY);
+          var container = target ? target.closest('.designer-bar-container') : null;
+          if (container) {
+            isDragging = true;
+            updateDesignerStep(container, touch.clientY);
+            e.preventDefault();
+          }
+        });
+
+        designerGrid.addEventListener('touchmove', function (e) {
+          if (!isDragging) return;
+          var touch = e.touches[0];
+          var target = document.elementFromPoint(touch.clientX, touch.clientY);
+          var container = target ? target.closest('.designer-bar-container') : null;
+          if (container) {
+            updateDesignerStep(container, touch.clientY);
+            e.preventDefault();
+          }
+        });
+
+        document.addEventListener('touchend', function () {
+          isDragging = false;
+        });
+      }
+
+      function drawDesignerWaveform() {
+        if (!designerCtx) return;
+        var w = designerCanvas.width;
+        var h = designerCanvas.height;
+
+        designerCtx.clearRect(0, 0, w, h);
+
+        // Grid
+        designerCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+        designerCtx.lineWidth = 1;
+        for (var gy = 0; gy < h; gy += 20) {
+          designerCtx.beginPath();
+          designerCtx.moveTo(0, gy);
+          designerCtx.lineTo(w, gy);
+          designerCtx.stroke();
+        }
+
+        // Center line
+        designerCtx.strokeStyle = 'rgba(255,255,255,0.15)';
+        designerCtx.beginPath();
+        designerCtx.moveTo(0, h / 2);
+        designerCtx.lineTo(w, h / 2);
+        designerCtx.stroke();
+
+        // Draw stepped waveform
+        designerCtx.strokeStyle = '#ff00ff';
+        designerCtx.lineWidth = 2;
+        designerCtx.beginPath();
+
+        var stepW = w / 16;
+        for (var i = 0; i < 16; i++) {
+          var y = h - designerSteps[i] * h;
+          var x1 = i * stepW;
+          var x2 = (i + 1) * stepW;
+
+          if (i === 0) {
+            designerCtx.moveTo(x1, y);
+          } else {
+            designerCtx.lineTo(x1, y);
+          }
+          designerCtx.lineTo(x2, y);
+        }
+        designerCtx.stroke();
+
+        // Draw dots at step positions
+        for (var d = 0; d < 16; d++) {
+          var dy = h - designerSteps[d] * h;
+          var dx = d * stepW + stepW / 2;
+          designerCtx.fillStyle = '#ff00ff';
+          designerCtx.beginPath();
+          designerCtx.arc(dx, dy, 3, 0, 2 * Math.PI);
+          designerCtx.fill();
+        }
+      }
+
+      // Designer action buttons
+      var randomBtn = document.getElementById('designer-random');
+      var invertBtn = document.getElementById('designer-invert');
+      var clearBtn = document.getElementById('designer-clear');
+
+      if (randomBtn) {
+        randomBtn.addEventListener('click', function () {
+          for (var i = 0; i < 16; i++) {
+            designerSteps[i] = Math.random();
+          }
+          refreshDesignerBars();
+          drawDesignerWaveform();
+        });
+      }
+
+      if (invertBtn) {
+        invertBtn.addEventListener('click', function () {
+          for (var i = 0; i < 16; i++) {
+            designerSteps[i] = 1 - designerSteps[i];
+          }
+          refreshDesignerBars();
+          drawDesignerWaveform();
+        });
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+          for (var i = 0; i < 16; i++) {
+            designerSteps[i] = 0;
+          }
+          refreshDesignerBars();
+          drawDesignerWaveform();
+        });
+      }
+
+      function refreshDesignerBars() {
+        var bars = designerGrid.querySelectorAll('.designer-bar');
+        for (var b = 0; b < bars.length; b++) {
+          bars[b].style.height = designerSteps[b] * 100 + '%';
+        }
+      }
+
+      // Initialize designer
+      buildDesignerGrid();
+      drawDesignerWaveform();
+
+      /* ----------------------------------------------------------
+         Load saved state on boot
+         ---------------------------------------------------------- */
+      loadSavedState();
+    </script>
+
+    <script src="assets/theme.js" defer></script>
+    <script src="assets/svg-overlay.js"></script>
+  </body>
+</html>
