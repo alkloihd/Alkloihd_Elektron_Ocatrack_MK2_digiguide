@@ -1,25 +1,70 @@
-# Alkloihd Octatrack Learning Platform
+# Octatrack MK2 Interactive Learning Platform
 
-## Deployment In Progress
+```
+    ___       __       __ __    __       ____     ____   __  __   ____
+   /   |     / /      / //_/   / /      / __ \   /  _/  / / / /  / __ \
+  / /| |    / /      / ,<     / /      / / / /   / /   / /_/ /  / / / /
+ / ___ |   / /___   / /| |   / /___   / /_/ /  _/ /   / __  /  / /_/ /
+/_/  |_|  /_____/  /_/ |_|  /_____/   \____/  /___/  /_/ /_/  /_____/
+```
 
-This repository has been intentionally converted to a **public landing/status repo**.
+Interactive browser-based learning for the Elektron Octatrack MK2.
 
-Because of rapid community growth and demand from non-technical users, the platform is now being moved to a hosted experience for better accessibility, reliability, and long-term support.
+## Important Update
 
-The full product code is currently private during this transition.
+This repository is now a **public landing/status repo**.
 
-## Why This Changed
+After rapid community growth, we pivoted to a private product-development model so we can ship a better hosted experience (account features, premium tooling, and AI-assisted learning) without exposing the full runtime source code.
 
-- The project gained strong visibility quickly.
-- We are preparing a production deployment with account-based access.
-- Future premium features (including AI-assisted learning) are being designed behind a proper backend/auth/payments architecture.
+## What This Project Includes
 
-## Current Status
+The platform curriculum covers **16 tutorials** across four tiers:
 
-- Public source distribution: paused
-- Hosted web deployment: in progress
-- Premium AI learning layer: planned
-- Additional instrument support: planned
+### Tier 1: Foundation
+
+- 01 Set Sail
+- 02 Load & Lock
+- 03 Beat Basics
+- 04 The Audio Pool
+
+### Tier 2: Core Techniques
+
+- 05 Slice & Dice
+- 06 Sample Locks
+- 07 Loop Stretching
+- 08 Parts, Banks & Scenes
+
+### Tier 3: Advanced Sequencing
+
+- 09 Trig Conditions
+- 10 Resampling
+- 11 FX & Neighbors
+- 12 LFOs & Modulation
+
+### Tier 4: Performance & Integration
+
+- 13 Arranger
+- 14 MIDI Sequencing
+- 15 Pickup Machines
+- 16 Performance & DJ
+
+## Product Direction
+
+We are transitioning from static source sharing to a hosted product with better accessibility for non-technical users.
+
+Current direction:
+
+- Private source/deployment workflow
+- Public status and roadmap updates here
+- Hosted release in progress
+- Premium Stripe tier planned
+- AI tutor/personalized learning layer planned
+
+## Why the Pivot Happened
+
+- Strong public traction quickly increased IP risk.
+- Front-end-only source distribution is not ideal for long-term premium features.
+- Hosted delivery lets us improve reliability, onboarding, and support.
 
 ## Creator
 
@@ -28,29 +73,63 @@ Built by **alkloihd**
 - Instagram: https://www.instagram.com/alkloihd/
 - Mixcloud: https://www.mixcloud.com/rish-ku/
 
-If this project helped you:
+Support the project:
 
 Like what you're using? Help me build more of these:
 https://paypal.me/Rishaal?locale.x=en_US&country.x=CA
 
-## What Is Public Here
+## Public Repo Contents
 
-This repo now contains:
+This public repo intentionally contains only:
 
-- Product status and roadmap
+- Status updates
+- Public roadmap/changelog
 - Security/reporting policy
-- High-level docs and original summaries
+- High-level documentation summaries
 
-This repo does **not** contain runnable tutorial runtime/source code.
+See:
 
-## Next Milestones
-
-1. Private hosted beta release
-2. Stripe-based premium tier enablement
-3. AI tutor beta features
-4. Expanded platform/app roadmap
+- [ROADMAP.md](./ROADMAP.md)
+- [CHANGELOG.md](./CHANGELOG.md)
+- [SECURITY.md](./SECURITY.md)
+- [docs/README.md](./docs/README.md)
 
 ## Official References
 
-For official Octatrack documentation and resources, use manufacturer/community primary sources.
-See [`docs/OFFICIAL-REFERENCES.md`](./docs/OFFICIAL-REFERENCES.md).
+For canonical Octatrack documentation and support resources, see:
+
+- [docs/OFFICIAL-REFERENCES.md](./docs/OFFICIAL-REFERENCES.md)
+
+## Credits
+
+This learning initiative was built for the Octatrack community and informed by:
+
+- Official Elektron Octatrack documentation
+- Merlin's community guidance
+- Educator ecosystem (Cuckoo, EZBOT, Dataline, Elektron, and others)
+
+## FAQ
+
+### Is the old source still public?
+
+No. This repo has been reset to a landing/status format.
+
+### Why not publish full code right now?
+
+We are productizing the platform for hosted access, reliability, and sustainable long-term development.
+
+### Can I still follow updates?
+
+Yes. This repo is now the official public channel for roadmap and rollout updates.
+
+## App + Hosted Rollout (Bottom-Line Plan)
+
+We are actively moving toward:
+
+1. Hosted web platform (best accessibility)
+2. Account system + progress sync
+3. Premium learning tier with Stripe
+4. AI-assisted tutoring features
+5. Potential app-wrapper distribution once web platform is stable
+
+Thanks for the support and momentum from the Elektron community.
