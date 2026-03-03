@@ -9,10 +9,10 @@
 ```
 
 Interactive browser-based learning for the Elektron Octatrack MK2.
-
+ACCESS
 ## Important Update
-
-This repository is now a **public landing/status repo**.
+This repository is now publicly acessible at 
+https://geartootz.web.app/
 
 After rapid community growth, we pivoted to a private product-development model so we can ship a better hosted experience (account features, premium tooling, and AI-assisted learning) without exposing the full runtime source code.
 
@@ -112,11 +112,11 @@ This learning initiative was built for the Octatrack community and informed by:
 
 ### Is the old source still public?
 
-No. This repo has been reset to a landing/status format.
+No. This repo has been reset to https://geartootz.web.app/
 
 ### Why not publish full code right now?
 
-We are productizing the platform for hosted access, reliability, and sustainable long-term development.
+We are productizing the platform for hosted access, reliability, and sustainable long-term development. 
 
 ### Can I still follow updates?
 
@@ -126,7 +126,7 @@ Yes. This repo is now the official public channel for roadmap and rollout update
 
 We are actively moving toward:
 
-1. Hosted web platform (best accessibility)
+1. Hosted web platform (best accessibility) - https://geartootz.web.app/
 2. Account system + progress sync
 3. Premium learning tier with Stripe
 4. AI-assisted tutoring features
