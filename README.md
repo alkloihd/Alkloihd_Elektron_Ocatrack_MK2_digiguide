@@ -14,7 +14,8 @@ ACCESS
 This repository is now publicly acessible at 
 https://geartootz.web.app/
 
-After rapid community growth, we pivoted to a private product-development model so we can ship a better hosted experience (account features, premium tooling, and AI-assisted learning) without exposing the full runtime source code.
+
+After rapid community growth, we pivoted to a private product-development model so we can ship a better hosted experience (account features, premium tooling, and AI-assisted learning) without exposing the full runtime source code. Pleae note also to save your progress through the tutorials you will have to login. SSO is available and the username and password should be working by Mar 3rd UTC evening. 
 
 ## What This Project Includes
 
