@@ -1,3 +1,25 @@
+> ⚠️ **URGENT — GITHUB ACTIONS WORKFLOWS DISABLED 2026-05-15** ⚠️
+>
+> GitHub Actions workflows in this repo were **disabled** as part of a cross-repo cost-discipline cleanup on 2026-05-15. This repo is currently **DORMANT** — no recent active development.
+>
+> **What was disabled in this repo**: `(no workflows found; this notice is preventive)`
+>
+> **Why**: GitHub Actions budget audit (see `alkloihd/dual_language_chat/work-sessions/2026-05-15/handoff/2026-05-15-chat-context-handoff-v6.md` for full context) found cross-repo macOS workflow runs were burning ~$10/day. Inactive repos disabled as a precaution against accidental pushes triggering expensive runs.
+>
+> **Workflow files are NOT deleted** — they remain in `.github/workflows/` and can be re-enabled instantly.
+>
+> **To re-enable** when you resume work on this project:
+> ```
+> gh workflow list --repo alkloihd/Alkloihd_Elektron_Ocatrack_MK2_digiguide
+> gh workflow enable <workflow_name> --repo alkloihd/Alkloihd_Elektron_Ocatrack_MK2_digiguide
+> ```
+> Or visit https://github.com/alkloihd/Alkloihd_Elektron_Ocatrack_MK2_digiguide/actions and click "Enable workflow" on each one.
+>
+> **For AI agents working on this repo**: read this note before doing any setup work. CI is NOT running automatically; verify locally before push. If you want to re-enable, ask the human first.
+>
+> ---
+>
+
 # Octatrack MK2 Interactive Learning Platform
 
 ```
